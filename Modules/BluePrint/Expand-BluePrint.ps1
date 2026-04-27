@@ -134,15 +134,38 @@ Write-Host "Written: $valFile ($valLines lines)"
 #endregion
 
 #region ── backup & replace original .mtpl ────────────────────────────────────
-if (Test-Path $origMtpl) {
-    Copy-Item -Path $origMtpl -Destination $backupMtpl -Force
-    Write-Host "Backup:  $backupMtpl"
+if (-not (Test-Path $backupMtpl)) {
+    if (Test-Path $origMtpl) {
+        Copy-Item -Path $origMtpl -Destination $backupMtpl -Force
+        Write-Host "Backup:  $backupMtpl (first-time snapshot)"
+    } else {
+        Write-Warning "Original .mtpl not found at $origMtpl - skipping backup"
+    }
 } else {
-    Write-Warning "Original .mtpl not found at $origMtpl - skipping backup"
+    Write-Host "Backup:  $backupMtpl (already exists, not overwritten)"
 }
 
 Copy-Item -Path $valFile -Destination $origMtpl -Force
 Write-Host "Updated: $origMtpl"
+#endregion
+
+#region ── copy to sibling modules (copyTargets) ─────────────────────────────
+$bpConfigFile = Join-Path $bpDir 'bp-config.json'
+if (Test-Path $bpConfigFile) {
+    $bpConfig = Get-Content -Raw $bpConfigFile | ConvertFrom-Json
+    if ($bpConfig.PSObject.Properties['copyTargets'] -and $bpConfig.copyTargets.Count -gt 0) {
+        $arrDir = Split-Path $moduleDir   # parent folder containing sibling modules
+        foreach ($target in $bpConfig.copyTargets) {
+            $targetMtpl = Join-Path (Join-Path $arrDir $target) "$target.mtpl"
+            if (Test-Path (Split-Path $targetMtpl)) {
+                Copy-Item -Path $valFile -Destination $targetMtpl -Force
+                Write-Host "Copied:  $targetMtpl (copyTarget)"
+            } else {
+                Write-Warning "copyTarget directory not found: $(Split-Path $targetMtpl) - skipping $target"
+            }
+        }
+    }
+}
 #endregion
 
 Write-Host ""
