@@ -142,3 +142,7 @@ Each module in `repo_root/Modules/<MODULE_NAME>/` may contain:
 - **`.sbdefs`** - Bin definitions file (generated from `.py` or manually maintained)
 - **`.flw`** - Flow file (generated from `.py` or manually maintained)
 - **`.mconfig`** - Pattern patch configuration (see mconfig instructions)
+
+## Automation Integration
+
+The `build_modules.ps1` script is intended to be integrated into a larger automated workflow. Ensure that this script is designed to work seamlessly within the overall automation framework, facilitating efficient module building and deployment processes.
