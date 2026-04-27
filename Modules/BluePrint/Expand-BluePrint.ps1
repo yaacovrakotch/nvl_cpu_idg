@@ -33,9 +33,7 @@ param(
     [Parameter(Mandatory)]
     [string]$InputBp,
 
-    [string]$SymbolsFile,
-
-    [int]$ValueIndex = 0
+    [string]$SymbolsFile
 )
 
 Set-StrictMode -Version Latest
@@ -62,15 +60,12 @@ $moduleDir = Split-Path $bpDir
 
 $valFile   = Join-Path $bpDir "$moduleName.mtpl.bp.val"
 $origMtpl  = Join-Path $moduleDir "$moduleName.mtpl"
-$backupMtpl = Join-Path $moduleDir "$moduleName.mtpl_orig"
 
 Write-Host "=== BluePrint Expander ==="
 Write-Host "Module    : $moduleName"
 Write-Host "Input BP  : $InputBp"
 Write-Host "Symbols   : $SymbolsFile"
-Write-Host "Value idx : $ValueIndex"
 Write-Host "Output val: $valFile"
-Write-Host "Backup    : $backupMtpl"
 #endregion
 
 #region ── load symbols ───────────────────────────────────────────────────────
@@ -87,8 +82,8 @@ foreach ($prop in $symbols.PSObject.Properties) {
     # Clean parenthetical notes from values: "M0 (no suffix)" -> "M0"
     $cleanValues = $values | ForEach-Object { ($_ -replace '\s*\(.*\)', '').Trim() }
 
-    $idx = [math]::Min($ValueIndex, $cleanValues.Count - 1)
-    $chosenValue = $cleanValues[$idx]
+    # Always use the first value from the symbol's values list
+    $chosenValue = $cleanValues[0]
 
     # Uppercase symbol: \FREQ_CORNER\ -> F1
     $replacements.Add([System.Collections.Generic.KeyValuePair[string,string]]::new('\' + $name + '\', $chosenValue))
@@ -131,20 +126,83 @@ if ($remaining.Count -gt 0) {
 $valLines = [IO.File]::ReadAllLines($valFile).Count
 Write-Host ""
 Write-Host "Written: $valFile ($valLines lines)"
-#endregion
 
-#region ── backup & replace original .mtpl ────────────────────────────────────
-if (-not (Test-Path $backupMtpl)) {
-    if (Test-Path $origMtpl) {
-        Copy-Item -Path $origMtpl -Destination $backupMtpl -Force
-        Write-Host "Backup:  $backupMtpl (first-time snapshot)"
-    } else {
-        Write-Warning "Original .mtpl not found at $origMtpl - skipping backup"
+# Auto-fix duplicate test instances (keep first occurrence, drop later ones)
+$valFileLines = [IO.File]::ReadAllLines($valFile)
+$testNames = $valFileLines | ForEach-Object { if ($_ -match '^\s*(CSharpTest|MultiTrialTest)\s+\S+\s+(.+)$') { $Matches[2].Trim() } } | Where-Object { $_ }
+$dups = $testNames | Group-Object | Where-Object { $_.Count -gt 1 }
+if ($dups) {
+    Write-Host "Auto-fixing $($dups.Count) duplicate test name(s) (keeping first occurrence)..."
+    $dupNameSet = @{}
+    foreach ($d in $dups) { $dupNameSet[$d.Name] = $true }
+
+    $seenTests = @{}
+    $cleanLines = [System.Collections.Generic.List[string]]::new()
+    $dropping = $false
+    $droppedCount = 0
+
+    foreach ($line in $valFileLines) {
+        if ($line -match '^\s*(CSharpTest|MultiTrialTest)\s+\S+\s+(.+)$') {
+            $name = $Matches[2].Trim()
+            if ($dupNameSet.ContainsKey($name) -and $seenTests.ContainsKey($name)) {
+                $dropping = $true
+                $droppedCount++
+                Write-Host "  Dropped duplicate: $name"
+                continue
+            }
+            $seenTests[$name] = $true
+            $dropping = $false
+        } elseif ($dropping) {
+            # Inside a duplicate block being dropped
+            if ($line -match '^\}') { $dropping = $false }
+            continue
+        }
+        $cleanLines.Add($line)
     }
-} else {
-    Write-Host "Backup:  $backupMtpl (already exists, not overwritten)"
+    [IO.File]::WriteAllLines($valFile, $cleanLines.ToArray())
+    Write-Host "  Removed $droppedCount duplicate test block(s)."
+    $valFileLines = [IO.File]::ReadAllLines($valFile)
 }
 
+# Auto-fix duplicate flow names (keep first occurrence, drop later ones)
+$flowNames = $valFileLines | ForEach-Object { if ($_ -match '^\s*Flow\s+(\S+)') { $Matches[1].Trim() } } | Where-Object { $_ }
+$flowDups = $flowNames | Group-Object | Where-Object { $_.Count -gt 1 }
+if ($flowDups) {
+    Write-Host "Auto-fixing $($flowDups.Count) duplicate flow name(s) (keeping first occurrence)..."
+    $dupFlowSet = @{}
+    foreach ($d in $flowDups) { $dupFlowSet[$d.Name] = $true }
+
+    $seenFlows = @{}
+    $cleanLines = [System.Collections.Generic.List[string]]::new()
+    $dropping = $false
+    $depth = 0
+    $droppedCount = 0
+
+    foreach ($line in $valFileLines) {
+        if (-not $dropping -and $line -match '^\s*Flow\s+(\S+)') {
+            $name = $Matches[1].Trim()
+            if ($dupFlowSet.ContainsKey($name) -and $seenFlows.ContainsKey($name)) {
+                $dropping = $true
+                $depth = 0
+                $droppedCount++
+                Write-Host "  Dropped duplicate flow: $name"
+            }
+            $seenFlows[$name] = $true
+        }
+        if ($dropping) {
+            $depth += ([regex]::Matches($line, '\{')).Count
+            $depth -= ([regex]::Matches($line, '\}')).Count
+            if ($depth -le 0 -and $line -match '\}') { $dropping = $false }
+            continue
+        }
+        $cleanLines.Add($line)
+    }
+    [IO.File]::WriteAllLines($valFile, $cleanLines.ToArray())
+    Write-Host "  Removed $droppedCount duplicate flow block(s)."
+}
+#endregion
+
+#region ── replace original .mtpl ────────────────────────────────────────
 Copy-Item -Path $valFile -Destination $origMtpl -Force
 Write-Host "Updated: $origMtpl"
 #endregion
