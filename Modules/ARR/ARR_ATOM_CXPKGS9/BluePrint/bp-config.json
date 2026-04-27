@@ -1,0 +1,221 @@
+{
+  "module": "ARR_ATOM_CXPKGS9",
+  "description": "BluePrint config for ARR_ATOM_CXPKGS9. CXPKGS9 is a package-socket module with CPU0/CPU1 dual-die variants, COMBINED/SSA/SSA_L2DATA/MEC coverage types, and F1-F4 frequency corners.",
+
+  "symbols": [
+    {
+      "name": "FREQ_CORNER",
+      "description": "Frequency corner for VMIN search tests. F1 is the lowest standard corner, F4 the highest.",
+      "values": ["F1", "F2", "F3", "F4"],
+      "replacements": [
+        {"find": "F1XAT", "replace": "\\FREQ_CORNER\\XAT"},
+        {"find": "F2XAT", "replace": "\\FREQ_CORNER\\XAT"},
+        {"find": "F3XAT", "replace": "\\FREQ_CORNER\\XAT"},
+        {"find": "F4XAT", "replace": "\\FREQ_CORNER\\XAT"},
+        {"find": "_VCCIA_F1_", "replace": "_VCCIA_\\FREQ_CORNER\\_"},
+        {"find": "_VCCIA_F2_", "replace": "_VCCIA_\\FREQ_CORNER\\_"},
+        {"find": "_VCCIA_F3_", "replace": "_VCCIA_\\FREQ_CORNER\\_"},
+        {"find": "_VCCIA_F4_", "replace": "_VCCIA_\\FREQ_CORNER\\_"},
+        {"find": "AT_F1_FREQ_MHz", "replace": "AT_\\FREQ_CORNER\\_FREQ_MHz"},
+        {"find": "AT_F2_FREQ_MHz", "replace": "AT_\\FREQ_CORNER\\_FREQ_MHz"},
+        {"find": "AT_F3_FREQ_MHz", "replace": "AT_\\FREQ_CORNER\\_FREQ_MHz"},
+        {"find": "AT_F4_FREQ_MHz", "replace": "AT_\\FREQ_CORNER\\_FREQ_MHz"},
+        {"find": "AT_F1_FREQ", "replace": "AT_\\FREQ_CORNER\\_FREQ"},
+        {"find": "AT_F2_FREQ", "replace": "AT_\\FREQ_CORNER\\_FREQ"},
+        {"find": "AT_F3_FREQ", "replace": "AT_\\FREQ_CORNER\\_FREQ"},
+        {"find": "AT_F4_FREQ", "replace": "AT_\\FREQ_CORNER\\_FREQ"},
+        {"find": "DROPOUT.AT_F1", "replace": "DROPOUT.AT_\\FREQ_CORNER\\"},
+        {"find": "DROPOUT.AT_F2", "replace": "DROPOUT.AT_\\FREQ_CORNER\\"},
+        {"find": "DROPOUT.AT_F3", "replace": "DROPOUT.AT_\\FREQ_CORNER\\"},
+        {"find": "DROPOUT.AT_F4", "replace": "DROPOUT.AT_\\FREQ_CORNER\\"},
+        {"find": "@F1", "replace": "@\\FREQ_CORNER\\"},
+        {"find": "@F2", "replace": "@\\FREQ_CORNER\\"},
+        {"find": "@F3", "replace": "@\\FREQ_CORNER\\"},
+        {"find": "@F4", "replace": "@\\FREQ_CORNER\\"},
+        {"find": "ForRetryF1", "replace": "ForRetry\\FREQ_CORNER\\"},
+        {"find": "ForRetryF2", "replace": "ForRetry\\FREQ_CORNER\\"},
+        {"find": "ForRetryF3", "replace": "ForRetry\\FREQ_CORNER\\"},
+        {"find": "ForRetryF4", "replace": "ForRetry\\FREQ_CORNER\\"},
+        {"find": "OffsetF1", "replace": "Offset\\FREQ_CORNER\\"},
+        {"find": "OffsetF2", "replace": "Offset\\FREQ_CORNER\\"},
+        {"find": "OffsetF3", "replace": "Offset\\FREQ_CORNER\\"},
+        {"find": "OffsetF4", "replace": "Offset\\FREQ_CORNER\\"},
+        {"find": "F1_VMIN", "replace": "\\FREQ_CORNER\\_VMIN"},
+        {"find": "F2_VMIN", "replace": "\\FREQ_CORNER\\_VMIN"},
+        {"find": "F3_VMIN", "replace": "\\FREQ_CORNER\\_VMIN"},
+        {"find": "F4_VMIN", "replace": "\\FREQ_CORNER\\_VMIN"},
+        {"find": "f1xat", "replace": "\\freq_corner\\xat"},
+        {"find": "f2xat", "replace": "\\freq_corner\\xat"},
+        {"find": "f3xat", "replace": "\\freq_corner\\xat"},
+        {"find": "f4xat", "replace": "\\freq_corner\\xat"},
+        {"find": "_f1_", "replace": "_\\freq_corner\\_"},
+        {"find": "_f2_", "replace": "_\\freq_corner\\_"},
+        {"find": "_f3_", "replace": "_\\freq_corner\\_"},
+        {"find": "_f4_", "replace": "_\\freq_corner\\_"}
+      ]
+    },
+    {
+      "name": "COVERAGE_TYPE",
+      "description": "Coverage variant for array tests: COMBINED=all arrays, SSA=single-sided only, SSA_L2DATA=L2 data arrays, MEC=maximum error count.",
+      "values": ["COMBINED", "SSA", "SSA_L2DATA", "MEC"],
+      "replacements": [
+        {"find": "_SSA_L2DATA", "replace": "_\\COVERAGE_TYPE\\"},
+        {"find": "_COMBINED", "replace": "_\\COVERAGE_TYPE\\"},
+        {"find": "_SSA", "replace": "_\\COVERAGE_TYPE\\"},
+        {"find": "_MEC", "replace": "_\\COVERAGE_TYPE\\"}
+      ]
+    },
+    {
+      "name": "MODULE_INDEX",
+      "description": "L2 cache module index (M0-M3). Each physical module is tested independently in the raster repair pipeline.",
+      "values": ["M0", "M1", "M2", "M3"],
+      "replacements": [
+        {"find": "_M0_1", "replace": "_\\MODULE_INDEX\\_1"},
+        {"find": "_M1_1", "replace": "_\\MODULE_INDEX\\_1"},
+        {"find": "_M2_1", "replace": "_\\MODULE_INDEX\\_1"},
+        {"find": "_M3_1", "replace": "_\\MODULE_INDEX\\_1"},
+        {"find": "_M0_REP2FUSE", "replace": "_\\MODULE_INDEX\\_REP2FUSE"},
+        {"find": "_M1_REP2FUSE", "replace": "_\\MODULE_INDEX\\_REP2FUSE"},
+        {"find": "_M2_REP2FUSE", "replace": "_\\MODULE_INDEX\\_REP2FUSE"},
+        {"find": "_M3_REP2FUSE", "replace": "_\\MODULE_INDEX\\_REP2FUSE"},
+        {"find": "_M3_CPU1", "replace": "_\\MODULE_INDEX\\_CPU1"},
+        {"find": "SCBD_0_0_0_0", "replace": "SCBD_\\MODULE_INDEX_NUM\\_0_0_0"},
+        {"find": "SCBD_1_0_0_0", "replace": "SCBD_\\MODULE_INDEX_NUM\\_0_0_0"},
+        {"find": "SCBD_2_0_0_0", "replace": "SCBD_\\MODULE_INDEX_NUM\\_0_0_0"},
+        {"find": "SCBD_3_0_0_0", "replace": "SCBD_\\MODULE_INDEX_NUM\\_0_0_0"},
+        {"find": "\"module0\"", "replace": "\"\\MODULE_INDEX\\\""},
+        {"find": "\"module1\"", "replace": "\"\\MODULE_INDEX\\\""},
+        {"find": "\"module2\"", "replace": "\"\\MODULE_INDEX\\\""},
+        {"find": "\"module3\"", "replace": "\"\\MODULE_INDEX\\\""},
+        {"find": "L2DATAMINM0", "replace": "L2DATA\\VOLTAGE_CORNER\\\\MODULE_INDEX\\"},
+        {"find": "L2DATAMINM1", "replace": "L2DATA\\VOLTAGE_CORNER\\\\MODULE_INDEX\\"},
+        {"find": "L2DATAMINM2", "replace": "L2DATA\\VOLTAGE_CORNER\\\\MODULE_INDEX\\"},
+        {"find": "L2DATAMINM3", "replace": "L2DATA\\VOLTAGE_CORNER\\\\MODULE_INDEX\\"},
+        {"find": "L2DATAMAXM0", "replace": "L2DATA\\VOLTAGE_CORNER\\\\MODULE_INDEX\\"},
+        {"find": "L2DATAMAXM1", "replace": "L2DATA\\VOLTAGE_CORNER\\\\MODULE_INDEX\\"},
+        {"find": "L2DATAMAXM2", "replace": "L2DATA\\VOLTAGE_CORNER\\\\MODULE_INDEX\\"},
+        {"find": "L2DATAMAXM3", "replace": "L2DATA\\VOLTAGE_CORNER\\\\MODULE_INDEX\\"},
+        {"find": "L2TAGMINM0", "replace": "L2TAG\\VOLTAGE_CORNER\\\\MODULE_INDEX\\"},
+        {"find": "L2TAGMINM1", "replace": "L2TAG\\VOLTAGE_CORNER\\\\MODULE_INDEX\\"},
+        {"find": "L2TAGMINM2", "replace": "L2TAG\\VOLTAGE_CORNER\\\\MODULE_INDEX\\"},
+        {"find": "L2TAGMINM3", "replace": "L2TAG\\VOLTAGE_CORNER\\\\MODULE_INDEX\\"},
+        {"find": "L2TAGMAXM0", "replace": "L2TAG\\VOLTAGE_CORNER\\\\MODULE_INDEX\\"},
+        {"find": "L2TAGMAXM1", "replace": "L2TAG\\VOLTAGE_CORNER\\\\MODULE_INDEX\\"},
+        {"find": "L2TAGMAXM2", "replace": "L2TAG\\VOLTAGE_CORNER\\\\MODULE_INDEX\\"},
+        {"find": "L2TAGMAXM3", "replace": "L2TAG\\VOLTAGE_CORNER\\\\MODULE_INDEX\\"},
+        {"find": "_m0_", "replace": "_\\module_index\\_"},
+        {"find": "_m1_", "replace": "_\\module_index\\_"},
+        {"find": "_m2_", "replace": "_\\module_index\\_"},
+        {"find": "_m3_", "replace": "_\\module_index\\_"}
+      ]
+    },
+    {
+      "name": "CPU_DIE",
+      "description": "CPU die selector. Tests are duplicated for the second die with _CPU1 suffix. CPU0=no suffix.",
+      "values": ["CPU0 (no suffix)", "CPU1 (_CPU1 suffix)"],
+      "replacements": [
+        {"find": "_CPU1", "replace": "_\\CPU_DIE\\"}
+      ]
+    },
+    {
+      "name": "PMUX_INDEX",
+      "description": "Power-mux callback index (0-3), one per ATOM compute cluster.",
+      "values": ["0", "1", "2", "3"],
+      "replacements": [
+        {"find": "PMUX_CO_FREQ0", "replace": "PMUX_CO_FREQ\\PMUX_INDEX\\"},
+        {"find": "PMUX_CO_FREQ1", "replace": "PMUX_CO_FREQ\\PMUX_INDEX\\"},
+        {"find": "PMUX_CO_FREQ2", "replace": "PMUX_CO_FREQ\\PMUX_INDEX\\"},
+        {"find": "PMUX_CO_FREQ3", "replace": "PMUX_CO_FREQ\\PMUX_INDEX\\"},
+        {"find": "CDIE_ATOM0_FREQ", "replace": "CDIE_ATOM\\PMUX_INDEX\\_FREQ"},
+        {"find": "CDIE_ATOM1_FREQ", "replace": "CDIE_ATOM\\PMUX_INDEX\\_FREQ"},
+        {"find": "CDIE_ATOM2_FREQ", "replace": "CDIE_ATOM\\PMUX_INDEX\\_FREQ"},
+        {"find": "CDIE_ATOM3_FREQ", "replace": "CDIE_ATOM\\PMUX_INDEX\\_FREQ"},
+        {"find": "_CDIEATOM0_CO_FREQ", "replace": "_CDIEATOM\\PMUX_INDEX\\_CO_FREQ"},
+        {"find": "_CDIEATOM1_CO_FREQ", "replace": "_CDIEATOM\\PMUX_INDEX\\_CO_FREQ"},
+        {"find": "_CDIEATOM2_CO_FREQ", "replace": "_CDIEATOM\\PMUX_INDEX\\_CO_FREQ"},
+        {"find": "_CDIEATOM3_CO_FREQ", "replace": "_CDIEATOM\\PMUX_INDEX\\_CO_FREQ"}
+      ]
+    },
+    {
+      "name": "VOLTAGE_CORNER",
+      "description": "Voltage corner for raster capture/repair tests. MIN=minimum voltage, MAX=maximum voltage.",
+      "values": ["MIN", "MAX"],
+      "replacements": [
+        {"find": "VCCIA_MIN_X", "replace": "VCCIA_\\VOLTAGE_CORNER\\_X"},
+        {"find": "VCCIA_MAX_X", "replace": "VCCIA_\\VOLTAGE_CORNER\\_X"}
+      ]
+    },
+    {
+      "name": "SSA_ARRAY_TYPE",
+      "description": "SSA array type: L2_DATA covers data arrays, L2_TAG covers tag arrays.",
+      "values": ["L2_DATA", "L2_TAG"],
+      "replacements": [
+        {"find": "_L2_DATA_", "replace": "_\\SSA_ARRAY_TYPE\\_"},
+        {"find": "_L2_TAG_", "replace": "_\\SSA_ARRAY_TYPE\\_"},
+        {"find": "l2_data", "replace": "\\ssa_array_type\\"},
+        {"find": "l2_tag", "replace": "\\ssa_array_type\\"}
+      ]
+    },
+    {
+      "name": "LSA_ARRAY_TYPE",
+      "description": "LSA array type: L2_C6 (C6 retention), L2_LRU (least recently used), L2_STATE (state arrays).",
+      "values": ["L2_C6", "L2_LRU", "L2_STATE"],
+      "replacements": [
+        {"find": "_L2_C6_", "replace": "_\\LSA_ARRAY_TYPE\\_"},
+        {"find": "_L2_LRU_", "replace": "_\\LSA_ARRAY_TYPE\\_"},
+        {"find": "_L2_STATE_", "replace": "_\\LSA_ARRAY_TYPE\\_"},
+        {"find": "l2_c6", "replace": "\\lsa_array_type\\"},
+        {"find": "l2_lru", "replace": "\\lsa_array_type\\"},
+        {"find": "l2_state", "replace": "\\lsa_array_type\\"}
+      ]
+    },
+    {
+      "name": "REP_DIRECTION",
+      "description": "Repair direction: VMIN-side vs VMAX-side repair flag.",
+      "values": ["VMIN", "VMAX"],
+      "replacements": [
+        {"find": "VMAXREP", "replace": "\\REP_DIRECTION\\REP"},
+        {"find": "VMINREP", "replace": "\\REP_DIRECTION\\REP"}
+      ]
+    },
+    {
+      "name": "L2_ENDCPU_TYPE",
+      "description": "L2 sub-array tested at ENDCPU: TAG or DATA.",
+      "values": ["TAG", "DATA"],
+      "replacements": [
+        {"find": "_X_L2_TAG", "replace": "_X_L2_\\L2_ENDCPU_TYPE\\"},
+        {"find": "_X_L2_DATA", "replace": "_X_L2_\\L2_ENDCPU_TYPE\\"}
+      ]
+    },
+    {
+      "name": "HRY_PHASE",
+      "description": "HRY test phase: PRE runs before repair, POST runs after repair.",
+      "values": ["PRE", "POST"],
+      "replacements": [
+        {"find": "_X_PRE", "replace": "_X_\\HRY_PHASE\\"},
+        {"find": "_X_POST", "replace": "_X_\\HRY_PHASE\\"}
+      ]
+    },
+    {
+      "name": "RASTERLOOP_TYPE",
+      "description": "PatConfig raster loop type: VMAXRASTERLOOP or VMINRASTERLOOP.",
+      "values": ["VMAXRASTERLOOP", "VMINRASTERLOOP"],
+      "replacements": [
+        {"find": "VMAXRASTERLOOP", "replace": "\\RASTERLOOP_TYPE\\"},
+        {"find": "VMINRASTERLOOP", "replace": "\\RASTERLOOP_TYPE\\"}
+      ]
+    }
+  ],
+
+  "normalization": [
+    {"pattern": "FuseNamespace\\s*=\\s*\"[^\"]*\"", "replacement": "FuseNamespace = \"\\FUSE_NAMESPACE\\\""},
+    {"pattern": "UnrepairabledSsiKey\\w+", "replacement": "UnrepairabledSsiKey\\CPU_DIE\\"}
+  ],
+
+  "notes": [
+    "Tests with _CPU1 suffix duplicate the base test for the second compute die.",
+    "F5 corner uses a different trial variable (ATOM_TOP) and freq references (Corners.AT_C5, FreqValues.AT_C5) — kept as a separate template.",
+    "FMIN corner uses different timing TC and voltage forwarding from F1 results.",
+    "When generating a product-specific MTPL, consult the Test Plan Wiki for the actual symbol values (frequencies, voltage limits, etc)."
+  ]
+}
