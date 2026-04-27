@@ -1,0 +1,53 @@
+{ 
+	"DC": [
+	{
+		"Token": "BGR_VOUT",
+		"Equations": [
+		 {
+			"Name": "CPU_OBS_02",
+			"Expression": "([CPU_OBS_02{0}]+[CPU_OBS_02{1}]+[CPU_OBS_02{2}]+[CPU_OBS_02{3}]+[CPU_OBS_02{4}]+[CPU_OBS_02{5}]+[CPU_OBS_02{6}]+[CPU_OBS_02{7}]+[CPU_OBS_02{8}]+[CPU_OBS_02{9}])/10",
+		 }
+		]
+	},
+    {
+        "Token": "BGR_VOUTCAL",
+		"Equations": [
+		 {
+			"Name": "CPU_OBS_02",
+			"Expression": "([CPU_OBS_02{0}]+[CPU_OBS_02{1}]+[CPU_OBS_02{2}]+[CPU_OBS_02{3}]+[CPU_OBS_02{4}]+[CPU_OBS_02{5}]+[CPU_OBS_02{6}]+[CPU_OBS_02{7}]+[CPU_OBS_02{8}]+[CPU_OBS_02{9}])/10-[PTH_BGR_CJ816P::PTH_BGR_CJ816P.PROBECAL_CH0_800MV]",
+		 }
+		]
+	},
+    {
+        "Token": "VCC_AGSBY2",
+		"Equations": [
+		 {
+			"Name": "CPU_OBS_03",
+			"Expression": "([CPU_OBS_03{0}]+[CPU_OBS_03{1}]+[CPU_OBS_03{2}]+[CPU_OBS_03{3}]+[CPU_OBS_03{4}]+[CPU_OBS_03{5}]+[CPU_OBS_03{6}]+[CPU_OBS_03{7}]+[CPU_OBS_03{8}]+[CPU_OBS_03{9}])/10",
+		 }
+		]
+	}, 
+	 
+	{
+        "Port": 2,
+		"Equations": [
+		 {
+			"Name": "BGR_VOUT",
+			"Expression": "([CPU_OBS_02{0}]+[CPU_OBS_02{1}]+[CPU_OBS_02{2}]+[CPU_OBS_02{3}]+[CPU_OBS_02{4}]+[CPU_OBS_02{5}]+[CPU_OBS_02{6}]+[CPU_OBS_02{7}]+[CPU_OBS_02{8}]+[CPU_OBS_02{9}])/10",
+		 },
+		 {
+			"Name": "BGR_VOUTCAL",
+			"Expression": "([CPU_OBS_02{0}]+[CPU_OBS_02{1}]+[CPU_OBS_02{2}]+[CPU_OBS_02{3}]+[CPU_OBS_02{4}]+[CPU_OBS_02{5}]+[CPU_OBS_02{6}]+[CPU_OBS_02{7}]+[CPU_OBS_02{8}]+[CPU_OBS_02{9}])/10-[PTH_BGR_CJ816P::PTH_BGR_CJ816P.PROBECAL_CH0_800MV]",
+			"LowLimit": "0.79",
+			"HighLimit": "0.81"
+		 },
+		 {
+			"Name": "VCC_AGSBY2",
+			"Expression": "([CPU_OBS_03{0}]+[CPU_OBS_03{1}]+[CPU_OBS_03{2}]+[CPU_OBS_03{3}]+[CPU_OBS_03{4}]+[CPU_OBS_03{5}]+[CPU_OBS_03{6}]+[CPU_OBS_03{7}]+[CPU_OBS_03{8}]+[CPU_OBS_03{9}])/10",
+			"LowLimit": "0.48",
+			"HighLimit": "0.63"
+		 }
+		]
+	}
+	]
+}

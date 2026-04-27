@@ -1,0 +1,280 @@
+{
+	"DAC_CAL": {
+		"DOMAINS": [ "CPU_ATOM0", "CPU_ATOM1", "CPU_ATOM2", "CPU_ATOM3", "CPU_CORE0P", "CPU_CORE1P", "CPU_CORE2P", "CPU_CORE3P", "CPU_RINGPRIM", "CPU1_ATOM0", "CPU1_ATOM1", "CPU1_ATOM2", "CPU1_ATOM3", "CPU1_CORE0P", "CPU1_CORE1P", "CPU1_CORE2P", "CPU1_CORE3P", "CPU1_RINGPRIM"],
+
+		"LINEARFIT": {
+			"INDEX": "0-8",
+			"X_GSDS": "G.U.D.{DOMAIN}_DVDACG_{INDEX}",
+			"Y_VALUES": "1.2, 1.1, 1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4"
+		},
+
+		"EQUATIONS": [
+		    {
+				"EXPRESSION": "([G.U.I.{DOMAIN}_DLVR_DAC_CAL_SLOPE])",
+				"PASS": "[R] >= -4095 && [R] <= 4095"
+			},
+			{
+				"EXPRESSION": "[G.U.I.{DOMAIN}_DLVR_DAC_CAL_SLOPE] > 4095 ? 2048 : ([G.U.I.{DOMAIN}_DLVR_DAC_CAL_SLOPE] < -4095 ? 2048 : [G.U.I.{DOMAIN}_DLVR_DAC_CAL_SLOPE])",
+				"RESULT_GSDS": "G.U.I.{DOMAIN}_DLVR_DAC_CAL_SLOPE"
+			},
+			{
+				"EXPRESSION": "([G.U.I.{DOMAIN}_DLVR_DAC_CAL_OFFSET_1])",
+				"PASS": "[R] >= -255 && [R] <= 255"
+			},
+			{
+				"EXPRESSION": "[G.U.I.{DOMAIN}_DLVR_DAC_CAL_OFFSET_1] > 255 ? 0 : ([G.U.I.{DOMAIN}_DLVR_DAC_CAL_OFFSET_1] < -255 ? 0 : [G.U.I.{DOMAIN}_DLVR_DAC_CAL_OFFSET_1])",
+				"RESULT_GSDS": "G.U.I.{DOMAIN}_DLVR_DAC_CAL_OFFSET_1"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_8] - 0.4)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CAL_DCERROR_0P4"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_7] - 0.5)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CAL_DCERROR_0P5"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_6] - 0.6)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CAL_DCERROR_0P6"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_5] - 0.7)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CAL_DCERROR_0P7"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_4] - 0.8)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CAL_DCERROR_0P8"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_3] - 0.9)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CAL_DCERROR_0P9"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_2] - 1.0)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CAL_DCERROR_1P0"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_1] - 1.1)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CAL_DCERROR_1P1"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_0] - 1.2)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CAL_DCERROR_1P2"
+			},
+			{
+				"EXPRESSION": "Substring(Dec2Bin([G.U.I.{DOMAIN}_DLVR_DAC_CAL_SLOPE], 13, true), 5, 8)",
+				"RESULT_GSDS": "G.U.I.{DOMAIN}_DLVR_DAC_CAL_SLOPE_3_LSB_BIN"
+			},
+			{
+				"EXPRESSION": "Substring(Dec2Bin([G.U.I.{DOMAIN}_DLVR_DAC_CAL_SLOPE], 13, true), 1, 4)",
+				"RESULT_GSDS": "G.U.I.{DOMAIN}_DLVR_DAC_CAL_SLOPE_3_MSB_BIN"
+			},
+			{
+				"EXPRESSION": "Bin2Dec([G.U.I.{DOMAIN}_DLVR_DAC_CAL_SLOPE_3_LSB_BIN])",
+				"RESULT_GSDS": "G.U.I.{DOMAIN}_DAC_SLOPE_3_LSB_S"
+			},
+			{
+				"EXPRESSION": "Bin2Dec([G.U.I.{DOMAIN}_DLVR_DAC_CAL_SLOPE_3_MSB_BIN])",
+				"RESULT_GSDS": "G.U.I.{DOMAIN}_DAC_SLOPE_3_MSB_S"
+			},
+			{
+				"EXPRESSION": "[G.U.I.{DOMAIN}_DAC_SLOPE_3_LSB_S]",
+				"RESULT_GSDS": "G.U.I.{DOMAIN}_DAC_SLOPE_1_LSB_FUSE"
+			},
+			{
+				"EXPRESSION": "[G.U.I.{DOMAIN}_DAC_SLOPE_3_MSB_S]",
+				"RESULT_GSDS": "G.U.I.{DOMAIN}_DAC_SLOPE_1_MSB_FUSE"
+			},
+			{
+				"EXPRESSION": "[G.U.I.{DOMAIN}_DAC_SLOPE_3_LSB_S]",
+				"RESULT_GSDS": "G.U.I.{DOMAIN}_DAC_SLOPE_2_LSB_FUSE"
+			},
+			{
+				"EXPRESSION": "[G.U.I.{DOMAIN}_DAC_SLOPE_3_MSB_S]",
+				"RESULT_GSDS": "G.U.I.{DOMAIN}_DAC_SLOPE_2_MSB_FUSE"
+			},
+			{
+				"EXPRESSION": "[G.U.I.{DOMAIN}_DAC_SLOPE_3_LSB_S]",
+				"RESULT_GSDS": "G.U.I.{DOMAIN}_DAC_SLOPE_3_LSB_FUSE"
+			},
+			{
+				"EXPRESSION": "[G.U.I.{DOMAIN}_DAC_SLOPE_3_MSB_S]",
+				"RESULT_GSDS": "G.U.I.{DOMAIN}_DAC_SLOPE_3_MSB_FUSE"
+			},
+			{
+				"EXPRESSION": "Substring(Dec2Bin([G.U.I.{DOMAIN}_DLVR_DAC_CAL_OFFSET_1],9, true), 1, 8)",
+				"RESULT_GSDS": "G.U.S.{DOMAIN}_DLVR_DAC_CAL_OFFSET_1_BIN"
+			},
+			{
+				"EXPRESSION": "Bin2Dec([G.U.S.{DOMAIN}_DLVR_DAC_CAL_OFFSET_1_BIN], false, false)",
+				"RESULT_GSDS": "G.U.I.{DOMAIN}_DLVR_DAC_CAL_OFFSET_1_2COMP"
+			},
+			{
+				"EXPRESSION": "[G.U.I.{DOMAIN}_DLVR_DAC_CAL_OFFSET_1_2COMP]",
+				"RESULT_GSDS": "G.U.I.{DOMAIN}_DLVR_DAC_CAL_OFFSET_1_2COMP_FUSE"
+			},
+			{
+				"EXPRESSION": "Substring(Dec2Bin([G.U.I.{DOMAIN}_DAC_SLOPE_1_LSB_FUSE], 9, true), 1, 8)",
+				"RESULT_GSDS": "G.U.S.{DOMAIN}_DLVR_DAC_CAL_SLOPE_1_LSB_BIN"
+			},
+			{
+				"EXPRESSION": "Substring(Dec2Bin([G.U.I.{DOMAIN}_DAC_SLOPE_1_MSB_FUSE], 5, true), 1, 4)",
+				"RESULT_GSDS": "G.U.S.{DOMAIN}_DLVR_DAC_CAL_SLOPE_1_MSB_BIN"
+			},
+			{
+				"EXPRESSION": "Substring(Dec2Bin([G.U.I.{DOMAIN}_DAC_SLOPE_2_LSB_FUSE], 9, true), 1, 8)",
+				"RESULT_GSDS": "G.U.S.{DOMAIN}_DLVR_DAC_CAL_SLOPE_2_LSB_BIN"
+			},
+			{
+				"EXPRESSION": "Substring(Dec2Bin([G.U.I.{DOMAIN}_DAC_SLOPE_2_MSB_FUSE], 5, true), 1, 4)",
+				"RESULT_GSDS": "G.U.S.{DOMAIN}_DLVR_DAC_CAL_SLOPE_2_MSB_BIN"
+			},
+			{
+				"EXPRESSION": "Substring(Dec2Bin([G.U.I.{DOMAIN}_DAC_SLOPE_3_LSB_FUSE], 9, true), 1, 8)",
+				"RESULT_GSDS": "G.U.S.{DOMAIN}_DLVR_DAC_CAL_SLOPE_3_LSB_BIN"
+			},
+			{
+				"EXPRESSION": "Substring(Dec2Bin([G.U.I.{DOMAIN}_DAC_SLOPE_3_MSB_FUSE], 5, true), 1, 4)",
+				"RESULT_GSDS": "G.U.S.{DOMAIN}_DLVR_DAC_CAL_SLOPE_3_MSB_BIN"
+			},
+			{
+				"EXPRESSION": "Substring(Dec2Bin([G.U.I.{DOMAIN}_DLVR_DAC_CAL_OFFSET_1_2COMP_FUSE], 9, true), 1, 8)",
+				"RESULT_GSDS": "G.U.S.{DOMAIN}_DLVR_DAC_CAL_OFFSET_1_BIN"
+			}
+		],
+		"FAIL_INDICATOR": "G.U.I.{DOMAIN}_DAC_CAL_FAILED",
+		"DATALOG": {
+			"_{DOMAIN}_SLP_OFF_R2_RESULT": ["G.U.I.{DOMAIN}_DLVR_DAC_CAL_SLOPE", "G.U.I.{DOMAIN}_DLVR_DAC_CAL_OFFSET_1", "G.U.D.{DOMAIN}_DLVR_DAC_CAL_R2", "G.U.D.{DOMAIN}_CAL_DCERROR_0P4", "G.U.D.{DOMAIN}_CAL_DCERROR_0P5", "G.U.D.{DOMAIN}_CAL_DCERROR_0P6", "G.U.D.{DOMAIN}_CAL_DCERROR_0P7", "G.U.D.{DOMAIN}_CAL_DCERROR_0P8", "G.U.D.{DOMAIN}_CAL_DCERROR_0P9", "G.U.D.{DOMAIN}_CAL_DCERROR_1P0", "G.U.D.{DOMAIN}_CAL_DCERROR_1P1", "G.U.D.{DOMAIN}_CAL_DCERROR_1P2"]
+		}
+	},
+	"DAC_CHK": {
+		"DOMAINS": [ "CPU_ATOM0", "CPU_ATOM1", "CPU_ATOM2", "CPU_ATOM3", "CPU_CORE0P", "CPU_CORE1P", "CPU_CORE2P", "CPU_CORE3P", "CPU_RINGPRIM", "CPU1_ATOM0", "CPU1_ATOM1", "CPU1_ATOM2", "CPU1_ATOM3", "CPU1_CORE0P", "CPU1_CORE1P", "CPU1_CORE2P", "CPU1_CORE3P", "CPU1_RINGPRIM"],
+
+		"LINEARFIT": {
+			"INDEX": "0-8",
+			"X_GSDS": "G.U.D.{DOMAIN}_DVDACG_{INDEX}",
+			"Y_VALUES": "1.2, 1.1, 1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4"
+		},
+
+		"EQUATIONS": [
+			{
+				"EXPRESSION": "[G.U.I.{DOMAIN}_DLVR_DAC_CAL_OFFSET_1]",
+				"PASS": "[R] >= -127 && [R] <= 127"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_8] - 0.4)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CHK_DCERROR_0P4",
+				"PASS": "[R] >= -30 && [R] <= 30"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_7] - 0.5)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CHK_DCERROR_0P5",
+				"PASS": "[R] >= -30 && [R] <= 30"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_6] - 0.6)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CHK_DCERROR_0P6",
+				"PASS": "[R] >= -30 && [R] <= 30"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_5] - 0.7)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CHK_DCERROR_0P7",
+				"PASS": "[R] >= -30 && [R] <= 30"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_4] - 0.8)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CHK_DCERROR_0P8",
+				"PASS": "[R] >= -30 && [R] <= 30"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_3] - 0.9)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CHK_DCERROR_0P9",
+				"PASS": "[R] >= -30 && [R] <= 30"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_2] - 1.0)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CHK_DCERROR_1P0",
+				"PASS": "[R] >= -30 && [R] <= 30"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_1] - 1.1)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CHK_DCERROR_1P1",
+				"PASS": "[R] >= -30 && [R] <= 30"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_0] - 1.2)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CHK_DCERROR_1P2",
+				"PASS": "[R] >= -30 && [R] <= 30"
+			}
+		],
+		"FAIL_INDICATOR": "G.U.I.{DOMAIN}_DAC_CHK_FAILED",
+		"DATALOG": {
+			"_{DOMAIN}_SLP_OFF_R2_RESULT": ["G.U.I.{DOMAIN}_DLVR_DAC_CAL_SLOPE", "G.U.I.{DOMAIN}_DLVR_DAC_CAL_OFFSET_1", "G.U.D.{DOMAIN}_DLVR_DAC_CAL_R2", "G.U.D.{DOMAIN}_CHK_DCERROR_0P4", "G.U.D.{DOMAIN}_CHK_DCERROR_0P5", "G.U.D.{DOMAIN}_CHK_DCERROR_0P6", "G.U.D.{DOMAIN}_CHK_DCERROR_0P7", "G.U.D.{DOMAIN}_CHK_DCERROR_0P8", "G.U.D.{DOMAIN}_CHK_DCERROR_0P9", "G.U.D.{DOMAIN}_CHK_DCERROR_1P0", "G.U.D.{DOMAIN}_CHK_DCERROR_1P1", "G.U.D.{DOMAIN}_CHK_DCERROR_1P2"]
+		}
+	},
+	"DAC_CHK_CSM": {
+		"DOMAINS": [ "CPU_ATOM0", "CPU_ATOM1", "CPU_ATOM2", "CPU_ATOM3", "CPU_CORE0P", "CPU_CORE1P", "CPU_CORE2P", "CPU_CORE3P", "CPU_RINGPRIM", "CPU1_ATOM0", "CPU1_ATOM1", "CPU1_ATOM2", "CPU1_ATOM3", "CPU1_CORE0P", "CPU1_CORE1P", "CPU1_CORE2P", "CPU1_CORE3P", "CPU1_RINGPRIM"],
+
+		"LINEARFIT": {
+			"INDEX": "0-8",
+			"X_GSDS": "G.U.D.{DOMAIN}_DVDACG_{INDEX}",
+			"Y_VALUES": "1.2, 1.1, 1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4"
+		},
+
+		"EQUATIONS": [
+			{
+				"EXPRESSION": "[G.U.I.{DOMAIN}_DLVR_DAC_CAL_OFFSET_1]",
+				"PASS": "[R] >= -127 && [R] <= 127"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_8] - 0.4)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CHK_DCERROR_0P4",
+				"PASS": "[R] >= -35 && [R] <= 35"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_7] - 0.5)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CHK_DCERROR_0P5",
+				"PASS": "[R] >= -35 && [R] <= 35"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_6] - 0.6)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CHK_DCERROR_0P6",
+				"PASS": "[R] >= -35 && [R] <= 35"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_5] - 0.7)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CHK_DCERROR_0P7",
+				"PASS": "[R] >= -35 && [R] <= 35"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_4] - 0.8)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CHK_DCERROR_0P8",
+				"PASS": "[R] >= -35 && [R] <= 35"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_3] - 0.9)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CHK_DCERROR_0P9",
+				"PASS": "[R] >= -35 && [R] <= 35"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_2] - 1.0)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CHK_DCERROR_1P0",
+				"PASS": "[R] >= -35 && [R] <= 35"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_1] - 1.1)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CHK_DCERROR_1P1",
+				"PASS": "[R] >= -35 && [R] <= 35"
+			},
+			{
+				"EXPRESSION": "Round(([G.U.D.{DOMAIN}_DVDACG_0] - 1.2)*1000, 4)",
+				"RESULT_GSDS": "G.U.D.{DOMAIN}_CHK_DCERROR_1P2",
+				"PASS": "[R] >= -35 && [R] <= 35"
+			}
+		],
+		"FAIL_INDICATOR": "G.U.I.{DOMAIN}_DAC_CHK_FAILED",
+		"DATALOG": {
+			"_{DOMAIN}_SLP_OFF_R2_RESULT": ["G.U.I.{DOMAIN}_DLVR_DAC_CAL_SLOPE", "G.U.I.{DOMAIN}_DLVR_DAC_CAL_OFFSET_1", "G.U.D.{DOMAIN}_DLVR_DAC_CAL_R2", "G.U.D.{DOMAIN}_CHK_DCERROR_0P4", "G.U.D.{DOMAIN}_CHK_DCERROR_0P5", "G.U.D.{DOMAIN}_CHK_DCERROR_0P6", "G.U.D.{DOMAIN}_CHK_DCERROR_0P7", "G.U.D.{DOMAIN}_CHK_DCERROR_0P8", "G.U.D.{DOMAIN}_CHK_DCERROR_0P9", "G.U.D.{DOMAIN}_CHK_DCERROR_1P0", "G.U.D.{DOMAIN}_CHK_DCERROR_1P1", "G.U.D.{DOMAIN}_CHK_DCERROR_1P2"]
+		}
+	}
+}

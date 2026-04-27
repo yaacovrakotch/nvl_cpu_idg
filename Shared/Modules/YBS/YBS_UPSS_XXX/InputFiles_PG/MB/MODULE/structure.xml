@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UpsStructure xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Info>
+    <Name>NVLS816_Structure_UPS2_PreSi_xT</Name>
+    <Description />
+    <FileFormat>0</FileFormat>
+  </Info>
+  <Structure name="NVL">
+    <Level name="Package">
+      <Component name="PKG" type="StandardPackage">
+        <Level name="Rail">
+          <Component name="VCCGT" type="InfiBusRail">
+            <Level name="Domain">
+              <Component name="GTdom" type="SimpleDomain">
+                <Level name="Block">
+                  <Component name="GT" type="Speed_Pet_Cvf" />
+                </Level>
+              </Component>
+            </Level>
+          </Component>
+          <Component name="VCCIA" type="InfiBusRail">
+            <Level name="Domain">
+              <Component name="ATOMdom" type="DlvrPsStateVdropDomain">
+                <Level name="Block">
+                  <Component name="AT" type="Speed_Pet_Cvf" />
+                </Level>
+              </Component>
+              <Component name="IAdom" type="DlvrPsStateVdropDomain">
+                <Level name="Block">
+                  <Component name="IA" type="Speed_Pet_Cvf" />
+                </Level>
+              </Component>
+              <Component name="CCFdom" type="DlvrPsStateVdropDomain">
+                <Level name="Block">
+                  <Component name="CCF" type="Speed_Pet_Cvf" />
+                </Level>
+              </Component>
+            </Level>
+          </Component>
+          <Component name="VCCSA" type="InfiBusRail">
+            <Level name="Domain">
+              <Component name="SAdom" type="SimpleDomain">
+                <Level name="Block">
+                  <Component name="CCLK" type="Speed_NoSicc_Cvf" />
+                  <Component name="DE" type="Speed_Pet_Cvf" />
+                  <Component name="IOCCLK" type="Speed_NoSicc_Cvf" />
+                  <Component name="LPATOM" type="Speed_Pet_Cvf" />
+                  <Component name="MEDIA" type="Speed_Pet_Cvf" />
+                  <Component name="NCLK" type="Speed_NoSicc_Cvf" />
+                  <Component name="NPU" type="Speed_Pet_Cvf" />
+                  <Component name="QCLK" type="Speed_NoSicc_Cvf" />
+                  <Component name="SAREST" type="NoSpeed_Pet_Conductance" />
+                  <Component name="IPU" type="Speed_Pet_Cvf" />
+                </Level>
+              </Component>
+            </Level>
+          </Component>
+          <Component name="VNNAON" type="InfiBusRail">
+            <Level name="Domain">
+              <Component name="SRAMdom" type="SimpleDomain">
+                <Level name="Block">
+                  <Component name="ATSRAM" type="Speed_Pet_Cvf" />
+                  <Component name="DESRAM" type="Speed_Pet_Cvf" />
+                  <Component name="LPATSRAM" type="Speed_Pet_Cvf" />
+                  <Component name="MEDIASRAM" type="Speed_Pet_Cvf" />
+                  <Component name="NPUSRAM" type="Speed_Pet_Cvf" />
+                  <Component name="CCFSRAM" type="Speed_Pet_Cvf" />
+                </Level>
+              </Component>
+            </Level>
+          </Component>
+          <Component name="VCCLPCORE" type="InfiBusRail">
+            <Level name="Domain">
+              <Component name="LPATdom" type="SimpleDomain">
+                <Level name="Block">
+                  <Component name="LPATOMb" type="Speed_Pet_Cvf" />
+                </Level>
+              </Component>
+            </Level>
+          </Component>
+        </Level>
+      </Component>
+    </Level>
+    <Category name="generic">
+      <Group name="CDIE_SCREENS" type="ExpressionsGroup_PreScen">
+        <Expansion />
+        <Level />
+      </Group>
+      <Group name="SCREENS" type="ExpressionsGroup_PreScen">
+        <Expansion />
+        <Level />
+      </Group>
+      <Group name="FUSER_CDIE1" type="Fuse">
+        <Expansion />
+        <Level />
+      </Group>
+      <Group name="FUSER_CDIE0" type="Fuse">
+        <Expansion />
+        <Level />
+      </Group>
+      <Group name="ISOVOLT" type="IsoVoltage">
+        <Expansion />
+        <Level>
+          <RefComponent name="CCF" />
+          <RefComponent name="IA" />
+          <RefComponent name="AT" />
+        </Level>
+      </Group>
+      <Group name="IACeiling" type="VminCeiling">
+        <Expansion />
+        <Level>
+          <RefComponent name="CCF" />
+          <RefComponent name="AT" />
+          <RefComponent name="IA" />
+        </Level>
+      </Group>
+      <Group name="GTrecovery" type="BasicRecovery">
+        <Expansion />
+        <Level />
+      </Group>
+      <Group name="RECOVERYIAATOM" type="BasicRecovery">
+        <Expansion />
+        <Level />
+      </Group>
+      <Group name="SACeiling" type="VminCeiling">
+        <Expansion />
+        <Level>
+          <RefComponent name="CCLK" />
+          <RefComponent name="DE" />
+          <RefComponent name="IOCCLK" />
+          <RefComponent name="LPATOM" />
+          <RefComponent name="MEDIA" />
+          <RefComponent name="NCLK" />
+          <RefComponent name="NPU" />
+          <RefComponent name="QCLK" />
+          <RefComponent name="IPU" />
+        </Level>
+      </Group>
+      <Group name="GTCeiling" type="VminCeiling">
+        <Expansion />
+        <Level>
+          <RefComponent name="GT" />
+        </Level>
+      </Group>
+      <Group name="IAPCPS" type="PcpsGroup">
+        <Expansion />
+        <Level>
+          <RefComponent name="IA" />
+        </Level>
+      </Group>
+      <Group name="ATPCPS" type="PcpsGroup">
+        <Expansion />
+        <Level>
+          <RefComponent name="AT" />
+        </Level>
+      </Group>
+      <Group name="IAFUSE" type="SpeedDeltaMinBaselineGroup">
+        <Expansion />
+        <Level>
+          <RefComponent name="IA" />
+        </Level>
+      </Group>
+      <Group name="ATFUSE" type="SpeedDeltaMinBaselineGroup">
+        <Expansion />
+        <Level>
+          <RefComponent name="AT" />
+        </Level>
+      </Group>
+      <Group name="EXPANDER" type="ScenarioExpanderGroup">
+        <Expansion />
+        <Level />
+      </Group>
+      <Group name="MAXIALEAK" type="BaselineComponentSelector">
+        <Expansion />
+        <Level>
+          <RefComponent name="IA" />
+        </Level>
+      </Group>
+      <Group name="MAXATLEAK" type="BaselineComponentSelector">
+        <Expansion />
+        <Level>
+          <RefComponent name="AT" />
+        </Level>
+      </Group>
+      <Group name="MAXATL2LEAK" type="BaselineComponentSelector">
+        <Expansion />
+        <Level>
+          <RefComponent name="ATSRAM" />
+        </Level>
+      </Group>
+      <Group name="FUSER" type="Fuse">
+        <Expansion />
+        <Level />
+      </Group>
+      <Group name="HUBrecovery" type="BasicRecovery">
+        <Expansion />
+        <Level />
+      </Group>
+    </Category>
+  </Structure>
+</UpsStructure>

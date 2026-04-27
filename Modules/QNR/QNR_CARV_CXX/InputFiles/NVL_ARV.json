@@ -1,0 +1,525 @@
+{
+  "Triggers": [
+      {
+      "TriggerName": "FUN_ATOM_CXX",
+      "Condition": {
+        "TestTemplate": "VminTC,DDGShmooTC,PrimeFunctionalTestMethod,PrimeLSARasterTestMethod",
+        "TestNameRegex": ".*FUN_ATOM.*",
+        "PortRegex": "[^1]",
+        "BinRegex": "^(90\\d{6})|(\\d{8})|([789]\\d{6})$"
+      },
+      "Execute": {
+        "Executables": [
+          {
+            "Type": "Test",
+            "Name": "IPC::QNR_CARV_CXX::CTRL_X_SHMOO_X_CPUIPFF_X_X_X_X_SHMOO",
+            "Sufix": "FunAtmShm",
+            "CopyCommonParams": "1",
+            "Overrides": [
+              {
+                "ParameterName": "BypassPort",
+                "Type": "Explicit",
+                "Value": "-1"
+              },
+              {
+                "ParameterName": "YAxisType",
+                 "Type": "Explicit",
+                "Value": "FIVR"
+              },
+              {
+                "ParameterName": "YAxisParam",
+                "Type": "Explicit",
+                "Value": "ATOM3,ATOM2,ATOM1,ATOM0"
+              },
+              {
+                "ParameterName": "YAxisRange",
+                "Type": "Explicit",
+                "Value": "0.45:0.01:20"
+              },
+              {
+                "ParameterName": "XAxisParam",
+                "Type": "Explicit",
+                "Value": "p_all_mts"
+              },
+              {
+                "ParameterName": "XAxisRange",
+                "Type": "Explicit",
+                "Value": "760e6:10e6:12"
+              },
+              {
+                "ParameterName": "VoltageConverter",
+                "Type": "Explicit",
+                "Value": "--dlvrpins VCCIA --expressions ATOM --railconfigurations CDIE_ATOM_POWERMUX --fivrcondition NOM"
+              }        
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "TriggerName": "FUN_CCF_CXX",
+      "Condition": {
+        "TestTemplate": "VminTC,DDGShmooTC,PrimeFunctionalTestMethod,PrimeLSARasterTestMethod",
+        "TestNameRegex": ".*FUN_CCF.*",
+        "PortRegex": "[^1]",
+        "BinRegex": "^(90\\d{6})|(\\d{8})|([789]\\d{6})$"
+      },
+      "Execute": {
+        "Executables": [
+          {
+            "Type": "Test",
+            "Name": "IPC::QNR_CARV_CXX::CTRL_X_SHMOO_X_CPUIPFF_X_X_X_X_SHMOO",
+            "Sufix": "FunCcfShm",
+            "CopyCommonParams": "1",
+            "Overrides": [
+              {
+                "ParameterName": "BypassPort",
+                "Type": "Explicit",
+                "Value": "-1"
+              },
+              {
+                "ParameterName": "YAxisType",
+                 "Type": "Explicit",
+                "Value": "FIVR"
+              },
+              {
+                "ParameterName": "YAxisParam",
+                "Type": "Explicit",
+                "Value": "CCF"
+              },
+              {
+                "ParameterName": "YAxisRange",
+                "Type": "Explicit",
+                "Value": "1.1:-0.05:14"
+              },
+              {
+                "ParameterName": "XAxisParam",
+                "Type": "Explicit",
+                "Value": "p_all_mts"
+              },
+              {
+                "ParameterName": "XAxisRange",
+                "Type": "Explicit",
+                "Value": "80e6:5e6:8"
+              },
+              {
+                "ParameterName": "VoltageConverter",
+                "Type": "Explicit",
+                "Value": "--dlvrpins VCCIA --expressions CCF --fivrcondition NOM_CCF_CORE"
+              }        
+            ]
+          }
+        ]
+      }
+    },
+  {
+      "TriggerName": "FUN_MLC_CXX",
+      "Condition": {
+        "TestTemplate": "VminTC,DDGShmooTC,PrimeFunctionalTestMethod,PrimeLSARasterTestMethod",
+        "TestNameRegex": ".*FUN_CORE.*MLC.*",
+        "PortRegex": "[^1]",
+        "BinRegex": "^(90\\d{6})|(\\d{8})|([789]\\d{6})$"
+      },
+      "Execute": {
+        "Executables": [
+          {
+            "Type": "Test",
+            "Name": "IPC::QNR_CARV_CXX::CTRL_X_SHMOO_X_CPUIPFF_X_X_X_X_SHMOO",
+            "Sufix": "FunMLcShm",
+            "CopyCommonParams": "1",
+            "Overrides": [
+              {
+                "ParameterName": "BypassPort",
+                "Type": "Explicit",
+                "Value": "-1"
+              },
+              {
+                "ParameterName": "YAxisType",
+                "Type": "Explicit",
+                "Value": "FIVR"
+              },
+              {
+                "ParameterName": "YAxisParam",
+                "Type": "Explicit",
+                "Value": "CORE3,CORE2,CORE1,CORE0"
+              },
+              {
+                "ParameterName": "YAxisRange",
+                "Type": "Explicit",
+                "Value": "1:-0.05:12"
+              },
+              {
+                "ParameterName": "XAxisParam",
+                "Type": "Explicit",
+                "Value": "p_all_mts"
+              },
+              {
+                "ParameterName": "XAxisRange",
+                "Type": "Explicit",
+                "Value": "750e6:20e6:6"
+              },
+              {
+                "ParameterName": "VoltageConverter",
+                "Type": "Explicit",
+                "Value": "--dlvrpins VCCIA --expressions CORE --fivrcondition NOM_CCF_CORE"
+              }        
+            ]
+          }
+        ]
+      }
+    },{
+      "TriggerName": "FUN_SLC_CXX",
+      "Condition": {
+        "TestTemplate": "VminTC,DDGShmooTC,PrimeFunctionalTestMethod,PrimeLSARasterTestMethod",
+        "TestNameRegex": ".*FUN_CORE.*SLC.*",
+        "PortRegex": "[^1]",
+        "BinRegex": "^(90\\d{6})|(\\d{8})|([789]\\d{6})$"
+      },
+      "Execute": {
+        "Executables": [
+          {
+            "Type": "Test",
+            "Name": "IPC::QNR_CARV_CXX::CTRL_X_SHMOO_X_CPUIPFF_X_X_X_X_SHMOO",
+            "Sufix": "FunSlcShm",
+            "CopyCommonParams": "1",
+            "Overrides": [
+              {
+                "ParameterName": "BypassPort",
+                "Type": "Explicit",
+                "Value": "-1"
+              },
+              {
+                "ParameterName": "YAxisType",
+                "Type": "Explicit",
+                "Value": "FIVR"
+              },
+              {
+                "ParameterName": "YAxisParam",
+                "Type": "Explicit",
+                "Value": "CORE3,CORE2,CORE1,CORE0"
+              },
+              {
+                "ParameterName": "YAxisRange",
+                "Type": "Explicit",
+                "Value": "0.4:0.1:8"
+              },
+              {
+                "ParameterName": "XAxisParam",
+                "Type": "Explicit",
+                "Value": "p_all_mts"
+              },
+              {
+                "ParameterName": "XAxisRange",
+                "Type": "Explicit",
+                "Value": "700e6:50e6:6"
+              },
+              {
+                "ParameterName": "VoltageConverter",
+                "Type": "Explicit",
+                "Value": "--dlvrpins VCCIA --expressions CORE --fivrcondition NOM_CCF_CORE"
+              }        
+            ]
+          }
+        ]
+      }
+    },
+  {
+      "TriggerName": "ARR_ATOM_CXX",
+      "Condition": {
+        "TestTemplate": "VminTC,DDGShmooTC,PrimeFunctionalTestMethod,PrimeLSARasterTestMethod",
+        "TestNameRegex": ".*ARR_ATOM.*",
+        "PortRegex": "[^1]",
+        "BinRegex": "^(90\\d{6})|(\\d{8})|([789]\\d{6})$"
+      },
+      "Execute": {
+        "Executables": [
+          {
+            "Type": "Test",
+            "Name": "IPC::QNR_CARV_CXX::CTRL_X_SHMOO_X_CPUIPFF_X_X_X_X_SHMOO",
+            "Sufix": "Arr`AtmShm",
+            "CopyCommonParams": "1",
+            "Overrides": [
+              {
+                "ParameterName": "BypassPort",
+                "Type": "Explicit",
+                "Value": "-1"
+              },
+              {
+                "ParameterName": "YAxisType",
+                 "Type": "Explicit",
+                "Value": "FIVR"
+              },
+              {
+                "ParameterName": "YAxisParam",
+                "Type": "Explicit",
+                "Value": "ATOM3,ATOM2,ATOM1,ATOM0"
+              },
+              {
+                "ParameterName": "YAxisRange",
+                "Type": "Explicit",
+                "Value": "0.45:0.05:12"
+              },
+              {
+                "ParameterName": "XAxisParam",
+                "Type": "Explicit",
+                "Value": "p_all_mts"
+              },
+              {
+                "ParameterName": "XAxisRange",
+                "Type": "Explicit",
+                "Value": "1.15e-9:0.05e-9:5"
+              },
+              {
+                "ParameterName": "VoltageConverter",
+                "Type": "Explicit",
+                "Value": "--dlvrpins VCCIA --fivrcondition NOM"
+              }        
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "TriggerName": "ARR_CCF_CXX",
+      "Condition": {
+        "TestTemplate": "VminTC,DDGShmooTC,PrimeFunctionalTestMethod,PrimeLSARasterTestMethod",
+        "TestNameRegex": ".*ARR_CCF.*",
+        "PortRegex": "[^1]",
+        "BinRegex": "^(90\\d{6})|(\\d{8})|([789]\\d{6})$"
+      },
+      "Execute": {
+        "Executables": [
+          {
+            "Type": "Test",
+            "Name": "IPC::QNR_CARV_CXX::CTRL_X_SHMOO_X_CPUIPFF_X_X_X_X_SHMOO",
+            "Sufix": "ArrCcfShm",
+            "CopyCommonParams": "1",
+            "Overrides": [
+              {
+                "ParameterName": "BypassPort",
+                "Type": "Explicit",
+                "Value": "-1"
+              },
+              {
+                "ParameterName": "YAxisType",
+                "Type": "Explicit",
+                "Value": "FIVR"
+              },
+              {
+                "ParameterName": "YAxisParam",
+                "Type": "Explicit",
+                "Value": "CCF"
+              },
+              {
+                "ParameterName": "YAxisRange",
+                "Type": "Explicit",
+                "Value": "0.4:0.1:8"
+              },
+              {
+                "ParameterName": "XAxisParam",
+                "Type": "Explicit",
+                "Value": "p_all_mts"
+              },
+              {
+                "ParameterName": "XAxisRange",
+                "Type": "Explicit",
+                "Value": "700e6:50e6:6"
+              },
+              {
+                "ParameterName": "VoltageConverter",
+                "Type": "Explicit",
+                "Value": "--dlvrpins VCCIA --expressions CCF --fivrcondition NOM_CCF_CORE"
+              }        
+            ]
+          }
+        ]
+      }
+    },
+  {
+      "TriggerName": "ARR_CORE_CXX",
+      "Condition": {
+        "TestTemplate": "VminTC,DDGShmooTC,PrimeFunctionalTestMethod,PrimeLSARasterTestMethod",
+        "TestNameRegex": ".*ARR_CORE.*",
+        "PortRegex": "[^1]",
+        "BinRegex": "^(90\\d{6})|(\\d{8})|([789]\\d{6})$"
+      },
+      "Execute": {
+        "Executables": [
+          {
+            "Type": "Test",
+            "Name": "IPC::QNR_CARV_CXX::CTRL_X_SHMOO_X_CPUIPFF_X_X_X_X_SHMOO",
+            "Sufix": "ArrCcfShm",
+            "CopyCommonParams": "1",
+            "Overrides": [
+              {
+                "ParameterName": "BypassPort",
+                "Type": "Explicit",
+                "Value": "-1"
+              },
+              {
+                "ParameterName": "YAxisType",
+                "Type": "Explicit",
+                "Value": "FIVR"
+              },
+              {
+                "ParameterName": "YAxisParam",
+                "Type": "Explicit",
+                "Value": "CORE"
+              },
+              {
+                "ParameterName": "YAxisRange",
+                "Type": "Explicit",
+                "Value": "0.4:0.1:8"
+              },
+              {
+                "ParameterName": "XAxisParam",
+                "Type": "Explicit",
+                "Value": "p_all_mts"
+              },
+              {
+                "ParameterName": "XAxisRange",
+                "Type": "Explicit",
+                "Value": "700e6:50e6:6"
+              },
+              {
+                "ParameterName": "VoltageConverter",
+                "Type": "Explicit",
+                "Value": "--dlvrpins VCCIA --expressions CORE --fivrcondition NOM_CCF_CORE"
+              }        
+            ]
+          }
+        ]
+      }
+    },
+      {
+      "TriggerName": "SCN_CORE_CXX",
+      "Condition": {
+        "TestTemplate": "VminTC,DDGShmooTC,PrimeFunctionalTestMethod,PrimeLSARasterTestMethod",
+        "TestNameRegex": ".*SCN_CORE.*",
+        "PortRegex": "[^1]",
+        "BinRegex": "^(90\\d{6})|(\\d{8})|([789]\\d{6})$"
+      },
+      "Execute": {
+        "Executables": [
+          {
+            "Type": "Test",
+            "Name": "IPC::QNR_CARV_CXX::CTRL_X_SHMOO_X_CPUIPFF_X_X_X_X_SHMOO",
+            "Sufix": "ScnCorShm",
+            "CopyCommonParams": "1",
+            "Overrides": [
+              {
+                "ParameterName": "BypassPort",
+                "Type": "Explicit",
+                "Value": "-1"
+              },
+              {
+                "ParameterName": "YAxisType",
+                "Type": "Explicit",
+                "Value": "FIVR"
+              },
+              {
+                "ParameterName": "YAxisParam",
+                "Type": "Explicit",
+                "Value": "CORE3,CORE2,CORE1,CORE0"
+              },
+              {
+                "ParameterName": "YAxisRange",
+                "Type": "Explicit",
+                "Value": "0.4:0.1:8"
+              },
+              {
+                "ParameterName": "XAxisParam",
+                "Type": "Explicit",
+                "Value": "p_all_mts"
+              },
+              {
+                "ParameterName": "XAxisRange",
+                "Type": "Explicit",
+                "Value": "300e6:100e6:6"
+              },
+              {
+                "ParameterName": "VoltageConverter",
+                "Type": "Explicit",
+                "Value": "--dlvrpins VCCIA --expressions CORE --fivrcondition NOM_CCF_CORE"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "TriggerName": "SCN_UNCORE_CXX",
+      "Condition": {
+        "TestTemplate": "VminTC,DDGShmooTC,PrimeFunctionalTestMethod,PrimeLSARasterTestMethod",
+        "TestNameRegex": ".*SCN_UNCORE.*",
+        "PortRegex": "[^1]",
+        "BinRegex": "^(90\\d{6})|(\\d{8})|([789]\\d{6})$"
+      },
+      "Execute": {
+        "Executables": [
+          {
+            "Type": "Test",
+            "Name": "IPC::QNR_CARV_CXX::CTRL_X_SHMOO_X_CPUIPFF_X_X_X_X_SHMOO",
+            "Sufix": "ScnUncShm",
+            "CopyCommonParams": "1",
+            "Overrides": [
+              {
+                "ParameterName": "BypassPort",
+                "Type": "Explicit",
+                "Value": "-1"
+              },
+              {
+                "ParameterName": "YAxisType",
+                "Type": "Explicit",
+                "Value": "FIVR"
+              },
+              {
+                "ParameterName": "YAxisParam",
+                "Type": "Explicit",
+                "Value": "CCF"
+              },
+              {
+                "ParameterName": "YAxisRange",
+                "Type": "Explicit",
+                "Value": "0.4:0.1:8"
+              },
+              {
+                "ParameterName": "XAxisParam",
+                "Type": "Explicit",
+                "Value": "p_all_mts"
+              },
+              {
+                "ParameterName": "XAxisRange",
+                "Type": "Explicit",
+                "Value": "600e6:100e6:5"
+              },
+              {
+                "ParameterName": "VoltageConverter",
+                "Type": "Explicit",
+                "Value": "--dlvrpins VCCIA --expressions CCF --fivrcondition NOM_CCF_CORE"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "TriggerName": "NOFORCE_CLAMP",
+      "Condition": {
+        "TestNameRegex": "TPI_EDM|FUSE|FIVR|TPI_SHOPS|CONT|TPI_VCC|PTH_DIODE|DRV_RESET|CLK_BASE|PTH_DLVR"
+      },
+      "Execute": {
+        "ForcePort": "NO_FORCE"
+      }
+    },
+    {
+      "TriggerName": "NOFORCE_CLAMP",
+      "Condition": {
+        "PortRegex": "(-1|-2)"
+      },
+      "Execute": {
+        "ForcePort": "NO_FORCE"
+      }
+    }
+  ]
+}

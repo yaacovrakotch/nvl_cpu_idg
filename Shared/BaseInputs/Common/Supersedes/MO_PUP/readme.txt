@@ -1,0 +1,1 @@
+This file exists so that the MO_PUP directory is available in the git repo

@@ -1,0 +1,5 @@
+- Content: CLK
+- Contact: mpe_ddg_pde_analog_clk_my@intel.com
+- Dielet: CPU
+- Scope: Debug module contains non-HVM centric tests, such as sighting driven tests, PKG specific fuseconfig, COLDEDC, and all the testerDV tests which are wholly not part of the production execution flow.
+- SIRP: https://wiki.ith.intel.com/display/ATVSecureWiki/NVL+Clock+HVM+SiRP

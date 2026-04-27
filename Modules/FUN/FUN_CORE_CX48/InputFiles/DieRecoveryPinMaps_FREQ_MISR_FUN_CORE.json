@@ -1,0 +1,52 @@
+[
+  {
+    "Name": "FUNCORE_MISR_FREQ_PM",
+    "Size": 2,
+     "PatConfigSetPoints": [
+      {
+        "Indexes": "1",
+        "Values": [ 1 ],
+        "SetPoints": [ "MCfun:funcore_corefreq0:0.8GHz", "MCfun:Dis_DCM0:matchmode" ]
+      },
+      {
+        "Indexes": "0",
+        "Values": [ 1 ],
+        "SetPoints": [ "MCfun:funcore_corefreq1:0.8GHz", "MCfun:Dis_DCM1:matchmode" ]
+      },
+      {
+        "Indexes": "1",
+        "Values": [ 0 ],
+        "SetPoints": [ "MCfun:En_DCM0:matchmode" ]
+      },
+      {
+        "Indexes": "0",
+        "Values": [ 0 ],
+        "SetPoints": [ "MCfun:En_DCM1:matchmode" ]
+      },
+      {
+        "Indexes": "0-1",
+        "SharedStorageTokens": {
+          "G.U.S.R1_SET_OPERAND": "'MOV '+Bin2Dec('111111111111'+'1111'+'11'+value)+',R1'"
+        },
+        "SetPoints": [ "MCdrv:R1_SET" ]
+      }
+    ],
+    "RegisterComparePins": [ "CPU_TDO" ],
+    "CapturedBitsPerPattern": 192,
+    "Registers": {
+    "DCM0": [ "64-95" , "0-31"    ],
+    "DCM1": [ "32-63"    , "96-127" ]
+    },
+
+    "FailDataIndexMap": [
+      {
+        "Label": ".*DCM0.*",
+        "Index": [ 1 ]
+      },
+      {
+        "Label": ".*DCM1.*",
+        "Index": [ 0 ]
+      }
+    ]
+  }
+]

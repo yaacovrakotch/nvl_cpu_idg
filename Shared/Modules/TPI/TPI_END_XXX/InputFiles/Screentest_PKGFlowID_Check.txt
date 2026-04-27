@@ -1,0 +1,7 @@
+#Compare FLOW ID Values vs Snapshot from ube file which them into uservars.
+#Port 1 is passing port.
+#Port 2 is compare failing port.
+START_SCREEN:PKGFlowIDChk
+#RunOn; TestName  	 ; Data Type ; Param Type ; Param1   		     ; Operation ; Param Type  ; Param2  		       ; TmpStore  ; OnTrue  ; OnFalse
+EXEC  ;	ChkDFFSOCFLW ; INTEGER	 ; DFF	      ; PKG.PBIC_DAB.SOCFLW  ;  ==	     ; GLOBAL	   ; __shared__::SNP_SOCFLW  ;  -	       ; 1	     ; 2
+END_SCREEN

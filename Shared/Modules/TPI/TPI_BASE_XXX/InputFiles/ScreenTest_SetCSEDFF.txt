@@ -1,0 +1,72 @@
+START_SCREEN:SetCSECCDFF
+#Set 'CSE' DFF token token token
+#0 - not CSECC, 1 - CSECC
+#RunOn	; TestName  ; DataType  ; ParamType 	; Param1              ; Operation ; ParamType    ; Param2            ; TmpStore  ; OnTrue   ; OnFalse                                                  			 
+EXEC    ; DFF01  	; STRING	; GLOBAL   		; __shared__::SCVars.SC_ENGID 	  ;   ==  	  ; LITERAL      ; "AE"              ;    -      ; DFF08    ;  DFF02
+EXEC    ; DFF02   	; STRING	; GLOBAL   		; __shared__::SCVars.SC_ENGID	  ;   ==  	  ; LITERAL      ; "ZE"              ;    -      ; DFF08    ;  DFF03
+EXEC    ; DFF03   	; STRING	; GLOBAL   		; __shared__::SCVars.SC_ENGID	  ;   ==  	  ; LITERAL      ; "SE"              ;    -      ; DFF08    ;  DFF04
+EXEC    ; DFF04   	; STRING	; GLOBAL   		; __shared__::SCVars.SC_ENGID	  ;   ==  	  ; LITERAL      ; "CE"              ;    -      ; DFF08    ;  DFF05
+EXEC    ; DFF05   	; STRING	; GLOBAL   		; __shared__::SCVars.SC_ENGID	  ;   ==  	  ; LITERAL      ; "YE"              ;    -      ; DFF08    ;  DFF06
+EXEC    ; DFF06   	; STRING	; GLOBAL    	; __shared__::SCVars.SC_ENGID 	  ;   ==      ; LITERAL      ; "LE"  	         ;    -      ; DFF08 	;  DFF07
+EXEC    ; DFF07   	; STRING	; GLOBAL    	; __shared__::SCVars.SC_ENGID 	  ;   ==      ; LITERAL      ; "KE"  	         ;    -      ; DFF08 	;  DFF09
+EXEC    : DFF08   	: STRING	: DFF       	: PKG.CURRENT.CSECC  :   SET     : LITERAL      : "1" 	             :    -      : 1        :  2
+EXEC    : DFF09   	: STRING	: DFF       	: PKG.CURRENT.CSECC  :   SET     : LITERAL      : "0" 	             :    -      : 1        :  2
+END_SCREEN
+
+START_SCREEN:SetCSECCDFFRC
+#Set 'CSE' DFF token token token
+#0 - not CSECC, 1 - CSECC
+#RunOn	; TestName  ; DataType  ; ParamType 	; Param1              ; Operation ; ParamType    ; Param2            ; TmpStore  ; OnTrue   ; OnFalse                                                  			 
+EXEC    ; DFF01  	; STRING	; GLOBAL   		; __shared__::SCVars.SC_ENGID 	  ;   ==  	  ; LITERAL      ; "AE"              ;    -      ; DFF08    ;  DFF02
+EXEC    ; DFF02   	; STRING	; GLOBAL   		; __shared__::SCVars.SC_ENGID	  ;   ==  	  ; LITERAL      ; "ZE"              ;    -      ; DFF08    ;  DFF03
+EXEC    ; DFF03   	; STRING	; GLOBAL   		; __shared__::SCVars.SC_ENGID	  ;   ==  	  ; LITERAL      ; "SE"              ;    -      ; DFF08    ;  DFF04
+EXEC    ; DFF04   	; STRING	; GLOBAL   		; __shared__::SCVars.SC_ENGID	  ;   ==  	  ; LITERAL      ; "CE"              ;    -      ; DFF08    ;  DFF05
+EXEC    ; DFF05   	; STRING	; GLOBAL   		; __shared__::SCVars.SC_ENGID	  ;   ==  	  ; LITERAL      ; "YE"              ;    -      ; DFF08    ;  DFF06
+EXEC    ; DFF06   	; STRING	; GLOBAL    	; __shared__::SCVars.SC_ENGID 	  ;   ==      ; LITERAL      ; "LE"  	         ;    -      ; DFF08 	;  DFF07
+EXEC    ; DFF07   	; STRING	; GLOBAL    	; __shared__::SCVars.SC_ENGID 	  ;   ==      ; LITERAL      ; "KE"  	         ;    -      ; DFF08 	;  DFF09
+EXEC    : DFF08   	: STRING	: DFF       	: PKG.CURRENT.CSECC  	  :   SET     : LITERAL      : "1" 	             :    -      : 1        :  2
+EXEC    : DFF09   	: STRING	: DFF       	: PKG.CURRENT.CSECC     :   SET     : LITERAL      : "0" 	             :    -      : 1        :  2
+END_SCREEN
+
+##############
+
+START_SCREEN:SetCSEPCDFF
+#Set 'CSEPC' DFF token token token
+#0 - not CSEPC, 1 - CSEPC
+#RunOn	; TestName  ; DataType  ; ParamType 	; Param1              ; Operation ; ParamType    ; Param2            ; TmpStore  ; OnTrue   ; OnFalse                                                  			 
+EXEC    ; DFF01  	; STRING	; GLOBAL   		; __shared__::SCVars.SC_LOCN 	  ;   ==  	  ; LITERAL      ; "6274"            ;    -      ; DFF03    ;  DFF02
+EXEC    ; DFF02 	; STRING	; GLOBAL   		; __shared__::SCVars.SC_LOCN 	  ;   ==  	  ; LITERAL      ; "6275"            ;    -      ; DFF03    ;  2
+EXEC    ; DFF03  	; STRING	; GLOBAL   		; __shared__::SCVars.SC_ENGID 	  ;   ==  	  ; LITERAL      ; "4N"              ;    -      ; DFF07    ;  DFF04
+EXEC    ; DFF04   	; STRING	; GLOBAL   		; __shared__::SCVars.SC_ENGID	  ;   ==  	  ; LITERAL      ; "4T"              ;    -      ; DFF07    ;  DFF05
+EXEC    ; DFF05   	; STRING	; GLOBAL   		; __shared__::SCVars.SC_ENGID	  ;   ==  	  ; LITERAL      ; "4M"              ;    -      ; DFF07    ;  DFF06
+EXEC    ; DFF06   	; STRING	; GLOBAL   		; __shared__::SCVars.SC_ENGID	  ;   ==  	  ; LITERAL      ; "4S"              ;    -      ; DFF07    ;  DFF08
+EXEC    : DFF07   	: STRING	: DFF       	: PKG.CURRENT.CSEPC  	  :   SET     : LITERAL      : "1" 	             :    -      : 1        :  2
+EXEC    : DFF08   	: STRING	: DFF       	: PKG.CURRENT.CSEPC     :   SET     : LITERAL      : "0" 	             :    -      : 1        :  2
+END_SCREEN
+
+##############
+
+START_SCREEN:SetOLBCC
+#RunOn; TestName  	; Data Type	; Param Type	;  Param1   				     ; Operation 	; Param Type  	; Param2  		 ; TmpStore 	; OnTrue  	; OnFalse
+EXEC  ;	Chk01	    ; STRING	; GLOBAL		; __shared__::SCVars.SC_CURRENT_PROCESS_TYPE ;	  ==		; LITERAL		;	"CLASSCOLD"	 ;	-			;	Chk03	;	Chk02
+EXEC  ;	Chk02	    ; STRING	; GLOBAL		; __shared__::SCVars.SC_CURRENT_PROCESS_TYPE ;	  ==		; LITERAL		;	"CSM"	     ;	-			;	Chk03	;	2
+EXEC  :	Chk03	    : STRING	: DFF		    : PKG.CURRENT.OLBCC             :	  SET		: LITERAL		:	"1"	         :	-			:	1	    :	2
+END_SCREEN
+
+START_SCREEN:SetOLBCCRC
+#RunOn; TestName  	; Data Type	; Param Type	;  Param1   				     ; Operation 	; Param Type  	; Param2  		 ; TmpStore 	; OnTrue  	; OnFalse
+EXEC  ;	Chk01	    ; STRING	; GLOBAL		; __shared__::SCVars.SC_CURRENT_PROCESS_TYPE ;	  ==		; LITERAL		;	"CLASSCOLD"	 ;	-			;	Chk03	;	Chk02
+EXEC  ;	Chk02	    ; STRING	; GLOBAL		; __shared__::SCVars.SC_CURRENT_PROCESS_TYPE ;	  ==		; LITERAL		;	"CSM"	     ;	-			;	Chk03	;	2
+EXEC  :	Chk03	    : STRING	: DFF		    : PKG.CURRENT.OLBCC                :	  SET		: LITERAL		:	"1"	         :	-			:	1	    :	2
+END_SCREEN
+
+##############
+
+START_SCREEN:SetOLBPC
+#RunOn; TestName  	; Data Type	; Param Type	;  Param1   				     ; Operation 	; Param Type  	; Param2  		 ; TmpStore 	; OnTrue  	; OnFalse
+EXEC  ;	Chk01	    ; STRING	; GLOBAL		; __shared__::SCVars.SC_LOCN                 ;	  ==		; LITERAL		;	"6274"	     ;	-			;	Chk03	;	Chk02
+EXEC  ;	Chk02	    ; STRING	; GLOBAL		; __shared__::SCVars.SC_LOCN 				 ;	  ==		; LITERAL		;	"6275"	     ;	-			;	Chk03	;	2
+EXEC  ;	Chk03	    ; STRING	; GLOBAL		; __shared__::SCVars.SC_CURRENT_PROCESS_TYPE ;	  ==		; LITERAL		;	"PHMCOLD"	 ;	-			;	Chk05	;	Chk04
+EXEC  ;	Chk04	    ; STRING	; GLOBAL		; __shared__::SCVars.SC_CURRENT_PROCESS_TYPE ;	  ==		; LITERAL		;	"PHMROOM"	 ;	-			;	Chk05	;	2
+EXEC  :	Chk05	    : STRING	: DFF		    : PKG.CURRENT.OLBPC                :	  SET		: LITERAL		:	"1"	         :	-			:	1	    :	2
+END_SCREEN

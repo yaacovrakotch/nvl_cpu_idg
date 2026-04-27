@@ -1,0 +1,43 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan FUS_FLE_XXX;
+
+Import "FUS_FLE_XXX.usrv";
+
+
+
+CSharpTest FuseLogicEngineInit FUSE_X_USERFUNC_K_INIT_X_X_X_X_FLE_SETUP_PRIME 
+{
+	FleInputFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "\\Shared\\Modules\\FUS\\FUS_FLE_XXX\\InputFiles\\FuseLogicEngine.json"; 
+}
+
+Flow FUS_FLE_XXX_INIT
+{
+	FlowItem FUSE_X_USERFUNC_K_INIT_X_X_X_X_FLE_SETUP_PRIME FUSE_X_USERFUNC_K_INIT_X_X_X_X_FLE_SETUP_PRIME
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99310053_fail_FUS_FLE_XXX_FUSE_X_USERFUNC_K_INIT_X_X_X_X_FLE_SETUP_PRIME_n2;
+			Return -1;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98310053_fail_FUS_FLE_XXX_FUSE_X_USERFUNC_K_INIT_X_X_X_X_FLE_SETUP_PRIME_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+	}
+}

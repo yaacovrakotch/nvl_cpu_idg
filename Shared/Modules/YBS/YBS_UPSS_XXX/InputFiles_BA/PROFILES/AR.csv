@@ -1,0 +1,43 @@
+Component,Attribute,DataType,GT_0.5,P1_AR,ALL_1,SA_0P5,SA_0P1,P1_CB24_AR,IA_PERF
+CCF,WC_AR,string,999,1,1,999,,1,1
+CCF,AR,string,999,0.22,1,999,,0.2,"Utils.Min(1, Utils.SWITCH({NA::LI::COMPUTE_DIE_CONFIG@string}, (''NVL_CPU_20_1278'', 0.16), (''NVL_CPU_40_1278'',0.23), (''NVL_CPU_40'',0.23), (''NVL_CPU_48'',0.27), (''NVL_CPU_48_N2P'',0.27), (''8P16+8P16bllc'', 0.44*1.432), (''16P32bllc+16P32'', 0.91)))"
+SAREST,AR,string,999,0.06,1,0.5,,0.06,0.06
+SAREST,WC_AR,string,999,1,1,1,1,1,1
+CCLK,AR,string,999,0.12,1,0.5,,0.25,{THIS::NCLK::AR@double}*0.768
+CCLK,WC_AR,string,999,1,1,{NA::VCCSA::C_SA_CEP@double},{NA::VCCSA::C_SA_CEP@double},1,1
+IOCCLK,AR,string,999,0.1,1,0.5,,0.1,0.1
+IOCCLK,WC_AR,string,999,1,1,{NA::VCCSA::C_SA_CEP@double},{NA::VCCSA::C_SA_CEP@double},1,1
+NCLK,AR,string,999,0.3,1,0.5,,0.3,"Utils.Min(1, Utils.SWITCH({NA::PKG::C_PACKAGE_TYPE@string} , (''DT'', 0.34), (''MBL'', 0.3))*1.573)"
+NCLK,WC_AR,string,999,1,1,{NA::VCCSA::C_SA_CEP@double},{NA::VCCSA::C_SA_CEP@double},1,1
+QCLK,AR,string,999,0.583,1,0.5,,0.3,{THIS::NCLK::AR@double}*2*0.726
+QCLK,WC_AR,string,999,1,1,1,1,1,1
+AT,AR,string,999,0.45,1,999,,0.27,0.3468
+AT,WC_AR,string,999,"Math.Min({AR@double}*1.4,1)",1,999,,"Math.Min({AR@double}*1.4,1)","Math.Min({AR@double}*1.4,1)"
+ATSRAM,AR,string,999,0.45,1,999,,0.27,{THIS::AT::AR@double}
+ATSRAM,WC_AR,string,999,1,1,999,,1,1
+DE,AR,string,999,0.22,1,0.5,,0.22,0.2169
+DE,WC_AR,string,999,1,1,1,1,1,1
+DESRAM,AR,string,999,0.22,1,0.5,,0.22,{THIS::DE::AR@double}
+DESRAM,WC_AR,string,999,1,1,1,1,1,1
+GT,AR,string,0.5,0.0804,1,999,,0.01,0.01
+GT,WC_AR,string,1,1,1,999,,1,1
+IA,AR,string,999,0.53,1,999,,0.4,"Utils.Min(1, (0.3310035 - 0.0046286*{MVS::STEP@double} + 0.00003084 * Math.Pow(({MVS::STEP@double}-4.16747),2))*1.19)"
+IA,WC_AR,string,999,"Math.Min({AR@double}*1.4,1)",1,999,,"Math.Min({AR@double}*1.4,1)","Math.Min({AR@double}*1.4,1)"
+LPATOM,AR,string,999,0.426,1,0.5,,0.33,"Utils.Min(1, Utils.SWITCH({NA::PKG::C_PACKAGE_TYPE@string} , (''DT'', 0.41), (''MBL'', 0.345))*1.02)"
+LPATOM,WC_AR,string,999,"Math.Min({AR@double}*1.4,1)",1,{NA::VCCSA::C_SA_CEP@double},{NA::VCCSA::C_SA_CEP@double},1,1
+LPATSRAM,AR,string,999,0.4,1,0.5,,0.33,{THIS::LPATOM::AR@double}
+LPATSRAM,WC_AR,string,999,1,1,1,1,1,1
+MEDIA,AR,string,999,999,1,0.5,,999,999
+MEDIA,WC_AR,string,999,999,1,{NA::VCCSA::C_SA_CEP@double},{NA::VCCSA::C_SA_CEP@double},999,999
+MEDIASRAM,AR,string,999,999,1,0.5,,999,999
+MEDIASRAM,WC_AR,string,999,999,1,1,1,999,999
+NPU,AR,string,999,999,1,0.5,,999,999
+NPU,WC_AR,string,999,999,1,{NA::VCCSA::C_SA_CEP@double},{NA::VCCSA::C_SA_CEP@double},999,999
+NPUSRAM,AR,string,999,999,1,0.5,,999,999
+NPUSRAM,WC_AR,string,999,999,1,1,1,999,999
+CCFSRAM,WC_AR,string,999,1,1,999,,1,1
+CCFSRAM,AR,string,999,1,1,999,,0.2,{THIS::CCF<<INDEX@string>>::AR@double}
+IPU,AR,string,999,999,1,0.5,,999,999
+IPU,WC_AR,string,999,999,1,{NA::VCCSA::C_SA_CEP@double},{NA::VCCSA::C_SA_CEP@double},999,999
+LPATOMb,AR,string,999,0.426,1,0.5,,0.33,
+LPATOMb,WC_AR,string,999,"Math.Min({AR@double}*1.4,1)",1,{NA::VCCSA::C_SA_CEP@double},{NA::VCCSA::C_SA_CEP@double},1,

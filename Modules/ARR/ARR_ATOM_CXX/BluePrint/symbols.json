@@ -1,0 +1,88 @@
+{
+  "_description": "Symbol definitions for ARR_ATOM_CXX BluePrint generation. Each symbol represents a dimension that varies across otherwise-identical test blocks.",
+  "_module": "ARR_ATOM_CXX",
+  "_note": "CXX is a cross-socket module (no _CPU1 dual-die variants). Has ECC-on (ECCON/ECCSBFDV) and low-operating-point (LO) test flows not present in CXPKGS9.",
+
+  "symbols": {
+    "FREQ_CORNER": {
+      "description": "Frequency corner for VMIN search tests. F1 is the lowest standard corner, F4 the highest.",
+      "values": ["F1", "F2", "F3", "F4"],
+      "applies_to": "Main VminTC/MTT search tests, ECCON VminTC (F1-F4), patlist freq tags, FlowMatrix freq references, DROPOUT expressions, CornerIdentifiers, VminResult keys, StartVoltagesForRetry/Offset"
+    },
+
+    "COVERAGE_TYPE": {
+      "description": "Coverage variant for array tests: COMBINED=all arrays, SSA_L2DATA=L2 data arrays only.",
+      "values": ["COMBINED", "SSA_L2DATA"],
+      "applies_to": "Main VminTC/MTT test name suffix, patlist coverage tags. Note: CXX has no SSA or MEC standalone coverage.",
+      "note": "CXX only has COMBINED and SSA_L2DATA (unlike CXPKGS9 which also has SSA, MEC)"
+    },
+
+    "MODULE_INDEX": {
+      "description": "L2 cache module index (M0-M3). Each physical module is tested independently in the SSA/LSA raster repair pipeline.",
+      "values": ["M0", "M1", "M2", "M3"],
+      "applies_to": "SSA/LSA raster pipeline: CAPPKTS/NVLRasterExtension/REP2FUSE test names (_M0_1, _M1_1...), patlist module tags (_m0_, _m1_...), SCBD BypassPort refs, DecoderMatchLabel, SharedStorage keys"
+    },
+
+    "VOLTAGE_CORNER": {
+      "description": "Voltage corner for raster capture/repair tests. MIN=minimum voltage, MAX=maximum voltage.",
+      "values": ["MIN", "MAX"],
+      "applies_to": "SSA/LSA raster pipeline test names (VCCIA_MIN_X, VCCIA_MAX_X), SharedStorage keys"
+    },
+
+    "SSA_ARRAY_TYPE": {
+      "description": "SSA array type: L2_DATA covers data arrays, L2_TAG covers tag arrays.",
+      "values": ["L2_DATA", "L2_TAG"],
+      "applies_to": "SSA raster pipeline test names and patlists"
+    },
+
+    "LSA_ARRAY_TYPE": {
+      "description": "LSA array type: L2_C6 (C6 retention), L2_LRU (least recently used), L2_STATE (state arrays).",
+      "values": ["L2_C6", "L2_LRU", "L2_STATE"],
+      "applies_to": "LSA raster pipeline test names and patlists"
+    },
+
+    "REP_DIRECTION": {
+      "description": "Repair direction: VMIN-side vs VMAX-side repair flag.",
+      "values": ["VMIN", "VMAX"],
+      "applies_to": "ScreenTC SETLOCAL/SETL2RR/REVERT tests, Screen repair flag tests, AuxiliaryTC SET_xREP_FLAG"
+    },
+
+    "L2_ENDCPU_TYPE": {
+      "description": "L2 sub-array tested at ENDCPU: TAG or DATA.",
+      "values": ["TAG", "DATA"],
+      "applies_to": "ENDCPU VminTC test names (_X_L2_TAG, _X_L2_DATA)"
+    },
+
+    "HRY_PHASE": {
+      "description": "HRY test phase: PRE runs before repair, POST runs after repair.",
+      "values": ["PRE", "POST"],
+      "applies_to": "XSA_ATOM_HRY test names (_X_PRE, _X_POST)"
+    },
+
+    "RASTERLOOP_TYPE": {
+      "description": "PatConfig raster loop type: VMAXRASTERLOOP or VMINRASTERLOOP.",
+      "values": ["VMAXRASTERLOOP", "VMINRASTERLOOP"],
+      "applies_to": "XSA_ATOM_PATMOD PatConfig test names"
+    },
+
+    "PMUX_INDEX": {
+      "description": "Power-mux callback index (0-3), one per ATOM compute cluster.",
+      "values": ["0", "1", "2", "3"],
+      "applies_to": "ENDCPU RunCallback PMUX_CO_FREQ test names, CDIE_ATOM freq references in callbacks"
+    },
+
+    "ECC_FREQ": {
+      "description": "ECC frequency corner for ECCON/ECCSBFDV tests within the F5-domain flow. F5=lowest, F7=highest.",
+      "values": ["F5", "F6", "F7"],
+      "applies_to": "CtvTokensTC ECCSBFDV test names (_VCCIA_F5_X_, _VCCIA_F6_X_, _VCCIA_F7_X_), ECCON_VMINTC VminTC tests, RunCallback ECCON json params (per_array_f5/f6/f7.json), ScreenTC SCREEN_ECCON_VMIN_F5/F6/F7 test names, SetPointsPreInstance AT_F5/F6/F7_FREQ references",
+      "note": "Only applies to F5XAT and F5XATLO flow domains. F1-F4 ECCSBFDV tests use the same FREQ_CORNER symbol instead."
+    },
+
+    "ECC_MODULE": {
+      "description": "ECCSBFDV CtvTokensTC module index. M0=base test (no name suffix), M1/M2/M3 have _M1/_M2/_M3 suffixes.",
+      "values": ["M0 (no suffix)", "M1", "M2", "M3"],
+      "applies_to": "CtvTokensTC ECCSBFDV test names (_ECCSBFDV_L2_DATA → M0 base, _ECCSBFDV_L2_DATA_M1 → M1, etc.), patlist module tags (_m0_, _m1_...), PrePlist VoltageConverter overrides (ATOM0:ATOMM0 → ATOM1:ATOMM1 etc.)",
+      "note": "M0 base test has NO suffix in the test name. Only M1/M2/M3 have explicit _MN suffixes. Body differs by patlist _mN_ tag and PrePlist ATOMN:ATOMMN target."
+    }
+  }
+}

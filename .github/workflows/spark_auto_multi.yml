@@ -1,0 +1,193 @@
+name: SparkAuto_Multi
+
+on:
+  workflow_dispatch:
+    inputs:
+      sites:
+        description: 'Target Sites (JF/PG/FM/ALL or comma-separated like JF,PG)'
+        # Default value if no value is explicitly provided
+        default: 'ALL'
+        # Input has to be provided for the workflow to run
+        required: true
+      ExcelFilePath:
+        description: 'Please enter the path to the Excel file'
+        # Input has to be provided for the workflow to run
+        required: true
+      DirectoryPath:
+        description: 'Please enter the directory path (required for SingleTP)'
+        # Input has to be provided for the workflow to run
+        required: false
+      productID:
+        description: 'Please select the Product ID'
+        # Input has to be provided for the workflow to run
+        required: true
+        type: choice
+        options:
+          - NVL_S28C
+          - NVL_HX28C
+          - NVL_S52C
+          - NVL_AllMV
+
+jobs:
+  # Determine which sites to run based on user input
+  DetermineSites:
+    runs-on: [self-hosted, checkers_JF]
+    outputs:
+      run_jf: ${{ steps.parse_sites.outputs.run_jf }}
+      run_pg: ${{ steps.parse_sites.outputs.run_pg }}
+      run_fm: ${{ steps.parse_sites.outputs.run_fm }}
+      site_selection: ${{ steps.parse_sites.outputs.site_selection }}
+    steps:
+    - name: Parse Sites Input
+      id: parse_sites
+      shell: powershell
+      run: |
+        # Get the sites input
+        $sitesInput = "${{ github.event.inputs.sites }}"
+        Write-Host "Raw sites input: '$sitesInput'"
+        
+        # Initialize variables
+        $runJF = "false"
+        $runPG = "false"
+        $runFM = "false"
+        
+        # Handle ALL case
+        if ($sitesInput -eq "ALL") {
+            $runJF = "true"
+            $runPG = "true"
+            $runFM = "true"
+            $siteSelection = "ALL"
+            Write-Host "ALL sites selected"
+        }
+        else {
+            # Split by comma and process each site
+            $siteArray = $sitesInput -split ',' | ForEach-Object { $_.Trim().ToUpper() }
+            Write-Host "Site array: $($siteArray -join ', ')"
+            
+            # Check each site
+            if ($siteArray -contains "JF") {
+                $runJF = "true"
+                Write-Host "JF enabled"
+            }
+            if ($siteArray -contains "PG") {
+                $runPG = "true"
+                Write-Host "PG enabled"
+            }
+            if ($siteArray -contains "FM") {
+                $runFM = "true"
+                Write-Host "FM enabled"
+            }
+            
+            # Create site selection string
+            $enabledSites = @()
+            if ($runJF -eq "true") { $enabledSites += "JF" }
+            if ($runPG -eq "true") { $enabledSites += "PG" }
+            if ($runFM -eq "true") { $enabledSites += "FM" }
+            
+            if ($enabledSites.Count -eq 0) {
+                $siteSelection = "NONE"
+            }
+            elseif ($enabledSites.Count -eq 3) {
+                $siteSelection = "ALL"
+            }
+            else {
+                $siteSelection = $enabledSites -join ","
+            }
+        }
+        
+        # Output results to GitHub Actions
+        echo "run_jf=$runJF" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+        echo "run_pg=$runPG" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+        echo "run_fm=$runFM" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+        echo "site_selection=$siteSelection" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+        
+        # Log final results
+        Write-Host "Final Results:"
+        Write-Host "Run JF: $runJF"
+        Write-Host "Run PG: $runPG"
+        Write-Host "Run FM: $runFM"
+        Write-Host "Site Selection: $siteSelection"
+
+  # JF Site Spark Auto Submission
+  SparkAutoSubmission_JF:
+    needs: DetermineSites
+    if: ${{ needs.DetermineSites.outputs.run_jf == 'true' }}
+    runs-on: [self-hosted, sparkauto_JF]
+    steps:
+    - name: Log Inputs
+      run: |
+        echo "TP Site: JF"
+        echo "Site Selection: ${{ needs.DetermineSites.outputs.site_selection }}"
+        echo "ExcelFilePath: ${{ github.event.inputs.ExcelFilePath }}"
+        echo "DirectoryPath: ${{ github.event.inputs.DirectoryPath }}"
+        echo "Product ID: ${{ github.event.inputs.productID }}"
+
+    - name: Run Spark Submission Script
+      shell: powershell
+      run: |
+        # Declare base path
+        $basepath = 'I:/engineering/dev/team_classtp/torch/SparkAuto/PerProduct'
+
+        # Use the productID input from the user
+        $productID="${{ github.event.inputs.productID }}"
+        $scriptpath="$basepath/Script"
+        $currentpath="$basepath/$productID/SPARK_SUBMISSION"
+
+        # Execute the Python script with the specified arguments (removed site parameter)
+        python -u "$scriptpath/sparkapi_autogen_submission.py" "${{ github.event.inputs.ExcelFilePath }}" "$currentpath" "$scriptpath" "${{ github.event.inputs.DirectoryPath }}"
+
+  # PG Site Spark Auto Submission
+  SparkAutoSubmission_PG:
+    needs: DetermineSites
+    if: ${{ needs.DetermineSites.outputs.run_pg == 'true' }}
+    runs-on: [self-hosted, sparkauto_PG]
+    steps:
+    - name: Log Inputs
+      run: |
+        echo "TP Site: PG"
+        echo "Site Selection: ${{ needs.DetermineSites.outputs.site_selection }}"
+        echo "ExcelFilePath: ${{ github.event.inputs.ExcelFilePath }}"
+        echo "DirectoryPath: ${{ github.event.inputs.DirectoryPath }}"
+        echo "Product ID: ${{ github.event.inputs.productID }}"
+
+    - name: Run Spark Submission Script
+      shell: powershell
+      run: |
+        # Declare base path
+        $basepath = 'I:/engineering/dev/team_classtp/TORCH/SparkAuto/PerProduct'
+
+        # Use the productID input from the user
+        $productID="${{ github.event.inputs.productID }}"
+        $scriptpath="$basepath/Script"
+        $currentpath="$basepath/$productID/SPARK_SUBMISSION"
+
+        # Execute the Python script with the specified arguments (removed site parameter)
+        python -u "$scriptpath/sparkapi_autogen_submission.py" "${{ github.event.inputs.ExcelFilePath }}" "$currentpath" "$scriptpath" "${{ github.event.inputs.DirectoryPath }}"
+
+  # FM Site Spark Auto Submission
+  SparkAutoSubmission_FM:
+    needs: DetermineSites
+    if: ${{ needs.DetermineSites.outputs.run_fm == 'true' }}
+    runs-on: [self-hosted, sparkauto_JF]
+    steps:
+    - name: Log Inputs
+      run: |
+        echo "TP Site: FM"
+        echo "Site Selection: ${{ needs.DetermineSites.outputs.site_selection }}"
+        echo "ExcelFilePath: ${{ github.event.inputs.ExcelFilePath }}"
+        echo "DirectoryPath: ${{ github.event.inputs.DirectoryPath }}"
+        echo "Product ID: ${{ github.event.inputs.productID }}"
+
+    - name: Run Spark Submission Script
+      shell: powershell
+      run: |
+        # Declare base path
+        $basepath = 'I:/engineering/dev/team_classtp/torch/SparkAuto/PerProduct'
+
+        # Use the productID input from the user
+        $productID="${{ github.event.inputs.productID }}"
+        $scriptpath="$basepath/Script"
+        $currentpath="$basepath/$productID/SPARK_SUBMISSION"
+
+        # Execute the Python script with the specified arguments (removed site parameter)
+        python -u "$scriptpath/sparkapi_autogen_submission.py" "${{ github.event.inputs.ExcelFilePath }}" "$currentpath" "$scriptpath" "${{ github.event.inputs.DirectoryPath }}"

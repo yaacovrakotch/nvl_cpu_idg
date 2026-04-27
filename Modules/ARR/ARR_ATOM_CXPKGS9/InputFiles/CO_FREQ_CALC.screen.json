@@ -1,0 +1,46 @@
+{
+	"Screen_Config": [
+		{
+			"TestName": "CDIE_ATOM_XOVER_FREQ",
+			"TestConfig": [               
+				[ "Test1", "String", "GSDS", "U.S.CPUATOMPMUX"  , "SET", "LITERAL", "MCdrv:pwrmux_sel_atom0_l2_0:vcclogic,MCdrv:pwrmux_sel_atom1_l2_0:vcclogic,MCdrv:pwrmux_sel_atom2_l2_0:vcclogic,MCdrv:pwrmux_sel_atom3_l2_0:vcclogic,CDIE_ATOM:nblctrl_cdie_atom_l2:nblon,MCdrv:corefreq:1.2GHz,MCdrv:ringfreq_0:1.2GHz,MCAarr:ratio_modify:1.2GHz", "Test2", "2" ],
+                [ "Test2", "String", "GSDS", "U.S.CPUATOMPMUX"  ,  "APPEND", "Literal"   , ",MCdrv:atomfreq0_0:"                                                                                        , "Check3atom0", "2"],
+                [ "Check3atom0", "String", "GSDS", "U.S.CDIE_ATOM0_FREQ" , "==" , "Literal", "3"  , "Set3p0atom0" , "Check2atom0" ],
+				[ "Check2atom0", "String", "GSDS", "U.S.CDIE_ATOM0_FREQ" , "==" , "Literal", "2" , "Set2p0atom0" , "Check1atom0" ],
+				[ "Check1atom0", "String", "GSDS", "U.S.CDIE_ATOM0_FREQ" , "==" , "Literal", "1" , "Set1p0atom0" , "Test3" ],
+				[ "Set3p0atom0", "String", "GSDS", "U.S.CDIE_ATOM0_FREQ" , "SET" , "Literal", "3.0" , "Test3", "2" ],
+				[ "Set2p0atom0", "String", "GSDS", "U.S.CDIE_ATOM0_FREQ" , "SET" , "Literal", "2.0" , "Test3", "2" ],
+				[ "Set1p0atom0", "String", "GSDS", "U.S.CDIE_ATOM0_FREQ" , "SET" , "Literal", "1.0" , "Test3", "2" ],
+				[ "Test3", "String", "GSDS", "U.S.CPUATOMPMUX"  ,  "APPEND", "GSDS"      , "U.S.CDIE_ATOM0_FREQ"                                                                                     , "Test4", "2"],
+                [ "Test4", "String", "GSDS", "U.S.CPUATOMPMUX"  ,  "APPEND", "Literal"   , "GHz,MCdrv:atomfreq1_0:"                                                                                        , "Check3atom1", "2"],
+                [ "Check3atom1", "String", "GSDS", "U.S.CDIE_ATOM1_FREQ" , "==" , "Literal", "3"  , "Set3p0atom1" , "Check2atom1" ],
+				[ "Check2atom1", "String", "GSDS", "U.S.CDIE_ATOM1_FREQ" , "==" , "Literal", "2" , "Set2p0atom1" , "Check1atom1" ],
+				[ "Check1atom1", "String", "GSDS", "U.S.CDIE_ATOM1_FREQ" , "==" , "Literal", "1" , "Set1p0atom1" , "Test5" ],
+				[ "Set3p0atom1", "String", "GSDS", "U.S.CDIE_ATOM1_FREQ" , "SET" , "Literal", "3.0" , "Test5", "2" ],
+				[ "Set2p0atom1", "String", "GSDS", "U.S.CDIE_ATOM1_FREQ" , "SET" , "Literal", "2.0" , "Test5", "2" ],
+				[ "Set1p0atom1", "String", "GSDS", "U.S.CDIE_ATOM1_FREQ" , "SET" , "Literal", "1.0" , "Test5", "2" ],
+                [ "Test5", "String", "GSDS", "U.S.CPUATOMPMUX"  ,  "APPEND", "GSDS"      , "U.S.CDIE_ATOM1_FREQ"                                                                                     , "Test6", "2"],
+                [ "Test6", "String", "GSDS", "U.S.CPUATOMPMUX"  ,  "APPEND", "Literal"   , "GHz,MCdrv:atomfreq2_0:"                                                                                        , "Check3atom2", "2"],
+                [ "Check3atom2", "String", "GSDS", "U.S.CDIE_ATOM2_FREQ" , "==" , "Literal", "3"  , "Set3p0atom2" , "Check2atom2" ],
+				[ "Check2atom2", "String", "GSDS", "U.S.CDIE_ATOM2_FREQ" , "==" , "Literal", "2" ,  "Set2p0atom2" , "Check1atom2" ],
+				[ "Check1atom2", "String", "GSDS", "U.S.CDIE_ATOM2_FREQ" , "==" , "Literal", "1" ,  "Set1p0atom2" , "Test7" ],
+				[ "Set3p0atom2", "String", "GSDS", "U.S.CDIE_ATOM2_FREQ" , "SET" , "Literal", "3.0" , "Test7", "2" ],
+				[ "Set2p0atom2", "String", "GSDS", "U.S.CDIE_ATOM2_FREQ" , "SET" , "Literal", "2.0" , "Test7", "2" ],
+				[ "Set1p0atom2", "String", "GSDS", "U.S.CDIE_ATOM2_FREQ" , "SET" , "Literal", "1.0" , "Test7", "2" ],
+                [ "Test7", "String", "GSDS", "U.S.CPUATOMPMUX"  ,  "APPEND", "GSDS"      , "U.S.CDIE_ATOM2_FREQ"                                                                                     , "Test8", "2"],
+                [ "Test8", "String", "GSDS", "U.S.CPUATOMPMUX"  ,  "APPEND", "Literal"   , "GHz,MCdrv:atomfreq3_0:"                                                                                        , "Check3atom3", "2"],
+                [ "Check3atom3", "String", "GSDS", "U.S.CDIE_ATOM3_FREQ" , "==" , "Literal", "3"  , "Set3p0atom3" , "Check2atom3" ],
+				[ "Check2atom3", "String", "GSDS", "U.S.CDIE_ATOM3_FREQ" , "==" , "Literal", "2" ,  "Set2p0atom3" , "Check1atom3" ],
+				[ "Check1atom3", "String", "GSDS", "U.S.CDIE_ATOM3_FREQ" , "==" , "Literal", "1" ,  "Set1p0atom3" , "Test9" ],
+				[ "Set3p0atom3", "String", "GSDS", "U.S.CDIE_ATOM3_FREQ" , "SET" , "Literal", "3.0" , "Test9", "2" ],
+				[ "Set2p0atom3", "String", "GSDS", "U.S.CDIE_ATOM3_FREQ" , "SET" , "Literal", "2.0" , "Test9", "2" ],
+				[ "Set1p0atom3", "String", "GSDS", "U.S.CDIE_ATOM3_FREQ" , "SET" , "Literal", "1.0" , "Test9", "2" ],
+                [ "Test9", "String", "GSDS", "U.S.CPUATOMPMUX"  ,  "APPEND", "GSDS"      , "U.S.CDIE_ATOM3_FREQ"                                                                                     , "Test10", "2"],		
+                [ "Test10", "String", "GSDS", "U.S.CPUATOMPMUX"  ,  "APPEND", "Literal"   , "GHz"                                                                                        , "1", "2"]				
+			]
+		}
+	]
+}
+
+
+

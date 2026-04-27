@@ -1,0 +1,126 @@
+{
+    "IndexAllMeasurements": false,
+    "CONSTANTS": {
+        "DVDACG_TGT": "1.2, 1.1, 1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4"
+    },
+    "CTV": [
+        {
+            "PinName": "CPU_TDO",
+            "Equations": [
+                {
+                    "RegName": "CPU_CORE1P_ADC0_1p2",
+                    "StartBit": 0,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU_CORE1P_ADC0_1p2"
+                },
+                {
+                    "RegName": "CPU_CORE1P_ADC0_1p1",
+                    "StartBit": 10,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU_CORE1P_ADC0_1p1"
+                },
+                {
+                    "RegName": "CPU_CORE1P_ADC0_1p0",
+                    "StartBit": 20,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU_CORE1P_ADC0_1p0"
+                },
+                {
+                    "RegName": "CPU_CORE1P_ADC0_0p9",
+                    "StartBit": 30,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU_CORE1P_ADC0_0p9"
+                },
+                {
+                    "RegName": "CPU_CORE1P_ADC0_0p8",
+                    "StartBit": 40,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU_CORE1P_ADC0_0p8"
+                },
+                {
+                    "RegName": "CPU_CORE1P_ADC0_0p7",
+                    "StartBit": 50,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU_CORE1P_ADC0_0p7"
+                },
+                {
+                    "RegName": "CPU_CORE1P_ADC0_0p6",
+                    "StartBit": 60,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU_CORE1P_ADC0_0p6"
+                },
+                {
+                    "RegName": "CPU_CORE1P_ADC0_0p5",
+                    "StartBit": 70,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU_CORE1P_ADC0_0p5"
+                },
+                {
+                    "RegName": "CPU_CORE1P_ADC0_0p4",
+                    "StartBit": 80,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU_CORE1P_ADC0_0p4"
+                }
+            ]
+        }
+    ],
+    "DC": [
+        {
+            "Domains": ["CORE1P"],
+            "Measurements": {
+                "CPU_CORE1P_DVDACG": {
+                    "Pin": "IPC::CPU_CORE1_DLVROUT",
+                    "Average": 10,
+                    "Expect": 90
+                }
+            },
+            "Equations": [
+                {
+                    "Name": "CPU_LINEARFIT_{DOMAIN}",
+                    "Expression": "LinearFit(SelectArrayElements([CPU_{DOMAIN}_DVDACG],'0-8', ','), SelectArrayElements([DVDACG_TGT], '0-8', ','), ',')",
+                    "SaveResult": true,
+                    "DatalogFormat": "STR"
+                }
+            ]
+        },
+        {
+            "Domains": ["0","1","2","3","4","5","6","7","8"],
+            "Token": "DVDACG_CORE1P",
+            "Equations": [
+                {
+                    "Expression": "Round(SelectArrayElement([CPU_CORE1P_DVDACG], {DOMAIN}), 4)",
+                    "SaveToSharedStorage": "CPU_CORE1P_DVDACG_{DOMAIN}",
+                    "DatalogFormat": "DBL"
+                }
+            ]
+        },
+        {
+            "Domains": ["CORE1P"],
+            "Equations": [
+                {
+                    "Expression": "ToInt32(Round(GetDelimitedData([CPU_LINEARFIT_CORE1P], ',', 1) * 2048, 0))",
+                    "DatalogFormat": "INT",
+                    "SaveToSharedStorage": "CPU_CORE1P_DLVR_DAC_CAL_SLOPE"
+                },
+                {
+                    "Expression": "ToInt32(Round(ToDouble(GetDelimitedData([CPU_LINEARFIT_CORE1P], ',', 0)) * 2/0.0025, 0))",
+                    "SaveToSharedStorage": "CPU_CORE1P_DLVR_DAC_CAL_OFFSET_1",
+                    "DatalogFormat": "INT"
+                },
+                {
+                    "Expression": "ToDouble(GetDelimitedData([CPU_LINEARFIT_CORE1P], ',', 2))",
+                    "SaveToSharedStorage": "CPU_CORE1P_DLVR_DAC_CAL_R2"
+                }
+            ]
+        }
+    ]
+}

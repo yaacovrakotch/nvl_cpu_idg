@@ -1,0 +1,144 @@
+{
+  "Configurations": [
+	{
+		"ConfigurationElement": [
+        {
+			"Domain": [
+				"CPU_ALL",
+                "HUB_ALL"
+			],
+			"Type": "INSTRUCTION",
+			"StartAddress": [
+				"SKIP_LOOP_Infra_WaitFuseSenseDone_mm"
+			],
+			"StartAddressOffset": [
+				2
+			],
+			"EndAddress": [
+				"SKIP_LOOP_Infra_WaitFuseSenseDone_mm"
+			],
+			"EndAddressOffset": [
+				2
+			],
+			"IsChannelLink": false,
+			"PatternsRegEx": [
+				"^[gdx]........0012942._.._......._....HC......._................._.1.................._longreset_infra.*"
+			]
+        }
+		],
+		"Name": "Add_delay_Infra_debug_d2d"
+	},
+	{
+		"ConfigurationElement": [
+        {
+			"Domain": [
+				"CPU_ALL",
+                "HUB_ALL"
+			],
+			"Type": "INSTRUCTION",
+			"StartAddress": [
+				"Infra_WaitFuseSenseDone"
+			],
+			"StartAddressOffset": [
+				1
+			],
+			"EndAddress": [
+				"Infra_WaitFuseSenseDone"
+			],
+			"EndAddressOffset": [
+				1
+			],
+			"IsChannelLink": false,
+			"PatternsRegEx": [
+				"^[gdx]........0000012._.._......._....HC......._................._.1.................._longreset_infra.*"
+			]
+        }
+		],
+		"Name": "Add_delay_Infra_debug_nonmm_d2d"
+	},
+    {
+		"ConfigurationElement": [
+        {
+			"Domain": [
+				"CPU_ALL",
+                "HUB_ALL"
+			],
+			"Type": "INSTRUCTION",
+			"StartAddress": [
+				"TIMEOUT_Infra_WaitFuseSenseDone_mm"
+			],
+			"StartAddressOffset": [
+				-1
+			],
+			"EndAddress": [
+				"TIMEOUT_Infra_WaitFuseSenseDone_mm"
+			],
+			"EndAddressOffset": [
+				-1
+			],
+			"IsChannelLink": false,
+			"PatternsRegEx": [
+				"^[gdx]........0012942._.._......._....HC......._................._.1.................._longreset_infra.*"
+			]
+        }
+		],
+		"Name": "JGSE_instruction_infra_mm_d2d"
+	},
+    {
+		"ConfigurationElement": [
+        {
+			"Domain": [
+				"CPU_ALL",
+                "HUB_ALL"
+			],
+			"Type": "INSTRUCTION",
+			"StartAddress": [
+				"TIMEOUT_Fuse_WaitRamZeroingDone_mm"
+			],
+			"StartAddressOffset": [
+				-1
+			],
+			"EndAddress": [
+				"TIMEOUT_Fuse_WaitRamZeroingDone_mm"
+			],
+			"EndAddressOffset": [
+				-1
+			],
+			"IsChannelLink": false,
+			"PatternsRegEx": [
+				"^[gdx]........0012942._.._......._....HC......._................._.1.................._longreset_fuseoverride.*"
+			]
+        }
+		],
+		"Name": "JGSE_instruction_fuse_mm_d2d"
+	},
+    {
+		"ConfigurationElement": [
+        {
+			"Domain": [
+				"CPU_ALL",
+                "HUB_ALL"
+			],
+			"Type": "INSTRUCTION",
+			"StartAddress": [
+				"TIMEOUT_Ph1a_WaitBootFsmUpState_mm"
+			],
+			"StartAddressOffset": [
+				-1
+			],
+			"EndAddress": [
+				"TIMEOUT_Ph1a_WaitBootFsmUpState_mm"
+			],
+			"EndAddressOffset": [
+				-1
+			],
+			"IsChannelLink": false,
+			"PatternsRegEx": [
+				"^[gdx]........0012942._.._......._....HC......._................._.1.................._longreset_phase1a.*"
+			]
+        }
+		],
+		"Name": "JGSE_instruction_ph1a_mm_d2d"
+	}
+  ]
+}

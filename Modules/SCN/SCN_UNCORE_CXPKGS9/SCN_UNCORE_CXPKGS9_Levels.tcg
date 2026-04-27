@@ -1,0 +1,33 @@
+Version 1.0;
+
+SpecificationSet cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCORE_OVERRIDE (max,min,nom) Inherits CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC
+{
+	Voltage c_cpu_all_tstprt_i_data_vox = 0.2;
+	Voltage c_cpu_all_tstprt_o_data_vox = 0.17;
+	Voltage c_cpu_all_1_tstprt_i_data_vox = 0.2;
+	Voltage c_cpu_all_1_tstprt_o_data_vox = 0.17;
+}
+
+TestConditionGroup cpu_all_bf_x_x_ipc_lvl_SCNUNCORE_OVERRIDE_TCG
+{
+	SpecificationSet = cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCORE_OVERRIDE;
+	Level = CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl;
+}
+
+TestCondition cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCORE_OVERRIDE_max
+{
+	TestConditionGroup = cpu_all_bf_x_x_ipc_lvl_SCNUNCORE_OVERRIDE_TCG;
+	Selector = max;
+}
+
+TestCondition cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCORE_OVERRIDE_min
+{
+	TestConditionGroup = cpu_all_bf_x_x_ipc_lvl_SCNUNCORE_OVERRIDE_TCG;
+	Selector = min;
+}
+
+TestCondition cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCORE_OVERRIDE_nom
+{
+	TestConditionGroup = cpu_all_bf_x_x_ipc_lvl_SCNUNCORE_OVERRIDE_TCG;
+	Selector = nom;
+}

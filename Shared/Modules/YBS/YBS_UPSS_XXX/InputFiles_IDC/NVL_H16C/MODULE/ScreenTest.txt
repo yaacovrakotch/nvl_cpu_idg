@@ -1,0 +1,11 @@
+START_SCREEN  : ItdFlowId
+#RunOn: TestName 	: DataType 	: ParamType   : Param1                : Operation   : ParamType   : Param2    	                    : TmpStore  : OnTrue   : OnFalse
+EXEC  : Test0       : STRING    : GSDS        : U.S.REV         : SET         : GLOBAL      : SCVars.SC_REV :    -      : Test1        : 2
+EXEC  : Test1       : STRING    : GSDS        : U.S.CATEGORY          : SET         : GLOBAL      : _UserVars.UFG_PgmRules_BomGroup :    -      : Test2        : 2
+EXEC  : Test2       : STRING    : GSDS        : U.S.CDIETEMP          : SET         : GLOBAL      : PTHVars.TJSETPOINT_CPU :    -      : 1        : 2
+#EXEC  : Test2		: STRING    : EXPRESSION  : SCVars.SC_LOCN like '6163' or SCVars.SC_LOCN like '5163' or SCVars.SC_LOCN like '6167' or SCVars.SC_LOCN like '5167' 	: -	: -	: -	: -	: Test3		:	Test4
+#EXEC  : Test3       : STRING    : GSDS        : U.S.UPS_CPUCORE          : SET         : DFF      : CURRENT.RC_S1.CPUCORE :    -      : Test3a        : 2
+#EXEC  : Test3a       : STRING    : GSDS        : U.S.UPS_CPUSLICE          : SET         : DFF      : CURRENT.RC_S1.CPUSLICE :    -      : 1        : 2
+#EXEC  : Test4       : STRING    : GSDS        : U.S.UPS_CPUCORE          : SET         : DFF      : CURRENT.PBIC_DAB.CPUCORE :    -      : Test4a        : 2
+#EXEC  : Test4a       : STRING    : GSDS        : U.S.UPS_CPUSLICE          : SET         : DFF      : CURRENT.PBIC_DAB.CPUSLICE :    -      : 1        : 2
+END_SCREEN

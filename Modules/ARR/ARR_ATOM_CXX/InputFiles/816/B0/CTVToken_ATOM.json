@@ -1,0 +1,319 @@
+{
+	"tokens": {
+		"SET": {
+			//only get 11 bits to truncate last 0 (as per PK) to match repair set value
+			"bits": "10-0",
+			"datatype": "integer",
+			"append": "RESULT",
+		},
+		"WAY": {
+			"bits": "3-0",
+			"datatype": "integer",
+            "append": "RESULT",
+		},
+		"SB_FBIT": {
+			"bits": "1-0",
+			"datatype": "integer",
+            "append": "RESULT",
+		},
+		"SB_FBIT_TO_COUNTER": {
+			"bits": "1-0",
+			"datatype": "integer",
+            "append": "COUNTER_[module]_[slc]",
+		},
+		"print_am0slc0_count_to_ituff": {
+			"datatype": "String",
+			//"equation": "[COUNTER_AM0_SLC0]",
+			"equation": "(32 - Count([COUNTER_AM0_SLC0],'0'))",
+			"ituff": "COUNTER_AM0_SLC0",     
+		},
+		"print_am0slc1_count_to_ituff": {
+			"datatype": "String",
+			//"equation": "[COUNTER_AM0_SLC1]",
+			"equation": "(32 - Count([COUNTER_AM0_SLC1],'0'))",
+			"ituff": "COUNTER_AM0_SLC1",     
+		},
+		"print_result_array_to_ituff": {
+			"datatype": "String",
+			"equation": "if(SelectArrayElement([RESULT],2,'|')=='0','0',[RESULT])",
+			//"equation": "[RESULT]",
+            "append": "SB_FAILS",
+			//"ituff": "[module]_[slc]_[entry]",     
+		},
+		"print_indiv_array_to_ituff": {
+			"datatype": "String",
+			"equation": "[RESULT]",
+			"ituff": "[module]_[slc]_[entry]",     
+		},
+		"print_others_array_to_ituff": {
+			"datatype": "String",
+			"equation": "[SB_FAILS]",
+			"ituff": "S_B_FAILS",     
+		},
+		"clear_result_array": {
+			"clear": ["RESULT"]
+		},
+		"get_all_sb_fails": {
+			"datatype": "String",
+			"equation": "SelectArrayElement([RESULT],2,'|')",
+			"append": "COUNT",
+			//"ituff": "GETPARAM_SAMPLE_ALL_[module]_[slc]",     
+		},
+		"print_all_sb_fail_to_ituff": {
+			"datatype": "String",
+			"equation": "(64 - Count([COUNT],'0'))",
+			//"equation": "[COUNT]",
+			//"equation": "Count(ToString(SelectArrayElements([COUNT],'0-9','|')),'n','n!=0')",
+			//"equation": "Length(ToString(SelectArrayElements([COUNT],'0-9','|')))",
+			//"equation": "Count('a piece of string', 'i')",
+			"ituff": "TOTAL_SB_FAILS",
+		}
+	},
+	"groups": {
+		"AM_SLC_ENTRY": {
+			"size": 18,
+			"fields": [
+			{
+				//offset off by one to match repair value
+				"type": "SET",
+				"offset": 5,
+ 			},
+			{
+				"type": "WAY",
+				"offset": 0,
+			},
+			{
+				"type": "SB_FBIT",
+				"offset": 16,
+ 			},
+			{
+				"type": "SB_FBIT_TO_COUNTER",
+				"offset": 16,
+ 			},
+			{
+				"type": "get_all_sb_fails",
+				"offset": 0
+			},
+			{
+				"type": "print_indiv_array_to_ituff",
+				"offset": 0
+			},
+			{
+				"type": "print_result_array_to_ituff",
+				"offset": 0
+			},
+			{
+				"type": "clear_result_array",
+				"offset": 0
+			}
+			]
+		},
+		"SLICE": {
+			"size": 576,
+			"fields": [
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 0,
+				"input": "module^AM0,entry^0"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 18,
+				"input": "module^AM0,entry^1"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 36,
+				"input": "module^AM0,entry^2"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 54,
+				"input": "module^AM0,entry^3"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 72,
+				"input": "module^AM0,entry^4"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 90,
+				"input": "module^AM0,entry^5"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 108,
+				"input": "module^AM0,entry^6"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 126,
+				"input": "module^AM0,entry^7"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 144,
+				"input": "module^AM0,entry^8"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 162,
+				"input": "module^AM0,entry^9"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 180,
+				"input": "module^AM0,entry^10"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 198,
+				"input": "module^AM0,entry^11"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 216,
+				"input": "module^AM0,entry^12"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 234,
+				"input": "module^AM0,entry^13"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 252,
+				"input": "module^AM0,entry^14"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 270,
+				"input": "module^AM0,entry^15"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 288,
+				"input": "module^AM0,entry^16"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 306,
+				"input": "module^AM0,entry^17"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 324,
+				"input": "module^AM0,entry^18"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 342,
+				"input": "module^AM0,entry^19"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 360,
+				"input": "module^AM0,entry^20"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 378,
+				"input": "module^AM0,entry^21"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 396,
+				"input": "module^AM0,entry^22"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 414,
+				"input": "module^AM0,entry^23"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 432,
+				"input": "module^AM0,entry^24"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 450,
+				"input": "module^AM0,entry^25"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 468,
+				"input": "module^AM0,entry^26"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 486,
+				"input": "module^AM0,entry^27"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 504,
+				"input": "module^AM0,entry^28"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 522,
+				"input": "module^AM0,entry^29"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 540,
+				"input": "module^AM0,entry^30"
+			},
+			{
+				"type": "AM_SLC_ENTRY",
+				"offset": 558,
+				"input": "module^AM0,entry^31"
+			}
+			]
+		},
+		"all_bits": {
+			"size": 1152,
+			"fields": [
+			{
+				"type": "SLICE",
+				"offset": 0,
+				"input": "slc^SLC0"
+			},
+			{
+				"type": "SLICE",
+				"offset": 576,
+				"input": "slc^SLC1"
+			}
+			]
+		}
+	},
+	"sets": {
+		"ATOMDECTED": {
+			"size": 1152,
+			"fields": [
+			{
+				"type": "all_bits",
+				"offset": 0
+			},
+			{
+				"type": "print_am0slc0_count_to_ituff",
+				"offset": 0
+			},
+			{
+				"type": "print_am0slc1_count_to_ituff",
+				"offset": 0
+			},
+			{
+				"type": "print_others_array_to_ituff",
+				"offset": 0
+			},
+			{
+				"type": "print_all_sb_fail_to_ituff",
+				"offset": 0
+			}
+			]
+		}
+	}
+}

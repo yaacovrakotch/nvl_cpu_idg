@@ -1,0 +1,334 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan ARR_UNCORE_CXPKGS9;
+
+Import "ARR_UNCORE_CXPKGS9.usrv";
+Import "ARR_UNCORE_CXPKGS9_Timing.tcg";
+Import "ARR_UNCORE_CXPKGS9_Level.tcg";
+
+# Test Counter Definition
+
+Counters
+{
+    n21052000_fail_ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM_0,
+    n21052001_fail_ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM_2,
+    n21052002_fail_ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM_3,
+    n21062000_fail_ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION_0,
+    n21062001_fail_ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION_2,
+    n21062002_fail_ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION_3,
+    n21072000_fail_ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX_0,
+    n21072001_fail_ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX_2,
+    n21072002_fail_ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX_3,
+    n21192000_fail_ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM_5,
+    n21192008_fail_ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX_5,
+    n21192010_fail_ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION_5,
+    n97212000_fail_ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM_4,
+    n97212008_fail_ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX_4,
+    n97212010_fail_ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION_4
+} # End of Test Counter Definition
+
+CSharpTest VminTC ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM
+{
+    Patlist = "IPC::arr_cdie_begincpupkg_mbist_uncore_all_all_vnnaon_ks_x_class_hptp_min_list";
+    LevelsTc = "IPC::ARR_UNCORE_CXPKGS9::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_nom_lvl";
+    TimingsTc = "IPC::ARR_UNCORE_CXPKGS9::cpu_fun_timing_mts800_tstprtclk400_tck100_uncarrmts800";
+    BaseNumbers = "12403";
+    BypassPort = 1;
+    EndVoltageLimits = "0.77";
+    ForwardingMode = "None";
+    RecoveryMode = "NoRecovery";
+    ExecutionMode = "SearchWithScoreboard";
+    FeatureSwitchSettings = ARR_UNCORE_CXPKGS9_Specs.FeatureSwitch_Uncore;
+    FivrCondition = ARR_UNCORE_CXPKGS9_Specs.FivrConditionNom;
+    MaxRepetitionCount = 1;
+    PatternNameCounterIndexes = ARR_UNCORE_CXPKGS9_Specs.PatternMap;
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPreInstance = PSPRE.CLR_F1+","+"MCdrv:corefreq:"+ __shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:ringfreq_0:"+ __shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz,MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F1_FREQ+"GHz";
+    SetPointsPostInstance = PSPOST.CLR_F1;
+    StartVoltages = "0.77";
+    StepSize = 0.02;
+    TestMode = "Scoreboard";
+    VoltageTargets = ARR_UNCORE_CXPKGS9_Specs.UNCORE_VoltageTarget;
+}
+
+CSharpTest VminTC ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION
+{
+    Patlist = "resetplb_8axx080808_phase2_all_MCarr_CA2P_hdmt2_hvm_list";
+    LevelsTc = "IPC::ARR_UNCORE_CXPKGS9::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_nom_lvl";
+    TimingsTc = "IPC::ARR_UNCORE_CXPKGS9::cpu_fun_timing_mts800_tstprtclk400_tck100_uncarrmts800";
+    BaseNumbers = "12405";
+    BypassPort = 1;
+    EndVoltageLimits = "0.77";
+    ForwardingMode = "None";
+    RecoveryMode = "NoRecovery";
+    ExecutionMode = "SearchWithScoreboard";
+    FeatureSwitchSettings = ARR_UNCORE_CXPKGS9_Specs.FeatureSwitch_Uncore;
+    FivrCondition = ARR_UNCORE_CXPKGS9_Specs.FivrConditionNom;
+    MaxRepetitionCount = 1;
+    PatternNameCounterIndexes = ARR_UNCORE_CXPKGS9_Specs.PatternMap;
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPreInstance = PSPRE.CLR_F1+","+"MCdrv:corefreq:"+ __shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:ringfreq_0:"+ __shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz,MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F1_FREQ+"GHz";
+    SetPointsPostInstance = PSPOST.CLR_F1;
+    StartVoltages = "0.77";
+    StepSize = 0.02;
+    TestMode = "Scoreboard";
+    VoltageTargets = ARR_UNCORE_CXPKGS9_Specs.UNCORE_VoltageTarget;
+}
+
+CSharpTest VminTC ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX
+{
+    Patlist = "IPC::arr_cdie_begincpupkg_mbist_uncore_all_all_vnnaon_ks_x_class_hptp_min_list";
+    LevelsTc = "IPC::ARR_UNCORE_CXPKGS9::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_max_lvl";
+    TimingsTc = "IPC::ARR_UNCORE_CXPKGS9::cpu_fun_timing_mts800_tstprtclk400_tck100_uncarrmts800";
+    BaseNumbers = "12404";
+    BypassPort = 1;
+    EndVoltageLimits = "0.825";
+    ForwardingMode = "None";
+    RecoveryMode = "NoRecovery";
+    ExecutionMode = "SearchWithScoreboard";
+    FeatureSwitchSettings = ARR_UNCORE_CXPKGS9_Specs.FeatureSwitch_Uncore;
+    FivrCondition = ARR_UNCORE_CXPKGS9_Specs.FivrConditionNom;
+    MaxRepetitionCount = 1;
+    PatternNameCounterIndexes = ARR_UNCORE_CXPKGS9_Specs.PatternMap;
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPreInstance = PSPRE.CLR_F1+","+"MCdrv:corefreq:"+ __shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:ringfreq_0:"+ __shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz,MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F1_FREQ+"GHz";
+    SetPointsPostInstance = PSPOST.CLR_F1;
+    StartVoltages = "0.825";
+    StepSize = 0.02;
+    TestMode = "Scoreboard";
+    VoltageTargets = ARR_UNCORE_CXPKGS9_Specs.UNCORE_VoltageTarget;
+}
+
+CSharpTest DDGShmooTC ARR_UNCORE_SHMOO_E_BEGINCPUNOM_X_X_X_X_SHMOO_FOR_DEDC
+{
+    Patlist = "IPC::arr_cdie_begincpupkg_mbist_uncore_all_all_vnnaon_ks_x_class_hptp_min_list";    
+    LevelsTc = "IPC::ARR_UNCORE_CXPKGS9::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_nom_lvl";
+    TimingsTc = "IPC::ARR_UNCORE_CXPKGS9::cpu_fun_timing_mts800_tstprtclk400_tck100_uncarrmts800";
+    BypassPort = 1;
+    LogLevel = "Enabled";
+    PrintFormat = "ShmooHub";
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPreInstance = "";
+    VoltageConverter = "--dlvrpins VCCIA --expressions CCF --fivrcondition NOM_CCF_CORE";
+    XAxisType = "SpecSetVariable";
+    XAxisParam = "p_all_mts";
+    XAxisParamType = "UserDefined";
+    XAxisRange = "700e6:50e6:6";
+    YAxisParam = "CCF";
+    YAxisParamType = "UserDefined";
+    YAxisRange = "0.9:-0.05:12";
+    YAxisType = "FIVR";
+}
+
+Flow ARR_UNCORE_CXPKGS9_BEGINCPUNOM
+{
+    FlowItem ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99212011_fail_ARR_UNCORE_CXPKGS9_ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98212011_fail_ARR_UNCORE_CXPKGS9_ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b21052000_fail_ARR_UNCORE_CXPKGS9_ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM_0;
+            IncrementCounters ARR_UNCORE_CXPKGS9::n21052000_fail_ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM_0;
+			Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b21052001_fail_ARR_UNCORE_CXPKGS9_ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM_2;
+            IncrementCounters ARR_UNCORE_CXPKGS9::n21052001_fail_ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM_2;
+			Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b21052002_fail_ARR_UNCORE_CXPKGS9_ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM_3;
+            IncrementCounters ARR_UNCORE_CXPKGS9::n21052002_fail_ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM_3;
+			Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97212000_fail_ARR_UNCORE_CXPKGS9_ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM_4;
+            IncrementCounters ARR_UNCORE_CXPKGS9::n97212000_fail_ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM_4;
+			Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b21192000_fail_ARR_UNCORE_CXPKGS9_ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM_5;
+            IncrementCounters ARR_UNCORE_CXPKGS9::n21192000_fail_ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM_5;
+			Return 0;
+        }
+    }
+	
+    	FlowItem ARR_UNCORE_SHMOO_E_BEGINCPUNOM_X_X_X_X_SHMOO_FOR_DEDC ARR_UNCORE_SHMOO_E_BEGINCPUNOM_X_X_X_X_SHMOO_FOR_DEDC @EDC
+        {
+       		Result -2
+        	{
+           		Property PassFail = "Fail";
+            		SetBin b99212044_fail_ARR_UNCORE_CXPKGS9_ARR_UNCORE_SHMOO_E_BEGINCPUNOM_X_X_X_X_SHMOO_FOR_DEDC_n2;
+            		Return -2;
+        	}
+        	Result -1
+        	{
+            		Property PassFail = "Fail";
+            		SetBin b98212044_fail_ARR_UNCORE_CXPKGS9_ARR_UNCORE_SHMOO_E_BEGINCPUNOM_X_X_X_X_SHMOO_FOR_DEDC_n1;
+            		Return -1;
+        	}
+        	Result 0
+        	{
+            		Property PassFail = "Fail";
+            		Return 1;
+        	}
+        	Result 1
+        	{
+            		Property PassFail = "Pass";
+            		Return 1;
+        	}
+            Result 2
+        	{
+            		Property PassFail = "Pass";
+            		Return 1;
+        	}
+   	 }
+    
+}
+
+Flow ARR_UNCORE_CXPKGS9_ENDCPUNOM
+{
+    FlowItem ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99212021_fail_ARR_UNCORE_CXPKGS9_ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98212021_fail_ARR_UNCORE_CXPKGS9_ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b21062000_fail_ARR_UNCORE_CXPKGS9_ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION_0;
+            IncrementCounters ARR_UNCORE_CXPKGS9::n21062000_fail_ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION_0;
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b21062001_fail_ARR_UNCORE_CXPKGS9_ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION_2;
+            IncrementCounters ARR_UNCORE_CXPKGS9::n21062001_fail_ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION_2;
+            Return 1;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b21062002_fail_ARR_UNCORE_CXPKGS9_ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION_3;
+            IncrementCounters ARR_UNCORE_CXPKGS9::n21062002_fail_ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION_3;
+            Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b97212010_fail_ARR_UNCORE_CXPKGS9_ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION_4;
+            IncrementCounters ARR_UNCORE_CXPKGS9::n97212010_fail_ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION_4;
+            Return 1;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b21192010_fail_ARR_UNCORE_CXPKGS9_ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION_5;
+            IncrementCounters ARR_UNCORE_CXPKGS9::n21192010_fail_ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION_5;
+            Return 1;
+        }
+    }
+    
+}
+
+Flow ARR_UNCORE_CXPKGS9_ENDCPUMAX
+{
+    FlowItem ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99212019_fail_ARR_UNCORE_CXPKGS9_ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98212019_fail_ARR_UNCORE_CXPKGS9_ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b21072000_fail_ARR_UNCORE_CXPKGS9_ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX_0;
+            IncrementCounters ARR_UNCORE_CXPKGS9::n21072000_fail_ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX_0;
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b21072001_fail_ARR_UNCORE_CXPKGS9_ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX_2;
+            IncrementCounters ARR_UNCORE_CXPKGS9::n21072001_fail_ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX_2;
+            Return 1;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b21072002_fail_ARR_UNCORE_CXPKGS9_ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX_3;
+            IncrementCounters ARR_UNCORE_CXPKGS9::n21072002_fail_ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX_3;
+            Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b97212008_fail_ARR_UNCORE_CXPKGS9_ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX_4;
+            IncrementCounters ARR_UNCORE_CXPKGS9::n97212008_fail_ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX_4;
+            Return 1;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b21192008_fail_ARR_UNCORE_CXPKGS9_ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX_5;
+            IncrementCounters ARR_UNCORE_CXPKGS9::n21192008_fail_ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX_5;
+            Return 1;
+        }
+    }
+    
+}

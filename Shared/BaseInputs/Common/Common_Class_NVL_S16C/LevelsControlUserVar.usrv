@@ -1,0 +1,70 @@
+Version 1.0;
+
+Shared
+{
+
+
+    UserVars PowerSpec
+	{
+		Voltage vcc3p3_min    = 3.1300V; Voltage vcc3p3_nom    = 3.30V; Voltage vcc3p3_max    = 3.4700V;
+		Voltage vdd2_min      = 1.05925V; Voltage vdd2_nom      = 1.115V; Voltage vdd2_max      = 1.1865V;
+		Voltage v1p8_min      = 1.71V;   Voltage v1p8_nom      = 1.8V;  Voltage v1p8_max      = 1.89V;
+		Voltage vnnaon_min    = 0.710V;  Voltage vnnaon_nom    = 0.77V; Voltage vnnaon_max    = 0.825V;
+		Voltage vccio_min     = 1.1875V; Voltage vccio_nom     = 1.25V; Voltage vccio_max     = 1.3125V;
+		Voltage vccsa_min     = 0.77V;   Voltage vccsa_nom     = 0.77V; Voltage vccsa_max     = 1.05V;
+		Voltage vcclpcore_min = 0.77V;   Voltage vcclpcore_nom = 0.77V; Voltage vcclpcore_max = 1.05V;
+		Voltage vccia_min     = 0.9V;    Voltage vccia_nom     = 1.1V;  Voltage vccia_max     = 1.3V;
+		Voltage vccgt_min     = 0.65V;   Voltage vccgt_nom     = 0.75V; Voltage vccgt_max     = 0.85V;
+		Voltage vccdftpcd_min = 0.9V;    Voltage vccdftpcd_nom = 0.9V;  Voltage vccdftpcd_max = 0.9V;
+		Voltage ddrterm_min   = 0.5225V; Voltage ddrterm_nom   = 0.55V; Voltage ddrterm_max   = 0.5775V;
+		Voltage vccrtc_min    = 1.14V;   Voltage vccrtc_nom    = 1.2V; Voltage vccrtc_max    = 1.26V;
+		Voltage vddq_min      = 1.05925V; Voltage vddq_nom      = 1.115V; Voltage vddq_max      = 1.1865V;
+
+        Double hvmtestmode_vih_ratio                    = 0.7;
+
+        Current uv_vccia_clamp_hi			            = 0.75*216A;
+        Current uv_vnnaon_fltr_clamp_hi     			= 1A;
+        Current uv_vccgt_clamp_hi			            = 0.75*48A;
+		Current uv_vccgt_clamp_lo			            = -10A;
+        Current uv_vccsa_clamp_hi			            = 0.95*72A;
+        Current uv_vnnaon_clamp_hi			            = 34A;
+		Current uv_vnnaon_fltr_h_clamp_hi               = 0.5A;          
+        Current uv_vccio_clamp_hi			            = 9A;    
+        Current uv_vccio_fltr_clamp_hi      			= 1A;
+		Current uv_vccio_fltr_h_clamp_hi      			= 0.5A;
+        Current uv_vdd2_clamp_hi			            = 10A;
+        Current uv_v1p8_clamp_hi            			= 2.2A;
+        Current uv_v1p8_cpu_clamp_hi        			= 1.4A;
+        Current uv_v1p8_fltr_clamp_hi       			= 0.4A;
+        Current uv_v1p8_fltra_clamp_hi       			= 0.4A;
+        Current uv_v1p8_fltrb_clamp_hi       			= 0.4A;
+        Current uv_vccio_out_svid_clamp_hi  			= 0.5A;
+        Current uv_vccdftpcd_clamp_hi       			= 0.25A;
+        Current uv_cpu0_ext_bgref_trim_ana_clamp_hi     = 0.5A;
+        Current uv_cpu1_ext_bgref_trim_ana_clamp_hi     = 0.5A;
+        Current uv_hub_ext_bgref_trim_ana_clamp_hi      = 0.5A;
+        Current uv_gcd_ext_bgref_trim_ana_clamp_hi      = 0.5A;
+        Current uv_gcd_hub_ext_bgref_trim_ana_clamp_hi  = 0.5A;
+        Current uv_ddr_term_clamp_hi                    = 4.26A; 
+        Current uv_vddq_clamp_hi                        = 2.4A;
+        Current uv_vccfpgm_cpu0_0_clamp_hi              = 0.256A;
+        Current uv_vccfpgm_cpu0_1_clamp_hi              = 0.256A;
+        Current uv_vccfpgm_cpu1_0_clamp_hi              = 0.256A;
+        Current uv_vccfpgm_cpu1_1_clamp_hi              = 0.256A;
+        Current uv_vccfpgm_gcd_clamp_hi                 = 0.256A;
+        Current uv_vccfpgm_hub_clamp_hi                 = 0.256A;
+        Current uv_vccfpgm_pcd_ext_nom_clamp_hi         = 0.256A;
+        Current uv_vccfpgm_pcd_ext_ehv_clamp_hi         = 0.256A;
+        Current uv_vccfpgm_pcd_osse_ehv_clamp_hi        = 0.256A;
+        Current uv_vccfpgm_pcd_osse_nom_clamp_hi        = 0.256A;
+		Current uv_vcclpcore_clamp_hi                   = 24A;
+    }
+    
+    UserVars SharedRailsIPFollower
+	{
+        Voltage v1p8   = PowerSpec.v1p8_nom;
+        Voltage vnnaon = PowerSpec.vnnaon_nom;
+        Voltage vccio  = PowerSpec.vccio_nom;
+    }
+    
+}    

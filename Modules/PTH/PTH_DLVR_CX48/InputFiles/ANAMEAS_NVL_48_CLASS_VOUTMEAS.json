@@ -1,0 +1,89 @@
+{
+    "DC": [
+        {
+            "Measurements": {
+                "ATOM0": {
+                    "Pin": "IPC::CPU_ATOM0_DLVROUT",
+                    "Average": 10,
+                    "Expect": 20
+                },
+                "ATOM1": {
+                    "Pin": "IPC::CPU_ATOM1_DLVROUT",
+                    "Average": 10,
+                    "Expect": 20
+                },
+                "CORE0": {
+                    "Pin": "IPC::CPU_CORE0_DLVROUT",
+                    "Average": 10,
+                    "Expect": 20
+                },
+                "CORE1": {
+                    "Pin": "IPC::CPU_CORE1_DLVROUT",
+                    "Average": 10,
+                    "Expect": 20
+                },
+                "RINGPRIM": {
+                    "Pin": "IPC::CPU_CCF_DLVROUT",
+                    "Average": 10,
+                    "Expect": 20
+                }
+            },
+            "Equations": [
+                {
+                    "Expression": "SelectArrayElement([ATOM0], 0)",
+                    "DatalogFormat": "DBL",
+                    "SaveToSharedStorage": "CPU_VOUTMEAS_FLOAT_ATOM0"
+                },
+                {
+                    "Expression": "SelectArrayElement([ATOM1], 0)",
+                    "DatalogFormat": "DBL",
+                    "SaveToSharedStorage": "CPU_VOUTMEAS_FLOAT_ATOM1"
+                },
+                {
+                    "Expression": "SelectArrayElement([CORE0], 0)",
+                    "DatalogFormat": "DBL",
+                    "SaveToSharedStorage": "CPU_VOUTMEAS_FLOAT_CORE0"
+                },
+                {
+                    "Expression": "SelectArrayElement([CORE1], 0)",
+                    "DatalogFormat": "DBL",
+                    "SaveToSharedStorage": "CPU_VOUTMEAS_FLOAT_CORE1"
+                },
+                {
+                    "Expression": "SelectArrayElement([RINGPRIM], 0)",
+                    "DatalogFormat": "DBL",
+                    "SaveToSharedStorage": "CPU_VOUTMEAS_FLOAT_RINGPRIM"
+                }
+            ]
+        },
+        {
+            "Equations": [
+                {
+                    "Expression": "SelectArrayElement([ATOM0], 1)",
+                    "DatalogFormat": "DBL",
+                    "SaveToSharedStorage": "CPU_VOUTMEAS_PH1_FLOAT_ATOM0"
+                },
+                {
+                    "Expression": "SelectArrayElement([ATOM1], 1)",
+                    "DatalogFormat": "DBL",
+                    "SaveToSharedStorage": "CPU_VOUTMEAS_PH1_FLOAT_ATOM1"
+                },
+                {
+                    "Expression": "SelectArrayElement([CORE0], 1)",
+                    "DatalogFormat": "DBL",
+                    "SaveToSharedStorage": "CPU_VOUTMEAS_PH1_FLOAT_CORE0"
+                },
+                {
+                    "Expression": "SelectArrayElement([CORE1], 1)",
+                    "DatalogFormat": "DBL",
+                    "SaveToSharedStorage": "CPU_VOUTMEAS_PH1_FLOAT_CORE1"
+                },
+                {
+                    "Expression": "SelectArrayElement([RINGPRIM], 1)",
+                    "DatalogFormat": "DBL",
+                    "SaveToSharedStorage": "CPU_VOUTMEAS_PH1_FLOAT_RINGPRIM"
+                }
+            ]
+        }
+    ]
+}

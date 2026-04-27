@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <CustomProjectExtensionsPath Condition=" '$(CustomProjectExtensionsPath)' == '' ">$(TorchCustomProjectPath)\</CustomProjectExtensionsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildProjectDirectory)\..\..\BomGroups.props" />
+  <Import Project="$(CustomProjectExtensionsPath)Torch.ProjectSystem.TestProgram.props" />
+  <ItemGroup>
+    <Folder Include="ProgramFlowsTestPlan\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Modules\DRV\DRV_RESET_XXX\DRV_RESET_XXX.mtproj" />
+    <ProjectReference Include="..\..\Modules\MIO\MIO_D2D_XXX\MIO_D2D_XXX.mtproj" />
+    <ProjectReference Include="..\..\Modules\TPI\TPI_PUP_XXX\TPI_PUP_XXX.mtproj" />
+  </ItemGroup>
+  <Import Project="$(CustomProjectExtensionsPath)Torch.ProjectSystem.TestProgram.targets" />
+</Project>

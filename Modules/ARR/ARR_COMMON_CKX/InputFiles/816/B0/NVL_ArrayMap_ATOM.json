@@ -1,0 +1,171 @@
+{
+  "Resources": [
+    {"Name": "L2DRCPU0", "Spares": 2, "Default": "U",
+      "DefectVars": {
+        "Domain": [
+          {"Name": "module", "Quantity": 4, "SubStructureIdentifier": "true"},
+          {"Name": "slice", "Quantity": 2},
+          {"Name": "databyte", "Quantity": 8},
+          {"Name": "way32", "Quantity": 4}
+        ],
+        "Element": [
+          {"Name": "wordline", "Quantity": 256}
+
+        ]
+      }
+    },
+
+    {"Name": "L2DCCPU0", "Spares": 1, "Default": "U",
+      "DefectVars": {
+        "Domain": [
+          {"Name": "module", "Quantity": 4, "SubStructureIdentifier": "true"},
+          {"Name": "slice", "Quantity": 2},
+          {"Name": "bank", "Quantity": 2},
+          {"Name": "databyte", "Quantity": 8},
+          {"Name": "way32", "Quantity": 4}
+        ],
+        "Element": [
+          {"Name": "iodata", "Quantity": 128}
+        ]
+      }
+    },
+	
+	{"Name": "L2CCCPU0", "Spares": 1, "Default": "U",
+      "DefectVars": {
+        "Domain": [
+          {"Name": "module", "Quantity": 4, "SubStructureIdentifier": "true"},
+          {"Name": "chunk", "Quantity": 2}
+        ],
+        "Element": [
+          {"Name": "iofuse", "Quantity": 128}
+        ]
+      }
+    },	
+	
+    {"Name": "L2LRURCPU0", "Spares": 2, "Default": "U",
+      "DefectVars": {
+        "Domain": [
+          {"Name": "module", "Quantity": 4, "SubStructureIdentifier": "true"}
+        ],
+        "Element": [
+          {"Name": "fixedway", "Quantity": 16},
+          {"Name": "fixedset", "Quantity": 1024}
+        ]
+      }
+    },	
+	
+    {"Name": "L2SRCPU0", "Spares": 2, "Default": "U",
+      "DefectVars": {
+        "Domain": [
+          {"Name": "module", "Quantity": 4, "SubStructureIdentifier": "true"}
+	  
+
+        ],
+        "Element": [
+          {"Name": "wordlineMSB", "Quantity": 4},
+          {"Name": "wordline", "Quantity": 128}
+        ]
+      }
+    },
+
+   {"Name": "L2TRM0CPU0", "Spares": 1, "Default": "U",
+      "DefectVars": {
+        "Domain": [
+          {"Name": "module", "Quantity": 4, "SubStructureIdentifier": "true"},
+          {"Name": "slice", "Quantity": 2},
+          {"Name": "bank", "Quantity": 2},
+          {"Name": "mrowV0", "Quantity": 2, "EnableValue": [ 1 ]}
+        ],
+        "Element": [
+          {"Name": "wordline", "Quantity": 256}
+        ]
+      }
+    },
+    {"Name": "L2TRM1CPU0", "Spares": 1, "Default": "U",
+      "DefectVars": {
+        "Domain": [
+          {"Name": "module", "Quantity": 4, "SubStructureIdentifier": "true"},
+          {"Name": "slice", "Quantity": 2},
+          {"Name": "bank", "Quantity": 2},
+          {"Name": "mrowV1", "Quantity": 2, "EnableValue": [ 1 ]}
+        ],
+        "Element": [
+          {"Name": "wordline", "Quantity": 256}
+        ]
+      }
+    },
+    {"Name": "L2TRM2CPU0", "Spares": 1, "Default": "U",
+      "DefectVars": {
+        "Domain": [
+          {"Name": "module", "Quantity": 4, "SubStructureIdentifier": "true"},
+          {"Name": "slice", "Quantity": 2},
+          {"Name": "bank", "Quantity": 2},
+          {"Name": "mrowV2", "Quantity": 2, "EnableValue": [ 1 ]}
+        ],
+        "Element": [
+          {"Name": "wordline", "Quantity": 256}
+        ]
+      }
+    },
+    {"Name": "L2TRLCPU0", "Spares": 2, "Default": "U",
+      "DefectVars": {
+        "Domain": [
+          {"Name": "module", "Quantity": 4, "SubStructureIdentifier": "true"},
+          {"Name": "slice", "Quantity": 2},
+          {"Name": "leftvalid", "Quantity": 2, "EnableValue": [ 1 ]}
+        ],
+        "Element": [
+          {"Name": "wordline", "Quantity": 256}
+        ]
+      }
+    },
+    {"Name": "L2TCCPU0", "Spares": 1, "Default": "U",
+      "DefectVars": {
+        "Domain": [
+          {"Name": "module", "Quantity": 4, "SubStructureIdentifier": "true"},
+          {"Name": "slice", "Quantity": 2},
+          {"Name": "bank", "Quantity": 2},
+          {"Name": "way32", "Quantity": 4}
+
+        ],
+        "Element": [
+          {"Name": "iofuse", "Quantity": 64,  "Ignore": "true"}
+        ]
+      }
+    },
+	
+		{"Name": "FECRCPU0", "Spares": 2, "Compress": "Bin",  "Default": "U",								
+			"DefectVars": {																			
+				"Domain": [	
+					{"Name": "fec", "Quantity": 17, "EnableValue": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 ]},				
+					{"Name": "module",    "Quantity": 4, "SubStructureIdentifier": "true"},					
+					{"Name": "slice",     "Quantity": 4}	
+
+			
+				],	
+				"Element": [				
+					{"Name": "fixedbank",  "Quantity": 16},											
+					{"Name": "fixedset",   "Quantity": 1024}											
+				]
+			}
+		},
+
+		{"Name": "NFECRCPU0", "Spares": 2, "Compress": "Bin",  "Default": "U",								
+			"DefectVars": {																			
+				"Domain": [				
+					{"Name": "nfec", "Quantity": 7, "EnableValue": [0, 1, 2, 3, 4, 5, 6]},					
+					{"Name": "module",    "Quantity": 4, "SubStructureIdentifier": "true"},					
+					{"Name": "slice",     "Quantity": 4}	
+
+			
+				],	
+				"Element": [				
+					{"Name": "fixedbank",  "Quantity": 16},											
+					{"Name": "fixedset",   "Quantity": 1024}											
+				]
+			}
+		}	
+	
+
+  ]
+}

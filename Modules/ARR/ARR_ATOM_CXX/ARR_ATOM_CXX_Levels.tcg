@@ -1,0 +1,34 @@
+Version 1.0;
+
+SpecificationSet arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_ATOM (max,min,nom) Inherits CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC
+{
+              Voltage c_cpu_all_tstprt_i_data_vox = 3.85;
+	          Voltage c_cpu_all_tstprt_o_data_vox = 3.85;
+}
+
+TestConditionGroup arr_cpu_all_bf_x_x_ipc_lvl_ARR_ATOM_TCG
+{
+              SpecificationSet = arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_ATOM;
+              Level = CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl;
+}
+
+TestCondition arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_ATOM_nom_lvl
+{
+              TestConditionGroup = arr_cpu_all_bf_x_x_ipc_lvl_ARR_ATOM_TCG;
+              Selector = nom;
+}
+
+TestCondition arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_ATOM_min_lvl
+{
+              TestConditionGroup = arr_cpu_all_bf_x_x_ipc_lvl_ARR_ATOM_TCG;
+              Selector = min;
+}
+
+TestCondition arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_ATOM_max_lvl
+{
+              TestConditionGroup = arr_cpu_all_bf_x_x_ipc_lvl_ARR_ATOM_TCG;
+              Selector = max;
+}
+
+
+

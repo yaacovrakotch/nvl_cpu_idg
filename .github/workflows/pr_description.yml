@@ -1,0 +1,55 @@
+name: pr_description
+env:
+  TARGET: "All"
+
+on:
+  pull_request:
+    branches: [ main* ]
+
+jobs:
+  pr_description:
+    runs-on: [self-hosted, checkers]
+    timeout-minutes: 60
+
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+
+    outputs:
+      runner1: ${{ steps.step1.outputs.runner1 }}
+      runner2: ${{ steps.step2.outputs.runner2 }}
+
+    steps:
+    - id: step1
+      run: |
+        echo "::set-output name=runner1::$(hostname)"
+    - id: step2
+      run: |
+        echo "::set-output name=runner2::$env:GITHUB_WORKSPACE"
+
+    - uses: actions/checkout@v6
+      with:
+          fetch-depth: 0
+          clean: true              # remove untracked files before checkout   
+          ref: ${{ github.event.pull_request.head.ref }}
+
+    - name: Checkout submodules
+      run: |
+          git submodule sync --recursive
+          git submodule update --init --recursive --force
+
+    - name: PR description check
+      run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/tprobot.py PRDESC
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Run PR_Gatekeeper
+      run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/tprobot.py PR_GATEKEEPER
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Add PRDESC_PASS label
+      run: |
+            gh pr edit --add-label "PRDESC_PASS"
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 

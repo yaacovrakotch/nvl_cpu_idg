@@ -1,0 +1,148 @@
+Version 1.0;
+
+####SPECIFICATION SETS####
+
+SpecificationSet dummy_PARAMS (nom)
+{
+}
+
+SpecificationSet XIUCHK_Measure_PARAMS (nom)
+{
+}
+
+SpecificationSet XIUCHK_VBUMP_VCCIA_VBUMP (force_0V,force_1400mV,force_1300mV,force_1200mV,force_1100mV,force_1000mV,force_900mV,force_800mV,force_700mV,force_600mV)
+{
+	Voltage p_vbump_val_ia = 0V,1400mV,1300mV,1200mV,1100mV,1000mV,900mV,800mV,700mV,600mV;
+}
+
+SpecificationSet  XIUCHK_VCCIA_1P0V (max, min, nom) Inherits __main__::cpu_all_bf_x_x_pkg_lvl_BFUNC
+{
+ Voltage p_vccia_spec = 1.0V;
+}
+
+####TEST CONDITION GROUPS####
+
+TestConditionGroup dummy_TCG
+{
+	SpecificationSet = dummy_PARAMS;
+	Level = PTH_XIUCHK_CKX::dummy;
+}
+
+TestConditionGroup XIUCHK_Measure_TCG
+{
+	SpecificationSet = XIUCHK_Measure_PARAMS;
+	Level = PTH_XIUCHK_CKX::XIUCHK_Measure;
+}
+
+TestConditionGroup XIUCHK_Measure_HX_TCG
+{
+	SpecificationSet = XIUCHK_Measure_PARAMS;
+	Level = PTH_XIUCHK_CKX::XIUCHK_Measure_HX;
+}
+
+TestConditionGroup XIUCHK_VBUMP_VCCIA_TCG
+{
+	SpecificationSet = XIUCHK_VBUMP_VCCIA_VBUMP;
+	Level = PTH_XIUCHK_CKX::XIUCHK_VBUMP_VCCIA;
+}
+
+TestConditionGroup XIUCHK_VCCIA_1P0V_TCG
+{
+	SpecificationSet = XIUCHK_VCCIA_1P0V;
+	Level = __main__::cpu_all_bf_x_x_pkg_lvl;
+}
+
+####TEST CONDITIONS####
+
+TestCondition dummy
+{
+	TestConditionGroup = dummy_TCG;
+	Selector = nom;
+}
+
+TestCondition XIUCHK_Measure
+{
+	TestConditionGroup = XIUCHK_Measure_TCG;
+	Selector = nom;
+}
+
+TestCondition XIUCHK_Measure_HX
+{
+	TestConditionGroup = XIUCHK_Measure_HX_TCG;
+	Selector = nom;
+}
+
+TestCondition XIUCHK_VBUMP_VCCIA_force_0V
+{
+	TestConditionGroup = XIUCHK_VBUMP_VCCIA_TCG;
+	Selector = force_0V;
+}
+TestCondition XIUCHK_VBUMP_VCCIA_force_1400mV
+{
+	TestConditionGroup = XIUCHK_VBUMP_VCCIA_TCG;
+	Selector = force_1400mV;
+}
+
+TestCondition XIUCHK_VBUMP_VCCIA_force_1300mV
+{
+	TestConditionGroup = XIUCHK_VBUMP_VCCIA_TCG;
+	Selector = force_1300mV;
+}
+
+TestCondition XIUCHK_VBUMP_VCCIA_force_1200mV
+{
+	TestConditionGroup = XIUCHK_VBUMP_VCCIA_TCG;
+	Selector = force_1200mV;
+}
+
+TestCondition XIUCHK_VBUMP_VCCIA_force_1100mV
+{
+	TestConditionGroup = XIUCHK_VBUMP_VCCIA_TCG;
+	Selector = force_1100mV;
+}
+
+TestCondition XIUCHK_VBUMP_VCCIA_force_1000mV
+{
+	TestConditionGroup = XIUCHK_VBUMP_VCCIA_TCG;
+	Selector = force_1000mV;
+}
+
+TestCondition XIUCHK_VBUMP_VCCIA_force_900mV
+{
+	TestConditionGroup = XIUCHK_VBUMP_VCCIA_TCG;
+	Selector = force_900mV;
+}
+
+TestCondition XIUCHK_VBUMP_VCCIA_force_800mV
+{
+	TestConditionGroup = XIUCHK_VBUMP_VCCIA_TCG;
+	Selector = force_800mV;
+}
+
+TestCondition XIUCHK_VBUMP_VCCIA_force_700mV
+{
+	TestConditionGroup = XIUCHK_VBUMP_VCCIA_TCG;
+	Selector = force_700mV;
+}
+
+TestCondition XIUCHK_VBUMP_VCCIA_force_600mV
+{
+	TestConditionGroup = XIUCHK_VBUMP_VCCIA_TCG;
+	Selector = force_600mV;
+}
+
+TestCondition XIUCHK_VCCIA_1P0V_MIN
+{
+	TestConditionGroup  = XIUCHK_VCCIA_1P0V_TCG;
+	Selector = min;
+}
+TestCondition XIUCHK_VCCIA_1P0V_NOM
+{
+	TestConditionGroup  = XIUCHK_VCCIA_1P0V_TCG;
+	Selector = nom;
+}
+TestCondition XIUCHK_VCCIA_1P0V_MAX
+{
+	TestConditionGroup  = XIUCHK_VCCIA_1P0V_TCG;
+	Selector = max;
+}

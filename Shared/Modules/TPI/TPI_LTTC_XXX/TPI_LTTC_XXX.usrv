@@ -1,0 +1,36 @@
+Version 1.0;
+
+SelectorRuleCollection  TPI_LTTC_XXX_Rules{
+
+	
+	
+	SelectorRule IsNotBenchtop (Outcome1, Outcome2, Outcome3)
+	{
+		Outcome1 =>  __shared__::SCVars.SC_BENCHTOP==-1;
+		Outcome2 =>  __shared__::SCVars.SC_BENCHTOP==1; 
+		Outcome3;
+	}
+
+	SelectorRule Select_BOM_default (CLASS_NVL_S28C, CLASS_NVL_S52C, CLASS_NVL_HX28C,CLASS_NVL_H16C, CLASS_NVL_P16C,CLASS_DNL_S28C, CLASS_NVL_S16C, CLASS_NVL_S28CB, CLASS_NVL_UL6C, CLASS_NVL_U8C, CLASS_NVL_AX28C, CLASS_NVL_AX16C, OTHER)
+	{
+		CLASS_NVL_S28C => (contains(__shared__::LocationSets.CH_CHVM,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.CH_CRV,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]")) &&  __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_S28C" ;
+		CLASS_NVL_S52C => (contains(__shared__::LocationSets.CH_CHVM,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.CH_CRV,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]")) &&  __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_S52C";
+		CLASS_NVL_HX28C => (contains(__shared__::LocationSets.CH_CHVM,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.CH_CRV,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]")) &&  __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_HX28C";
+		CLASS_NVL_H16C => (contains(__shared__::LocationSets.CH_CHVM,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.CH_CRV,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]")) &&  __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_H16C";
+		CLASS_NVL_P16C => (contains(__shared__::LocationSets.CH_CHVM,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.CH_CRV,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]")) &&  __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_P16C";
+		CLASS_DNL_S28C => (contains(__shared__::LocationSets.CH_CHVM,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.CH_CRV,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]")) &&  __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_DNL_S28C";
+		CLASS_NVL_S16C => (contains(__shared__::LocationSets.CH_CHVM,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.CH_CRV,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]")) &&  __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_S16C";
+		CLASS_NVL_S28CB => (contains(__shared__::LocationSets.CH_CHVM,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.CH_CRV,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]")) &&  __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_S28CB";
+		CLASS_NVL_UL6C => (contains(__shared__::LocationSets.CH_CHVM,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.CH_CRV,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]")) &&  __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_UL6C";
+		CLASS_NVL_U8C => (contains(__shared__::LocationSets.CH_CHVM,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.CH_CRV,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]")) &&  __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_U8C";
+		CLASS_NVL_AX28C => (contains(__shared__::LocationSets.CH_CHVM,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.CH_CRV,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]")) &&  __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_AX28C";
+		CLASS_NVL_AX16C => (contains(__shared__::LocationSets.CH_CHVM,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.CH_CRV,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]")) &&  __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_AX16C";
+		OTHER;
+	}
+	
+	
+}
+UserVars TPI_LTTC_XXX
+{
+
+}

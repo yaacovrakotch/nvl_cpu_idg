@@ -1,0 +1,97 @@
+{
+	"Screen_Config": [
+		{
+			"TestName": "QualUservarInit",
+			"TestConfig": [
+				[ "Test1", "String", "SharedStorage", "DUT.FuseQualSort", "SET", "LITERAL", "FAIL", "Test2", "2" ],
+				[ "Test2", "String", "SharedStorage", "DUT.FuseQualClass", "SET", "LITERAL", "FAIL", "1", "2" ]
+			]
+		},
+		{
+			"TestName": "QualResultClass",
+			"TestConfig": [
+				[ "Test1", "String", "SharedStorage", "DUT.FuseQualClass", "SET", "LITERAL", "PASS", "1", "2" ]
+			]
+		},
+		{
+			"TestName": "QualResultSort",
+			"TestConfig": [
+				[ "Test1", "String", "SharedStorage", "DUT.FuseQualSort", "SET", "LITERAL", "PASS", "1", "2" ]
+			]
+		},
+		{
+			"TestName": "WriteQualResult",
+			"TestConfig": [
+				[ "Test1", "String", "SharedStorage", "DUT.DUMMY", "SET", "EXPRESSION", "ExecCallback('PrintToItuff', '--tname_suf _SORT  --body_type strgval --body_data G.U.S.FuseQualSort')", "Test2", "Test2" ],
+				[ "Test2", "String", "SharedStorage", "DUT.DUMMY", "SET", "EXPRESSION", "ExecCallback('PrintToItuff', '--tname_suf _CLASS --body_type strgval --body_data G.U.S.FuseQualClass')", "1", "2" ]
+			]
+		},
+		{
+			"TestName": "LOG_ITUFF_FAILBURN_ROW6",
+			"TestConfig": [
+				[ "Test1", "String", "SharedStorage", "DUT.FUSEBURN_ROW6", "SET", "LITERAL", "FAILED_FUSEBURN_NOM", "Test2", "2" ],
+				[ "Test2", "String", "SharedStorage", "DUT.DUMMY", "SET", "EXPRESSION", "ExecCallback('PrintToItuff', '--tname_suf _QUAL --body_type strgval --body_data G.U.S.FUSEBURN_ROW6')", "1", "2" ]
+			]
+		},
+		{
+			"TestName": "LOG_ITUFF_FAILBURN_ROW7_8",
+			"TestConfig": [
+				[ "Test1", "String", "SharedStorage", "DUT.FUSEBURN_ROW7_8", "SET", "LITERAL", "FAILED_FUSEBURN_5P_UP", "Test2", "2" ],
+				[ "Test2", "String", "SharedStorage", "DUT.DUMMY", "SET", "EXPRESSION", "ExecCallback('PrintToItuff', '--tname_suf _QUAL --body_type strgval --body_data G.U.S.FUSEBURN_ROW7_8')", "1", "2" ]
+			]
+		},
+		{
+			"TestName": "LOG_ITUFF_FAILBURN_ROW9_10",
+			"TestConfig": [
+				[ "Test1", "String", "SharedStorage", "DUT.FUSEBURN_ROW9_10", "SET", "LITERAL", "FAILED_FUSEBURN_5P_DOWN", "Test2", "2" ],
+				[ "Test2", "String", "SharedStorage", "DUT.DUMMY", "SET", "EXPRESSION", "ExecCallback('PrintToItuff', '--tname_suf _QUAL --body_type strgval --body_data G.U.S.FUSEBURN_ROW9_10')", "1", "2" ]
+			]
+		},
+		{
+			"TestName": "LOG_ITUFF_FAIL_RAP",
+			"TestConfig": [
+				[ "Test1", "String", "SharedStorage", "DUT.FUSERAP", "SET", "LITERAL", "FAILED_FUSE_RAP", "Test2", "2" ],
+				[ "Test2", "String", "SharedStorage", "DUT.DUMMY", "SET", "EXPRESSION", "ExecCallback('PrintToItuff', '--tname_suf _QUAL --body_type strgval --body_data G.U.S.FUSERAP')", "1", "2" ]
+			]
+		},
+		{
+			"TestName": "QualBurnVoltage_LOW_DUT",
+			"TestConfig": [
+				[ "Test11", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCST_Prog_CPU0", "SET", "Literal", "0.77", "Test12", "2" ],
+				[ "Test12", "Double", "SharedStorage", "DUT.FUSE_VOLTAGE_VCCST_NOMINAL_CPU0", "SET", "Literal", "0.77", "Test13", "2" ],
+				[ "Test13", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_PreProg_CPU0", "SET", "Literal", "0.00", "Test14", "2" ],
+				[ "Test14", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_Prog_0_CPU0", "SET", "Literal", "1.70", "Test15", "2" ],
+				[ "Test15", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_Prog_1_CPU0", "SET", "Literal", "1.70", "Test16", "2" ],
+				[ "Test16", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_Nominal_CPU0", "SET", "Literal", "0.00", "Test17", "2" ],
+				[ "Test17", "String", "SharedStorage", "DUT.DUMMY", "SET", "EXPRESSION", "ExecCallback('PrintToItuff', '--tname_suf _PRINT_VOLTAGE_LO --body_type mrslt --body_data G.U.D.Fuse_Voltage_VCCFPRGx_Prog_0_CPU0')", "1", "2" ]
+			]
+		},
+		{
+			"TestName": "QualBurnVoltage_HIGH_DUT",
+			"TestConfig": [
+				[ "Test11", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCST_Prog_CPU0", "SET", "Literal", "0.77", "Test12", "2" ],
+				[ "Test12", "Double", "SharedStorage", "DUT.FUSE_VOLTAGE_VCCST_NOMINAL_CPU0", "SET", "Literal", "0.77", "Test13", "2" ],
+				[ "Test13", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_PreProg_CPU0", "SET", "Literal", "0.00", "Test14", "2" ],
+				[ "Test14", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_Prog_0_CPU0", "SET", "Literal", "1.90", "Test15", "2" ],
+				[ "Test15", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_Prog_1_CPU0", "SET", "Literal", "1.90", "Test16", "2" ],
+				[ "Test16", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_Nominal_CPU0", "SET", "Literal", "0.00", "Test17", "2" ],
+				[ "Test17", "String", "SharedStorage", "DUT.DUMMY", "SET", "EXPRESSION", "ExecCallback('PrintToItuff', '--tname_suf _PRINT_VOLTAGE_HI --body_type mrslt --body_data G.U.D.Fuse_Voltage_VCCFPRGx_Prog_0_CPU0')", "1", "2" ]
+			]
+		},
+		{
+			"TestName": "WriteBurnVoltageToItuff",
+			"TestConfig": [
+				[ "Test1", "Double", "UserVar", "FUS_FUSEBURN_CXX::FUS_FUSEBURN_CXX.QualBurnVoltage", "SET", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_Prog_0_CPU0", "Test2", "2" ],
+				[ "Test2", "String", "SharedStorage", "DUT.TEST", "SET", "EXPRESSION", "ExecCallback('PrintToItuff', '--body_type mrslt --body_data FUS_FUSEBURN_CXX::FUS_FUSEBURN_CXX.QualBurnVoltage --tname_suf _VALUE')", "1", "2" ]
+			]
+		},
+		{
+			"TestName": "UPDATE_STRING_TO_COMPARE",
+			"TestConfig": [
+				[ "Test1", "String", "SharedStorage", "DUT.FUSE_STRING_TO_COMPARE_TEMP_CPU0", "SET", "SharedStorage", "DUT.FUSE_STRING_TO_COMPARE_CPU0",	"Test2",	"2" ],
+				[ "Test2", "String", "SharedStorage", "DUT.FUSE_STRING_TO_COMPARE_CPU0", "SET", "EXPRESSION", "Substring([G.U.S.FUSE_STRING_TO_COMPARE_CPU0], 0, 97920) + 'ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss' + Substring([G.U.S.FUSE_STRING_TO_COMPARE_CPU0], 98080, 224)",	"1",	"2" ]					
+            ]
+        }
+
+	]
+}

@@ -1,0 +1,1726 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan FUS_FUSEREAD_CXX;
+
+Import "FUS_FUSEREAD_CXX.usrv";
+
+# Test Counter Definition
+
+Counters
+{
+    n31402000_fail_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_CANARY_READ_FUNC_0,
+    n31402001_fail_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_CANARY_READ_FUNC_4,
+    n31402002_fail_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_CANARY_READ_FUNC_5,
+    n31402003_fail_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_HASH_0,
+    n31402004_fail_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_HASH_4,
+    n31402005_fail_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_HASH_5,
+    n31402006_fail_FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_BABYSTEPS_TESTS_0,
+    n31402007_fail_FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_BABYSTEPS_TESTS_2,
+    n31402009_fail_FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_BABYSTEPS_TESTS_4,
+    n31402010_fail_FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_BABYSTEPS_TESTS_5,
+    n31402011_fail_FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_FSM_BABYSTEPS_TESTS_0,
+    n31402012_fail_FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_FSM_BABYSTEPS_TESTS_2,
+    n31402014_fail_FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_FSM_BABYSTEPS_TESTS_4,
+    n31402015_fail_FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_FSM_BABYSTEPS_TESTS_5,
+    n31402069_fail_FUSE_X_AUX_K_STARTCPUNOM_X_X_X_X_LOCKSTATUS_CHECK_0,
+    n31412012_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_0,
+    n31412013_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_2,
+    n31412014_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_3,
+    n31412015_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_4,
+    n31412016_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_5,
+    n31412017_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_6,
+    n31412018_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_7,
+    n31412019_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_8,
+    n31412020_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_9,
+    n31412021_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_10,
+    n31412027_fail_FUSE_X_ULTREAD_E_STARTCPUNOM_X_X_X_X_IR_MARGINS_0,
+    n31412028_fail_FUSE_X_ULTREAD_E_STARTCPUNOM_X_X_X_X_IR_MARGINS_CPU1_0,
+    n31412029_fail_FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_EFUSE_READ_0,
+    n31412030_fail_FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_EFUSE_READ_2,
+    n31412031_fail_FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_EFUSE_READ_3,
+    n31412032_fail_FUSE_X_FUSEREAD_K_STARTCPUNOM_X_X_X_X_IR_0,
+    n31412033_fail_FUSE_X_FUSEREAD_K_STARTCPUNOM_X_X_X_X_IR_2,
+    n31432000_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_ECC_STATUS_0,
+    n31432001_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_ECC_STATUS_2,
+    n31432002_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_ECC_STATUS_3,
+    n31432003_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_ECC_STATUS_4,
+    n31432004_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_ECC_STATUS_5,
+    n31432005_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_DFF_ULT_EFUSE_COMPARE_0,
+    n31432006_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_DFF_ULT_EFUSE_COMPARE_2,
+    n31432007_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_DFF_ULT_EFUSE_COMPARE_CPU1_0,
+    n31432008_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_DFF_ULT_EFUSE_COMPARE_CPU1_2,
+    n31442000_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_FUSE_STRING_VALID_CHECK_0,
+    n31442001_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_FUSE_STRING_VALID_CHECK_2,
+    n31442002_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_FUSE_STRING_VALID_CHECK_4,
+    n31442003_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_FUSE_STRING_VALID_CHECK_5,
+    n31442004_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_FUSE_STRING_VALID_CHECK_6,
+    n31442005_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_FUSE_STRING_VALID_CHECK_7,
+    n31442006_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_SOCKET_MODE_CHECK_0,
+    n31442007_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_SOCKET_MODE_CHECK_2,
+    n31442008_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_SOCKET_MODE_CHECK_4,
+    n31452000_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_FUSED_SSPEC_0,
+    n31452001_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_FUSED_SSPEC_2,
+    n31452002_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_PRINT_SSPEC_TO_ITUFF_0,
+    n31472013_fail_FUSE_X_PATCONFIG_K_STARTCPUNOM_X_X_X_X_READ_MARGIN_SET_0,
+    n31472014_fail_FUSE_X_PATCONFIG_K_STARTCPUNOM_X_X_X_X_SET_HASH_0,
+    n31482020_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_0,
+    n31482021_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_2,
+    n31482022_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_4,
+    n31482023_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_5,
+    n31482024_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_6,
+    n31482025_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_7,
+    n31482026_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_8,
+    n31482027_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_9,
+    n31482028_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_10,
+    n31482030_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_0,
+    n31482031_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_2,
+    n31482032_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_3,
+    n31482033_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_4,
+    n31482034_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_5,
+    n31482035_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_6,
+    n31482036_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_7,
+    n31482037_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_8,
+    n31482038_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_9,
+    n31482039_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_10,
+    n31482040_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_0,
+    n31482041_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_2,
+    n31482042_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_4,
+    n31482043_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_5,
+    n31482044_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_6,
+    n31482045_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_7,
+    n31482046_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_8,
+    n31482047_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_9,
+    n31482048_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_10,
+    n31492006_fail_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_STROBE_0,
+    n31492007_fail_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_STROBE_4,
+    n31492008_fail_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_STROBE_5,
+    n92022003_fail_FUSE_X_ISEED_K_STARTCPUNOM_X_X_X_X_GET_HOST_KEY_0,
+    p31402008_pass_FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_BABYSTEPS_TESTS_3,
+    p31402013_pass_FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_FSM_BABYSTEPS_TESTS_3
+} # End of Test Counter Definition
+
+# BEGIN MTPL COMMENT SECTION 
+
+# This is a NVL ./FUS FUSEREAD CXX mtpl rev 25ww13p2_rev1
+
+# END MTPL COMMENT SECTION 
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_PATCONFIG_K_INIT_X_X_X_X_READ_MARGIN_SETUP
+{
+    BypassPort = -1;
+    ConfigurationFile = FUS_FUSEREAD_CXX_Rules.FUSE_X_PATCONFIG_K_INIT_X_X_X_X_READ_MARGIN_SETUP_CfgFile("./InputFiles/FUSEREAD_C2X.PatConfigSetpoints.json","./InputFiles/FUSEREAD_C1X_TSMC.PatConfigSetpoints.json","./InputFiles/FUSEREAD_C2X_TSMC.PatConfigSetpoints.json","./InputFiles/FUSEREAD_C1X_TSMC.PatConfigSetpoints.json","./InputFiles/FUSEREAD_C1X.PatConfigSetpoints.json");
+    SetPoint = FUS_FUSEREAD_CXX_Rules.FUSE_X_PATCONFIG_K_INIT_X_X_X_X_READ_MARGIN_SETUP_SetPoint("CPU_QA","CPU_QA","CPU_READ");
+}
+
+CSharpTest ScreenTC FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU
+{
+    ScreenTestSet = "AllInOneCheck";
+    ScreenTestsFile = __shared__::TpRule.If_MICP("./InputFiles/FUSEREAD_C2X.screen.json","./InputFiles/FUSEREAD_C1X.screen.json");
+}
+
+CSharpTest PrimeFunctionalTestMethod FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_STROBE
+{
+    Patlist = "IPC::cpu_dfxagg_read_hvm_status_csr";
+    LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+    TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+    FailuresToCaptureTotal = 1;
+    MaxFailuresToItuff = 1;
+}
+
+CSharpTest AuxiliaryTC FUSE_X_AUX_K_STARTCPUNOM_X_X_X_X_LOCKSTATUS_CHECK
+{
+    DataType = "String";
+    Expression = "[G.U.S.LCKSTATUS_CPU0]='LGUL_CPU0'";
+    ResultPort = "[R]?1:2";
+    Storage = "SharedStorage";
+}
+
+CSharpTest PrimeFunctionalTestMethod FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_CANARY_READ_FUNC
+{
+    Patlist = "IPC::cpu_fuse_read_hvm_canary_func";
+    LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+    TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = FUS_FUSEREAD_CXX_Rules.FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_CANARY_READ_FUNC_BypassPort(1,1,1,-1);
+    FailuresToCaptureTotal = 1;
+    MaxFailuresToItuff = 1;
+}
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_PATCONFIG_K_STARTCPUNOM_X_X_X_X_READ_MARGIN_SET
+{
+    BypassPort = -1;
+    ConfigurationFile = FUS_FUSEREAD_CXX_Rules.FUSE_X_PATCONFIG_K_STARTCPUNOM_X_X_X_X_READ_MARGIN_SET_CfgFile("./InputFiles/FUSEREAD_C2X.PatConfigSetpoints.json","./InputFiles/FUSEREAD_C1X_TSMC.PatConfigSetpoints.json","./InputFiles/FUSEREAD_C2X_TSMC.PatConfigSetpoints.json","./InputFiles/FUSEREAD_C1X_TSMC.PatConfigSetpoints.json","./InputFiles/FUSEREAD_C1X.PatConfigSetpoints.json");
+    SetPoint = FUS_FUSEREAD_CXX_Rules.FUSE_X_PATCONFIG_K_STARTCPUNOM_X_X_X_X_READ_MARGIN_SET_SetPoint("CPU_QA","CPU_QA","CPU_READ");
+}
+
+CSharpTest PrimeFuseReadMaskTestMethod FUSE_X_FUSEREAD_K_STARTCPUNOM_X_X_X_X_IR
+{
+    Patlist = "IPC::cpu_fuse_read_hvm_x";
+    LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+    TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+    ConfigName = "FuseReadFlow";
+    ConfigurationFile = FUS_FUSEREAD_CXX_Rules.FUSEREAD_CfgFile("./InputFiles/FUSEREAD_C2X.fuseRead.json","./InputFiles/FUSEREAD_C2X.fuseRead_BLLC.json","./InputFiles/FUSEREAD_C1X.fuseRead_BLLC.json","./InputFiles/FUSEREAD_C1X.fuseRead.json");
+    FuseGroupToDatalog = "ULT";
+    PassingMaskName = "maskv_CPU_skip";
+    RegisterName = __shared__::TpRule.If_MICP("CPU0,CPU1","CPU0");
+    SharedStorageKeyToStore = __shared__::TpRule.If_MICP("FUS_FUSEREAD_CXX::FUS_FUSEREAD_CXX.FuseReadOutputStr_CPU0,FUS_FUSEREAD_CXX::FUS_FUSEREAD_CXX.FuseReadOutputStr_CPU1","FUS_FUSEREAD_CXX::FUS_FUSEREAD_CXX.FuseReadOutputStr_CPU0");
+}
+
+CSharpTest FleCheckFuseStringStatusByDies FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_FUSE_STRING_VALID_CHECK
+{
+    BypassPort = -1;
+    FuseReadTokenNames = __shared__::TpRule.If_MICP("FUS_FUSEREAD_CXX::FUS_FUSEREAD_CXX.FuseReadOutputStr_CPU0,FUS_FUSEREAD_CXX::FUS_FUSEREAD_CXX.FuseReadOutputStr_CPU1","FUS_FUSEREAD_CXX::FUS_FUSEREAD_CXX.FuseReadOutputStr_CPU0");
+    LockoutBitGroup = "LockoutBits_00";
+    OutputFuseStringLocation = "SharedStorage";
+    Registers = __shared__::TpRule.If_MICP("CPU0,CPU1","CPU0");
+}
+
+CSharpTest FleGetDieStatus FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_SOCKET_MODE_CHECK
+{
+    FuseStateUservar = "Which_Socket.FuseState";
+    Register = "CPU0";
+}
+
+CSharpTest FleISeedGetUnitKeys FUSE_X_ISEED_K_STARTCPUNOM_X_X_X_X_GET_HOST_KEY
+{
+    BypassPort = -1;
+    DieId = "PKG";
+    KeysTypeId = __shared__::TpRule.If_MICP("1600,1599","1600");
+    QueryMode = "ENG";
+}
+
+CSharpTest ScreenTC FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP
+{
+    ScreenTestSet = "HASH_SETUP_CPU";
+    ScreenTestsFile = __shared__::TpRule.If_MICP("./InputFiles/FUSEREAD_C2X.screen.json","./InputFiles/FUSEREAD_C1X.screen.json");
+}
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_PATCONFIG_K_STARTCPUNOM_X_X_X_X_SET_HASH
+{
+    BypassPort = -1;
+    ConfigurationFile = __shared__::TpRule.If_MICP("./InputFiles/FUSEREAD_C2X.PatConfigSetpoints.json","./InputFiles/FUSEREAD_C1X.PatConfigSetpoints.json");
+    SetPoint = "SET_HASHSIG_CPU";
+}
+
+CSharpTest PrimeFunctionalTestMethod FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_HASH
+{
+    Patlist = "IPC::cpu_fuse_hvm_hash";
+    LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+    TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+    FailuresToCaptureTotal = 1;
+    MaxFailuresToItuff = 1;
+}
+
+CSharpTest ScreenTC FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC
+{
+    BypassPort = __shared__::TpRule.FuseRetestBypass(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1);
+    ScreenTestSet = FUS_FUSEREAD_CXX_Rules.FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_SetPoint("POP_SSPEC_QA","POP_SSPEC");
+    ScreenTestsFile = __shared__::TpRule.If_MICP("./InputFiles/FUSEREAD_C2X.screen.json","./InputFiles/FUSEREAD_C1X.screen.json");
+}
+
+CSharpTest FleCheckFusedSspecFusing FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_FUSED_SSPEC
+{
+    BypassPort = __shared__::TpRule.FuseRetestBypass(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1);
+    FuseReadTokenName = "FUS_FUSEREAD_CXX::FUS_FUSEREAD_CXX.FuseReadOutputStr_CPU0";
+    OutputFuseStringLocation = "SharedStorage";
+    Register = "CPU0";
+    SspecFuseGroupName = "dfx_agg/qdf_fuse";
+}
+
+CSharpTest FlePrintSSPECToItuff FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_PRINT_SSPEC_TO_ITUFF
+{
+    BypassPort = __shared__::TpRule.FuseRetestBypass(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+}
+
+CSharpTest SFMCheckEccStatisticsStatus FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_ECC_STATUS
+{
+    Patlist = "IPC::cpu_fuse_read_hvm_ecc_statictics";
+    LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+    TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = 1;
+    CtvCapturePins = __shared__::TpRule.If_MICP("IPC::CPU_TDO,IPC::CPU1_TDO","IPC::CPU_TDO");
+    NumberOfCorrectableError = 0;
+    SetPoint = "Intel_10nm";
+}
+
+CSharpTest PrimeFuseReadMaskUltDecodeTestMethod FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_EFUSE_READ
+{
+    Patlist = "IPC::cpu_dfxagg_read_hvm_efuse";
+    LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+    TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+    ConfigName = "CXX_EFUSEReadFlow";
+    ConfigurationFile = __shared__::TpRule.If_MICP("./InputFiles/FUSEREAD_C2X.fuseRead.json","./InputFiles/FUSEREAD_C1X.fuseRead.json");
+    DieIdNames = __shared__::TpRule.If_MICP("U1.U5,U1.U6", "U1.U5");
+    FailingMaskName = "FMaskName_All_00,FMaskName_All_11,FMaskName_All_01,FMaskName_All_10";
+    FuseGroupToDatalog = "EFUSE_ULT";
+    PackageEfuse = __shared__::TpRule.If_MICP("ALLOW_NO_PKG","");
+    PassingMaskName = "PMaskName_All_ss";
+    RegisterName = __shared__::TpRule.If_MICP("CPU0_EFUSE,CPU1_EFUSE","CPU0_EFUSE");
+}
+
+CSharpTest ScreenTC FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE
+{
+    BypassPort = -1;
+    ScreenTestSet = "EFUSE_CHECK";
+    ScreenTestsFile = __shared__::TpRule.If_MICP("./InputFiles/FUSEREAD_C2X.screen.json","./InputFiles/FUSEREAD_C1X.screen.json");
+}
+
+CSharpTest SFMDffEfuseCheck FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_DFF_ULT_EFUSE_COMPARE
+{
+    BypassPort = -1;
+    DffFormat = "Desegregation";
+    DieIdName = __shared__::DFFVars.DIEID_CPU;
+    UserVarCollection = "FUSEUFGL";
+}
+
+CSharpTest SFMDffEfuseCheck FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_DFF_ULT_EFUSE_COMPARE_CPU1
+{
+    BypassPort = __shared__::TpRule.If_MICP(-1,1);
+    DffFormat = "Desegregation";
+    DieIdName = __shared__::DFFVars.DIEID_CPU1;
+    UserVarCollection = "FUSEUFGL";
+}
+
+CSharpTest PrimeFuseReadMarginSweepTestMethod FUSE_X_ULTREAD_E_STARTCPUNOM_X_X_X_X_IR_MARGINS
+{
+    Patlist = "IPC::cpu_fuse_read_hvm_msw";
+    LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+    TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+    ConfigName = "MarginFuseReadFlow";
+    ConfigurationFile = FUS_FUSEREAD_CXX_Rules.FUSEREAD_CfgFile("./InputFiles/FUSEREAD_C2X.fuseRead.json","./InputFiles/FUSEREAD_C2X.fuseRead_BLLC.json","./InputFiles/FUSEREAD_C1X.fuseRead_BLLC.json","./InputFiles/FUSEREAD_C1X.fuseRead.json");
+    FuseGroupToDatalog = "";
+    RegisterName = "CPU0";
+}
+
+CSharpTest PrimeFuseReadMarginSweepTestMethod FUSE_X_ULTREAD_E_STARTCPUNOM_X_X_X_X_IR_MARGINS_CPU1
+{
+    Patlist = "IPC::cpu_fuse_read_hvm_msw";
+    LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+    TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = __shared__::TpRule.If_MICP(-1,1);
+    ConfigName = "MarginFuseReadFlow_CPU1";
+    ConfigurationFile = FUS_FUSEREAD_CXX_Rules.FUSEREAD_CfgFile("./InputFiles/FUSEREAD_C2X.fuseRead.json","./InputFiles/FUSEREAD_C2X.fuseRead_BLLC.json","./InputFiles/FUSEREAD_C1X.fuseRead_BLLC.json","./InputFiles/FUSEREAD_C1X.fuseRead.json");
+    FuseGroupToDatalog = "";
+    RegisterName = "CPU1";
+}
+
+CSharpTest PrimeFunctionalTestMethod FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_BABYSTEPS_TESTS
+{
+    Patlist = "IPC::cpu_fuse_debug_babystep_tap_access";
+    LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+    TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+    FailuresToCaptureTotal = 1;
+    MaxFailuresToItuff = 1;
+}
+
+CSharpTest PrimeFunctionalTestMethod FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_FSM_BABYSTEPS_TESTS
+{
+    Patlist = "IPC::cpu_fuse_read_babystep_fsm";
+    LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+    TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+    FailuresToCaptureTotal = 1;
+    MaxFailuresToItuff = 1;
+}
+
+Flow FUS_FUSEREAD_CXX_INIT
+{
+    FlowItem FUSE_X_PATCONFIG_K_INIT_X_X_X_X_READ_MARGIN_SETUP FUSE_X_PATCONFIG_K_INIT_X_X_X_X_READ_MARGIN_SETUP
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312500_fail_FUS_FUSEREAD_CXX_FUSE_X_PATCONFIG_K_INIT_X_X_X_X_READ_MARGIN_SETUP_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312500_fail_FUS_FUSEREAD_CXX_FUSE_X_PATCONFIG_K_INIT_X_X_X_X_READ_MARGIN_SETUP_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow PREREAD
+{
+    FlowItem FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312501_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312501_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482020_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_0;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482020_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31482021_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_2;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482021_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 3;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b31482022_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_4;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482022_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b31482023_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_5;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482023_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_5;
+            Return 0;
+        }
+        Result 6
+        {
+            Property PassFail = "Fail";
+            SetBin b31482024_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_6;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482024_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_6;
+            Return 0;
+        }
+        Result 7
+        {
+            Property PassFail = "Fail";
+            SetBin b31482025_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_7;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482025_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_7;
+            Return 0;
+        }
+        Result 8
+        {
+            Property PassFail = "Fail";
+            SetBin b31482026_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_8;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482026_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_8;
+            Return 0;
+        }
+        Result 9
+        {
+            Property PassFail = "Fail";
+            SetBin b31482027_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_9;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482027_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_9;
+            Return 0;
+        }
+        Result 10
+        {
+            Property PassFail = "Fail";
+            SetBin b31482028_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_10;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482028_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU_10;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow FUNCTIONAL_TESTS
+{
+    FlowItem FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_STROBE FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_STROBE
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312502_fail_FUS_FUSEREAD_CXX_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_STROBE_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312502_fail_FUS_FUSEREAD_CXX_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_STROBE_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31492006_fail_FUS_FUSEREAD_CXX_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_STROBE_0;
+            IncrementCounters FUS_FUSEREAD_CXX::n31492006_fail_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_STROBE_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_AUX_K_STARTCPUNOM_X_X_X_X_LOCKSTATUS_CHECK;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b31492007_fail_FUS_FUSEREAD_CXX_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_STROBE_4;
+            IncrementCounters FUS_FUSEREAD_CXX::n31492007_fail_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_STROBE_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b31492008_fail_FUS_FUSEREAD_CXX_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_STROBE_5;
+            IncrementCounters FUS_FUSEREAD_CXX::n31492008_fail_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_STROBE_5;
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_AUX_K_STARTCPUNOM_X_X_X_X_LOCKSTATUS_CHECK FUSE_X_AUX_K_STARTCPUNOM_X_X_X_X_LOCKSTATUS_CHECK
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312503_fail_FUS_FUSEREAD_CXX_FUSE_X_AUX_K_STARTCPUNOM_X_X_X_X_LOCKSTATUS_CHECK_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312503_fail_FUS_FUSEREAD_CXX_FUSE_X_AUX_K_STARTCPUNOM_X_X_X_X_LOCKSTATUS_CHECK_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31402069_fail_FUS_FUSEREAD_CXX_FUSE_X_AUX_K_STARTCPUNOM_X_X_X_X_LOCKSTATUS_CHECK_0;
+            IncrementCounters FUS_FUSEREAD_CXX::n31402069_fail_FUSE_X_AUX_K_STARTCPUNOM_X_X_X_X_LOCKSTATUS_CHECK_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_CANARY_READ_FUNC;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+    FlowItem FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_CANARY_READ_FUNC FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_CANARY_READ_FUNC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312504_fail_FUS_FUSEREAD_CXX_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_CANARY_READ_FUNC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312504_fail_FUS_FUSEREAD_CXX_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_CANARY_READ_FUNC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31402000_fail_FUS_FUSEREAD_CXX_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_CANARY_READ_FUNC_0;
+            IncrementCounters FUS_FUSEREAD_CXX::n31402000_fail_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_CANARY_READ_FUNC_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b31402001_fail_FUS_FUSEREAD_CXX_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_CANARY_READ_FUNC_4;
+            IncrementCounters FUS_FUSEREAD_CXX::n31402001_fail_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_CANARY_READ_FUNC_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b31402002_fail_FUS_FUSEREAD_CXX_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_CANARY_READ_FUNC_5;
+            IncrementCounters FUS_FUSEREAD_CXX::n31402002_fail_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_CANARY_READ_FUNC_5;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow FUSE_READ
+{
+    FlowItem FUSE_X_PATCONFIG_K_STARTCPUNOM_X_X_X_X_READ_MARGIN_SET FUSE_X_PATCONFIG_K_STARTCPUNOM_X_X_X_X_READ_MARGIN_SET
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312505_fail_FUS_FUSEREAD_CXX_FUSE_X_PATCONFIG_K_STARTCPUNOM_X_X_X_X_READ_MARGIN_SET_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312505_fail_FUS_FUSEREAD_CXX_FUSE_X_PATCONFIG_K_STARTCPUNOM_X_X_X_X_READ_MARGIN_SET_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31472013_fail_FUS_FUSEREAD_CXX_FUSE_X_PATCONFIG_K_STARTCPUNOM_X_X_X_X_READ_MARGIN_SET_0;
+            IncrementCounters FUS_FUSEREAD_CXX::n31472013_fail_FUSE_X_PATCONFIG_K_STARTCPUNOM_X_X_X_X_READ_MARGIN_SET_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSEREAD_K_STARTCPUNOM_X_X_X_X_IR;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSEREAD_K_STARTCPUNOM_X_X_X_X_IR FUSE_X_FUSEREAD_K_STARTCPUNOM_X_X_X_X_IR
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312506_fail_FUS_FUSEREAD_CXX_FUSE_X_FUSEREAD_K_STARTCPUNOM_X_X_X_X_IR_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312506_fail_FUS_FUSEREAD_CXX_FUSE_X_FUSEREAD_K_STARTCPUNOM_X_X_X_X_IR_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31412032_fail_FUS_FUSEREAD_CXX_FUSE_X_FUSEREAD_K_STARTCPUNOM_X_X_X_X_IR_0;
+            IncrementCounters FUS_FUSEREAD_CXX::n31412032_fail_FUSE_X_FUSEREAD_K_STARTCPUNOM_X_X_X_X_IR_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31412033_fail_FUS_FUSEREAD_CXX_FUSE_X_FUSEREAD_K_STARTCPUNOM_X_X_X_X_IR_2;
+            IncrementCounters FUS_FUSEREAD_CXX::n31412033_fail_FUSE_X_FUSEREAD_K_STARTCPUNOM_X_X_X_X_IR_2;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow RETEST_EXEC
+{
+    FlowItem FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_FUSE_STRING_VALID_CHECK FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_FUSE_STRING_VALID_CHECK
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312508_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_FUSE_STRING_VALID_CHECK_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312508_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_FUSE_STRING_VALID_CHECK_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31442000_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_FUSE_STRING_VALID_CHECK_0;
+            IncrementCounters FUS_FUSEREAD_CXX::n31442000_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_FUSE_STRING_VALID_CHECK_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_SOCKET_MODE_CHECK;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31442001_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_FUSE_STRING_VALID_CHECK_2;
+            IncrementCounters FUS_FUSEREAD_CXX::n31442001_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_FUSE_STRING_VALID_CHECK_2;
+            Return 2;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_SOCKET_MODE_CHECK;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b31442002_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_FUSE_STRING_VALID_CHECK_4;
+            IncrementCounters FUS_FUSEREAD_CXX::n31442002_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_FUSE_STRING_VALID_CHECK_4;
+            Return 4;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b31442003_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_FUSE_STRING_VALID_CHECK_5;
+            IncrementCounters FUS_FUSEREAD_CXX::n31442003_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_FUSE_STRING_VALID_CHECK_5;
+            Return 4;
+        }
+        Result 6
+        {
+            Property PassFail = "Fail";
+            SetBin b31442004_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_FUSE_STRING_VALID_CHECK_6;
+            IncrementCounters FUS_FUSEREAD_CXX::n31442004_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_FUSE_STRING_VALID_CHECK_6;
+            Return 4;
+        }
+        Result 7
+        {
+            Property PassFail = "Fail";
+            SetBin b31442005_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_FUSE_STRING_VALID_CHECK_7;
+            IncrementCounters FUS_FUSEREAD_CXX::n31442005_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_FUSE_STRING_VALID_CHECK_7;
+            Return 4;
+        }
+    }
+    
+    FlowItem FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_SOCKET_MODE_CHECK FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_SOCKET_MODE_CHECK
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312509_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_SOCKET_MODE_CHECK_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312509_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_SOCKET_MODE_CHECK_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31442006_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_SOCKET_MODE_CHECK_0;
+            IncrementCounters FUS_FUSEREAD_CXX::n31442006_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_SOCKET_MODE_CHECK_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31442007_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_SOCKET_MODE_CHECK_2;
+            IncrementCounters FUS_FUSEREAD_CXX::n31442007_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_SOCKET_MODE_CHECK_2;
+            Return 2;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_ISEED_K_STARTCPUNOM_X_X_X_X_GET_HOST_KEY;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b31442008_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_SOCKET_MODE_CHECK_4;
+            IncrementCounters FUS_FUSEREAD_CXX::n31442008_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_SOCKET_MODE_CHECK_4;
+            Return 4;
+        }
+    }
+    
+    FlowItem FUSE_X_ISEED_K_STARTCPUNOM_X_X_X_X_GET_HOST_KEY FUSE_X_ISEED_K_STARTCPUNOM_X_X_X_X_GET_HOST_KEY
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99922500_fail_FUS_FUSEREAD_CXX_FUSE_X_ISEED_K_STARTCPUNOM_X_X_X_X_GET_HOST_KEY_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98922500_fail_FUS_FUSEREAD_CXX_FUSE_X_ISEED_K_STARTCPUNOM_X_X_X_X_GET_HOST_KEY_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b92022003_fail_FUS_FUSEREAD_CXX_FUSE_X_ISEED_K_STARTCPUNOM_X_X_X_X_GET_HOST_KEY_0;
+            IncrementCounters FUS_FUSEREAD_CXX::n92022003_fail_FUSE_X_ISEED_K_STARTCPUNOM_X_X_X_X_GET_HOST_KEY_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP;
+        }
+    }
+    
+    FlowItem FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312510_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312510_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482030_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_0;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482030_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_PATCONFIG_K_STARTCPUNOM_X_X_X_X_SET_HASH;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31482031_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_2;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482031_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b31482032_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_3;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482032_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b31482033_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_4;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482033_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b31482034_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_5;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482034_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_5;
+            Return 0;
+        }
+        Result 6
+        {
+            Property PassFail = "Fail";
+            SetBin b31482035_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_6;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482035_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_6;
+            Return 0;
+        }
+        Result 7
+        {
+            Property PassFail = "Fail";
+            SetBin b31482036_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_7;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482036_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_7;
+            Return 0;
+        }
+        Result 8
+        {
+            Property PassFail = "Fail";
+            SetBin b31482037_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_8;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482037_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_8;
+            Return 0;
+        }
+        Result 9
+        {
+            Property PassFail = "Fail";
+            SetBin b31482038_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_9;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482038_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_9;
+            Return 0;
+        }
+        Result 10
+        {
+            Property PassFail = "Fail";
+            SetBin b31482039_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_10;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482039_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP_10;
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_PATCONFIG_K_STARTCPUNOM_X_X_X_X_SET_HASH FUSE_X_PATCONFIG_K_STARTCPUNOM_X_X_X_X_SET_HASH
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312511_fail_FUS_FUSEREAD_CXX_FUSE_X_PATCONFIG_K_STARTCPUNOM_X_X_X_X_SET_HASH_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312511_fail_FUS_FUSEREAD_CXX_FUSE_X_PATCONFIG_K_STARTCPUNOM_X_X_X_X_SET_HASH_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31472014_fail_FUS_FUSEREAD_CXX_FUSE_X_PATCONFIG_K_STARTCPUNOM_X_X_X_X_SET_HASH_0;
+            IncrementCounters FUS_FUSEREAD_CXX::n31472014_fail_FUSE_X_PATCONFIG_K_STARTCPUNOM_X_X_X_X_SET_HASH_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_HASH;
+        }
+    }
+    
+    FlowItem FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_HASH FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_HASH
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312512_fail_FUS_FUSEREAD_CXX_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_HASH_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312512_fail_FUS_FUSEREAD_CXX_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_HASH_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31402003_fail_FUS_FUSEREAD_CXX_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_HASH_0;
+            IncrementCounters FUS_FUSEREAD_CXX::n31402003_fail_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_HASH_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b31402004_fail_FUS_FUSEREAD_CXX_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_HASH_4;
+            IncrementCounters FUS_FUSEREAD_CXX::n31402004_fail_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_HASH_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b31402005_fail_FUS_FUSEREAD_CXX_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_HASH_5;
+            IncrementCounters FUS_FUSEREAD_CXX::n31402005_fail_FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_HASH_5;
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312513_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312513_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482040_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_0;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482040_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_FUSED_SSPEC;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31482041_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_2;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482041_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 3;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b31482042_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_4;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482042_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b31482043_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_5;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482043_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_5;
+            Return 0;
+        }
+        Result 6
+        {
+            Property PassFail = "Fail";
+            SetBin b31482044_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_6;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482044_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_6;
+            Return 0;
+        }
+        Result 7
+        {
+            Property PassFail = "Fail";
+            SetBin b31482045_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_7;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482045_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_7;
+            Return 0;
+        }
+        Result 8
+        {
+            Property PassFail = "Fail";
+            SetBin b31482046_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_8;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482046_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_8;
+            Return 0;
+        }
+        Result 9
+        {
+            Property PassFail = "Fail";
+            SetBin b31482047_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_9;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482047_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_9;
+            Return 0;
+        }
+        Result 10
+        {
+            Property PassFail = "Fail";
+            SetBin b31482048_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_10;
+            IncrementCounters FUS_FUSEREAD_CXX::n31482048_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_10;
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_FUSED_SSPEC FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_FUSED_SSPEC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312514_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_FUSED_SSPEC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312514_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_FUSED_SSPEC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31452000_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_FUSED_SSPEC_0;
+            IncrementCounters FUS_FUSEREAD_CXX::n31452000_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_FUSED_SSPEC_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_PRINT_SSPEC_TO_ITUFF;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31452001_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_FUSED_SSPEC_2;
+            IncrementCounters FUS_FUSEREAD_CXX::n31452001_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_FUSED_SSPEC_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_PRINT_SSPEC_TO_ITUFF FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_PRINT_SSPEC_TO_ITUFF
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312515_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_PRINT_SSPEC_TO_ITUFF_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312515_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_PRINT_SSPEC_TO_ITUFF_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31452002_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_PRINT_SSPEC_TO_ITUFF_0;
+            IncrementCounters FUS_FUSEREAD_CXX::n31452002_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_PRINT_SSPEC_TO_ITUFF_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 3;
+        }
+    }
+    
+}
+
+Flow QA_FUSED
+{
+    FlowItem FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_ECC_STATUS FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_ECC_STATUS
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312516_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_ECC_STATUS_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312516_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_ECC_STATUS_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31432000_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_ECC_STATUS_0;
+            IncrementCounters FUS_FUSEREAD_CXX::n31432000_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_ECC_STATUS_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_EFUSE_READ;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31432001_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_ECC_STATUS_2;
+            IncrementCounters FUS_FUSEREAD_CXX::n31432001_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_ECC_STATUS_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b31432002_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_ECC_STATUS_3;
+            IncrementCounters FUS_FUSEREAD_CXX::n31432002_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_ECC_STATUS_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b31432003_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_ECC_STATUS_4;
+            IncrementCounters FUS_FUSEREAD_CXX::n31432003_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_ECC_STATUS_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b31432004_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_ECC_STATUS_5;
+            IncrementCounters FUS_FUSEREAD_CXX::n31432004_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_ECC_STATUS_5;
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_EFUSE_READ FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_EFUSE_READ
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312517_fail_FUS_FUSEREAD_CXX_FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_EFUSE_READ_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312517_fail_FUS_FUSEREAD_CXX_FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_EFUSE_READ_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31412029_fail_FUS_FUSEREAD_CXX_FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_EFUSE_READ_0;
+            IncrementCounters FUS_FUSEREAD_CXX::n31412029_fail_FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_EFUSE_READ_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31412030_fail_FUS_FUSEREAD_CXX_FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_EFUSE_READ_2;
+            IncrementCounters FUS_FUSEREAD_CXX::n31412030_fail_FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_EFUSE_READ_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b31412031_fail_FUS_FUSEREAD_CXX_FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_EFUSE_READ_3;
+            IncrementCounters FUS_FUSEREAD_CXX::n31412031_fail_FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_EFUSE_READ_3;
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312519_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312519_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31412012_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_0;
+            IncrementCounters FUS_FUSEREAD_CXX::n31412012_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_DFF_ULT_EFUSE_COMPARE;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31412013_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_2;
+            IncrementCounters FUS_FUSEREAD_CXX::n31412013_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b31412014_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_3;
+            IncrementCounters FUS_FUSEREAD_CXX::n31412014_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b31412015_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_4;
+            IncrementCounters FUS_FUSEREAD_CXX::n31412015_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b31412016_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_5;
+            IncrementCounters FUS_FUSEREAD_CXX::n31412016_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_5;
+            Return 0;
+        }
+        Result 6
+        {
+            Property PassFail = "Fail";
+            SetBin b31412017_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_6;
+            IncrementCounters FUS_FUSEREAD_CXX::n31412017_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_6;
+            Return 0;
+        }
+        Result 7
+        {
+            Property PassFail = "Fail";
+            SetBin b31412018_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_7;
+            IncrementCounters FUS_FUSEREAD_CXX::n31412018_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_7;
+            Return 0;
+        }
+        Result 8
+        {
+            Property PassFail = "Fail";
+            SetBin b31412019_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_8;
+            IncrementCounters FUS_FUSEREAD_CXX::n31412019_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_8;
+            Return 0;
+        }
+        Result 9
+        {
+            Property PassFail = "Fail";
+            SetBin b31412020_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_9;
+            IncrementCounters FUS_FUSEREAD_CXX::n31412020_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_9;
+            Return 0;
+        }
+        Result 10
+        {
+            Property PassFail = "Fail";
+            SetBin b31412021_fail_FUS_FUSEREAD_CXX_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_10;
+            IncrementCounters FUS_FUSEREAD_CXX::n31412021_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE_10;
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_DFF_ULT_EFUSE_COMPARE FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_DFF_ULT_EFUSE_COMPARE
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312520_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_DFF_ULT_EFUSE_COMPARE_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312520_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_DFF_ULT_EFUSE_COMPARE_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31432005_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_DFF_ULT_EFUSE_COMPARE_0;
+            IncrementCounters FUS_FUSEREAD_CXX::n31432005_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_DFF_ULT_EFUSE_COMPARE_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_DFF_ULT_EFUSE_COMPARE_CPU1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31432006_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_DFF_ULT_EFUSE_COMPARE_2;
+            IncrementCounters FUS_FUSEREAD_CXX::n31432006_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_DFF_ULT_EFUSE_COMPARE_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_DFF_ULT_EFUSE_COMPARE_CPU1 FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_DFF_ULT_EFUSE_COMPARE_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312521_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_DFF_ULT_EFUSE_COMPARE_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312521_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_DFF_ULT_EFUSE_COMPARE_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31432007_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_DFF_ULT_EFUSE_COMPARE_CPU1_0;
+            IncrementCounters FUS_FUSEREAD_CXX::n31432007_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_DFF_ULT_EFUSE_COMPARE_CPU1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31432008_fail_FUS_FUSEREAD_CXX_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_DFF_ULT_EFUSE_COMPARE_CPU1_2;
+            IncrementCounters FUS_FUSEREAD_CXX::n31432008_fail_FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_DFF_ULT_EFUSE_COMPARE_CPU1_2;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow MARGINS_READ
+{
+    FlowItem FUSE_X_ULTREAD_E_STARTCPUNOM_X_X_X_X_IR_MARGINS FUSE_X_ULTREAD_E_STARTCPUNOM_X_X_X_X_IR_MARGINS @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312522_fail_FUS_FUSEREAD_CXX_FUSE_X_ULTREAD_E_STARTCPUNOM_X_X_X_X_IR_MARGINS_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312522_fail_FUS_FUSEREAD_CXX_FUSE_X_ULTREAD_E_STARTCPUNOM_X_X_X_X_IR_MARGINS_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            IncrementCounters FUS_FUSEREAD_CXX::n31412027_fail_FUSE_X_ULTREAD_E_STARTCPUNOM_X_X_X_X_IR_MARGINS_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_ULTREAD_E_STARTCPUNOM_X_X_X_X_IR_MARGINS_CPU1;
+        }
+    }
+    
+    FlowItem FUSE_X_ULTREAD_E_STARTCPUNOM_X_X_X_X_IR_MARGINS_CPU1 FUSE_X_ULTREAD_E_STARTCPUNOM_X_X_X_X_IR_MARGINS_CPU1 @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312523_fail_FUS_FUSEREAD_CXX_FUSE_X_ULTREAD_E_STARTCPUNOM_X_X_X_X_IR_MARGINS_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312523_fail_FUS_FUSEREAD_CXX_FUSE_X_ULTREAD_E_STARTCPUNOM_X_X_X_X_IR_MARGINS_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            IncrementCounters FUS_FUSEREAD_CXX::n31412028_fail_FUSE_X_ULTREAD_E_STARTCPUNOM_X_X_X_X_IR_MARGINS_CPU1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 0;
+        }
+    }
+    
+}
+
+Flow RESET_FAIL_FLOW
+{
+    FlowItem FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_BABYSTEPS_TESTS FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_BABYSTEPS_TESTS @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312524_fail_FUS_FUSEREAD_CXX_FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_BABYSTEPS_TESTS_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312524_fail_FUS_FUSEREAD_CXX_FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_BABYSTEPS_TESTS_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            IncrementCounters FUS_FUSEREAD_CXX::n31402006_fail_FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_BABYSTEPS_TESTS_0;
+            GoTo FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_FSM_BABYSTEPS_TESTS;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_FSM_BABYSTEPS_TESTS;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            IncrementCounters FUS_FUSEREAD_CXX::n31402007_fail_FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_BABYSTEPS_TESTS_2;
+            GoTo FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_FSM_BABYSTEPS_TESTS;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            IncrementCounters FUS_FUSEREAD_CXX::p31402008_pass_FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_BABYSTEPS_TESTS_3;
+            GoTo FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_FSM_BABYSTEPS_TESTS;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            IncrementCounters FUS_FUSEREAD_CXX::n31402009_fail_FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_BABYSTEPS_TESTS_4;
+            GoTo FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_FSM_BABYSTEPS_TESTS;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            IncrementCounters FUS_FUSEREAD_CXX::n31402010_fail_FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_BABYSTEPS_TESTS_5;
+            GoTo FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_FSM_BABYSTEPS_TESTS;
+        }
+    }
+    
+    FlowItem FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_FSM_BABYSTEPS_TESTS FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_FSM_BABYSTEPS_TESTS @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312525_fail_FUS_FUSEREAD_CXX_FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_FSM_BABYSTEPS_TESTS_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312525_fail_FUS_FUSEREAD_CXX_FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_FSM_BABYSTEPS_TESTS_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            IncrementCounters FUS_FUSEREAD_CXX::n31402011_fail_FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_FSM_BABYSTEPS_TESTS_0;
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            IncrementCounters FUS_FUSEREAD_CXX::n31402012_fail_FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_FSM_BABYSTEPS_TESTS_2;
+            Return 1;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            IncrementCounters FUS_FUSEREAD_CXX::p31402013_pass_FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_FSM_BABYSTEPS_TESTS_3;
+            Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            IncrementCounters FUS_FUSEREAD_CXX::n31402014_fail_FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_FSM_BABYSTEPS_TESTS_4;
+            Return 1;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            IncrementCounters FUS_FUSEREAD_CXX::n31402015_fail_FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_FSM_BABYSTEPS_TESTS_5;
+            Return 1;
+        }
+    }
+    
+}
+
+Flow FUS_FUSEREAD_CXX_STARTCPUNOM
+{
+    FlowItem PREREAD PREREAD
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            GoTo FUNCTIONAL_TESTS;
+        }
+    }
+    
+    FlowItem FUNCTIONAL_TESTS FUNCTIONAL_TESTS
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo RESET_FAIL_FLOW;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_READ;
+        }
+    }
+    
+    FlowItem FUSE_READ FUSE_READ
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo RETEST_EXEC;
+        }
+    }
+    
+    FlowItem RETEST_EXEC RETEST_EXEC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo RESET_FAIL_FLOW;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            GoTo QA_FUSED;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            GoTo MARGINS_READ;
+        }
+    }
+    
+    FlowItem QA_FUSED QA_FUSED
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo MARGINS_READ;
+        }
+    }
+    
+    FlowItem MARGINS_READ MARGINS_READ
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 0;
+        }
+    }
+    
+    FlowItem RESET_FAIL_FLOW RESET_FAIL_FLOW
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 0;
+        }
+    }
+    
+}

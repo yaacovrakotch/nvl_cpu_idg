@@ -1,0 +1,37 @@
+Version 1.0;
+
+SelectorRuleCollection  FUS_FUSEVLD_CKX_Rules
+{	
+	###Prime###
+	SelectorRule FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_UVLDSETDFF_BypassPort (Outcome1, Outcome2)
+	{
+        Outcome1 => contains(__shared__::LocationSets.PBIC_DAB,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome2 ;
+	}
+	SelectorRule FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLDSETDFF_BypassPort (Outcome1, Outcome2)
+	{
+        Outcome1 => contains(__shared__::LocationSets.PBIC_DAB,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome2 ;
+	}
+	SelectorRule FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_SETDFF_BypassPort (Outcome1, Outcome2)
+	{
+        Outcome1 => contains(__shared__::LocationSets.PBIC_DAB,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome2 ;
+	}
+	SelectorRule FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_UVLDSETDFF_CPU1_BypassPort (Outcome1, Outcome2)
+	{
+        Outcome1 => contains(__shared__::LocationSets.PBIC_DAB,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && (GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C");
+		Outcome2 ;
+	}
+	SelectorRule FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLDSETDFF_CPU1_BypassPort (Outcome1, Outcome2)
+	{
+        Outcome1 => contains(__shared__::LocationSets.PBIC_DAB,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && (GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C");
+		Outcome2 ;
+	}
+	SelectorRule FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_SETDFF_CPU1_BypassPort (Outcome1, Outcome2)
+	{
+        Outcome1 => contains(__shared__::LocationSets.PBIC_DAB,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && (GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C");
+		Outcome2 ;
+	}
+    
+}

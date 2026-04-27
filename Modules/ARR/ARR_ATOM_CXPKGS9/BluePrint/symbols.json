@@ -1,0 +1,246 @@
+{
+  "_description": "Symbol definitions for ARR_ATOM_CXPKGS9 MTPL BluePrint generation",
+  "_format": "Each symbol maps to its possible values and a plain-English description",
+
+  "symbols": {
+    "FREQ_CORNER": {
+      "description": "Frequency corner index used in VMIN search tests (F1 through F4). Each corner targets a different operating frequency for the ATOM domain.",
+      "values": ["F1", "F2", "F3", "F4"],
+      "appears_in": [
+        "Test name (e.g. ARR_ATOM_VMIN_K_F{N}XAT_HITO_VCCIA_F{N}_X_...)",
+        "Patlist (e.g. f{n}xat, _f{n}_)",
+        "CornerIdentifiers (AT*@F{N})",
+        "SetPointsPreInstance (AT_F{N}_FREQ)",
+        "VoltageConverter DROPOUT (DROPOUT.AT_F{N})",
+        "StartVoltagesForRetry/Offset (ForRetryF{N} / OffsetF{N})",
+        "VminResult (F{N}_VMIN)",
+        "BaseNumbers",
+        "CSharpTrialTest dynamic name (__shared__::CustomFlowMatrixSpecs.AT_F{N}_FREQ_MHz)"
+      ]
+    },
+
+    "SEARCH_VARIANT": {
+      "description": "The search variant defines the type of array coverage being tested: COMBINED covers all arrays, SSA targets single-sided arrays only, and SSA_L2DATA targets L2 data arrays specifically.",
+      "values": ["COMBINED", "SSA", "SSA_L2DATA"],
+      "appears_in": [
+        "Test name suffix",
+        "Patlist (COMBINED=all_all, SSA=all_all but BypassPort=1, SSA_L2DATA=directdsdb_ssa + l2_data)",
+        "BypassPort (COMBINED=-1, SSA=1, SSA_L2DATA=-1)",
+        "CornerIdentifiers count (COMBINED/SSA_L2DATA=8 targets, SSA=4 targets)",
+        "EndVoltageLimits (varies by variant)",
+        "VminResult suffix (e.g. _L2DATA)",
+        "DtsConfiguration presence"
+      ]
+    },
+
+    "CPU_DIE": {
+      "description": "CPU die selector. Many tests are duplicated for a second CPU die (CPU1) with minor parameter differences such as FuseNamespace and GSDS storage keys.",
+      "values": ["CPU0", "CPU1"],
+      "appears_in": [
+        "Test name suffix (_CPU1 for second die, no suffix for first)",
+        "FuseNamespace (CPU0 vs CPU1)",
+        "PostInstance GSDS keys",
+        "BypassPort values"
+      ]
+    },
+
+    "MODULE_INDEX": {
+      "description": "Module index within the L2 cache. Each module (M0-M3) corresponds to a physical cache module being tested in the raster repair pipeline.",
+      "values": ["M0", "M1", "M2", "M3"],
+      "appears_in": [
+        "Test name (e.g. _M0_1, _M1_1)",
+        "Patlist suffix (m0, m1, m2, m3)",
+        "BypassPort SCBD reference (SCBD_0_0_0_0 through SCBD_3_0_0_0)",
+        "KeyForSharedStorage (L2DATAMINM0, L2TAGMINM0, etc.)",
+        "DecoderMatchLabel (module0, module1, etc.)",
+        "InputStorageKey"
+      ]
+    },
+
+    "SSA_ARRAY_TYPE": {
+      "description": "Array type being tested in the SSA (Single-Sided Array) raster capture/repair/rep2fuse pipeline.",
+      "values": ["L2_DATA", "L2_TAG"],
+      "appears_in": [
+        "Test name (e.g. _L2_DATA_M0_1 vs _L2_TAG_M0_1)",
+        "Patlist (l2_data vs l2_tag)",
+        "BypassPort SCBD reference (L2_DATA_ALL_SCBD vs L2_TAG_ALL_SCBD)",
+        "KeyForSharedStorage (L2DATA vs L2TAG)",
+        "TargetArray (l2d vs l2t)"
+      ]
+    },
+
+    "LSA_ARRAY_TYPE": {
+      "description": "Array type for LSA (Large-Scale Array) raster repair. Covers C6, LRU, and STATE sub-arrays.",
+      "values": ["L2_C6", "L2_LRU", "L2_STATE"],
+      "appears_in": [
+        "Test name (e.g. _L2_C6_M0_1, _L2_LRU_M0_1, _L2_STATE_M0_1)",
+        "Patlist (l2_c6, l2_lru, l2_state)",
+        "BypassPort SCBD reference",
+        "KeyForSharedStorage",
+        "DecoderMatchLabel"
+      ]
+    },
+
+    "VOLTAGE_CORNER": {
+      "description": "Voltage corner for raster repair and capture tests. MIN targets minimum voltage operation; MAX targets maximum voltage.",
+      "values": ["MIN", "MAX"],
+      "appears_in": [
+        "Test name (e.g. VCCIA_MIN_X vs VCCIA_MAX_X)",
+        "Patlist voltage indicator",
+        "BypassPort conditional",
+        "KeyForSharedStorage prefix (e.g. L2DATAMINM0 vs L2DATAMAXM0)"
+      ]
+    },
+
+    "PMUX_INDEX": {
+      "description": "Power-mux frequency callback index. Four callbacks (0-3) calculate the frequency switch for each ATOM compute cluster.",
+      "values": ["0", "1", "2", "3"],
+      "appears_in": [
+        "Test name suffix (PMUX_CO_FREQ0 through FREQ3)",
+        "Parameters --token (CDIE_ATOM0_FREQ through CDIE_ATOM3_FREQ)",
+        "PostInstance _tname_suf (_CDIEATOM0_CO_FREQ through _CDIEATOM3_CO_FREQ)"
+      ]
+    },
+
+    "REP_DIRECTION": {
+      "description": "Repair direction for VFDM export, ScreenTC and PatConfig tests. VMIN-side repair vs VMAX-side repair.",
+      "values": ["VMIN", "VMAX"],
+      "appears_in": [
+        "Test name (VMINREP vs VMAXREP, MIN vs MAX in LSA tests)",
+        "ScreenTestSet (SET_LOCAL* references)",
+        "SetPoint (Vmin* vs Vmax*)",
+        "VFDM export keys"
+      ]
+    },
+
+    "L2_ENDCPU_TYPE": {
+      "description": "L2 sub-array for ENDCPU VminTC scoreboard tests.",
+      "values": ["TAG", "DATA"],
+      "appears_in": [
+        "Test name (L2_TAG vs L2_DATA)",
+        "Patlist (l2_tag vs l2_data)"
+      ]
+    },
+
+    "HRY_PHASE": {
+      "description": "Phase of the HRY (Hierarchy) array test — before or after repair.",
+      "values": ["PRE", "POST"],
+      "appears_in": [
+        "Test name suffix (XSA_ATOM_HRY_*_PRE vs *_POST)",
+        "ConfigFile reference"
+      ]
+    },
+
+    "LSA_RASTER_MODE": {
+      "description": "LSA raster operational mode: R=repair, NONREP_MP=non-repairable multipass.",
+      "values": ["R", "NONREP_MP", "MP"],
+      "appears_in": [
+        "Test name (e.g. _X_R, _LFM_NONREP_MP, _X_MP)",
+        "ConfigFile/ScreenTestSet references"
+      ]
+    },
+
+    "RASTERLOOP_TYPE": {
+      "description": "PatConfig raster loop type for XSA tests.",
+      "values": ["VMAXRASTERLOOP", "VMINRASTERLOOP"],
+      "appears_in": [
+        "Test name suffix",
+        "SetPoint value"
+      ]
+    }
+  },
+
+  "test_groups": {
+    "VMIN_MTT_F1_F4": {
+      "description": "VminTC MultiTrialTest for frequency corners F1 through F4, each with 3 search variants",
+      "symbols_used": ["FREQ_CORNER", "SEARCH_VARIANT"],
+      "template_name": "ARR_ATOM_VMIN_K_\\FREQ_CORNER\\XAT_HITO_VCCIA_\\FREQ_CORNER\\_X_\\SEARCH_VARIANT\\",
+      "instance_count": 12
+    },
+    "VMIN_MTT_F5": {
+      "description": "VminTC MultiTrialTest for F5 corner with ATOM_TOP trial variable, 3 variants (COMBINED, MEC, SSA_L2DATA)",
+      "symbols_used": ["SEARCH_VARIANT"],
+      "template_name": "ARR_ATOM_VMIN_K_F5XAT_HITO_VCCIA_F5_X_\\SEARCH_VARIANT\\",
+      "instance_count": 3,
+      "note": "F5 uses ATOM_TOP trial variable, different freq references (Corners.AT_C5, FreqValues.AT_C5)"
+    },
+    "VMIN_MTT_FMIN": {
+      "description": "VminTC MultiTrialTest for FMIN corner, 5 variants including FF_SEARCH",
+      "symbols_used": ["SEARCH_VARIANT"],
+      "template_name": "ARR_ATOM_VMIN_K_FMINXAT_HITO_VCCIA_FMIN_X_\\SEARCH_VARIANT\\",
+      "instance_count": 5,
+      "note": "FMIN uses different timing, different StartVoltages (forwarded from F1 results)"
+    },
+    "SB_BEGINCPU": {
+      "description": "VminTC Scoreboard tests at BEGINCPUNOM, F3 frequency",
+      "symbols_used": ["SEARCH_VARIANT"],
+      "template_name": "ARR_ATOM_SB_K_BEGINCPUNOM_HITO_VCCIA_F3_X_\\SEARCH_VARIANT\\",
+      "instance_count": 2
+    },
+    "SB_VMAX_F1": {
+      "description": "VminTC Scoreboard VMAX tests at F1",
+      "symbols_used": ["SEARCH_VARIANT"],
+      "template_name": "ARR_ATOM_SB_K_VMAXXAT_HITO_VCCIA_F1_X_\\SEARCH_VARIANT\\",
+      "instance_count": 2
+    },
+    "SB_VMAX_F5": {
+      "description": "VminTC Scoreboard/MTT VMAX tests at F5",
+      "symbols_used": ["SEARCH_VARIANT"],
+      "template_name": "ARR_ATOM_SB_K_VMAXXAT_HITO_VCCIA_F5_X_\\SEARCH_VARIANT\\",
+      "instance_count": 2
+    },
+    "ENDCPU_L2": {
+      "description": "VminTC Scoreboard ENDCPU tests for L2 TAG and DATA",
+      "symbols_used": ["L2_ENDCPU_TYPE"],
+      "template_name": "ARR_ATOM_VMIN_E_ENDCPU_HITO_VCCIA_X_X_L2_\\L2_ENDCPU_TYPE\\",
+      "instance_count": 2
+    },
+    "PMUX_CALLBACKS": {
+      "description": "RunCallback tests for power-mux frequency calculation per ATOM cluster",
+      "symbols_used": ["PMUX_INDEX"],
+      "template_name": "ARR_ATOM_RUNCALLBACK_K_ENDCPU_HITO_X_X_X_PMUX_CO_FREQ\\PMUX_INDEX\\",
+      "instance_count": 4
+    },
+    "SSA_RASTER_PIPELINE": {
+      "description": "Capture, Repair, and Rep2Fuse pipeline per module and array type",
+      "symbols_used": ["VOLTAGE_CORNER", "SSA_ARRAY_TYPE", "MODULE_INDEX", "CPU_DIE"],
+      "template_name": "SSA_ATOM_{CAPPKTS|REPAIR|REP2FUSE}_E_BEGINCPUNOM_TITO_VCCIA_\\VOLTAGE_CORNER\\_X_\\SSA_ARRAY_TYPE\\_\\MODULE_INDEX\\_1",
+      "instance_count": "2 voltages x 2 arrays x 4 modules x 3 stages x 2 dies = 96"
+    },
+    "LSA_RASTER_PIPELINE": {
+      "description": "LSA Capture, Repair, and Rep2Fuse pipeline per module and LSA array type",
+      "symbols_used": ["VOLTAGE_CORNER", "LSA_ARRAY_TYPE", "MODULE_INDEX", "CPU_DIE"],
+      "template_name": "LSA_ATOM_{CAPPKTS|REPAIR|REP2FUSE}_E_BEGINCPUNOM_TITO_VCCIA_\\VOLTAGE_CORNER\\_X_\\LSA_ARRAY_TYPE\\_\\MODULE_INDEX\\_...",
+      "instance_count": "2 voltages x 3 arrays x 4 modules x 3 stages x 2 dies = 144"
+    },
+    "XSA_HRY_TESTS": {
+      "description": "PrimeArrayHryTestMethod pre/post repair per voltage corner and CPU die",
+      "symbols_used": ["VOLTAGE_CORNER", "HRY_PHASE", "CPU_DIE"],
+      "template_name": "XSA_ATOM_HRY_E_BEGINCPUNOM_TITO_VCCIA_\\VOLTAGE_CORNER\\_X_\\HRY_PHASE\\",
+      "instance_count": 8
+    },
+    "LSA_HRY_TESTS": {
+      "description": "PrimeLSARasterTestMethod and PrimeArrayHryTestMethod for LSA HRY testing",
+      "symbols_used": ["VOLTAGE_CORNER", "LSA_RASTER_MODE", "CPU_DIE"],
+      "instance_count": "~20"
+    },
+    "SCREEN_REVERT_RF": {
+      "description": "ScreenTC revert repair flag tests",
+      "symbols_used": ["REP_DIRECTION", "CPU_DIE"],
+      "template_name": "ALL_ATOM_SCREEN_E_BEGINCPUNOM_X_X_X_X_REVERT_RF_\\REP_DIRECTION\\REP",
+      "instance_count": 4
+    },
+    "SCREEN_L2_SETLOCAL": {
+      "description": "ScreenTC set local L2 repair tests",
+      "symbols_used": ["REP_DIRECTION", "CPU_DIE"],
+      "template_name": "ALL_ATOM_SCREENTC_E_BEGINCPUNOM_X_X_X_X_SETLOCAL_L2_\\REP_DIRECTION\\REP",
+      "instance_count": 4
+    },
+    "PATCONFIG_RASTERLOOP": {
+      "description": "PatConfig raster loop setup",
+      "symbols_used": ["RASTERLOOP_TYPE", "CPU_DIE"],
+      "template_name": "XSA_ATOM_PATMOD_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_\\RASTERLOOP_TYPE\\",
+      "instance_count": 4
+    }
+  }
+}

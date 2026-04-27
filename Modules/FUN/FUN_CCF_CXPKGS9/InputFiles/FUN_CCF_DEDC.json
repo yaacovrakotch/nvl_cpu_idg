@@ -1,0 +1,83 @@
+{
+  "Triggers": [
+    {
+      "TriggerName": "FUN_CCF_CXPKGS9",
+      "Condition": {
+        "TestNameRegex": "^(?!.*(C01|C23|C45|TDAU)).*FUN_CCF_CXPKGS69::.*F[0123456].*(DRG|CCFBIST|DRNG).*$",
+        "PortRegex": "[023456]",
+        "BinRegex": "^90[^9]"
+      },
+      "Execute": {
+        "Executables": [
+          {
+            "Type": "Test",
+            "Name": "IPC::FUN_CCF_CX816::SBFT_CCF_SHMOO_E_FMIN_X_VCCR_X_X_X_DEDC",
+            "Sufix": "FUN_CCF_SHM",
+            "Overrides": [
+              {
+                "ParameterName": "BypassPort",
+                "Type": "Explicit",
+                "Value": "-1"
+              },
+              {
+                "ParameterName": "LogLevel",
+                "Type": "Explicit",
+                "Value": "PRIME_DEBUG"
+              },
+              {
+                "ParameterName": "PrintFormat",
+                "Type": "Explicit",
+                "Value": "ShmooHub"
+              },
+              {
+                "ParameterName": "SetPointsPreInstance",
+                "Type": "MatchingInstance",
+                "Value": "SetPointsPreInstance"
+              },
+              {
+                "ParameterName": "LevelsTc",
+                "Type": "MatchingInstance",
+                "Value": "LevelsTc"
+              },
+              {
+                "ParameterName": "Patlist",
+                "Type": "MatchingInstance",
+                "Value": "Patlist"
+              },
+              {
+                "ParameterName": "TimingsTc",
+                "Type": "MatchingInstance",
+                "Value": "TimingsTc"
+              },
+              {
+                "ParameterName": "XAxisParam",
+                "Type": "Explicit",
+                "Value": "p_mtd_per"
+              },
+              {
+                "ParameterName": "XAxisRange",
+                "Type": "Explicit",
+                "Value": "8e-9:0.5e-9:8"
+              },
+              {
+                "ParameterName": "YAxisType",
+                "Type": "Explicit",
+                "Value": "FIVR"
+              },
+              {
+                "ParameterName": "YAxisParam",
+                "Type": "Explicit",
+                "Value": "CCF"
+              },
+              {
+                "ParameterName": "YAxisRange",
+                "Type": "Explicit",
+                "Value": "0.5:0.05:15"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,243 @@
+START_SCREEN:SetL2_RasterRepair
+
+
+# This screen test checks each gloabal var per array and per module (i.e., L2_LRU array has both L2_LRU AND L2_UTCC), and if either value is -1, it sets a new variable (i.e. L2_LRU_ALL) to be -1. This new variable is then used as the global bypass 
+# variable in TPIE (since only one variable can be used per test instance).
+
+# Test Name: Name of the test (set by user creating the screentest)
+# Data Type: INT, DOUBLE, STRING, BINARY
+# Param Type1/Param Type2: DFF, CUSTOM, GLOBAL, GSDS, FUNCTION, LITERAL, WHICHSOCKET, CONSOLE, EXPRESSION
+# Param 1/Param 2: Parameters (for global: <collection>.<user var name>)
+# Operation: What to do between the first and second parameter (i.e. compare, set, etc]) (options: <, >, <=, >=, ==, !=, SET, APPEND)
+# Tmp Store: Integer variables only
+# OnTrue/OnFalse: If condition is/is not met, set next test name to go to or port value (positive int only)
+
+# Run On : Test Name               : Data Type   : Param Type1  : Param 1                 			      :  Operation  : Param Type2    : Param 2    : Tmp Store  : OnTrue                  : OnFalse
+
+
+#L2_DATA -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EXEC     ; check_l2_data_m0         ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_DATA_SCBD_0_0_0_0      ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_data_all_m0  ; check_l2_dataecc_m0
+EXEC     ; check_l2_dataecc_m0      ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_DATAECC_SCBD_0_0_0_0   ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_data_all_m0  ; set_pass_l2_data_all_m0
+EXEC     ; set_fail_l2_data_all_m0  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_DATA_ALL_SCBD_0_0_0_0  ; SET         ; LITERAL        ; -1 	      ; -          ; check_l2_data_m1         ; check_l2_data_m1
+EXEC     ; set_pass_l2_data_all_m0  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_DATA_ALL_SCBD_0_0_0_0  ; SET         ; LITERAL        ; 1 	  	  ; -          ; check_l2_data_m1         ; check_l2_data_m1
+#module1
+EXEC     ; check_l2_data_m1         ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_DATA_SCBD_1_0_0_0      ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_data_all_m1  ; check_l2_dataecc_m1
+EXEC     ; check_l2_dataecc_m1      ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_DATAECC_SCBD_1_0_0_0   ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_data_all_m1  ; set_pass_l2_data_all_m1
+EXEC     ; set_fail_l2_data_all_m1  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_DATA_ALL_SCBD_1_0_0_0  ; SET         ; LITERAL        ; -1 	      ; -          ; check_l2_data_m2          ; check_l2_data_m2
+EXEC     ; set_pass_l2_data_all_m1  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_DATA_ALL_SCBD_1_0_0_0  ; SET         ; LITERAL        ; 1 	  	  ; -          ; check_l2_data_m2          ; check_l2_data_m2
+#module2
+EXEC     ; check_l2_data_m2         ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_DATA_SCBD_2_0_0_0      ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_data_all_m2  ; check_l2_dataecc_m2
+EXEC     ; check_l2_dataecc_m2      ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_DATAECC_SCBD_2_0_0_0   ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_data_all_m2  ; set_pass_l2_data_all_m2
+EXEC     ; set_fail_l2_data_all_m2  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_DATA_ALL_SCBD_2_0_0_0  ; SET         ; LITERAL        ; -1 	      ; -          ; check_l2_data_m3         ; check_l2_data_m3
+EXEC     ; set_pass_l2_data_all_m2  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_DATA_ALL_SCBD_2_0_0_0  ; SET         ; LITERAL        ; 1 	  	  ; -          ; check_l2_data_m3         ; check_l2_data_m3
+#module3
+EXEC     ; check_l2_data_m3         ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_DATA_SCBD_3_0_0_0      ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_data_all_m3  ; check_l2_dataecc_m3
+EXEC     ; check_l2_dataecc_m3      ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_DATAECC_SCBD_3_0_0_0   ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_data_all_m3  ; set_pass_l2_data_all_m3
+EXEC     ; set_fail_l2_data_all_m3  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_DATA_ALL_SCBD_3_0_0_0  ; SET         ; LITERAL        ; -1 	      ; -          ; check_l2_c6s_m0          ; check_l2_c6s_m0
+EXEC     ; set_pass_l2_data_all_m3 ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_DATA_ALL_SCBD_3_0_0_0  ; SET         ; LITERAL        ; 1 	  	  ; -          ; check_l2_c6s_m0          ; check_l2_c6s_m0
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#L2_C6S -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EXEC     ; check_l2_c6s_m0         ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_C6S_SCBD_0_0_0_0      ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_c6s_all_m0  ; check_l2_c6secc_m0
+EXEC     ; check_l2_c6secc_m0      ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_C6SECC_SCBD_0_0_0_0   ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_c6s_all_m0  ; set_pass_l2_c6s_all_m0
+EXEC     ; set_fail_l2_c6s_all_m0  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_C6S_ALL_SCBD_0_0_0_0  ; SET         ; LITERAL        ; -1 	      ; -          ; check_l2_c6s_m1         ; check_l2_c6s_m1
+EXEC     ; set_pass_l2_c6s_all_m0  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_C6S_ALL_SCBD_0_0_0_0  ; SET         ; LITERAL        ; 1 	  	  ; -          ; check_l2_c6s_m1         ; check_l2_c6s_m1
+#module1
+EXEC     ; check_l2_c6s_m1         ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_C6S_SCBD_1_0_0_0      ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_c6s_all_m1  ; check_l2_c6secc_m1
+EXEC     ; check_l2_c6secc_m1      ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_C6SECC_SCBD_1_0_0_0   ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_c6s_all_m1  ; set_pass_l2_c6s_all_m1
+EXEC     ; set_fail_l2_c6s_all_m1  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_C6S_ALL_SCBD_1_0_0_0  ; SET         ; LITERAL        ; -1 	      ; -          ; check_l2_c6s_m2          ; check_l2_c6s_m2
+EXEC     ; set_pass_l2_c6s_all_m1  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_C6S_ALL_SCBD_1_0_0_0  ; SET         ; LITERAL        ; 1 	  	  ; -          ; check_l2_c6s_m2          ; check_l2_c6s_m2
+#module2
+EXEC     ; check_l2_c6s_m2         ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_C6S_SCBD_2_0_0_0      ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_c6s_all_m2  ; check_l2_c6secc_m2
+EXEC     ; check_l2_c6secc_m2      ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_C6SECC_SCBD_2_0_0_0   ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_c6s_all_m2  ; set_pass_l2_c6s_all_m2
+EXEC     ; set_fail_l2_c6s_all_m2  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_C6S_ALL_SCBD_2_0_0_0  ; SET         ; LITERAL        ; -1 	      ; -          ; check_l2_c6s_m3         ; check_l2_c6s_m3
+EXEC     ; set_pass_l2_c6s_all_m2  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_C6S_ALL_SCBD_2_0_0_0  ; SET         ; LITERAL        ; 1 	  	  ; -          ; check_l2_c6s_m3         ; check_l2_c6s_m3
+#module3
+EXEC     ; check_l2_c6s_m3         ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_C6S_SCBD_3_0_0_0      ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_c6s_all_m3  ; check_l2_c6secc_m3
+EXEC     ; check_l2_c6secc_m3      ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_C6SECC_SCBD_3_0_0_0   ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_c6s_all_m3  ; set_pass_l2_c6s_all_m3
+EXEC     ; set_fail_l2_c6s_all_m3  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_C6S_ALL_SCBD_3_0_0_0  ; SET         ; LITERAL        ; -1 	      ; -          ; check_l2_lru_m0          ; check_l2_lru_m0
+EXEC     ; set_pass_l2_c6s_all_m3 ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_C6S_ALL_SCBD_3_0_0_0  ; SET         ; LITERAL        ; 1 	  	  ; -          ; check_l2_lru_m0          ; check_l2_lru_m0
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#L2_LRU -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EXEC     ; check_l2_lru_m0         ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_LRU_SCBD_0_0_0_0      ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_lru_all_m0  ; check_l2_utcc_m0
+EXEC     ; check_l2_utcc_m0      ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_UTCC_SCBD_0_0_0_0   ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_lru_all_m0  ; set_pass_l2_lru_all_m0
+EXEC     ; set_fail_l2_lru_all_m0  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_LRU_ALL_SCBD_0_0_0_0  ; SET         ; LITERAL        ; -1 	      ; -          ; check_l2_lru_m1         ; check_l2_lru_m1
+EXEC     ; set_pass_l2_lru_all_m0  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_LRU_ALL_SCBD_0_0_0_0  ; SET         ; LITERAL        ; 1 	  	  ; -          ; check_l2_lru_m1         ; check_l2_lru_m1
+#module1
+EXEC     ; check_l2_lru_m1         ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_LRU_SCBD_1_0_0_0      ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_lru_all_m1  ; check_l2_utcc_m1
+EXEC     ; check_l2_utcc_m1      ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_UTCC_SCBD_1_0_0_0   ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_lru_all_m1  ; set_pass_l2_lru_all_m1
+EXEC     ; set_fail_l2_lru_all_m1  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_LRU_ALL_SCBD_1_0_0_0  ; SET         ; LITERAL        ; -1 	      ; -          ; check_l2_lru_m2          ; check_l2_lru_m2
+EXEC     ; set_pass_l2_lru_all_m1  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_LRU_ALL_SCBD_1_0_0_0  ; SET         ; LITERAL        ; 1 	  	  ; -          ; check_l2_lru_m2          ; check_l2_lru_m2
+#module2
+EXEC     ; check_l2_lru_m2         ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_LRU_SCBD_2_0_0_0      ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_lru_all_m2  ; check_l2_utcc_m2
+EXEC     ; check_l2_utcc_m2      ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_UTCC_SCBD_2_0_0_0   ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_lru_all_m2  ; set_pass_l2_lru_all_m2
+EXEC     ; set_fail_l2_lru_all_m2  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_LRU_ALL_SCBD_2_0_0_0  ; SET         ; LITERAL        ; -1 	      ; -          ; check_l2_lru_m3         ; check_l2_lru_m3
+EXEC     ; set_pass_l2_lru_all_m2  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_LRU_ALL_SCBD_2_0_0_0  ; SET         ; LITERAL        ; 1 	  	  ; -          ; check_l2_lru_m3         ; check_l2_lru_m3
+#module3
+EXEC     ; check_l2_lru_m3         ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_LRU_SCBD_3_0_0_0      ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_lru_all_m3  ; check_l2_utcc_m3
+EXEC     ; check_l2_utcc_m3      ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_UTCC_SCBD_3_0_0_0   ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_lru_all_m3  ; set_pass_l2_lru_all_m3
+EXEC     ; set_fail_l2_lru_all_m3  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_LRU_ALL_SCBD_3_0_0_0  ; SET         ; LITERAL        ; -1 	      ; -          ; check_l2_tag_m0          ; check_l2_tag_m0
+EXEC     ; set_pass_l2_lru_all_m3 ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_LRU_ALL_SCBD_3_0_0_0  ; SET         ; LITERAL        ; 1 	  	  ; -          ; check_l2_tag_m0          ; check_l2_tag_m0
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#L2_TAG ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EXEC     ; check_l2_tag_m0         ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_TAG_SCBD_0_0_0_0      ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_tag_all_m0  ; check_l2_tagecc_m0
+EXEC     ; check_l2_tagecc_m0      ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_TAGECC_SCBD_0_0_0_0   ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_tag_all_m0  ; set_pass_l2_tag_all_m0
+EXEC     ; set_fail_l2_tag_all_m0  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_TAG_ALL_SCBD_0_0_0_0  ; SET         ; LITERAL        ; -1 	      ; -          ; check_l2_tag_m1         ; check_l2_tag_m1
+EXEC     ; set_pass_l2_tag_all_m0  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_TAG_ALL_SCBD_0_0_0_0  ; SET         ; LITERAL        ; 1 	  	  ; -          ; check_l2_tag_m1         ; check_l2_tag_m1
+
+EXEC     ; check_l2_tag_m1         ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_TAG_SCBD_1_0_0_0      ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_tag_all_m1  ; check_l2_tagecc_m1
+EXEC     ; check_l2_tagecc_m1      ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_TAGECC_SCBD_1_0_0_0   ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_tag_all_m1  ; set_pass_l2_tag_all_m1
+EXEC     ; set_fail_l2_tag_all_m1  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_TAG_ALL_SCBD_1_0_0_0  ; SET         ; LITERAL        ; -1 	      ; -          ; check_l2_tag_m2         ; check_l2_tag_m2
+EXEC     ; set_pass_l2_tag_all_m1  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_TAG_ALL_SCBD_1_0_0_0  ; SET         ; LITERAL        ; 1 	  	  ; -          ; check_l2_tag_m2         ; check_l2_tag_m2
+
+EXEC     ; check_l2_tag_m2         ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_TAG_SCBD_2_0_0_0      ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_tag_all_m2  ; check_l2_tagecc_m2
+EXEC     ; check_l2_tagecc_m2      ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_TAGECC_SCBD_2_0_0_0   ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_tag_all_m2  ; set_pass_l2_tag_all_m2
+EXEC     ; set_fail_l2_tag_all_m2  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_TAG_ALL_SCBD_2_0_0_0  ; SET         ; LITERAL        ; -1 	      ; -          ; check_l2_tag_m3         ; check_l2_tag_m3
+EXEC     ; set_pass_l2_tag_all_m2  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_TAG_ALL_SCBD_2_0_0_0  ; SET         ; LITERAL        ; 1 	  	  ; -          ; check_l2_tag_m3         ; check_l2_tag_m3
+
+
+EXEC     ; check_l2_tag_m3         ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_TAG_SCBD_3_0_0_0      ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_tag_all_m3  ; check_l2_tagecc_m3
+EXEC     ; check_l2_tagecc_m3      ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_TAGECC_SCBD_3_0_0_0   ; ==          ; LITERAL        ; -1 	      ; -          ; set_fail_l2_tag_all_m3  ; set_pass_l2_tag_all_m3
+EXEC     ; set_fail_l2_tag_all_m3  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_TAG_ALL_SCBD_3_0_0_0  ; SET         ; LITERAL        ; -1 	      ; -          ; 1    			         ; 2
+EXEC     ; set_pass_l2_tag_all_m3  ; INT      	 ; GLOBAL       ; ARR_ATOM_CXX::ARR_ATOM_CXX.L2_TAG_ALL_SCBD_3_0_0_0  ; SET         ; LITERAL        ; 1 	  	  ; -          ; 1  			         ; 2
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+# FIGURE OUT PORTS
+
+END_SCREEN 
+
+START_SCREEN:FORCEL2DATAREPAIR
+###### Use this screen test forr repair debug, forcing values into the repair global.
+#RunOn 	: TestName : DataType 	: ParamType 	: Param1				: Operation 	: ParamType 	: Param2   			: TmpStore 		: OnTrue 		: OnFalse
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EXEC	: ATOM3R_REPAIR				: STRING	: GSDS			: I.S.RVFCMT_3				: SET			: LITERAL	: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX000110XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX01100000XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000111111000000000000000000000000000000000000000000000000XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX0000"		: -			 : 1		 : 2
+
+END_SCREEN
+
+START_SCREEN:InitBin17GSDS
+#RunOn 	: TestName 	: DataType 	: ParamType : Param1		: Operation 	: ParamType 		: Param2   									: TmpStore	: OnTrue	: OnFalse
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EXEC	: TEST1		: STRING	: GSDS	    : I.S.ARR_ATOM_CXX_SSA_BIN17	: SET			: LITERAL   		: "0"	    									: -			: TEST2		: 2
+EXEC	: TEST2		: STRING	: GSDS	    : I.S.ARR_ATOM_CXX_LSA_BIN17	: SET			: LITERAL   		: "0"	    									: -			: TEST3		: 2
+EXEC	: TEST3		: STRING	: GSDS	    : I.S.ARR_ATOM_CXX_ROM_BIN17	: SET			: LITERAL   		: "0"	    									: -			: 1			: 2
+END_SCREEN 
+
+
+START_SCREEN:InitNCSVMINGSDS
+#RunOn 	: TestName 	: DataType 	: ParamType : Param1		: Operation 	: ParamType 		: Param2   									: TmpStore	: OnTrue	: OnFalse
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EXEC	: TEST1	: DOUBLE	: GSDS			: U.D.F2_VMIN_LSA_ATOM3						: SET			: EXPRESSION: "0.45"															: -			 : TEST2		 : 2
+EXEC	: TEST2	: DOUBLE	: GSDS			: U.D.F3_VMIN_LSA_ATOM3						: SET			: EXPRESSION: "0.45"															: -			 : TEST3		 : 2
+EXEC	: TEST3	: DOUBLE	: GSDS			: U.D.F4_VMIN_LSA_ATOM3						: SET			: EXPRESSION: "0.45"															: -			 : TEST4		 : 2
+EXEC	: TEST4	: DOUBLE	: GSDS			: U.D.F5_VMIN_LSA_ATOM3						: SET			: EXPRESSION: "0.45"															: -			 : 1		 	 : 2
+
+END_SCREEN 
+
+START_SCREEN:EnableLYASinglemodulefail
+
+#L2_DATA -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EXEC     : check_l2_data_m0         : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_DATA_SCBD_0_0_0_0      : ==          : LITERAL        : -1 	      : -          : check_l2_data_m1_f   : check_l2_dataecc_m0
+EXEC     : check_l2_dataecc_m0      : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_DATAECC_SCBD_0_0_0_0   : ==          : LITERAL        : -1 	      : -          : check_l2_data_m1_f   : bypass_lyatest_m0
+
+EXEC     : check_l2_data_m1_f       : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_DATA_SCBD_1_0_0_0      : ==          : LITERAL        : -1 	      : -          : bypass_lyatest_m0_f  : check_l2_dataecc_m1_f
+EXEC     : check_l2_dataecc_m1_f    : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_DATAECC_SCBD_1_0_0_0   : ==          : LITERAL        : -1 	      : -          : bypass_lyatest_m0_f  : bypass_lyatest_m1
+
+EXEC     : bypass_lyatest_m0  		: INT      	 : GLOBAL       : ARR_ATOM_CXX_C68.L2DATAM0_nofail  	   	   : SET         : LITERAL        : 1 	  	  : -          : check_l2_data_m1	  : check_l2_data_m1         
+EXEC     : bypass_lyatest_m1  		: INT      	 : GLOBAL       : ARR_ATOM_CXX_C68.L2DATAM1_nofail  	       : SET         : LITERAL        : 1 	  	  : -          : 1		              : 2
+
+
+EXEC     : bypass_lyatest_m0_f  	: INT      	 : GLOBAL       : ARR_ATOM_CXX_C68.L2DATAM0_nofail  	   	   : SET         : LITERAL        : 1 	  	  : -          : bypass_lyatest_m1_f	  : bypass_lyatest_m1_f         
+EXEC     : bypass_lyatest_m1_f 		: INT      	 : GLOBAL       : ARR_ATOM_CXX_C68.L2DATAM1_nofail  	       : SET         : LITERAL        : 1 	  	  : -          : 1		              : 2
+
+
+
+EXEC     : check_l2_data_m1       : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_DATA_SCBD_1_0_0_0      : ==          : LITERAL        : -1 	      : -          : 1  				  : check_l2_dataecc_m1
+EXEC     : check_l2_dataecc_m1    : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_DATAECC_SCBD_1_0_0_0   : ==          : LITERAL        : -1 	      : -          : 1  				  : bypass_lyatest_m1
+
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+# FIGURE OUT PORTS
+
+END_SCREEN 
+
+START_SCREEN:Resetmodulesforlya
+
+#L2_DATA -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EXEC     : unbypass_lyatest_m0  		: INT      	 : GLOBAL       : ARR_ATOM_CXX_C68.L2DATAM0_nofail  	   	   : SET         : LITERAL        : -1 	  	  : -          : unbypass_lyatest_m1	  : unbypass_lyatest_m1         
+EXEC     : unbypass_lyatest_m1  		: INT      	 : GLOBAL       : ARR_ATOM_CXX_C68.L2DATAM1_nofail  	       : SET         : LITERAL        : -1 	  	  : -          : 1		              : 2
+
+
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+# FIGURE OUT PORTS
+
+END_SCREEN 
+
+########################
+# Revert to Local VFDM #
+########################
+START_SCREEN:REVERT_ATOMVMINRepair
+EXEC:   ATOM0_VFDM     	: STRING      : GSDS	   : I.S.RVFCMT_0  	        	:  SET	      : EXPRESSION	  : @G.I.S.LOCAL_RVFCMT_0	        :    -	    : ATOM1_VFDM 			: 2
+EXEC:   ATOM1_VFDM     	: STRING      : GSDS	   : I.S.RVFCMT_1  	        	:  SET	      : EXPRESSION	  : @G.I.S.LOCAL_RVFCMT_1	        :    -	    : ATOM1R	    	: 2
+#EXEC:   ATOM2_VFDM     	: STRING      : GSDS	   : I.S.RVFCMT_2  	        	:  SET	      : EXPRESSION	  : @G.I.S.LOCAL_RVFCMT_2	        :    -	    : ATOM3_VFDM	    	: 2
+#EXEC:   ATOM3_VFDM     	: STRING      : GSDS	   : I.S.RVFCMT_3  	        	:  SET	      : EXPRESSION	  : @G.I.S.LOCAL_RVFCMT_3	        :    -	    : ATOM3R	    		: 2
+#EXEC:   ATOM3R		 	: STRING      : GSDS	   : I.S.VFDM_ATOM3R	    	:  SET	      : EXPRESSION	  : @G.I.S.LOCAL_VFDM_ATOM3R	    :    -	    : ATOM2R				: 2
+#EXEC:   ATOM2R		 	: STRING      : GSDS	   : I.S.VFDM_ATOM2R	    	:  SET	      : EXPRESSION	  : @G.I.S.LOCAL_VFDM_ATOM2R	    :    -	    : ATOM1R				: 2
+EXEC:   ATOM1R		 	: STRING      : GSDS	   : I.S.VFDM_ATOM1R	    	:  SET	      : EXPRESSION	  : @G.I.S.LOCAL_VFDM_ATOM1R	    :    -	    : ATOM0R				: 2
+EXEC:   ATOM0R		 	: STRING      : GSDS	   : I.S.VFDM_ATOM0R	    	:  SET	      : EXPRESSION	  : @G.I.S.LOCAL_VFDM_ATOM0R	    :    -	    : SetUF					: 2
+EXEC:   SetUF		 	: STRING      : GSDS	   : I.S.ATOMVMINREP_UF	    	:  SET	      : EXPRESSION	  : 1								:    -	    : 1						: 2
+END_SCREEN
+
+START_SCREEN:SetL2_RasterRepair_legacy
+
+
+# Run On : Test Name               : Data Type   : Param Type1  : Param 1                 			      :  Operation  : Param Type2    : Param 2    : Tmp Store  : OnTrue                  : OnFalse
+
+
+
+#L2_C6 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EXEC     : check_l2_c6_m0         : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_C6S_SCBD_0_0_0_0      : ==          : LITERAL        : -1 	      : -          : set_fail_l2_c6_all   : check_l2_c6ecc_m0
+EXEC     : check_l2_c6ecc_m0      : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_C6SECC_SCBD_0_0_0_0   : ==          : LITERAL        : -1 	      : -          : set_fail_l2_c6_all   : set_pass_l2_c6_all
+#EXEC     : set_fail_l2_c6_all_m0  : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_C6S_ALL_SCBD_0_0_0_0  : SET         : LITERAL        : -1 	      : -          : check_l2_c6_m1          : check_l2_c6_m1
+#EXEC     : set_pass_l2_c6_all_m0  : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_C6S_ALL_SCBD_0_0_0_0  : SET         : LITERAL        : 1 	  	  : -          : check_l2_c6_m1          : check_l2_c6_m1
+
+EXEC     : check_l2_c6_m1         : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_C6S_SCBD_1_0_0_0      : ==          : LITERAL        : -1 	      : -          : set_fail_l2_c6_all   : check_l2_c6ecc_m1
+EXEC     : check_l2_c6ecc_m1      : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_C6SECC_SCBD_1_0_0_0   : ==          : LITERAL        : -1 	      : -          : set_fail_l2_c6_all   : set_pass_l2_c6_all
+EXEC     : set_fail_l2_c6_all  : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_C6S_ALL_SCBD_0_0_0_0  : SET         : LITERAL        : -1 	      : -          : check_l2_data_m0        : check_l2_data_m0
+EXEC     : set_pass_l2_c6_all  : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_C6S_ALL_SCBD_0_0_0_0  : SET         : LITERAL        : 1 	  	  : -          : check_l2_data_m0        : check_l2_data_m0
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+#L2_DATA -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EXEC     : check_l2_data_m0         : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_DATA_SCBD_0_0_0_0      : ==          : LITERAL        : -1 	      : -          : set_fail_l2_data_all  : check_l2_dataecc_m0
+EXEC     : check_l2_dataecc_m0      : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_DATAECC_SCBD_0_0_0_0   : ==          : LITERAL        : -1 	      : -          : set_fail_l2_data_all  : check_l2_data_m1
+
+EXEC     : check_l2_data_m1         : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_DATA_SCBD_1_0_0_0      : ==          : LITERAL        : -1 	      : -          : set_fail_l2_data_all  : check_l2_dataecc_m1
+EXEC     : check_l2_dataecc_m1      : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_DATAECC_SCBD_1_0_0_0   : ==          : LITERAL        : -1 	      : -          : set_fail_l2_data_all  : set_pass_l2_data_all
+EXEC     : set_fail_l2_data_all  : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_DATA_ALL_SCBD_0_0_0_0  : SET         : LITERAL        : -1 	      : -          : check_l2_tap_m0          : check_l2_tap_m0
+EXEC     : set_pass_l2_data_all  : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_DATA_ALL_SCBD_0_0_0_0  : SET         : LITERAL        : 1 	  	  : -          : check_l2_tap_m0          : check_l2_tap_m0
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+#L2_TSP ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EXEC     : check_l2_tap_m0         : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_TAG_SCBD_0_0_0_0      : ==          : LITERAL        : -1 	      : -          : set_fail_l2_tag_all  : check_l2_tagecc_m0
+EXEC     : check_l2_tagecc_m0      : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_TAGECC_SCBD_0_0_0_0   : ==          : LITERAL        : -1 	      : -          : set_fail_l2_tag_all  : check_l2_state_m0
+EXEC     : check_l2_state_m0       : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_STATE_SCBD_0_0_0_0    : ==          : LITERAL        : -1 	      : -          : set_fail_l2_tag_all  : check_l2_tap_m1
+
+EXEC     : check_l2_tap_m1         : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_TAG_SCBD_1_0_0_0      : ==          : LITERAL        : -1 	      : -          : set_fail_l2_tag_all  : check_l2_tagecc_m1
+EXEC     : check_l2_tagecc_m1      : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_TAGECC_SCBD_1_0_0_0   : ==          : LITERAL        : -1 	      : -          : set_fail_l2_tag_all  : check_l2_state_m1
+EXEC     : check_l2_state_m1       : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_STATE_SCBD_1_0_0_0    : ==          : LITERAL        : -1 	      : -          : set_fail_l2_tag_all  : set_pass_l2_tag_all
+EXEC     : set_fail_l2_tag_all  : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_TSP_ALL_SCBD_0_0_0_0  : SET         : LITERAL        : -1 	      : -          : 1    			         : 2
+EXEC     : set_pass_l2_tag_all  : INT      	 : GLOBAL       : ARR_ATOM_CXX.L2_TSP_ALL_SCBD_0_0_0_0  : SET         : LITERAL        : 1 	  	  : -          : 1  			         : 2
+# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# FIGURE OUT PORTS
+END_SCREEN 

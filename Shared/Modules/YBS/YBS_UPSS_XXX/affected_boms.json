@@ -1,0 +1,16 @@
+/*
+Folder structures should be well-organized to simplify your path patterns.  Any unmapped files will be validated against all BOM Groups.
+Matching patterns should take into consideration support for future products and thus files, paths, and their corresponding regex patterns should be as explicit as possible (such as NVL_S28C instead of just S28C)
+If model recipe json paths are changed based on the above suggestions, they will also need to be re-mapped in the pymtpl and mtpl
+Please see the user-guide for additional details of capabilities and best practices: https://wiki.ith.intel.com/spaces/ITSpdxtp/pages/4617026145/Affected+BOMs+JSON+Feature+-+User+Guide
+*/
+{
+    "InputFiles_JF/.*NVL_S28C.*" : "CLASS_NVL_S28C",                         // S28C Recipe files, ITD screen test files, and LAVA files
+    "InputFiles_JF/.*NVL_S52C.*" : "CLASS_NVL_S52C",                         // S52C Recipe files, ITD screen test files, and LAVA files
+    "InputFiles_JF/(MODULE|PROFILES)/.*" : "CLASS_NVL_S28C|CLASS_NVL_S52C",  // For all other JF model files shared by NVL S28C and S52C
+    // "InputFiles_JF/.*"  : "CLASS_NVL_S28C|CLASS_NVL_S52C",                      // Initial rules for current NVL packages. New packages will need to be added to the BOM regex.
+    "InputFiles_IDC/.*" : "CLASS_NVL_H16C",                                     // Initial rules for current NVL packages. New packages will need to be added to the BOM regex.
+    "InputFiles_BA/.*"  : "CLASS_NVL_P16C",                                     // Initial rules for current NVL packages. New packages will need to be added to the BOM regex.
+    "InputFiles_PG/DT/.*"  : "CLASS_NVL_S16C|.*DNL.*",                           // Initial rules for current NVL packages. New packages will need to be added to the BOM regex.
+    "InputFiles_PG/MB/.*"  : "CLASS_NVL_HX28C"                                   // Initial rules for current NVL packages. New packages will need to be added to the BOM regex.
+}

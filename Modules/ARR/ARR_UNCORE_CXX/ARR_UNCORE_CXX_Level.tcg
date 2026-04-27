@@ -1,0 +1,31 @@
+Version 1.0;
+
+SpecificationSet arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST (max,min,nom) Inherits CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC
+{
+              Voltage c_cpu_all_tstprt_i_data_vox = 0.2;
+	          Voltage c_cpu_all_tstprt_o_data_vox = 0.2;
+}
+
+TestConditionGroup arr_cpu_all_bf_x_x_ipc_lvl_ARR_MBIST_TCG
+{
+              SpecificationSet = arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST;
+              Level = CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl;
+}
+
+TestCondition arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_nom_lvl
+{
+              TestConditionGroup = arr_cpu_all_bf_x_x_ipc_lvl_ARR_MBIST_TCG;
+              Selector = nom;
+}
+
+TestCondition arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_min_lvl
+{
+              TestConditionGroup = arr_cpu_all_bf_x_x_ipc_lvl_ARR_MBIST_TCG;
+              Selector = min;
+}
+
+TestCondition arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_max_lvl
+{
+              TestConditionGroup = arr_cpu_all_bf_x_x_ipc_lvl_ARR_MBIST_TCG;
+              Selector = max;
+}

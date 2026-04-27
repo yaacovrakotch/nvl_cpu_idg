@@ -1,0 +1,577 @@
+
+
+############################################################################
+### HDMx MPS Class Location Code Standard  											###   
+### Owner: Quek, Joo Chin                 											###
+### Platform: HDMx	                  												###
+###                                       											###
+### Change Description	                  											###  
+### Revision 2:New MPS - PRIME STD (11/7/2021)										### 
+### ENG Version: REBI at PHM Condition Enabling (8/15/2022)						    ###
+### 		   : Fused unit Testing Enabling for QRE Flows (9/8/2022)				###
+### 		   : Fused unit Class Testing Enabling for FACR Flows (9/23/2022)		###
+############################################################################
+
+
+# locn <code>, <ws_port>, <fuses>, <ws_code>, <load ube>, <log ube>, <DFF Optype>
+#
+# locn <locn>, <ws_port>, <x|p|d>, <hvm|eng|fuse|dmix|ult>, <ube|!ube>, <logube|!logube>, <Y/N>, <RC_S1, PBIC_S1...>
+#                                                                
+# <code>     - 4 character location code.
+#
+# <ws_port>  - Exit port for WhichSocket UF.
+#
+# <fuses>    - x = unprogrammed
+#            - p = programmed
+#            - d = don't care
+#
+# <ws_code>  - hvm
+#            - eng
+#            - dmix
+#            - vdmx
+#
+# <load ube> -  ube = load ube file
+#            - !ube = don't load ube file.
+#
+# <log ube>	 -  logube = log ube data to datalogger
+#            - !logube = don't log ube data to datalogger.
+#
+# [OPTIONAL] - Required if DFF is used
+# <DFF Optype> - SORT
+#              - RC_S1								
+#              - RC_S2									
+#              - PBIC_S1								
+#              - PBIC_S2
+#	           - PBIC_DAB					
+#              - FC_S1								
+#              - FC_S2								
+#              - FIF_S1								
+#              - QA_S1								
+#              - QA_S2								
+#              - EQAM_S1								
+#              - CSM_S1	
+#
+#########################################################
+#      Class HDMx MPS Testing Location Code 			#
+#########################################################
+
+
+########################### Raw Class Hot HVM Testing Location                       ############################ 
+locn  6163     1     x     hvm     SORT         RC_S1   	CLASSHOT      WRITE		#RC HOT
+locn  6167     1     x     hvm     SORT         RC_S1   	CLASSHOT      WRITE     #RC/AHMT HOT
+
+########################### Raw Class Hot Reject Validation Testing Location         ############################ 
+locn  5163     1     x     eng     SORT     	 RC_S1   	CLASSHOT      UNDEFINED    	#RC HOT RV
+locn  5167     1     x     eng     SORT     	 RC_S1   	CLASSHOT      UNDEFINED     #RC/AHMT HOT RV
+
+########################### Raw Class Cold HVM Testing Location                       ############################ 
+locn  6163     1     x     hvm     RC_S1         RC_S1   	CSM     LOCALWRITE   	#RC COLD
+locn  6167     1     x     hvm     RC_S1         RC_S1   	CSM     LOCALWRITE   	#RC COLD
+
+########################### Raw Class Cold Reject Validation Testing Location                       ############################ 
+locn  5163     1     x     eng     RC_S1      	 RC_S1    	CSM     UNDEFINED   	#RC COLD RV
+locn  5167     1     x     eng     RC_S1      	 RC_S1      CSM     UNDEFINED   	#RC COLD RV
+
+
+########################### 	   PBIC Class Hot HVM Testing Location   			  ###########################           
+locn  6248     1     x     hvm     SORT     	PBIC_DAB  CLASSHOT     WRITE           #PBIC CLASSHOT (2 STEP FACT)
+locn  7820     1     d     hvm     SORT     	PBIC_DAB  CLASSHOT     WRITE           #PBIC CLASSHOT (1 STEP FACT)
+locn  7821     1     d     hvm     PBIC_DAB     PBIC_S2   CLASSHOT     WRITE           #PBIC CLASSHOT REBI 1 (QA Condition)  
+locn  7823     1     d     hvm     PBIC_DAB     PBIC_S2   CLASSHOT     WRITE           #PBIC CLASSHOT REBI 2 (QA Condition)  
+locn  6249     1     x     hvm     SORT     	PBIC_DAB  CLASSHOT     WRITE           #PBIC CLASSHOT K LOT (2 STEP FACT)
+locn  7827     1     d     hvm     SORT     	PBIC_DAB  CLASSHOT     WRITE           #PBIC CLASSHOT K LOT (1 STEP FACT)
+
+locn  7822     1     d     hvm     PBIC_DAB     PBIC_S2   CLASSHOT     WRITE           #PBIC CLASSHOT QRE Usage 1 (Unfused/Fused Class Condition)  
+locn  7824     1     d     hvm     PBIC_DAB     PBIC_S2   CLASSHOT     WRITE           #PBIC CLASSHOT QRE Usage 2 (Unfused/Fused Class Condition)  
+locn  7825     1     d     hvm     PBIC_DAB     PBIC_S2   CLASSHOT     WRITE           #PBIC CLASSHOT QRE Usage 3 (Unfused/Fused Class Condition)  
+locn  7826     1     d     hvm     PBIC_DAB     PBIC_S2   CLASSHOT     WRITE           #PBIC CLASSHOT QRE Usage 4 (Unfused/Fused Class Condition)  
+locn  7828     1     d     hvm     PBIC_DAB     PBIC_S2   CLASSHOT     WRITE           #PBIC CLASSHOT QRE Usage 5 (Unfused/Fused Class Condition)  
+
+locn  7872     1     d     hvm     PBIC_DAB     PBIC_S2   CLASSHOT     WRITE           #PBIC CLASSHOT QRE Usage 6 (Unfused/Fused Class Condition)  
+locn  7874     1     d     hvm     PBIC_DAB     PBIC_S2   CLASSHOT     WRITE           #PBIC CLASSHOT QRE Usage 7 (Unfused/Fused Class Condition)  
+locn  7875     1     d     hvm     PBIC_DAB     PBIC_S2   CLASSHOT     WRITE           #PBIC CLASSHOT QRE Usage 8 (Unfused/Fused Class Condition)  
+locn  7876     1     d     hvm     PBIC_DAB     PBIC_S2   CLASSHOT     WRITE           #PBIC CLASSHOT QRE Usage 9 (Unfused/Fused Class Condition)  
+locn  7878     1     d     hvm     PBIC_DAB     PBIC_S2   CLASSHOT     WRITE           #PBIC CLASSHOT QRE Usage 10 (Unfused/Fused Class Condition)  
+
+locn  6261     1     x     hvm     SORT     	PBIC_DAB  CLASSHOT     WRITE           #PBIC DISCRETE CLASSHOT (2 STEP FACT)
+
+locn  7821     1     d     hvm     PBIC_DAB     PBIC_S2   PHMHOT       WRITE           #PBIC CLASSHOT REBI 1 (QA Condition)  
+locn  7823     1     d     hvm     PBIC_DAB     PBIC_S2   PHMHOT       WRITE           #PBIC CLASSHOT REBI 2 (QA Condition)
+
+###########################        PBIC Class Hot Reject Validation Testing Location  ###########################  
+locn  5248     1     x     eng     SORT    		PBIC_DAB   CLASSHOT     UNDEFINED      #PBIC CLASSHOT RV (2 STEP FACT)
+locn  5820     1     d     eng     SORT    		PBIC_DAB   CLASSHOT     UNDEFINED      #PBIC CLASSHOT RV (1 STEP FACT)
+locn  5821     1     d     eng     PBIC_DAB    	PBIC_S2    CLASSHOT     UNDEFINED      #PBIC CLASSHOT REBI 1 RV(QA Condition)
+locn  5823     1     d     eng     PBIC_DAB    	PBIC_S2    CLASSHOT     UNDEFINED      #PBIC CLASSHOT REBI 1 RV(QA Condition)
+locn  5249     1     x     eng     SORT    		PBIC_DAB   CLASSHOT     UNDEFINED      #PBIC CLASSHOT K LOT RV (2 STEP FACT)
+locn  5827     1     d     eng     SORT    		PBIC_DAB   CLASSHOT     UNDEFINED      #PBIC CLASSHOT K LOT RV (1 STEP FACT)
+
+locn  5822     1     d     eng     PBIC_DAB    	PBIC_S2    CLASSHOT     UNDEFINED      #PBIC CLASSHOT QRE Usage 1 RV (Unfused/Fused Class Condition) 
+locn  5824     1     d     eng     PBIC_DAB    	PBIC_S2    CLASSHOT     UNDEFINED      #PBIC CLASSHOT QRE Usage 2 RV (Unfused/Fused Class Condition)   
+locn  5825     1     d     eng     PBIC_DAB    	PBIC_S2    CLASSHOT     UNDEFINED      #PBIC CLASSHOT QRE Usage 3 RV (Unfused/Fused Class Condition) 
+locn  5826     1     d     eng     PBIC_DAB    	PBIC_S2    CLASSHOT     UNDEFINED      #PBIC CLASSHOT QRE Usage 4 RV (Unfused/Fused Class Condition) 
+locn  5828     1     d     eng     PBIC_DAB    	PBIC_S2    CLASSHOT     UNDEFINED      #PBIC CLASSHOT QRE Usage 5 RV (Unfused/Fused Class Condition) 
+
+locn  5872     1     d     eng     PBIC_DAB    	PBIC_S2    CLASSHOT     UNDEFINED      #PBIC CLASSHOT QRE Usage 6 RV (Unfused/Fused Class Condition)   
+locn  5874     1     d     eng     PBIC_DAB    	PBIC_S2    CLASSHOT     UNDEFINED      #PBIC CLASSHOT QRE Usage 7 RV (Unfused/Fused Class Condition)   
+locn  5875     1     d     eng     PBIC_DAB    	PBIC_S2    CLASSHOT     UNDEFINED      #PBIC CLASSHOT QRE Usage 8 RV (Unfused/Fused Class Condition) 
+locn  5876     1     d     eng     PBIC_DAB    	PBIC_S2    CLASSHOT     UNDEFINED      #PBIC CLASSHOT QRE Usage 9 RV (Unfused/Fused Class Condition) 
+locn  5878     1     d     eng     PBIC_DAB    	PBIC_S2    CLASSHOT     UNDEFINED      #PBIC CLASSHOT QRE Usage 10 RV (Unfused/Fused Class Condition) 
+
+locn  5821     1     d     eng     PBIC_DAB    	PBIC_S2    PHMHOT       UNDEFINED      #PBIC CLASSHOT REBI 1 RV(QA Condition)
+locn  5823     1     d     eng     PBIC_DAB    	PBIC_S2    PHMHOT       UNDEFINED      #PBIC CLASSHOT REBI 1 RV(QA Condition)
+
+###########################        FC Class Cold HVM  Testing Location   			  ###########################     
+#locn  6248     1     d     hvm     PBIC_DAB    PBIC_DAB  CSM    LOCALWRITE     #FC CSM (2 STEP FACT)
+#locn  7820     1     d     hvm     PBIC_DAB    PBIC_DAB  CSM    LOCALWRITE     #FC CSM (1 STEP FACT)
+#locn  7821     1     d     hvm     PBIC_S2     PBIC_S2   CSM    LOCALWRITE     #FC CSM REBI 1 (QA Condition)  
+#locn  7823     1     d     hvm     PBIC_S2     PBIC_S2   CSM    LOCALWRITE     #FC CSM REBI 2 (QA Condition)  
+#locn  6249     1     d     hvm     PBIC_DAB    PBIC_DAB  CSM    LOCALWRITE     #FC CSM K LOT (2 STEP FACT)
+#locn  7827     1     d     hvm     PBIC_DAB    PBIC_DAB  CSM    LOCALWRITE     #FC CSM K LOT (1 STEP FACT)
+
+locn  6248     1     d     hvm     PBIC_DAB    PBIC_DAB  EXTCOLD      LOCALWRITE     #FC EXTCOLD (2 STEP FACT)
+locn  7821     1     d     hvm     PBIC_S2     PBIC_S2   EXTCOLD      LOCALWRITE     #FC EXTCOLD REBI 1 (QA Condition)  
+locn  7823     1     d     hvm     PBIC_S2     PBIC_S2   EXTCOLD      LOCALWRITE     #FC EXTCOLD REBI 2 (QA Condition) 
+locn  6249     1     d     hvm     PBIC_DAB    PBIC_DAB  EXTCOLD      LOCALWRITE     #FC EXTCOLD K LOT (2 STEP FACT)
+
+locn  7822     1     d     hvm     PBIC_S2     PBIC_S2   CSM    LOCALWRITE     #FC CSM QRE Usage 1 (Unfused/Fused Class Condition)  
+locn  7824     1     d     hvm     PBIC_S2     PBIC_S2   CSM    LOCALWRITE     #FC CSM QRE Usage 2 (Unfused/Fused Class Condition)  
+#locn  7825     1     d     hvm     PBIC_S2     PBIC_S2   CSM    LOCALWRITE     #FC CSM QRE Usage 3 (Unfused/Fused Class Condition)  
+locn  7826     1     d     hvm     PBIC_S2     PBIC_S2   CSM    LOCALWRITE     #FC CSM QRE Usage 4 (Unfused/Fused Class Condition)  
+locn  7828     1     d     hvm     PBIC_S2     PBIC_S2   CSM    LOCALWRITE     #FC CSM QRE Usage 5 (Unfused/Fused Class Condition)  
+
+locn  7822     1     d     hvm     PBIC_S2     PBIC_S2   EXTCOLD      LOCALWRITE     #FC EXTCOLD QRE Usage 1 (Unfused/Fused Class Condition)  
+locn  7824     1     d     hvm     PBIC_S2     PBIC_S2   EXTCOLD      LOCALWRITE     #FC EXTCOLD QRE Usage 2 (Unfused/Fused Class Condition)  
+locn  7825     1     d     hvm     PBIC_S2     PBIC_S2   EXTCOLD      LOCALWRITE     #FC EXTCOLD QRE Usage 3 (Unfused/Fused Class Condition)  
+locn  7826     1     d     hvm     PBIC_S2     PBIC_S2   EXTCOLD      LOCALWRITE     #FC EXTCOLD QRE Usage 4 (Unfused/Fused Class Condition)  
+locn  7828     1     d     hvm     PBIC_S2     PBIC_S2   EXTCOLD      LOCALWRITE     #FC EXTCOLD QRE Usage 5 (Unfused/Fused Class Condition)  
+
+locn  7872     1     d     hvm     PBIC_S2     PBIC_S2   CSM    LOCALWRITE     #FC CSM QRE Usage 6 (Unfused/Fused Class Condition)  
+locn  7874     1     d     hvm     PBIC_S2     PBIC_S2   CSM    LOCALWRITE     #FC CSM QRE Usage 7 (Unfused/Fused Class Condition)  
+locn  7875     1     d     hvm     PBIC_S2     PBIC_S2   CSM    LOCALWRITE     #FC CSM QRE Usage 8 (Unfused/Fused Class Condition)  
+locn  7876     1     d     hvm     PBIC_S2     PBIC_S2   CSM    LOCALWRITE     #FC CSM QRE Usage 9 (Unfused/Fused Class Condition)  
+locn  7878     1     d     hvm     PBIC_S2     PBIC_S2   CSM    LOCALWRITE     #FC CSM QRE Usage 10 (Unfused/Fused Class Condition)  
+
+locn  7872     1     d     hvm     PBIC_S2     PBIC_S2   EXTCOLD      LOCALWRITE     #FC EXTCOLD QRE Usage 6 (Unfused/Fused Class Condition)  
+locn  7874     1     d     hvm     PBIC_S2     PBIC_S2   EXTCOLD      LOCALWRITE     #FC EXTCOLD QRE Usage 7 (Unfused/Fused Class Condition)  
+locn  7875     1     d     hvm     PBIC_S2     PBIC_S2   EXTCOLD      LOCALWRITE     #FC EXTCOLD QRE Usage 8 (Unfused/Fused Class Condition)  
+locn  7876     1     d     hvm     PBIC_S2     PBIC_S2   EXTCOLD      LOCALWRITE     #FC EXTCOLD QRE Usage 9 (Unfused/Fused Class Condition)  
+locn  7878     1     d     hvm     PBIC_S2     PBIC_S2   EXTCOLD      LOCALWRITE     #FC EXTCOLD QRE Usage 10 (Unfused/Fused Class Condition)  
+
+locn  6116     1     d     hvm     PBIC_DAB    PBIC_DAB  CSM    LOCALWRITE     #FC DISCRETE CSM/FC RECLAIM CSM 
+
+locn  7821     1     d     hvm     PBIC_DAB     PBIC_S2   PHMCOLD      LOCALWRITE     #FC CSM REBI 1 (QA Condition)  
+locn  7823     1     d     hvm     PBIC_DAB     PBIC_S2   PHMCOLD      LOCALWRITE     #FC CSM REBI 2 (QA Condition)  
+
+###########################        PBIC Class Cold Reject Validation Testing Location ########################### 
+#locn  5248     1     d     eng     PBIC_DAB    PBIC_DAB   CSM   UNDEFINED     #FC CSM RV (2 STEP FACT)
+#locn  5820     1     d     eng     PBIC_DAB    PBIC_DAB   CSM   UNDEFINED     #FC CSM RV (1 STEP FACT)
+#locn  5821     1     d     eng     PBIC_S2     PBIC_S2    CSM   UNDEFINED     #FC CSM REBI 1 RV(QA Condition)
+#locn  5823     1     d     eng     PBIC_S2     PBIC_S2    CSM   UNDEFINED     #FC CSM REBI 2 RV(QA Condition)
+#locn  5249     1     d     eng     PBIC_DAB    PBIC_DAB   CSM   UNDEFINED     #FC CSM K LOT RV (2 STEP FACT)
+#locn  5827     1     d     eng     PBIC_DAB    PBIC_DAB   CSM   UNDEFINED     #FC CSM K LOT RV (1 STEP FACT)
+
+locn  5248     1     d     eng     PBIC_DAB    PBIC_DAB   EXTCOLD     UNDEFINED     #FC EXTCOLD RV (2 STEP FACT)
+locn  5821     1     d     eng     PBIC_S2     PBIC_S2    EXTCOLD     UNDEFINED     #FC EXTCOLD REBI 1 RV(QA Condition)
+locn  5823     1     d     eng     PBIC_S2     PBIC_S2    EXTCOLD     UNDEFINED     #FC EXTCOLD REBI 2 RV(QA Condition)
+locn  5249     1     d     eng     PBIC_DAB    PBIC_DAB   EXTCOLD     UNDEFINED     #FC EXTCOLD K LOT RV (2 STEP FACT)
+
+
+locn  5822     1     d     eng     PBIC_S2     PBIC_S2   CSM    UNDEFINED     #FC CSM QRE Usage 1 RV (Unfused/Fused Class Condition)  
+locn  5824     1     d     eng     PBIC_S2     PBIC_S2   CSM    UNDEFINED     #FC CSM QRE Usage 2 RV (Unfused/Fused Class Condition)  
+#locn  5825     1     d     eng     PBIC_S2     PBIC_S2   CSM    UNDEFINED     #FC CSM QRE Usage 3 RV (Unfused/Fused Class Condition)  
+locn  5826     1     d     eng     PBIC_S2     PBIC_S2   CSM    UNDEFINED     #FC CSM QRE Usage 4 RV (Unfused/Fused Class Condition)  
+locn  5828     1     d     eng     PBIC_S2     PBIC_S2   CSM    UNDEFINED     #FC CSM QRE Usage 5 RV (Unfused/Fused Class Condition)  
+
+locn  5822     1     d     eng     PBIC_S2     PBIC_S2   EXTCOLD      UNDEFINED     #FC EXTCOLD QRE Usage 1 RV (Unfused/Fused Class Condition)  
+locn  5824     1     d     eng     PBIC_S2     PBIC_S2   EXTCOLD      UNDEFINED     #FC EXTCOLD QRE Usage 2 RV (Unfused/Fused Class Condition)  
+locn  5825     1     d     eng     PBIC_S2     PBIC_S2   EXTCOLD      UNDEFINED     #FC EXTCOLD QRE Usage 3 RV (Unfused/Fused Class Condition)  
+locn  5826     1     d     eng     PBIC_S2     PBIC_S2   EXTCOLD      UNDEFINED     #FC EXTCOLD QRE Usage 4 RV (Unfused/Fused Class Condition)  
+locn  5828     1     d     eng     PBIC_S2     PBIC_S2   EXTCOLD      UNDEFINED     #FC EXTCOLD QRE Usage 5 RV (Unfused/Fused Class Condition)  
+
+locn  5872     1     d     eng     PBIC_S2     PBIC_S2   CSM    UNDEFINED     #FC CSM QRE Usage 6 RV (Unfused/Fused Class Condition)  
+locn  5874     1     d     eng     PBIC_S2     PBIC_S2   CSM    UNDEFINED     #FC CSM QRE Usage 7 RV (Unfused/Fused Class Condition)  
+locn  5875     1     d     eng     PBIC_S2     PBIC_S2   CSM    UNDEFINED     #FC CSM QRE Usage 8 RV (Unfused/Fused Class Condition)  
+locn  5876     1     d     eng     PBIC_S2     PBIC_S2   CSM    UNDEFINED     #FC CSM QRE Usage 9 RV (Unfused/Fused Class Condition)  
+locn  5878     1     d     eng     PBIC_S2     PBIC_S2   CSM    UNDEFINED     #FC CSM QRE Usage 10 RV (Unfused/Fused Class Condition)  
+
+locn  5872     1     d     eng     PBIC_S2     PBIC_S2   EXTCOLD      UNDEFINED     #FC EXTCOLD QRE Usage 6 RV (Unfused/Fused Class Condition)  
+locn  5874     1     d     eng     PBIC_S2     PBIC_S2   EXTCOLD      UNDEFINED     #FC EXTCOLD QRE Usage 7 RV (Unfused/Fused Class Condition)  
+locn  5875     1     d     eng     PBIC_S2     PBIC_S2   EXTCOLD      UNDEFINED     #FC EXTCOLD QRE Usage 8 RV (Unfused/Fused Class Condition)  
+locn  5876     1     d     eng     PBIC_S2     PBIC_S2   EXTCOLD      UNDEFINED     #FC EXTCOLD QRE Usage 9 RV (Unfused/Fused Class Condition)  
+locn  5878     1     d     eng     PBIC_S2     PBIC_S2   EXTCOLD      UNDEFINED     #FC EXTCOLD QRE Usage 10 RV (Unfused/Fused Class Condition)  
+
+locn  5821     1     d     eng     PBIC_DAB     PBIC_S2    PHMCOLD     UNDEFINED     #FC CSM REBI 1 RV(QA Condition)
+locn  5823     1     d     eng     PBIC_DAB     PBIC_S2    PHMCOLD     UNDEFINED     #FC CSM REBI 2 RV(QA Condition)
+
+###########################        PBIC Class Hot Condition for Fused Unit Reject Validation Testing Location  ###########################  
+locn  6233     1     d     eng     PBIC_S2     PBIC_S2   CLASSHOT     WRITE         #PBIC CLASSHOT condition for Fused Unit
+locn  6234     1     d     eng     SORT        PBIC_DAB  CLASSHOT     WRITE         #PBIC CLASSHOT condition for Fused Unit
+
+###########################        PBIC Class Cold Condition for Fused Unit Reject Validation Testing Location  ########################### 
+locn  6233     1     d     eng     PBIC_S2     PBIC_S2   CSM     LOCALWRITE    #PBIC CSM condition for Fused Unit
+locn  6234     1     d     eng     PBIC_DAB    PBIC_DAB  CSM     LOCALWRITE    #PBIC CSM condition for Fused Unit
+locn  6233     1     d     eng     PBIC_S2     PBIC_S2   EXTCOLD       LOCALWRITE    #PBIC EXTCOLD condition for Fused Unit
+locn  6234     1     d     eng     PBIC_DAB    PBIC_DAB  EXTCOLD       LOCALWRITE    #PBIC EXTCOLD condition for Fused Unit
+
+###########################        PBIC PHM Condition for Fused Unit Reject Validation Testing Location  ########################### 
+locn  6233     1     d     eng     PBIC_S2     PBIC_S2   PHMHOT        LOCALWRITE    #PBIC PHMHOT condition Unit Skipping for Fused Unit
+locn  6234     1     d     eng     PBIC_DAB    PBIC_DAB  PHMHOT        LOCALWRITE    #PBIC PHMHOT condition Unit Skipping for Fused Unit
+
+locn  6233     1     d     eng     PBIC_S2     PBIC_S2   PHMCOLD       LOCALWRITE    #PBIC PHMCOLD condition Unit Skipping for Fused Unit
+locn  6234     1     d     eng     PBIC_DAB    PBIC_DAB  PHMCOLD       LOCALWRITE    #PBIC PHMCOLD condition Unit Skipping for Fused Unit
+
+locn  6233     1     d     eng     PBIC_S2     PBIC_S2   EXTPCOLD      LOCALWRITE    #PBIC PHM EXTREME COLD condition Unit Skipping for Fused Unit
+locn  6234     1     d     eng     PBIC_DAB    PBIC_DAB  EXTPCOLD      LOCALWRITE    #PBIC PHM EXTREME COLD condition Unit Skipping for Fused Unit
+
+locn  6233     1     d     eng     PBIC_S2     PBIC_S2   PHMROOM       LOCALWRITE    #PBIC PHMROOM condition Unit Skipping for Fused Unit
+locn  6234     1     d     eng     PBIC_DAB    PBIC_DAB  PHMROOM       LOCALWRITE    #PBIC PHMROOM condition Unit Skipping for Fused Unit
+
+###########################        PHM Hot Fuse Condition for Fused Unit HVM Testing Location   ###############################  
+locn  6274     3     p     hvm     PBIC_DAB    QA_S1     PHMHOT        LOCALWRITE    #PHM HOT Condition for Fused unit
+locn  6275     3     p     hvm     PBIC_DAB    QA_S1     PHMHOT        LOCALWRITE    #PHM HOT Condition for Fused unit
+locn  6259     3     p     hvm     PBIC_DAB    QA_S1     PHMHOT        LOCALWRITE    #PHM HOT Condition Unit Skipping for Fused unit (LTS)
+locn  6274     3     p     hvm     PBIC_DAB    QA_S1     CLASSHOT      LOCALWRITE    #CLASSHOT Inline QV RV for Fused unit
+locn  6275     3     p     hvm     PBIC_DAB    QA_S1     CLASSHOT      LOCALWRITE    #CLASSHOT Inline QV RV for Fused unit
+locn  6259     3     p     hvm     PBIC_DAB    QA_S1     CLASSHOT      LOCALWRITE    #CLASSHOT Inline QV RV Unit Skipping for Fused unit (LTS)
+
+###########################        PHM Hot Fuse Condition for Fused Unit Reject Validation Testing Location   ###########################   
+locn  5274     3     d     eng     PBIC_DAB    QA_S1 PHMHOT        UNDEFINED    #PHM HOT Condition for Fused unit Hot RV
+locn  5275     3     d     eng     PBIC_DAB    QA_S1 PHMHOT        UNDEFINED    #PHM HOT Condition for Fused unit Hot RV
+locn  5259     3     d     eng     PBIC_DAB    QA_S1 PHMHOT        UNDEFINED    #PHM HOT Condition Unit Skipping for Fused unit Hot RV (LTS)
+locn  5274     3     d     eng     PBIC_DAB    QA_S1 CLASSHOT      UNDEFINED    #CLASSHOT Inline QV RV for Fused unit
+locn  5275     3     d     eng     PBIC_DAB    QA_S1 CLASSHOT      UNDEFINED    #CLASSHOT Inline QV RV for Fused unit
+locn  5259     3     d     eng     PBIC_DAB    QA_S1 CLASSHOT      UNDEFINED    #CLASSHOT Inline QV RV Unit Skipping for Fused unit (LTS)
+locn  5980     3     d     eng     PBIC_DAB    QA_S1 PHMHOT        UNDEFINED    #PHM HOT Condition for Fused unit Hot FACR RV
+locn  5980     3     d     eng     PBIC_DAB    QA_S1 CLASSHOT      UNDEFINED    #CLASSHOT Condition Unit Skipping for Fused unit Hot FACR RV
+locn  5980     3     d     eng     PBIC_DAB    QA_S1 CSM     UNDEFINED    #CSM Condition Unit Skipping for Fused unit Cold FACR RV
+locn  5980     3     d     eng     PBIC_DAB    QA_S1 EXTCOLD       UNDEFINED    #EXTCOLD Condition Unit Skipping for Fused unit Cold FACR RV
+
+###########################        PHM Cold Fuse Condition for Fused Unit HVM Testing Location   ############################### 
+locn  6274     3     p     hvm     PBIC_DAB     QA_S1    PHMCOLD    LOCALWRITE     	#PHM COLD Condition for Fused unit
+locn  6275     3     p     hvm     PBIC_DAB     QA_S1    PHMCOLD    LOCALWRITE     	#PHM COLD Condition for Fused unit
+locn  6259     3     p     hvm     PBIC_DAB     QA_S1    PHMCOLD    LOCALWRITE     	#PHM COLD Condition Unit Skipping for Fused unit (LTS)
+locn  6274     3     p     hvm     PBIC_DAB     QA_S1    EXTPCOLD   LOCALWRITE     	#PHM EXTREME COLD Condition for Fused unit
+locn  6275     3     p     hvm     PBIC_DAB     QA_S1    EXTPCOLD   LOCALWRITE     	#PHM EXTREME COLD Condition for Fused unit
+
+
+###########################        PHM Cold Fuse Condition for Fused Unit Reject Validation Testing Location   ########################### 
+locn  5274     3     d     eng     PBIC_DAB    QA_S1 PHMCOLD   UNDEFINED     	#PHM COLD Condition for Fused unit Cold RV
+locn  5275     3     d     eng     PBIC_DAB    QA_S1 PHMCOLD   UNDEFINED    	#PHM COLD Condition for Fused unit Cold RV
+locn  5259     3     d     eng     PBIC_DAB    QA_S1 PHMCOLD   UNDEFINED     	#PHM COLD Condition Unit Skipping for Fused unit Cold RV (LTS)
+locn  5980     3     d     eng     PBIC_DAB    QA_S1 PHMCOLD   UNDEFINED     	#PHM COLD Condition for Fused unit Cold FACR RV
+locn  5980     3     d     eng     PBIC_DAB    QA_S1 EXTPCOLD  UNDEFINED     	#PHM EXTREME COLD Condition for Fused unit Cold FACR RV
+locn  5274     3     d     eng     PBIC_DAB    QA_S1 EXTPCOLD  UNDEFINED     	#PHM EXTREME COLD Condition for Fused unit Cold RV
+locn  5275     3     d     eng     PBIC_DAB    QA_S1 EXTPCOLD  UNDEFINED    	#PHM EXTREME COLD Condition for Fused unit Cold RV
+
+###########################        PHM Room Fuse Condition for Fused Unit HVM Testing Location   ############################### 
+locn  6274     3     p     hvm     PBIC_DAB    QA_S1  	PHMROOM     LOCALWRITE      #PHM ROOM Condition for Fused unit
+locn  6275     3     p     hvm     PBIC_DAB    QA_S1  	PHMROOM     LOCALWRITE      #PHM ROOM Condition for Fused unit
+locn  6259     3     p     hvm     PBIC_DAB    QA_S1  	PHMROOM     LOCALWRITE      #PHM ROOM Condition for Fused unit (LTS)
+
+###########################        PHM ROOM Fuse Condition for Fused Unit Reject Validation Testing Location   ########################### 
+locn  5274     3     d     eng     PBIC_DAB     QA_S1   PHMROOM  UNDEFINED     #PHM ROOM Condition for Fused unit Room RV
+locn  5275     3     d     eng     PBIC_DAB     QA_S1   PHMROOM  UNDEFINED     #PHM ROOM Condition for Fused unit Room RV
+locn  5980     3     d     eng     PBIC_DAB     QA_S1   PHMROOM  UNDEFINED     #PHM ROOM Condition for Fused unit Room FACR RV
+locn  5259     3     d     eng     PBIC_DAB     QA_S1   PHMROOM  UNDEFINED     #PHM ROOM Condition for Fused unit Room RV (LTS)
+
+###########################        PHM Condition for Unfused Unit HVM Testing Location   ###############################     
+locn  6248     1     d     eng     PBIC_DAB    PBIC_DAB    PHMHOT      LOCALWRITE     #PHM HOT unfused Condition (2 STEP FACT)
+locn  6248     1     d     eng     PBIC_DAB    PBIC_DAB    PHMCOLD     LOCALWRITE     #PHM COLD unfused Condition (2 STEP FACT)
+locn  6248     1     d     eng     PBIC_DAB    PBIC_DAB    EXTPCOLD    LOCALWRITE     #PHM EXTREME COLD unfused Condition (2 STEP FACT)
+locn  6248     1     d     eng     PBIC_DAB    PBIC_DAB    PHMROOM     LOCALWRITE     #PHM ROOM unfused Condition (2 STEP FACT)
+locn  7820     1     d     eng     PBIC_DAB    PBIC_DAB    PHMHOT      LOCALWRITE     #PHM HOT unfused Condition (1 STEP FACT)
+locn  7820     1     d     eng     PBIC_DAB    PBIC_DAB    PHMCOLD     LOCALWRITE     #PHM COLD unfused Condition (1 STEP FACT)
+locn  7820     1     d     eng     PBIC_DAB    PBIC_DAB    PHMROOM     LOCALWRITE     #PHM ROOM unfused Condition (1 STEP FACT)
+
+locn  7822     1     d     hvm     PBIC_S2     PBIC_S2     PHMHOT      LOCALWRITE     #PHM HOT unfused Condition Unit Skipping QRE Usage 1
+locn  7824     1     d     hvm     PBIC_S2     PBIC_S2     PHMHOT      LOCALWRITE     #PHM HOT unfused Condition Unit Skipping QRE Usage 2
+locn  7825     1     d     hvm     PBIC_S2     PBIC_S2     PHMHOT      LOCALWRITE     #PHM HOT unfused Condition Unit SkippingQRE Usage 3
+locn  7826     1     d     hvm     PBIC_S2     PBIC_S2     PHMHOT      LOCALWRITE     #PHM HOT unfused Condition Unit Skipping QRE Usage 4
+locn  7828     1     d     hvm     PBIC_S2     PBIC_S2     PHMHOT      LOCALWRITE     #PHM HOT unfused Condition Unit Skipping QRE Usage 5
+
+locn  7822     1     d     hvm     PBIC_S2     PBIC_S2     PHMCOLD     LOCALWRITE     #PHM Cold unfused Condition Unit Skipping QRE Usage 1
+locn  7824     1     d     hvm     PBIC_S2     PBIC_S2     PHMCOLD     LOCALWRITE     #PHM Cold unfused Condition Unit Skipping QRE Usage 2
+locn  7825     1     d     hvm     PBIC_S2     PBIC_S2     PHMCOLD     LOCALWRITE     #PHM Cold unfused Condition Unit Skipping QRE Usage 3
+locn  7826     1     d     hvm     PBIC_S2     PBIC_S2     PHMCOLD     LOCALWRITE     #PHM Cold unfused Condition Unit Skipping QRE Usage 4
+locn  7828     1     d     hvm     PBIC_S2     PBIC_S2     PHMCOLD     LOCALWRITE     #PHM Cold unfused Condition Unit Skipping QRE Usage 5
+
+locn  7822     1     d     hvm     PBIC_S2     PBIC_S2     EXTPCOLD    LOCALWRITE     #PHM Extreme Cold unfused Condition Unit Skipping QRE Usage 1
+locn  7824     1     d     hvm     PBIC_S2     PBIC_S2     EXTPCOLD    LOCALWRITE     #PHM Extreme Cold unfused Condition Unit Skipping QRE Usage 2
+locn  7825     1     d     hvm     PBIC_S2     PBIC_S2     EXTPCOLD    LOCALWRITE     #PHM Extreme Cold unfused Condition Unit Skipping QRE Usage 3
+locn  7826     1     d     hvm     PBIC_S2     PBIC_S2     EXTPCOLD    LOCALWRITE     #PHM Extreme Cold unfused Condition Unit Skipping QRE Usage 4
+locn  7828     1     d     hvm     PBIC_S2     PBIC_S2     EXTPCOLD    LOCALWRITE     #PHM Extreme Cold unfused Condition Unit Skipping QRE Usage 5
+
+locn  7822     1     d     hvm     PBIC_S2     PBIC_S2     PHMROOM     LOCALWRITE     #PHM ROOM unfused Condition Unit Skipping QRE Usage 1
+locn  7824     1     d     hvm     PBIC_S2     PBIC_S2     PHMROOM     LOCALWRITE     #PHM ROOM unfused Condition Unit Skipping QRE Usage 2
+locn  7825     1     d     hvm     PBIC_S2     PBIC_S2     PHMROOM     LOCALWRITE     #PHM ROOM unfused Condition Unit Skipping QRE Usage 3
+locn  7826     1     d     hvm     PBIC_S2     PBIC_S2     PHMROOM     LOCALWRITE     #PHM ROOM unfused Condition Unit Skipping QRE Usage 4
+locn  7828     1     d     hvm     PBIC_S2     PBIC_S2     PHMROOM     LOCALWRITE     #PHM ROOM unfused Condition Unit Skipping QRE Usage 5
+
+locn  7872     1     d     hvm     PBIC_S2     PBIC_S2     PHMHOT      LOCALWRITE     #PHM HOT unfused Condition Unit Skipping QRE Usage 6
+locn  7874     1     d     hvm     PBIC_S2     PBIC_S2     PHMHOT      LOCALWRITE     #PHM HOT unfused Condition Unit Skipping QRE Usage 7
+locn  7875     1     d     hvm     PBIC_S2     PBIC_S2     PHMHOT      LOCALWRITE     #PHM HOT unfused Condition Unit Skipping QRE Usage 8
+locn  7876     1     d     hvm     PBIC_S2     PBIC_S2     PHMHOT      LOCALWRITE     #PHM HOT unfused Condition Unit Skipping QRE Usage 9
+locn  7878     1     d     hvm     PBIC_S2     PBIC_S2     PHMHOT      LOCALWRITE     #PHM HOT unfused Condition Unit Skipping QRE Usage 10
+
+locn  7872     1     d     hvm     PBIC_S2     PBIC_S2     PHMCOLD     LOCALWRITE     #PHM Cold unfused Condition Unit Skipping QRE Usage 6
+locn  7874     1     d     hvm     PBIC_S2     PBIC_S2     PHMCOLD     LOCALWRITE     #PHM Cold unfused Condition Unit Skipping QRE Usage 7
+locn  7875     1     d     hvm     PBIC_S2     PBIC_S2     PHMCOLD     LOCALWRITE     #PHM Cold unfused Condition Unit Skipping QRE Usage 8
+locn  7876     1     d     hvm     PBIC_S2     PBIC_S2     PHMCOLD     LOCALWRITE     #PHM Cold unfused Condition Unit Skipping QRE Usage 9
+locn  7878     1     d     hvm     PBIC_S2     PBIC_S2     PHMCOLD     LOCALWRITE     #PHM Cold unfused Condition Unit Skipping QRE Usage 10
+
+locn  7872     1     d     hvm     PBIC_S2     PBIC_S2     EXTPCOLD    LOCALWRITE     #PHM Extreme Cold unfused Condition Unit Skipping QRE Usage 6
+locn  7874     1     d     hvm     PBIC_S2     PBIC_S2     EXTPCOLD    LOCALWRITE     #PHM Extreme Cold unfused Condition Unit Skipping QRE Usage 7
+locn  7875     1     d     hvm     PBIC_S2     PBIC_S2     EXTPCOLD    LOCALWRITE     #PHM Extreme Cold unfused Condition Unit Skipping QRE Usage 8
+locn  7876     1     d     hvm     PBIC_S2     PBIC_S2     EXTPCOLD    LOCALWRITE     #PHM Extreme Cold unfused Condition Unit Skipping QRE Usage 9
+locn  7878     1     d     hvm     PBIC_S2     PBIC_S2     EXTPCOLD    LOCALWRITE     #PHM Extreme Cold unfused Condition Unit Skipping QRE Usage 10
+
+locn  7872     1     d     hvm     PBIC_S2     PBIC_S2     PHMROOM     LOCALWRITE     #PHM ROOM unfused Condition Unit Skipping QRE Usage 6
+locn  7874     1     d     hvm     PBIC_S2     PBIC_S2     PHMROOM     LOCALWRITE     #PHM ROOM unfused Condition Unit Skipping QRE Usage 7
+locn  7875     1     d     hvm     PBIC_S2     PBIC_S2     PHMROOM     LOCALWRITE     #PHM ROOM unfused Condition Unit Skipping QRE Usage 8
+locn  7876     1     d     hvm     PBIC_S2     PBIC_S2     PHMROOM     LOCALWRITE     #PHM ROOM unfused Condition Unit Skipping QRE Usage 9
+locn  7878     1     d     hvm     PBIC_S2     PBIC_S2     PHMROOM     LOCALWRITE     #PHM ROOM unfused Condition Unit Skipping QRE Usage 10
+
+
+
+###########################        PHM Condition for Unfused Unit Reject Validation Testing Location   ###############################     
+locn  5248     1     d     eng     PBIC_DAB    PBIC_DAB    PHMHOT      UNDEFINED     #PHM HOT unfused Condition RV (2 STEP FACT)
+locn  5248     1     d     eng     PBIC_DAB    PBIC_DAB    PHMCOLD     UNDEFINED     #PHM COLD unfused Condition RV (2 STEP FACT)
+locn  5248     1     d     eng     PBIC_DAB    PBIC_DAB    EXTPCOLD    UNDEFINED     #PHM EXTREME COLD unfused Condition RV (2 STEP FACT)
+locn  5248     1     d     eng     PBIC_DAB    PBIC_DAB    PHMROOM     UNDEFINED     #PHM ROOM unfused Condition RV (2 STEP FACT)
+locn  5820     1     d     eng     PBIC_DAB    PBIC_DAB    PHMHOT      UNDEFINED     #PHM HOT unfused Condition RV (1 STEP FACT)
+locn  5820     1     d     eng     PBIC_DAB    PBIC_DAB    PHMCOLD     UNDEFINED     #PHM COLD unfused Condition RV (1 STEP FACT)
+locn  5820     1     d     eng     PBIC_DAB    PBIC_DAB    PHMROOM     UNDEFINED     #PHM ROOM unfused Condition RV (1 STEP FACT)
+
+locn  5822     1     d     eng     PBIC_S2     PBIC_S2     PHMHOT      UNDEFINED      #PHM HOT unfused Condition Unit Skipping QRE Usage 1 RV
+locn  5824     1     d     eng     PBIC_S2     PBIC_S2     PHMHOT      UNDEFINED      #PHM HOT unfused Condition Unit Skipping QRE Usage 2 RV
+locn  5825     1     d     eng     PBIC_S2     PBIC_S2     PHMHOT      UNDEFINED      #PHM HOT unfused Condition Unit Skipping QRE Usage 3 RV
+locn  5826     1     d     eng     PBIC_S2     PBIC_S2     PHMHOT      UNDEFINED      #PHM HOT unfused Condition Unit Skipping QRE Usage 4 RV
+locn  5828     1     d     eng     PBIC_S2     PBIC_S2     PHMHOT      UNDEFINED      #PHM HOT unfused Condition Unit Skipping QRE Usage 5 RV
+
+locn  5822     1     d     eng     PBIC_S2     PBIC_S2     PHMCOLD     UNDEFINED      #PHM COLD unfused Condition Unit Skipping QRE Usage 1 RV
+locn  5824     1     d     eng     PBIC_S2     PBIC_S2     PHMCOLD     UNDEFINED      #PHM COLD unfused Condition Unit Skipping QRE Usage 2 RV
+locn  5825     1     d     eng     PBIC_S2     PBIC_S2     PHMCOLD     UNDEFINED      #PHM COLD unfused Condition Unit Skipping QRE Usage 3 RV
+locn  5826     1     d     eng     PBIC_S2     PBIC_S2     PHMCOLD     UNDEFINED      #PHM COLD unfused Condition Unit Skipping QRE Usage 4 RV
+locn  5828     1     d     eng     PBIC_S2     PBIC_S2     PHMCOLD     UNDEFINED      #PHM COLD unfused Condition Unit Skipping QRE Usage 5 RV
+
+locn  5822     1     d     eng     PBIC_S2     PBIC_S2     EXTPCOLD    UNDEFINED      #PHM EXTREME COLD unfused Condition Unit Skipping QRE Usage 1 RV
+locn  5824     1     d     eng     PBIC_S2     PBIC_S2     EXTPCOLD    UNDEFINED      #PHM EXTREME COLD unfused Condition Unit Skipping QRE Usage 2 RV
+locn  5825     1     d     eng     PBIC_S2     PBIC_S2     EXTPCOLD    UNDEFINED      #PHM EXTREME COLD unfused Condition Unit Skipping QRE Usage 3 RV
+locn  5826     1     d     eng     PBIC_S2     PBIC_S2     EXTPCOLD    UNDEFINED      #PHM EXTREME COLD unfused Condition Unit Skipping QRE Usage 4 RV
+locn  5828     1     d     eng     PBIC_S2     PBIC_S2     EXTPCOLD    UNDEFINED      #PHM EXTREME COLD unfused Condition Unit Skipping QRE Usage 5 RV
+
+locn  5822     1     d     eng     PBIC_S2     PBIC_S2     PHMROOM     UNDEFINED      #PHM ROOM unfused Condition Unit Skipping QRE Usage 1 RV
+locn  5824     1     d     eng     PBIC_S2     PBIC_S2     PHMROOM     UNDEFINED      #PHM ROOM unfused Condition Unit Skipping QRE Usage 2 RV
+locn  5825     1     d     eng     PBIC_S2     PBIC_S2     PHMROOM     UNDEFINED      #PHM ROOM unfused Condition Unit Skipping QRE Usage 3 RV
+locn  5826     1     d     eng     PBIC_S2     PBIC_S2     PHMROOM     UNDEFINED      #PHM ROOM unfused Condition Unit Skipping QRE Usage 4 RV
+locn  5828     1     d     eng     PBIC_S2     PBIC_S2     PHMROOM     UNDEFINED      #PHM ROOM unfused Condition Unit Skipping QRE Usage 5 RV
+
+locn  5872     1     d     eng     PBIC_S2     PBIC_S2     PHMHOT      UNDEFINED      #PHM HOT unfused Condition Unit Skipping QRE Usage 6 RV
+locn  5874     1     d     eng     PBIC_S2     PBIC_S2     PHMHOT      UNDEFINED      #PHM HOT unfused Condition Unit Skipping QRE Usage 7 RV
+locn  5875     1     d     eng     PBIC_S2     PBIC_S2     PHMHOT      UNDEFINED      #PHM HOT unfused Condition Unit Skipping QRE Usage 8 RV
+locn  5876     1     d     eng     PBIC_S2     PBIC_S2     PHMHOT      UNDEFINED      #PHM HOT unfused Condition Unit Skipping QRE Usage 9 RV
+locn  5878     1     d     eng     PBIC_S2     PBIC_S2     PHMHOT      UNDEFINED      #PHM HOT unfused Condition Unit Skipping QRE Usage 10 RV
+
+locn  5872     1     d     eng     PBIC_S2     PBIC_S2     PHMCOLD     UNDEFINED      #PHM COLD unfused Condition Unit Skipping QRE Usage 6 RV
+locn  5874     1     d     eng     PBIC_S2     PBIC_S2     PHMCOLD     UNDEFINED      #PHM COLD unfused Condition Unit Skipping QRE Usage 7 RV
+locn  5875     1     d     eng     PBIC_S2     PBIC_S2     PHMCOLD     UNDEFINED      #PHM COLD unfused Condition Unit Skipping QRE Usage 8 RV
+locn  5876     1     d     eng     PBIC_S2     PBIC_S2     PHMCOLD     UNDEFINED      #PHM COLD unfused Condition Unit Skipping QRE Usage 9 RV
+locn  5878     1     d     eng     PBIC_S2     PBIC_S2     PHMCOLD     UNDEFINED      #PHM COLD unfused Condition Unit Skipping QRE Usage 10 RV
+
+locn  5872     1     d     eng     PBIC_S2     PBIC_S2     EXTPCOLD    UNDEFINED      #PHM EXTREME COLD unfused Condition Unit Skipping QRE Usage 6 RV
+locn  5874     1     d     eng     PBIC_S2     PBIC_S2     EXTPCOLD    UNDEFINED      #PHM EXTREME COLD unfused Condition Unit Skipping QRE Usage 7 RV
+locn  5875     1     d     eng     PBIC_S2     PBIC_S2     EXTPCOLD    UNDEFINED      #PHM EXTREME COLD unfused Condition Unit Skipping QRE Usage 8 RV
+locn  5876     1     d     eng     PBIC_S2     PBIC_S2     EXTPCOLD    UNDEFINED      #PHM EXTREME COLD unfused Condition Unit Skipping QRE Usage 9 RV
+locn  5878     1     d     eng     PBIC_S2     PBIC_S2     EXTPCOLD    UNDEFINED      #PHM EXTREME COLD unfused Condition Unit Skipping QRE Usage 10 RV
+
+locn  5872     1     d     eng     PBIC_S2     PBIC_S2     PHMROOM     UNDEFINED      #PHM ROOM unfused Condition Unit Skipping QRE Usage 6 RV
+locn  5874     1     d     eng     PBIC_S2     PBIC_S2     PHMROOM     UNDEFINED      #PHM ROOM unfused Condition Unit Skipping QRE Usage 7 RV
+locn  5875     1     d     eng     PBIC_S2     PBIC_S2     PHMROOM     UNDEFINED      #PHM ROOM unfused Condition Unit Skipping QRE Usage 8 RV
+locn  5876     1     d     eng     PBIC_S2     PBIC_S2     PHMROOM     UNDEFINED      #PHM ROOM unfused Condition Unit Skipping QRE Usage 9 RV
+locn  5878     1     d     eng     PBIC_S2     PBIC_S2     PHMROOM     UNDEFINED      #PHM ROOM unfused Condition Unit Skipping QRE Usage 10 RV
+
+
+
+
+###########################        ADPM HVM Testing Location   						  ############################### 
+locn  6208     3     p     hvm     PBIC_DAB   EQAM_S1      PHMHOT      LOCALWRITE     #PHMHOT ADPM Location
+locn  6208     3     p     hvm     PBIC_DAB   EQAM_S1      PHMCOLD     LOCALWRITE     #PHMCOLD Unit Skipping Inline ADPM Location
+locn  6208     3     p     hvm     PBIC_DAB   EQAM_S1      CLASSHOT    LOCALWRITE     #CLASSHOT Inline ADPM RV Location
+locn  5208     3     d     eng     PBIC_DAB   EQAM_S1      PHMHOT      UNDEFINED      #PHMHOT ADPM RV Location
+locn  5208     3     d     eng     PBIC_DAB   EQAM_S1      PHMCOLD     UNDEFINED      #PHMCOLD Unit Skipping Inline ADPM RV Location
+locn  5208     3     d     eng     PBIC_DAB   EQAM_S1      CLASSHOT    UNDEFINED      #CLASSHOT Inline ADPM RV Location
+
+###########################        ADPM Reject Validation Testing Location   		  ############################### 
+locn  6207     3     p     hvm     PBIC_DAB   CSM_S1       PHMCOLD     LOCALWRITE     #PHMCOLD ADPM Location
+locn  5207     3     d     eng     PBIC_DAB    CSM_S1     PHMCOLD      UNDEFINED      #PHMCOLD ADPM RV Location
+
+
+###########################        Class CSM HVM  Testing Location   	    ###########################     
+locn  6248     1     d     hvm     PBIC_DAB    PBIC_DAB  CSM     LOCALWRITE     #CLASS CSM (2 STEP FACT)
+locn  7820     1     d     hvm     PBIC_DAB    PBIC_DAB  CSM     LOCALWRITE     #CLASS CSM (1 STEP FACT)
+locn  7821     1     d     hvm     PBIC_S2     PBIC_S2   CSM     LOCALWRITE     #CLASS CSM
+locn  7823     1     d     hvm     PBIC_S2     PBIC_S2   CSM     LOCALWRITE     #CLASS CSM
+
+locn  7825     1     d     hvm     PBIC_S2     PBIC_S2   CSM     LOCALWRITE     #CLASS CSM
+locn  6249     1     d     hvm     PBIC_DAB    PBIC_DAB  CSM     LOCALWRITE     #CLASS CSM (2 STEP FACT)
+locn  7827     1     d     hvm     PBIC_DAB    PBIC_DAB  CSM     LOCALWRITE     #CLASS CSM (1 STEP FACT)
+
+###########################        Class CSM Reject Validation Testing Location ###########################     
+locn  5248     1     d     eng     PBIC_DAB    PBIC_DAB   CSM     UNDEFINED     #CLASS CSM (2 STEP FACT)
+locn  5820     1     d     eng     PBIC_DAB    PBIC_DAB   CSM     UNDEFINED     #CLASS CSM (1 STEP FACT)
+locn  5821     1     d     eng     PBIC_S2     PBIC_S2    CSM     UNDEFINED     #CLASS CSM
+locn  5823     1     d     eng     PBIC_S2     PBIC_S2    CSM     UNDEFINED   	#CLASS CSM
+
+locn  5825     1     d     eng     PBIC_S2     PBIC_S2    CSM     UNDEFINED   	#CLASS CSM 
+locn  5249     1     d     eng     PBIC_DAB    PBIC_DAB   CSM     UNDEFINED     #CLASS CSM (2 STEP FACT)
+locn  5827     1     d     eng     PBIC_DAB    PBIC_DAB   CSM     UNDEFINED     #CLASS CSM (1 STEP FACT)
+
+###########################        PBIC Class HVM Fusing Location   	        ########################### 
+locn   6197    2     d     hvm     PBIC_DAB    FIF_S1    FUSE    LOCALWRITE     #Fuse on MPS
+locn   9993    2     d     eng     PBIC_DAB    FIF_S1    FUSE    UNDEFINED      #Engineering Fuse on CMT
+
+
+#########################################################
+#      SORT CMT Non HCSL Testing Location Code 		#
+#########################################################
+
+###########################        Sort Cold HVM Testing Location   	        ###########################
+locn  6051     1     x     hvm     UNDEFINED     SORT   SORTCOLD     WRITE      #Cold Sort
+
+###########################        Sort Cold Correlation Testing Location      ###########################
+locn  6029     1     x     hvm     UNDEFINED     SORT   SORTCOLD     WRITE     #Cold Sort Correlation (corr2)
+locn  6140     1     x     hvm     UNDEFINED     SORT   SORTCOLD     WRITE     #Cold Sort Correlation (golden corr)
+
+###########################        Sort Cold QRE Testing Location   	       ###########################
+locn  6196     1     x     hvm     UNDEFINED     SORT   SORTCOLD     WRITE     #Cold Sort QRE oper
+locn  6198     1     x     hvm     UNDEFINED     SORT   SORTCOLD     WRITE     #Cold Sort QRE oper
+
+###########################        Sort Cold Engineering Testing Location      ###########################
+locn  6160     1     x     eng     UNDEFINED     SORT   SORTCOLD     WRITE     #Sort Engineering (kappa operation)
+locn  9050     1     x     eng     UNDEFINED     SORT   SORTCOLD     WRITE     #Sort (No NTSC)
+locn  9051     1     x     eng     UNDEFINED     SORT   SORTCOLD     WRITE     #Sort Engineering
+
+###########################        Sort Hot HVM Testing Location   	           ###########################
+locn  6751     1     x     hvm     UNDEFINED     SORT   SORTHOT      WRITE     #Hot Sort
+
+###########################        Sort Hot Correlation Testing Location       ###########################
+locn  6739     1     x     hvm     UNDEFINED     SORT   SORTHOT      WRITE     #Hot Sort Correlation Hot (corr2)
+locn  6740     1     x     hvm     UNDEFINED     SORT   SORTHOT      WRITE     #Hot Sort Correlation (golden corr)
+
+
+
+#########################################################
+#      SDS HDMx Testing Location Code 			#
+#########################################################
+
+###########################        SDS Cold HVM Testing Location   	        ###########################
+locn 	132110	1	x	hvm		 UNDEFINED     SORT   SORTCOLD     WRITE	#Cold SDS Production Run 
+
+###########################        SDS Cold Engineering Testing Location   	        ###########################
+locn 	132310	1	x	eng		 UNDEFINED     SORT   SORTCOLD     WRITE			#Cold SDS Kappa 
+locn 	132321	1	x	eng		 UNDEFINED     SORT   SORTCOLD     WRITE			#Cold SDS Kappa2 
+
+###########################        SDS Cold Correlation Testing Location   	        ###########################
+locn 	129869	1	x	eng		 UNDEFINED     SORT   SORTCOLD     WRITE			#Cold SDS Correlation
+
+###########################        SDS Cold MV Testing Location   	        ###########################
+locn 	132311	1	x	eng		 UNDEFINED     SORT   SORTCOLD     WRITE			#Cold SDS MV (Cache)
+locn	132312	1	x	eng		 UNDEFINED     SORT   SORTCOLD     WRITE			#Cold SDS MV (Func)
+locn	132313	1	x	eng		 UNDEFINED     SORT   SORTCOLD     WRITE			#Cold SDS MV (IO1)
+locn	132314	1	x	eng		 UNDEFINED     SORT   SORTCOLD     WRITE			#Cold SDS MV (IO2)
+locn	132315	1	x	eng		 UNDEFINED     SORT   SORTCOLD     WRITE			#Cold SDS MV (GFX)
+locn	132316	1	x	eng		 UNDEFINED     SORT   SORTCOLD     WRITE			#Cold SDS MV (SCAN)
+locn	132317	1	x	eng		 UNDEFINED     SORT   SORTCOLD     WRITE			#Cold SDS MV (Power/Thermal)
+locn	132318	1	x	eng		 UNDEFINED     SORT   SORTCOLD     WRITE			#Cold SDS MV (PLL)
+locn	132320	1	x	eng		 UNDEFINED     SORT   SORTCOLD     WRITE			#Cold SDS MV (Yield)
+
+
+#########################################################
+#      SDT HDMx Testing Location Code 			#
+#########################################################
+
+###########################        SDT Hot HVM Testing Location   	        ###########################
+locn 	132150	1	x	hvm		SORT     SORT   SORTHOT      WRITE			#Hot SDT Production Run	
+
+###########################        SDT Hot Engineering Testing Location   	        ###########################
+locn 	132350	1	x	eng		SORT     SORT   SORTHOT      WRITE			#Hot SDT Base Run	
+locn 	132361	1	x	eng		SORT     SORT   SORTHOT      WRITE			#Hot SDT Kappa 2	
+
+###########################        SDT Hot Correlation Testing Location   	        ###########################
+locn 	119372	1	x	eng		SORT     SORT   SORTHOT      WRITE			#Hot SDT Correlation	
+
+###########################        SDT Hot MV Testing Location   	        ###########################
+locn 	132351	1	x	eng		SORT     SORT   SORTHOT      WRITE			#Hot SDT MV (Cache) 	
+locn 	132352	1	x	eng		SORT     SORT   SORTHOT      WRITE			#Hot SDT MV (Func)	
+locn 	132353	1	x	eng		SORT     SORT   SORTHOT      WRITE			#Hot SDT MV (IO1)	
+locn 	132354	1	x	eng		SORT     SORT   SORTHOT      WRITE			#Hot SDT MV (IO2)	
+locn 	132355	1	x	eng		SORT     SORT   SORTHOT      WRITE			#Hot SDT MV (GFX)	
+locn 	132356	1	x	eng		SORT     SORT   SORTHOT      WRITE			#Hot SDT MV (SCAN)	
+locn 	132357	1	x	eng		SORT     SORT   SORTHOT      WRITE			#Hot SDT MV (Power Thermal)	
+locn 	132358	1	x	eng		SORT     SORT   SORTHOT      WRITE			#Hot SDT MV (PLL)	
+locn 	132360	1	x	eng		SORT     SORT   SORTHOT      WRITE			#Hot SDT MV (Yield)	
+
+
+##################################################################################
+#      HDMT on Prober (HOP) Wafer Sort HDMx Testing Location Code 			#
+##################################################################################
+
+###########################        HOP Cold HVM Testing Location   	        ###########################
+locn    7180   1    x   hvm		UNDEFINED     SORT   SORTCOLD     WRITE		#Cold HOP Production Run 
+locn    7609   1    x   hvm		UNDEFINED     SORT   SORTCOLD     WRITE		#Cold HOP Production Run 
+locn    7610   1    x   hvm		UNDEFINED     SORT   SORTCOLD     WRITE		#Cold HOP Production Run 
+locn    7611   1    x   hvm		UNDEFINED     SORT   SORTCOLD     WRITE		#Cold HOP Production Run 
+
+
+#########################################################
+#      SDM HDMx Testing Location Code 			#
+#########################################################
+
+###########################        SDM HVM Testing Location   	        ###########################
+locn 	119325	1	x	hvm		UNDEFINED     SORT	 SORTCOLD   		WRITE		#SDM Production Run 
+
+###########################        SDM Engineering Testing Location   	        ###########################
+locn 	132330	1	x	eng		UNDEFINED     SORT	 SORTCOLD   		WRITE			#SDM BaseRun split subfiles capability 
+locn	132331	1	x	eng		UNDEFINED     SORT	 SORTCOLD   		WRITE			#SDM Kappa1 split subfiles capability
+locn 	132332	1	x	eng		UNDEFINED     SORT	 SORTCOLD   		WRITE			#SDM Kappa2 split subfiles capability  
+
+###########################        SDM MV Testing Location   	        ###########################
+locn 	132322	1	x	eng		UNDEFINED     SORT	 SORTCOLD   		WRITE			#SDM MV (Cache)
+locn	132323	1	x	eng		UNDEFINED     SORT	 SORTCOLD   		WRITE			#SDM MV (Func)
+locn	132324	1	x	eng		UNDEFINED     SORT	 SORTCOLD   		WRITE			#SDM MV (IO1)
+locn	132325	1	x	eng		UNDEFINED     SORT	 SORTCOLD   		WRITE			#SDM MV (IO2)
+locn	132326	1	x	eng		UNDEFINED     SORT	 SORTCOLD   		WRITE			#SDM MV (GFX)
+locn	132327	1	x	eng		UNDEFINED     SORT	 SORTCOLD   		WRITE			#SDM MV (SCAN)
+locn	132328	1	x	eng		UNDEFINED     SORT	 SORTCOLD   		WRITE			#SDM MV (Power/Thermal)
+locn	132329	1	x	eng		UNDEFINED     SORT	 SORTCOLD  			WRITE			#SDM MV (PLL)
+
+
+
+###########################        Burn In Stressed Test Location    ############################### 
+locn	6731	1	x	hvm		SORT 	     BI		 CLASSHOT 		WRITE			#Burn In Stressed Test Hot
+locn	6732	1	x	hvm		SORT 	     BI		 CLASSHOT 		WRITE			#Burn In Stressed Test REBI 1 Hot
+locn	6733	1	x	hvm		SORT         BI		 CLASSHOT 		WRITE			#Burn In Stressed Test REBI 2 Hot
+locn	6734	1	x	hvm		SORT 	     BI		 CLASSHOT 		WRITE			#Burn In Stressed Test REBI 3 Hot
+locn	6735	1	x	hvm		SORT 	     BI		 CLASSHOT 		WRITE			#Burn In Stressed Test K Lot Hot
+
+
+
+#########################################################
+#      HBI HDMx Testing Location Code 			#
+#########################################################
+
+locn	7652	1	d	hvm		SORT 	      BI	HBIHOT 			WRITE			#HDMx Burn In Production
+locn	7653	1	d	hvm		SORT 	      BI	HBIHOT 			WRITE			#HDMx Burn In REBI 1
+locn	7654	1	d	hvm		SORT 	      BI	HBIHOT 			WRITE			#HDMx Burn In REBI 2
+locn	7655	1	d	hvm		SORT 	      BI	HBIHOT 			WRITE			#HDMx Burn In KLOT
+
+locn	7657	1	d	eng		SORT 	      BI	HBIHOT 			WRITE			#HDMx Burn In IME1
+locn	7658	1	d	eng		SORT 	      BI	HBIHOT 			WRITE			#HDMx Burn In IME2
+locn	7659	1	d	eng		SORT 	      BI	HBIHOT 			WRITE			#HDMx Burn In IME3
+
+locn	7656	1	d	eng		SORT 	      BI	HBIHOT 			WRITE			#HDMx Burn In OP1
+locn	7660	1	d	eng		SORT 	      BI	HBIHOT 			WRITE			#HDMx Burn In OP2
+locn	7661	1	d	eng		SORT 	      BI	HBIHOT 			WRITE			#HDMx Burn In OP3
+locn	7662	1	d	eng		SORT 	      BI	HBIHOT 			WRITE			#HDMx Burn In OP4
+locn	7663	1	d	eng		SORT 	      BI	HBIHOT 			WRITE			#HDMx Burn In OP5

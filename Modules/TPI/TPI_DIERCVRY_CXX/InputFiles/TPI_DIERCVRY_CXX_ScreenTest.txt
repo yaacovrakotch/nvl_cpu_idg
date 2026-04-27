@@ -1,0 +1,22 @@
+START_SCREEN:SetDFF2GSDS
+#RunOn  : TestName    : DataType   : ParamType       : Param1                    : Operation         : ParamType        : Param2                     : TmpStore     : OnTrue       : OnFalse
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EXEC    : SETDFF2GSDS : STRING     : GSDS            : I.S.COREREC               : SET               :   DFF    		: U1.U5.SORT.COREREC       :   -          : REVERTGSDS   : 1
+EXEC    : REVERTGSDS  : STRING     : GSDS            : I.S.REVERTCOREREC         : SET               :   EXPRESSION   	: Reverse([G.I.S.COREREC])   :   -          : CHECKSORT     : 1
+
+#Check Sort TPREV:
+EXEC    : CHECKSORT		: STRING     : DFF          :  U1.U5.SORT.TPREV        			 : ==         		 : LITERAL   		: "0"						 : -            : 2      : 1
+END_SCREEN
+
+START_SCREEN:SetDFF2GSDS_2CDIE
+#RunOn  : TestName    : DataType   : ParamType       : Param1                    : Operation         : ParamType        : Param2                     : TmpStore     : OnTrue       : OnFalse
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#EXEC    : SETDFF2GSDSCPU0 : STRING     : GSDS            : I.S.COREREC0               : SET               :   DFF    		: U1.U5.SORT.COREREC       :   -          : REVERTGSDSCPU0   : 1
+#EXEC    : REVERTGSDSCPU0  : STRING     : GSDS            : I.S.REVERTCOREREC0         : SET               :   EXPRESSION   	: Reverse([G.I.S.COREREC0])   :   -          : SETDFF2GSDSCPU1     : 1
+EXEC    : SETDFF2GSDSCPU1 : STRING     : GSDS            : I.S.COREREC1               : SET               :   DFF    		: U1.U6.SORT.COREREC       :   -          : REVERTGSDSCPU1   : 1
+EXEC    : REVERTGSDSCPU1  : STRING     : GSDS            : I.S.REVERTCOREREC1         : SET               :   EXPRESSION   	: Reverse([G.I.S.COREREC1])   :   -          : CHECKSORTCPU1     : 1
+
+#Check Sort TPREV:
+#EXEC    : CHECKSORTCPU0		: STRING     : DFF          :  U1.U5.SORT.TPREV        			 : ==         		 : LITERAL   		: "0"						 : -            : CHECKSORTCPU1      : 1
+EXEC    : CHECKSORTCPU1		: STRING     : DFF          :  U1.U6.SORT.TPREV        			 : ==         		 : LITERAL   		: "0"						 : -            : 2      : 1                                                                              
+END_SCREEN

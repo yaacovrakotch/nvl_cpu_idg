@@ -1,0 +1,212 @@
+Version 1.0;
+
+SelectorRuleCollection  TPI_EDM_XXX_Rules
+{
+	SelectorRule EDM_Limit_HOT_COLD (CHOT, COLD, default)
+	{
+		CHOT => contains(__shared__::LocationSets.HOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		COLD => contains(__shared__::LocationSets.COLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		default;
+	}
+	SelectorRule If_CLASS_NVL_S52C(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+		no;
+	}
+	SelectorRule If_M_PKGs(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_UL6C";
+		no;
+	}
+}
+UserVars TPI_EDM_XXX
+{
+}
+
+UserVars TPI_EDM_XXX_HighLimit
+{
+	#HOT
+	#String HOT_High_Limit_BASE_PRIME = "0.000327A";
+	#String HOT_High_Limit_CPU_PRIME = "0.000020A";
+	#String HOT_High_Limit_CPU1_PRIME = "0.000020A";
+	#String HOT_High_Limit_GCD_PRIME = "0.000016A";
+	#String HOT_High_Limit_HUB_PRIME = "0.000008A";
+	#String HOT_High_Limit_GND_PRIME = "0.00006A";
+	#String HOT_High_Limit_PCD_TMUX_07_PRIME = "0.000030A";
+	String HOT_High_Limit_BASE_PRIME = "0.0006A";
+	String HOT_High_Limit_CPU_PRIME = "0.000040A";
+	String HOT_High_Limit_CPU1_PRIME = "0.000040A";
+	String HOT_High_Limit_GCD_PRIME = "0.000032A";
+	String HOT_High_Limit_HUB_PRIME = "0.000016A";
+	String HOT_High_Limit_GND_PRIME = "0.00012A";
+	String HOT_High_Limit_PCD_TMUX_07_PRIME = "0.000060A";
+	
+	#COLD
+	#String COLD_High_Limit_BASE_PRIME = "0.000426A";
+	#String COLD_High_Limit_CPU_PRIME = "0.000020A";
+	#String COLD_High_Limit_CPU1_PRIME = "0.000020A";
+	#String COLD_High_Limit_GCD_PRIME = "0.000017A";
+	#String COLD_High_Limit_HUB_PRIME = "0.000008A";
+	#String COLD_High_Limit_GND_PRIME = "0.00002A";
+	#String COLD_High_Limit_PCD_TMUX_07_PRIME = "0.000030A";
+	String COLD_High_Limit_BASE_PRIME = "0.0008A";
+	String COLD_High_Limit_CPU_PRIME = "0.000040A";
+	String COLD_High_Limit_CPU1_PRIME = "0.000040A";
+	String COLD_High_Limit_GCD_PRIME = "0.000030A";
+	String COLD_High_Limit_HUB_PRIME = "0.000016A";
+	String COLD_High_Limit_GND_PRIME = "0.00004A";
+	String COLD_High_Limit_PCD_TMUX_07_PRIME = "0.000060A";
+	
+	#Default
+	#String Default_High_Limit_BASE_PRIME = "0.000327A";
+	#String Default_High_Limit_CPU_PRIME	= "0.000020A";
+	#String Default_High_Limit_CPU1_PRIME = "0.000020A";
+	#String Default_High_Limit_GCD_PRIME	= "0.000016A";
+	#String Default_High_Limit_HUB_PRIME	= "0.000008A";
+	#String Default_High_Limit_GND_PRIME	= "0.00006A";
+	#String Default_High_Limit_PCD_TMUX_07_PRIME	= "0.000030A";
+	String Default_High_Limit_BASE_PRIME = "0.0006A";
+	String Default_High_Limit_CPU_PRIME	= "0.000040A";
+	String Default_High_Limit_CPU1_PRIME = "0.000040A";
+	String Default_High_Limit_GCD_PRIME	= "0.000032A";
+	String Default_High_Limit_HUB_PRIME	= "0.000016A";
+	String Default_High_Limit_GND_PRIME	= "0.00012A";
+	String Default_High_Limit_PCD_TMUX_07_PRIME	= "0.000060A";
+
+}
+
+UserVars TPI_EDM_XXX_LowLimit
+{
+	#HOT
+	String HOT_Low_Limit_BASE_PRIME = "0.000178A";
+	String HOT_Low_Limit_CPU_PRIME = "0.000001A";
+	String HOT_Low_Limit_CPU1_PRIME = "0.000001A";
+	String HOT_Low_Limit_GCD_PRIME = "0.000007A";
+	String HOT_Low_Limit_HUB_PRIME = "0.000002A";
+	String HOT_Low_Limit_GND_PRIME = "0.000003A";
+	String HOT_Low_Limit_PCD_TMUX_07_PRIME = "0.000006A";
+	
+	#COLD
+	String COLD_Low_Limit_BASE_PRIME = "0.000217A";
+	String COLD_Low_Limit_CPU_PRIME = "0.000001A";
+	String COLD_Low_Limit_CPU1_PRIME = "0.000001A";
+	String COLD_Low_Limit_GCD_PRIME = "0.000008";
+	String COLD_Low_Limit_HUB_PRIME = "0.000003A";
+	String COLD_Low_Limit_GND_PRIME = "0.000001A";
+	String COLD_Low_Limit_PCD_TMUX_07_PRIME = "0.000008A";
+	
+	#Default
+	String Default_Low_Limit_BASE_PRIME	= "0.000178A";
+	String Default_Low_Limit_CPU_PRIME = "0.000001A";
+	String Default_Low_Limit_CPU1_PRIME = "0.000001A";
+	String Default_Low_Limit_GCD_PRIME = "0.000007A";
+	String Default_Low_Limit_HUB_PRIME = "0.000002A";
+	String Default_Low_Limit_GND_PRIME = "0.000003A";
+	String Default_Low_Limit_PCD_TMUX_07_PRIME = "0.000006A";
+}
+
+UserVars TPI_EDM_XXX_HighLimit_S16C
+{
+	#HOT
+	#String HOT_High_Limit_BASE_PRIME = "0.000327A";
+	#String HOT_High_Limit_CPU_PRIME = "0.000020A";
+	#String HOT_High_Limit_CPU1_PRIME = "0.000020A";
+	#String HOT_High_Limit_GCD_PRIME = "0.000016A";
+	#String HOT_High_Limit_HUB_PRIME = "0.000008A";
+	#String HOT_High_Limit_GND_PRIME = "0.00006A";
+	#String HOT_High_Limit_PCD_TMUX_07_PRIME = "0.000030A";
+	String HOT_High_Limit_BASE_PRIME = "0.00043095A";
+	String HOT_High_Limit_CPU_PRIME = "0.00000500325A";
+	String HOT_High_Limit_CPU1_PRIME = "0.00009A";
+	String HOT_High_Limit_GCD_PRIME = "0.0000137459A";
+	String HOT_High_Limit_HUB_PRIME = "0.00000659552A";
+	String HOT_High_Limit_GND_PRIME = "0.00012A";
+	String HOT_High_Limit_PCD_TMUX_07_PRIME = "0.00001132A";
+	
+	#COLD
+	#String COLD_High_Limit_BASE_PRIME = "0.000426A";
+	#String COLD_High_Limit_CPU_PRIME = "0.000020A";
+	#String COLD_High_Limit_CPU1_PRIME = "0.000020A";
+	#String COLD_High_Limit_GCD_PRIME = "0.000017A";
+	#String COLD_High_Limit_HUB_PRIME = "0.000008A";
+	#String COLD_High_Limit_GND_PRIME = "0.00002A";
+	#String COLD_High_Limit_PCD_TMUX_07_PRIME = "0.000030A";
+	String COLD_High_Limit_BASE_PRIME = "0.00056429A";
+	String COLD_High_Limit_CPU_PRIME = "0.00000568306A";
+	String COLD_High_Limit_CPU1_PRIME = "0.00004A";
+	String COLD_High_Limit_GCD_PRIME = "0.0000156541A";
+	String COLD_High_Limit_HUB_PRIME = "0.00000727115A";
+	String COLD_High_Limit_GND_PRIME = "0.00004A";
+	String COLD_High_Limit_PCD_TMUX_07_PRIME = "0.0000127862A";
+	
+	#Default
+	#String Default_High_Limit_BASE_PRIME = "0.000327A";
+	#String Default_High_Limit_CPU_PRIME = "0.000020A";
+	#String Default_High_Limit_CPU1_PRIME = "0.000020A";
+	#String Default_High_Limit_GCD_PRIME = "0.000016A";
+	#String Default_High_Limit_HUB_PRIME = "0.000008A";
+	#String Default_High_Limit_GND_PRIME = "0.00006A";
+	#String Default_High_Limit_PCD_TMUX_07_PRIME = "0.000030A";
+	String Default_High_Limit_BASE_PRIME = "0.0009A";
+	String Default_High_Limit_CPU_PRIME = "0.00003A";
+	String Default_High_Limit_CPU1_PRIME = "0.00003A";
+	String Default_High_Limit_GCD_PRIME = "0.00002A";
+	String Default_High_Limit_HUB_PRIME = "0.00002A";
+	String Default_High_Limit_GND_PRIME = "0.00002A";
+	String Default_High_Limit_PCD_TMUX_07_PRIME = "0.00003A";
+
+}
+
+UserVars TPI_EDM_XXX_LowLimit_S16C
+{
+	#HOT
+	String HOT_Low_Limit_BASE_PRIME = "0.00028484A";
+	String HOT_Low_Limit_CPU_PRIME = "0.000000802928A";
+	String HOT_Low_Limit_CPU1_PRIME = "0.000001A";
+	String HOT_Low_Limit_GCD_PRIME = "0.00000821704A";
+	String HOT_Low_Limit_HUB_PRIME = "0.0000023454A";
+	String HOT_Low_Limit_GND_PRIME = "0.000001A";
+	String HOT_Low_Limit_PCD_TMUX_07_PRIME = "0.00000736689A";
+	
+	#COLD
+	String COLD_Low_Limit_BASE_PRIME = "0.00035649A";
+	String COLD_Low_Limit_CPU_PRIME = "0.00000129505A";
+	String COLD_Low_Limit_CPU1_PRIME = "0.000001A";
+	String COLD_Low_Limit_GCD_PRIME = "0.00000953531A";
+	String COLD_Low_Limit_HUB_PRIME = "0.00000300367A";
+	String COLD_Low_Limit_GND_PRIME = "0.000001A";
+	String COLD_Low_Limit_PCD_TMUX_07_PRIME = "0.00000843149A";
+	
+	#Default
+	String Default_Low_Limit_BASE_PRIME = "0.000001A";
+	String Default_Low_Limit_CPU_PRIME = "0.000001A";
+	String Default_Low_Limit_CPU1_PRIME = "0.000001A";
+	String Default_Low_Limit_GCD_PRIME = "0.000001A";
+	String Default_Low_Limit_HUB_PRIME = "0.000001A";
+	String Default_Low_Limit_GND_PRIME = "0.000001A";
+	String Default_Low_Limit_PCD_TMUX_07_PRIME = "0.000001A";
+
+}
+
+UserVars TPI_EDM_XXX_Desktop_Limit
+{
+	String TPI_EDM_XXX_High_Default = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("0.0003A","0.000001A","0.000001A");
+	String TPI_EDM_XXX_High_BASE = __shared__::TpRule.If_CLASS_NVL_S16C(TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_HighLimit_S16C.HOT_High_Limit_BASE_PRIME, TPI_EDM_XXX_HighLimit_S16C.COLD_High_Limit_BASE_PRIME, TPI_EDM_XXX_HighLimit_S16C.Default_High_Limit_BASE_PRIME), TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_HighLimit.HOT_High_Limit_BASE_PRIME, TPI_EDM_XXX_HighLimit.COLD_High_Limit_BASE_PRIME, TPI_EDM_XXX_HighLimit.Default_High_Limit_BASE_PRIME));
+	String TPI_EDM_XXX_High_CPU = __shared__::TpRule.If_CLASS_NVL_S16C(TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_HighLimit_S16C.HOT_High_Limit_CPU_PRIME, TPI_EDM_XXX_HighLimit_S16C.COLD_High_Limit_CPU_PRIME, TPI_EDM_XXX_HighLimit_S16C.Default_High_Limit_CPU_PRIME), TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_HighLimit.HOT_High_Limit_CPU_PRIME, TPI_EDM_XXX_HighLimit.COLD_High_Limit_CPU_PRIME, TPI_EDM_XXX_HighLimit.Default_High_Limit_CPU_PRIME));
+	String TPI_EDM_XXX_High_CPU1 = __shared__::TpRule.If_CLASS_NVL_S16C(TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_HighLimit_S16C.HOT_High_Limit_CPU1_PRIME, TPI_EDM_XXX_HighLimit_S16C.COLD_High_Limit_CPU1_PRIME, TPI_EDM_XXX_HighLimit_S16C.Default_High_Limit_CPU1_PRIME), TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_HighLimit.HOT_High_Limit_CPU1_PRIME, TPI_EDM_XXX_HighLimit.COLD_High_Limit_CPU1_PRIME, TPI_EDM_XXX_HighLimit.Default_High_Limit_CPU1_PRIME));
+	String TPI_EDM_XXX_High_GCD = __shared__::TpRule.If_CLASS_NVL_S16C(TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_HighLimit_S16C.HOT_High_Limit_GCD_PRIME, TPI_EDM_XXX_HighLimit_S16C.COLD_High_Limit_GCD_PRIME, TPI_EDM_XXX_HighLimit_S16C.Default_High_Limit_GCD_PRIME), TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_HighLimit.HOT_High_Limit_GCD_PRIME, TPI_EDM_XXX_HighLimit.COLD_High_Limit_GCD_PRIME, TPI_EDM_XXX_HighLimit.Default_High_Limit_GCD_PRIME));
+	String TPI_EDM_XXX_High_HUB = __shared__::TpRule.If_CLASS_NVL_S16C(TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_HighLimit_S16C.HOT_High_Limit_HUB_PRIME, TPI_EDM_XXX_HighLimit_S16C.COLD_High_Limit_HUB_PRIME, TPI_EDM_XXX_HighLimit_S16C.Default_High_Limit_HUB_PRIME), TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_HighLimit.HOT_High_Limit_HUB_PRIME, TPI_EDM_XXX_HighLimit.COLD_High_Limit_HUB_PRIME, TPI_EDM_XXX_HighLimit.Default_High_Limit_HUB_PRIME));
+	String TPI_EDM_XXX_High_GND = __shared__::TpRule.If_CLASS_NVL_S16C(TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_HighLimit_S16C.HOT_High_Limit_GND_PRIME, TPI_EDM_XXX_HighLimit_S16C.COLD_High_Limit_GND_PRIME, TPI_EDM_XXX_HighLimit_S16C.Default_High_Limit_GND_PRIME), TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_HighLimit.HOT_High_Limit_GND_PRIME, TPI_EDM_XXX_HighLimit.COLD_High_Limit_GND_PRIME, TPI_EDM_XXX_HighLimit.Default_High_Limit_GND_PRIME));
+	String TPI_EDM_XXX_High_PCD = __shared__::TpRule.If_CLASS_NVL_S16C(TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_HighLimit_S16C.HOT_High_Limit_PCD_TMUX_07_PRIME, TPI_EDM_XXX_HighLimit_S16C.COLD_High_Limit_PCD_TMUX_07_PRIME, TPI_EDM_XXX_HighLimit_S16C.Default_High_Limit_PCD_TMUX_07_PRIME), TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_HighLimit.HOT_High_Limit_PCD_TMUX_07_PRIME, TPI_EDM_XXX_HighLimit.COLD_High_Limit_PCD_TMUX_07_PRIME, TPI_EDM_XXX_HighLimit.Default_High_Limit_PCD_TMUX_07_PRIME));
+
+	
+	String TPI_EDM_XXX_Low_Default = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("0.000003A","0.000001A","0.000001A");
+	String TPI_EDM_XXX_Low_BASE = __shared__::TpRule.If_CLASS_NVL_S16C(TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_LowLimit_S16C.HOT_Low_Limit_BASE_PRIME, TPI_EDM_XXX_LowLimit_S16C.COLD_Low_Limit_BASE_PRIME, TPI_EDM_XXX_LowLimit_S16C.Default_Low_Limit_BASE_PRIME), TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_LowLimit.HOT_Low_Limit_BASE_PRIME, TPI_EDM_XXX_LowLimit.COLD_Low_Limit_BASE_PRIME, TPI_EDM_XXX_LowLimit.Default_Low_Limit_BASE_PRIME));
+	String TPI_EDM_XXX_Low_CPU = __shared__::TpRule.If_CLASS_NVL_S16C(TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_LowLimit_S16C.HOT_Low_Limit_CPU_PRIME, TPI_EDM_XXX_LowLimit_S16C.COLD_Low_Limit_CPU_PRIME, TPI_EDM_XXX_LowLimit_S16C.Default_Low_Limit_CPU_PRIME), TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_LowLimit.HOT_Low_Limit_CPU_PRIME, TPI_EDM_XXX_LowLimit.COLD_Low_Limit_CPU_PRIME, TPI_EDM_XXX_LowLimit.Default_Low_Limit_CPU_PRIME));
+	String TPI_EDM_XXX_Low_CPU1 = __shared__::TpRule.If_CLASS_NVL_S16C(TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_LowLimit_S16C.HOT_Low_Limit_CPU1_PRIME, TPI_EDM_XXX_LowLimit_S16C.COLD_Low_Limit_CPU1_PRIME, TPI_EDM_XXX_LowLimit_S16C.Default_Low_Limit_CPU1_PRIME), TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_LowLimit.HOT_Low_Limit_CPU1_PRIME, TPI_EDM_XXX_LowLimit.COLD_Low_Limit_CPU1_PRIME, TPI_EDM_XXX_LowLimit.Default_Low_Limit_CPU1_PRIME));
+	String TPI_EDM_XXX_Low_GCD = __shared__::TpRule.If_CLASS_NVL_S16C(TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_LowLimit_S16C.HOT_Low_Limit_GCD_PRIME, TPI_EDM_XXX_LowLimit_S16C.COLD_Low_Limit_GCD_PRIME, TPI_EDM_XXX_LowLimit_S16C.Default_Low_Limit_GCD_PRIME), TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_LowLimit.HOT_Low_Limit_GCD_PRIME, TPI_EDM_XXX_LowLimit.COLD_Low_Limit_GCD_PRIME, TPI_EDM_XXX_LowLimit.Default_Low_Limit_GCD_PRIME));
+	String TPI_EDM_XXX_Low_HUB = __shared__::TpRule.If_CLASS_NVL_S16C(TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_LowLimit_S16C.HOT_Low_Limit_HUB_PRIME, TPI_EDM_XXX_LowLimit_S16C.COLD_Low_Limit_HUB_PRIME, TPI_EDM_XXX_LowLimit_S16C.Default_Low_Limit_HUB_PRIME), TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_LowLimit.HOT_Low_Limit_HUB_PRIME, TPI_EDM_XXX_LowLimit.COLD_Low_Limit_HUB_PRIME, TPI_EDM_XXX_LowLimit.Default_Low_Limit_HUB_PRIME));
+	String TPI_EDM_XXX_Low_GND = __shared__::TpRule.If_CLASS_NVL_S16C(TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_LowLimit_S16C.HOT_Low_Limit_GND_PRIME, TPI_EDM_XXX_LowLimit_S16C.COLD_Low_Limit_GND_PRIME, TPI_EDM_XXX_LowLimit_S16C.Default_Low_Limit_GND_PRIME), TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_LowLimit.HOT_Low_Limit_GND_PRIME, TPI_EDM_XXX_LowLimit.COLD_Low_Limit_GND_PRIME, TPI_EDM_XXX_LowLimit.Default_Low_Limit_GND_PRIME));
+	String TPI_EDM_XXX_Low_PCD = __shared__::TpRule.If_CLASS_NVL_S16C(TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_LowLimit_S16C.HOT_Low_Limit_PCD_TMUX_07_PRIME, TPI_EDM_XXX_LowLimit_S16C.COLD_Low_Limit_PCD_TMUX_07_PRIME, TPI_EDM_XXX_LowLimit_S16C.Default_Low_Limit_PCD_TMUX_07_PRIME), TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XXX_LowLimit.HOT_Low_Limit_PCD_TMUX_07_PRIME, TPI_EDM_XXX_LowLimit.COLD_Low_Limit_PCD_TMUX_07_PRIME, TPI_EDM_XXX_LowLimit.Default_Low_Limit_PCD_TMUX_07_PRIME));
+
+}

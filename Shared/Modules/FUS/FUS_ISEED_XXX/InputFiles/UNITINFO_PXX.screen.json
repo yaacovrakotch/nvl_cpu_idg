@@ -1,0 +1,97 @@
+{
+  "Screen_Config": 
+  [
+    {
+      "TestName" : "STATUS_SET_PIC8_PrimeCtvDecoderTestMethod",
+      "TestConfig": [
+        [ "FUSEDOWNLOAD", "String", "SharedStorage", "DUT.G_PCD_STATUS_0_FUSE_PULL_DONE", "==", "Literal", "1", "REDFUSED", "2" ],
+        [ "REDFUSED", "String", "SharedStorage", "DUT.G_PCD_TAP_CTRL_INTEL_PC_PWD_PROV", "==", "Literal", "1", "1", "SETLG" ],
+        [ "SETLG", "String", "SharedStorage", "DUT.TAP_UNLOCK", "SET", "Literal", "LG", "3", "4" ]
+      ]
+    },    
+    {
+      "TestName" : "SIM_STATUS_SET_PIC8_PrimeCtvDecoderTestMethod",
+      "TestConfig": 
+      [
+        ["SET_G_PCD_STATUS_0_FUSE_PULL_DONE",       "String",   "SharedStorage",    "DUT.G_PCD_STATUS_0_FUSE_PULL_DONE",        "SET",  "LITERAL",  "1",    "SET_G_PCD_TAP_CTRL_INTEL_PC_PWD_PROV", "2"],
+        ["SET_G_PCD_TAP_CTRL_INTEL_PC_PWD_PROV",    "String",   "SharedStorage",    "DUT.G_PCD_TAP_CTRL_INTEL_PC_PWD_PROV",     "SET",  "LITERAL",  "0",    "SET_G_PCD_STATUS_0_POLICY_OUTPUT",     "2"],
+        ["SET_G_PCD_STATUS_0_POLICY_OUTPUT",        "String",   "SharedStorage",    "DUT.G_PCD_STATUS_0_POLICY_OUTPUT",         "SET",  "LITERAL",  "99",    "FUSEDOWNLOAD",                     "2"],
+        ["FUSEDOWNLOAD",                        "String",   "SharedStorage",    "DUT.G_PCD_STATUS_0_FUSE_PULL_DONE",        "==",   "Literal",  "1",    "PCENABLE",                         "2"],
+        ["PCENABLE",                            "String",   "SharedStorage",    "DUT.G_PCD_TAP_CTRL_INTEL_PC_PWD_PROV",     "==",   "Literal",  "0",    "LGFUSED",                          "REDFUSED"],
+        ["LGFUSED",                             "String",   "SharedStorage",    "DUT.G_PCD_STATUS_0_POLICY_OUTPUT",         "==",   "Literal",  "46",    "3",                                "4"],
+        ["REDFUSED",                            "String",   "SharedStorage",    "DUT.G_PCD_STATUS_0_POLICY_OUTPUT",         "==",   "Literal",  "70",    "1",                                "4"]
+      ]
+    },	
+    {
+      "TestName" : "UNLOCK_SET_PIC8_PrimeCtvDecoderTestMethod",
+      "TestConfig": [
+        [ "LGUNLOCK", "String", "SharedStorage", "DUT.G_PCD_STATUS_0_POLICY_OUTPUT", "==", "Literal", "46", "1", "REDUNLOCK" ],
+        [ "REDUNLOCK", "String", "SharedStorage", "DUT.G_PCD_STATUS_0_POLICY_OUTPUT", "==", "Literal", "70", "1", "2" ]
+      ]
+    },	
+    {
+      "TestName" : "RED_KEY_split_by_32bits_MsbToLsb",
+      "TestConfig": [
+        [ "GETREDKEY", "String", "SharedStorage", "DUT.FUS_PCD_red_key_hex", "SET", "SharedStorage", "DUT.hCASIKT4426", "Test1", "2" ],
+        [ "Test1", "String", "SharedStorage", "DUT.FUS_PCD_data_hex_PAYLOAD_11_red", "SET", "EXPRESSION", "Substring([G.U.S.FUS_PCD_red_key_hex], 0, 8)", "Test2", "2" ],
+        [ "Test2", "String", "SharedStorage", "DUT.FUS_PCD_data_hex_PAYLOAD_10_red", "SET", "EXPRESSION", "Substring([G.U.S.FUS_PCD_red_key_hex], 8, 8)", "Test3", "2" ],
+        [ "Test3", "String", "SharedStorage", "DUT.FUS_PCD_data_hex_PAYLOAD_9_red", "SET", "EXPRESSION", "Substring([G.U.S.FUS_PCD_red_key_hex], 16, 8)", "Test4", "2" ],
+        [ "Test4", "String", "SharedStorage", "DUT.FUS_PCD_data_hex_PAYLOAD_8_red", "SET", "EXPRESSION", "Substring([G.U.S.FUS_PCD_red_key_hex], 24, 8)", "Test5", "2" ],
+        [ "Test5", "String", "SharedStorage", "DUT.FUS_PCD_data_hex_PAYLOAD_7_red", "SET", "EXPRESSION", "Substring([G.U.S.FUS_PCD_red_key_hex], 32, 8)", "Test6", "2" ],
+        [ "Test6", "String", "SharedStorage", "DUT.FUS_PCD_data_hex_PAYLOAD_6_red", "SET", "EXPRESSION", "Substring([G.U.S.FUS_PCD_red_key_hex], 40, 8)", "Test7", "2" ],
+        [ "Test7", "String", "SharedStorage", "DUT.FUS_PCD_data_hex_PAYLOAD_5_red", "SET", "EXPRESSION", "Substring([G.U.S.FUS_PCD_red_key_hex], 48, 8)", "Test8", "2" ],
+        [ "Test8", "String", "SharedStorage", "DUT.FUS_PCD_data_hex_PAYLOAD_4_red", "SET", "EXPRESSION", "Substring([G.U.S.FUS_PCD_red_key_hex], 56, 8)", "Test9", "2" ],
+        [ "Test9", "String", "SharedStorage", "DUT.FUS_PCD_data_hex_PAYLOAD_3_red", "SET", "EXPRESSION", "Substring([G.U.S.FUS_PCD_red_key_hex], 64, 8)", "Test10", "2" ],
+        [ "Test10", "String", "SharedStorage", "DUT.FUS_PCD_data_hex_PAYLOAD_2_red", "SET", "EXPRESSION", "Substring([G.U.S.FUS_PCD_red_key_hex], 72, 8)", "Test11", "2" ],
+        [ "Test11", "String", "SharedStorage", "DUT.FUS_PCD_data_hex_PAYLOAD_1_red", "SET", "EXPRESSION", "Substring([G.U.S.FUS_PCD_red_key_hex], 80, 8)", "Test12", "2" ],
+        [ "Test12", "String", "SharedStorage", "DUT.FUS_PCD_data_hex_PAYLOAD_0_red", "SET", "EXPRESSION", "Substring([G.U.S.FUS_PCD_red_key_hex], 88, 8)", "Test13", "2" ],
+        [ "Test13", "String", "SharedStorage", "DUT.FUS_PCD_data_bin_PAYLOAD_11_red", "SET", "EXPRESSION", "Reverse(Hex2Bin([G.U.S.FUS_PCD_data_hex_PAYLOAD_11_red], 32))", "Test14", "2" ],
+        [ "Test14", "String", "SharedStorage", "DUT.FUS_PCD_data_bin_PAYLOAD_10_red", "SET", "EXPRESSION", "Reverse(Hex2Bin([G.U.S.FUS_PCD_data_hex_PAYLOAD_10_red], 32))", "Test15", "2" ],
+        [ "Test15", "String", "SharedStorage", "DUT.FUS_PCD_data_bin_PAYLOAD_9_red", "SET", "EXPRESSION", "Reverse(Hex2Bin([G.U.S.FUS_PCD_data_hex_PAYLOAD_9_red], 32))", "Test16", "2" ],
+        [ "Test16", "String", "SharedStorage", "DUT.FUS_PCD_data_bin_PAYLOAD_8_red", "SET", "EXPRESSION", "Reverse(Hex2Bin([G.U.S.FUS_PCD_data_hex_PAYLOAD_8_red], 32))", "Test17", "2" ],
+        [ "Test17", "String", "SharedStorage", "DUT.FUS_PCD_data_bin_PAYLOAD_7_red", "SET", "EXPRESSION", "Reverse(Hex2Bin([G.U.S.FUS_PCD_data_hex_PAYLOAD_7_red], 32))", "Test18", "2" ],
+        [ "Test18", "String", "SharedStorage", "DUT.FUS_PCD_data_bin_PAYLOAD_6_red", "SET", "EXPRESSION", "Reverse(Hex2Bin([G.U.S.FUS_PCD_data_hex_PAYLOAD_6_red], 32))", "Test19", "2" ],
+        [ "Test19", "String", "SharedStorage", "DUT.FUS_PCD_data_bin_PAYLOAD_5_red", "SET", "EXPRESSION", "Reverse(Hex2Bin([G.U.S.FUS_PCD_data_hex_PAYLOAD_5_red], 32))", "Test20", "2" ],
+        [ "Test20", "String", "SharedStorage", "DUT.FUS_PCD_data_bin_PAYLOAD_4_red", "SET", "EXPRESSION", "Reverse(Hex2Bin([G.U.S.FUS_PCD_data_hex_PAYLOAD_4_red], 32))", "Test21", "2" ],
+        [ "Test21", "String", "SharedStorage", "DUT.FUS_PCD_data_bin_PAYLOAD_3_red", "SET", "EXPRESSION", "Reverse(Hex2Bin([G.U.S.FUS_PCD_data_hex_PAYLOAD_3_red], 32))", "Test22", "2" ],
+        [ "Test22", "String", "SharedStorage", "DUT.FUS_PCD_data_bin_PAYLOAD_2_red", "SET", "EXPRESSION", "Reverse(Hex2Bin([G.U.S.FUS_PCD_data_hex_PAYLOAD_2_red], 32))", "Test23", "2" ],
+        [ "Test23", "String", "SharedStorage", "DUT.FUS_PCD_data_bin_PAYLOAD_1_red", "SET", "EXPRESSION", "Reverse(Hex2Bin([G.U.S.FUS_PCD_data_hex_PAYLOAD_1_red], 32))", "Test24", "2" ],
+        [ "Test24", "String", "SharedStorage", "DUT.FUS_PCD_data_bin_PAYLOAD_0_red", "SET", "EXPRESSION", "Reverse(Hex2Bin([G.U.S.FUS_PCD_data_hex_PAYLOAD_0_red], 32))", "Test25", "2" ],
+        [ "Test25", "String", "SharedStorage", "DUT.lckstatus", "SET", "LITERAL", "RDULPCH", "Test26", "2" ],
+        [ "Test26", "String", "SharedStorage", "DUT.LCKSTATUS_PCD", "SET", "SharedStorage", "DUT.lckstatus", "1", "2" ]
+      ]
+    },
+    {
+      "TestName" : "LEG_KEY_split_by_32bits_MsbToLsb",
+      "TestConfig": [
+        [ "GETLEGKEY", "String", "SharedStorage", "DUT.FUS_PCD_leg_metal_key_hex", "SET", "LITERAL", "3DE585A9615A8E2EB7A24D32BCA0D41AB5A1D4E88A25228EB91ED6A8C61E368DB9594B81B8A63812BC2B5E12EB4D763E", "Test1", "2" ],
+        [ "Test1", "String", "SharedStorage", "DUT.FUS_PCD_data_hex_PAYLOAD_11_leg", "SET", "EXPRESSION", "Substring([G.U.S.FUS_PCD_leg_metal_key_hex], 0, 8)", "Test2", "2" ],
+        [ "Test2", "String", "SharedStorage", "DUT.FUS_PCD_data_hex_PAYLOAD_10_leg", "SET", "EXPRESSION", "Substring([G.U.S.FUS_PCD_leg_metal_key_hex], 8, 8)", "Test3", "2" ],
+        [ "Test3", "String", "SharedStorage", "DUT.FUS_PCD_data_hex_PAYLOAD_9_leg", "SET", "EXPRESSION", "Substring([G.U.S.FUS_PCD_leg_metal_key_hex], 16, 8)", "Test4", "2" ],
+        [ "Test4", "String", "SharedStorage", "DUT.FUS_PCD_data_hex_PAYLOAD_8_leg", "SET", "EXPRESSION", "Substring([G.U.S.FUS_PCD_leg_metal_key_hex], 24, 8)", "Test5", "2" ],
+        [ "Test5", "String", "SharedStorage", "DUT.FUS_PCD_data_hex_PAYLOAD_7_leg", "SET", "EXPRESSION", "Substring([G.U.S.FUS_PCD_leg_metal_key_hex], 32, 8)", "Test6", "2" ],
+        [ "Test6", "String", "SharedStorage", "DUT.FUS_PCD_data_hex_PAYLOAD_6_leg", "SET", "EXPRESSION", "Substring([G.U.S.FUS_PCD_leg_metal_key_hex], 40, 8)", "Test7", "2" ],
+        [ "Test7", "String", "SharedStorage", "DUT.FUS_PCD_data_hex_PAYLOAD_5_leg", "SET", "EXPRESSION", "Substring([G.U.S.FUS_PCD_leg_metal_key_hex], 48, 8)", "Test8", "2" ],
+        [ "Test8", "String", "SharedStorage", "DUT.FUS_PCD_data_hex_PAYLOAD_4_leg", "SET", "EXPRESSION", "Substring([G.U.S.FUS_PCD_leg_metal_key_hex], 56, 8)", "Test9", "2" ],
+        [ "Test9", "String", "SharedStorage", "DUT.FUS_PCD_data_hex_PAYLOAD_3_leg", "SET", "EXPRESSION", "Substring([G.U.S.FUS_PCD_leg_metal_key_hex], 64, 8)", "Test10", "2" ],
+        [ "Test10", "String", "SharedStorage", "DUT.FUS_PCD_data_hex_PAYLOAD_2_leg", "SET", "EXPRESSION", "Substring([G.U.S.FUS_PCD_leg_metal_key_hex], 72, 8)", "Test11", "2" ],
+        [ "Test11", "String", "SharedStorage", "DUT.FUS_PCD_data_hex_PAYLOAD_1_leg", "SET", "EXPRESSION", "Substring([G.U.S.FUS_PCD_leg_metal_key_hex], 80, 8)", "Test12", "2" ],
+        [ "Test12", "String", "SharedStorage", "DUT.FUS_PCD_data_hex_PAYLOAD_0_leg", "SET", "EXPRESSION", "Substring([G.U.S.FUS_PCD_leg_metal_key_hex], 88, 8)", "Test13", "2" ],
+        [ "Test13", "String", "SharedStorage", "DUT.FUS_PCD_data_bin_PAYLOAD_11_leg", "SET", "EXPRESSION", "Reverse(Hex2Bin([G.U.S.FUS_PCD_data_hex_PAYLOAD_11_leg], 32))", "Test14", "2" ],
+        [ "Test14", "String", "SharedStorage", "DUT.FUS_PCD_data_bin_PAYLOAD_10_leg", "SET", "EXPRESSION", "Reverse(Hex2Bin([G.U.S.FUS_PCD_data_hex_PAYLOAD_10_leg], 32))", "Test15", "2" ],
+        [ "Test15", "String", "SharedStorage", "DUT.FUS_PCD_data_bin_PAYLOAD_9_leg", "SET", "EXPRESSION", "Reverse(Hex2Bin([G.U.S.FUS_PCD_data_hex_PAYLOAD_9_leg], 32))", "Test16", "2" ],
+        [ "Test16", "String", "SharedStorage", "DUT.FUS_PCD_data_bin_PAYLOAD_8_leg", "SET", "EXPRESSION", "Reverse(Hex2Bin([G.U.S.FUS_PCD_data_hex_PAYLOAD_8_leg], 32))", "Test17", "2" ],
+        [ "Test17", "String", "SharedStorage", "DUT.FUS_PCD_data_bin_PAYLOAD_7_leg", "SET", "EXPRESSION", "Reverse(Hex2Bin([G.U.S.FUS_PCD_data_hex_PAYLOAD_7_leg], 32))", "Test18", "2" ],
+        [ "Test18", "String", "SharedStorage", "DUT.FUS_PCD_data_bin_PAYLOAD_6_leg", "SET", "EXPRESSION", "Reverse(Hex2Bin([G.U.S.FUS_PCD_data_hex_PAYLOAD_6_leg], 32))", "Test19", "2" ],
+        [ "Test19", "String", "SharedStorage", "DUT.FUS_PCD_data_bin_PAYLOAD_5_leg", "SET", "EXPRESSION", "Reverse(Hex2Bin([G.U.S.FUS_PCD_data_hex_PAYLOAD_5_leg], 32))", "Test20", "2" ],
+        [ "Test20", "String", "SharedStorage", "DUT.FUS_PCD_data_bin_PAYLOAD_4_leg", "SET", "EXPRESSION", "Reverse(Hex2Bin([G.U.S.FUS_PCD_data_hex_PAYLOAD_4_leg], 32))", "Test21", "2" ],
+        [ "Test21", "String", "SharedStorage", "DUT.FUS_PCD_data_bin_PAYLOAD_3_leg", "SET", "EXPRESSION", "Reverse(Hex2Bin([G.U.S.FUS_PCD_data_hex_PAYLOAD_3_leg], 32))", "Test22", "2" ],
+        [ "Test22", "String", "SharedStorage", "DUT.FUS_PCD_data_bin_PAYLOAD_2_leg", "SET", "EXPRESSION", "Reverse(Hex2Bin([G.U.S.FUS_PCD_data_hex_PAYLOAD_2_leg], 32))", "Test23", "2" ],
+        [ "Test23", "String", "SharedStorage", "DUT.FUS_PCD_data_bin_PAYLOAD_1_leg", "SET", "EXPRESSION", "Reverse(Hex2Bin([G.U.S.FUS_PCD_data_hex_PAYLOAD_1_leg], 32))", "Test24", "2" ],
+        [ "Test24", "String", "SharedStorage", "DUT.FUS_PCD_data_bin_PAYLOAD_0_leg", "SET", "EXPRESSION", "Reverse(Hex2Bin([G.U.S.FUS_PCD_data_hex_PAYLOAD_0_leg], 32))", "Test25", "2" ],
+        [ "Test25", "String", "SharedStorage", "DUT.lckstatus", "SET", "LITERAL", "LGULPCH", "Test26", "2" ],
+        [ "Test26", "String", "SharedStorage", "DUT.LCKSTATUS_PCD", "SET", "SharedStorage", "DUT.lckstatus", "1", "2" ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+Version 1.0;
+
+SelectorRuleCollection  TPI_END_XXX_Rules
+{
+	SelectorRule CTRL_X_SCREEN_K_ENDSOC_X_X_X_X_FLOWIDSNP_preinstance (Outcome1, Outcome2)
+	{
+		Outcome1 => contains(__shared__::LocationSets.CCOLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		#Outcome2 => contains(__shared__::LocationSets.CSM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome2;
+	}	
+	
+	SelectorRule CTRL_X_SCREEN_K_ENDSOC_X_X_X_X_FLOWIDSNP_bypass_global (Outcome1, Outcome2, Outcome3, Outcome4, Outcome5, Outcome6, Outcome7)
+	{
+		Outcome1 => contains(__shared__::LocationSets.FUSE,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome2 => contains(__shared__::LocationSets.RCHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome3 => contains(__shared__::LocationSets.CH_CHVM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome4 => contains(__shared__::LocationSets.CH_CRV,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome5 => contains(__shared__::LocationSets.CH_QUAL,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome6 => contains(__shared__::LocationSets.CH_QUAL_RV,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome7;
+	}	
+}
+UserVars TPI_END_XXX
+{
+}

@@ -1,0 +1,40 @@
+{
+	"configurations": [
+		{
+			"configurationName": "hptp_txpdn",
+			"description": "hptp test",
+			"layout": {
+				"layoutName": "hptp_txpdn",
+				"xAxisData": { "axisName": "txpdn",	"axisOffset": 0, "axisMultiplier": 1	},
+				"yAxisData": { "axisName": "y" },
+				"layers": [
+					{	"layerName": "y",	    "layerSize": 1 },
+					{ "layerName": "pin",	  "layerSize": 1 },
+					{ "layerName": "txpdn", "layerSize": 63	}
+				]
+			},
+				"output": {
+				"parametersInput": [
+					{"parameter": "Right", "lowLimit": 5,"highLimit": 63}
+					]
+				},
+			"sharedStorage": {
+				"parameters": "Right",
+				"tokenPrefix": "IP.HPTP"
+			},
+			"pinFinder": {
+				"layerName": "pin",
+				"pinFinderMap": [
+					{	"ctvPin": "IPC::CPU_TSTPRT_O_00", "bitSequence": [ "CPU_TSTPRT_O_00" ] },
+					{	"ctvPin": "IPC::CPU_TSTPRT_O_01", "bitSequence": [ "CPU_TSTPRT_O_01" ] },
+                    {	"ctvPin": "IPC::CPU_TSTPRT_O_02", "bitSequence": [ "CPU_TSTPRT_O_02" ] },
+                    {	"ctvPin": "IPC::CPU_TSTPRT_O_03", "bitSequence": [ "CPU_TSTPRT_O_03" ] },
+                    {	"ctvPin": "IPC::CPU_TSTPRT_O_04", "bitSequence": [ "CPU_TSTPRT_O_04" ] },
+                    {	"ctvPin": "IPC::CPU_TSTPRT_O_05", "bitSequence": [ "CPU_TSTPRT_O_05" ] },
+                    {	"ctvPin": "IPC::CPU_TSTPRT_O_06", "bitSequence": [ "CPU_TSTPRT_O_06" ] },
+                    {	"ctvPin": "IPC::CPU_TSTPRT_O_07", "bitSequence": [ "CPU_TSTPRT_O_07" ] }
+				] 
+			}     
+		}         
+	]             
+}                 

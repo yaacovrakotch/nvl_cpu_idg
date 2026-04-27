@@ -1,0 +1,561 @@
+{
+	"Version": "1.0",
+	"DiePinDefinitions": {
+		"U1.U5": {
+			"CtvPinMapping": {
+				"xx_cpu_hvm_tap_tdo": "IPC::CPU_TDO"
+			},
+      "DpsPinToDomains": {
+        "vccring": "HV01_08_0P85_VCCR",
+        "vcccore": "HV04_04_0P85_VCCIA",
+        "vccmlc": "HV04_04_0P85_VCCIA",
+        "vnnaon":  "HV03_02_0P77_VNNAON"
+      }
+		}
+	},
+	"UseDieNameInTag": true,
+	"DefaultTagDefinition": {
+		"HryTagsByType": {
+			"Hry": {
+				"SharedStorage": "HRY_RAWSTR_MBIST",
+				"Ituff": "HRY_RAWSTR_MBIST",
+				"Dff": "{'ALL': ''}"
+			},
+			"KitchenSink": {
+				"SharedStorage": "",
+				"Dff": "{'ALL': ''}",
+				"Ituff": ""
+			}
+		},
+    //"Recovery": {
+    //  "SharedStorage": "ArrCoreRecovery",
+    //  "Dff": ""
+    //},
+		"Vmin": {
+			"SharedStorage": "MbistVminPerMem",
+			"Ituff": "PER_MEM_VMIN"
+		},
+		"RegisterNames": {
+			"HCS": "CPU0.VF_Heap_Data_Gap.VF_Heap_Data_Gap",
+			"FDS": "CPU0.VF_Heap_Descriptor_Gap.VF_Heap_Descriptor_Gap"
+		},
+        "BisrChains": {
+            "CPU_BP90": {
+                "SharedStorage": "S2BTDAT",
+                "Dff": { "ALL": "S2BTDAT" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_2/bisr_fuse_bisr_bottom_llc_data"
+                }
+            },
+            "CPU_BP91": {
+                "SharedStorage": "S2BTRF",
+                "Dff": { "ALL": "S2BTRF" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_2/bisr_fuse_bisr_bottom_llc_rf"
+                }
+            },
+            "CPU_BP92": {
+                "SharedStorage": "S2BTTAG",
+                "Dff": { "ALL": "S2BTTAG" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_2/bisr_fuse_bisr_bottom_llc_tag"
+                }
+            },
+            "CPU_BP93": {
+                "SharedStorage": "S2TPDAT",
+                "Dff": { "ALL": "S2TPDAT" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_2/bisr_fuse_bisr_top_llc_data"
+                }
+            },
+            "CPU_BP94": {
+                "SharedStorage": "S2TPRF",
+                "Dff": { "ALL": "S2TPRF" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_2/bisr_fuse_bisr_top_llc_rf"
+                }
+            },
+            "CPU_BP95": {
+                "SharedStorage": "S2TPTAG",
+                "Dff": { "ALL": "S2TPTAG" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_2/bisr_fuse_bisr_top_llc_tag"
+                }
+            },
+            "CPU_BP106": {
+                "SharedStorage": "C0B5PMS",
+                "Dff": { "ALL": "C0B5PMS" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "core0_fuse/core_fuse_core_fuse_pma_BISR5_PMUCS_VCCSA"
+                }
+            },
+            "CPU_BP107": {
+                "SharedStorage": "C0B4RF0",
+                "Dff": { "ALL": "C0B4RF0" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "core0_fuse/core_fuse_core_fuse_misc_core0_BISR4_OTHER_RF"
+                }
+            },
+            "CPU_BP108": {
+                "SharedStorage": "C0B4RF1",
+                "Dff": { "ALL": "C0B4RF1" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "core0_fuse/core_fuse_core_fuse_misc_core1_BISR4_OTHER_RF"
+                }
+            },
+            "CPU_BP109": {
+                "SharedStorage": "C0B1MRF",
+                "Dff": { "ALL": "C0B1MRF" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "core0_fuse/core_fuse_core_fuse_misc_bisr1_mlc_rf"
+                }
+            },
+            "CPU_BP110": {
+                "SharedStorage": "C0B2MLC",
+                "Dff": { "ALL": "C0B2MLC" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "core0_fuse/core_fuse_core_fuse_misc_bisr2_mlc_sram"
+                }
+            },
+            "CPU_BP111": {
+                "SharedStorage": "C0B3MLC",
+                "Dff": { "ALL": "C0B3MLC" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "core0_fuse/core_fuse_core_fuse_misc_bisr3_mlc_sram"
+                }
+            },
+            "CPU_BP112": {
+                "SharedStorage": "C1B5PMS",
+                "Dff": { "ALL": "C1B5PMS" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "core1_fuse/core_fuse_core_fuse_pma_BISR5_PMUCS_VCCSA"
+                }
+            },
+            "CPU_BP113": {
+                "SharedStorage": "C1B4RF0",
+                "Dff": { "ALL": "C1B4RF0" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "core1_fuse/core_fuse_core_fuse_misc_core0_BISR4_OTHER_RF"
+                }
+            },
+            "CPU_BP114": {
+                "SharedStorage": "C1B4RF1",
+                "Dff": { "ALL": "C1B4RF1" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "core1_fuse/core_fuse_core_fuse_misc_core1_BISR4_OTHER_RF"
+                }
+            },
+            "CPU_BP115": {
+                "SharedStorage": "C1B1MRF",
+                "Dff": { "ALL": "C1B1MRF" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "core1_fuse/core_fuse_core_fuse_misc_bisr1_mlc_rf"
+                }
+            },
+            "CPU_BP116": {
+                "SharedStorage": "C1B2MLC",
+                "Dff": { "ALL": "C1B2MLC" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "core1_fuse/core_fuse_core_fuse_misc_bisr2_mlc_sram"
+                }
+            },
+            "CPU_BP117": {
+                "SharedStorage": "C1B3MLC",
+                "Dff": { "ALL": "C1B3MLC" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "core1_fuse/core_fuse_core_fuse_misc_bisr3_mlc_sram"
+                }
+            },
+            "CPU_BP118": {
+                "SharedStorage": "S0BTDAT",
+                "Dff": { "ALL": "S0BTDAT" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_0/bisr_fuse_bisr_bottom_llc_data"
+                }
+            },
+            "CPU_BP119": {
+                "SharedStorage": "S0BTRF",
+                "Dff": { "ALL": "S0BTRF" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_0/bisr_fuse_bisr_bottom_llc_rf"
+                }
+            },
+            "CPU_BP120": {
+                "SharedStorage": "S0BTTAG",
+                "Dff": { "ALL": "S0BTTAG" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_0/bisr_fuse_bisr_bottom_llc_tag"
+                }
+            },
+            "CPU_BP121": {
+                "SharedStorage": "S0TPDAT",
+                "Dff": { "ALL": "S0TPDAT" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_0/bisr_fuse_bisr_top_llc_data"
+                }
+            },
+            "CPU_BP122": {
+                "SharedStorage": "S0TPRF",
+                "Dff": { "ALL": "S0TPRF" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_0/bisr_fuse_bisr_top_llc_rf"
+                }
+            },
+            "CPU_BP123": {
+                "SharedStorage": "S0TPTAG",
+                "Dff": { "ALL": "S0TPTAG" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_0/bisr_fuse_bisr_top_llc_tag"
+                }
+            },
+            "CPU_BP134": {
+                "SharedStorage": "S1BTDAT",
+                "Dff": { "ALL": "S1BTDAT" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_1/bisr_fuse_bisr_bottom_llc_data"
+                }
+            },
+            "CPU_BP135": {
+                "SharedStorage": "S1BTRF",
+                "Dff": { "ALL": "S1BTRF" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_1/bisr_fuse_bisr_bottom_llc_rf"
+                }
+            },
+            "CPU_BP136": {
+                "SharedStorage": "S1BTTAG",
+                "Dff": { "ALL": "S1BTTAG" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_1/bisr_fuse_bisr_bottom_llc_tag"
+                }
+            },
+            "CPU_BP137": {
+                "SharedStorage": "S1TPDAT",
+                "Dff": { "ALL": "S1TPDAT" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_1/bisr_fuse_bisr_top_llc_data"
+                }
+            },
+            "CPU_BP138": {
+                "SharedStorage": "S1TPRF",
+                "Dff": { "ALL": "S1TPRF" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_1/bisr_fuse_bisr_top_llc_rf"
+                }
+            },
+            "CPU_BP139": {
+                "SharedStorage": "S1TPTAG",
+                "Dff": { "ALL": "S1TPTAG" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_1/bisr_fuse_bisr_top_llc_tag"
+                }
+            },
+            "CPU_BP264": {
+                "SharedStorage": "S3BTDAT",
+                "Dff": { "ALL": "S3BTDAT" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_3/bisr_fuse_bisr_bottom_llc_data"
+                }
+            },
+            "CPU_BP265": {
+                "SharedStorage": "S3BTRF",
+                "Dff": { "ALL": "S3BTRF"},
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_3/bisr_fuse_bisr_bottom_llc_rf"
+                }
+            },
+            "CPU_BP266": {
+                "SharedStorage": "S3BTTAG",
+                "Dff": { "ALL": "S3BTTAG" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_3/bisr_fuse_bisr_bottom_llc_tag"
+                }
+            },
+            "CPU_BP267": {
+                "SharedStorage": "S3TPDAT",
+                "Dff": { "ALL": "S3TPDAT" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_3/bisr_fuse_bisr_top_llc_data"
+                }
+            },
+            "CPU_BP268": {
+                "SharedStorage": "S3TPRF",
+                "Dff": { "ALL": "S3TPRF" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_3/bisr_fuse_bisr_top_llc_rf"
+                }
+            },
+            "CPU_BP269": {
+                "SharedStorage": "S3TPTAG",
+                "Dff": { "ALL": "S3TPTAG" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_3/bisr_fuse_bisr_top_llc_tag"
+                }
+            },
+            "CPU_BP280": {
+                "SharedStorage": "S4BTDAT",
+                "Dff": { "ALL": "S4BTDAT" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_4/bisr_fuse_bisr_bottom_llc_data"
+                }
+            },
+            "CPU_BP281": {
+                "SharedStorage": "S4BTRF",
+                "Dff": { "ALL": "S4BTRF" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_4/bisr_fuse_bisr_bottom_llc_rf"
+                }
+            },
+            "CPU_BP282": {
+                "SharedStorage": "S4BTTAG",
+                "Dff": { "ALL": "S4BTTAG" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_4/bisr_fuse_bisr_bottom_llc_tag"
+                }
+            },
+            "CPU_BP283": {
+                "SharedStorage": "S4TPDAT",
+                "Dff": { "ALL": "S4TPDAT" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_4/bisr_fuse_bisr_top_llc_data"
+                }
+            },
+            "CPU_BP284": {
+                "SharedStorage": "S4TPRF",
+                "Dff": { "ALL": "S4TPRF" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_4/bisr_fuse_bisr_top_llc_rf"
+                }
+            },
+            "CPU_BP285": {
+                "SharedStorage": "S4TPTAG",
+                "Dff": { "ALL": "S4TPTAG" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "cbopair_fuse_4/bisr_fuse_bisr_top_llc_tag"
+                }
+            },
+            "CPU_BP150": {
+                "SharedStorage": "MBDMU0",
+                "Dff": { "ALL": "MBDMU0" },
+                "PaddingChar": "0",
+                "Ituff": "",
+                "VfdmReverse":true,
+                "BisrVirtualFuse": {
+                    "NameSpace": "CPU0",
+                    "Tag": "",
+                    "FuseName": "dmu_fuse/dmu_fuses_SSA_REDUNDANCY6,dmu_fuse/dmu_fuses_SSA_REDUNDANCY5,dmu_fuse/dmu_fuses_SSA_REDUNDANCY4,dmu_fuse/dmu_fuses_SSA_REDUNDANCY3,dmu_fuse/dmu_fuses_SSA_REDUNDANCY2,dmu_fuse/dmu_fuses_SSA_REDUNDANCY1,dmu_fuse/dmu_fuses_SSA_REDUNDANCY0"
+                }                
+            }
+        }
+    }
+}

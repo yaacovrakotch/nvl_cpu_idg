@@ -1,0 +1,335 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan DRV_RESET_CKX;
+
+
+# Test Counter Definition
+
+Counters
+{
+    n19002000_fail_CTRL_X_UF_E_INIT_X_X_X_X_PINMAP_DRVCDIE_0,
+    n19002001_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE_0,
+    n19002002_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE_2,
+    n19002003_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE_3,
+    n19002004_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE_4,
+    n19002005_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE_5,
+    n19002006_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER_0,
+    n19002007_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER_2,
+    n19002008_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER_3,
+    n19002009_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER_4,
+    n19002010_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER_5,
+    n19002011_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER2_0,
+    n19002012_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER2_2,
+    n19002013_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER2_3,
+    n19002014_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER2_4,
+    n19002015_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER2_5,
+    n19002016_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE2_0,
+    n19002017_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE2_2,
+    n19002018_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE2_3,
+    n19002019_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE2_4,
+    n19002020_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE2_5
+} # End of Test Counter Definition
+
+# BEGIN MTPL COMMENT SECTION 
+
+# pymtpl source tag: pymtpl_v25ww28p5_rev2
+# generation date/time: 2025-07-11 15:29:47
+# generation type: CDIE_816_CLASS_CKX
+# pymtpl source sha id: 6f7bf3e072fd35dfef4ebb70fb59d4097e985bb3
+
+# END MTPL COMMENT SECTION 
+
+CSharpTest PrimePauseTestMethod RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE
+{
+    BypassPort = __shared__::TpRule.If_48(1,__shared__::TpRule.If_C40(1,-1));
+    SetPointsPlistMode = "Global";
+    SetPointsPreInstance = __shared__::TpRule.If_CLASS_NVL_S52C("MCdrv:dlvrmode:class_mode,MCdrv:dlvrvoutpwrgood_local:class_mode,MCPdrv:dlvrmode:class_mode,MCPdrv:dlvrvoutpwrgood_local:class_mode,MNCdrv:dlvrmode:class_mode,MNCdrv:dlvrvoutpwrgood_local:class_mode,MNCdrv:dlvrmode_CPU1:class_mode,MNCdrv:dlvrvoutpwrgood_local_CPU1:class_mode","MCdrv:dlvrmode:class_mode,MCdrv:dlvrvoutpwrgood_local:class_mode,MCPdrv:dlvrmode:class_mode,MCPdrv:dlvrvoutpwrgood_local:class_mode,MNCdrv:dlvrmode:class_mode,MNCdrv:dlvrvoutpwrgood_local:class_mode");
+    SleepTime = 1;
+}
+
+CSharpTest PrimePauseTestMethod RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER
+{
+    BypassPort = __shared__::TpRule.If_S28_S52_HX28_P16C_H16C_S16C_DS28C(-1,1,-1,1,1,1,-1,1);
+    SetPointsPlistMode = "Global";
+    SetPointsPreInstance = "MCdrv:R1_Add_RPT_JNZ:enable_48pass,MCdrv:R8_Add_RPT_JNZ:enable_48pass,MCdrv:R16_Add_RPT_JNZ:enable_48pass,MCPdrv:R1_Add_RPT_JNZ:enable_48pass,MCPdrv:R8_Add_RPT_JNZ:enable_48pass,MCPdrv:R16_Add_RPT_JNZ:enable_48pass,MCdrv:patmod_dlvr_eor_check:enable,MCdrv:Add_delay_FuseSenseState:enable,MCdrv:Add_delay_FuseSenseState_non_mm:enable,MCPdrv:Add_delay_FuseSenseState:enable,MCPdrv:Add_delay_FuseSenseState_non_mm:enable,MNCdrv:Add_delay_FuseSenseState_d2d:enable,MNCdrv:Add_delay_FuseSenseState_non_mm_d2d:enable,MNCdrv:JGSE_inst_mm_d2d:enable";
+    SleepTime = 1;
+}
+
+CSharpTest RunCallback CTRL_X_UF_E_INIT_X_X_X_X_PINMAP_DRVCDIE
+{
+    Callback = "LoadPinMapFile";
+    Parameters = "--decoder FailDataDecoder --file ./Modules/DRV/DRV_RESET_CKX/InputFiles/DieRecoveryPinMaps_DRV_CDIE.json";
+}
+
+CSharpTest PrimePauseTestMethod RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER2
+{
+    BypassPort = __shared__::TpRule.If_S28_S52_HX28_P16C_H16C_S16C_DS28C(1,-1,1,-1,-1,-1,1,-1);
+    SetPointsPlistMode = "Global";
+    SetPointsPreInstance = __shared__::TpRule.If_816_48_40("MCdrv:patmod_dlvr_eor_check:enable,MCdrv:patmod_post_fuse_check:enable,MCPdrv:patmod_post_fuse_check:enable,MNCdrv:patmod_post_fuse_check:enable", "MCdrv:patmod_dlvr_eor_check:enable,MCdrv:Add_delay_FuseSenseState:enable,MCdrv:Add_delay_FuseSenseState_non_mm:enable,MCPdrv:Add_delay_FuseSenseState:enable,MCPdrv:Add_delay_FuseSenseState_non_mm:enable,MNCdrv:Add_delay_FuseSenseState_d2d:enable,MNCdrv:Add_delay_FuseSenseState_non_mm_d2d:enable,MNCdrv:JGSE_inst_mm_d2d:enable", "MCdrv:patmod_dlvr_eor_check:enable", "MCdrv:patmod_dlvr_eor_check:enable,MCdrv:patmod_post_fuse_check:enable,MCPdrv:patmod_post_fuse_check:enable,MNCdrv:patmod_post_fuse_check:enable");
+	SleepTime = 1;
+}
+
+CSharpTest PrimePauseTestMethod RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE2
+{
+    BypassPort = __shared__::TpRule.If_48_40(-1,1);
+    SetPointsPlistMode = "Global";
+    SetPointsPreInstance = "MCdrv:dlvrmode:class_mode,MCdrv:dlvrvoutpwrgood:class_mode,MCPdrv:dlvrmode:class_mode,MCPdrv:dlvrvoutpwrgood:class_mode,MNCdrv:dlvrmode:class_mode,MNCdrv:dlvrvoutpwrgood:class_mode";
+    SleepTime = 1;
+}
+
+Flow DRV_RESET_CKX_INIT
+{
+    FlowItem RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99192065_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98192065_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b19002001_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE_0;
+            IncrementCounters DRV_RESET_CKX::n19002001_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE_0;
+			GoTo RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE2;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE2;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b19002002_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE_2;
+            IncrementCounters DRV_RESET_CKX::n19002002_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE_2;
+			GoTo RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE2;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b19002003_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE_3;
+            IncrementCounters DRV_RESET_CKX::n19002003_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE_3;
+			GoTo RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE2;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b19002004_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE_4;
+            IncrementCounters DRV_RESET_CKX::n19002004_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE_4;
+			GoTo RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE2;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b19002005_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE_5;
+            IncrementCounters DRV_RESET_CKX::n19002005_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE_5;
+			GoTo RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE2;
+        }
+    }
+    
+    FlowItem RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99192066_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98192066_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b19002006_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER_0;
+            IncrementCounters DRV_RESET_CKX::n19002006_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER_0;
+			GoTo RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER2;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER2;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b19002007_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER_2;
+            IncrementCounters DRV_RESET_CKX::n19002007_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER_2;
+			GoTo RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER2;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b19002008_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER_3;
+            IncrementCounters DRV_RESET_CKX::n19002008_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER_3;
+			GoTo RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER2;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b19002009_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER_4;
+            IncrementCounters DRV_RESET_CKX::n19002009_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER_4;
+			GoTo RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER2;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b19002010_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER_5;
+            IncrementCounters DRV_RESET_CKX::n19002010_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER_5;
+			GoTo RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER2;
+        }
+    }
+    
+    FlowItem CTRL_X_UF_E_INIT_X_X_X_X_PINMAP_DRVCDIE CTRL_X_UF_E_INIT_X_X_X_X_PINMAP_DRVCDIE @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99192000_fail_DRV_RESET_CKX_CTRL_X_UF_E_INIT_X_X_X_X_PINMAP_DRVCDIE_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98192000_fail_DRV_RESET_CKX_CTRL_X_UF_E_INIT_X_X_X_X_PINMAP_DRVCDIE_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b19002000_fail_DRV_RESET_CKX_CTRL_X_UF_E_INIT_X_X_X_X_PINMAP_DRVCDIE_0;
+            IncrementCounters DRV_RESET_CKX::n19002000_fail_CTRL_X_UF_E_INIT_X_X_X_X_PINMAP_DRVCDIE_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+    FlowItem RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER2 RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER2 @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99192230_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER2_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98192230_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER2_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b19002006_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER_0;
+            IncrementCounters DRV_RESET_CKX::n19002011_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER2_0;
+            GoTo CTRL_X_UF_E_INIT_X_X_X_X_PINMAP_DRVCDIE;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_UF_E_INIT_X_X_X_X_PINMAP_DRVCDIE;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b19002007_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER_2;
+            IncrementCounters DRV_RESET_CKX::n19002012_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER2_2;
+            GoTo CTRL_X_UF_E_INIT_X_X_X_X_PINMAP_DRVCDIE;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b19002008_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER_3;
+            IncrementCounters DRV_RESET_CKX::n19002013_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER2_3;
+            GoTo CTRL_X_UF_E_INIT_X_X_X_X_PINMAP_DRVCDIE;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b19002009_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER_4;
+            IncrementCounters DRV_RESET_CKX::n19002014_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER2_4;
+            GoTo CTRL_X_UF_E_INIT_X_X_X_X_PINMAP_DRVCDIE;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b19002010_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER_5;
+            IncrementCounters DRV_RESET_CKX::n19002015_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER2_5;
+            GoTo CTRL_X_UF_E_INIT_X_X_X_X_PINMAP_DRVCDIE;
+        }
+    }
+    FlowItem RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE2 RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE2 @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99192231_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE2_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98192231_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE2_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b19002001_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE_0;
+            IncrementCounters DRV_RESET_CKX::n19002016_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE2_0;
+			GoTo RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b19002002_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE_2;
+            IncrementCounters DRV_RESET_CKX::n19002017_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE2_2;
+			GoTo RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b19002003_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE_3;
+            IncrementCounters DRV_RESET_CKX::n19002018_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE2_3;
+			GoTo RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b19002004_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE_4;
+            IncrementCounters DRV_RESET_CKX::n19002019_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE2_4;
+			GoTo RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b19002005_fail_DRV_RESET_CKX_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE_5;
+            IncrementCounters DRV_RESET_CKX::n19002020_fail_RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_DVLR_MODE2_5;
+			GoTo RESET_X_PATMOD_E_INIT_X_X_X_X_PATMOD_PLACEHOLDER;
+        }
+    }
+    
+}

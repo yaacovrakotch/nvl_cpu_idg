@@ -1,0 +1,101 @@
+name: SCHEDULER_INIT
+
+on:
+  schedule:
+    # Runs at 13:00 UTC (7 AM GMT+8) or 5 AM PST
+    - cron: '0 13 * * *'
+ 
+  workflow_dispatch: 
+    inputs:
+
+      name:
+        description: 'MV_json_file or FULL - rev1'
+        # Default value if no value is explicitly provided
+        default: 'FULL'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      targetbom:
+        description: 'Option: Class_NVL_S28C | ALL | If running multi boms, using comma delimiter'
+        # Default value if no value is explicitly provided
+        default: 'Class_NVL_S28C,Class_NVL_S52C'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      destination:
+        description: 'I:/ path to copy TP. Leave alone to not copy.'
+        # Default value if no value is explicitly provided
+        default: 'I:/'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      tester:
+        description: 'Enter tester name if you want to request a specific tester.'
+        # Default value if no value is explicitly provided
+        default: 'any'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      special_socket:
+        description: 'Enter special socket LOCN_STEP_ENGID Ex: 6248_CSM_AF| 6248_CSM | 7822'
+        # Default value if no value is explicitly provided
+        default: '6197_FUSE,6248_PHMHOT'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      acpy:
+        description: 'Auto Content pymtpl I:\ path:'
+        default: 'None'
+        required: false
+
+      email:
+        description: 'Email address'
+        # Default value if no value is explicitly provided
+        default: ''
+        # Input has to be provided for the workflow to run
+        required: true
+
+
+jobs:
+  SCHEDULER_INIT:
+    runs-on: [self-hosted, checkers]
+    timeout-minutes: 180
+
+    steps:
+    - name: Log Inputs
+      run: echo "${{ toJSON(github.event.inputs) }}"
+
+    - name: repo_init_check
+      continue-on-error: true
+      run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/tprobot.py REPO_INIT main
+
+    - uses: actions/checkout@v6
+      with: 
+        fetch-depth: 0
+        clean: true              # remove untracked files before checkout
+        ref: ${{ github.event.pull_request.head.ref }}
+
+    - name: Checkout submodules
+      run: |
+        git submodule sync --recursive
+        git submodule update --init --recursive --force
+
+    - name: clone dielets
+      run: python I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/nvl_buildtp.py ${{ github.event.inputs.targetbom }} -clone
+      env:
+         CPU_Branch: main
+         GCD_Branch: main
+         PCD_Branch: main
+         HUB_Branch: main
+
+    - name: Bot run
+      run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/runner_botos.py nvl2_mbot._ALL_.nvl_common
+      env:
+          DEST: ${{ github.event.inputs.destination }}
+          EMAIL: ${{ github.event.inputs.email }}
+          IN1: ${{ github.event.inputs.name }}
+          TARGETBOM: ${{ github.event.inputs.targetbom }}
+          CLEANTP: False
+          ACPY: ${{ github.event.inputs.acpy }}
+          TESTER: ${{ github.event.inputs.tester }}
+          SPECIAL_SOCKET: ${{ github.event.inputs.special_socket }}

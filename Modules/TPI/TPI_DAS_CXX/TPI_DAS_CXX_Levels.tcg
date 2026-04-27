@@ -1,0 +1,158 @@
+Version 1.0;
+
+###################################################
+### SpecificationSet : to set what to overwrite ###
+###################################################
+SpecificationSet  DAS_VCCIA_0P55V (max, min, nom) Inherits CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC
+{
+	Voltage p_vccia_spec						= 0.55V;
+}
+SpecificationSet  DAS_VCCIA_0P65V (max, min, nom) Inherits CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC
+{
+	Voltage p_vccia_spec						= 0.65V;
+}
+SpecificationSet  DAS_VCCIA_0P75V (max, min, nom) Inherits CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC
+{
+	Voltage p_vccia_spec						= 0.75V;
+}
+SpecificationSet  DAS_VCCIA_0P85V (max, min, nom) Inherits CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC
+{
+	Voltage p_vccia_spec						= 0.85V;
+}
+SpecificationSet  DAS_VCCIA_0P95V (max, min, nom) Inherits CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC
+{
+	Voltage p_vccia_spec						= 0.95V;
+}
+SpecificationSet  DAS_VCCIA_1P05V (max, min, nom) Inherits CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC
+{
+	Voltage p_vccia_spec						= 1.05V;
+}
+
+
+################################
+### Test Condition Group [1] ###
+################################
+TestConditionGroup DAS_VCCIA_0P55V_TCG
+{
+	SpecificationSet = DAS_VCCIA_0P55V;
+	Level = CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl;
+}
+TestConditionGroup DAS_VCCIA_0P65V_TCG
+{
+	SpecificationSet = DAS_VCCIA_0P65V;
+	Level = CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl;
+}
+TestConditionGroup DAS_VCCIA_0P75V_TCG
+{
+	SpecificationSet = DAS_VCCIA_0P75V;
+	Level = CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl;
+}
+TestConditionGroup DAS_VCCIA_0P85V_TCG
+{
+	SpecificationSet = DAS_VCCIA_0P85V;
+	Level = CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl;
+}
+TestConditionGroup DAS_VCCIA_0P95V_TCG
+{
+	SpecificationSet = DAS_VCCIA_0P95V;
+	Level = CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl;
+}
+TestConditionGroup DAS_VCCIA_1P05V_TCG
+{
+	SpecificationSet = DAS_VCCIA_1P05V;
+	Level = CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl;
+}
+
+##########################
+### Test Condition [1] ###
+##########################
+TestCondition DAS_VCCIA_0P55V_MIN
+{
+	TestConditionGroup  = DAS_VCCIA_0P55V_TCG;
+	Selector = min;
+}
+TestCondition DAS_VCCIA_0P55V_NOM
+{
+	TestConditionGroup  = DAS_VCCIA_0P55V_TCG;
+	Selector = nom;
+}
+TestCondition DAS_VCCIA_0P55V_MAX
+{
+	TestConditionGroup  = DAS_VCCIA_0P55V_TCG;
+	Selector = max;
+}
+TestCondition DAS_VCCIA_0P65V_MIN
+{
+	TestConditionGroup  = DAS_VCCIA_0P65V_TCG;
+	Selector = min;
+}
+TestCondition DAS_VCCIA_0P65V_NOM
+{
+	TestConditionGroup  = DAS_VCCIA_0P65V_TCG;
+	Selector = nom;
+}
+TestCondition DAS_VCCIA_0P65V_MAX
+{
+	TestConditionGroup  = DAS_VCCIA_0P65V_TCG;
+	Selector = max;
+}
+TestCondition DAS_VCCIA_0P75V_MIN
+{
+	TestConditionGroup  = DAS_VCCIA_0P75V_TCG;
+	Selector = min;
+}
+TestCondition DAS_VCCIA_0P75V_NOM
+{
+	TestConditionGroup  = DAS_VCCIA_0P75V_TCG;
+	Selector = nom;
+}
+TestCondition DAS_VCCIA_0P75V_MAX
+{
+	TestConditionGroup  = DAS_VCCIA_0P75V_TCG;
+	Selector = max;
+}
+TestCondition DAS_VCCIA_0P85V_MIN
+{
+	TestConditionGroup  = DAS_VCCIA_0P85V_TCG;
+	Selector = min;
+}
+TestCondition DAS_VCCIA_0P85V_NOM
+{
+	TestConditionGroup  = DAS_VCCIA_0P85V_TCG;
+	Selector = nom;
+}
+TestCondition DAS_VCCIA_0P85V_MAX
+{
+	TestConditionGroup  = DAS_VCCIA_0P85V_TCG;
+	Selector = max;
+}
+TestCondition DAS_VCCIA_0P95V_MIN
+{
+	TestConditionGroup  = DAS_VCCIA_0P95V_TCG;
+	Selector = min;
+}
+TestCondition DAS_VCCIA_0P95V_NOM
+{
+	TestConditionGroup  = DAS_VCCIA_0P95V_TCG;
+	Selector = nom;
+}
+TestCondition DAS_VCCIA_0P95V_MAX
+{
+	TestConditionGroup  = DAS_VCCIA_0P95V_TCG;
+	Selector = max;
+}
+TestCondition DAS_VCCIA_1P05V_MIN
+{
+	TestConditionGroup  = DAS_VCCIA_1P05V_TCG;
+	Selector = min;
+}
+TestCondition DAS_VCCIA_1P05V_NOM
+{
+	TestConditionGroup  = DAS_VCCIA_1P05V_TCG;
+	Selector = nom;
+}
+TestCondition DAS_VCCIA_1P05V_MAX
+{
+	TestConditionGroup  = DAS_VCCIA_1P05V_TCG;
+	Selector = max;
+}

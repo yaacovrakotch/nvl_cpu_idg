@@ -1,0 +1,933 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DFF xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TOKEN name="gt_fuse/gt_FUSE_GT_COMPUTE_DSSEN" dff="PGXEXX00" format="128" value_type="binary" round_type="EXACT">
+    <Value>{GTrecovery::CHOSEN_CONFIG_VALUES@string_string}["FUSE_GT_COMPUTE_DSS_EN"]</Value>
+  </TOKEN>
+  <TOKEN name="gt_fuse/gt_FUSE_GT_GEOMETRY_DSSEN" dff="PGXEXX01" format="128" value_type="binary" round_type="EXACT">
+    <Value>{GTrecovery::CHOSEN_CONFIG_VALUES@string_string}["FUSE_GT_GEOMETRY_DSS_EN"]</Value>
+  </TOKEN>
+  <TOKEN name="gt_fuse/gt_FUSE_L3_BANK_EN" dff="PGXEXX02" format="128" value_type="binary" round_type="EXACT">
+    <Value>{GTrecovery::CHOSEN_CONFIG_VALUES@string_string}["FUSE_L3_BANK_EN"]</Value>
+  </TOKEN>
+  <TOKEN name="gt_fuse/gt_FUSE_MEML3_EN" dff="PGXEXX03" format="16" value_type="binary" round_type="EXACT">
+    <Value>{GTrecovery::CHOSEN_CONFIG_VALUES@string_string}["FUSE_MEML3_EN"]</Value>
+  </TOKEN>
+  <TOKEN name="mediass_media_fuse/Media_GTFS_FUSE_VDBOX_EN" dff="PGXEXX04" format="8" value_type="binary" round_type="EXACT">
+    <Value>{HUBrecovery::CHOSEN_CONFIG_VALUES@string_string}[''VDBOX_EN'']</Value>
+  </TOKEN>
+  <TOKEN name="mediass_media_fuse/Media_GTFS_FUSE_VDSFC_EN" dff="PGXEXX05" format="8" value_type="binary" round_type="EXACT">
+    <Value>{HUBrecovery::CHOSEN_CONFIG_VALUES@string_string}[''VDSFC_EN'']</Value>
+  </TOKEN>
+  <TOKEN name="mediass_media_fuse/Media_GTFS_FUSE_VEBOX_EN" dff="PGXEXX06" format="8" value_type="binary" round_type="EXACT">
+    <Value>{HUBrecovery::CHOSEN_CONFIG_VALUES@string_string}[''VEBOX_EN'']</Value>
+  </TOKEN>
+  <TOKEN name="mediass_media_fuse/Media_GTFS_FUSE_VESFC_EN" dff="PGXEXX07" format="8" value_type="binary" round_type="EXACT">
+    <Value>{HUBrecovery::CHOSEN_CONFIG_VALUES@string_string}[''VESFC_EN'']</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_0C_CDYN_VAR" dff="PH0CXX08" format="U6.0.6" value_type="double" round_type="UP">
+    <Value>{PKG::F_LPATOM_0C_CDYN_VAR@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_0C_LEAK_VAR" dff="PH0LXX09" format="U6.0.6" value_type="double" round_type="UP">
+    <Value>{PKG::F_LPATOM_0C_LEAK_VAR@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_1C_CDYN_VAR" dff="PH1CXX0A" format="U6.0.6" value_type="double" round_type="UP">
+    <Value>{PKG::F_LPATOM_1C_CDYN_VAR@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_1C_LEAK_VAR" dff="PH1LXX0B" format="U6.0.6" value_type="double" round_type="UP">
+    <Value>{PKG::F_LPATOM_1C_LEAK_VAR@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_2C_CDYN_VAR" dff="PH2CXX0C" format="U6.0.6" value_type="double" round_type="UP">
+    <Value>{PKG::F_LPATOM_2C_CDYN_VAR@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_2C_LEAK_VAR" dff="PH2LXX0D" format="U6.0.6" value_type="double" round_type="UP">
+    <Value>{PKG::F_LPATOM_2C_LEAK_VAR@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_3C_CDYN_VAR" dff="PH3CXX0E" format="U6.0.6" value_type="double" round_type="UP">
+    <Value>{PKG::F_LPATOM_3C_CDYN_VAR@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_3C_LEAK_VAR" dff="PH3LXX0F" format="U6.0.6" value_type="double" round_type="UP">
+    <Value>{PKG::F_LPATOM_3C_LEAK_VAR@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_CDYN_MAX" dff="PHXCXX10" format="U10.5.5" value_type="double" round_type="UP">
+    <Value>{LPATOM::IS_ENABLED@bool} ? ({LPATOM::CDYN_AT_REF@double?}.Value - {LPATSRAM::CDYN_AT_REF@double?}.Value) : ({LPATOMb::IS_ENABLED@bool} ? ({LPATOMb::CDYN_AT_REF@double?}.Value - {LPATSRAM::CDYN_AT_REF@double?}.Value) : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_CDYN_V_CORRECTION" dff="PHXCXX11" format="U7.2.5" value_type="double" round_type="CLOSEST">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::CV_SLOPE@double?}.Value : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::CV_SLOPE@double?}.Value : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_ITD_CUTOFF_V" dff="PHXIOX12" format="U9.1.8" value_type="double" round_type="CLOSEST">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::ITD_MODEL@itd?}.Value.VCutoff(0) : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::ITD_MODEL@itd?}.Value.VCutoff(0) : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_ITD_CUTOFF_V2" dff="PHXIOX13" format="U9.1.8" value_type="double" round_type="CLOSEST">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::ITD_MODEL@itd?}.Value.VCutoff(1) : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::ITD_MODEL@itd?}.Value.VCutoff(1) : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_ITD_FLOOR_VOLTAGE" dff="PHXIXX14" format="U8.0.8" value_type="double" round_type="CLOSEST">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::ITD_MODEL@itd}.VStart(0) : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::ITD_MODEL@itd}.VStart(0) : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_ITD_SLOPE" dff="PHXISX15" format="U9.-7.16" value_type="double" round_type="CLOSEST">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::ITD_MODEL@itd?}.Value.Slope(0) : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::ITD_MODEL@itd?}.Value.Slope(0) : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_ITD_SLOPE_ABOVE_CUTOFF_TJ" dff="PHXISX16" format="U8.3.5" value_type="double" round_type="CLOSEST">
+    <Value>4</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_ITD_SLOPE2" dff="PHXISX17" format="U9.-7.16" value_type="double" round_type="CLOSEST">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::ITD_MODEL@itd?}.Value.Slope(1) : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::ITD_MODEL@itd?}.Value.Slope(1) : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_LEAK" dff="PHXLXX18" format="U11.5.6" value_type="double" round_type="UP">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::SICC_SYSTEM_AT_REF@double?}.Value - {LPATSRAM::SICC_SYSTEM_AT_REF@double?}.Value : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::SICC_SYSTEM_AT_REF@double?}.Value - {LPATSRAM::SICC_SYSTEM_AT_REF@double?}.Value : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_LEAK_EQ_T" dff="PHXLPX19" format="U9.-4.13" value_type="double" round_type="CLOSEST">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::PET_T@double?}.Value : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::PET_T@double?}.Value : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_LEAK_EQ_V" dff="PHXLPX1A" format="U9.2.7" value_type="double" round_type="CLOSEST">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::PET_V@double?}.Value : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::PET_V@double?}.Value : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_LEAK_EQ_VT" dff="PHXLPX1B" format="U8.-5.13" value_type="double" round_type="CLOSEST">
+    <Value>{LPATOM::IS_ENABLED@bool} ? (-1)*{LPATOM::PET_VT@double?}.Value : ({LPATOMb::IS_ENABLED@bool} ? (-1)*{LPATOMb::PET_VT@double?}.Value : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_LP_CCP0_VF_VOLTAGE_DELTA_0" dff="PHXVX01C" format="U6.-2.8" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_LP_CCP0_VF_VOLTAGE_DELTA_1" dff="PHXVX11D" format="U6.-2.8" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_LP_CCP0_VF_VOLTAGE_DELTA_2" dff="PHXVX21E" format="U6.-2.8" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_LP_CCP0_VF_VOLTAGE_DELTA_3" dff="PHXVX31F" format="U6.-2.8" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_LP_CCP0_VF_VOLTAGE_DELTA_4" dff="PHXVX420" format="U6.-2.8" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_VF_RATIO_0" dff="PHXFX021" format="7:0.100" value_type="double" round_type="EXACT">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(0,true) : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(0,true) : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_VF_RATIO_1" dff="PHXFX122" format="7:0.100" value_type="double" round_type="EXACT">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(1,true) : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(1,true) : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_VF_RATIO_2" dff="PHXFX223" format="7:0.100" value_type="double" round_type="EXACT">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(2,true) : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(2,true) : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_VF_RATIO_3" dff="PHXFX324" format="7:0.100" value_type="double" round_type="EXACT">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(3,true) : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(3,true) : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_VF_RATIO_4" dff="PHXFX425" format="7:0.100" value_type="double" round_type="EXACT">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(4,true) : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(4,true) : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_VF_RATIO_5" dff="PHXFX526" format="7:0.100" value_type="double" round_type="EXACT">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(5,true) : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(5,true) : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_VF_RATIO_6" dff="PHXFX627" format="7:0.100" value_type="double" round_type="EXACT">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(6,true) : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(6,true) : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_VF_RATIO_7" dff="PHXFX728" format="7:0.100" value_type="double" round_type="EXACT">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(7,true) : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(7,true) : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_VF_RATIO_8" dff="PHXFX829" format="7:0.100" value_type="double" round_type="EXACT">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(8,true) : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(8,true) : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_VF_VOLTAGE_0" dff="PHXVX02A" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(0,true) : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(0,true) : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_VF_VOLTAGE_1" dff="PHXVX12B" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(1,true) : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(1,true) : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_VF_VOLTAGE_2" dff="PHXVX22C" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(2,true) : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(2,true) : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_VF_VOLTAGE_3" dff="PHXVX32D" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(3,true) : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(3,true) : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_VF_VOLTAGE_4" dff="PHXVX42E" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(4,true) : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(4,true) : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_VF_VOLTAGE_5" dff="PHXVX52F" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(5,true) : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(5,true) : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_VF_VOLTAGE_6" dff="PHXVX630" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(6,true) : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(6,true) : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_VF_VOLTAGE_7" dff="PHXVX731" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(7,true) : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(7,true) : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ATOM_VF_VOLTAGE_8" dff="PHXVX832" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(8,true) : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(8,true) : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CCP_0_IA_CDYN_VAR" dff="PH0CXX33" format="U7.1.6" value_type="double" round_type="UP">
+    <Value>1</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CCP_0_IA_LEAK_VAR" dff="PH0LXX34" format="U7.1.6" value_type="double" round_type="UP">
+    <Value>1</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CCP_0_IA_P0_RATIO_DOWNBIN" dff="PHXFDX35" format="6:0.100" value_type="double" round_type="EXACT">
+    <Value>{NA::LI::PROCESSOR_LP_ECORE_FUNC_QTY@double} &lt; 4 ? 0 : (Utils.MAX({NA::LI::MAX_TURBO_FREQ_RTE@double}, {NA::LI::SMALL_CORE_MAX_TURBO_FREQ_RATE@double}) - {NA::LI::LPE_TURBO_FREQUENCY_RATE@double})</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CCP_0_PCVF_VF_DELTA_0" dff="PH0VX036" format="U6.-2.8" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CCP_0_PCVF_VF_DELTA_1" dff="PH0VX137" format="U6.-2.8" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CCP_0_PCVF_VF_DELTA_2" dff="PH0VX238" format="U6.-2.8" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CCP_0_PCVF_VF_DELTA_3" dff="PH0VX339" format="U6.-2.8" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CCP_0_PCVF_VF_DELTA_4" dff="PH0VX43A" format="U6.-2.8" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CCP_0_PCVF_VF_DELTA_5" dff="PH0VX53B" format="U6.-2.8" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CCP_0_PCVF_VF_DELTA_6" dff="PH0VX63C" format="U6.-2.8" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CCP_0_PCVF_VF_DELTA_7" dff="PH0VX73D" format="U6.-2.8" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CCP_0_PCVF_VF_DELTA_8" dff="PH0VX83E" format="U6.-2.8" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CCP_0_PCVF_VF_DELTA_9" dff="PH0VX93F" format="U6.-2.8" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CSAF_CDYN_MAX" dff="PHXCXX40" format="U10.4.6" value_type="double" round_type="UP">
+    <Value>{CCLK::CDYN_AT_REF@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CSAF_LEAK" dff="PHXLXX41" format="U9.3.6" value_type="double" round_type="UP">
+    <Value>{SAREST::SICC_SYSTEM_AT_REF@double}*{PKG::F_CCLK_LEAK_RATIO@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CSAF_PE_RATIO" dff="PHXFXX42" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{CCLK::FV_MODEL_FINAL@fv}[''SSE''].F(0,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CSAF_VF_RATIO_0" dff="PHXFX043" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{CCLK::FV_MODEL_FINAL@fv}[''SSE''].F(0,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CSAF_VF_RATIO_1" dff="PHXFX144" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{CCLK::FV_MODEL_FINAL@fv}[''SSE''].F(1,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CSAF_VF_RATIO_2" dff="PHXFX245" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{CCLK::FV_MODEL_FINAL@fv}[''SSE''].F(2,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CSAF_VF_RATIO_3" dff="PHXFX346" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{CCLK::FV_MODEL_FINAL@fv}[''SSE''].F(3,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CSAF_VF_RATIO_4" dff="PHXFX447" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{CCLK::FV_MODEL_FINAL@fv}[''SSE''].F(4,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CSAF_VF_VOLTAGE_0" dff="PHXVX048" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{CCLK::FV_MODEL_FINAL@fv}[''SSE''].V(0,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CSAF_VF_VOLTAGE_1" dff="PHXVX149" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{CCLK::FV_MODEL_FINAL@fv}[''SSE''].V(1,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CSAF_VF_VOLTAGE_2" dff="PHXVX24A" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{CCLK::FV_MODEL_FINAL@fv}[''SSE''].V(2,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CSAF_VF_VOLTAGE_3" dff="PHXVX34B" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{CCLK::FV_MODEL_FINAL@fv}[''SSE''].V(3,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CSAF_VF_VOLTAGE_4" dff="PHXVX44C" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{CCLK::FV_MODEL_FINAL@fv}[''SSE''].V(4,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_DE_CDYN_MAX" dff="PHXCXX4D" format="U8.3.5" value_type="double" round_type="UP">
+    <Value>{DE::IS_ENABLED@bool} ? {DE::CDYN_AT_REF@double?}.Value - {DESRAM::CDYN_AT_REF@double?}.Value : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_DE_CDYN_PIPE" dff="PHXCXX4E" format="U8.3.5" value_type="double" round_type="UP">
+    <Value>{DE::IS_ENABLED@bool} ? {PKG::F_DE_CDYN_PIPE@double} : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_DE_CDYN_UNGATED" dff="PHXCXX4F" format="U8.3.5" value_type="double" round_type="UP">
+    <Value>{DE::IS_ENABLED@bool} ? {PKG::F_DE_CDYN_UNGATED@double} : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_DE_LEAK_MAX" dff="PHXLXX50" format="U9.3.6" value_type="double" round_type="UP">
+    <Value>{DE::IS_ENABLED@bool} ? {DE::SICC_SYSTEM_AT_REF@double?}.Value - {DESRAM::SICC_SYSTEM_AT_REF@double?}.Value : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_DE_LEAK_PIPE" dff="PHXLXX51" format="U9.3.6" value_type="double" round_type="UP">
+    <Value>{DE::IS_ENABLED@bool} ? {PKG::F_DE_LEAK_PIPE_RATIO@double}*{DE::SICC_SYSTEM_AT_REF@double?}.Value : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_DE_LEAK_UNGATED" dff="PHXLXX52" format="U9.3.6" value_type="double" round_type="UP">
+    <Value>{DE::IS_ENABLED@bool} ? {PKG::F_DE_LEAK_UNGATED_RATIO@double}*{DE::SICC_SYSTEM_AT_REF@double?}.Value : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_DE_VF_RATIO_0" dff="PHXFX053" format="U8.8.0" value_type="double" round_type="CLOSEST">
+    <Value>{DE::IS_ENABLED@bool} ? {DE::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(0,true)*1000/24 : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_DE_VF_RATIO_1" dff="PHXFX154" format="U8.8.0" value_type="double" round_type="CLOSEST">
+    <Value>{DE::IS_ENABLED@bool} ? {DE::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(1,true)*1000/24 : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_DE_VF_RATIO_2" dff="PHXFX255" format="U8.8.0" value_type="double" round_type="CLOSEST">
+    <Value>{DE::IS_ENABLED@bool} ? {DE::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(2,true)*1000/24 : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_DE_VF_RATIO_3" dff="PHXFX356" format="U8.8.0" value_type="double" round_type="CLOSEST">
+    <Value>{DE::IS_ENABLED@bool} ? {DE::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(3,true)*1000/24 : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_DE_VF_VOLTAGE_0" dff="PHXVX057" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{DE::IS_ENABLED@bool} ? {DE::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(0,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_DE_VF_VOLTAGE_1" dff="PHXVX158" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{DE::IS_ENABLED@bool} ? {DE::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(1,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_DE_VF_VOLTAGE_2" dff="PHXVX259" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{DE::IS_ENABLED@bool} ? {DE::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(2,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_DE_VF_VOLTAGE_3" dff="PHXVX35A" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{DE::IS_ENABLED@bool} ? {DE::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(3,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_ACM_JAGR_0" dff="PGXVJ05B" format="U10.1.9" value_type="double" round_type="CLOSEST">
+    <Value>{GT::IS_ENABLED@bool} ? {NA::PKG::C_VAGR_RATIO_AT_FV_FREQS@fv?}.Value[''GTVPG''].V(0,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_ACM_JAGR_1" dff="PGXVJ15C" format="U10.1.9" value_type="double" round_type="CLOSEST">
+    <Value>{GT::IS_ENABLED@bool} ? {NA::PKG::C_VAGR_RATIO_AT_FV_FREQS@fv?}.Value[''GTVPG''].V(1,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_ACM_JAGR_2" dff="PGXVJ25D" format="U10.1.9" value_type="double" round_type="CLOSEST">
+    <Value>{GT::IS_ENABLED@bool} ? {NA::PKG::C_VAGR_RATIO_AT_FV_FREQS@fv?}.Value[''GTVPG''].V(2,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_ACM_JAGR_3" dff="PGXVJ35E" format="U10.1.9" value_type="double" round_type="CLOSEST">
+    <Value>{GT::IS_ENABLED@bool} ? {NA::PKG::C_VAGR_RATIO_AT_FV_FREQS@fv?}.Value[''GTVPG''].V(3,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_ACM_JAGR_4" dff="PGXVJ45F" format="U10.1.9" value_type="double" round_type="CLOSEST">
+    <Value>{GT::IS_ENABLED@bool} ? {NA::PKG::C_VAGR_RATIO_AT_FV_FREQS@fv?}.Value[''GTVPG''].V(4,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_ACM_JAGR_5" dff="PGXVJ560" format="U10.1.9" value_type="double" round_type="CLOSEST">
+    <Value>{GT::IS_ENABLED@bool} ? {NA::PKG::C_VAGR_RATIO_AT_FV_FREQS@fv?}.Value[''GTVPG''].V(5,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_CDYN_MAX" dff="PGXCXX61" format="U11.6.5" value_type="double" round_type="UP">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::CDYN_AT_REF@double?}.Value : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_CDYN_V_CORRECTION" dff="PGXCXX63" format="U7.2.5" value_type="double" round_type="CLOSEST">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::CV_SLOPE@double?}.Value : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_ITD_CUTOFF_V" dff="PGXIOX64" format="U9.1.8" value_type="double" round_type="CLOSEST">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::ITD_MODEL@itd?}.Value.VCutoff(0) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_ITD_CUTOFF_V2" dff="PGXIOX65" format="U9.1.8" value_type="double" round_type="CLOSEST">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::ITD_MODEL@itd?}.Value.VCutoff(1) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_ITD_FLOOR_VOLTAGE" dff="PGXIXX66" format="U8.0.8" value_type="double" round_type="CLOSEST">
+    <Value>{GT::ITD_MODEL@itd}.VStart(0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_ITD_SLOPE" dff="PGXISX67" format="U9.-7.16" value_type="double" round_type="CLOSEST">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::ITD_MODEL@itd?}.Value.Slope(0) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_ITD_SLOPE_ABOVE_CUTOFF_TJ" dff="PGXISX68" format="U8.3.5" value_type="double" round_type="CLOSEST">
+    <Value>4</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_ITD_SLOPE2" dff="PGXISX69" format="U9.-7.16" value_type="double" round_type="CLOSEST">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::ITD_MODEL@itd?}.Value.Slope(1) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_LEAK" dff="PGXLXX6A" format="U12.6.6" value_type="double" round_type="UP">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::SICC_SYSTEM_AT_REF@double?}.Value : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_LEAK_PARAMS_EQ_T" dff="PGXLPX6B" format="U9.-4.13" value_type="double" round_type="CLOSEST">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::PET_T@double?}.Value : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_LEAK_PARAMS_EQ_V" dff="PGXLPX6C" format="U9.2.7" value_type="double" round_type="CLOSEST">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::PET_V@double?}.Value : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_LEAK_PARAMS_EQ_VT" dff="PGXLPX6D" format="U8.-5.13" value_type="double" round_type="CLOSEST">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::PET_VT@double?}.Value*(-1) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_RENDER_FMAX_AT_VMIN_RATIO" dff="PGXFXX6E" format="6:0.050" value_type="double" round_type="EXACT">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(0,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_SYSTOLIC_DELTA_ACM_OFF_VF_VOLTAGE_0" dff="PGXVX06F" format="S6.1.5" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_SYSTOLIC_DELTA_ACM_OFF_VF_VOLTAGE_1" dff="PGXVX170" format="S6.1.5" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_SYSTOLIC_DELTA_ACM_OFF_VF_VOLTAGE_2" dff="PGXVX271" format="S6.1.5" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_SYSTOLIC_DELTA_ACM_OFF_VF_VOLTAGE_3" dff="PGXVX372" format="S6.1.5" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_SYSTOLIC_DELTA_ACM_OFF_VF_VOLTAGE_4" dff="PGXVX473" format="S6.1.5" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_SYSTOLIC_DELTA_ACM_OFF_VF_VOLTAGE_5" dff="PGXVX574" format="S6.1.5" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_SYSTOLIC_DELTA_ACM_ON_VF_VOLTAGE_0" dff="PGXVX075" format="S6.1.5" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_SYSTOLIC_DELTA_ACM_ON_VF_VOLTAGE_1" dff="PGXVX176" format="S6.1.5" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_SYSTOLIC_DELTA_ACM_ON_VF_VOLTAGE_2" dff="PGXVX277" format="S6.1.5" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_SYSTOLIC_DELTA_ACM_ON_VF_VOLTAGE_3" dff="PGXVX378" format="S6.1.5" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_SYSTOLIC_DELTA_ACM_ON_VF_VOLTAGE_4" dff="PGXVX479" format="S6.1.5" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_SYSTOLIC_DELTA_ACM_ON_VF_VOLTAGE_5" dff="PGXVX57A" format="S6.1.5" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_T_REF" dff="PGXXXX7B" format="U8.8.0" value_type="double" round_type="CLOSEST">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::TREF@double?}.Value : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_V_REF" dff="PGXXXX7C" format="U9.1.8" value_type="double" round_type="CLOSEST">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::VREF@double?}.Value : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_RATIO_0" dff="PGXFX07D" format="6:0.050" value_type="double" round_type="EXACT">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(0,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_RATIO_1" dff="PGXFX17E" format="6:0.050" value_type="double" round_type="EXACT">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(1,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_RATIO_2" dff="PGXFX27F" format="6:0.050" value_type="double" round_type="EXACT">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(2,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_RATIO_3" dff="PGXFX380" format="6:0.050" value_type="double" round_type="EXACT">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(3,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_RATIO_4" dff="PGXFX481" format="6:0.050" value_type="double" round_type="EXACT">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(4,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_RATIO_5" dff="PGXFX582" format="6:0.050" value_type="double" round_type="EXACT">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(5,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_RATIO_ACM_VPG_0" dff="PGXFX083" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::FV_MODEL_FINAL@fv?}.Value[''GTVPG''].F(0,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_RATIO_ACM_VPG_1" dff="PGXFX184" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::FV_MODEL_FINAL@fv?}.Value[''GTVPG''].F(1,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_RATIO_ACM_VPG_2" dff="PGXFX285" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::FV_MODEL_FINAL@fv?}.Value[''GTVPG''].F(2,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_RATIO_ACM_VPG_3" dff="PGXFX386" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::FV_MODEL_FINAL@fv?}.Value[''GTVPG''].F(3,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_RATIO_ACM_VPG_4" dff="PGXFX487" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::FV_MODEL_FINAL@fv?}.Value[''GTVPG''].F(4,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_RATIO_ACM_VPG_5" dff="PGXFX588" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::FV_MODEL_FINAL@fv?}.Value[''GTVPG''].F(5,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_VOLTAGE_0" dff="PGXVX089" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(0,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_VOLTAGE_1" dff="PGXVX18A" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(1,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_VOLTAGE_2" dff="PGXVX28B" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(2,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_VOLTAGE_3" dff="PGXVX38C" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(3,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_VOLTAGE_4" dff="PGXVX48D" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(4,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_VOLTAGE_5" dff="PGXVX58E" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(5,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_VOLTAGE_ACM_VPG_0" dff="PGXVX08F" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::FV_MODEL_FINAL@fv?}.Value[''GTVPG''].V(0,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_VOLTAGE_ACM_VPG_1" dff="PGXVX190" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::FV_MODEL_FINAL@fv?}.Value[''GTVPG''].V(1,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_VOLTAGE_ACM_VPG_2" dff="PGXVX291" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::FV_MODEL_FINAL@fv?}.Value[''GTVPG''].V(2,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_VOLTAGE_ACM_VPG_3" dff="PGXVX392" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::FV_MODEL_FINAL@fv?}.Value[''GTVPG''].V(3,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_VOLTAGE_ACM_VPG_4" dff="PGXVX493" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::FV_MODEL_FINAL@fv?}.Value[''GTVPG''].V(4,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_VOLTAGE_ACM_VPG_5" dff="PGXVX594" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{GT::IS_ENABLED@bool} ? {GT::FV_MODEL_FINAL@fv?}.Value[''GTVPG''].V(5,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IA_FMAX_AT_VMIN_RATIO" dff="PHXFXX95" format="6:0.100" value_type="double" round_type="EXACT">
+    <Value>{LPATOM::IS_ENABLED@bool} ? {LPATOM::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(0,true) : ({LPATOMb::IS_ENABLED@bool} ? {LPATOMb::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(0,true) : 0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IA_MIN_RATIO" dff="PHXFXX96" format="6:0.100" value_type="double" round_type="EXACT">
+    <Value>{PKG::F_IA_MIN_RATIO@double}*(0.1)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IA_P0_RATIO" dff="PHXFXX97" format="7:0.100" value_type="double" round_type="EXACT">
+    <Value>Utils.MAX({NA::LI::MAX_TURBO_FREQ_RTE@double}, {NA::LI::SMALL_CORE_MAX_TURBO_FREQ_RATE@double})</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IA_P0_RATIO_AVX256_DELTA" dff="PHXFXX98" format="4:0.100" value_type="double" round_type="EXACT">
+    <Value>{PKG::F_IA_P0_RATIO_AVX256_DELTA@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IA_P0_RATIO_AVX512_DELTA" dff="PHXFXX99" format="4:0.100" value_type="double" round_type="EXACT">
+    <Value>{PKG::F_IA_P0_RATIO_AVX512_DELTA@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IA_PN_RATIO" dff="PHXFXX9B" format="6:0.100" value_type="double" round_type="EXACT">
+    <Value> {NA::LI::CPU_SPEED_IN_LOW_FREQ_MODE@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOC_CDYN_MAX" dff="PHXCXX9D" format="U10.4.6" value_type="double" round_type="UP">
+    <Value>{IOCCLK::CDYN_AT_REF@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOC_LEAK" dff="PHXLXX9E" format="U9.3.6" value_type="double" round_type="UP">
+    <Value>{SAREST::SICC_SYSTEM_AT_REF@double}*{PKG::F_IOCCLK_LEAK_RATIO@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOCD2D_PE_DIVIDER" dff="PHXXXX9F" format="U8.8.0" value_type="double" round_type="EXACT">
+    <Value>{PKG::F_IOC_DIVIDER_NUM@double}/{IOCCLK::FV_MODEL_FINAL@fv}[''SSE''].F(0,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOCD2D_VF_DIVIDER_0" dff="PHXXX0A0" format="U8.8.0" value_type="double" round_type="EXACT">
+    <Value>{PKG::F_IOC_DIVIDER_VF_0@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOCD2D_VF_DIVIDER_1" dff="PHXXX1A1" format="U8.8.0" value_type="double" round_type="EXACT">
+    <Value>{PKG::F_IOC_DIVIDER_VF_1@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOCD2D_VF_DIVIDER_2" dff="PHXXX2A2" format="U8.8.0" value_type="double" round_type="EXACT">
+    <Value>{PKG::F_IOC_DIVIDER_NUM@double}/{IOCCLK::FV_MODEL_FINAL@fv}[''SSE''].F(0,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOCD2D_VF_DIVIDER_3" dff="PHXXX3A3" format="U8.8.0" value_type="double" round_type="EXACT">
+    <Value>{PKG::F_IOC_DIVIDER_NUM@double}/{IOCCLK::FV_MODEL_FINAL@fv}[''SSE''].F(1,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOCD2D_VF_VOLTAGE_0" dff="PHXVX0A4" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{IOCCLK::FV_MODEL_FINAL@fv}[''SSE''].V(0,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOCD2D_VF_VOLTAGE_1" dff="PHXVX1A5" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{IOCCLK::FV_MODEL_FINAL@fv}[''SSE''].V(0,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOCD2D_VF_VOLTAGE_2" dff="PHXVX2A6" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{IOCCLK::FV_MODEL_FINAL@fv}[''SSE''].V(0,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOCD2D_VF_VOLTAGE_3" dff="PHXVX3A7" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{IOCCLK::FV_MODEL_FINAL@fv}[''SSE''].V(1,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOSAF_CDYN_MAX" dff="PHXCXXA8" format="U10.4.6" value_type="double" round_type="UP">
+    <Value>{NCLK::CDYN_AT_REF@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOSAF_LEAK" dff="PHXLXXA9" format="U9.3.6" value_type="double" round_type="UP">
+    <Value>{SAREST::SICC_SYSTEM_AT_REF@double}*{PKG::F_NCLK_LEAK_RATIO@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOSAF_PE_RATIO" dff="PHXFXXAA" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{NCLK::FV_MODEL_FINAL@fv}[''SSE''].F(0,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOSAF_VF_RATIO_0" dff="PHXFX0AB" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{NCLK::FV_MODEL_FINAL@fv}[''SSE''].F(0,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOSAF_VF_RATIO_1" dff="PHXFX1AC" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{NCLK::FV_MODEL_FINAL@fv}[''SSE''].F(1,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOSAF_VF_RATIO_2" dff="PHXFX2AD" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{NCLK::FV_MODEL_FINAL@fv}[''SSE''].F(2,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOSAF_VF_RATIO_3" dff="PHXFX3AE" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{NCLK::FV_MODEL_FINAL@fv}[''SSE''].F(3,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOSAF_VF_RATIO_4" dff="PHXFX4AF" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{NCLK::FV_MODEL_FINAL@fv}[''SSE''].F(4,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOSAF_VF_VOLTAGE_0" dff="PHXVX0B0" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{NCLK::FV_MODEL_FINAL@fv}[''SSE''].V(0,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOSAF_VF_VOLTAGE_1" dff="PHXVX1B1" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{NCLK::FV_MODEL_FINAL@fv}[''SSE''].V(1,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOSAF_VF_VOLTAGE_2" dff="PHXVX2B2" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{NCLK::FV_MODEL_FINAL@fv}[''SSE''].V(2,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOSAF_VF_VOLTAGE_3" dff="PHXVX3B3" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{NCLK::FV_MODEL_FINAL@fv}[''SSE''].V(3,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOSAF_VF_VOLTAGE_4" dff="PHXVX4B4" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{NCLK::FV_MODEL_FINAL@fv}[''SSE''].V(4,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IPU_IS_CDYN_MAX" dff="PHXCXXB5" format="U9.4.5" value_type="double" round_type="UP">
+    <Value>{IPU::IS_ENABLED@bool} ? {PKG::F_IPU_IS_CDYN_MAX@double} : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IPU_IS_LEAK" dff="PHXLXXB6" format="U9.3.6" value_type="double" round_type="UP">
+    <Value>{IPU::IS_ENABLED@bool} ? {PKG::F_IPU_IS_LEAK@double}*{IPU::SICC_SYSTEM_AT_REF@double?}.Value : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IPU_IS_VF_RATIO_0" dff="PHXFXXB7" format="6:0.025" value_type="double" round_type="CLOSEST">
+    <Value>{IPU::IS_ENABLED@bool} ? {PKG::F_IPU_IS_FREQ_F0@double} : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IPU_IS_VF_VOLTAGE_0" dff="PHXVXXB8" format="U9.1.8" value_type="double" round_type="CLOSEST">
+    <Value>{IPU::IS_ENABLED@bool} ? {IPU::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(0,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IPU_PB_IB_CDYN_MAX" dff="PHXCXXB9" format="U9.4.5" value_type="double" round_type="CLOSEST">
+    <Value>{IPU::IS_ENABLED@bool} ? {PKG::F_IPU_PB_IB_CDYN_MAX@double} : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IPU_PB_IB_LEAK" dff="PHXLXXBA" format="U9.3.6" value_type="double" round_type="UP">
+    <Value>{IPU::IS_ENABLED@bool} ? {PKG::F_IPU_PB_IB_LEAK@double}*{IPU::SICC_SYSTEM_AT_REF@double?}.Value : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IPU_PS_CDYN_MAX" dff="PHXCXXBB" format="U9.4.5" value_type="double" round_type="UP">
+    <Value>{IPU::IS_ENABLED@bool} ? {PKG::F_IPU_PS_CDYN_MAX@double} : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IPU_PS_LEAK" dff="PHXLXXBC" format="U9.3.6" value_type="double" round_type="UP">
+    <Value>{IPU::IS_ENABLED@bool} ? {PKG::F_IPU_PS_LEAK@double}*{IPU::SICC_SYSTEM_AT_REF@double?}.Value : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IPU_PS_VF_RATIO_0" dff="PHXFX0BD" format="6:0.025" value_type="double" round_type="EXACT">
+    <Value>{IPU::IS_ENABLED@bool} ? {IPU::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(0,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IPU_PS_VF_RATIO_1" dff="PHXFX1BE" format="6:0.025" value_type="double" round_type="EXACT">
+    <Value>{IPU::IS_ENABLED@bool} ? {IPU::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(1,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IPU_PS_VF_RATIO_2" dff="PHXFX2BF" format="6:0.025" value_type="double" round_type="EXACT">
+    <Value>{IPU::IS_ENABLED@bool} ? {IPU::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(2,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IPU_PS_VF_VOLTAGE_0" dff="PHXVX0C0" format="U9.1.8" value_type="double" round_type="CLOSEST">
+    <Value>{IPU::IS_ENABLED@bool} ? {IPU::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(0,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IPU_PS_VF_VOLTAGE_1" dff="PHXVX1C1" format="U9.1.8" value_type="double" round_type="CLOSEST">
+    <Value>{IPU::IS_ENABLED@bool} ? {IPU::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(1,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IPU_PS_VF_VOLTAGE_2" dff="PHXVX2C2" format="U9.1.8" value_type="double" round_type="CLOSEST">
+    <Value>{IPU::IS_ENABLED@bool} ? {IPU::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(2,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_ITD_CUTOFF_TJ" dff="PHXIOXC3" format="U7.7.0" value_type="double" round_type="EXACT">
+    <Value>{QCLK::ITD_MODEL@itd}.TCutoff(0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_L2_ATOM_CDYN_MAX" dff="PHXCXXC4" format="U10.5.5" value_type="double" round_type="UP">
+    <Value>{NA::LI::PROCESSOR_LP_ECORE_FUNC_QTY@double} &lt; 4 ? 0 : {LPATSRAM::CDYN_AT_REF@double?}.Value</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_L2_ATOM_CDYN_V_CORRECTION" dff="PHXCXXC5" format="U7.2.5" value_type="double" round_type="UP">
+    <Value>{NA::LI::PROCESSOR_LP_ECORE_FUNC_QTY@double} &lt; 4 ? 0 : {LPATSRAM::CV_SLOPE@double?}.Value</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_L2_ATOM_EQ_T" dff="PHXLPXC6" format="U9.-4.13" value_type="double" round_type="CLOSEST">
+    <Value>{NA::LI::PROCESSOR_LP_ECORE_FUNC_QTY@double} &lt; 4 ? 0 : {LPATSRAM::PET_T@double?}.Value</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_L2_ATOM_EQ_V" dff="PHXLPXC7" format="U9.2.7" value_type="double" round_type="CLOSEST">
+    <Value>{NA::LI::PROCESSOR_LP_ECORE_FUNC_QTY@double} &lt; 4 ? 0 : {LPATSRAM::PET_V@double?}.Value</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_L2_ATOM_EQ_VT" dff="PHXLPXC8" format="U8.-5.13" value_type="double" round_type="CLOSEST">
+    <Value>{NA::LI::PROCESSOR_LP_ECORE_FUNC_QTY@double} &lt; 4 ? 0 : {LPATSRAM::PET_VT@double?}.Value*(-1)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_L2_ATOM_LEAK" dff="PHXLXXC9" format="U11.5.6" value_type="double" round_type="UP">
+    <Value>{NA::LI::PROCESSOR_LP_ECORE_FUNC_QTY@double} &lt; 4 ? 0 : {LPATSRAM::SICC_SYSTEM_AT_REF@double?}.Value</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_LOW_FREQUENCY_ITD_ATOM_FREQUENCY_THRESHOLD" dff="PHXIXXCB" format="8:0.010" value_type="double" round_type="CLOSEST">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_LOW_FREQUENCY_ITD_CSAF_FREQUENCY_THRESHOLD" dff="PHXIXXCC" format="8:0.010" value_type="double" round_type="CLOSEST">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_LOW_FREQUENCY_ITD_DISPLAY_FREQUENCY_THRESHOLD" dff="PHXIXXCD" format="8:0.010" value_type="double" round_type="CLOSEST">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_LOW_FREQUENCY_ITD_IOCD2D_FREQUENCY_THRESHOLD" dff="PHXIXXCE" format="8:0.010" value_type="double" round_type="CLOSEST">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_LOW_FREQUENCY_ITD_IOSAF_FREQUENCY_THRESHOLD" dff="PHXIXXCF" format="8:0.010" value_type="double" round_type="CLOSEST">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_LOW_FREQUENCY_ITD_IPU_IS_FREQUENCY_THRESHOLD" dff="PHXIXXD0" format="8:0.010" value_type="double" round_type="CLOSEST">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_LOW_FREQUENCY_ITD_IPU_PS_FREQUENCY_THRESHOLD" dff="PHXIXXD1" format="8:0.010" value_type="double" round_type="CLOSEST">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_LOW_FREQUENCY_ITD_MEDIA_FREQUENCY_THRESHOLD" dff="PHXIXXD2" format="8:0.010" value_type="double" round_type="CLOSEST">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_LOW_FREQUENCY_ITD_QCLK_FREQUENCY_THRESHOLD" dff="PHXIXXD3" format="8:0.010" value_type="double" round_type="CLOSEST">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_LOW_FREQUENCY_ITD_SCALING_FACTOR" dff="PHXIXXD4" format="U9.-7.16" value_type="double" round_type="CLOSEST">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_LOW_FREQUENCY_ITD_VPU_FREQUENCY_THRESHOLD" dff="PHXIXXD5" format="8:0.010" value_type="double" round_type="CLOSEST">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_MAX_GT_LOADLINE_GTCLK" dff="PGXXXXDE" format="U8.8.0 " value_type="double" round_type="CLOSEST">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_MAX_VOLTAGE_VCCSA" dff="PHXVXXDF" format="U10.2.8" value_type="double" round_type="CLOSEST">
+    <Value>{PKG::F_VCCSA_VR_MAX_VOLTAGE@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_MEDIA_PN_RATIO" dff="PHXFXXE0" format="6:0.050" value_type="double" round_type="EXACT">
+    <Value>{MEDIA::IS_ENABLED@bool} ? {MEDIA::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(0,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_MEDIA_SLICE_1_CDYN_MAX" dff="PHXCXXE1" format="U10.5.5" value_type="double" round_type="UP">
+    <Value>{MEDIA::IS_ENABLED@bool} ? {PKG::F_MEDIA_SLICE_1_CDYN_MAX@double} : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_MEDIA_SLICE_1_LEAK" dff="PHXLXXE2" format="U9.3.6" value_type="double" round_type="UP">
+    <Value>{MEDIA::IS_ENABLED@bool} ? {MEDIA::SICC_SYSTEM_AT_REF@double?}.Value * {PKG::F_MEDIA_SLICE_1_LEAK_PERCENT@double} : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_MEDIA_SRAM_CDYN_MAX" dff="PHXCXXE5" format="U7.1.6" value_type="double" round_type="UP">
+    <Value>{MEDIA::IS_ENABLED@bool} ? {MEDIASRAM::CDYN_AT_REF@double?}.Value : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_MEDIA_SRAM_LEAK" dff="PHXLXXE6" format="U7.1.6" value_type="double" round_type="UP">
+    <Value>{MEDIA::IS_ENABLED@bool} ? {MEDIASRAM::SICC_SYSTEM_AT_REF@double?}.Value : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_MEDIA_UNGATED_CDYN_MAX" dff="PHXCXXE7" format="U9.4.5" value_type="double" round_type="UP">
+    <Value>{MEDIA::IS_ENABLED@bool} ? {PKG::F_MEDIA_UNGATED_CDYN_MAX@double} : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_MEDIA_UNGATED_LEAK" dff="PHXLXXE8" format="U9.3.6" value_type="double" round_type="UP">
+    <Value>{MEDIA::IS_ENABLED@bool} ? {PKG::F_MEDIA_UNGATED_LEAK_PERCENT@double} * {MEDIA::SICC_SYSTEM_AT_REF@double?}.Value : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_MEDIA_VF_RATIO_0" dff="PHXFX0EB" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{MEDIA::IS_ENABLED@bool} ? {MEDIA::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(0,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_MEDIA_VF_RATIO_1" dff="PHXFX1EC" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{MEDIA::IS_ENABLED@bool} ? {MEDIA::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(1,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_MEDIA_VF_RATIO_2" dff="PHXFX2ED" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{MEDIA::IS_ENABLED@bool} ? {MEDIA::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(2,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_MEDIA_VF_RATIO_3" dff="PHXFX3EE" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{MEDIA::IS_ENABLED@bool} ? {MEDIA::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(3,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_MEDIA_VF_RATIO_4" dff="PHXFX4EF" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{MEDIA::IS_ENABLED@bool} ? {MEDIA::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(4,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_MEDIA_VF_RATIO_5" dff="PHXFX5F0" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{MEDIA::IS_ENABLED@bool} ? {MEDIA::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(5,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_MEDIA_VF_VOLTAGE_0" dff="PHXVX0F1" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{MEDIA::IS_ENABLED@bool} ? {MEDIA::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(0,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_MEDIA_VF_VOLTAGE_1" dff="PHXVX1F2" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{MEDIA::IS_ENABLED@bool} ? {MEDIA::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(1,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_MEDIA_VF_VOLTAGE_2" dff="PHXVX2F3" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{MEDIA::IS_ENABLED@bool} ? {MEDIA::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(2,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_MEDIA_VF_VOLTAGE_3" dff="PHXVX3F4" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{MEDIA::IS_ENABLED@bool} ? {MEDIA::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(3,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_MEDIA_VF_VOLTAGE_4" dff="PHXVX4F5" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{MEDIA::IS_ENABLED@bool} ? {MEDIA::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(4,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_MEDIA_VF_VOLTAGE_5" dff="PHXVX5F6" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{MEDIA::IS_ENABLED@bool} ? {MEDIA::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(5,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_MEMSS_LEAK" dff="PHXLXXF7" format="U9.3.6" value_type="double" round_type="UP">
+    <Value>{SAREST::SICC_SYSTEM_AT_REF@double}*{PKG::F_QCLK_LEAK_RATIO@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_MEMSS_QCLK_CDYN_MAX" dff="PHXCXXF8" format="U8.3.5" value_type="double" round_type="UP">
+    <Value>{PKG::F_MEMSS_QCLK_CDYN_MAX@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_MEMSS_REST_CDYN_CONDUCTIVITY_MAX" dff="PHXCXXF9" format="U10.4.6" value_type="double" round_type="UP">
+    <Value>{PKG::F_MEMSS_REST_CONDUCTIVITY@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_MODULE_0_L2_ATOM_CDYN_VAR" dff="PHXCXXFA" format="U7.1.6" value_type="double" round_type="UP">
+    <Value>1</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_MODULE_0_L2_ATOM_LEAK_VAR" dff="PHXLXXFB" format="U7.1.6" value_type="double" round_type="UP">
+    <Value>1</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_REFERENCE_TEMPERATURE" dff="PHXXXXFC" format="U8.8.0" value_type="double" round_type="EXACT">
+    <Value>{NPU::TREF@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_REFERENCE_VOLTAGE" dff="PHXVXXFD" format="U9.1.8" value_type="double" round_type="CLOSEST">
+    <Value>{NPU::VREF@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_CDYN_V_CORRECTION" dff="PHXCXXFE" format="U7.2.5" value_type="double" round_type="UP">
+    <Value>{QCLK::CV_SLOPE@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_DE_SRAM_CDYN_MAX" dff="PHXCXXFF" format="U8.3.5" value_type="double" round_type="UP">
+    <Value>{DE::IS_ENABLED@bool} ? {DESRAM::CDYN_AT_REF@double?}.Value : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_DE_SRAM_LEAK" dff="PHXLXX00" format="U9.3.6" value_type="double" round_type="UP">
+    <Value>{DE::IS_ENABLED@bool} ? {DESRAM::SICC_SYSTEM_AT_REF@double?}.Value : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_IP_VF_VOLTAGE_DELTA_0" dff="PHXVX001" format="U6.-2.8" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_IP_VF_VOLTAGE_DELTA_1" dff="PHXVX102" format="U6.-2.8" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_IP_VF_VOLTAGE_DELTA_2" dff="PHXVX203" format="U6.-2.8" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_IP_VF_VOLTAGE_DELTA_3" dff="PHXVX304" format="U6.-2.8" value_type="double" round_type="UP">
+    <Value>0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_ITD_CUTOFF_V" dff="PHXIOX05" format="U9.1.8" value_type="double" round_type="CLOSEST">
+    <Value>{QCLK::ITD_MODEL@itd}.VCutoff(0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_ITD_CUTOFF_V2" dff="PHXIOX06" format="U9.1.8" value_type="double" round_type="CLOSEST">
+    <Value>{QCLK::ITD_MODEL@itd}.VCutoff(1)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_ITD_FLOOR_VOLTAGE" dff="PHXIXX07" format="U8.0.8" value_type="double" round_type="CLOSEST">
+    <Value>{QCLK::ITD_MODEL@itd}.VStart(0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_ITD_SLOPE" dff="PHXISX08" format="U9.-7.16" value_type="double" round_type="CLOSEST">
+    <Value>{QCLK::ITD_MODEL@itd}.Slope(0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_ITD_SLOPE_ABOVE_CUTOFF_TJ" dff="PHXISX09" format="U8.3.5" value_type="double" round_type="CLOSEST">
+    <Value>4</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_ITD_SLOPE2" dff="PHXISX0A" format="U9.-7.16" value_type="double" round_type="CLOSEST">
+    <Value>{QCLK::ITD_MODEL@itd}.Slope(1)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_LEAK" dff="PHXLXX0B" format="U12.6.6" value_type="double" round_type="UP">
+    <Value>{SAREST::SICC_SYSTEM_AT_REF@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_LEAK_PARAMS_EQ_T" dff="PHXLPX0C" format="U9.-4.13" value_type="double" round_type="CLOSEST">
+    <Value>{SAREST::ST@double} + {SAREST::SRT@double} * Math.Log(({LPATOM::IS_ENABLED@bool} ? {LPATOM::SICC_SYSTEM_AT_REF@double?}.Value : 0) + ({DE::IS_ENABLED@bool} ? {DE::SICC_SYSTEM_AT_REF@double?}.Value : 0) + ({IPU::IS_ENABLED@bool} ? {IPU::SICC_SYSTEM_AT_REF@double?}.Value : 0) + ({MEDIA::IS_ENABLED@bool} ? {MEDIA::SICC_SYSTEM_AT_REF@double?}.Value : 0) + ({NPU::IS_ENABLED@bool} ? {NPU::SICC_SYSTEM_AT_REF@double?}.Value : 0))</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_LEAK_PARAMS_EQ_V" dff="PHXLPX0D" format="U9.2.7" value_type="double" round_type="CLOSEST">
+    <Value>{SAREST::SV@double} + {SAREST::SRV@double} * Math.Log(({LPATOM::IS_ENABLED@bool} ? {LPATOM::SICC_SYSTEM_AT_REF@double?}.Value : 0) + ({DE::IS_ENABLED@bool} ? {DE::SICC_SYSTEM_AT_REF@double?}.Value : 0) + ({IPU::IS_ENABLED@bool} ? {IPU::SICC_SYSTEM_AT_REF@double?}.Value : 0) + ({MEDIA::IS_ENABLED@bool} ? {MEDIA::SICC_SYSTEM_AT_REF@double?}.Value : 0) + ({NPU::IS_ENABLED@bool} ? {NPU::SICC_SYSTEM_AT_REF@double?}.Value : 0))</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_LEAK_PARAMS_EQ_VT" dff="PHXLPX0E" format="U8.-5.13" value_type="double" round_type="CLOSEST">
+    <Value>{SAREST::PET_VT@double}*(-1)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_MIN_VOLTAGE" dff="PHXVXX0F" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>Utils.MAX({QCLK::FV_MODEL_FINAL@fv}[''SSE''].V(0,true), ({LPATOM::IS_ENABLED@bool} ? {LPATOM::FV_MODEL_FINAL@fv}[''SSE''].V(0,true) : 0))</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_QCLK_VF_RATIO_0" dff="PHXFX010" format="7:0.03333" value_type="double" round_type="CLOSEST">
+    <Value>{QCLK::FV_MODEL_FINAL@fv}[''SSE''].F(0,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_QCLK_VF_RATIO_1" dff="PHXFX111" format="7:0.03333" value_type="double" round_type="CLOSEST">
+    <Value>{QCLK::FV_MODEL_FINAL@fv}[''SSE''].F(1,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_QCLK_VF_RATIO_2" dff="PHXFX212" format="7:0.03333" value_type="double" round_type="CLOSEST">
+    <Value>{QCLK::FV_MODEL_FINAL@fv}[''SSE''].F(2,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_QCLK_VF_RATIO_3" dff="PHXFX313" format="7:0.03333" value_type="double" round_type="CLOSEST">
+    <Value>{QCLK::FV_MODEL_FINAL@fv}[''SSE''].F(3,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_QCLK_VF_RATIO_4" dff="PHXFX414" format="7:0.03333" value_type="double" round_type="CLOSEST">
+    <Value>{QCLK::FV_MODEL_FINAL@fv}[''SSE''].F(4,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_QCLK_VF_RATIO_5" dff="PHXFX515" format="7:0.03333" value_type="double" round_type="CLOSEST">
+    <Value>{QCLK::FV_MODEL_FINAL@fv}[''SSE''].F(5,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_QCLK_VF_VOLTAGE_0" dff="PHXVX016" format="U9.1.8" value_type="double" round_type="CLOSEST">
+    <Value>{QCLK::FV_MODEL_FINAL@fv}[''SSE''].V(0,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_QCLK_VF_VOLTAGE_1" dff="PHXVX117" format="U9.1.8" value_type="double" round_type="CLOSEST">
+    <Value>{QCLK::FV_MODEL_FINAL@fv}[''SSE''].V(1,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_QCLK_VF_VOLTAGE_2" dff="PHXVX218" format="U9.1.8" value_type="double" round_type="CLOSEST">
+    <Value>{QCLK::FV_MODEL_FINAL@fv}[''SSE''].V(2,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_QCLK_VF_VOLTAGE_3" dff="PHXVX319" format="U9.1.8" value_type="double" round_type="CLOSEST">
+    <Value>{QCLK::FV_MODEL_FINAL@fv}[''SSE''].V(3,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_QCLK_VF_VOLTAGE_4" dff="PHXVX41A" format="U9.1.8" value_type="double" round_type="CLOSEST">
+    <Value>{QCLK::FV_MODEL_FINAL@fv}[''SSE''].V(4,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_QCLK_VF_VOLTAGE_5" dff="PHXVX51B" format="U9.1.8" value_type="double" round_type="CLOSEST">
+    <Value>{QCLK::FV_MODEL_FINAL@fv}[''SSE''].V(5,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_REST_CDYN_CONDUCTIVITY_MAX" dff="PHXCXX1C" format="U10.4.6" value_type="double" round_type="CLOSEST">
+    <Value>{SAREST::CONDUCTANCE@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_SRAM_LEAK_PARAMS_EQ_T" dff="PHXLPX1D" format="U9.-4.13" value_type="double" round_type="CLOSEST">
+    <Value>{SAREST::ST@double} + {SAREST::SRT@double} * Math.Log(({LPATSRAM::IS_ENABLED@bool} ? {LPATSRAM::SICC_SYSTEM_AT_REF@double?}.Value : 0) + ({DESRAM::IS_ENABLED@bool} ? {DESRAM::SICC_SYSTEM_AT_REF@double?}.Value : 0) + ({MEDIASRAM::IS_ENABLED@bool} ? {MEDIASRAM::SICC_SYSTEM_AT_REF@double?}.Value : 0) + ({NPUSRAM::IS_ENABLED@bool} ? {NPUSRAM::SICC_SYSTEM_AT_REF@double?}.Value : 0))</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_SRAM_LEAK_PARAMS_EQ_V" dff="PHXLPX1E" format="U9.2.7" value_type="double" round_type="CLOSEST">
+    <Value>{SAREST::SV@double} + {SAREST::SRV@double} * Math.Log(({LPATSRAM::IS_ENABLED@bool} ? {LPATSRAM::SICC_SYSTEM_AT_REF@double?}.Value : 0) + ({DESRAM::IS_ENABLED@bool} ? {DESRAM::SICC_SYSTEM_AT_REF@double?}.Value : 0) + ({MEDIASRAM::IS_ENABLED@bool} ? {MEDIASRAM::SICC_SYSTEM_AT_REF@double?}.Value : 0) + ({NPUSRAM::IS_ENABLED@bool} ? {NPUSRAM::SICC_SYSTEM_AT_REF@double?}.Value : 0))</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SA_SRAM_LEAK_PARAMS_EQ_VT" dff="PHXLPX1F" format="U8.-5.13" value_type="double" round_type="CLOSEST">
+    <Value>{SAREST::PET_VT@double}*(-1)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SOC_OTHER_MAX_POWER" dff="PHXXXX20" format="U8.5.3" value_type="double" round_type="UP">
+    <Value>{PKG::F_SOC_OTHER_MAX_POWER@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SVID_VOLTAGE_OFFSET_ATOM_LP" dff="PHXVXX21" format="U5.-3.8" value_type="double" round_type="CLOSEST">
+    <Value>{PKG::F_LPATOM_SVID_VOLTAGE_OFFSET@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SVID_VOLTAGE_OFFSET_GT" dff="PGXVXX22" format="U5.-3.8" value_type="double" round_type="CLOSEST">
+    <Value>{PKG::F_GT_SVID_VOLTAGE_OFFSET@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SVID_VOLTAGE_OFFSET_IA" dff="PHXVXX23" format="U5.-3.8" value_type="double" round_type="CLOSEST">
+    <Value>{PKG::F_IA_SVID_VOLTAGE_OFFSET@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_SVID_VOLTAGE_OFFSET_SA" dff="PHXVXX24" format="U5.-3.8" value_type="double" round_type="CLOSEST">
+    <Value>{PKG::F_HUB_SVID_VOLTAGE_OFFSET@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_VCCGT_VR_MAX_VOLTAGE" dff="PGXVXX25" format="U10.2.8" value_type="double" round_type="CLOSEST">
+    <Value>{PKG::F_VCCGT_VR_MAX_VOLTAGE@double?}.GetOrDefault(1.0)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_VCCIA_VR_MAX_VOLTAGE" dff="PHXVXX26" format="U10.2.8" value_type="double" round_type="CLOSEST">
+    <Value>{PKG::F_VCCIA_VR_MAX_VOLTAGE@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_VCCLP_ATOM_VR_MAX_VOLTAGE" dff="PHXVXX27" format="U10.2.8" value_type="double" round_type="CLOSEST">
+    <Value>{PKG::C_PACKAGE_TYPE@string} == ''MBL'' ? {PKG::F_VCCLPCORE_VR_MAX_VOLTAGE@double?}.Value : {PKG::F_VCCSA_VR_MAX_VOLTAGE@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_VCCSA_VR_MAX_VOLTAGE" dff="PHXVXX28" format="U10.2.8" value_type="double" round_type="CLOSEST">
+    <Value>{PKG::F_VCCSA_VR_MAX_VOLTAGE@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_VPU_CDYN_MAX_0TILE" dff="PHXCXX29" format="U10.5.5" value_type="double" round_type="UP">
+    <Value>{NPU::IS_ENABLED@bool} ? {PKG::F_NPU_CDYN_MAX_0TILE@double} : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_VPU_CDYN_MAX_1TILE" dff="PHXCXX2A" format="U10.5.5" value_type="double" round_type="UP">
+    <Value>{NPU::IS_ENABLED@bool} ? {PKG::F_NPU_CDYN_MAX_1TILE@double} : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_VPU_LEAK_MAX_0TILE" dff="PHXLXX2B" format="U9.3.6" value_type="double" round_type="UP">
+    <Value>{NPU::IS_ENABLED@bool} ? {NPU::SICC_SYSTEM_AT_REF@double?}.Value*{PKG::F_NPU_LEAK_MAX_0TILE_RATIO@double} : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_VPU_LEAK_MAX_1TILE" dff="PHXLXX2C" format="U9.3.6" value_type="double" round_type="UP">
+    <Value>{NPU::IS_ENABLED@bool} ? {NPU::SICC_SYSTEM_AT_REF@double?}.Value*{PKG::F_NPU_LEAK_MAX_1TILE_RATIO@double} : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_VPU_PB_IB_CDYN_MAX" dff="PHXCXX2D" format="U10.5.5" value_type="double" round_type="UP">
+    <Value>{NPU::IS_ENABLED@bool} ? {PKG::F_NPU_PB_IB_CDYN_MAX@double} : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_VPU_PB_IB_LEAK" dff="PHXLXX2E" format="U9.3.6" value_type="double" round_type="UP">
+    <Value>{NPU::IS_ENABLED@bool} ? {NPU::SICC_SYSTEM_AT_REF@double?}.Value*{PKG::F_NPU_PB_IB_LEAK_RATIO@double} : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_VPU_PN_RATIO" dff="PHXFXX2F" format="8:0.050" value_type="double" round_type="CLOSEST">
+    <Value>{NPU::IS_ENABLED@bool} ? {NPU::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(0,true)*2 : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_VPU_VF_RATIO_0" dff="PHXFX030" format="7:0.050" value_type="double" round_type="CLOSEST">
+    <Value>{NPU::IS_ENABLED@bool} ? {NPU::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(0,true)*2 : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_VPU_VF_RATIO_1" dff="PHXFX131" format="7:0.050" value_type="double" round_type="CLOSEST">
+    <Value>{NPU::IS_ENABLED@bool} ? {NPU::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(1,true)*2 : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_VPU_VF_RATIO_2" dff="PHXFX232" format="7:0.050" value_type="double" round_type="CLOSEST">
+    <Value>{NPU::IS_ENABLED@bool} ? {NPU::FV_MODEL_FINAL@fv?}.Value[''SSE''].F(2,true)*2 : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_VPU_VF_VOLTAGE_0" dff="PHXVX033" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{NPU::IS_ENABLED@bool} ? {NPU::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(0,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_VPU_VF_VOLTAGE_1" dff="PHXVX134" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{NPU::IS_ENABLED@bool} ? {NPU::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(1,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_VPU_VF_VOLTAGE_2" dff="PHXVX235" format="U9.1.8" value_type="double" round_type="UP">
+    <Value>{NPU::IS_ENABLED@bool} ? {NPU::FV_MODEL_FINAL@fv?}.Value[''SSE''].V(2,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="vpu_btrs_fuse/VPU_TILE_SKU" dff="PHXEXX1E" format="6" value_type="binary" round_type="EXACT">
+    <Value>{HUBrecovery::CHOSEN_CONFIG_VALUES@string_string}[''VPU_TILE_SKU'']</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_VPU_SRAM_LEAK_MAX_1TILE" dff="PHXLXX1F" format="U7.1.6" value_type="double" round_type="UP">
+    <Value>{NPU::IS_ENABLED@bool} ? {NPU::SICC_SYSTEM_AT_REF@double?}.Value*{PKG::F_VPU_SRAM_LEAK_MAX_1TILE@double} : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_VPU_SRAM_CDYN_MAX_1TILE" dff="PHXCXX20" format="U7.1.6" value_type="double" round_type="UP">
+    <Value>{NPU::IS_ENABLED@bool} ? {PKG::F_VPU_SRAM_CDYN_MAX_1TILE@double} : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_TRUE_TD_ENABLE" dff="PHXIXX21" format="1" value_type="binary" round_type="EXACT">
+    <Value>{QCLK::ITD_MODEL@itd}.AllowNegativeItd ? ''1'' : ''0''</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOSAF_MIN_RATIO" dff="PHXFXX22" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{PKG::F_HUB_MIN_RATIO@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOSAF_MAX_RATIO" dff="PHXFXX23" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{NCLK::FV_MODEL_FINAL@fv}[''SSE''].F(4,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_IOSAF_BOOT_RATIO" dff="PHXFXX24" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{PKG::F_IOSAF_BOOT_RATIO@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CSAF_BOOT_RATIO" dff="PHXFXX25" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{PKG::F_CSAF_BOOT_RATIO@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CSAF_MIN_RATIO" dff="PHXFXX26" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{PKG::F_HUB_MIN_RATIO@double}</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_CSAF_MAX_RATIO" dff="PHXFXX27" format="8:0.050" value_type="double" round_type="EXACT">
+    <Value>{CCLK::FV_MODEL_FINAL@fv}[''SSE''].F(4,true)</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_VOLTAGE_ACM_KOSC_0" dff="PGXVK000" format="U9.2.7" value_type="double" round_type="CLOSEST">
+    <Value>{GT::IS_ENABLED@bool} ? {NA::PKG::C_VOSC_RATIO_AT_FV_FREQS@fv?}.Value[''GTVPG''].V(0,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_VOLTAGE_ACM_KOSC_1" dff="PGXVK101" format="U9.2.7" value_type="double" round_type="CLOSEST">
+    <Value>{GT::IS_ENABLED@bool} ? {NA::PKG::C_VOSC_RATIO_AT_FV_FREQS@fv?}.Value[''GTVPG''].V(1,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_VOLTAGE_ACM_KOSC_2" dff="PGXVK202" format="U9.2.7" value_type="double" round_type="CLOSEST">
+    <Value>{GT::IS_ENABLED@bool} ? {NA::PKG::C_VOSC_RATIO_AT_FV_FREQS@fv?}.Value[''GTVPG''].V(2,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_VOLTAGE_ACM_KOSC_3" dff="PGXVK303" format="U9.2.7" value_type="double" round_type="CLOSEST">
+    <Value>{GT::IS_ENABLED@bool} ? {NA::PKG::C_VOSC_RATIO_AT_FV_FREQS@fv?}.Value[''GTVPG''].V(3,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_VOLTAGE_ACM_KOSC_4" dff="PGXVK404" format="U9.2.7" value_type="double" round_type="CLOSEST">
+    <Value>{GT::IS_ENABLED@bool} ? {NA::PKG::C_VOSC_RATIO_AT_FV_FREQS@fv?}.Value[''GTVPG''].V(4,true) : 0</Value>
+  </TOKEN>
+  <TOKEN name="punit/punit_fw_fuses_GT_VF_VOLTAGE_ACM_KOSC_5" dff="PGXVK505" format="U9.2.7" value_type="double" round_type="CLOSEST">
+    <Value>{GT::IS_ENABLED@bool} ? {NA::PKG::C_VOSC_RATIO_AT_FV_FREQS@fv?}.Value[''GTVPG''].V(5,true) : 0</Value>
+  </TOKEN>
+</DFF>

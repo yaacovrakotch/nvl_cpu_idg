@@ -1,0 +1,1488 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan PTH_BGR_CXPKGS9;
+
+Import "PTH_BGR_CXPKGS9.usrv";
+Import "PTH_BGR_CXPKGS9_LevelsSequences.lvl";
+Import "PTH_BGR_CXPKGS9_Levels.tcg";
+Import "PTH_BGR_CXPKGS9_PatternTrigger.ptm";
+Import "PTH_BGR_CXPKGS9_LevelsSequences_CPU01.lvl";
+Import "PTH_BGR_CXPKGS9_Levels_CPU01.tcg";
+Import "PTH_BGR_CXPKGS9_PatternTrigger_CPU01.ptm";
+
+#Test Counter Definition
+Counters
+{
+	n29022006_fail_BGR_X_CTVDEC_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_0,
+	n29022007_fail_BGR_X_CTVDEC_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_2,
+	n29022008_fail_BGR_X_CTVDEC_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_3,
+	n29022009_fail_BGR_X_CTVDEC_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_4,
+	n29022010_fail_BGR_X_CTVDEC_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_5,
+	n29022011_fail_BGR_X_CTVDEC_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_6,
+	n29052000_fail_BGR_X_ANAFUNCAP_K_STARTANA0CPU_X_X_X_X_BGTAPRW_0,
+	n29052001_fail_BGR_X_ANAFUNCAP_K_STARTANA0CPU_X_X_X_X_BGTAPRW_2,
+	n29052002_fail_BGR_X_ANAFUNCAP_K_STARTANA0CPU_X_X_X_X_BGTAPRW_3,
+	n29052003_fail_BGR_X_ANAFUNCAP_K_STARTANA0CPU_X_X_X_X_BGTAPRW_4,
+	n29052004_fail_BGR_X_ANAFUNCAP_K_STARTANA0CPU_X_X_X_X_BGTAPRW_5,
+	n29062000_fail_BGR_X_SCREEN_K_STARTANA0CPU_X_X_X_X_BGR_TEMPCO_CALC_0,
+	n29062001_fail_BGR_X_SCREEN_K_STARTANA0CPU_X_X_X_X_BGR_TEMPCO_CALC_2,
+	n29072000_fail_BGR_X_ANADC_K_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_0,
+	n29072001_fail_BGR_X_ANADC_K_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_2,
+	n29072002_fail_BGR_X_ANADC_K_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_3,
+	n29072003_fail_BGR_X_ANADC_K_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_4,
+	n29072004_fail_BGR_X_ANADC_K_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_5,
+	n29072005_fail_BGR_X_ANADC_K_STARTPWRCPU_X_X_X_X_BGR_ANAPRB_POST_0,
+	n29072006_fail_BGR_X_ANADC_K_STARTPWRCPU_X_X_X_X_BGR_ANAPRB_POST_2,
+	n29072007_fail_BGR_X_ANADC_K_STARTPWRCPU_X_X_X_X_BGR_ANAPRB_POST_3,
+	n29072008_fail_BGR_X_ANADC_K_STARTPWRCPU_X_X_X_X_BGR_ANAPRB_POST_4,
+	n29072009_fail_BGR_X_ANADC_K_STARTPWRCPU_X_X_X_X_BGR_ANAPRB_POST_5,
+	n29112005_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH0_0,
+	n29112006_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH0_2,
+	n29112007_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH0_3,
+	n29112008_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH0_4,
+	n29112009_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH0_5,
+	n29122005_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH1_0,
+	n29122006_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH1_2,
+	n29122007_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH1_3,
+	n29122008_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH1_4,
+	n29122009_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH1_5,
+	n29152005_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_PRE_0,
+	n29152006_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_PRE_2,
+	n29152007_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_PRE_3,
+	n29152008_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_PRE_4,
+	n29152009_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_PRE_5,
+	n29162005_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_0,
+	n29162006_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_2,
+	n29162007_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_3,
+	n29162008_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_4,
+	n29162009_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_5,
+	n29182001_fail_BGR_X_PATCONFIG_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_CALC_FUSE_R1_0,
+	n29282004_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU0_0,
+	n29282005_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU0_2,
+	n29282006_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU0_3,
+	n29282007_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU0_4,
+	n29292000_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU1_0,
+	n29292001_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU1_2,
+	n29292002_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU1_3,
+	n29292003_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU1_4,
+	n29302002_fail_BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_DEC2BIN_0,
+	n29302003_fail_BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_DEC2BIN_2,
+	n29312000_fail_BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_PROBECAL_0,
+	n29312001_fail_BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_PROBECAL_2,
+	n29332004_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR_0,
+	n29332005_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR_2,
+	n29332006_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR_3,
+	n29332007_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR_4,
+	n29332008_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR_CPU1_0,
+	n29332009_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR_CPU1_2,
+	n29332010_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR_CPU1_3,
+	n29332011_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR_CPU1_4,
+	n29342000_fail_BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_PER_PART_FUSE_0,
+	n29342001_fail_BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_PER_PART_FUSE_2,
+	n29352000_fail_BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_HOT2COLD_DELTA_0,
+	n29352001_fail_BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_HOT2COLD_DELTA_2,
+	n94292005_fail_BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_PRE_0,
+	n94292005_fail_BGR_X_ANADC_K_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_0,
+	n94292006_fail_BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_PRE_2,
+	n94292006_fail_BGR_X_ANADC_K_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_2,
+	n94292007_fail_BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_PRE_3,
+	n94292007_fail_BGR_X_ANADC_K_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_3,
+	n94292008_fail_BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_PRE_4,
+	n94292008_fail_BGR_X_ANADC_K_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_4,
+	n94292009_fail_BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_PRE_5,
+	n94292009_fail_BGR_X_ANADC_K_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_5,
+	n94292012_fail_BGR_X_SCREEN_K_LTTCCPU_X_X_X_X_BGR_TEMPCO_CALC_0,
+	n94292013_fail_BGR_X_SCREEN_K_LTTCCPU_X_X_X_X_BGR_TEMPCO_CALC_2,
+	n94292015_fail_BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_0,
+	n94292016_fail_BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_2,
+	n94292017_fail_BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_3,
+	n94292018_fail_BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_4,
+	n94292019_fail_BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_5,
+	n94292026_fail_BGR_X_CTVDEC_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_0,
+	n94292027_fail_BGR_X_CTVDEC_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_2,
+	n94292028_fail_BGR_X_CTVDEC_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_3,
+	n94292029_fail_BGR_X_CTVDEC_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_4,
+	n94292030_fail_BGR_X_CTVDEC_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_5,
+	n94292031_fail_BGR_X_CTVDEC_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_6,
+	n94292033_fail_BGR_X_PATCONFIG_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_CALC_FUSE_R1_0,
+	n94292036_fail_BGR_X_SCREEN_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_HOT2COLD_DELTA_0,
+	n94292037_fail_BGR_X_SCREEN_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_HOT2COLD_DELTA_2
+}
+
+CSharpTest AnalogDcTC BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH0
+{
+	Patlist = "pth_cpu_x_bgr_anaprb_cal_ch0_list";
+	LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	BypassPort = -1;
+	DataBaseFile = "./InputFiles/AnalogDC_ANAPRB_CAL_CH0.json";
+	DatalogLevel = "PIN_DETAIL";
+	FlushLevels = "ENABLED";
+	MeasurementTypes = "V,V";
+	Pins = "IPC::CPU_OBS_02,IPC::CPU1_OBS_02";
+	TriggerMapName = "PTH_BGR_CXPKGS9::CPU01_BGR_ANAPRB_CAL_CH0_TriggerMap";
+}
+CSharpTest AnalogDcTC BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH1
+{
+	Patlist = "pth_cpu_x_bgr_anaprb_cal_ch1_list";
+	LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	BypassPort = -1;
+	DataBaseFile = "./InputFiles/AnalogDC_ANAPRB_CAL_CH1.json";
+	DatalogLevel = "PIN_DETAIL";
+	FlushLevels = "ENABLED";
+	MeasurementTypes = "V,V";
+	Pins = "IPC::CPU_OBS_03,IPC::CPU1_OBS_03";
+	TriggerMapName = "PTH_BGR_CXPKGS9::CPU01_BGR_ANAPRB_CAL_CH1_TriggerMap";
+}
+CSharpTest AnalogDcTC BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_PRE
+{
+	Patlist = "pth_cpu_x_bgr_anaprb_bgvout_vccags_list";
+	LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	BypassPort = -1;
+	DataBaseFile = "./InputFiles/AnalogDC_ANAPRB_BGRVAGSBY2.json";
+	DatalogLevel = "PIN_DETAIL";
+	FlushLevels = "ENABLED";
+	MeasurementTypes = "V,V,V,V";
+	Pins = "IPC::CPU_OBS_02,IPC::CPU1_OBS_02,IPC::CPU_OBS_03,IPC::CPU1_OBS_03";
+	TriggerMapName = "PTH_BGR_CXPKGS9::CPU01_BGR_ANAPRB_TriggerMap";
+}
+CSharpTest AnalogDcTC BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP
+{
+	Patlist = "pth_cpu_x_bgr_anaprb_vinhalf_vcpby3_list";
+	LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	BypassPort = -1;
+	DataBaseFile = "./InputFiles/AnalogDC_ANAPRB_VINHALFVCPBY3.json";
+	DatalogLevel = "PIN_DETAIL";
+	FlushLevels = "ENABLED";
+	MeasurementTypes = "V,V,V,V";
+	Pins = "IPC::CPU_OBS_02,IPC::CPU1_OBS_02,IPC::CPU_OBS_03,IPC::CPU1_OBS_03";
+	TriggerMapName = "PTH_BGR_CXPKGS9::CPU01_BGR_ANAPRB_TriggerMap";
+}
+CSharpTest CtvDecoderSpm BGR_X_CTVDEC_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP
+{
+	Patlist = "pth_cpu_x_bgr_bgtrim_tempco_sweep_list";
+	LevelsTc = "PTH_BGR_CXPKGS9::bf_lvl_nom_lvl_0P8V";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	BypassPort = -1;
+	ConfigurationFile = PTH_BGR_CXPKGS9_Rules.Select_CHOT_RCHOT_RCCOLD_Otherwise("./InputFiles/CTVDECODER_BG_TEMPCO_SWEEP_hot_2cdie.csv","./InputFiles/CTVDECODER_BG_TEMPCO_SWEEP_hot_2cdie.csv","./InputFiles/CTVDECODER_BG_TEMPCO_SWEEP_cold_2cdie.csv","./InputFiles/CTVDECODER_BG_TEMPCO_SWEEP_cold_2cdie.csv");
+	CtvCapturePins = "IPC::CPU_TDO,IPC::CPU1_TDO";
+}
+CSharpTest ScreenTC BGR_X_SCREEN_K_STARTANA0CPU_X_X_X_X_BGR_TEMPCO_CALC
+{
+	BypassPort = -1;
+	ScreenTestSet = PTH_BGR_CXPKGS9_Rules.Select_CHOT_RCHOT_RCCOLD_Otherwise("TEMPCO","TEMPCO","TEMPCO_COLD","TEMPCO_COLD");
+	ScreenTestsFile = "./InputFiles/ScreenTC_NVL_bgr_screen_TC25.txt";
+}
+CSharpTest PrimePatConfigTestMethod BGR_X_PATCONFIG_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_CALC_FUSE_R1
+{
+	BypassPort = -1;
+	ConfigurationFile = "./InputFiles/PatConfigTC_NVL_bgr_configset.json";
+	RegEx = "[gdx].......C........_.._......._............._...C.*";
+	SetPoint = PTH_BGR_CXPKGS9_Rules.Select_CHOT_RCHOT_RCCOLD_Otherwise("2cdie_BGPOSTCAL","2cdie_BGPOSTCAL","2cdie_COLD_DEFTEMPCOBG","2cdie_COLD_DEFTEMPCOBG");
+}
+CSharpTest AnalogDcTC BGR_X_ANADC_K_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST
+{
+	Patlist = "pth_cpu_x_bgr_anaprb_bgvout_vccags_list";
+	LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	BypassPort = -1;
+	DataBaseFile = PTH_BGR_CXPKGS9_Rules.Select_CHOT_RCHOT_RCCOLD_Otherwise("./InputFiles/AnalogDC_ANAPRB_BGRVAGSBY2.json","./InputFiles/AnalogDC_ANAPRB_BGRVAGSBY2.json","./InputFiles/AnalogDC_ANAPRB_BGRVAGSBY2_COLD.json","./InputFiles/AnalogDC_ANAPRB_BGRVAGSBY2_COLD.json");
+	DatalogLevel = "PIN_DETAIL";
+	FlushLevels = "ENABLED";
+	MeasurementTypes = "V,V,V,V";
+	Pins = "IPC::CPU_OBS_02,IPC::CPU1_OBS_02,IPC::CPU_OBS_03,IPC::CPU1_OBS_03";
+	TriggerMapName = "PTH_BGR_CXPKGS9::CPU01_BGR_ANAPRB_TriggerMap";
+}
+
+CSharpTest AnalogDcTC BGR_X_ANADC_K_STARTPWRCPU_X_X_X_X_BGR_ANAPRB_POST
+{
+	Patlist = "pth_cpu_x_bgr_anaprb_bgvout_vccags_list";
+	LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_min";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	BypassPort = -1;
+	DataBaseFile = PTH_BGR_CXPKGS9_Rules.Select_CHOT_RCHOT_RCCOLD_Otherwise("./InputFiles/AnalogDC_ANAPRB_BGRVAGSBY2.json","./InputFiles/AnalogDC_ANAPRB_BGRVAGSBY2.json","./InputFiles/AnalogDC_ANAPRB_BGRVAGSBY2_COLD.json","./InputFiles/AnalogDC_ANAPRB_BGRVAGSBY2_COLD.json");
+	DatalogLevel = "PIN_DETAIL";
+	FlushLevels = "ENABLED";
+	MeasurementTypes = "V,V,V,V";
+	Pins = "IPC::CPU_OBS_02,IPC::CPU1_OBS_02,IPC::CPU_OBS_03,IPC::CPU1_OBS_03";
+	TriggerMapName = "PTH_BGR_CXPKGS9::CPU01_BGR_ANAPRB_TriggerMap";
+}
+
+CSharpTest PTHGetSetGsdsDffTC BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU0
+{
+	BypassPort = -1;
+	ConfigurationFile = PTH_BGR_CXPKGS9_Rules.Select_CHOT_RCHOT_RCCOLD_Otherwise("./InputFiles/PTHGetSetGsdsDffTC_NVL_bgr_dff2gsds.json","./InputFiles/PTHGetSetGsdsDffTC_NVL_bgr_dff2gsds.json","./InputFiles/PTHGetSetGsdsDffTC_NVL_bgr_dff2gsds_rccold.json","./InputFiles/PTHGetSetGsdsDffTC_NVL_bgr_dff2gsds_cold.json");
+	OPType = "DFF2GSDS";
+	PreInstance = "SetCurrentDieId("+__shared__::DFFVars.DIEID_CPU+")";
+}
+CSharpTest PTHGetSetGsdsDffTC BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU1
+{
+	BypassPort = -1;
+	ConfigurationFile = PTH_BGR_CXPKGS9_Rules.Select_CHOT_RCHOT_RCCOLD_Otherwise("./InputFiles/PTHGetSetGsdsDffTC_NVL_bgr_dff2gsds_cpu1.json","./InputFiles/PTHGetSetGsdsDffTC_NVL_bgr_dff2gsds_cpu1.json","./InputFiles/PTHGetSetGsdsDffTC_NVL_bgr_dff2gsds_rccold_cpu1.json","./InputFiles/PTHGetSetGsdsDffTC_NVL_bgr_dff2gsds_cold_cpu1.json");
+	OPType = "DFF2GSDS";
+	PreInstance = "SetCurrentDieId("+__shared__::DFFVars.DIEID_CPU1+");";
+}
+CSharpTest ScreenTC BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_DEC2BIN
+{
+	BypassPort = PTH_BGR_CXPKGS9_Rules.Select_CHOT_RCHOT_RCCOLD_Otherwise(1,1,-1,-1);
+	ScreenTestSet = "CONVERT_DFF2GSDS";
+	ScreenTestsFile = "./InputFiles/ScreenTC_NVL_cold_dff2gsds_binary_convert.txt";
+}
+CSharpTest DDGFunctionalTC BGR_X_ANAFUNCAP_K_STARTANA0CPU_X_X_X_X_BGTAPRW
+{
+	Patlist = "pth_cpu_x_bgr_taprw_check_list";
+	LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	BypassPort = -1;
+}
+CSharpTest ScreenTC BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_PER_PART_FUSE
+{
+	BypassPort = -1;
+	ScreenTestSet = "PER_PART_FUSE";
+	ScreenTestsFile = "./InputFiles/ScreenTC_NVL_bgr_per_part_fuse.txt";
+}
+CSharpTest PTHGetSetGsdsDffTC BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR
+{
+    BypassPort = PTH_BGR_CXPKGS9_Rules.Select_CHOT_RCHOT_RCCOLD_Otherwise(__shared__::GlobalRule.primaryoptype(-1,-1,1,1,1,1,1,1,1,-1),-1,1,1);
+	ConfigurationFile = PTH_BGR_CXPKGS9_Rules.GSDS2DFFPR_ConfigurationFile("./InputFiles/PTHGetSetGsdsDffTC_NVL_bgr_gsds2dff_rchot.json","./InputFiles/PTHGetSetGsdsDffTC_NVL_bgr_gsds2dff_hot.json");
+	OPType = "GSDS2DFF";
+	PreInstance = "SetCurrentDieId("+__shared__::DFFVars.DIEID_CPU+")";
+}
+CSharpTest ScreenTC BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_PROBECAL
+{
+	BypassPort = -1;
+	ScreenTestSet = "PROBECAL";
+	ScreenTestsFile = "./InputFiles/ScreenTC_NVL_bg_probecal_screen.txt";
+}
+CSharpTest PTHGetSetGsdsDffTC BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR_CPU1
+{
+    BypassPort = PTH_BGR_CXPKGS9_Rules.Select_CHOT_RCHOT_RCCOLD_Otherwise(__shared__::GlobalRule.primaryoptype(-1,-1,1,1,1,1,1,1,1,-1),-1,1,1);
+	ConfigurationFile = PTH_BGR_CXPKGS9_Rules.GSDS2DFFPR_ConfigurationFile("./InputFiles/PTHGetSetGsdsDffTC_NVL_bgr_gsds2dff_rchot_cpu1.json","./InputFiles/PTHGetSetGsdsDffTC_NVL_bgr_gsds2dff_hot_cpu1.json");
+	OPType = "GSDS2DFF";
+	PreInstance = "SetCurrentDieId("+__shared__::DFFVars.DIEID_CPU1+")";
+}
+CSharpTest ScreenTC BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_HOT2COLD_DELTA
+{
+	BypassPort =  PTH_BGR_CXPKGS9_Rules.Select_CHOT_RCHOT_RCCOLD_Otherwise(1,1,-1,-1);
+	ScreenTestSet = "BGR_VOUTCAL_HOT2COLD_DELTA";
+	ScreenTestsFile =    "./InputFiles/ScreenTC_NVL_bgr_screen.txt";
+}
+CSharpTest AnalogDcTC BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_PRE
+{
+	Patlist = "pth_cpu_x_bgr_anaprb_bgvout_vccags_list";
+	LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	BypassPort = -1;
+	DataBaseFile = "./InputFiles/AnalogDC_ANAPRB_BGRVAGSBY2.json";
+	DatalogLevel = "PIN_DETAIL";
+	FlushLevels = "ENABLED";
+	MeasurementTypes = "V,V,V,V";
+	Pins = "IPC::CPU_OBS_02,IPC::CPU1_OBS_02,IPC::CPU_OBS_03,IPC::CPU1_OBS_03";
+	TriggerMapName = "PTH_BGR_CXPKGS9::CPU01_BGR_ANAPRB_TriggerMap";
+}
+CSharpTest AnalogDcTC BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP
+{
+	Patlist = "pth_cpu_x_bgr_anaprb_vinhalf_vcpby3_list";
+	LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	BypassPort = -1;
+	DataBaseFile = "./InputFiles/AnalogDC_ANAPRB_VINHALFVCPBY3.json";
+	DatalogLevel = "PIN_DETAIL";
+	FlushLevels = "ENABLED";
+	MeasurementTypes = "V,V,V,V";
+	Pins = "IPC::CPU_OBS_02,IPC::CPU1_OBS_02,IPC::CPU_OBS_03,IPC::CPU1_OBS_03";
+	TriggerMapName = "PTH_BGR_CXPKGS9::CPU01_BGR_ANAPRB_TriggerMap";
+}
+CSharpTest CtvDecoderSpm BGR_X_CTVDEC_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP
+{
+	Patlist = "pth_cpu_x_bgr_bgtrim_tempco_sweep_list";
+	LevelsTc = "PTH_BGR_CXPKGS9::bf_lvl_nom_lvl_0P8V";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	BypassPort = -1;
+	ConfigurationFile = "./InputFiles/CTVDECODER_BG_TEMPCO_SWEEP_cold_2cdie.csv";
+	CtvCapturePins = "IPC::CPU_TDO,IPC::CPU1_TDO";
+}
+CSharpTest ScreenTC BGR_X_SCREEN_K_LTTCCPU_X_X_X_X_BGR_TEMPCO_CALC
+{
+	BypassPort = -1;
+	ScreenTestSet = PTH_BGR_CXPKGS9_Rules.Select_CHOT_RCHOT_RCCOLD_Otherwise("TEMPCO","TEMPCO","TEMPCO_COLD","TEMPCO_COLD");
+	ScreenTestsFile = "./InputFiles/ScreenTC_NVL_bgr_screen_TC25.txt";
+}
+CSharpTest PrimePatConfigTestMethod BGR_X_PATCONFIG_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_CALC_FUSE_R1
+{
+	BypassPort = 1;
+	ConfigurationFile = "./InputFiles/PatConfigTC_NVL_bgr_configset.json";
+	RegEx = "[gdx].......C........_.._......._............._...C.*";
+	SetPoint = "2cdie_COLD_DEFTEMPCOBG";
+}
+CSharpTest AnalogDcTC BGR_X_ANADC_K_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST
+{
+	Patlist = "pth_cpu_x_bgr_anaprb_bgvout_vccags_list";
+	LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	BypassPort = -1;
+	DataBaseFile = "./InputFiles/AnalogDC_ANAPRB_BGRVAGSBY2_LTTC.json";
+	DatalogLevel = "PIN_DETAIL";
+	FlushLevels = "ENABLED";
+	MeasurementTypes = "V,V,V,V";
+	Pins = "IPC::CPU_OBS_02,IPC::CPU1_OBS_02,IPC::CPU_OBS_03,IPC::CPU1_OBS_03";
+	TriggerMapName = "PTH_BGR_CXPKGS9::CPU01_BGR_ANAPRB_TriggerMap";
+}
+CSharpTest ScreenTC BGR_X_SCREEN_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_HOT2COLD_DELTA
+{
+	BypassPort = -1;
+	ScreenTestSet = "BGR_VOUTCAL_HOT2COLD_DELTA_LTTC";
+	ScreenTestsFile =    "./InputFiles/ScreenTC_NVL_bgr_screen.txt";
+}
+
+Flow VIEWPIN_CAL
+{
+	FlowItem BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH0 BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH0 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99292005_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH0_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98292005_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH0_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29112005_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH0_0;
+			GoTo BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29112006_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH0_2;
+			GoTo BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH1;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29112007_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH0_3;
+			GoTo BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH1;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29112008_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH0_4;
+			GoTo BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH1;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29112009_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH0_5;
+			GoTo BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH1;
+		}
+	}
+	FlowItem BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH1 BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH1 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99292007_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH1_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98292007_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH1_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29122005_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH1_0;
+			GoTo BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_PROBECAL;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_PROBECAL;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29122006_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH1_2;
+			GoTo BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_PROBECAL;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29122007_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH1_3;
+			GoTo BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_PROBECAL;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29122008_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH1_4;
+			GoTo BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_PROBECAL;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29122009_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_ANAPRB_CAL_CH1_5;
+			GoTo BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_PROBECAL;
+		}
+	}
+	FlowItem BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_PROBECAL BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_PROBECAL @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99292036_fail_PTH_BGR_CXPKGS9_BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_PROBECAL_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98292036_fail_PTH_BGR_CXPKGS9_BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_PROBECAL_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29312000_fail_BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_PROBECAL_0;
+			Return 1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29312001_fail_BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_PROBECAL_2;
+			Return 1;
+		}
+	}
+}
+Flow BANDGAP
+{
+	FlowItem BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_PRE BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_PRE @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99292011_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_PRE_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98292011_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_PRE_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29152005_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_PRE_0;
+			GoTo BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29152006_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_PRE_2;
+			GoTo BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29152007_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_PRE_3;
+			GoTo BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29152008_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_PRE_4;
+			GoTo BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29152009_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_PRE_5;
+			GoTo BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP;
+		}
+	}
+	FlowItem BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99292009_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98292009_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29162005_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_0;
+			GoTo BGR_X_CTVDEC_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_CTVDEC_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29162006_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_2;
+			GoTo BGR_X_CTVDEC_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29162007_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_3;
+			GoTo BGR_X_CTVDEC_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29162008_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_4;
+			GoTo BGR_X_CTVDEC_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29162009_fail_BGR_X_ANADC_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_5;
+			GoTo BGR_X_CTVDEC_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP;
+		}
+	}
+	FlowItem BGR_X_CTVDEC_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP BGR_X_CTVDEC_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99292021_fail_PTH_BGR_CXPKGS9_BGR_X_CTVDEC_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98292021_fail_PTH_BGR_CXPKGS9_BGR_X_CTVDEC_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29022006_fail_BGR_X_CTVDEC_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_0;
+			GoTo BGR_X_SCREEN_K_STARTANA0CPU_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_SCREEN_K_STARTANA0CPU_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29022007_fail_BGR_X_CTVDEC_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_2;
+			GoTo BGR_X_SCREEN_K_STARTANA0CPU_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29022008_fail_BGR_X_CTVDEC_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_3;
+			GoTo BGR_X_SCREEN_K_STARTANA0CPU_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29022009_fail_BGR_X_CTVDEC_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_4;
+			GoTo BGR_X_SCREEN_K_STARTANA0CPU_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29022010_fail_BGR_X_CTVDEC_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_5;
+			GoTo BGR_X_SCREEN_K_STARTANA0CPU_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+		Result 6
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29022011_fail_BGR_X_CTVDEC_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_6;
+			GoTo BGR_X_SCREEN_K_STARTANA0CPU_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+	}
+	FlowItem BGR_X_SCREEN_K_STARTANA0CPU_X_X_X_X_BGR_TEMPCO_CALC BGR_X_SCREEN_K_STARTANA0CPU_X_X_X_X_BGR_TEMPCO_CALC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99292042_fail_PTH_BGR_CXPKGS9_BGR_X_SCREEN_K_STARTANA0CPU_X_X_X_X_BGR_TEMPCO_CALC_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98292042_fail_PTH_BGR_CXPKGS9_BGR_X_SCREEN_K_STARTANA0CPU_X_X_X_X_BGR_TEMPCO_CALC_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29062000_fail_BGR_X_SCREEN_K_STARTANA0CPU_X_X_X_X_BGR_TEMPCO_CALC_0;
+			SetBin b29062000_fail_PTH_BGR_CXPKGS9_BGR_X_SCREEN_K_STARTANA0CPU_X_X_X_X_BGR_TEMPCO_CALC_0;
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_PATCONFIG_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_CALC_FUSE_R1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29062001_fail_BGR_X_SCREEN_K_STARTANA0CPU_X_X_X_X_BGR_TEMPCO_CALC_2;
+			SetBin b29062001_fail_PTH_BGR_CXPKGS9_BGR_X_SCREEN_K_STARTANA0CPU_X_X_X_X_BGR_TEMPCO_CALC_2;
+			Return 0;
+		}
+	}
+	FlowItem BGR_X_PATCONFIG_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_CALC_FUSE_R1 BGR_X_PATCONFIG_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_CALC_FUSE_R1 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99292031_fail_PTH_BGR_CXPKGS9_BGR_X_PATCONFIG_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_CALC_FUSE_R1_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98292031_fail_PTH_BGR_CXPKGS9_BGR_X_PATCONFIG_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_CALC_FUSE_R1_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29182001_fail_BGR_X_PATCONFIG_E_STARTANA0CPU_X_X_X_X_BGR_TRIM_TEMPCO_CALC_FUSE_R1_0;
+			GoTo BGR_X_ANADC_K_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_ANADC_K_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST;
+		}
+	}
+	FlowItem BGR_X_ANADC_K_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST BGR_X_ANADC_K_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99292013_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_K_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98292013_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_K_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29072000_fail_BGR_X_ANADC_K_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_0;
+			SetBin b29072000_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_K_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_0;
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_HOT2COLD_DELTA;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29072001_fail_BGR_X_ANADC_K_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_2;
+			SetBin b29072001_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_K_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_2;
+			Return 0;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29072002_fail_BGR_X_ANADC_K_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_3;
+			SetBin b29072002_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_K_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_3;
+			Return 0;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29072003_fail_BGR_X_ANADC_K_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_4;
+			SetBin b29072003_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_K_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_4;
+			Return 0;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29072004_fail_BGR_X_ANADC_K_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_5;
+			SetBin b29072004_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_K_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_5;
+			Return 0;
+		}
+	}
+	FlowItem BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_HOT2COLD_DELTA BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_HOT2COLD_DELTA @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99292033_fail_PTH_BGR_CXPKGS9_BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_HOT2COLD_DELTA_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98292033_fail_PTH_BGR_CXPKGS9_BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_HOT2COLD_DELTA_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29352000_fail_BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_HOT2COLD_DELTA_0;
+			Return 1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29352001_fail_BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_ANAPRB_POST_HOT2COLD_DELTA_2;
+			Return 1;
+		}
+	}
+}
+
+Flow PTH_BGR_CXPKGS9_STARTPWRCPU 
+{
+	FlowItem BGR_X_ANADC_K_STARTPWRCPU_X_X_X_X_BGR_ANAPRB_POST BGR_X_ANADC_K_STARTPWRCPU_X_X_X_X_BGR_ANAPRB_POST @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99292015_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_K_STARTPWRCPU_X_X_X_X_BGR_ANAPRB_POST_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98292015_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_K_STARTPWRCPU_X_X_X_X_BGR_ANAPRB_POST_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29072005_fail_BGR_X_ANADC_K_STARTPWRCPU_X_X_X_X_BGR_ANAPRB_POST_0;
+			Return 1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29072006_fail_BGR_X_ANADC_K_STARTPWRCPU_X_X_X_X_BGR_ANAPRB_POST_2;
+			Return 1;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29072007_fail_BGR_X_ANADC_K_STARTPWRCPU_X_X_X_X_BGR_ANAPRB_POST_3;
+			Return 1;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29072008_fail_BGR_X_ANADC_K_STARTPWRCPU_X_X_X_X_BGR_ANAPRB_POST_4;
+			Return 1;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29072009_fail_BGR_X_ANADC_K_STARTPWRCPU_X_X_X_X_BGR_ANAPRB_POST_5;
+			Return 1;
+		}
+	}	
+}
+Flow PTH_BGR_CXPKGS9_STARTANA0CPU @STARTANA0CPU_SubFlow
+{
+	FlowItem BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU0 BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU0 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99292023_fail_PTH_BGR_CXPKGS9_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU0_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98292023_fail_PTH_BGR_CXPKGS9_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU0_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29282004_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU0_0;
+			GoTo BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29282005_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU0_2;
+			GoTo BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU1;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29282006_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU0_3;
+			GoTo BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU1;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29282007_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU0_4;
+			GoTo BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU1;
+		}
+	}
+	FlowItem BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU1 BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU1 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99292024_fail_PTH_BGR_CXPKGS9_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU1_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98292024_fail_PTH_BGR_CXPKGS9_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU1_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29292000_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU1_0;
+			GoTo BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_DEC2BIN;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_DEC2BIN;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29292001_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU1_2;
+			GoTo BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_DEC2BIN;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29292002_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU1_3;
+			GoTo BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_DEC2BIN;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29292003_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_CPU1_4;
+			GoTo BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_DEC2BIN;
+		}
+	}
+	FlowItem BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_DEC2BIN BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_DEC2BIN @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99292038_fail_PTH_BGR_CXPKGS9_BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_DEC2BIN_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98292038_fail_PTH_BGR_CXPKGS9_BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_DEC2BIN_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29302002_fail_BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_DEC2BIN_0;
+			GoTo BGR_X_ANAFUNCAP_K_STARTANA0CPU_X_X_X_X_BGTAPRW;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_ANAFUNCAP_K_STARTANA0CPU_X_X_X_X_BGTAPRW;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29302003_fail_BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_DFF2GSDSPR_DEC2BIN_2;
+			GoTo BGR_X_ANAFUNCAP_K_STARTANA0CPU_X_X_X_X_BGTAPRW;
+		}
+	}
+	FlowItem BGR_X_ANAFUNCAP_K_STARTANA0CPU_X_X_X_X_BGTAPRW BGR_X_ANAFUNCAP_K_STARTANA0CPU_X_X_X_X_BGTAPRW
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99292017_fail_PTH_BGR_CXPKGS9_BGR_X_ANAFUNCAP_K_STARTANA0CPU_X_X_X_X_BGTAPRW_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98292017_fail_PTH_BGR_CXPKGS9_BGR_X_ANAFUNCAP_K_STARTANA0CPU_X_X_X_X_BGTAPRW_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29052000_fail_BGR_X_ANAFUNCAP_K_STARTANA0CPU_X_X_X_X_BGTAPRW_0;
+			SetBin b29052000_fail_PTH_BGR_CXPKGS9_BGR_X_ANAFUNCAP_K_STARTANA0CPU_X_X_X_X_BGTAPRW_0;
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_PER_PART_FUSE;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29052001_fail_BGR_X_ANAFUNCAP_K_STARTANA0CPU_X_X_X_X_BGTAPRW_2;
+			SetBin b29052001_fail_PTH_BGR_CXPKGS9_BGR_X_ANAFUNCAP_K_STARTANA0CPU_X_X_X_X_BGTAPRW_2;
+			Return 0;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29052002_fail_BGR_X_ANAFUNCAP_K_STARTANA0CPU_X_X_X_X_BGTAPRW_3;
+			SetBin b29052002_fail_PTH_BGR_CXPKGS9_BGR_X_ANAFUNCAP_K_STARTANA0CPU_X_X_X_X_BGTAPRW_3;
+			Return 0;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29052003_fail_BGR_X_ANAFUNCAP_K_STARTANA0CPU_X_X_X_X_BGTAPRW_4;
+			SetBin b29052003_fail_PTH_BGR_CXPKGS9_BGR_X_ANAFUNCAP_K_STARTANA0CPU_X_X_X_X_BGTAPRW_4;
+			Return 0;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29052004_fail_BGR_X_ANAFUNCAP_K_STARTANA0CPU_X_X_X_X_BGTAPRW_5;
+			SetBin b29052004_fail_PTH_BGR_CXPKGS9_BGR_X_ANAFUNCAP_K_STARTANA0CPU_X_X_X_X_BGTAPRW_5;
+			Return 0;
+		}
+	}
+	FlowItem BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_PER_PART_FUSE BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_PER_PART_FUSE @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99292035_fail_PTH_BGR_CXPKGS9_BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_PER_PART_FUSE_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98292035_fail_PTH_BGR_CXPKGS9_BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_PER_PART_FUSE_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29342000_fail_BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_PER_PART_FUSE_0;
+			GoTo VIEWPIN_CAL;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo VIEWPIN_CAL;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29342001_fail_BGR_X_SCREEN_E_STARTANA0CPU_X_X_X_X_BGR_PER_PART_FUSE_2;
+			GoTo VIEWPIN_CAL;
+		}
+	}
+	FlowItem VIEWPIN_CAL VIEWPIN_CAL
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BANDGAP;
+		}
+	}
+	FlowItem BANDGAP BANDGAP
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR;
+		}
+	}
+	FlowItem BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99292026_fail_PTH_BGR_CXPKGS9_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98292026_fail_PTH_BGR_CXPKGS9_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29332004_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR_0;
+			Return 1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR_CPU1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29332005_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR_2;
+			Return 1;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29332006_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR_3;
+			Return 1;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29332007_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR_4;
+			Return 1;
+		}
+	}
+	FlowItem BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR_CPU1 BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR_CPU1 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99292027_fail_PTH_BGR_CXPKGS9_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR_CPU1_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98292027_fail_PTH_BGR_CXPKGS9_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR_CPU1_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29332008_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR_CPU1_0;
+			Return 1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29332009_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR_CPU1_2;
+			Return 1;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29332010_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR_CPU1_3;
+			Return 1;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n29332011_fail_BGR_X_GSDS2DFF_E_STARTANA0CPU_X_X_X_X_GSDS2DFFPR_CPU1_4;
+			Return 1;
+		}
+	}
+}
+Flow PTH_BGR_CXPKGS9_LTTCCPU @LTTCCPU_SubFlow
+{
+	FlowItem BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_PRE BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_PRE @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99292003_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_PRE_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98292003_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_PRE_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n94292005_fail_BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_PRE_0;
+			GoTo BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n94292006_fail_BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_PRE_2;
+			GoTo BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n94292007_fail_BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_PRE_3;
+			GoTo BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n94292008_fail_BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_PRE_4;
+			GoTo BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n94292009_fail_BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_PRE_5;
+			GoTo BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP;
+		}
+	}
+	FlowItem BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99292001_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98292001_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n94292015_fail_BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_0;
+			GoTo BGR_X_CTVDEC_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_CTVDEC_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n94292016_fail_BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_2;
+			GoTo BGR_X_CTVDEC_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n94292017_fail_BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_3;
+			GoTo BGR_X_CTVDEC_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n94292018_fail_BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_4;
+			GoTo BGR_X_CTVDEC_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n94292019_fail_BGR_X_ANADC_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_5;
+			GoTo BGR_X_CTVDEC_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP;
+		}
+	}
+	FlowItem BGR_X_CTVDEC_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP BGR_X_CTVDEC_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99292019_fail_PTH_BGR_CXPKGS9_BGR_X_CTVDEC_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98292019_fail_PTH_BGR_CXPKGS9_BGR_X_CTVDEC_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n94292026_fail_BGR_X_CTVDEC_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_0;
+			GoTo BGR_X_SCREEN_K_LTTCCPU_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_SCREEN_K_LTTCCPU_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n94292027_fail_BGR_X_CTVDEC_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_2;
+			GoTo BGR_X_SCREEN_K_LTTCCPU_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n94292028_fail_BGR_X_CTVDEC_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_3;
+			GoTo BGR_X_SCREEN_K_LTTCCPU_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n94292029_fail_BGR_X_CTVDEC_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_4;
+			GoTo BGR_X_SCREEN_K_LTTCCPU_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n94292030_fail_BGR_X_CTVDEC_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_5;
+			GoTo BGR_X_SCREEN_K_LTTCCPU_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+		Result 6
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n94292031_fail_BGR_X_CTVDEC_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_6;
+			GoTo BGR_X_SCREEN_K_LTTCCPU_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+	}
+	FlowItem BGR_X_SCREEN_K_LTTCCPU_X_X_X_X_BGR_TEMPCO_CALC BGR_X_SCREEN_K_LTTCCPU_X_X_X_X_BGR_TEMPCO_CALC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99942019_fail_PTH_BGR_CXPKGS9_BGR_X_SCREEN_K_LTTCCPU_X_X_X_X_BGR_TEMPCO_CALC_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98942019_fail_PTH_BGR_CXPKGS9_BGR_X_SCREEN_K_LTTCCPU_X_X_X_X_BGR_TEMPCO_CALC_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n94292012_fail_BGR_X_SCREEN_K_LTTCCPU_X_X_X_X_BGR_TEMPCO_CALC_0;
+			SetBin b94292012_fail_PTH_BGR_CXPKGS9_BGR_X_SCREEN_K_LTTCCPU_X_X_X_X_BGR_TEMPCO_CALC_0;
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_PATCONFIG_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_CALC_FUSE_R1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n94292013_fail_BGR_X_SCREEN_K_LTTCCPU_X_X_X_X_BGR_TEMPCO_CALC_2;
+			SetBin b94292013_fail_PTH_BGR_CXPKGS9_BGR_X_SCREEN_K_LTTCCPU_X_X_X_X_BGR_TEMPCO_CALC_2;
+			Return 0;
+		}
+	}
+	FlowItem BGR_X_PATCONFIG_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_CALC_FUSE_R1 BGR_X_PATCONFIG_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_CALC_FUSE_R1 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99292029_fail_PTH_BGR_CXPKGS9_BGR_X_PATCONFIG_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_CALC_FUSE_R1_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98292029_fail_PTH_BGR_CXPKGS9_BGR_X_PATCONFIG_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_CALC_FUSE_R1_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n94292033_fail_BGR_X_PATCONFIG_E_LTTCCPU_X_X_X_X_BGR_TRIM_TEMPCO_CALC_FUSE_R1_0;
+			GoTo BGR_X_ANADC_K_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_ANADC_K_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST;
+		}
+	}
+	FlowItem BGR_X_ANADC_K_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST BGR_X_ANADC_K_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99942017_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_K_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98942017_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_K_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n94292005_fail_BGR_X_ANADC_K_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_0;
+			SetBin b94292005_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_K_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_0;
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_SCREEN_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_HOT2COLD_DELTA;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n94292006_fail_BGR_X_ANADC_K_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_2;
+			SetBin b94292006_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_K_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_2;
+			Return 0;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n94292007_fail_BGR_X_ANADC_K_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_3;
+			SetBin b94292007_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_K_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_3;
+			Return 0;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n94292008_fail_BGR_X_ANADC_K_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_4;
+			SetBin b94292008_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_K_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_4;
+			Return 0;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n94292009_fail_BGR_X_ANADC_K_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_5;
+			SetBin b94292009_fail_PTH_BGR_CXPKGS9_BGR_X_ANADC_K_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_5;
+			Return 0;
+		}
+	}
+	FlowItem BGR_X_SCREEN_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_HOT2COLD_DELTA BGR_X_SCREEN_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_HOT2COLD_DELTA @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99292032_fail_PTH_BGR_CXPKGS9_BGR_X_SCREEN_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_HOT2COLD_DELTA_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98292032_fail_PTH_BGR_CXPKGS9_BGR_X_SCREEN_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_HOT2COLD_DELTA_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n94292036_fail_BGR_X_SCREEN_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_HOT2COLD_DELTA_0;
+			Return 1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_BGR_CXPKGS9::n94292037_fail_BGR_X_SCREEN_E_LTTCCPU_X_X_X_X_BGR_ANAPRB_POST_HOT2COLD_DELTA_2;
+			Return 1;
+		}
+	}
+	
+}

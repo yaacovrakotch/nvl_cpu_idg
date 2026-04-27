@@ -1,0 +1,470 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan TPI_END_XXX;
+
+Import "TPI_END_XXX.usrv";
+
+# Test Counter Definition
+
+Counters
+{
+    n69030000_fail_CTRL_X_AUX_K_FACT_X_X_X_X_CHK0SET1_END_0,
+    n69030001_fail_CTRL_X_AUX_K_FACT_X_X_X_X_CHK0SET1_END_2,
+    n69050000_fail_CTRL_X_AUX_K_FINAL_X_X_X_X_CHK1SET2_0,
+    n69050001_fail_CTRL_X_AUX_K_FINAL_X_X_X_X_CHK1SET2_2,
+    n80200000_fail_CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV_6,
+    n80300000_fail_CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV_3,
+    n80400000_fail_CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV_4,
+    n80500000_fail_CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV_5,
+    n80800000_fail_CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV_7,
+    n93070000_fail_CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV_0,
+    n93070001_fail_CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV_2,
+    n93070002_fail_CTRL_X_USERCODETC_K_END_X_X_X_X_GTSTATIC_END_0
+} # End of Test Counter Definition
+
+CSharpTest PrimeInitializeInstancesTestMethod CTRL_X_PRIMEINIT_K_INIT_X_X_X_X_VERIFYALL
+{
+    PostInstance = "WriteUserVar(--uservar __shared__::SCVars.SC_TDRLOG --value -1 --type String)";
+    VerifyAll = "True";
+}
+
+CSharpTest RunCallback CTRL_X_UF_K_INIT_X_X_X_X_INITSKIP
+{
+    Callback = "IsLongInitRequired";
+    LogLevel = "Disabled";
+    ResultPort = "[R]=='TRUE'?1:0";
+}
+
+CSharpTest RunCallback CTRL_X_UF_K_INIT_X_X_X_X_SAVEINFO
+{
+    Callback = "SaveInitPassInformation";
+    LogLevel = "Disabled";
+}
+
+CSharpTest RunCallback CTRL_X_UF_K_INIT_X_X_X_X_SETINITGSDSPASS
+{
+    Callback = "WriteSharedStorage";
+    Parameters = "--token G.L.S.INITFLAG --value PASS";
+}
+
+CSharpTest AuxiliaryTC CTRL_X_AUX_K_FACT_X_X_X_X_CHK0SET1_END
+{
+    DataType = "Integer";
+    Expression = "[__shared__::TP_KNOB.Bin69_FLG] + 1";
+    ResultPort = "[R]=1?1:2";
+    ResultToken = "__shared__::TP_KNOB.Bin69_FLG";
+    Storage = "UserVar";
+}
+
+CSharpTest UserCodeTC CTRL_X_USERCODETC_K_END_X_X_X_X_GTSTATIC_END
+{
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_P16C(-1,1);
+    InputFile = "./InputFiles/GT_STATIC.cs";
+    Method = "PoweronGTStaticValue";
+    NamespaceClass = "TPIUserCode.TPI";
+}
+
+CSharpTest PrimeDeviceEndDatalogTestMethod CTRL_X_DEVICEEND_K_TESTPLANENDFLOW_X_X_X_X_PDETM
+{
+    LogLevel = "Disabled";
+}
+
+CSharpTest PrimeDeviceEndFinalizeTestMethod CTRL_X_DEVICEEND_K_TESTPLANENDFLOW_X_X_X_X_PDEFTM
+{
+    LogLevel = "Disabled";
+}
+
+CSharpTest PrimeOdeseBinConverterTestMethod CTRL_X_ODESEBINCONVERTERTC_E_TESTPLANENDFLOW_X_X_X_X_ODESEREMAP
+{
+    BypassPort = 1;
+    LogLevel = "Disabled";
+}
+
+CSharpTest AuxiliaryTC CTRL_X_AUX_K_FINAL_X_X_X_X_CHK1SET2
+{
+    # improvement: b69_flag move out of TPI_DFF since not related to DFF
+    DataType = "Integer";
+    Expression = "[__shared__::TP_KNOB.Bin69_FLG] + 1";
+    ResultPort = "[R]==2?1:2";
+    ResultToken = "__shared__::TP_KNOB.Bin69_FLG";
+    Storage = "UserVar";
+}
+
+CSharpTest ScreenTC CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV
+{
+    # improvement: inlinerv move out of TPI_DFF since not related to DFF
+    ScreenTestSet = "INLINERVREBIN";
+    ScreenTestsFile = "./InputFiles/INLINERV_ScreenTest.txt";
+}
+
+Flow TPI_END_XXX_INIT
+{
+    FlowItem CTRL_X_PRIMEINIT_K_INIT_X_X_X_X_VERIFYALL CTRL_X_PRIMEINIT_K_INIT_X_X_X_X_VERIFYALL
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99935500_fail_TPI_END_XXX_CTRL_X_PRIMEINIT_K_INIT_X_X_X_X_VERIFYALL_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98935500_fail_TPI_END_XXX_CTRL_X_PRIMEINIT_K_INIT_X_X_X_X_VERIFYALL_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_UF_K_INIT_X_X_X_X_INITSKIP;
+        }
+    }
+    
+    FlowItem CTRL_X_UF_K_INIT_X_X_X_X_INITSKIP CTRL_X_UF_K_INIT_X_X_X_X_INITSKIP
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99935501_fail_TPI_END_XXX_CTRL_X_UF_K_INIT_X_X_X_X_INITSKIP_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98935501_fail_TPI_END_XXX_CTRL_X_UF_K_INIT_X_X_X_X_INITSKIP_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo CTRL_X_UF_K_INIT_X_X_X_X_SAVEINFO;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_UF_K_INIT_X_X_X_X_SAVEINFO;
+        }
+    }
+    
+    FlowItem CTRL_X_UF_K_INIT_X_X_X_X_SAVEINFO CTRL_X_UF_K_INIT_X_X_X_X_SAVEINFO
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99935502_fail_TPI_END_XXX_CTRL_X_UF_K_INIT_X_X_X_X_SAVEINFO_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98935502_fail_TPI_END_XXX_CTRL_X_UF_K_INIT_X_X_X_X_SAVEINFO_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_UF_K_INIT_X_X_X_X_SETINITGSDSPASS;
+        }
+    }
+    
+    FlowItem CTRL_X_UF_K_INIT_X_X_X_X_SETINITGSDSPASS CTRL_X_UF_K_INIT_X_X_X_X_SETINITGSDSPASS
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99935503_fail_TPI_END_XXX_CTRL_X_UF_K_INIT_X_X_X_X_SETINITGSDSPASS_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98935503_fail_TPI_END_XXX_CTRL_X_UF_K_INIT_X_X_X_X_SETINITGSDSPASS_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow TPI_END_XXX_FACT
+{
+    FlowItem CTRL_X_AUX_K_FACT_X_X_X_X_CHK0SET1_END CTRL_X_AUX_K_FACT_X_X_X_X_CHK0SET1_END
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99691000_fail_TPI_END_XXX_CTRL_X_AUX_K_FACT_X_X_X_X_CHK0SET1_END_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98691000_fail_TPI_END_XXX_CTRL_X_AUX_K_FACT_X_X_X_X_CHK0SET1_END_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b69030000_fail_TPI_END_XXX_CTRL_X_AUX_K_FACT_X_X_X_X_CHK0SET1_END_0;
+            IncrementCounters TPI_END_XXX::n69030000_fail_CTRL_X_AUX_K_FACT_X_X_X_X_CHK0SET1_END_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b69030001_fail_TPI_END_XXX_CTRL_X_AUX_K_FACT_X_X_X_X_CHK0SET1_END_2;
+            IncrementCounters TPI_END_XXX::n69030001_fail_CTRL_X_AUX_K_FACT_X_X_X_X_CHK0SET1_END_2;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow TPI_END_XXX_END
+{
+    FlowItem CTRL_X_USERCODETC_K_END_X_X_X_X_GTSTATIC_END CTRL_X_USERCODETC_K_END_X_X_X_X_GTSTATIC_END
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99935504_fail_TPI_END_XXX_CTRL_X_USERCODETC_K_END_X_X_X_X_GTSTATIC_END_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98935504_fail_TPI_END_XXX_CTRL_X_USERCODETC_K_END_X_X_X_X_GTSTATIC_END_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93070002_fail_TPI_END_XXX_CTRL_X_USERCODETC_K_END_X_X_X_X_GTSTATIC_END_0;
+            IncrementCounters TPI_END_XXX::n93070002_fail_CTRL_X_USERCODETC_K_END_X_X_X_X_GTSTATIC_END_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow TPI_END_XXX_TESTPLANENDFLOW
+{
+    FlowItem CTRL_X_DEVICEEND_K_TESTPLANENDFLOW_X_X_X_X_PDETM CTRL_X_DEVICEEND_K_TESTPLANENDFLOW_X_X_X_X_PDETM
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99935505_fail_TPI_END_XXX_CTRL_X_DEVICEEND_K_TESTPLANENDFLOW_X_X_X_X_PDETM_n2;
+            GoTo CTRL_X_DEVICEEND_K_TESTPLANENDFLOW_X_X_X_X_PDEFTM;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98935505_fail_TPI_END_XXX_CTRL_X_DEVICEEND_K_TESTPLANENDFLOW_X_X_X_X_PDETM_n1;
+            GoTo CTRL_X_DEVICEEND_K_TESTPLANENDFLOW_X_X_X_X_PDEFTM;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_DEVICEEND_K_TESTPLANENDFLOW_X_X_X_X_PDEFTM;
+        }
+    }
+    
+    FlowItem CTRL_X_DEVICEEND_K_TESTPLANENDFLOW_X_X_X_X_PDEFTM CTRL_X_DEVICEEND_K_TESTPLANENDFLOW_X_X_X_X_PDEFTM
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99935506_fail_TPI_END_XXX_CTRL_X_DEVICEEND_K_TESTPLANENDFLOW_X_X_X_X_PDEFTM_n2;
+            GoTo CTRL_X_ODESEBINCONVERTERTC_E_TESTPLANENDFLOW_X_X_X_X_ODESEREMAP;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98935506_fail_TPI_END_XXX_CTRL_X_DEVICEEND_K_TESTPLANENDFLOW_X_X_X_X_PDEFTM_n1;
+            GoTo CTRL_X_ODESEBINCONVERTERTC_E_TESTPLANENDFLOW_X_X_X_X_ODESEREMAP;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_ODESEBINCONVERTERTC_E_TESTPLANENDFLOW_X_X_X_X_ODESEREMAP;
+        }
+    }
+    
+    FlowItem CTRL_X_ODESEBINCONVERTERTC_E_TESTPLANENDFLOW_X_X_X_X_ODESEREMAP CTRL_X_ODESEBINCONVERTERTC_E_TESTPLANENDFLOW_X_X_X_X_ODESEREMAP
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99935507_fail_TPI_END_XXX_CTRL_X_ODESEBINCONVERTERTC_E_TESTPLANENDFLOW_X_X_X_X_ODESEREMAP_n2;
+            Return 1;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98935507_fail_TPI_END_XXX_CTRL_X_ODESEBINCONVERTERTC_E_TESTPLANENDFLOW_X_X_X_X_ODESEREMAP_n1;
+            Return 1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow TPI_END_XXX_FINAL
+{
+    FlowItem CTRL_X_AUX_K_FINAL_X_X_X_X_CHK1SET2 CTRL_X_AUX_K_FINAL_X_X_X_X_CHK1SET2
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99691001_fail_TPI_END_XXX_CTRL_X_AUX_K_FINAL_X_X_X_X_CHK1SET2_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98691001_fail_TPI_END_XXX_CTRL_X_AUX_K_FINAL_X_X_X_X_CHK1SET2_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b69050000_fail_TPI_END_XXX_CTRL_X_AUX_K_FINAL_X_X_X_X_CHK1SET2_0;
+            IncrementCounters TPI_END_XXX::n69050000_fail_CTRL_X_AUX_K_FINAL_X_X_X_X_CHK1SET2_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b69050001_fail_TPI_END_XXX_CTRL_X_AUX_K_FINAL_X_X_X_X_CHK1SET2_2;
+            IncrementCounters TPI_END_XXX::n69050001_fail_CTRL_X_AUX_K_FINAL_X_X_X_X_CHK1SET2_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99935508_fail_TPI_END_XXX_CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98935508_fail_TPI_END_XXX_CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93070000_fail_TPI_END_XXX_CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV_0;
+            IncrementCounters TPI_END_XXX::n93070000_fail_CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b93070001_fail_TPI_END_XXX_CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV_2;
+            IncrementCounters TPI_END_XXX::n93070001_fail_CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b80300000_fail_TPI_END_XXX_CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV_3;
+            IncrementCounters TPI_END_XXX::n80300000_fail_CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b80400000_fail_TPI_END_XXX_CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV_4;
+            IncrementCounters TPI_END_XXX::n80400000_fail_CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b80500000_fail_TPI_END_XXX_CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV_5;
+            IncrementCounters TPI_END_XXX::n80500000_fail_CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV_5;
+            Return 0;
+        }
+        Result 6
+        {
+            Property PassFail = "Fail";
+            SetBin b80200000_fail_TPI_END_XXX_CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV_6;
+            IncrementCounters TPI_END_XXX::n80200000_fail_CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV_6;
+            Return 0;
+        }
+        Result 7
+        {
+            Property PassFail = "Fail";
+            SetBin b80800000_fail_TPI_END_XXX_CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV_7;
+            IncrementCounters TPI_END_XXX::n80800000_fail_CTRL_X_SCREEN_K_FINAL_X_X_X_X_INLINERV_7;
+            Return 0;
+        }
+    }
+    
+}

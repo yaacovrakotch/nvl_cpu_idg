@@ -1,0 +1,635 @@
+Version 1.0;
+
+Shared
+{
+
+UserVars DieletIndicator
+{
+	String DIELET_INDICATOR = "CPU,GCD,HUB,PCD";
+}
+
+SelectorRuleCollection TpRule
+{
+
+	SelectorRule Check_BOM(Outcome1, Outcome2, Outcome3)
+	{
+        Outcome1 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+		Outcome2 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C";
+		Outcome3;
+	}
+	
+	 SelectorRule If_NoGTRecovery(CLASS, CH_CHVM, RCHOT, CH_QUAL, default)
+    {
+        CLASS => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28CB"  ;
+		CH_CHVM => contains(__shared__::LocationSets.CH_CHVM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		RCHOT => contains(__shared__::LocationSets.RCHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		CH_QUAL => contains(__shared__::LocationSets.CH_QUAL,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		default;
+    }
+	
+	### This rule was ported over from ARL under the SelectorRuleCollection "TpRule" ||  Usage: refer to Fuse module refer
+    SelectorRule FuseSpecial(fuse, pbic, rv, fh_eng, fc_eng, default)
+    {
+        fuse => contains(LocationSets.FUSE,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+        pbic => contains(LocationSets.PBIC_DAB,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+        rv => contains(LocationSets.RV,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+        fh_eng => contains(LocationSets.FH_ENG,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+        fc_eng => contains(LocationSets.FC_ENG,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+        default;
+    }
+	### This rule was ported over from ARL under the SelectorRuleCollection "TpRule" ||  Usage: refer to Fuse module 
+	SelectorRule FuseRetestBypass(Outcome1, Outcome2, Outcome3, Outcome4, Outcome5, Outcome6, Outcome7, Outcome8, Outcome9, Outcome10, Outcome11, default)
+    {
+        Outcome1 => contains(LocationSets.FUSE,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+        Outcome2 => contains(LocationSets.PBIC_DAB,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+        Outcome3 => contains(LocationSets.RV,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+        Outcome4 => (contains(LocationSets.FH_ENG,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(LocationSets.CH_QUAL,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]"));
+        Outcome5 => (contains(LocationSets.FC_ENG,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(LocationSets.CC_QUAL,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]"));
+        Outcome6 => contains(LocationSets.CC_CHVM,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]") && SCVars.SC_LOCN == "6234";
+        Outcome7 => SCVars.SC_CURRENT_PROCESS_TYPE == "PHMHOT" && (SCVars.SC_ENGID == "4R" || SCVars.SC_ENGID == "4P");
+        Outcome8 => SCVars.SC_CURRENT_PROCESS_TYPE == "PHMCOLD" && SCVars.SC_ENGID == "4R";
+        Outcome9 => SCVars.SC_CURRENT_PROCESS_TYPE == "PHMCOLD" && SCVars.SC_ENGID == "4P";
+        Outcome10 => SCVars.SC_CURRENT_PROCESS_TYPE == "PHMROOM" && SCVars.SC_ENGID == "4R";
+        Outcome11 => SCVars.SC_CURRENT_PROCESS_TYPE == "PHMROOM" && SCVars.SC_ENGID == "4P";
+        default;
+    }
+	### This rule was ported over from ARL under the SelectorRuleCollection "TpRule". It is used by Fuse to tell the FACT flow we are ready to burn ||  Usage: refer to rule "If_CLASS_NVL_S28C" in this file 
+	SelectorRule If_FacilityID_GDL (yes, no)
+	{
+		yes => contains(SCVars.SC_FACILITYID, "GDL");
+		no;
+	}
+	### This rule was ported over from ARL under the SelectorRuleCollection "TpRule" ||  Usage: refer to rule "If_CLASS_NVL_S28C" in this file 
+	SelectorRule If_PHMF (yes, no)
+    {
+        yes => contains(LocationSets.PHMF,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+        no;
+    }
+	### This rule can be used to apply condition based on the 32EU GCD config || Usage: refer to rule "If_CLASS_NVL_S28C" in this file 
+	SelectorRule If_32EU(yes, no)  ## Subject to enhance when we get i5, i3, BLLC, UL and HX BOM Group names 
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28CB" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_UL6C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C";
+		no;
+	}
+	### This rule can be used to apply condition based on the 64EU GCD config || Usage: refer to rule "If_CLASS_NVL_S28C" in this file
+	SelectorRule If_64EU(yes, no)  
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C";
+		no;
+	}
+	### This rule can be used to apply condition based on the 192EU GCD config || Usage: refer to rule "If_CLASS_NVL_S28C" in this file 
+	SelectorRule If_192EU(yes, no) 
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C";
+		no;
+	}
+	### This rule was ported over from ARL under the SelectorRuleCollection "TpRule" ||  Usage: refer to rule "If_CLASS_NVL_S28C" in this file
+	SelectorRule If_PHM(yes, no) ####By Testing Condition#### 
+	{
+		yes => contains(LocationSets.PHM, "[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		no;
+	}
+	### This rule was ported over from ARL under the SelectorRuleCollection "TpRule" ||  Usage: refer to rule "If_CLASS_NVL_S28C" in this file
+	SelectorRule If_CHOT(yes, no) ####By Testing Condition + Temperature####
+	{
+		yes => contains(LocationSets.CHOT, "[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		no;
+	}
+	### This rule was ported over from ARL under the SelectorRuleCollection "TpRule" ||  Usage: refer to rule "If_CLASS_NVL_S28C" in this file
+	SelectorRule If_CCOLD(yes, no) ####By Testing Condition + Temperature####
+	{
+		yes => contains(LocationSets.CCOLD, "[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		no;
+	}
+	### This rule was ported over from ARL under the SelectorRuleCollection "TpRule" ||  Usage: refer to rule "If_CLASS_NVL_S28C" in this file
+	SelectorRule If_RCHOT(yes, no) ####By Testing Condition + Temperature####
+	{
+		yes => contains(LocationSets.RCHOT, "[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		no;
+	}
+	### This rule was ported over from ARL under the SelectorRuleCollection "TpRule" ||  Usage: refer to rule "If_CLASS_NVL_S28C" in this file
+	SelectorRule If_RCCOLD(yes, no) ####By Testing Condition + Temperature####
+	{
+		yes => contains(LocationSets.RCCOLD, "[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		no;
+	}
+	### This rule was ported over from ARL under the SelectorRuleCollection "TpRule" ||  Usage: refer to rule "If_CLASS_NVL_S28C" in this file
+	SelectorRule If_PHMHOT(yes, no) ####By Testing Condition + Temperature####
+	{
+		yes => contains(LocationSets.PHMHOT, "[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		no;
+	}
+	### This rule was ported over from ARL under the SelectorRuleCollection "TpRule" ||  Usage: refer to rule "If_CLASS_NVL_S28C" in this file
+	SelectorRule If_PHMCOLD(yes, no) ####By Testing Condition + Temperature####
+	{
+		yes => contains(LocationSets.PHMCOLD, "[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		no;
+	}
+	### This rule was ported over from ARL under the SelectorRuleCollection "TpRule" ||  Usage: refer to rule "If_CLASS_NVL_S28C" in this file
+	SelectorRule If_PHMROOM(yes, no) ####By Testing Condition + Temperature####
+	{
+		yes => contains(LocationSets.PHMROOM, "[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		no;
+	}
+	### This rule was ported over from ARL under the SelectorRuleCollection "TpRule" ||  Usage: refer to rule "If_CLASS_NVL_S28C" in this file
+	SelectorRule If_COLD(yes, no)
+	{
+		yes => contains(LocationSets.COLD,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		no;
+	}
+	### This rule was ported over from ARL under the SelectorRuleCollection "TpRule" ||  Usage: refer to rule "If_CLASS_NVL_S28C" in this file
+	SelectorRule If_RCHOT_CHOT(yes, no)
+	{
+		yes => ( contains (LocationSets.RCHOT,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(LocationSets.CHOT,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]") );
+		no;
+	}
+	### This rule was ported over from ARL under the SelectorRuleCollection "TpRule" ||  Usage: refer to rule "If_CLASS_NVL_S28C" in this file
+	SelectorRule If_RCCOLD_CCOLD(yes, no)
+	{
+		yes => ( contains (LocationSets.RCCOLD,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(LocationSets.CCOLD,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]") );
+		no;
+	}
+	### This rule was ported over from ARL under the SelectorRuleCollection "TpRule" ||  Usage: refer to rule "If_CLASS_NVL_S28C" in this file
+	SelectorRule MTT_Rule(yes, no)
+	{
+		yes => contains(LocationSets.CH_CHVM, "[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(LocationSets.RCHOT,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(LocationSets.CH_CRV ,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]") || SCVars.SC_ENGID == "QE" || SCVars.SC_ENGID == "QZ" ;
+		no;
+	}
+	### This rule was ported over from ARL under the SelectorRuleCollection "TpRule" ||  Requester: Huynh, Hy N || Usage: refer to rule "If_CLASS_NVL_S28C" in this file
+	SelectorRule If_RV(yes, no)
+	{
+		yes => contains(LocationSets.RV,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		no;
+	}
+	### This rule can be used to apply condition based on [SC_LOCN]:[SC_CURRENT_PROCESS_TYPE] matching a valid QRE/Qual location set || Requestor: Le, Ly K || Usage: BypassPort = __shared__::TpRule.If_QRE(-1,1);
+	SelectorRule If_QRE(yes, no)
+	{
+		yes =>	contains(LocationSets.CH_QUAL,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(LocationSets.CC_QUAL,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(LocationSets.CH_QUAL_RV,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(LocationSets.CC_QUAL_RV,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		no;
+	}
+	### This rule can be used to apply condition based on [SC_LOCN]:[SC_CURRENT_PROCESS_TYPE] matching a valid REBI location set || Usage: BypassPort = __shared__::TpRule.If_REBI(-1,1);
+	SelectorRule If_REBI(yes, no)
+	{
+		yes =>	contains(LocationSets.INLINE_REBI_RV,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		no;
+	}
+	### This rule can be used to apply condition based on BOM || Requester: TPI || Usage: BypassPort = __shared__::TpRule.If_CLASS_NVL_S28C(-1,1);
+	SelectorRule If_CLASS_NVL_S28C(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C";
+		no;
+	}
+	### This rule can be used to apply condition based on BOM || Requester: TPI || Usage: refer to rule "If_CLASS_NVL_S28C" in this file 
+	SelectorRule If_CLASS_NVL_S52C(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+		no;
+	}
+	### This rule can be used to apply condition based on BOM || Requester: TPI || Usage: refer to rule "If_CLASS_NVL_S28C" in this file 
+	SelectorRule If_CLASS_NVL_S28CB(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28CB";
+		no;
+	}
+	### This rule can be used to apply condition based on BOM || Requester: TPI || Usage: refer to rule "If_CLASS_NVL_S28C" in this file 
+	SelectorRule If_CLASS_NVL_S16C(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C";
+		no;
+	}	
+	### This rule can be used to apply condition based on BOM || Requester: TPI || Usage: refer to rule "If_CLASS_DNL_S28C" in this file 
+	SelectorRule If_CLASS_DNL_S28C(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C";
+		no;
+	}	
+		### This rule can be used to apply condition based on BOM || Requester: TPI || Usage: refer to rule "If_CLASS_NVL_S28C" in this file 
+	SelectorRule If_CLASS_NVL_UL6C(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_UL6C";
+		no;
+	}
+		### This rule can be used to apply condition based on BOM || Requester: TPI || Usage: refer to rule "If_CLASS_NVL_S28C" in this file 
+	SelectorRule If_SS_NVL_U8C(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C";
+		no;
+	}
+		### This rule can be used to apply condition based on BOM || Requester: TPI || Usage: refer to rule "If_CLASS_NVL_S28C" in this file 
+	SelectorRule If_CLASS_NVL_H16C(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C";
+		no;
+	}
+		### This rule can be used to apply condition based on BOM || Requester: TPI || Usage: refer to rule "If_CLASS_NVL_S28C" in this file 
+	SelectorRule If_CLASS_NVL_U8C(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C";
+		no;
+	}
+		### This rule can be used to apply condition based on BOM || Requester: TPI || Usage: refer to rule "If_CLASS_NVL_S28C" in this file 
+	SelectorRule If_CLASS_NVL_P16C(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C";
+		no;
+	}
+		### This rule can be used to apply condition based on BOM || Requester: TPI || Usage: refer to rule "If_CLASS_NVL_S28C" in this file 
+	SelectorRule If_CLASS_NVL_HX28C(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C";
+		no;
+	}
+		### This rule can be used to apply condition based on BOM || Requester: TPI || Usage: refer to rule "If_CLASS_NVL_S28C" in this file 
+	SelectorRule If_CLASS_NVL_AX28C(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_AX28C";
+		no;
+	}
+		### This rule can be used to apply condition based BOM || Requester: TPI || Usage: refer to rule "If_CLASS_NVL_S28C" in this file 
+	SelectorRule If_CLASS_NVL_AX16C(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_AX16C";
+		no;
+	}
+	### This rule can be used to apply condition based on either BOM NVLS28C or DNLS28C || Requester: Chan, Jia Huei || Usage: BypassPort = __shared__::TpRule.If_CLASS_NVL_S28C(-1,1);
+	SelectorRule If_CLASS_NVL_DNL_S28C(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C";
+		no;
+	}
+	### This rule to switch between CDIE-40 DS(Desktop0:i5), DNL S8C and M boms in NVL REPO || DS: S8C || DNL: DNL S8C || M: U8C
+	SelectorRule If_C40_DS_DNL_M(Outcome1, Outcome2, Outcome3, Outcome4)
+	{
+		Outcome1 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S8C";
+		Outcome2 => GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S8C";
+		Outcome3 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C";
+		Outcome4;
+	}
+	### This rule can be used to for Cdie Dietype 40:Intel 4+0
+	SelectorRule If_C40(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S8C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S8C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C" ;
+		no;
+	}
+	### This rule can be used to apply condition based on Benchtop testing || Requester: Huang, Leo || Usage: refer to rule "If_CLASS_NVL_S28C" in this file 
+	SelectorRule If_BENCHTOP(yes, no)
+	{
+		yes => __shared__::SCVars.SC_BENCHTOP == 1;
+		no => __shared__::SCVars.SC_BENCHTOP == -1;
+	}
+	
+	### This rule can be used to apply condition based on DIELET_INDICATOR value|| Requester: TPI || Usage: TBD
+	SelectorRule If_Dielet(all_die, cpu_gcd_hub, cpu_gcd, cpu_hub, gcd_hub, cpu, gcd, hub, default) 
+	{
+		all_die => (contains(DieletIndicator.DIELET_INDICATOR, "CPU")) && (contains(DieletIndicator.DIELET_INDICATOR, "HUB")) && (contains(DieletIndicator.DIELET_INDICATOR, "GCD")) && (contains(DieletIndicator.DIELET_INDICATOR, "PCD"));
+		cpu_gcd_hub => (((contains(DieletIndicator.DIELET_INDICATOR, "CPU")) && (contains(DieletIndicator.DIELET_INDICATOR, "HUB")) && (contains(DieletIndicator.DIELET_INDICATOR, "GCD")))||((contains(DieletIndicator.DIELET_INDICATOR, "CPU")) && (contains(DieletIndicator.DIELET_INDICATOR, "HUB")) && (contains(DieletIndicator.DIELET_INDICATOR, "GCD"))&& (contains(DieletIndicator.DIELET_INDICATOR, "PCD")))) && (contains(LocationSets.CH_HVM,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]")||contains(LocationSets.RCH_HVM,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]"));
+		cpu_gcd => (((contains(DieletIndicator.DIELET_INDICATOR, "CPU")) && (contains(DieletIndicator.DIELET_INDICATOR, "GCD"))&& (contains(DieletIndicator.DIELET_INDICATOR, "PCD")))||((contains(DieletIndicator.DIELET_INDICATOR, "CPU")) && (contains(DieletIndicator.DIELET_INDICATOR, "GCD")))) && (contains(LocationSets.CH_HVM,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]")||contains(LocationSets.RCH_HVM,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]"));
+		cpu_hub => (((contains(DieletIndicator.DIELET_INDICATOR, "CPU")) && (contains(DieletIndicator.DIELET_INDICATOR, "HUB")))||((contains(DieletIndicator.DIELET_INDICATOR, "CPU")) && (contains(DieletIndicator.DIELET_INDICATOR, "HUB"))&& (contains(DieletIndicator.DIELET_INDICATOR, "PCD")))) && (contains(LocationSets.CH_HVM,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]")||contains(LocationSets.RCH_HVM,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]"));
+		gcd_hub => (((contains(DieletIndicator.DIELET_INDICATOR, "HUB")) &&  (contains(DieletIndicator.DIELET_INDICATOR, "GCD"))&&(contains(DieletIndicator.DIELET_INDICATOR, "PCD")))||((contains(DieletIndicator.DIELET_INDICATOR, "HUB")) &&  (contains(DieletIndicator.DIELET_INDICATOR, "GCD"))))&& (contains(LocationSets.CH_HVM,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]")||contains(LocationSets.RCH_HVM,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]"));
+		cpu => (((contains(DieletIndicator.DIELET_INDICATOR, "CPU")) && (contains(DieletIndicator.DIELET_INDICATOR, "PCD")))||(DieletIndicator.DIELET_INDICATOR == "CPU")) && (contains(LocationSets.CH_HVM,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]")||contains(LocationSets.RCH_HVM,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]"));
+		gcd => (((contains(DieletIndicator.DIELET_INDICATOR, "GCD")) && (contains(DieletIndicator.DIELET_INDICATOR, "PCD")))||(DieletIndicator.DIELET_INDICATOR == "GCD")) && (contains(LocationSets.CH_HVM,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]")||contains(LocationSets.RCH_HVM,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]"));
+		hub => (((contains(DieletIndicator.DIELET_INDICATOR, "HUB")) && (contains(DieletIndicator.DIELET_INDICATOR, "PCD")))||(DieletIndicator.DIELET_INDICATOR == "HUB")) && (contains(LocationSets.CH_HVM,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]")||contains(LocationSets.RCH_HVM,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]"));
+		default;
+	}
+	###This rule is differentiate between IntelProcess and TSMC for FUSE modules
+	SelectorRule If_18AP(yes, no)
+	{
+		yes => (((GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S8C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_UL6C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C") && SCVars.SC_STEP == "A") || (GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C" && SCVars.SC_STEP == "Z"));
+		#ext => (((GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C") && (SCVars.SC_STEP == "B" || SCVars.SC_STEP == "C")) || (GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_AX" && SCVars.SC_STEP == "A") || ((GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_AM") && (SCVars.SC_STEP == "A" || SCVars.SC_STEP == "B")));
+	    #bllc => ((GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28CB" && SCVars.SC_STEP == "A") || ((GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52CB" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52CB") && SCVars.SC_STEP == "B"));
+		no;
+	}
+	SelectorRule If_ProcessType(int, ext, bllc, no)
+	{
+		int => (((GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S8C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_UL6C" ||  GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C")  && SCVars.SC_STEP == "A") || (GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C" && SCVars.SC_STEP == "Z")); 
+	    ext => (((GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C") && (SCVars.SC_STEP == "B" || SCVars.SC_STEP == "C")) || (GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_AX" && SCVars.SC_STEP == "A") || ((GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C" ||GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_AM") && (SCVars.SC_STEP == "A" || SCVars.SC_STEP == "B")));
+	    bllc => ((GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28CB" && SCVars.SC_STEP == "A") || ((GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52CB" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52CB") && SCVars.SC_STEP == "B"));
+		no;
+	}
+	### This rule was ported over from ARL under the SelectorRuleCollection "GlobalRule" || Usage: refer to rule "If_CLASS_NVL_S28C" in this file
+	SelectorRule PO_Z_step_bypass (yes, no)
+	{
+		yes => contains(SCVars.SC_STEP,"Z");
+		no;
+	}
+	
+	### This rule to switch between current three boms in NVL REPO || Usage: refer to rule "If_CLASS_NVL_S28C" in this file
+	SelectorRule If_S28_S52_HX28(Outcome1, Outcome2, Outcome3, Outcome4)
+	{
+		Outcome1 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C";
+        Outcome2 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+		Outcome3 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C";
+		Outcome4;
+	}
+	SelectorRule If_S28_S52_HX28_P16C_U8C(Outcome1, Outcome2, Outcome3, Outcome4, Outcome5, Outcome6)
+	{
+		Outcome1 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C";
+        Outcome2 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+		Outcome3 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C";
+		Outcome4 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C";
+		Outcome5 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C";
+		Outcome6;
+	}
+	SelectorRule If_S28_S52_HX28_P16C_H16C(Outcome1, Outcome2, Outcome3, Outcome4, Outcome5, Outcome6)
+	{
+		Outcome1 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C";
+        Outcome2 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+		Outcome3 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C";
+		Outcome4 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C";
+		Outcome5 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C";
+		Outcome6;
+	}
+	### This rule use for PTH_DLVR_CXX|| Requester: Mohd Yusof, Muhammad Syafiq|| Usage: Covering for DNL_S28C package
+	SelectorRule If_S28_S52_HX28_P16C_DS28C(Outcome1, Outcome2, Outcome3, Outcome4, Outcome5, Outcome6)
+	{
+		Outcome1 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C";
+        Outcome2 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+		Outcome3 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C";
+		Outcome4 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C";
+		Outcome5 => GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C";
+		Outcome6;
+	}
+	### This rule is for MAESTRO test usage
+	SelectorRule If_S28_DS28_S52_HX28(Outcome1, Outcome2, Outcome3, Outcome4, Outcome5)
+	{
+		Outcome1 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C";
+        Outcome2 => GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C";
+		Outcome3 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+		Outcome4 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C";
+		Outcome5;
+	}
+	### This rules use for FUS_FUSECFG_CXX || Usage: Covering all packages
+	SelectorRule If_S28_S52_HX28_P16C_S16C_H16C_U8C_UL6C_S8C_AX_AM_S28CB_S52CB_DNL28C_DNLS16C_DNLS8C_DNLS52CB(Outcome1, Outcome2, Outcome3, Outcome4, Outcome5, Outcome6, Outcome7, Outcome8, Outcome9, Outcome10, Outcome11, Outcome12, Outcome13, Outcome14, Outcome15, Outcome16, Outcome17, Outcome18)
+	{
+		Outcome1 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C";
+        Outcome2 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+		Outcome3 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C";
+		Outcome4 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C";
+		Outcome5 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C";
+		Outcome6 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C";
+		Outcome7 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C";
+		Outcome8 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_UL6C";
+		Outcome9 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S8C";
+		Outcome10 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_AX";
+		Outcome11 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_AM";
+		Outcome12 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28CB";
+		Outcome13 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52CB";
+		Outcome14 => GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C";
+		Outcome15 => GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S16C";
+		Outcome16 => GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S8C";
+		Outcome17 => GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S52CB";
+		Outcome18;
+	}
+	### This rules use for FUS Modules || Usage: Differentiate between S52C and S52_BLLC
+	SelectorRule If_S52_S52CB_DNL52CB(Outcome1, Outcome2, Outcome3, Outcome4)
+	{
+		Outcome1 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+        Outcome2 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52CB";
+		Outcome3 => GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S52CB";
+		Outcome4;
+	}
+	### This rules use for FUS Modules || Usage: Differentiate MICP packages
+	SelectorRule If_MICP(Outcome1, Outcome2)
+	{
+		Outcome1 => (GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52CB" || GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S52CB");
+        Outcome2;
+	}
+
+	### This rule use for TPI_DIERCVRY|| Usage: for recovery rules of each packages that enabled in repo
+	SelectorRule If_S28_S52_HX28_P16C_S16C_DS28C(Outcome1, Outcome2, Outcome3, Outcome4, Outcome5, Outcome6, Outcome7)
+	{
+		Outcome1 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C";
+        Outcome2 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+		Outcome3 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C";
+		Outcome4 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C";
+		Outcome5 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C";
+		Outcome6 => GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C";
+		Outcome7;
+	}
+	
+	### This rule use for TPI_DIERCVRY|| Usage: for recovery rules of each packages that enabled in repo
+	SelectorRule If_S28_S52_HX28_P16C_S16C_DS28C_U8C(Outcome1, Outcome2, Outcome3, Outcome4, Outcome5, Outcome6, Outcome7, Outcome8)
+	{
+		Outcome1 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C";
+        Outcome2 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+		Outcome3 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C";
+		Outcome4 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C";
+		Outcome5 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C";
+		Outcome6 => GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C";
+		Outcome7 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C";
+		Outcome8;
+	}
+	
+	### This rule use for TPI_DIERCVRY|| Usage: for recovery tracker based on their CDIE (8+16, 4+8, 4+0)
+	SelectorRule If_816_48_40(Outcome1, Outcome2, Outcome3, Outcome4)
+	{
+		Outcome1 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C";
+        Outcome2 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C" ;
+		Outcome3 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C";
+		Outcome4;
+	}
+	
+	### This rule use for PTH_THRSOAK_DIODE_CXX|| Requester: Syed Al Amin|| Usage: Covering for NVL_H16C package
+	SelectorRule If_S28_S52_HX28_P16C_H16C_S16C_DS28C(Outcome1, Outcome2, Outcome3, Outcome4, Outcome5, Outcome6, Outcome7, Outcome8)
+	{
+		Outcome1 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C";
+        Outcome2 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+		Outcome3 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C";
+		Outcome4 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C";
+		Outcome5 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C";
+		Outcome6 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C";
+		Outcome7 => GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C";
+		Outcome8;
+	}
+	### This rule to switch between DS0(Desktop0:i5,i7), DS1 (Desktop1:i9) and M boms in NVL REPO || DS0: S28C, S28CB, S16C || DS1: S52C || M: HX28C, H16C, P16C, U8C, UL6C 
+	SelectorRule If_DS0_DS1_M(Outcome1, Outcome2, Outcome3, Outcome4)
+	{
+		Outcome1 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28CB" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C";
+        Outcome2 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+		Outcome3 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_UL6C";
+		Outcome4;
+	}
+	
+	### This rule to switch between CDIE-48 DS(Desktop0:i5), AX (AX 16C) and M boms in NVL REPO || DS: S16C || AX: AX 16C || M: H16C, P16C
+	SelectorRule If_C48_DS_AX_M(Outcome1, Outcome2, Outcome3, Outcome4)
+	{
+		Outcome1 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S16C";
+        Outcome2 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_AX16C";
+		Outcome3 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C";
+		Outcome4;
+	}
+
+	SelectorRule IF_S52(Outcome1, Outcome2)
+	{
+        Outcome1 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+		Outcome2;
+	}
+
+	SelectorRule If_M_PKGs(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_UL6C";
+		no;
+	}
+
+	SelectorRule If_HX28C_P16C(Outcome1, Outcome2, Outcome3)
+	{
+		Outcome1 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C" ;
+        Outcome2 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C";
+		Outcome3;
+	}
+		SelectorRule If_HX28C_P16C_H16C(HX28C, P16C, H16C,OTHER)
+	{
+		HX28C => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C" ;
+        P16C => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C";
+		H16C => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C";
+		OTHER;
+	}
+	SelectorRule If_S_PKGs(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28CB" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C";
+		no;
+	}
+
+	SelectorRule If_PACKAGE(YES, NO)
+	{
+		YES => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28CB" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C";
+		NO => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_UL6C";
+	}
+	
+	### This rule use for controlling all post fuse locations || Requester: Ching Fang Keh || Usage: Covering all post fuse locations
+	SelectorRule If_POSTFUSED (yes, no)
+    {
+        yes => contains(LocationSets.PHMF,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(LocationSets.QA_S1,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(LocationSets.CH_QUAL,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(LocationSets.CC_QUAL,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(LocationSets.FC_ENG,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(LocationSets.FH_ENG,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(LocationSets.CH_QUAL_RV,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(LocationSets.CC_QUAL_RV,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(SCVars.SC_LOCN, "6234");
+        no;
+    }
+	
+	### this rule enables to check if Dieslct is enabled on not
+	SelectorRule Is_Dieslct (no, yes)
+    {
+        no => contains(SCVars.SC_DIESLCT,"NA");
+        yes;
+    }
+	
+	### This rule can be used to for Cdie Dietype 40:Intel 4+0 || 48:Intel 4+8 ||816P:Intel Cdie 8+16  ||816N: N2P Cdie 8+16 ||816BLL: N2P 8+16 bllc 
+	SelectorRule If_48(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C" ;
+		no;
+	}
+	### This rule can be used to check if the lot name ends with "MV" (MV lot) || Requester: PCH Scan Team || Usage: BypassPort = __shared__::TpRule.If_MV(-1,1);
+	SelectorRule If_MV(yes, no)
+	{
+		yes => endsWith(__shared__::SCVars.SC_LOTNAME,"MV");
+		no;
+	}
+	### This rule is for TPI_DIERCVRY module usage to differentiate CR tracker 
+	SelectorRule If_48_40(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C" ;
+		no;
+	}
+}
+
+### This rule can be used to define dielet combo based on DIELET_INDICATOR || Requester: TPI || Usage: Any condition needs define per dielet(s)
+SelectorRuleCollection  DieIndic
+{
+	### Child rule for CPU dielet
+	SelectorRule if_cpu(yes, no) 
+	{
+	  yes => contains(DieletIndicator.DIELET_INDICATOR, "CPU");
+	  no;
+	}
+	### Child rule for GCD dielet
+	SelectorRule if_gcd(yes, no) 
+	{
+	  yes => contains(DieletIndicator.DIELET_INDICATOR, "GCD");
+	  no;
+	}
+	### Child rule for HUB dielet
+	SelectorRule if_hub(yes, no) 
+	{
+	  yes => contains(DieletIndicator.DIELET_INDICATOR, "HUB");
+	  no;
+	}
+	### Child rule for PCD dielet
+	SelectorRule if_pcd(yes, no) 
+	{
+	  yes => contains(DieletIndicator.DIELET_INDICATOR, "PCD");
+	  no;
+	}
+	### Child rule for Primary ClassHot
+	SelectorRule if_primech(yes, no) 
+	{
+	  yes => contains(LocationSets.CH_HVM,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]")||contains(LocationSets.RCH_HVM,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+	  no;
+	}
+	### Parent rule for define dielet combo
+	SelectorRule DieCombo(all, cgh, chp, cgp, ghp, cg, ch, cp, gh, gp, hp, cpu, gcd, hub, pcd, default)
+	{
+	  all =>  DieIndic.if_cpu(True, False) && DieIndic.if_gcd(True, False) && DieIndic.if_hub(True, False) && DieIndic.if_pcd(True, False);
+	  cgh =>  DieIndic.if_cpu(True, False) && DieIndic.if_gcd(True, False) && DieIndic.if_hub(True, False);
+	  chp =>  DieIndic.if_cpu(True, False) && DieIndic.if_hub(True, False) && DieIndic.if_pcd(True, False);
+	  cgp =>  DieIndic.if_cpu(True, False) && DieIndic.if_gcd(True, False) && DieIndic.if_pcd(True, False);
+	  ghp =>  DieIndic.if_gcd(True, False) && DieIndic.if_hub(True, False) && DieIndic.if_pcd(True, False);
+	  cg =>   DieIndic.if_cpu(True, False) && DieIndic.if_gcd(True, False);
+	  ch =>   DieIndic.if_cpu(True, False) && DieIndic.if_hub(True, False);
+	  cp =>   DieIndic.if_cpu(True, False) && DieIndic.if_pcd(True, False);
+	  gh =>   DieIndic.if_gcd(True, False) && DieIndic.if_hub(True, False);
+	  gp =>   DieIndic.if_gcd(True, False) && DieIndic.if_pcd(True, False);
+	  hp =>   DieIndic.if_hub(True, False) && DieIndic.if_pcd(True, False);
+	  cpu =>  DieIndic.if_cpu(True, False);
+	  gcd =>  DieIndic.if_gcd(True, False);
+	  hub =>  DieIndic.if_hub(True, False);
+	  pcd =>  DieIndic.if_pcd(True, False);
+	  default;
+	}
+
+	SelectorRule AllDie(all,default)
+	{
+	  all =>  DieIndic.if_cpu(True, False) && DieIndic.if_gcd(True, False) && DieIndic.if_hub(True, False) && DieIndic.if_pcd(True, False) && contains(__shared__::LocationSets.CH_CHVM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+	  default;
+	}
+
+	### This rule special for dummydata only enable in primary sockets|| Requester: TPI || Usage: DummyData module
+	SelectorRule If_DummyData(all, cgh, cpu_gcd, cpu_hub, gcd_hub, cpu, gcd, hub, pcd, default) 
+	{
+	  all => DieIndic.if_cpu(True, False) && DieIndic.if_gcd(True, False) && DieIndic.if_hub(True, False) && DieIndic.if_pcd(True, False) && DieIndic.if_primech(True, False);
+      cgh => DieIndic.if_cpu(True, False) && DieIndic.if_gcd(True, False) && DieIndic.if_hub(True, False) && DieIndic.if_primech(True, False);
+      cpu_gcd => (DieIndic.if_cpu(True, False) && DieIndic.if_gcd(True, False)) || (DieIndic.if_cpu(True, False) && DieIndic.if_gcd(True, False) && DieIndic.if_pcd(True, False)) && DieIndic.if_primech(True, False);
+      cpu_hub => (DieIndic.if_cpu(True, False) && DieIndic.if_hub(True, False)) || (DieIndic.if_cpu(True, False) && DieIndic.if_hub(True, False) && DieIndic.if_pcd(True, False)) && DieIndic.if_primech(True, False);
+      gcd_hub => (DieIndic.if_gcd(True, False) && DieIndic.if_hub(True, False)) || (DieIndic.if_gcd(True, False) && DieIndic.if_hub(True, False) && DieIndic.if_pcd(True, False)) && DieIndic.if_primech(True, False);
+      cpu => (DieIndic.if_cpu(True, False)) || (DieIndic.if_cpu(True, False) && DieIndic.if_pcd(True, False)) && DieIndic.if_primech(True, False);
+      gcd => (DieIndic.if_gcd(True, False)) || (DieIndic.if_gcd(True, False) && DieIndic.if_pcd(True, False)) && DieIndic.if_primech(True, False);
+      hub => (DieIndic.if_hub(True, False)) || (DieIndic.if_hub(True, False) && DieIndic.if_pcd(True, False)) && DieIndic.if_primech(True, False);
+      pcd => DieIndic.if_pcd(True, False) && DieIndic.if_primech(True, False);
+      default;
+	}
+}
+
+#UserVars TorchRulesVars
+#{
+#	String locationCode = "6248";
+#	#String bom = "394CAB2VB";
+#	String bom = (__shared__::TpRule.If_CLASS_NVL_S28C("394AAA2VB","394CAB2VB"));
+#}
+
+### This rule controls PUP HERMES test bypass across all socket types.
+### Cond 1 (run_both__0__1): PUP enabled at supported CHOT locations (CH_HVM, CH_RV, RCHOT) — run both __0 and __1 plists
+### Cond 2 (skip__0_non_pup): ClassHot but the location code is not supported in PUP (FH_ENG / CHM_ENG) — skip __0 plist only.
+### Cond 3 (skip__0_downstream): Downstream sockets (CSM & PHM: CCOLD, RCCOLD, PHM) — skip __0 plist.
+### Cond 4 (default): Default fallback — also skips the __0 plist.
+### Requester: PUP || Usage: BypassPort = __shared__::PUPHERMESRules.PUPSupportedOperation(-1,1,1,-1);
+SelectorRuleCollection PUPHERMESRules
+{
+	SelectorRule PUPSupportedOperation(run_both__0__1, skip__0_non_pup, skip__0_downstream, default)
+	{
+		run_both__0__1 => contains(LocationSets.CH_HVM,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(LocationSets.CH_RV,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(LocationSets.RCHOT,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		skip__0_non_pup => contains(LocationSets.FH_ENG,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(LocationSets.CHM_ENG,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		skip__0_downstream => contains(LocationSets.CCOLD,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(LocationSets.RCCOLD,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(LocationSets.PHM,"[" + SCVars.SC_LOCN + ":" + SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		default;
+	}
+}
+
+
+}
+

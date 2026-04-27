@@ -1,0 +1,98 @@
+START_SCREEN:FUN_CCF_SCREEN_8C_C01
+#RunOn	: TestName  		: DataType  : ParamType 	: Param1												       	 	: Oper.		: ParamType 	: Param2		: TmpStore	: OnTrue    	: OnFalse
+EXEC    : GetCoreStatus       : STRING   : EXPRESSION : ExecCallback('CopyTracker', '--tracker=CR --gsds=G.U.S.CORESTATUS')	: 	- 		: - 			: - 			: - 		: CheckFull 	: CheckFull
+EXEC    : CheckFull           : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "0000" 		: - 		    : 1	        : CheckC01A
+EXEC    : CheckC01A           : STRING   : EXPRESSION : "Substring([G.U.S.CORESTATUS], 3, 1)"               			    :	==		: LITERAL 		: "0" 			: - 		    : 2         : 3
+END_SCREEN
+
+START_SCREEN:FUN_CCF_SCREEN_C23
+#RunOn	: TestName  		: DataType  : ParamType 	: Param1												       	 	: Oper.		: ParamType 	: Param2		: TmpStore	: OnTrue    	: OnFalse
+EXEC    : GetCoreStatus       : STRING   : EXPRESSION : ExecCallback('CopyTracker', '--tracker=CR --gsds=G.U.S.CORESTATUS')	: 	- 		: - 			: - 			: - 		: CheckC23A 	: CheckC23A
+EXEC    : CheckC23A           : STRING   : EXPRESSION : "Substring([G.U.S.CORESTATUS], 2, 1)"               			    :	==		: LITERAL 		: "0" 			: - 		    : 1        : 2
+END_SCREEN
+
+START_SCREEN:FUN_CCF_SCREEN_C45
+#RunOn	: TestName  		: DataType  : ParamType 	: Param1												       	 	: Oper.		: ParamType 	: Param2		: TmpStore	: OnTrue    	: OnFalse
+EXEC    : GetCoreStatus       : STRING   : EXPRESSION : ExecCallback('CopyTracker', '--tracker=CR --gsds=G.U.S.CORESTATUS')	: 	- 		: - 			: - 			: - 		: CheckC45A 	: CheckC45A
+EXEC    : CheckC45A           : STRING   : EXPRESSION : "Substring([G.U.S.CORESTATUS], 1, 1)"               			    :	==		: LITERAL 		: "0" 			: - 		    : 1        : 2
+END_SCREEN
+
+START_SCREEN:FUN_CCF_SCREEN_C67
+#RunOn	: TestName  		: DataType  : ParamType 	: Param1												       	 	: Oper.		: ParamType 	: Param2		: TmpStore	: OnTrue    	: OnFalse
+EXEC    : GetCoreStatus       : STRING   : EXPRESSION : ExecCallback('CopyTracker', '--tracker=CR --gsds=G.U.S.CORESTATUS')	: 	- 		: - 			: - 			: - 		: CheckC67A 	: CheckC67A
+EXEC    : CheckC67A           : STRING   : EXPRESSION : "Substring([G.U.S.CORESTATUS], 0, 1)"               			    :	==		: LITERAL 		: "0" 			: - 		    : 1        : 2
+END_SCREEN
+
+START_SCREEN:FUN_CCF_SCREEN_SingleFlow
+#RunOn	: TestName  		: DataType  : ParamType 	: Param1												       	 	: Oper.		: ParamType 	: Param2		: TmpStore		: OnTrue    		: OnFalse
+EXEC    : GetCoreStatus       : STRING   : EXPRESSION : ExecCallback('CopyTracker', '--tracker=CR --gsds=G.U.S.CORESTATUS')	: 	- 		: - 			: - 			: - 		: CheckFull 	: CheckFull
+EXEC    : CheckFull           : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "0000" 		: - 		    : SetFull	        : CheckDCM123
+EXEC    : SetFull             : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 0,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config:8C_DCM0123_UC_SETUP))" 		: - 		    : 1	        : 0
+EXEC    : CheckDCM123         : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "0001" 		: - 		    : SetDCM123	        : CheckDCM023
+EXEC    : SetDCM123           : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 1,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config:6C_DCM123_UC_SETUP))" 		: - 		    : 2	        : 0
+EXEC    : CheckDCM023         : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "0010" 		: - 		    : SetDCM023	        : CheckDCM013
+EXEC    : SetDCM023           : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 2,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config:6C_DCM023_UC_SETUP))" 		: - 		    : 3	        : 0
+EXEC    : CheckDCM013         : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "0100" 		: - 		    : SetDCM013	        : CheckDCM012
+EXEC    : SetDCM013           : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 4,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config:6C_DCM013_UC_SETUP))" 		: - 		    : 4	        : 0
+EXEC    : CheckDCM012         : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "1000" 		: - 		    : SetDCM012	        : CheckDCM12
+EXEC    : SetDCM012           : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 8,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config:6C_DCM012_UC_SETUP))" 		: - 		    : 5	        : 0
+
+EXEC    : CheckDCM12          : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "1001" 		: - 		    : SetDCM12	        : CheckDCM02
+EXEC    : SetDCM12            : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 9,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config:4C_DCM12_UC_SETUP))" 		: - 		    : 6	        : 0
+EXEC    : CheckDCM02          : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "1010" 		: - 		    : SetDCM02	        : CheckDCM01
+EXEC    : SetDCM02            : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 10,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config:4C_DCM02_UC_SETUP))" 		: - 		    : 7	        : 0
+EXEC    : CheckDCM01          : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "1100" 		: - 		    : SetDCM01	        : CheckDCM13
+EXEC    : SetDCM01            : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 12,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config:4C_DCM01_UC_SETUP))" 		: - 		    : 8	        : 0
+EXEC    : CheckDCM13          : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "0101" 		: - 		    : SetDCM13	        : CheckDCM03
+EXEC    : SetDCM13            : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 5,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config:4C_DCM13_UC_SETUP))" 		: - 		    : 9	        : 0
+EXEC    : CheckDCM03          : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "0110" 		: - 		    : SetDCM03	        : CheckDCM23
+EXEC    : SetDCM03            : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 6,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config:4C_DCM03_UC_SETUP))" 		: - 		    : 10	        : 0
+EXEC    : CheckDCM23          : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "0011" 		: - 		    : SetDCM23	        : CheckDCM0
+EXEC    : SetDCM23            : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 3,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config:4C_DCM23_UC_SETUP))" 		: - 		    : 11	        : 0
+
+EXEC    : CheckDCM0           : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "1110" 		: - 		    : SetDCM0	        : CheckDCM1
+EXEC    : SetDCM0             : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 14,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config:2C_DCM0_UC_SETUP))" 		: - 		    : 12	        : 0
+EXEC    : CheckDCM1           : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "1101" 		: - 		    : SetDCM1	        : CheckDCM2
+EXEC    : SetDCM1             : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 13,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config:2C_DCM1_UC_SETUP))" 		: - 		    : 13	        : 0
+EXEC    : CheckDCM2           : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "1011" 		: - 		    : SetDCM2	        : CheckDCM3
+EXEC    : SetDCM2             : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 11,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config:2C_DCM2_UC_SETUP))" 		: - 		    : 14	        : 0
+EXEC    : CheckDCM3           : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "0111" 		: - 		    : SetDCM3	        : 0
+EXEC    : SetDCM3             : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 7,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config:2C_DCM3_UC_SETUP))" 		: - 		    : 15	        : 0
+END_SCREEN
+
+START_SCREEN:FUN_CCF_MM_SCREEN_SingleFlow
+#RunOn	: TestName  		: DataType  : ParamType 	: Param1												       	 	: Oper.		: ParamType 	: Param2		: TmpStore		: OnTrue    		: OnFalse
+EXEC    : GetCoreStatus       : STRING   : EXPRESSION : ExecCallback('CopyTracker', '--tracker=CR --gsds=G.U.S.CORESTATUS')	: 	- 		: - 			: - 			: - 		: CheckFull 	: CheckFull
+EXEC    : CheckFull           : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "0000" 		: - 		    : SetFull	        : CheckDCM123
+EXEC    : SetFull             : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 0,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config_MM:8C_DCM0123_UC_SETUP))" 		: - 		    : 1	        : 0
+EXEC    : CheckDCM123         : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "0001" 		: - 		    : SetDCM123	        : CheckDCM023
+EXEC    : SetDCM123           : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 1,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config_MM:6C_DCM123_UC_SETUP))" 		: - 		    : 2	        : 0
+EXEC    : CheckDCM023         : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "0010" 		: - 		    : SetDCM023	        : CheckDCM013
+EXEC    : SetDCM023           : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 2,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config_MM:6C_DCM023_UC_SETUP))" 		: - 		    : 3	        : 0
+EXEC    : CheckDCM013         : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "0100" 		: - 		    : SetDCM013	        : CheckDCM012
+EXEC    : SetDCM013           : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 4,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config_MM:6C_DCM013_UC_SETUP))" 		: - 		    : 4	        : 0
+EXEC    : CheckDCM012         : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "1000" 		: - 		    : SetDCM012	        : CheckDCM12
+EXEC    : SetDCM012           : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 8,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config_MM:6C_DCM012_UC_SETUP))" 		: - 		    : 5	        : 0
+
+EXEC    : CheckDCM12          : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "1001" 		: - 		    : SetDCM12	        : CheckDCM02
+EXEC    : SetDCM12            : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 9,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config_MM:4C_DCM12_UC_SETUP))" 		: - 		    : 6	        : 0
+EXEC    : CheckDCM02          : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "1010" 		: - 		    : SetDCM02	        : CheckDCM01
+EXEC    : SetDCM02            : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 10,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config_MM:4C_DCM02_UC_SETUP))" 		: - 		    : 7	        : 0
+EXEC    : CheckDCM01          : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "1100" 		: - 		    : SetDCM01	        : CheckDCM13
+EXEC    : SetDCM01            : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 12,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config_MM:4C_DCM01_UC_SETUP))" 		: - 		    : 8	        : 0
+EXEC    : CheckDCM13          : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "0101" 		: - 		    : SetDCM13	        : CheckDCM03
+EXEC    : SetDCM13            : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 5,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config_MM:4C_DCM13_UC_SETUP))" 		: - 		    : 9	        : 0
+EXEC    : CheckDCM03          : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "0110" 		: - 		    : SetDCM03	        : CheckDCM23
+EXEC    : SetDCM03            : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 6,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config_MM:4C_DCM03_UC_SETUP))" 		: - 		    : 10	        : 0
+EXEC    : CheckDCM23          : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "0011" 		: - 		    : SetDCM23	        : CheckDCM0
+EXEC    : SetDCM23            : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 3,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config_MM:4C_DCM23_UC_SETUP))" 		: - 		    : 11	        : 0
+
+EXEC    : CheckDCM0           : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "1110" 		: - 		    : SetDCM0	        : CheckDCM1
+EXEC    : SetDCM0             : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 14,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config_MM:2C_DCM0_UC_SETUP))" 		: - 		    : 12	        : 0
+EXEC    : CheckDCM1           : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "1101" 		: - 		    : SetDCM1	        : CheckDCM2
+EXEC    : SetDCM1             : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 13,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config_MM:2C_DCM1_UC_SETUP))" 		: - 		    : 13	        : 0
+EXEC    : CheckDCM2           : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "1011" 		: - 		    : SetDCM2	        : CheckDCM3
+EXEC    : SetDCM2             : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 11,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config_MM:2C_DCM2_UC_SETUP))" 		: - 		    : 14	        : 0
+EXEC    : CheckDCM3           : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "0111" 		: - 		    : SetDCM3	        : 0
+EXEC    : SetDCM3             : STRING   : GLOBAL		 : "IPC::FUN_CCF_CX816::FUN_CCF_CX816_SPECS.UncoreConfigPreinstance"							: 	SET		: LITERAL 		: "Call(EvaluateExpression(--expression 'MOV 7,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config_MM:2C_DCM3_UC_SETUP))" 		: - 		    : 15	        : 0
+END_SCREEN

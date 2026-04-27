@@ -1,0 +1,63 @@
+#mtl file input switch  
+
+START_SCREEN:DFF_DIEID
+#RunOn	:	TestName : Data Type: Param Type	: Param1   					: 	Operation 	: 	Param Type	:	Param2  							:	TmpStore 	:	OnTrue	:	OnFalse
+EXEC   ; TEST1 ; STRING ; LITERAL ; True ; == ; EXPRESSION ; Contains([__shared__::SCVars.SC_PACKAGE], '63') && Contains([__shared__::SCVars.SC_DEVICE], 'AAA') ; - ; TESTRC1  ;  TEST28A
+EXEC   ; TESTRC1 ; STRING ; LITERAL ; True ; == ; EXPRESSION ; in([__shared__::SCVars.SC_LOCN], '6163', '5163', '6167', '5167', '6168', '5168') ; - ; TESTRC2 ; TEST1A
+EXEC   ; TESTRC2 ; STRING ; GLOBAL     ; __shared__::DFFVars.MTL_FILE_PATH                    ; SET ; LITERAL ; ./Shared/Modules/TPI/TPI_DFF_XXX/InputFiles/NVL_S28C_RAWCLASS.xml ; - ; 1  ; 2     
+EXEC   ; TEST1A  ; STRING ; GLOBAL     ; __shared__::DFFVars.MTL_FILE_PATH                    ; SET ; LITERAL ; ./Shared/Modules/TPI/TPI_DFF_XXX/InputFiles/NVL_S28C_CLASS.xml ; - ; 1  ; 2  
+
+EXEC   ; TEST28A ; STRING ; LITERAL ; True ; == ; EXPRESSION ; Contains([__shared__::SCVars.SC_PACKAGE], '56') && Contains([__shared__::SCVars.SC_DEVICE], 'AAA') ; - ; TESTRC1_28A  ;  TEST2
+EXEC   ; TESTRC1_28A ; STRING ; LITERAL ; True ; == ; EXPRESSION ; in([__shared__::SCVars.SC_LOCN], '6163', '5163', '6167', '5167', '6168', '5168') ; - ; TESTRC2_28A ; TEST1A_28A
+EXEC   ; TESTRC2_28A ; STRING ; GLOBAL     ; __shared__::DFFVars.MTL_FILE_PATH                    ; SET ; LITERAL ; ./Shared/Modules/TPI/TPI_DFF_XXX/InputFiles/NVL_S28C_RAWCLASS.xml ; - ; 1  ; 2     
+EXEC   ; TEST1A_28A  ; STRING ; GLOBAL     ; __shared__::DFFVars.MTL_FILE_PATH                    ; SET ; LITERAL ; ./Shared/Modules/TPI/TPI_DFF_XXX/InputFiles/NVL_S28C_CLASS.xml ; - ; 1  ; 2  
+
+EXEC   ; TEST2 ; STRING ; LITERAL ; True ; == ; EXPRESSION ; Contains([__shared__::SCVars.SC_PACKAGE], '56') && Contains([__shared__::SCVars.SC_DEVICE], 'AAB') ; - ; TESTRC3  ;  TEST4
+EXEC   ; TESTRC3 ; STRING ; LITERAL ; True ; == ; EXPRESSION ; in([__shared__::SCVars.SC_LOCN], '6163', '5163', '6167', '5167', '6168', '5168') ; - ; TESTRC4 ; TEST2A
+EXEC   ; TESTRC4 ; STRING ; GLOBAL     ; __shared__::DFFVars.MTL_FILE_PATH                    ; SET ; LITERAL ; ./Shared/Modules/TPI/TPI_DFF_XXX/InputFiles/NVL_S52C_RAWCLASS.xml ; - ; 1  ; 2     
+EXEC   ; TEST2A  ; STRING ; GLOBAL     ; __shared__::DFFVars.MTL_FILE_PATH                    ; SET ; LITERAL ; ./Shared/Modules/TPI/TPI_DFF_XXX/InputFiles/NVL_S52C_CLASS.xml ; - ; 1  ; 2  
+
+EXEC   ; TEST4 ; STRING ; LITERAL ; True ; == ; EXPRESSION ; Contains([__shared__::SCVars.SC_PACKAGE], '59') && Contains([__shared__::SCVars.SC_DEVICE], 'AAA') ; - ; TESTRC7  ;  TEST5
+EXEC   ; TESTRC7 ; STRING ; LITERAL ; True ; == ; EXPRESSION ; in([__shared__::SCVars.SC_LOCN], '6163', '5163', '6167', '5167', '6168', '5168') ; - ; TESTRC8 ; TEST4A
+EXEC   ; TESTRC8 ; STRING ; GLOBAL     ; __shared__::DFFVars.MTL_FILE_PATH                    ; SET ; LITERAL ; ./Shared/Modules/TPI/TPI_DFF_XXX/InputFiles/NVL_HX28C_RAWCLASS.xml ; - ; 1  ; 2     
+EXEC   ; TEST4A  ; STRING ; GLOBAL     ; __shared__::DFFVars.MTL_FILE_PATH                    ; SET ; LITERAL ; ./Shared/Modules/TPI/TPI_DFF_XXX/InputFiles/NVL_HX28C_CLASS.xml ; - ; 1  ; 2  
+
+EXEC   ; TEST5 ; STRING ; LITERAL ; True ; == ; EXPRESSION ; Contains([__shared__::SCVars.SC_PACKAGE], '69') && Contains([__shared__::SCVars.SC_DEVICE], 'AAA') ; - ; TESTRC9  ;  TEST6
+EXEC   ; TESTRC9 ; STRING ; LITERAL ; True ; == ; EXPRESSION ; in([__shared__::SCVars.SC_LOCN], '6163', '5163', '6167', '5167') ; - ; TESTRC10 ; TEST5A
+EXEC   ; TESTRC10 ; STRING ; GLOBAL     ; __shared__::DFFVars.MTL_FILE_PATH                    ; SET ; LITERAL ; ./Shared/Modules/TPI/TPI_DFF_XXX/InputFiles/NVL_P16C_RAWCLASS.xml ; - ; 1  ; 2     
+EXEC   ; TEST5A  ; STRING ; GLOBAL     ; __shared__::DFFVars.MTL_FILE_PATH                    ; SET ; LITERAL ; ./Shared/Modules/TPI/TPI_DFF_XXX/InputFiles/NVL_P16C_CLASS.xml ; - ; 1  ; 2  
+
+EXEC   ; TEST6 ; STRING ; LITERAL ; True ; == ; EXPRESSION ; Contains([__shared__::SCVars.SC_PACKAGE], '67') && Contains([__shared__::SCVars.SC_DEVICE], 'AAA') ; - ; TESTRC11  ;  TEST7
+EXEC   ; TESTRC11 ; STRING ; LITERAL ; True ; == ; EXPRESSION ; in([__shared__::SCVars.SC_LOCN], '6163', '5163', '6167', '5167') ; - ; TESTRC12 ; TEST6A
+EXEC   ; TESTRC12 ; STRING ; GLOBAL     ; __shared__::DFFVars.MTL_FILE_PATH                    ; SET ; LITERAL ; ./Shared/Modules/TPI/TPI_DFF_XXX/InputFiles/NVL_S16C_RAWCLASS.xml ; - ; 1  ; 2     
+EXEC   ; TEST6A  ; STRING ; GLOBAL     ; __shared__::DFFVars.MTL_FILE_PATH                    ; SET ; LITERAL ; ./Shared/Modules/TPI/TPI_DFF_XXX/InputFiles/NVL_S16C_CLASS.xml ; - ; 1  ; 2  
+
+EXEC   ; TEST7 ; STRING ; LITERAL ; True ; == ; EXPRESSION ; Contains([__shared__::SCVars.SC_PACKAGE], '66') && Contains([__shared__::SCVars.SC_DEVICE], 'AAA') ; - ; TESTRC13  ;  TEST8
+EXEC   ; TESTRC13 ; STRING ; LITERAL ; True ; == ; EXPRESSION ; in([__shared__::SCVars.SC_LOCN], '6163', '5163', '6167', '5167') ; - ; TESTRC14 ; TEST7A
+EXEC   ; TESTRC14 ; STRING ; GLOBAL     ; __shared__::DFFVars.MTL_FILE_PATH                    ; SET ; LITERAL ; ./Shared/Modules/TPI/TPI_DFF_XXX/InputFiles/NVL_H16C_RAWCLASS.xml ; - ; 1  ; 2     
+EXEC   ; TEST7A  ; STRING ; GLOBAL     ; __shared__::DFFVars.MTL_FILE_PATH                    ; SET ; LITERAL ; ./Shared/Modules/TPI/TPI_DFF_XXX/InputFiles/NVL_H16C_CLASS.xml ; - ; 1  ; 2  
+
+EXEC   ; TEST8 ; STRING ; LITERAL ; True ; == ; EXPRESSION ; Contains([__shared__::SCVars.SC_PACKAGE], '63') && Contains([__shared__::SCVars.SC_DEVICE], 'AAC') ; - ; TESTRC15  ;  TEST9
+EXEC   ; TESTRC15 ; STRING ; LITERAL ; True ; == ; EXPRESSION ; in([__shared__::SCVars.SC_LOCN], '6163', '5163', '6167', '5167', '6168', '5168') ; - ; TESTRC16 ; TEST8A
+EXEC   ; TESTRC16 ; STRING ; GLOBAL     ; __shared__::DFFVars.MTL_FILE_PATH                    ; SET ; LITERAL ; ./Shared/Modules/TPI/TPI_DFF_XXX/InputFiles/NVL_DNLS28C_RAWCLASS.xml ; - ; 1  ; 2     
+EXEC   ; TEST8A  ; STRING ; GLOBAL     ; __shared__::DFFVars.MTL_FILE_PATH                    ; SET ; LITERAL ; ./Shared/Modules/TPI/TPI_DFF_XXX/InputFiles/NVL_DNLS28C_CLASS.xml ; - ; 1  ; 2 
+
+EXEC   ; TEST9 ; STRING ; LITERAL ; True ; == ; EXPRESSION ; Contains([__shared__::SCVars.SC_PACKAGE], '66') && Contains([__shared__::SCVars.SC_DEVICE], 'AAB') ; - ; TESTRC17  ;  TEST10
+EXEC   ; TESTRC17 ; STRING ; LITERAL ; True ; == ; EXPRESSION ; in([__shared__::SCVars.SC_LOCN], '6163', '5163', '6167', '5167') ; - ; TESTRC18 ; TEST9A
+EXEC   ; TESTRC18 ; STRING ; GLOBAL     ; __shared__::DFFVars.MTL_FILE_PATH                    ; SET ; LITERAL ; ./Shared/Modules/TPI/TPI_DFF_XXX/InputFiles/NVL_HX28C_RAWCLASS.xml ; - ; 1  ; 2     
+EXEC   ; TEST9A  ; STRING ; GLOBAL     ; __shared__::DFFVars.MTL_FILE_PATH                    ; SET ; LITERAL ; ./Shared/Modules/TPI/TPI_DFF_XXX/InputFiles/NVL_HX28C_CLASS.xml ; - ; 1  ; 2 
+
+EXEC   ; TEST10 ; STRING ; LITERAL ; True ; == ; EXPRESSION ; Contains([__shared__::SCVars.SC_PACKAGE], '68') && Contains([__shared__::SCVars.SC_DEVICE], 'AAA') ; - ; TESTRC19  ;  TEST11
+EXEC   ; TESTRC19 ; STRING ; LITERAL ; True ; == ; EXPRESSION ; in([__shared__::SCVars.SC_LOCN], '6163', '5163', '6167', '5167') ; - ; TESTRC20 ; TEST10A
+EXEC   ; TESTRC20 ; STRING ; GLOBAL     ; __shared__::DFFVars.MTL_FILE_PATH                    ; SET ; LITERAL ; ./Shared/Modules/TPI/TPI_DFF_XXX/InputFiles/NVL_U8C_RAWCLASS.xml ; - ; 1  ; 2     
+EXEC   ; TEST10A  ; STRING ; GLOBAL     ; __shared__::DFFVars.MTL_FILE_PATH                    ; SET ; LITERAL ; ./Shared/Modules/TPI/TPI_DFF_XXX/InputFiles/NVL_U8C_CLASS.xml ; - ; 1  ; 2  
+
+EXEC   ; TEST11 ; STRING ; LITERAL ; True ; == ; EXPRESSION ; Contains([__shared__::SCVars.SC_PACKAGE], '63') && Contains([__shared__::SCVars.SC_DEVICE], 'AAB') ; - ; TESTRC21  ;  2
+EXEC   ; TESTRC21 ; STRING ; LITERAL ; True ; == ; EXPRESSION ; in([__shared__::SCVars.SC_LOCN], '6163', '5163', '6167', '5167', '6168', '5168') ; - ; TESTRC22 ; TEST11A
+EXEC   ; TESTRC22 ; STRING ; GLOBAL     ; __shared__::DFFVars.MTL_FILE_PATH                    ; SET ; LITERAL ; ./Shared/Modules/TPI/TPI_DFF_XXX/InputFiles/NVL_S28CBLLC_RAWCLASS.xml ; - ; 1  ; 2     
+EXEC   ; TEST11A  ; STRING ; GLOBAL     ; __shared__::DFFVars.MTL_FILE_PATH                    ; SET ; LITERAL ; ./Shared/Modules/TPI/TPI_DFF_XXX/InputFiles/NVL_S28CBLLC_CLASS.xml ; - ; 1  ; 2  
+
+END_SCREENs
+
+
+

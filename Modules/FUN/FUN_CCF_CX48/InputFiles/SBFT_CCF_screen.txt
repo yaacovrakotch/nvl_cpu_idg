@@ -1,0 +1,36 @@
+START_SCREEN:FUNCCF_4C_and_C0_DRG
+#4C_Core0
+#RunOn	: TestName  		: DataType  : ParamType 	: Param1												: Oper.	: ParamType : Param2		: TmpStore	: OnTrue          : OnFalse
+EXEC    : GetCore           : STRING : EXPRESSION : ExecCallback('CopyTracker', '--tracker=CR --gsds=G.U.S.CORESTATUS')                           : - : - : - : - : Test1a      : 2
+EXEC  	: Test1a 	        : STRING   : GSDS	: G.U.S.CORESTATUS                                  :	==	 : LITERAL	: "0000"    : -	        : 	1	:  Test2a
+EXEC  	: Test2a 	        : STRING   : GSDS	: G.U.S.CORESTATUS                                  :	==	 : LITERAL	: "1000"    : -	        : 	2 	:  Test3a
+EXEC  	: Test3a 	        : STRING   : GSDS	: G.U.S.CORESTATUS                                 :	==	 : LITERAL	: "1100"    : -	        : 	2 	:  Test4a
+EXEC  	: Test4a 	        : STRING   : GSDS	: G.U.S.CORESTATUS                                  :	==	 : LITERAL	: "1110"    : -	        : 	2 	:  3
+END_SCREEN
+
+START_SCREEN:FUNCCF_C1_DRG
+#Core1
+#RunOn	: TestName  		: DataType  : ParamType 	: Param1												: Oper.	: ParamType : Param2		: TmpStore	: OnTrue          : OnFalse
+EXEC    : GetCore           : STRING : EXPRESSION : ExecCallback('CopyTracker', '--tracker=CR --gsds=G.U.S.CORESTATUS')                           : - : - : - : - : Test1a     : 2
+EXEC  	: Test1a 	        : STRING   : GSDS	: G.U.S.CORESTATUS                                  :	==	 : LITERAL	: "1000"    : -	        : 	1 	:  Test2a
+EXEC  	: Test2a 	        : STRING   : GSDS	: G.U.S.CORESTATUS                                  :	==	 : LITERAL	: "1100"    : -	        : 	1 	:  Test3a
+EXEC  	: Test3a 	        : STRING   : GSDS	: G.U.S.CORESTATUS                                  :	==	 : LITERAL	: "1101"    : -	        : 	1 	:  2
+END_SCREEN
+
+START_SCREEN:FUNCCF_C2_DRG
+#Core2
+#RunOn	: TestName  		: DataType  : ParamType 	: Param1												: Oper.	: ParamType : Param2		: TmpStore	: OnTrue          : OnFalse
+EXEC    : GetCore           : STRING : EXPRESSION : ExecCallback('CopyTracker', '--tracker=CR --gsds=G.U.S.CORESTATUS')                           : - : - : - : - : Test1a      : 2
+EXEC  	: Test1a 	        : STRING   : GSDS	: G.U.S.CORESTATUS                                  :	==	 : LITERAL	: "1000"    : -	        : 	1 	:  Test2a
+EXEC  	: Test2a 	        : STRING   : GSDS	: G.U.S.CORESTATUS                                  :	==	 : LITERAL	: "1001"    : -	        : 	1 	:  Test3a
+EXEC  	: Test3a 	        : STRING   : GSDS	: G.U.S.CORESTATUS                                  :	==	 : LITERAL	: "1011"    : -	        : 	1 	:  2
+END_SCREEN
+
+START_SCREEN:FUNCCF_C3_DRG
+#Core3
+#RunOn	: TestName  		: DataType  : ParamType 	: Param1												: Oper.	: ParamType : Param2		: TmpStore	: OnTrue          : OnFalse
+EXEC    : GetCore           : STRING : EXPRESSION : ExecCallback('CopyTracker', '--tracker=CR --gsds=G.U.S.CORESTATUS')                           : - : - : - : - : Test1a      : 2
+EXEC  	: Test1a 	        : STRING   : GSDS	: G.U.S.CORESTATUS                                  :	==	 : LITERAL	: "0001"    : -	        : 	1 	:  Test2a
+EXEC  	: Test2a 	        : STRING   : GSDS	: G.U.S.CORESTATUS                                  :	==	 : LITERAL	: "0011"    : -	        : 	1 	:  Test3a
+EXEC  	: Test3a 	        : STRING   : GSDS	: G.U.S.CORESTATUS                                  :	==	 : LITERAL	: "0111"    : -	        : 	1 	:  2
+END_SCREEN

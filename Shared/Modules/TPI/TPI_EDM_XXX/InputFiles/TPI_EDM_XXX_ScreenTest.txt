@@ -1,0 +1,18 @@
+START_SCREEN:SHOPSBINCHECK1
+#RunOn	: TestName	: Data Type	: Param Type : Param1   		         : Operation	: ParamType	: Param2   : TmpStore	: OnTrue	: OnFalse
+EXEC	: TEST2		: INT		: EXPRESSION : GetCurrentHardBin()       : <			: LITERAL	: 7        : -			: 1			: TEST3
+EXEC	: TEST3		: INT		: EXPRESSION : GetCurrentHardBin()       : >			: LITERAL	: 999      : -			: 1			: TEST4
+EXEC	: TEST4		: INT		: EXPRESSION : GetCurrentHardBin()       : ==			: LITERAL	: 10       : -			: TEST5		: TEST6
+EXEC	; TEST5		; STRING	; GLOBAL     ; __shared__::_UserVars.Shop_Short_Flag ; SET			; LITERAL	; Fail     ; -			; 2			; 4    
+EXEC	: TEST6		: INT		: EXPRESSION : GetCurrentHardBin()       : ==			: LITERAL	: 15       : -			: TEST7		: 1    
+EXEC	: TEST7		: INT		: EXPRESSION : GetCurrentSoftBin()       : >			: LITERAL	: 90151589 : -			: 1			: TEST8
+EXEC	; TEST8		; STRING	; GLOBAL     ; __shared__::_UserVars.Shop_Open_Flag  ; SET			; LITERAL	; Fail     ; -			; 3			; 4    
+END_SCREEN
+
+START_SCREEN:SHOPSBINCHECK2
+#RunOn	: TestName	: Data Type	: Param Type	: Param1   					: Operation	: ParamType	: Param2	: TmpStore	: OnTrue	: OnFalse
+EXEC	; TEST1		; STRING	; GLOBAL		; __shared__::_UserVars.Shop_Open_Flag	; ==		; LITERAL	; Fail		; -			; TEST2		; TEST3
+EXEC	; TEST2		; STRING	; GLOBAL		; __shared__::_UserVars.Shop_Open_Flag	; SET		; LITERAL	; Pass		; -			; 1			; TEST3
+EXEC	; TEST3		; STRING	; GLOBAL		; __shared__::_UserVars.Shop_Short_Flag	; ==		; LITERAL	; Fail		; -			; TEST4		; 3    
+EXEC	; TEST4		; STRING	; GLOBAL		; __shared__::_UserVars.Shop_Short_Flag	; SET		; LITERAL	; Pass		; -			; 2			; 3    
+END_SCREEN

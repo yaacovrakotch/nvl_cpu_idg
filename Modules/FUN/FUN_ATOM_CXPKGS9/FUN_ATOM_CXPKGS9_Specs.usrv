@@ -1,0 +1,31 @@
+Version 1.0;
+
+UserVars FUN_ATOM_CXPKGS9_Specs
+#Still using dummy values for the user variables
+{
+	Const String L2_Recovery_Tracking_In = "ACRM3_B,ACRM2_B,ACRM1_B,ACRM0_B,ACRM3,ACRM2,ACRM1,ACRM0";
+	Const String SLC_Recovery_Tracking_In = "SLC0_B,SLC0";
+	Const String L2_Recovery_Tracking_Out = "ACRM3_B,ACRM2_B,ACRM1_B,ACRM0_B,ACRM3,ACRM2,ACRM1,ACRM0";
+	#Const String L2_LOCKSTEP_Pin_Map = "ACRM3,ACRM2,ACRM1,ACRM0";
+	#Const String SLC_DRAGON_Pin_Map = "ACRM3,ACRM2,ACRM1,ACRM0";
+	Const String L2_Pin_Map = "ATOM3,ATOM2,ATOM1,ATOM0";
+    Const Integer Fail_Capture_Count = 100;
+	Const Double StepSize = 0.01;
+	Const String recov_pinmap_l2_lockstep = "FATOM_CX816_L2_Lockstep_Pinmap";
+	Const String recov_pinmap_l2_dragon = "FATOM_CX816_L2_Dragon_Pinmap";
+	Const String recov_pinmap_slc_dragon = "FATOM_CX816_SLC_Dragon_Pinmap";
+	Const String recov_pinmap_l2_lockstep_freq = "FATOM_CX816_L2_Lockstep_Pinmap_Freq";
+	Const String recov_pinmap_l2_dragon_freq = "FATOM_CX816_L2_Dragon_Pinmap_Freq";
+	Const String recov_pinmap_slc_dragon_freq = "FATOM_CX816_SLC_Dragon_Pinmap_Freq";
+	Const String dtsconfig_noctv = "ALL_CDIE_S52C";
+	Array<String> Apex_Multipass = ["1110","1101","1011","0111"];
+	Const String ApexTC_2CDIE_ExportTokens = "";
+	Const String VoltageConverter_NBLRailAtom = " --dlvrpins VCCIA --railconfigurations CDIE_L2_NBLCTRL0 CDIE_L2_NBLCTRL1 CDIE_L2_NBLCTRL2 CDIE_L2_NBLCTRL3 CDIE1_L2_NBLCTRL0 CDIE1_L2_NBLCTRL1 CDIE1_L2_NBLCTRL2 CDIE1_L2_NBLCTRL3 --expressions  ";
+	Const String VoltageConverter_NoNBLRail = " --dlvrpins VCCIA --expressions ";
+	Const String VoltageConverter_NBLRailCCF = " --dlvrpins VCCIA --railconfigurations  CDIE_CCF_NBLCTRL CDIE1_CCF_NBLCTRL   --overrides CCF1:1.1,CCF:1.1  ";
+ 	Const String VoltageConverter_NBLRailF4CCF = " --dlvrpins VCCIA --railconfigurations  CDIE_CCF_NBLCTRL CDIE1_CCF_NBLCTRL   --overrides ATOM31:1.1,ATOM21:1.1,ATOM11:1.1,ATOM01:1.1,ATOM3:1.1,ATOM2:1.1,ATOM1:1.1,ATOM0:1.1,CCF1:1.1,CCF:1.1  ";
+	Const String VoltageConverter_NoNBLRailVmax = " --dlvrpins VCCIA --overrides  ATOM31:1.1,ATOM21:1.1,ATOM11:1.1,ATOM01:1.1,ATOM3:1.1,ATOM2:1.1,ATOM1:1.1,ATOM0:1.1  ";
+
+	# Var use to setup FC config before test
+	String AtomConfigPreinstance = "EvaluateExpression(--expression 'MOV 0,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds)";
+}

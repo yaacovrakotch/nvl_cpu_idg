@@ -1,0 +1,2757 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan TPI_VCCMIMS_XXX;
+
+Import "TPI_VCCMIMS_XXX.usrv";
+
+# Test Counter Definition
+
+Counters
+{
+    n91080000_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_CPU0_EXT_BGREF_TRIM_ANA_0,
+    n91080001_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_CPU0_EXT_BGREF_TRIM_ANA_2,
+    n91080002_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_CPU1_EXT_BGREF_TRIM_ANA_0,
+    n91080003_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_CPU1_EXT_BGREF_TRIM_ANA_2,
+    n91080004_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_GCD_BGR_TRIM_REF_0,
+    n91080005_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_GCD_BGR_TRIM_REF_2,
+    n91080006_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_HUB_EXT_BGREF_TRIM_ANA_0,
+    n91080007_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_HUB_EXT_BGREF_TRIM_ANA_2,
+    n91080008_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_HUB_GCD_EXT_BGREF_TRIM_ANA_0,
+    n91080009_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_HUB_GCD_EXT_BGREF_TRIM_ANA_2,
+    n91080010_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_0,
+    n91080011_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_2,
+    n91080012_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_CPU_0,
+    n91080013_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_CPU_2,
+    n91080014_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTR_0,
+    n91080015_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTR_2,
+    n91080016_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTRA_0,
+    n91080017_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTRA_2,
+    n91080018_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTRB_0,
+    n91080019_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTRB_2,
+    n91080020_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCDFT_PCD_0,
+    n91080021_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCDFT_PCD_2,
+    n91080022_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCGT_0,
+    n91080023_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCGT_2,
+    n91080024_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIA_0,
+    n91080025_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIA_2,
+    n91080026_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_0,
+    n91080027_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_2,
+    n91080028_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_FLTR_0,
+    n91080029_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_FLTR_2,
+    n91080030_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_FLTR_H_0,
+    n91080031_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_FLTR_H_2,
+    n91080032_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_OUT_SVID_0,
+    n91080033_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_OUT_SVID_2,
+    n91080034_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCLPECORE_0,
+    n91080035_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCLPECORE_2,
+    n91080036_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCSA_0,
+    n91080037_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCSA_2,
+    n91080038_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VDD2_0,
+    n91080039_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VDD2_2,
+    n91080040_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VDDQ_0,
+    n91080041_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VDDQ_2,
+    n91080042_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_0,
+    n91080043_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_2,
+    n91080044_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_FLTR_0,
+    n91080045_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_FLTR_2,
+    n91080046_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_FLTR_H_0,
+    n91080047_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_FLTR_H_2,
+    n91080048_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU0_EXT_BGREF_TRIM_ANA_LTTC_0,
+    n91080049_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU0_EXT_BGREF_TRIM_ANA_START_0,
+    n91080050_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU1_EXT_BGREF_TRIM_ANA_LTTC_0,
+    n91080051_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU1_EXT_BGREF_TRIM_ANA_START_0,
+    n91080052_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_GCD_BGR_TRIM_REF_LTTC_0,
+    n91080053_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_GCD_BGR_TRIM_REF_START_0,
+    n91080054_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_HUB_EXT_BGREF_TRIM_ANA_LTTC_0,
+    n91080055_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_HUB_EXT_BGREF_TRIM_ANA_START_0,
+    n91080056_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_CPU_LTTC_0,
+    n91080057_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_CPU_START_0,
+    n91080058_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRA_LTTC_0,
+    n91080059_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRA_START_0,
+    n91080060_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRB_LTTC_0,
+    n91080061_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRB_START_0,
+    n91080062_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTR_LTTC_0,
+    n91080063_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTR_START_0,
+    n91080064_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_LTTC_0,
+    n91080065_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_START_0,
+    n91080066_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCDFT_PCD_LTTC_0,
+    n91080067_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCDFT_PCD_START_0,
+    n91080068_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCGT_LTTC_0,
+    n91080069_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCGT_START_0,
+    n91080070_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIA_LTTC_0,
+    n91080071_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIA_START_0,
+    n91080072_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_H_LTTC_0,
+    n91080073_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_H_START_0,
+    n91080074_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_LTTC_0,
+    n91080075_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_START_0,
+    n91080076_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_LTTC_0,
+    n91080077_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_OUT_SVID_LTTC_0,
+    n91080078_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_OUT_SVID_START_0,
+    n91080079_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_START_0,
+    n91080080_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCLPECORE_LTTC_0,
+    n91080081_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCLPECORE_START_0,
+    n91080082_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCSA_LTTC_0,
+    n91080083_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCSA_START_0,
+    n91080084_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDD2_LTTC_0,
+    n91080085_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDD2_START_0,
+    n91080086_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDDQ_LTTC_0,
+    n91080087_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDDQ_START_0,
+    n91080088_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_H_LTTC_0,
+    n91080089_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_H_START_0,
+    n91080090_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_LTTC_0,
+    n91080091_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_START_0,
+    n91080092_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_LTTC_0,
+    n91080093_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_START_0
+} # End of Test Counter Definition
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIA_START
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VCCIA_START^IPC::VCCIA --tname_suf _VCCIA_START";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_LTTC
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VCCIO_LTTC^VCCIO --tname_suf _VCCIO_LTTC";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_START
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VCCIO_FLTR_START^VCCIO_FLTR --tname_suf _VCCIO_FLTR_START";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCSA_LTTC
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VCCSA_LTTC^IPH::VCCSA --tname_suf _VCCSA_LTTC";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_START
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VNNAON_START^VNNAON --tname_suf _VNNAON_START";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_LTTC
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VNNAON_FLTR_LTTC^VNNAON_FLTR --tname_suf _VNNAON_FLTR_LTTC";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDD2_START
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VDD2_START^IPH::VDD2 --tname_suf _VDD2_START";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCGT_LTTC
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VCCGT_LTTC^IPG::VCCGT --tname_suf _VCCGT_LTTC";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU0_EXT_BGREF_TRIM_ANA_START
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.CPU0_EXT_BGREF_TRIM_ANA_START^IPC::CPU0_EXT_BGREF_TRIM_ANA --tname_suf _CPU0_EXT_BGREF_TRIM_ANA_START";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU1_EXT_BGREF_TRIM_ANA_LTTC
+{
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(1,1);
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.CPU1_EXT_BGREF_TRIM_ANA_LTTC^IPC::CPU1_EXT_BGREF_TRIM_ANA --tname_suf _CPU1_EXT_BGREF_TRIM_ANA_LTTC";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_START
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.V1P8_START^V1P8 --tname_suf _V1P8_START";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_CPU_LTTC
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.V1P8_CPU_LTTC^V1P8_CPU --tname_suf _V1P8_CPU_LTTC";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTR_START
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.V1P8_FLTR_START^V1P8_FLTR --tname_suf _V1P8_FLTR_START";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_OUT_SVID_LTTC
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VCCIO_OUT_SVID_LTTC^VCCIO_OUT_SVID --tname_suf _VCCIO_OUT_SVID_LTTC";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCDFT_PCD_START
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VCCDFT_PCD_START^IPP::VCCDFT_PCD --tname_suf _VCCDFT_PCD_START";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIA_LTTC
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VCCIA_LTTC^IPC::VCCIA --tname_suf _VCCIA_LTTC";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_START
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VCCIO_START^VCCIO --tname_suf _VCCIO_START";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_LTTC
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VCCIO_FLTR_LTTC^VCCIO_FLTR --tname_suf _VCCIO_FLTR_LTTC";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCSA_START
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VCCSA_START^IPH::VCCSA --tname_suf _VCCSA_START";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_LTTC
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VNNAON_LTTC^VNNAON --tname_suf _VNNAON_LTTC";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_START
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VNNAON_FLTR_START^VNNAON_FLTR --tname_suf _VNNAON_FLTR_START";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDD2_LTTC
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VDD2_LTTC^IPH::VDD2 --tname_suf _VDD2_LTTC";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCGT_START
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VCCGT_START^IPG::VCCGT --tname_suf _VCCGT_START";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU0_EXT_BGREF_TRIM_ANA_LTTC
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.CPU0_EXT_BGREF_TRIM_ANA_LTTC^IPC::CPU0_EXT_BGREF_TRIM_ANA --tname_suf _CPU0_EXT_BGREF_TRIM_ANA_LTTC";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU1_EXT_BGREF_TRIM_ANA_START
+{
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(1,1);
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.CPU1_EXT_BGREF_TRIM_ANA_START^IPC::CPU1_EXT_BGREF_TRIM_ANA --tname_suf _CPU1_EXT_BGREF_TRIM_ANA_START";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_LTTC
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.V1P8_LTTC^V1P8 --tname_suf _V1P8_LTTC";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_CPU_START
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.V1P8_CPU_START^V1P8_CPU --tname_suf _V1P8_CPU_START";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTR_LTTC
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.V1P8_FLTR_LTTC^V1P8_FLTR --tname_suf _V1P8_FLTR_LTTC";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_OUT_SVID_START
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VCCIO_OUT_SVID_START^VCCIO_OUT_SVID --tname_suf _VCCIO_OUT_SVID_START";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCDFT_PCD_LTTC
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VCCDFT_PCD_LTTC^IPP::VCCDFT_PCD --tname_suf _VCCDFT_PCD_LTTC";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRA_START
+{
+    BypassPort = TPI_VCCMIMS_XXX_Rules.If_M_PKGs(1,1);
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.V1P8_FLTRA_START^V1P8_FLTRA --tname_suf _V1P8_FLTRA_START";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRB_START
+{
+    BypassPort = TPI_VCCMIMS_XXX_Rules.If_M_PKGs(1,1);
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.V1P8_FLTRB_START^V1P8_FLTRB --tname_suf _V1P8_FLTRB_START";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_GCD_BGR_TRIM_REF_START
+{
+    BypassPort = 1;
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.GCD_BGR_TRIM_REF_START^IPG::GCD_BGR_TRIM_REF --tname_suf _GCD_BGR_TRIM_REF_START";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_HUB_EXT_BGREF_TRIM_ANA_START
+{
+    BypassPort = TPI_VCCMIMS_XXX_Rules.If_M_PKGs(1,1);
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.HUB_EXT_BGREF_TRIM_ANA_START^IPH::HUB_EXT_BGREF_TRIM_ANA --tname_suf _HUB_EXT_BGREF_TRIM_ANA_START";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCLPECORE_START
+{
+    BypassPort = TPI_VCCMIMS_XXX_Rules.If_M_PKGs(1,1);
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VCCLPECORE_START^IPH::VCCLPECORE --tname_suf _VCCLPECORE_START";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDDQ_START
+{
+    BypassPort = TPI_VCCMIMS_XXX_Rules.If_M_PKGs(1,1);
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VDDQ_START^IPH::VDDQ --tname_suf _VDDQ_START";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_H_START
+{
+    BypassPort = TPI_VCCMIMS_XXX_Rules.If_M_PKGs(1,1);
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VCCIO_FLTR_H_START^VCCIO_FLTR_H --tname_suf _VCCIO_FLTR_H_START";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_H_START
+{
+    BypassPort = TPI_VCCMIMS_XXX_Rules.If_M_PKGs(1,1);
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VNNAON_FLTR_H_START^VNNAON_FLTR_H --tname_suf _VNNAON_FLTR_H_START";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRA_LTTC
+{
+    BypassPort = TPI_VCCMIMS_XXX_Rules.If_M_PKGs(1,1);
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.V1P8_FLTRA_LTTC^V1P8_FLTRA --tname_suf _V1P8_FLTRA_LTTC";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRB_LTTC
+{
+    BypassPort = TPI_VCCMIMS_XXX_Rules.If_M_PKGs(1,1);
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.V1P8_FLTRB_LTTC^V1P8_FLTRB --tname_suf _V1P8_FLTRB_LTTC";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_GCD_BGR_TRIM_REF_LTTC
+{
+    BypassPort = TPI_VCCMIMS_XXX_Rules.If_M_PKGs(1,1);
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.GCD_BGR_TRIM_REF_LTTC^IPG::GCD_BGR_TRIM_REF --tname_suf _GCD_BGR_TRIM_REF_LTTC";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_HUB_EXT_BGREF_TRIM_ANA_LTTC
+{
+    BypassPort = TPI_VCCMIMS_XXX_Rules.If_M_PKGs(1,1);
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.HUB_EXT_BGREF_TRIM_ANA_LTTC^IPH::HUB_EXT_BGREF_TRIM_ANA --tname_suf _HUB_EXT_BGREF_TRIM_ANA_LTTC";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCLPECORE_LTTC
+{
+    BypassPort = TPI_VCCMIMS_XXX_Rules.If_M_PKGs(1,1);
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VCCLPECORE_LTTC^IPH::VCCLPECORE --tname_suf _VCCLPECORE_LTTC";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDDQ_LTTC
+{
+    BypassPort = TPI_VCCMIMS_XXX_Rules.If_M_PKGs(1,1);
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VDDQ_LTTC^IPH::VDDQ --tname_suf _VDDQ_LTTC";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_H_LTTC
+{
+    BypassPort = TPI_VCCMIMS_XXX_Rules.If_M_PKGs(1,1);
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VCCIO_FLTR_H_LTTC^VCCIO_FLTR_H --tname_suf _VCCIO_FLTR_H_LTTC";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_H_LTTC
+{
+    BypassPort = TPI_VCCMIMS_XXX_Rules.If_M_PKGs(1,1);
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.U.D.VNNAON_FLTR_H_LTTC^VNNAON_FLTR_H --tname_suf _VNNAON_FLTR_H_LTTC";
+}
+
+CSharpTest ScreenTC CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIA
+{
+    BypassPort = 1;
+    ScreenTestSet = "MIMSHORT_SCREEN_VCCIA";
+    ScreenTestsFile = "./InputFiles/VCC_MIMS_Screentest.txt";
+}
+
+CSharpTest ScreenTC CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO
+{
+    BypassPort = 1;
+    ScreenTestSet = "MIMSHORT_SCREEN_VCCIO";
+    ScreenTestsFile = "./InputFiles/VCC_MIMS_Screentest.txt";
+}
+
+CSharpTest ScreenTC CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_FLTR
+{
+    BypassPort = 1;
+    ScreenTestSet = "MIMSHORT_SCREEN_VCCIO_FLTR";
+    ScreenTestsFile = "./InputFiles/VCC_MIMS_Screentest.txt";
+}
+
+CSharpTest ScreenTC CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCSA
+{
+    BypassPort = 1;
+    ScreenTestSet = "MIMSHORT_SCREEN_VCCSA";
+    ScreenTestsFile = "./InputFiles/VCC_MIMS_Screentest.txt";
+}
+
+CSharpTest ScreenTC CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON
+{
+    BypassPort = 1;
+    ScreenTestSet = "MIMSHORT_SCREEN_VNNAON";
+    ScreenTestsFile = "./InputFiles/VCC_MIMS_Screentest.txt";
+}
+
+CSharpTest ScreenTC CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_FLTR
+{
+    BypassPort = 1;
+    ScreenTestSet = "MIMSHORT_SCREEN_VNNAON_FLTR";
+    ScreenTestsFile = "./InputFiles/VCC_MIMS_Screentest.txt";
+}
+
+CSharpTest ScreenTC CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VDD2
+{
+    BypassPort = 1;
+    ScreenTestSet = "MIMSHORT_SCREEN_VDD2";
+    ScreenTestsFile = "./InputFiles/VCC_MIMS_Screentest.txt";
+}
+
+CSharpTest ScreenTC CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCGT
+{
+    BypassPort = 1;
+    ScreenTestSet = "MIMSHORT_SCREEN_VCCGT";
+    ScreenTestsFile = "./InputFiles/VCC_MIMS_Screentest.txt";
+}
+
+CSharpTest ScreenTC CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_CPU0_EXT_BGREF_TRIM_ANA
+{
+    BypassPort = 1;
+    ScreenTestSet = "MIMSHORT_SCREEN_CPU0_EXT_BGREF_TRIM_ANA";
+    ScreenTestsFile = "./InputFiles/VCC_MIMS_Screentest.txt";
+}
+
+CSharpTest ScreenTC CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_CPU1_EXT_BGREF_TRIM_ANA
+{
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(1,1);
+    ScreenTestSet = "MIMSHORT_SCREEN_CPU1_EXT_BGREF_TRIM_ANA";
+    ScreenTestsFile = "./InputFiles/VCC_MIMS_Screentest.txt";
+}
+
+CSharpTest ScreenTC CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8
+{
+    BypassPort = 1;
+    ScreenTestSet = "MIMSHORT_SCREEN_V1P8";
+    ScreenTestsFile = "./InputFiles/VCC_MIMS_Screentest.txt";
+}
+
+CSharpTest ScreenTC CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_CPU
+{
+    BypassPort = 1;
+    ScreenTestSet = "MIMSHORT_SCREEN_V1P8_CPU";
+    ScreenTestsFile = "./InputFiles/VCC_MIMS_Screentest.txt";
+}
+
+CSharpTest ScreenTC CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTR
+{
+    BypassPort = 1;
+    ScreenTestSet = "MIMSHORT_SCREEN_V1P8_FLTR";
+    ScreenTestsFile = "./InputFiles/VCC_MIMS_Screentest.txt";
+}
+
+CSharpTest ScreenTC CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_OUT_SVID
+{
+    BypassPort = 1;
+    ScreenTestSet = "MIMSHORT_SCREEN_VCCIO_OUT_SVID";
+    ScreenTestsFile = "./InputFiles/VCC_MIMS_Screentest.txt";
+}
+
+CSharpTest ScreenTC CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCDFT_PCD
+{
+    BypassPort = 1;
+    ScreenTestSet = "MIMSHORT_SCREEN_VCCDFT_PCD";
+    ScreenTestsFile = "./InputFiles/VCC_MIMS_Screentest.txt";
+}
+
+CSharpTest ScreenTC CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTRA
+{
+    BypassPort = TPI_VCCMIMS_XXX_Rules.If_M_PKGs(1,1);
+    ScreenTestSet = "MIMSHORT_SCREEN_V1P8_FLTRA";
+    ScreenTestsFile = "./InputFiles/VCC_MIMS_Screentest.txt";
+}
+
+CSharpTest ScreenTC CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTRB
+{
+    BypassPort = TPI_VCCMIMS_XXX_Rules.If_M_PKGs(1,1);
+    ScreenTestSet = "MIMSHORT_SCREEN_V1P8_FLTRB";
+    ScreenTestsFile = "./InputFiles/VCC_MIMS_Screentest.txt";
+}
+
+CSharpTest ScreenTC CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_GCD_BGR_TRIM_REF
+{
+    BypassPort = TPI_VCCMIMS_XXX_Rules.If_M_PKGs(1,1);
+    ScreenTestSet = "MIMSHORT_SCREEN_GCD_BGR_TRIM_REF";
+    ScreenTestsFile = "./InputFiles/VCC_MIMS_Screentest.txt";
+}
+
+CSharpTest ScreenTC CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_HUB_EXT_BGREF_TRIM_ANA
+{
+    BypassPort = TPI_VCCMIMS_XXX_Rules.If_M_PKGs(1,1);
+    ScreenTestSet = "MIMSHORT_SCREEN_HUB_EXT_BGREF_TRIM_ANA";
+    ScreenTestsFile = "./InputFiles/VCC_MIMS_Screentest.txt";
+}
+
+CSharpTest ScreenTC CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCLPECORE
+{
+    BypassPort = TPI_VCCMIMS_XXX_Rules.If_M_PKGs(1,1);
+    ScreenTestSet = "MIMSHORT_SCREEN_VCCLPECORE";
+    ScreenTestsFile = "./InputFiles/VCC_MIMS_Screentest.txt";
+}
+
+CSharpTest ScreenTC CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VDDQ
+{
+    BypassPort = TPI_VCCMIMS_XXX_Rules.If_M_PKGs(1,1);
+    ScreenTestSet = "MIMSHORT_SCREEN_VDDQ";
+    ScreenTestsFile = "./InputFiles/VCC_MIMS_Screentest.txt";
+}
+
+CSharpTest ScreenTC CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_HUB_GCD_EXT_BGREF_TRIM_ANA
+{
+    BypassPort = 1;
+    ScreenTestSet = "MIMSHORT_SCREEN_HUB_GCD_EXT_BGREF_TRIM_ANA";
+    ScreenTestsFile = "./InputFiles/VCC_MIMS_Screentest.txt";
+}
+
+CSharpTest ScreenTC CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_FLTR_H
+{
+    BypassPort = TPI_VCCMIMS_XXX_Rules.If_M_PKGs(1,1);
+    ScreenTestSet = "MIMSHORT_SCREEN_VCCIO_FLTR_H";
+    ScreenTestsFile = "./InputFiles/VCC_MIMS_Screentest.txt";
+}
+
+CSharpTest ScreenTC CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_FLTR_H
+{
+    BypassPort = TPI_VCCMIMS_XXX_Rules.If_M_PKGs(1,1);
+    ScreenTestSet = "MIMSHORT_SCREEN_VNNAON_FLTR_H";
+    ScreenTestsFile = "./InputFiles/VCC_MIMS_Screentest.txt";
+}
+
+Flow PrintToITUFF
+{
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIA_START CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIA_START @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910047_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIA_START_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910047_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIA_START_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080071_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIA_START_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080071_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIA_START_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_LTTC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_LTTC;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_LTTC CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_LTTC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910052_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_LTTC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910052_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_LTTC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080076_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_LTTC_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080076_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_LTTC_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_START;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_START;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_START CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_START @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910051_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_START_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910051_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_START_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080075_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_START_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080075_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_START_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCSA_LTTC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCSA_LTTC;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCSA_LTTC CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCSA_LTTC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910058_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCSA_LTTC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910058_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCSA_LTTC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080082_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCSA_LTTC_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080082_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCSA_LTTC_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_START;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_START;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_START CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_START @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910069_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_START_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910069_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_START_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080093_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_START_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080093_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_START_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_LTTC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_LTTC;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_LTTC CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_LTTC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910066_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_LTTC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910066_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_LTTC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080090_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_LTTC_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080090_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_LTTC_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDD2_START;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDD2_START;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDD2_START CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDD2_START @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910061_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDD2_START_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910061_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDD2_START_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080085_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDD2_START_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080085_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDD2_START_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCGT_LTTC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCGT_LTTC;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCGT_LTTC CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCGT_LTTC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910044_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCGT_LTTC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910044_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCGT_LTTC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080068_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCGT_LTTC_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080068_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCGT_LTTC_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU0_EXT_BGREF_TRIM_ANA_START;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU0_EXT_BGREF_TRIM_ANA_START;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU0_EXT_BGREF_TRIM_ANA_START CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU0_EXT_BGREF_TRIM_ANA_START @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910025_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU0_EXT_BGREF_TRIM_ANA_START_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910025_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU0_EXT_BGREF_TRIM_ANA_START_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080049_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU0_EXT_BGREF_TRIM_ANA_START_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080049_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU0_EXT_BGREF_TRIM_ANA_START_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU1_EXT_BGREF_TRIM_ANA_LTTC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU1_EXT_BGREF_TRIM_ANA_LTTC;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU1_EXT_BGREF_TRIM_ANA_LTTC CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU1_EXT_BGREF_TRIM_ANA_LTTC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910026_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU1_EXT_BGREF_TRIM_ANA_LTTC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910026_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU1_EXT_BGREF_TRIM_ANA_LTTC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080050_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU1_EXT_BGREF_TRIM_ANA_LTTC_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080050_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU1_EXT_BGREF_TRIM_ANA_LTTC_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_START;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_START;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_START CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_START @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910041_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_START_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910041_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_START_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080065_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_START_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080065_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_START_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_CPU_LTTC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_CPU_LTTC;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_CPU_LTTC CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_CPU_LTTC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910032_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_CPU_LTTC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910032_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_CPU_LTTC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080056_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_CPU_LTTC_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080056_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_CPU_LTTC_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTR_START;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTR_START;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTR_START CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTR_START @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910039_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTR_START_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910039_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTR_START_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080063_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTR_START_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080063_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTR_START_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_OUT_SVID_LTTC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_OUT_SVID_LTTC;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_OUT_SVID_LTTC CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_OUT_SVID_LTTC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910053_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_OUT_SVID_LTTC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910053_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_OUT_SVID_LTTC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080077_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_OUT_SVID_LTTC_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080077_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_OUT_SVID_LTTC_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCDFT_PCD_START;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCDFT_PCD_START;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCDFT_PCD_START CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCDFT_PCD_START @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910043_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCDFT_PCD_START_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910043_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCDFT_PCD_START_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080067_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCDFT_PCD_START_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080067_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCDFT_PCD_START_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIA_LTTC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIA_LTTC;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIA_LTTC CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIA_LTTC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910046_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIA_LTTC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910046_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIA_LTTC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080070_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIA_LTTC_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080070_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIA_LTTC_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_START;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_START;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_START CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_START @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910055_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_START_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910055_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_START_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080079_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_START_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080079_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_START_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_LTTC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_LTTC;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_LTTC CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_LTTC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910050_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_LTTC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910050_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_LTTC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080074_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_LTTC_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080074_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_LTTC_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCSA_START;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCSA_START;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCSA_START CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCSA_START @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910059_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCSA_START_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910059_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCSA_START_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080083_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCSA_START_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080083_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCSA_START_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_LTTC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_LTTC;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_LTTC CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_LTTC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910068_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_LTTC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910068_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_LTTC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080092_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_LTTC_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080092_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_LTTC_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_START;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_START;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_START CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_START @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910067_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_START_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910067_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_START_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080091_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_START_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080091_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_START_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDD2_LTTC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDD2_LTTC;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDD2_LTTC CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDD2_LTTC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910060_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDD2_LTTC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910060_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDD2_LTTC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080084_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDD2_LTTC_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080084_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDD2_LTTC_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCGT_START;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCGT_START;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCGT_START CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCGT_START @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910045_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCGT_START_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910045_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCGT_START_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080069_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCGT_START_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080069_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCGT_START_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU0_EXT_BGREF_TRIM_ANA_LTTC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU0_EXT_BGREF_TRIM_ANA_LTTC;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU0_EXT_BGREF_TRIM_ANA_LTTC CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU0_EXT_BGREF_TRIM_ANA_LTTC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910024_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU0_EXT_BGREF_TRIM_ANA_LTTC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910024_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU0_EXT_BGREF_TRIM_ANA_LTTC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080048_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU0_EXT_BGREF_TRIM_ANA_LTTC_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080048_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU0_EXT_BGREF_TRIM_ANA_LTTC_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU1_EXT_BGREF_TRIM_ANA_START;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU1_EXT_BGREF_TRIM_ANA_START;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU1_EXT_BGREF_TRIM_ANA_START CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU1_EXT_BGREF_TRIM_ANA_START @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910027_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU1_EXT_BGREF_TRIM_ANA_START_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910027_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU1_EXT_BGREF_TRIM_ANA_START_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080051_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU1_EXT_BGREF_TRIM_ANA_START_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080051_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_CPU1_EXT_BGREF_TRIM_ANA_START_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_LTTC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_LTTC;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_LTTC CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_LTTC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910040_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_LTTC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910040_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_LTTC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080064_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_LTTC_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080064_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_LTTC_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_CPU_START;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_CPU_START;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_CPU_START CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_CPU_START @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910033_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_CPU_START_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910033_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_CPU_START_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080057_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_CPU_START_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080057_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_CPU_START_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTR_LTTC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTR_LTTC;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTR_LTTC CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTR_LTTC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910038_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTR_LTTC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910038_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTR_LTTC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080062_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTR_LTTC_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080062_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTR_LTTC_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_OUT_SVID_START;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_OUT_SVID_START;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_OUT_SVID_START CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_OUT_SVID_START @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910054_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_OUT_SVID_START_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910054_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_OUT_SVID_START_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080078_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_OUT_SVID_START_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080078_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_OUT_SVID_START_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCDFT_PCD_LTTC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCDFT_PCD_LTTC;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCDFT_PCD_LTTC CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCDFT_PCD_LTTC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910042_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCDFT_PCD_LTTC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910042_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCDFT_PCD_LTTC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080066_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCDFT_PCD_LTTC_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080066_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCDFT_PCD_LTTC_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRA_START;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRA_START;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRA_START CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRA_START @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910035_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRA_START_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910035_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRA_START_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080059_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRA_START_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080059_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRA_START_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRB_START;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRB_START;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRB_START CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRB_START @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910037_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRB_START_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910037_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRB_START_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080061_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRB_START_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080061_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRB_START_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_GCD_BGR_TRIM_REF_START;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_GCD_BGR_TRIM_REF_START;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_GCD_BGR_TRIM_REF_START CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_GCD_BGR_TRIM_REF_START @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910029_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_GCD_BGR_TRIM_REF_START_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910029_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_GCD_BGR_TRIM_REF_START_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080053_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_GCD_BGR_TRIM_REF_START_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080053_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_GCD_BGR_TRIM_REF_START_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_HUB_EXT_BGREF_TRIM_ANA_START;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_HUB_EXT_BGREF_TRIM_ANA_START;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_HUB_EXT_BGREF_TRIM_ANA_START CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_HUB_EXT_BGREF_TRIM_ANA_START @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910031_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_HUB_EXT_BGREF_TRIM_ANA_START_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910031_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_HUB_EXT_BGREF_TRIM_ANA_START_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080055_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_HUB_EXT_BGREF_TRIM_ANA_START_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080055_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_HUB_EXT_BGREF_TRIM_ANA_START_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCLPECORE_START;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCLPECORE_START;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCLPECORE_START CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCLPECORE_START @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910057_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCLPECORE_START_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910057_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCLPECORE_START_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080081_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCLPECORE_START_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080081_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCLPECORE_START_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDDQ_START;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDDQ_START;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDDQ_START CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDDQ_START @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910063_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDDQ_START_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910063_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDDQ_START_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080087_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDDQ_START_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080087_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDDQ_START_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_H_START;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_H_START;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_H_START CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_H_START @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910049_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_H_START_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910049_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_H_START_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080073_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_H_START_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080073_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_H_START_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_H_START;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_H_START;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_H_START CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_H_START @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910065_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_H_START_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910065_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_H_START_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080089_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_H_START_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080089_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_H_START_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRA_LTTC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRA_LTTC;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRA_LTTC CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRA_LTTC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910034_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRA_LTTC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910034_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRA_LTTC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080058_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRA_LTTC_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080058_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRA_LTTC_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRB_LTTC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRB_LTTC;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRB_LTTC CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRB_LTTC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910036_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRB_LTTC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910036_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRB_LTTC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080060_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRB_LTTC_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080060_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_V1P8_FLTRB_LTTC_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_GCD_BGR_TRIM_REF_LTTC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_GCD_BGR_TRIM_REF_LTTC;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_GCD_BGR_TRIM_REF_LTTC CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_GCD_BGR_TRIM_REF_LTTC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910028_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_GCD_BGR_TRIM_REF_LTTC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910028_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_GCD_BGR_TRIM_REF_LTTC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080052_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_GCD_BGR_TRIM_REF_LTTC_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080052_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_GCD_BGR_TRIM_REF_LTTC_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_HUB_EXT_BGREF_TRIM_ANA_LTTC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_HUB_EXT_BGREF_TRIM_ANA_LTTC;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_HUB_EXT_BGREF_TRIM_ANA_LTTC CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_HUB_EXT_BGREF_TRIM_ANA_LTTC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910030_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_HUB_EXT_BGREF_TRIM_ANA_LTTC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910030_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_HUB_EXT_BGREF_TRIM_ANA_LTTC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080054_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_HUB_EXT_BGREF_TRIM_ANA_LTTC_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080054_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_HUB_EXT_BGREF_TRIM_ANA_LTTC_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCLPECORE_LTTC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCLPECORE_LTTC;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCLPECORE_LTTC CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCLPECORE_LTTC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910056_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCLPECORE_LTTC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910056_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCLPECORE_LTTC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080080_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCLPECORE_LTTC_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080080_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCLPECORE_LTTC_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDDQ_LTTC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDDQ_LTTC;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDDQ_LTTC CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDDQ_LTTC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910062_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDDQ_LTTC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910062_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDDQ_LTTC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080086_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDDQ_LTTC_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080086_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VDDQ_LTTC_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_H_LTTC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_H_LTTC;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_H_LTTC CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_H_LTTC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910048_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_H_LTTC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910048_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_H_LTTC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080072_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_H_LTTC_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080072_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VCCIO_FLTR_H_LTTC_0;
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_H_LTTC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_H_LTTC;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_H_LTTC CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_H_LTTC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910064_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_H_LTTC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910064_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_H_LTTC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b91080088_fail_TPI_VCCMIMS_XXX_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_H_LTTC_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080088_fail_CTRL_X_RUNCALLBACK_K_LTTCCOMMON_X_X_X_X_PRINTTOITUFF_VNNAON_FLTR_H_LTTC_0;
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow TPI_VCCMIMS_XXX_LTTCCOMMON
+{
+    FlowItem PrintToITUFF PrintToITUFF @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIA;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIA;
+        }
+    }
+    
+    FlowItem CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIA CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIA
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910012_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIA_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910012_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIA_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b91080024_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIA_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080024_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIA_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b91080025_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIA_2;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080025_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIA_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910013_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910013_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b91080026_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080026_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_FLTR;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b91080027_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_2;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080027_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_FLTR CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_FLTR
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910014_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_FLTR_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910014_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_FLTR_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b91080028_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_FLTR_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080028_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_FLTR_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCSA;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b91080029_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_FLTR_2;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080029_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_FLTR_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCSA CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCSA
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910018_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCSA_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910018_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCSA_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b91080036_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCSA_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080036_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCSA_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b91080037_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCSA_2;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080037_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCSA_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910021_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910021_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b91080042_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080042_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_FLTR;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b91080043_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_2;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080043_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_FLTR CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_FLTR
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910022_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_FLTR_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910022_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_FLTR_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b91080044_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_FLTR_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080044_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_FLTR_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VDD2;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b91080045_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_FLTR_2;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080045_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_FLTR_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VDD2 CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VDD2
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910019_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VDD2_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910019_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VDD2_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b91080038_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VDD2_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080038_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VDD2_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCGT;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b91080039_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VDD2_2;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080039_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VDD2_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCGT CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCGT
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910011_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCGT_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910011_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCGT_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b91080022_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCGT_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080022_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCGT_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_CPU0_EXT_BGREF_TRIM_ANA;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b91080023_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCGT_2;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080023_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCGT_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_CPU0_EXT_BGREF_TRIM_ANA CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_CPU0_EXT_BGREF_TRIM_ANA
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910000_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_CPU0_EXT_BGREF_TRIM_ANA_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910000_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_CPU0_EXT_BGREF_TRIM_ANA_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b91080000_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_CPU0_EXT_BGREF_TRIM_ANA_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080000_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_CPU0_EXT_BGREF_TRIM_ANA_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_CPU1_EXT_BGREF_TRIM_ANA;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b91080001_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_CPU0_EXT_BGREF_TRIM_ANA_2;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080001_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_CPU0_EXT_BGREF_TRIM_ANA_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_CPU1_EXT_BGREF_TRIM_ANA CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_CPU1_EXT_BGREF_TRIM_ANA
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910001_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_CPU1_EXT_BGREF_TRIM_ANA_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910001_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_CPU1_EXT_BGREF_TRIM_ANA_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b91080002_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_CPU1_EXT_BGREF_TRIM_ANA_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080002_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_CPU1_EXT_BGREF_TRIM_ANA_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b91080003_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_CPU1_EXT_BGREF_TRIM_ANA_2;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080003_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_CPU1_EXT_BGREF_TRIM_ANA_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8 CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910005_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910005_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b91080010_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080010_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_CPU;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b91080011_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_2;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080011_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_CPU CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_CPU
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910006_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_CPU_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910006_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_CPU_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b91080012_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_CPU_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080012_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_CPU_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTR;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b91080013_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_CPU_2;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080013_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_CPU_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTR CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTR
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910007_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTR_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910007_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTR_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b91080014_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTR_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080014_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTR_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_OUT_SVID;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b91080015_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTR_2;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080015_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTR_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_OUT_SVID CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_OUT_SVID
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910016_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_OUT_SVID_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910016_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_OUT_SVID_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b91080032_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_OUT_SVID_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080032_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_OUT_SVID_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCDFT_PCD;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b91080033_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_OUT_SVID_2;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080033_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_OUT_SVID_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCDFT_PCD CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCDFT_PCD
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910010_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCDFT_PCD_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910010_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCDFT_PCD_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b91080020_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCDFT_PCD_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080020_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCDFT_PCD_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTRA;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b91080021_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCDFT_PCD_2;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080021_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCDFT_PCD_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTRA CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTRA
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910008_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTRA_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910008_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTRA_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b91080016_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTRA_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080016_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTRA_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTRB;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b91080017_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTRA_2;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080017_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTRA_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTRB CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTRB
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910009_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTRB_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910009_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTRB_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b91080018_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTRB_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080018_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTRB_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_GCD_BGR_TRIM_REF;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b91080019_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTRB_2;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080019_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_V1P8_FLTRB_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_GCD_BGR_TRIM_REF CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_GCD_BGR_TRIM_REF
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910002_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_GCD_BGR_TRIM_REF_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910002_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_GCD_BGR_TRIM_REF_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b91080004_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_GCD_BGR_TRIM_REF_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080004_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_GCD_BGR_TRIM_REF_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_HUB_EXT_BGREF_TRIM_ANA;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b91080005_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_GCD_BGR_TRIM_REF_2;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080005_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_GCD_BGR_TRIM_REF_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_HUB_EXT_BGREF_TRIM_ANA CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_HUB_EXT_BGREF_TRIM_ANA
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910003_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_HUB_EXT_BGREF_TRIM_ANA_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910003_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_HUB_EXT_BGREF_TRIM_ANA_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b91080006_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_HUB_EXT_BGREF_TRIM_ANA_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080006_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_HUB_EXT_BGREF_TRIM_ANA_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCLPECORE;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b91080007_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_HUB_EXT_BGREF_TRIM_ANA_2;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080007_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_HUB_EXT_BGREF_TRIM_ANA_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCLPECORE CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCLPECORE
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910017_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCLPECORE_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910017_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCLPECORE_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b91080034_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCLPECORE_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080034_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCLPECORE_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VDDQ;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b91080035_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCLPECORE_2;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080035_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCLPECORE_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VDDQ CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VDDQ
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910020_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VDDQ_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910020_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VDDQ_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b91080040_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VDDQ_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080040_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VDDQ_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_HUB_GCD_EXT_BGREF_TRIM_ANA;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b91080041_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VDDQ_2;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080041_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VDDQ_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_HUB_GCD_EXT_BGREF_TRIM_ANA CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_HUB_GCD_EXT_BGREF_TRIM_ANA
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910004_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_HUB_GCD_EXT_BGREF_TRIM_ANA_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910004_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_HUB_GCD_EXT_BGREF_TRIM_ANA_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b91080008_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_HUB_GCD_EXT_BGREF_TRIM_ANA_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080008_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_HUB_GCD_EXT_BGREF_TRIM_ANA_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_FLTR_H;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b91080009_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_HUB_GCD_EXT_BGREF_TRIM_ANA_2;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080009_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_HUB_GCD_EXT_BGREF_TRIM_ANA_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_FLTR_H CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_FLTR_H
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910015_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_FLTR_H_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910015_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_FLTR_H_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b91080030_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_FLTR_H_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080030_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_FLTR_H_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_FLTR_H;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b91080031_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_FLTR_H_2;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080031_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VCCIO_FLTR_H_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_FLTR_H CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_FLTR_H
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99910023_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_FLTR_H_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98910023_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_FLTR_H_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b91080046_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_FLTR_H_0;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080046_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_FLTR_H_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b91080047_fail_TPI_VCCMIMS_XXX_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_FLTR_H_2;
+            IncrementCounters TPI_VCCMIMS_XXX::n91080047_fail_CONT_X_SCREEN_K_LTTCCOMMON_X_X_X_X_MIMS_VNNAON_FLTR_H_2;
+            Return 0;
+        }
+    }
+    
+}

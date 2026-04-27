@@ -1,0 +1,20 @@
+Version 1.0;
+
+SelectorRuleCollection  PTH_POWER_CXPKGS9_Rules
+{
+	SelectorRule PTHSICCFlowControl (Outcome1,Outcome2,Outcome3)
+	{
+		Outcome1 => contains(__shared__::LocationSets.CHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") ;
+		Outcome2 => contains(__shared__::LocationSets.RCHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") ;
+		Outcome3;
+	}
+}
+UserVars PTH_POWER_CXPKGS9
+{
+	Double tdau_cpu_sicc_1 = -99;
+	Double tdau_cpu_sicc_2 = -99;
+	Double tdau_cpu_sicc_3 = -99;	
+	Double tdau_cpu_sicc_4 = -99;	
+	Double tdau_cpu_sicc_5 = -99;	
+	Double tdau_cpu_sicc_6 = -99;	
+}

@@ -1,0 +1,253 @@
+START_SCREEN:FUSE_SHORT_TP_NAME
+### To get trim down short TP name for fusing usage.
+### Translate letters to corresponding alphabetical order.
+### Port 0 screen test function fail.
+### Port 2 letters covenrt to alphabetical order fail.
+### Port 3 No letters in test program name.
+
+#Run ; Test           ; Data    ; Param Type  ; Param1       ; Operation ; Param       ; Param2                 ;TmpStore   ;OnTrue	         ; OnFalse			
+EXEC : SetPipeIndex   : STRING  : GSDS        : U.S.PIPEINDX : SET       : LITERAL     : "|"                    :-          : GetProName     : 2
+EXEC : GetProName     : STRING  : GSDS        : U.S.PROGNAM  : SET       : GLOBAL      : RunTimeLibraryVars.iCGL_TpAltName  :-          : GetLetr        : 2  
+EXEC : GetLetr        : STRING  : GSDS        : U.S.LETTER   : SET       : EXPRESSION  : Substring([G.U.S.PROGNAM],12,1) :-          : ChkLetrA       : 2
+
+### Letter alphabetical order lookpup table.
+EXEC : ChkLetrA       : STRING  : LITERAL     :"A"           : ==	     : EXPRESSION  : [G.U.S.LETTER]		    :-          :SetNumVaA       : ChkLetrB
+EXEC : SetNumVaA      : STRING  : GSDS        : U.S.NUMBER   : SET       : EXPRESSION  : "1"                    :-	        :GetNumbr  : 2
+EXEC : ChkLetrB       : STRING  : LITERAL     : "B"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaB       : ChkLetrC
+EXEC : SetNumVaB      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "2"                    :-          :GetNumbr  : 2
+EXEC : ChkLetrC       : STRING  : LITERAL     : "C"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaC       : ChkLetrD
+EXEC : SetNumVaC      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "3"                    :-          :GetNumbr  : 2 
+EXEC : ChkLetrD       : STRING  : LITERAL     : "D"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaD       : ChkLetrE
+EXEC : SetNumVaD      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "4"                    :-          :GetNumbr  : 2 
+EXEC : ChkLetrE       : STRING  : LITERAL     : "E"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaE       : ChkLetrF
+EXEC : SetNumVaE      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "5"                    :-          :GetNumbr  : 2 
+EXEC : ChkLetrF       : STRING  : LITERAL     : "F"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaF       : ChkLetrG
+EXEC : SetNumVaF      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "6"                    :-          :GetNumbr  : 2 
+EXEC : ChkLetrG       : STRING  : LITERAL     : "G"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaG       : ChkLetrH
+EXEC : SetNumVaG      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "7"                    :-          :GetNumbr  : 2 
+EXEC : ChkLetrH       : STRING  : LITERAL     : "H"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaH       : ChkLetrI
+EXEC : SetNumVaH      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "8"                    :-          :GetNumbr  : 2 
+EXEC : ChkLetrI       : STRING  : LITERAL     : "I"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaI       : ChkLetrJ
+EXEC : SetNumVaI      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "9"                    :-          :GetNumbr  : 2 
+EXEC : ChkLetrJ       : STRING  : LITERAL     : "J"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaJ       : ChkLetrK
+EXEC : SetNumVaJ      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "10"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrK       : STRING  : LITERAL     : "K"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaK       : ChkLetrL
+EXEC : SetNumVaK      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "11"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrL       : STRING  : LITERAL     : "L"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaL       : ChkLetrM
+EXEC : SetNumVaL      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "12"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrM       : STRING  : LITERAL     : "M"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaM       : ChkLetrN
+EXEC : SetNumVaM      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "13"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrN       : STRING  : LITERAL     : "N"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaN       : ChkLetrO
+EXEC : SetNumVaN      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "14"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrO       : STRING  : LITERAL     : "O"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaO       : ChkLetrP
+EXEC : SetNumVaO      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "15"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrP       : STRING  : LITERAL     : "P"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaP       : ChkLetrQ
+EXEC : SetNumVaP      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "16"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrQ       : STRING  : LITERAL     : "Q"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaQ       : ChkLetrR
+EXEC : SetNumVaQ      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "17"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrR       : STRING  : LITERAL     : "R"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaR       : ChkLetrS
+EXEC : SetNumVaR      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "18"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrS       : STRING  : LITERAL     : "S"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaS       : ChkLetrT
+EXEC : SetNumVaS      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "19"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrT       : STRING  : LITERAL     : "T"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaT       : ChkLetrU
+EXEC : SetNumVaT      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "20"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrU       : STRING  : LITERAL     : "U"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaU       : ChkLetrV
+EXEC : SetNumVaU      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "21"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrV       : STRING  : LITERAL     : "V"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaV       : ChkLetrW
+EXEC : SetNumVaV      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "22"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrW       : STRING  : LITERAL     : "W"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaW       : ChkLetrX
+EXEC : SetNumVaW      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "23"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrX       : STRING  : LITERAL     : "X"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaX       : ChkLetrY
+EXEC : SetNumVaX      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "24"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrY       : STRING  : LITERAL     : "Y"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaY       : ChkLetrZ
+EXEC : SetNumVaY      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "25"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrZ       : STRING  : LITERAL     : "Z"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaZ       : 3
+EXEC : SetNumVaZ      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "26"                   :-          :GetNumbr  : 2 
+
+### Get number 0 or 1 for engineering program release alphabetical build
+EXEC : GetNumbr       : STRING  : GSDS        : U.S.LETTER   : SET       : EXPRESSION  : Substring([G.U.S.PROGNAM],14,1) :-          : SetShrtProName2    : 2
+
+### NumberLookUpTable
+#EXEC : ChkNumbrA      : STRING  : LITERAL     :"A"           : ==	     : EXPRESSION  : [G.U.S.LETTER]		    :-          :SetLetVaA       : ChkNumbrB
+#EXEC : SetLetVaA      : STRING  : GSDS        : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-	        :SetShrtProName  : 2
+#EXEC : ChkNumbrB      : STRING  : LITERAL    : "B"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaB       : ChkNumbrC
+#EXEC : SetLetVaB      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2
+#EXEC : ChkNumbrC      : STRING  : LITERAL    : "C"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaC       : ChkNumbrD
+#EXEC : SetLetVaC      : STRING  : GSDS	      : U.S.NUMBER2  : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+#EXEC : ChkNumbrD      : STRING  : LITERAL    : "D"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaD       : ChkNumbrE
+#EXEC : SetLetVaD      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+#EXEC : ChkNumbrE      : STRING  : LITERAL    : "E"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaE       : ChkNumbrF
+#EXEC : SetLetVaE      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+#EXEC : ChkNumbrF      : STRING  : LITERAL    : "F"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaF       : ChkNumbrG
+#EXEC : SetLetVaF      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+#EXEC : ChkNumbrG      : STRING  : LITERAL    : "G"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaG       : ChkNumbrH
+#EXEC : SetLetVaG      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+#EXEC : ChkNumbrH      : STRING  : LITERAL    : "H"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaH       : ChkNumbrI
+#EXEC : SetLetVaH      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+#EXEC : ChkNumbrI      : STRING  : LITERAL    : "I"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaI       : ChkNumbrJ
+#EXEC : SetLetVaI      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+#EXEC : ChkNumbrJ      : STRING  : LITERAL    : "J"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaJ       : ChkNumbrK
+#EXEC : SetLetVaJ      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+#EXEC : ChkNumbrK      : STRING  : LITERAL    : "K"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaK       : ChkNumbrL
+#EXEC : SetLetVaK      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+#EXEC : ChkNumbrL      : STRING  : LITERAL    : "L"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaL       : ChkNumbrM
+#EXEC : SetLetVaL      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+#EXEC : ChkNumbrM      : STRING  : LITERAL    : "M"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaM       : ChkNumbrN
+#EXEC : SetLetVaM      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+#EXEC : ChkNumbrN      : STRING  : LITERAL    : "N"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaN       : ChkNumbrO
+#EXEC : SetLetVaN      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+#EXEC : ChkNumbrO      : STRING  : LITERAL    : "O"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaO       : ChkNumbrP
+#EXEC : SetLetVaO      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+#EXEC : ChkNumbrP      : STRING  : LITERAL    : "P"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaP       : ChkNumbrQ
+#EXEC : SetLetVaP      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+#EXEC : ChkNumbrQ      : STRING  : LITERAL    : "Q"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaQ       : ChkNumbrR
+#EXEC : SetLetVaQ      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+#EXEC : ChkNumbrR      : STRING  : LITERAL    : "R"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaR       : ChkNumbrS
+#EXEC : SetLetVaR      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+#EXEC : ChkNumbrS      : STRING  : LITERAL    : "S"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaS       : ChkNumbrT
+#EXEC : SetLetVaS      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+#EXEC : ChkNumbrT      : STRING  : LITERAL    : "T"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaT       : ChkNumbrU
+#EXEC : SetLetVaT      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+#EXEC : ChkNumbrU      : STRING  : LITERAL    : "U"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaU       : ChkNumbrV
+#EXEC : SetLetVaU      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+#EXEC : ChkNumbrV      : STRING  : LITERAL    : "V"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaV       : ChkNumbrW
+#EXEC : SetLetVaV      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+#EXEC : ChkNumbrW      : STRING  : LITERAL    : "W"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaW       : ChkNumbrX
+#EXEC : SetLetVaW      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+#EXEC : ChkNumbrX      : STRING  : LITERAL    : "X"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaX       : ChkNumbrY
+#EXEC : SetLetVaX      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+#EXEC : ChkNumbrY      : STRING  : LITERAL    : "Y"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaY       : ChkNumbrZ
+#EXEC : SetLetVaY      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+#EXEC : ChkNumbrZ      : STRING  : LITERAL    : "Z"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaZ       : SetShrtProName2
+#EXEC : SetLetVaZ      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+###	Set Final Short test program Name for Fuse.
+EXEC : SetShrtProName  : STRING  : DFF      : PKG.CURRENT.CLASSTPN  : SET     : EXPRESSION  : Substring([G.U.S.PROGNAM],10,2) + [G.U.S.PIPEINDX] + [G.U.S.NUMBER] + [G.U.S.PIPEINDX] + Substring([G.U.S.PROGNAM],13,1)  :-        : 1        : SetShrtProName2
+EXEC : SetShrtProName2 : STRING  : DFF      : PKG.CURRENT.CLASSTPN  : SET     : EXPRESSION  : Substring([G.U.S.PROGNAM],10,2) + [G.U.S.PIPEINDX] + [G.U.S.NUMBER] + [G.U.S.PIPEINDX] + Substring([G.U.S.PROGNAM],13,1)  :-        : 1        : 2
+END_SCREEN
+
+START_SCREEN:FUSE_SHORT_TP_NAME_RC
+### To get trim down short TP name for fusing usage.
+### Translate letters to corresponding alphabetical order.
+### Port 0 screen test function fail.
+### Port 2 letters covenrt to alphabetical order fail.
+### Port 3 No letters in test program name.
+
+#Run : Test           : Data    : Param Type  : Param1       : Operation : Param       : Param2                 :TmpStore   :OnTrue	         : OnFalse			
+EXEC : SetPipeIndex   : STRING  : GSDS        : U.S.PIPEINDX : SET       : LITERAL     : "|"                    :-          : GetProName     : 2
+EXEC : GetProName     : STRING  : GSDS        : U.S.PROGNAM  : SET       : GLOBAL      : RunTimeLibraryVars.iCGL_TpAltName  :-          : GetLetr        : 2  
+EXEC : GetLetr        : STRING  : GSDS        : U.S.LETTER   : SET       : EXPRESSION  : Substring([G.U.S.PROGNAM],12,1) :-          : ChkLetrA       : 2
+
+### Letter alphabetical order lookpup table.
+EXEC : ChkLetrA       : STRING  : LITERAL     :"A"           : ==	     : EXPRESSION  : [G.U.S.LETTER]		    :-          :SetNumVaA       : ChkLetrB
+EXEC : SetNumVaA      : STRING  : GSDS        : U.S.NUMBER   : SET       : EXPRESSION  : "1"                    :-	        :GetNumbr  : 2
+EXEC : ChkLetrB       : STRING  : LITERAL     : "B"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaB       : ChkLetrC
+EXEC : SetNumVaB      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "2"                    :-          :GetNumbr  : 2
+EXEC : ChkLetrC       : STRING  : LITERAL     : "C"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaC       : ChkLetrD
+EXEC : SetNumVaC      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "3"                    :-          :GetNumbr  : 2 
+EXEC : ChkLetrD       : STRING  : LITERAL     : "D"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaD       : ChkLetrE
+EXEC : SetNumVaD      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "4"                    :-          :GetNumbr  : 2 
+EXEC : ChkLetrE       : STRING  : LITERAL     : "E"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaE       : ChkLetrF
+EXEC : SetNumVaE      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "5"                    :-          :GetNumbr  : 2 
+EXEC : ChkLetrF       : STRING  : LITERAL     : "F"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaF       : ChkLetrG
+EXEC : SetNumVaF      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "6"                    :-          :GetNumbr  : 2 
+EXEC : ChkLetrG       : STRING  : LITERAL     : "G"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaG       : ChkLetrH
+EXEC : SetNumVaG      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "7"                    :-          :GetNumbr  : 2 
+EXEC : ChkLetrH       : STRING  : LITERAL     : "H"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaH       : ChkLetrI
+EXEC : SetNumVaH      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "8"                    :-          :GetNumbr  : 2 
+EXEC : ChkLetrI       : STRING  : LITERAL     : "I"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaI       : ChkLetrJ
+EXEC : SetNumVaI      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "9"                    :-          :GetNumbr  : 2 
+EXEC : ChkLetrJ       : STRING  : LITERAL     : "J"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaJ       : ChkLetrK
+EXEC : SetNumVaJ      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "10"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrK       : STRING  : LITERAL     : "K"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaK       : ChkLetrL
+EXEC : SetNumVaK      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "11"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrL       : STRING  : LITERAL     : "L"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaL       : ChkLetrM
+EXEC : SetNumVaL      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "12"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrM       : STRING  : LITERAL     : "M"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaM       : ChkLetrN
+EXEC : SetNumVaM      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "13"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrN       : STRING  : LITERAL     : "N"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaN       : ChkLetrO
+EXEC : SetNumVaN      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "14"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrO       : STRING  : LITERAL     : "O"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaO       : ChkLetrP
+EXEC : SetNumVaO      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "15"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrP       : STRING  : LITERAL     : "P"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaP       : ChkLetrQ
+EXEC : SetNumVaP      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "16"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrQ       : STRING  : LITERAL     : "Q"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaQ       : ChkLetrR
+EXEC : SetNumVaQ      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "17"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrR       : STRING  : LITERAL     : "R"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaR       : ChkLetrS
+EXEC : SetNumVaR      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "18"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrS       : STRING  : LITERAL     : "S"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaS       : ChkLetrT
+EXEC : SetNumVaS      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "19"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrT       : STRING  : LITERAL     : "T"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaT       : ChkLetrU
+EXEC : SetNumVaT      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "20"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrU       : STRING  : LITERAL     : "U"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaU       : ChkLetrV
+EXEC : SetNumVaU      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "21"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrV       : STRING  : LITERAL     : "V"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaV       : ChkLetrW
+EXEC : SetNumVaV      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "22"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrW       : STRING  : LITERAL     : "W"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaW       : ChkLetrX
+EXEC : SetNumVaW      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "23"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrX       : STRING  : LITERAL     : "X"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaX       : ChkLetrY
+EXEC : SetNumVaX      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "24"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrY       : STRING  : LITERAL     : "Y"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaY       : ChkLetrZ
+EXEC : SetNumVaY      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "25"                   :-          :GetNumbr  : 2 
+EXEC : ChkLetrZ       : STRING  : LITERAL     : "Z"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetNumVaZ       : 3
+EXEC : SetNumVaZ      : STRING  : GSDS	      : U.S.NUMBER   : SET       : EXPRESSION  : "26"                   :-          :GetNumbr  : 2 
+
+### Get number 0 or 1 for engineering program release alphabetical build
+EXEC : GetNumbr       : STRING  : GSDS        : U.S.LETTER   : SET       : EXPRESSION  : Substring([G.U.S.PROGNAM],14,1) :-          : ChkNumbrA    : 2
+
+### NumberLookUpTable
+EXEC : ChkNumbrA      : STRING  : LITERAL     :"A"           : ==	     : EXPRESSION  : [G.U.S.LETTER]		    :-          :SetLetVaA       : ChkNumbrB
+EXEC : SetLetVaA      : STRING  : GSDS        : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-	        :SetShrtProName  : 2
+EXEC : ChkNumbrB      : STRING  : LITERAL    : "B"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaB       : ChkNumbrC
+EXEC : SetLetVaB      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2
+EXEC : ChkNumbrC      : STRING  : LITERAL    : "C"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaC       : ChkNumbrD
+EXEC : SetLetVaC      : STRING  : GSDS	      : U.S.NUMBER2  : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+EXEC : ChkNumbrD      : STRING  : LITERAL    : "D"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaD       : ChkNumbrE
+EXEC : SetLetVaD      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+EXEC : ChkNumbrE      : STRING  : LITERAL    : "E"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaE       : ChkNumbrF
+EXEC : SetLetVaE      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+EXEC : ChkNumbrF      : STRING  : LITERAL    : "F"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaF       : ChkNumbrG
+EXEC : SetLetVaF      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+EXEC : ChkNumbrG      : STRING  : LITERAL    : "G"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaG       : ChkNumbrH
+EXEC : SetLetVaG      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+EXEC : ChkNumbrH      : STRING  : LITERAL    : "H"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaH       : ChkNumbrI
+EXEC : SetLetVaH      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+EXEC : ChkNumbrI      : STRING  : LITERAL    : "I"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaI       : ChkNumbrJ
+EXEC : SetLetVaI      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+EXEC : ChkNumbrJ      : STRING  : LITERAL    : "J"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaJ       : ChkNumbrK
+EXEC : SetLetVaJ      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+EXEC : ChkNumbrK      : STRING  : LITERAL    : "K"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaK       : ChkNumbrL
+EXEC : SetLetVaK      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+EXEC : ChkNumbrL      : STRING  : LITERAL    : "L"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaL       : ChkNumbrM
+EXEC : SetLetVaL      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+EXEC : ChkNumbrM      : STRING  : LITERAL    : "M"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaM       : ChkNumbrN
+EXEC : SetLetVaM      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+EXEC : ChkNumbrN      : STRING  : LITERAL    : "N"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaN       : ChkNumbrO
+EXEC : SetLetVaN      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+EXEC : ChkNumbrO      : STRING  : LITERAL    : "O"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaO       : ChkNumbrP
+EXEC : SetLetVaO      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+EXEC : ChkNumbrP      : STRING  : LITERAL    : "P"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaP       : ChkNumbrQ
+EXEC : SetLetVaP      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+EXEC : ChkNumbrQ      : STRING  : LITERAL    : "Q"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaQ       : ChkNumbrR
+EXEC : SetLetVaQ      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+EXEC : ChkNumbrR      : STRING  : LITERAL    : "R"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaR       : ChkNumbrS
+EXEC : SetLetVaR      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+EXEC : ChkNumbrS      : STRING  : LITERAL    : "S"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaS       : ChkNumbrT
+EXEC : SetLetVaS      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+EXEC : ChkNumbrT      : STRING  : LITERAL    : "T"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaT       : ChkNumbrU
+EXEC : SetLetVaT      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+EXEC : ChkNumbrU      : STRING  : LITERAL    : "U"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaU       : ChkNumbrV
+EXEC : SetLetVaU      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+EXEC : ChkNumbrV      : STRING  : LITERAL    : "V"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaV       : ChkNumbrW
+EXEC : SetLetVaV      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+EXEC : ChkNumbrW      : STRING  : LITERAL    : "W"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaW       : ChkNumbrX
+EXEC : SetLetVaW      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+EXEC : ChkNumbrX      : STRING  : LITERAL    : "X"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaX       : ChkNumbrY
+EXEC : SetLetVaX      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+EXEC : ChkNumbrY      : STRING  : LITERAL    : "Y"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaY       : ChkNumbrZ
+EXEC : SetLetVaY      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+EXEC : ChkNumbrZ      : STRING  : LITERAL    : "Z"          : ==	     : EXPRESSION  : [G.U.S.LETTER]         :-          :SetLetVaZ       : SetShrtProName2
+EXEC : SetLetVaZ      : STRING  : GSDS	      : U.S.NUMBER2   : SET       : EXPRESSION  : "0"                    :-          :SetShrtProName  : 2 
+###	Set Final Short test program Name for Fuse.
+EXEC : SetShrtProName  : STRING  : DFF      : PKG.CURRENT.CLASSTPN  : SET     : EXPRESSION  : Substring([G.U.S.PROGNAM],10,2) + [G.U.S.PIPEINDX] + [G.U.S.NUMBER] + [G.U.S.PIPEINDX] + Substring([G.U.S.PROGNAM],13,1) + [G.U.S.PIPEINDX] + [G.U.S.NUMBER2]  :-        : 1        : SetShrtProName2
+EXEC : SetShrtProName2 : STRING  : DFF      : PKG.CURRENT.CLASSTPN  : SET     : EXPRESSION  : Substring([G.U.S.PROGNAM],10,2) + [G.U.S.PIPEINDX] + [G.U.S.NUMBER] + [G.U.S.PIPEINDX] + Substring([G.U.S.PROGNAM],13,1) + [G.U.S.PIPEINDX] + Substring([G.U.S.PROGNAM],14,1)  :-        : 1        : 2
+END_SCREEN

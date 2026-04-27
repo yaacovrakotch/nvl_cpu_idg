@@ -1,0 +1,90 @@
+name: Create PR to Dielet Repo
+
+on:
+  schedule:
+    # Runs at 10 AM UTC (2 AM PST)
+    - cron: '0 10 * * *'
+
+  workflow_dispatch:
+    inputs:
+      CPU:
+        description: 'Include CPU repository'
+        required: false
+        default: 'false'
+        type: boolean
+      CPU_BRANCH:
+        description: 'Branch name for CPU repository'
+        required: false
+        default: 'default'
+        type: string
+      HUB:
+        description: 'Include HUB repository'
+        required: false
+        default: 'false'
+        type: boolean
+      HUB_BRANCH:
+        description: 'Branch name for HUB repository'
+        required: false
+        default: 'default'
+        type: string
+      PCD:
+        description: 'Include PCD repository'
+        required: false
+        default: 'false'
+        type: boolean
+      PCD_BRANCH:
+        description: 'Branch name for PCD repository'
+        required: false
+        default: 'default'
+        type: string
+      GCD:
+        description: 'Include GCD repository'
+        required: false
+        default: 'false'
+        type: boolean
+      GCD_BRANCH:
+        description: 'Branch name for GCD repository'
+        required: false
+        default: 'default'
+        type: string
+      ALL:
+        description: 'Include all NVL repositories'
+        required: false
+        default: 'false'
+        type: boolean
+      ENABLE_MAILING:
+        description: 'Enable mailing'
+        required: false
+        default: 'false'
+        type: boolean
+
+jobs:
+  Create_CommonPR:
+    runs-on: [self-hosted, checkers]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Log Inputs
+        run: echo "${{ toJSON(github.event.inputs) }}"
+
+      - name: Run script to create PRs in Selected Dielet Repo
+        env:
+          GITHUB_TOKEN: ${{ secrets.CPUTOK }}
+          CPU: ${{ github.event.inputs.CPU || 'false' }}
+          CPU_BRANCH: ${{ github.event.inputs.CPU_BRANCH || 'default' }}
+          HUB: ${{ github.event.inputs.HUB || 'false' }}
+          HUB_BRANCH: ${{ github.event.inputs.HUB_BRANCH || 'default' }}
+          PCD: ${{ github.event.inputs.PCD || 'false' }}
+          PCD_BRANCH: ${{ github.event.inputs.PCD_BRANCH || 'default' }}
+          GCD: ${{ github.event.inputs.GCD || 'false' }}
+          GCD_BRANCH: ${{ github.event.inputs.GCD_BRANCH || 'default' }}
+          ALL: ${{ github.event.inputs.ALL || 'true' }}
+          ENABLE_MAILING: ${{ github.event.inputs.ENABLE_MAILING || 'true' }}
+          CPU_OWNER: "mys.ddg.class_tpi@intel.com"
+          HUB_OWNER: "chen3.chen@intel.com,danny.phan@intel.com,weilan.ladeau@intel.com"
+          PCD_OWNER: "leo.huang@intel.com,nvlpcdh_classtpi@intel.com,man.kit.ng@intel.com"
+          GCD_OWNER: "chen3.chen@intel.com,danny.phan@intel.com,weilan.ladeau@intel.com"
+          CC_LIST: "sam.ren.jie.yap@intel.com,john.q.delos.reyes@intel.com,chung.shen.yeoh@intel.com,tai.pham@intel.com"
+        run: |
+          python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/create_pr.py NVL

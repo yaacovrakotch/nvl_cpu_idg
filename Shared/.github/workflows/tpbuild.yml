@@ -1,0 +1,183 @@
+name: TPBuild
+
+env:
+  CustomPath: "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe"
+  
+on:
+  workflow_dispatch: 
+    inputs:
+
+      sites:
+        description: 'Target ONE Site'
+        type: choice
+        options:
+          - JF
+          - PG
+          - FM
+          - IDC
+          - BA
+        required: true
+
+      BOMGroups:
+        description: 'Target BOMGroups to build out'
+        # Default value if no value is explicitly provided
+        default: 'Class_NVL_S28C'
+        # Input has to be provided for the workflow to run
+        required: true
+        
+      name:
+        description: 'MV_json_file or FULL'
+        # Default value if no value is explicitly provided
+        default: 'FULL'
+        # Input has to be provided for the workflow to run
+        required: true
+        
+      destination:
+        description: 'I:\ drive destination'
+        # Default value if no value is explicitly provided
+        default: 'I:\'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      quickbuild:
+        description: 'QuickBuild mode (SD only): no checks'
+        type: boolean
+        default: false
+
+      DieletBranches:
+        description: 'Branchname|tag|sha|none e.g.CPU;GCD;PCD;HUB'
+        # Default value if no value is explicitly provided
+        default: 'main;main;main;main'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      #repjson:
+      #  description: 'replace_for_mv_json_file_name'
+      #  # Default value if no value is explicitly provided
+      #  default: 'None'
+      #  # Input has to be provided for the workflow to run
+      #  required: true
+
+      cleantp:
+        type: boolean
+        description: 'Clean TP Enable. Default is true'
+        default: true
+
+      acpy:
+        description: 'TPSwitch or ACPY:'
+        default: 'None'
+        required: false
+
+      previousTP:
+        description: 'For TPI: Enter previous TP to generate report. eg: 21F0A'
+        # Default value if no value is explicitly provided
+        default: 'None'
+        # Input has to be provided for the workflow to run
+        required: true
+
+jobs:
+  TP_BUILD:
+    runs-on:
+    - self-hosted
+    - checkers_${{ inputs.sites }}
+
+    steps:
+    - name: Log Inputs
+      shell: powershell
+      run: |
+        $inputs = @'
+        ${{ toJSON(github.event.inputs) }}
+        '@
+        Write-Host "Inputs: $inputs"
+
+    - name: i drive check
+      shell: powershell
+      run: >
+        python -c "import os, socket;
+        assert os.path.isdir('I:/tpvalidation'),
+        f'I:/ drive is not accessible. Pls contact TPD to fix drive mapping on {socket.gethostname()} right away.'"
+
+    - name: Parse Dielet Branches
+      id: parse_branches
+      shell: powershell
+      run: |
+        $inputBranches = "${{ github.event.inputs.DieletBranches }}"
+        Write-Host "Raw DieletBranches input: '$inputBranches'"
+        
+        # Handle both semicolon and line break separators
+        $branches = $inputBranches -split '[;\r\n]+' | Where-Object { $_.Trim() -ne '' }
+        Write-Host "Split branches: $($branches -join ', ')"
+        
+        $CPU_Branch = if ($branches[0]) { $branches[0].Trim() } else { "main" }
+        $GCD_Branch = if ($branches[1]) { $branches[1].Trim() } else { "main" }
+        $PCD_Branch = if ($branches[2]) { $branches[2].Trim() } else { "main" }
+        $HUB_Branch = if ($branches[3]) { $branches[3].Trim() } else { "main" }
+        
+        echo "CPU_Branch=$CPU_Branch" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+        echo "GCD_Branch=$GCD_Branch" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+        echo "PCD_Branch=$PCD_Branch" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+        echo "HUB_Branch=$HUB_Branch" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+        Write-Host "Parsed branches: CPU=$CPU_Branch, GCD=$GCD_Branch, PCD=$PCD_Branch, HUB=$HUB_Branch"
+
+    - name: repo_init_check
+      continue-on-error: true
+      shell: powershell
+      run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/tprobot.py REPO_INIT main
+
+    - uses: actions/checkout@v6
+      with: 
+        fetch-depth: 0
+        clean: true              # remove untracked files before checkout
+        ref: ${{ github.event.pull_request.head.ref }}
+       
+    - name: Checkout submodules
+      shell: powershell
+      run: |
+        git submodule sync --recursive
+        git submodule update --init --recursive --force
+
+    - name: clone dielets
+      shell: powershell
+      run: python I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/nvl_buildtp.py ${{ github.event.inputs.BOMGroups }} -clone
+      env:
+         CPU_Branch: ${{ steps.parse_branches.outputs.CPU_Branch }}
+         GCD_Branch: ${{ steps.parse_branches.outputs.GCD_Branch }}
+         PCD_Branch: ${{ steps.parse_branches.outputs.PCD_Branch }}
+         HUB_Branch: ${{ steps.parse_branches.outputs.HUB_Branch }}
+         GH_TOKEN: ${{ secrets.PAT_GH_CROSS_REPO }}
+
+    - name: TP Build
+      shell: powershell
+      run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/nvl_buildtp.py ${{ github.event.inputs.BOMGroups }} -flow -common -output ${{ github.event.inputs.destination }}
+      env:
+          PREVIOUSTP: ${{ github.event.inputs.previousTP }}
+          #REPJSON: ${{ github.event.inputs.repjson }}
+          IN1: ${{ github.event.inputs.name }}
+          CPU_Branch: ${{ steps.parse_branches.outputs.CPU_Branch }}
+          GCD_Branch: ${{ steps.parse_branches.outputs.GCD_Branch }}
+          PCD_Branch: ${{ steps.parse_branches.outputs.PCD_Branch }}
+          HUB_Branch: ${{ steps.parse_branches.outputs.HUB_Branch }}
+          CLEANTP: ${{ github.event.inputs.cleantp }}
+          QUICKBUILD: ${{ github.event.inputs.quickbuild }}
+          ACPY: ${{ github.event.inputs.acpy }}
+          IS_PR_COMMON: True
+          CURRENT_BRANCH: ${{ github.ref_name }}
+          DEST: ${{ github.event.inputs.destination }}
+          GH_TOKEN: ${{ secrets.PAT_GH_CROSS_REPO }}
+
+    - name: Atomic_rev Check
+      if: ${{ inputs.quickbuild == false }}
+      shell: powershell
+      run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/atomic_rev_check.py ${{ github.event.inputs.BOMGroups }}
+      env:
+          BASE_REF: ${{ github.ref_name }}
+          GH_TOKEN: ${{ secrets.PAT_GH_CROSS_REPO }}
+          CPU_Branch: ${{ steps.parse_branches.outputs.CPU_Branch }}
+          GCD_Branch: ${{ steps.parse_branches.outputs.GCD_Branch }}
+          PCD_Branch: ${{ steps.parse_branches.outputs.PCD_Branch }}
+          HUB_Branch: ${{ steps.parse_branches.outputs.HUB_Branch }}
+          TP_OUTPUT_PATH: ${{ github.event.inputs.destination }}          
+          
+#    - name: Unused Report
+#      run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/tprobot.py UNUSED ${{ github.event.inputs.destination }}
+#      continue-on-error: true

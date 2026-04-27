@@ -1,0 +1,68 @@
+Version 1.0;
+
+SelectorRuleCollection  ARR_COMMON_Rules
+{
+	SelectorRule QA_HOT_Default (QA,HOT, Default)
+	{
+		QA => contains("[5M],[6M],[6S],[5S],[4M],[4S],[QQ],[QE],[QP],[QC],[QZ],[Q8]","[" + __shared__::SCVars.SC_ENGID + "]") && contains(__shared__::LocationSets.QA_S1,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		HOT => contains(__shared__::LocationSets.CH_CHVM + "," + __shared__::LocationSets.CH_CRV + "," + __shared__::LocationSets.CHM_ENG,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.RCHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Default;
+	}
+	SelectorRule RC_S1 (RC, Default)
+	{
+		RC => contains(__shared__::LocationSets.RC_S1,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Default;
+	}
+	SelectorRule TPRules (Outcome1, Outcome2, Outcome3, Outcome4, Outcome5, Outcome6, Outcome7, Outcome8)
+	{
+		Outcome1 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C";
+        Outcome2 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+		Outcome3 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C";
+		Outcome4 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C";
+		Outcome5 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C";
+		Outcome6 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C";
+		Outcome7 => GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C";
+		Outcome8;
+	}
+}
+
+UserVars ARR_COMMON_Specs
+{
+	String VCCIA = "1";
+	String VCCSA = "1";
+	Integer HCS_SIZE = 10048;
+	Integer FDS_SIZE = 32928;
+	Const String BISRStress = "MCarr:bisr_modify_BP176_BP179_BP182_BP185_BP200_BP203_BP206_BP209_BP224_BP227_BP230_BP233:bisrrepair:Global,MCarr:bisr_modify_BP177_BP180_BP183_BP186_BP201_BP204_BP207_BP210_BP225_BP228_BP231_BP234:bisrrepair:Global,MCarr:bisr_modify_BP178_BP181_BP184_BP187_BP202_BP205_BP208_BP211_BP226_BP229_BP232_BP235:bisrrepair:Global,MCarr:bisr_modify_BP189_BP190_BP195_BP196_BP213_BP214_BP219_BP220:bisrrepair:Global,MCarr:bisr_modify_BP191_BP197_BP215_BP221:bisrrepair:Global,MCarr:bisr_modify_BP192_BP193_BP198_BP199_BP216_BP217_BP222_BP223:bisrrepair:Global";
+	Const String HRY_LIST_816 = GetEnvironmentVariable("MCARR_PATMODIFY_PATH") + "\\NVLCPU_P\\HRY\\MBIST\\MIT_MBIST_HRY_list.json";
+	Const String HRY_LIST_others = GetEnvironmentVariable("MCARR_PATMODIFY_PATH") + "\\NVLCPU_A\\HRY\\MBIST\\MIT_MBIST_HRY_list.json";
+	Const String HRY_LIST_48 = GetEnvironmentVariable("MCARR_PATMODIFY_PATH") + "\\NVLCPU_T\\HRY\\MBIST\\MIT_MBIST_HRY_list.json";
+	String pinmap_816 = "--decoder PinToSliceIndexDecoder --file ./Modules/ARR/ARR_COMMON_CKX/InputFiles/816/B0/ARR.PinMap.json";
+	String pinmap_48 = "--decoder PinToSliceIndexDecoder --file ./Modules/ARR/ARR_COMMON_CKX/InputFiles/48/T0/ARR.PinMap.json";
+	String mbist_fusecon_s28c = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "\\Modules\\ARR\\ARR_COMMON_CKX\\InputFiles\\816\\B0\\MBIST.FuseConfigSetPoints.json";
+	String mbist_fusecon_48 = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "\\Modules\\ARR\\ARR_COMMON_CKX\\InputFiles\\48\\T0\\MBIST.FuseConfigSetPoints.json";
+	String dffmap_s28c = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "\\Modules\\ARR\\ARR_COMMON_CKX\\InputFiles\\816\\B0\\SharedStorageDFFMapB0.json";
+	String dffmap_48 = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "\\Modules\\ARR\\ARR_COMMON_CKX\\InputFiles\\48\\T0\\SharedStorageDFFMap.json";
+	String repairfuse_others = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "/Modules/ARR/ARR_COMMON_CKX/InputFiles/816/B0/NVL_Repair_to_fuse_ATOM.json";
+	String repairfuse_48 = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "/Modules/ARR/ARR_COMMON_CKX/InputFiles/48/T0/NVL_Repair_to_fuse_ATOM.json";
+	String arraymap_others = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "/Modules/ARR/ARR_COMMON_CKX/InputFiles/816/B0/NVL_ArrayMap_ATOM.json";
+	String arraymap_48 = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "/Modules/ARR/ARR_COMMON_CKX/InputFiles/48/T0/NVL_ArrayMap_ATOM.json";
+	String hextobin_others = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "\\Modules\\ARR\\ARR_COMMON_CKX\\InputFiles\\816\\B0\\MBIST_HextoBinTest.txt";
+	String hextobin_48 = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "\\Modules\\ARR\\ARR_COMMON_CKX\\InputFiles\\48\\T0\\MBIST_HextoBinTest.txt";
+	String resetdff_s28c = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "\\Modules\\ARR\\ARR_COMMON_CKX\\InputFiles\\816\\B0\\ResetDFFTestB0.txt";
+	String resetdff_48 = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "\\Modules\\ARR\\ARR_COMMON_CKX\\InputFiles\\48\\T0\\ResetDFFTest.txt";
+	String atom_hex2bin_other = "./InputFiles/816/B0/HextoBinTest.txt";
+	String atom_hex2bin_48 = "./InputFiles/48/T0/HextoBinTest.txt";
+	String others_timing = "IPC::CPU_IP_BASE::cpu_hvm_timing_mts800_tstprtclk400_tck100";
+	String dnls28c_hvmtiming = "IPC::ARR_CORE_CXX::cpu_hvm_timing_mts800_tstprtclk400_tck100_dnls28c";
+	String timing_48 = "IPC::CPU_IP_BASE::cpu_hvm_timing_mts800_tstprtclk400_tck100";
+	String hxb0_800_hvmtiming = "__main__::ARR_COMMON_CKX::cpu_hvm_timing_mts800_tstprtclk400_tck100_pncarrmts800_hxb0";
+	String hxb0_400_hvmtiming = "__main__::ARR_COMMON_CKX::cpu_hvm_timing_mts800_tstprtclk400_tck100_pncarrmts400_hxb0";
+
+	String timingRules = ARR_COMMON_Rules.TPRules(ARR_COMMON_Specs.others_timing,ARR_COMMON_Specs.others_timing,ARR_COMMON_Specs.others_timing,ARR_COMMON_Specs.timing_48,ARR_COMMON_Specs.timing_48,ARR_COMMON_Specs.timing_48,ARR_COMMON_Specs.others_timing,ARR_COMMON_Specs.others_timing);
+
+}
+
+
+
+
+

@@ -1,0 +1,1527 @@
+Version 1.0;
+
+Import "../../PinDefinitions_IPC.pin";
+
+Timing cpu_fun_timing
+{
+	Domain CPU_ALL
+	{
+		PeriodTable
+		{
+			Divisor = p_cpu_all_timing_table_div;
+			Multiplier = c_cpu_all_timing_table_mul;
+			Period = p_cpu_all_timing_table_period;
+		}
+		cpu_all_dpin_pins
+		{
+			compare = c_cpu_all_dpin_pins_stb;
+			drive = c_cpu_all_dpin_pins_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_CLK_0_HPCDIF
+		{
+			ClockEnable = c_cpu_clk0_hpcdif_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = c_cpu_clk0_hpcdif_period;
+		}
+		CPU_CLK_0_HPC
+		{
+			ClockEnable = c_cpu_clk0_hpc_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = c_cpu_clk0_hpc_period;
+		}
+		CPU_CLK_0_EC
+		{
+			Compare = 0;
+			EdgeCounter = "Off";
+			Ratio = c_cpu_clk0_ec_ratio;
+			TFall = c_cpu_clk0_ec_tfall;
+			TRise = c_cpu_clk0_ec_trise;
+		}
+		CPU_CLK_1_HPCDIF
+		{
+			ClockEnable = c_cpu_clk1_hpcdif_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = c_cpu_clk1_hpcdif_period;
+		}
+		CPU_CLK_1_HPC
+		{
+			ClockEnable = c_cpu_clk1_hpc_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = c_cpu_clk1_hpc_period;
+		}
+		CPU_CLK_1_EC
+		{
+			Compare = 0;
+			EdgeCounter = "Off";
+			Ratio = c_cpu_clk1_ec_ratio;
+			TFall = c_cpu_clk1_ec_tfall;
+			TRise = c_cpu_clk1_ec_trise;
+		}
+		CPU_CLK_2_HPCDIF
+		{
+			ClockEnable = c_cpu_clk2_hpcdif_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = c_cpu_clk2_hpcdif_period;
+		}
+		CPU_CLK_2_HPC
+		{
+			ClockEnable = c_cpu_clk2_hpc_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = c_cpu_clk2_hpc_period;
+		}
+		CPU_CLK_2_EC
+		{
+			Compare = 0;
+			EdgeCounter = "Off";
+			Ratio = c_cpu_clk2_ec_ratio;
+			TFall = c_cpu_clk2_ec_tfall;
+			TRise = c_cpu_clk2_ec_trise;
+		}
+		CPU_CLK_3_HPCDIF
+		{
+			ClockEnable = c_cpu_clk3_hpcdif_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = c_cpu_clk3_hpcdif_period;
+		}
+		CPU_CLK_3_HPC
+		{
+			ClockEnable = c_cpu_clk3_hpc_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = c_cpu_clk3_hpc_period;
+		}
+		CPU_CLK_3_EC
+		{
+			Compare = 0;
+			EdgeCounter = "Off";
+			Ratio = c_cpu_clk3_ec_ratio;
+			TFall = c_cpu_clk3_ec_tfall;
+			TRise = c_cpu_clk3_ec_trise;
+		}
+		CPU_TSTPRT_I_CK_EC
+		{
+			Compare = dontCare;
+			EdgeCounter = "Off";
+			Ratio = c_cpu_tstprt_i_clk_ec_ratio;
+			TFall = c_cpu_tstprt_i_clk_ec_tfall;
+			TRise = c_cpu_tstprt_i_clk_ec_trise;
+		}
+		CPU_TSTPRT_O_CK_EC
+		{
+			Compare = dontCare;
+			EdgeCounter = "Off";
+			Ratio = c_cpu_tstprt_o_clk_ec_ratio;
+			TFall = c_cpu_tstprt_o_clk_ec_tfall;
+			TRise = c_cpu_tstprt_o_clk_ec_trise;
+		}
+		CPU_TSTPRT_I_CK
+		{
+			Compare = dontCare;
+			drive = c_cpu_tstprt_i_ck_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_CK
+		{
+			Compare = dontCare;
+			drive = c_cpu_tstprt_o_ck_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_00
+		{
+			compare = dontCare;
+			drive = c_cpu_tstprt_i_00_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_01
+		{
+			compare = dontCare;
+			drive = c_cpu_tstprt_i_01_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_02
+		{
+			compare = dontCare;
+			drive = c_cpu_tstprt_i_02_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_03
+		{
+			compare = dontCare;
+			drive = c_cpu_tstprt_i_03_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_04
+		{
+			compare = dontCare;
+			drive = c_cpu_tstprt_i_04_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_05
+		{
+			compare = dontCare;
+			drive = c_cpu_tstprt_i_05_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_06
+		{
+			compare = dontCare;
+			drive = c_cpu_tstprt_i_06_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_07
+		{
+			compare = dontCare;
+			drive = c_cpu_tstprt_i_07_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_08
+		{
+			compare = dontCare;
+			drive = c_cpu_tstprt_i_08_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_09
+		{
+			compare = dontCare;
+			drive = c_cpu_tstprt_i_09_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_10
+		{
+			compare = dontCare;
+			drive = c_cpu_tstprt_i_10_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_11
+		{
+			compare = dontCare;
+			drive = c_cpu_tstprt_i_11_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_12
+		{
+			compare = dontCare;
+			drive = c_cpu_tstprt_i_12_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_13
+		{
+			compare = dontCare;
+			drive = c_cpu_tstprt_i_13_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_14
+		{
+			compare = dontCare;
+			drive = c_cpu_tstprt_i_14_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_15
+		{
+			compare = dontCare;
+			drive = c_cpu_tstprt_i_15_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_00
+		{
+			compare = c_cpu_tstprt_o_00_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_01
+		{
+			compare = c_cpu_tstprt_o_01_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_02
+		{
+			compare = c_cpu_tstprt_o_02_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_03
+		{
+			compare = c_cpu_tstprt_o_03_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_04
+		{
+			compare = c_cpu_tstprt_o_04_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_05
+		{
+			compare = c_cpu_tstprt_o_05_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_06
+		{
+			compare = c_cpu_tstprt_o_06_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_07
+		{
+			compare = c_cpu_tstprt_o_07_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_08
+		{
+			compare = c_cpu_tstprt_o_08_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_09
+		{
+			compare = c_cpu_tstprt_o_09_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_10
+		{
+			compare = c_cpu_tstprt_o_10_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_11
+		{
+			compare = c_cpu_tstprt_o_11_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_12
+		{
+			compare = c_cpu_tstprt_o_12_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_13
+		{
+			compare = c_cpu_tstprt_o_13_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_14
+		{
+			compare = c_cpu_tstprt_o_14_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_15
+		{
+			compare = c_cpu_tstprt_o_15_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TRST
+		{
+			compare = dontCare;
+			drive = c_cpu_trst_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TCK
+		{
+			Compare = 0;
+			EdgeCounter = "Off";
+			Ratio = p_cpu_tck_ratio;
+			TFall = c_cpu_tck_tfall;
+			TRise = c_cpu_tck_trise;
+		}
+		CPU_TMS
+		{
+			compare = dontCare;
+			drive = c_cpu_tms_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TDI
+		{
+			compare = dontCare;
+			drive = c_cpu_tdi_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TDO
+		{
+			compare = c_cpu_tdo_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+	}
+	Domain CPU_ALL_1
+	{
+		PeriodTable
+		{
+			Divisor = p_cpu1_all_timing_table_div;
+			Multiplier = c_cpu1_all_timing_table_mul;
+			Period = p_cpu1_all_timing_table_period;
+		}
+		cpu_all_1_dpin_pins
+		{
+			compare = c_cpu1_all_dpin_pins_stb;
+			drive = c_cpu1_all_dpin_pins_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_CLK_0_HPCDIF
+		{
+			ClockEnable = c_cpu1_clk0_hpcdif_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = c_cpu1_clk0_hpcdif_period;
+		}
+		CPU1_CLK_0_HPC
+		{
+			ClockEnable = c_cpu1_clk0_hpc_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = c_cpu1_clk0_hpc_period;
+		}
+		CPU1_CLK_0_EC
+		{
+			Compare = 0;
+			EdgeCounter = "Off";
+			Ratio = c_cpu1_clk0_ec_ratio;
+			TFall = c_cpu1_clk0_ec_tfall;
+			TRise = c_cpu1_clk0_ec_trise;
+		}
+		CPU1_CLK_1_HPCDIF
+		{
+			ClockEnable = c_cpu1_clk1_hpcdif_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = c_cpu1_clk1_hpcdif_period;
+		}
+		CPU1_CLK_1_HPC
+		{
+			ClockEnable = c_cpu1_clk1_hpc_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = c_cpu1_clk1_hpc_period;
+		}
+		CPU1_CLK_1_EC
+		{
+			Compare = 0;
+			EdgeCounter = "Off";
+			Ratio = c_cpu1_clk1_ec_ratio;
+			TFall = c_cpu1_clk1_ec_tfall;
+			TRise = c_cpu1_clk1_ec_trise;
+		}
+		CPU1_CLK_2_HPCDIF
+		{
+			ClockEnable = c_cpu1_clk2_hpcdif_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = c_cpu1_clk2_hpcdif_period;
+		}
+		CPU1_CLK_2_HPC
+		{
+			ClockEnable = c_cpu1_clk2_hpc_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = c_cpu1_clk2_hpc_period;
+		}
+		CPU1_CLK_2_EC
+		{
+			Compare = 0;
+			EdgeCounter = "Off";
+			Ratio = c_cpu1_clk2_ec_ratio;
+			TFall = c_cpu1_clk2_ec_tfall;
+			TRise = c_cpu1_clk2_ec_trise;
+		}
+		CPU1_CLK_3_HPCDIF
+		{
+			ClockEnable = c_cpu1_clk3_hpcdif_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = c_cpu1_clk3_hpcdif_period;
+		}
+		CPU1_CLK_3_HPC
+		{
+			ClockEnable = c_cpu1_clk3_hpc_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = c_cpu1_clk3_hpc_period;
+		}
+		CPU1_CLK_3_EC
+		{
+			Compare = 0;
+			EdgeCounter = "Off";
+			Ratio = c_cpu1_clk3_ec_ratio;
+			TFall = c_cpu1_clk3_ec_tfall;
+			TRise = c_cpu1_clk3_ec_trise;
+		}
+		CPU1_TSTPRT_I_CK_EC
+		{
+			Compare = dontCare;
+			EdgeCounter = "Off";
+			Ratio = c_cpu1_tstprt_i_clk_ec_ratio;
+			TFall = c_cpu1_tstprt_i_clk_ec_tfall;
+			TRise = c_cpu1_tstprt_i_clk_ec_trise;
+		}
+		CPU1_TSTPRT_O_CK_EC
+		{
+			Compare = dontCare;
+			EdgeCounter = "Off";
+			Ratio = c_cpu1_tstprt_o_clk_ec_ratio;
+			TFall = c_cpu1_tstprt_o_clk_ec_tfall;
+			TRise = c_cpu1_tstprt_o_clk_ec_trise;
+		}
+		CPU1_TSTPRT_I_CK
+		{
+			Compare = dontCare;
+			drive = c_cpu1_tstprt_i_ck_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_CK
+		{
+			Compare = dontCare;
+			drive = c_cpu1_tstprt_o_ck_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_00
+		{
+			compare = dontCare;
+			drive = c_cpu1_tstprt_i_00_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_01
+		{
+			compare = dontCare;
+			drive = c_cpu1_tstprt_i_01_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_02
+		{
+			compare = dontCare;
+			drive = c_cpu1_tstprt_i_02_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_03
+		{
+			compare = dontCare;
+			drive = c_cpu1_tstprt_i_03_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_04
+		{
+			compare = dontCare;
+			drive = c_cpu1_tstprt_i_04_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_05
+		{
+			compare = dontCare;
+			drive = c_cpu1_tstprt_i_05_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_06
+		{
+			compare = dontCare;
+			drive = c_cpu1_tstprt_i_06_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_07
+		{
+			compare = dontCare;
+			drive = c_cpu1_tstprt_i_07_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_08
+		{
+			compare = dontCare;
+			drive = c_cpu1_tstprt_i_08_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_09
+		{
+			compare = dontCare;
+			drive = c_cpu1_tstprt_i_09_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_10
+		{
+			compare = dontCare;
+			drive = c_cpu1_tstprt_i_10_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_11
+		{
+			compare = dontCare;
+			drive = c_cpu1_tstprt_i_11_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_12
+		{
+			compare = dontCare;
+			drive = c_cpu1_tstprt_i_12_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_13
+		{
+			compare = dontCare;
+			drive = c_cpu1_tstprt_i_13_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_14
+		{
+			compare = dontCare;
+			drive = c_cpu1_tstprt_i_14_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_15
+		{
+			compare = dontCare;
+			drive = c_cpu1_tstprt_i_15_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_00
+		{
+			compare = c_cpu1_tstprt_o_00_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_01
+		{
+			compare = c_cpu1_tstprt_o_01_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_02
+		{
+			compare = c_cpu1_tstprt_o_02_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_03
+		{
+			compare = c_cpu1_tstprt_o_03_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_04
+		{
+			compare = c_cpu1_tstprt_o_04_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_05
+		{
+			compare = c_cpu1_tstprt_o_05_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_06
+		{
+			compare = c_cpu1_tstprt_o_06_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_07
+		{
+			compare = c_cpu1_tstprt_o_07_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_08
+		{
+			compare = c_cpu1_tstprt_o_08_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_09
+		{
+			compare = c_cpu1_tstprt_o_09_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_10
+		{
+			compare = c_cpu1_tstprt_o_10_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_11
+		{
+			compare = c_cpu1_tstprt_o_11_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_12
+		{
+			compare = c_cpu1_tstprt_o_12_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_13
+		{
+			compare = c_cpu1_tstprt_o_13_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_14
+		{
+			compare = c_cpu1_tstprt_o_14_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_15
+		{
+			compare = c_cpu1_tstprt_o_15_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TRST
+		{
+			compare = dontCare;
+			drive = c_cpu1_trst_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TCK
+		{
+			Compare = 0;
+			EdgeCounter = "Off";
+			Ratio = p_cpu1_tck_ratio;
+			TFall = c_cpu1_tck_tfall;
+			TRise = c_cpu1_tck_trise;
+		}
+		CPU1_TMS
+		{
+			compare = dontCare;
+			drive = c_cpu1_tms_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TDI
+		{
+			compare = dontCare;
+			drive = c_cpu1_tdi_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TDO
+		{
+			compare = c_cpu1_tdo_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+	}
+} #End of Timing Block cpu_fun_timing
+
+Timing cpu_hvm_timing
+{
+	Domain CPU_ALL
+	{
+		PeriodTable
+		{
+			Divisor = cpu_all_timing_table_div;
+			Multiplier = cpu_all_timing_table_mul;
+			Period = cpu_all_timing_table_period;
+		}
+		cpu_all_dpin_pins
+		{
+			compare = cpu_all_dpin_pins_stb;
+			drive = cpu_all_dpin_pins_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_CLK_0_HPCDIF
+		{
+			ClockEnable = cpu_clk0_hpcdif_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = cpu_clk0_hpcdif_period;
+		}
+		CPU_CLK_0_HPC
+		{
+			ClockEnable = cpu_clk0_hpc_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = cpu_clk0_hpc_period;
+		}
+		CPU_CLK_0_EC
+		{
+			Compare = 0;
+			EdgeCounter = "Off";
+			Ratio = cpu_clk0_ec_ratio;
+			TFall = cpu_clk0_ec_tfall;
+			TRise = cpu_clk0_ec_trise;
+		}
+		CPU_CLK_1_HPCDIF
+		{
+			ClockEnable = cpu_clk1_hpcdif_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = cpu_clk1_hpcdif_period;
+		}
+		CPU_CLK_1_HPC
+		{
+			ClockEnable = cpu_clk1_hpc_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = cpu_clk1_hpc_period;
+		}
+		CPU_CLK_1_EC
+		{
+			Compare = 0;
+			EdgeCounter = "Off";
+			Ratio = cpu_clk1_ec_ratio;
+			TFall = cpu_clk1_ec_tfall;
+			TRise = cpu_clk1_ec_trise;
+		}
+		CPU_CLK_2_HPCDIF
+		{
+			ClockEnable = cpu_clk2_hpcdif_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = cpu_clk2_hpcdif_period;
+		}
+		CPU_CLK_2_HPC
+		{
+			ClockEnable = cpu_clk2_hpc_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = cpu_clk2_hpc_period;
+		}
+		CPU_CLK_2_EC
+		{
+			Compare = 0;
+			EdgeCounter = "Off";
+			Ratio = cpu_clk2_ec_ratio;
+			TFall = cpu_clk2_ec_tfall;
+			TRise = cpu_clk2_ec_trise;
+		}
+		CPU_CLK_3_HPCDIF
+		{
+			ClockEnable = cpu_clk3_hpcdif_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = cpu_clk3_hpcdif_period;
+		}
+		CPU_CLK_3_HPC
+		{
+			ClockEnable = cpu_clk3_hpc_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = cpu_clk3_hpc_period;
+		}
+		CPU_CLK_3_EC
+		{
+			Compare = 0;
+			EdgeCounter = "Off";
+			Ratio = cpu_clk3_ec_ratio;
+			TFall = cpu_clk3_ec_tfall;
+			TRise = cpu_clk3_ec_trise;
+		}
+		CPU_TSTPRT_I_CK_EC
+		{
+			Compare = dontCare;
+			EdgeCounter = "Off";
+			Ratio = cpu_tstprt_i_clk_ec_ratio;
+			TFall = cpu_tstprt_i_clk_ec_tfall;
+			TRise = cpu_tstprt_i_clk_ec_trise;
+		}
+		CPU_TSTPRT_O_CK_EC
+		{
+			Compare = dontCare;
+			EdgeCounter = "Off";
+			Ratio = cpu_tstprt_o_clk_ec_ratio;
+			TFall = cpu_tstprt_o_clk_ec_tfall;
+			TRise = cpu_tstprt_o_clk_ec_trise;
+		}
+		CPU_TSTPRT_I_CK
+		{
+			Compare = dontCare;
+			drive = cpu_tstprt_i_clk_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_CK
+		{
+			Compare = dontCare;
+			drive = cpu_tstprt_o_clk_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_00
+		{
+			compare = dontCare;
+			drive = cpu_tstprt_i_00_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_01
+		{
+			compare = dontCare;
+			drive = cpu_tstprt_i_01_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_02
+		{
+			compare = dontCare;
+			drive = cpu_tstprt_i_02_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_03
+		{
+			compare = dontCare;
+			drive = cpu_tstprt_i_03_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_04
+		{
+			compare = dontCare;
+			drive = cpu_tstprt_i_04_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_05
+		{
+			compare = dontCare;
+			drive = cpu_tstprt_i_05_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_06
+		{
+			compare = dontCare;
+			drive = cpu_tstprt_i_06_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_07
+		{
+			compare = dontCare;
+			drive = cpu_tstprt_i_07_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_08
+		{
+			compare = dontCare;
+			drive = cpu_tstprt_i_08_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_09
+		{
+			compare = dontCare;
+			drive = cpu_tstprt_i_09_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_10
+		{
+			compare = dontCare;
+			drive = cpu_tstprt_i_10_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_11
+		{
+			compare = dontCare;
+			drive = cpu_tstprt_i_11_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_12
+		{
+			compare = dontCare;
+			drive = cpu_tstprt_i_12_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_13
+		{
+			compare = dontCare;
+			drive = cpu_tstprt_i_13_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_14
+		{
+			compare = dontCare;
+			drive = cpu_tstprt_i_14_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_I_15
+		{
+			compare = dontCare;
+			drive = cpu_tstprt_i_15_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_00
+		{
+			compare = cpu_tstprt_o_00_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_01
+		{
+			compare = cpu_tstprt_o_01_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_02
+		{
+			compare = cpu_tstprt_o_02_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_03
+		{
+			compare = cpu_tstprt_o_03_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_04
+		{
+			compare = cpu_tstprt_o_04_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_05
+		{
+			compare = cpu_tstprt_o_05_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_06
+		{
+			compare = cpu_tstprt_o_06_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_07
+		{
+			compare = cpu_tstprt_o_07_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_08
+		{
+			compare = cpu_tstprt_o_08_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_09
+		{
+			compare = cpu_tstprt_o_09_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_10
+		{
+			compare = cpu_tstprt_o_10_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_11
+		{
+			compare = cpu_tstprt_o_11_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_12
+		{
+			compare = cpu_tstprt_o_12_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_13
+		{
+			compare = cpu_tstprt_o_13_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_14
+		{
+			compare = cpu_tstprt_o_14_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TSTPRT_O_15
+		{
+			compare = cpu_tstprt_o_15_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU_TRST
+		{
+			compare = dontCare;
+			drive = cpu_trst_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TCK
+		{
+			Compare = 0;
+			EdgeCounter = "Off";
+			Ratio = cpu_tck_ec_ratio;
+			TFall = cpu_tck_tfall;
+			TRise = cpu_tck_trise;
+		}
+		CPU_TMS
+		{
+			compare = dontCare;
+			drive = cpu_tms_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TDI
+		{
+			compare = dontCare;
+			drive = cpu_tdi_drv;
+			EdgeCounter = "Off";
+		}
+		CPU_TDO
+		{
+			compare = cpu_tdo_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+	}
+	Domain CPU_ALL_1
+	{
+		PeriodTable
+		{
+			Divisor = cpu1_all_timing_table_div;
+			Multiplier = cpu1_all_timing_table_mul;
+			Period = cpu1_all_timing_table_period;
+		}
+		cpu_all_1_dpin_pins
+		{
+			compare = cpu1_all_dpin_pins_stb;
+			drive = cpu1_all_dpin_pins_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_CLK_0_HPCDIF
+		{
+			ClockEnable = cpu1_clk0_hpcdif_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = cpu1_clk0_hpcdif_period;
+		}
+		CPU1_CLK_0_HPC
+		{
+			ClockEnable = cpu1_clk0_hpc_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = cpu1_clk0_hpc_period;
+		}
+		CPU1_CLK_0_EC
+		{
+			Compare = 0;
+			EdgeCounter = "Off";
+			Ratio = cpu1_clk0_ec_ratio;
+			TFall = cpu1_clk0_ec_tfall;
+			TRise = cpu1_clk0_ec_trise;
+		}
+		CPU1_CLK_1_HPCDIF
+		{
+			ClockEnable = cpu1_clk1_hpcdif_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = cpu1_clk1_hpcdif_period;
+		}
+		CPU1_CLK_1_HPC
+		{
+			ClockEnable = cpu1_clk1_hpc_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = cpu1_clk1_hpc_period;
+		}
+		CPU1_CLK_1_EC
+		{
+			Compare = 0;
+			EdgeCounter = "Off";
+			Ratio = cpu1_clk1_ec_ratio;
+			TFall = cpu1_clk1_ec_tfall;
+			TRise = cpu1_clk1_ec_trise;
+		}
+		CPU1_CLK_2_HPCDIF
+		{
+			ClockEnable = cpu1_clk2_hpcdif_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = cpu1_clk2_hpcdif_period;
+		}
+		CPU1_CLK_2_HPC
+		{
+			ClockEnable = cpu1_clk2_hpc_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = cpu1_clk2_hpc_period;
+		}
+		CPU1_CLK_2_EC
+		{
+			Compare = 0;
+			EdgeCounter = "Off";
+			Ratio = cpu1_clk2_ec_ratio;
+			TFall = cpu1_clk2_ec_tfall;
+			TRise = cpu1_clk2_ec_trise;
+		}
+		CPU1_CLK_3_HPCDIF
+		{
+			ClockEnable = cpu1_clk3_hpcdif_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = cpu1_clk3_hpcdif_period;
+		}
+		CPU1_CLK_3_HPC
+		{
+			ClockEnable = cpu1_clk3_hpc_clkenable;
+			ClockSkew = 0;
+			Compare = 0;
+			Divisor = 1;
+			EdgeCounter = "Off";
+			Multiplier = 1;
+			Period = cpu1_clk3_hpc_period;
+		}
+		CPU1_CLK_3_EC
+		{
+			Compare = 0;
+			EdgeCounter = "Off";
+			Ratio = cpu1_clk3_ec_ratio;
+			TFall = cpu1_clk3_ec_tfall;
+			TRise = cpu1_clk3_ec_trise;
+		}
+		CPU1_TSTPRT_I_CK_EC
+		{
+			Compare = dontCare;
+			EdgeCounter = "Off";
+			Ratio = cpu1_tstprt_i_clk_ec_ratio;
+			TFall = cpu1_tstprt_i_clk_ec_tfall;
+			TRise = cpu1_tstprt_i_clk_ec_trise;
+		}
+		CPU1_TSTPRT_O_CK_EC
+		{
+			Compare = dontCare;
+			EdgeCounter = "Off";
+			Ratio = cpu1_tstprt_o_clk_ec_ratio;
+			TFall = cpu1_tstprt_o_clk_ec_tfall;
+			TRise = cpu1_tstprt_o_clk_ec_trise;
+		}
+		CPU1_TSTPRT_I_CK
+		{
+			Compare = dontCare;
+			drive = cpu1_tstprt_i_clk_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_CK
+		{
+			Compare = dontCare;
+			drive = cpu1_tstprt_o_clk_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_00
+		{
+			compare = dontCare;
+			drive = cpu1_tstprt_i_00_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_01
+		{
+			compare = dontCare;
+			drive = cpu1_tstprt_i_01_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_02
+		{
+			compare = dontCare;
+			drive = cpu1_tstprt_i_02_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_03
+		{
+			compare = dontCare;
+			drive = cpu1_tstprt_i_03_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_04
+		{
+			compare = dontCare;
+			drive = cpu1_tstprt_i_04_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_05
+		{
+			compare = dontCare;
+			drive = cpu1_tstprt_i_05_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_06
+		{
+			compare = dontCare;
+			drive = cpu1_tstprt_i_06_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_07
+		{
+			compare = dontCare;
+			drive = cpu1_tstprt_i_07_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_08
+		{
+			compare = dontCare;
+			drive = cpu1_tstprt_i_08_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_09
+		{
+			compare = dontCare;
+			drive = cpu1_tstprt_i_09_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_10
+		{
+			compare = dontCare;
+			drive = cpu1_tstprt_i_10_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_11
+		{
+			compare = dontCare;
+			drive = cpu1_tstprt_i_11_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_12
+		{
+			compare = dontCare;
+			drive = cpu1_tstprt_i_12_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_13
+		{
+			compare = dontCare;
+			drive = cpu1_tstprt_i_13_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_14
+		{
+			compare = dontCare;
+			drive = cpu1_tstprt_i_14_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_I_15
+		{
+			compare = dontCare;
+			drive = cpu1_tstprt_i_15_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_00
+		{
+			compare = cpu1_tstprt_o_00_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_01
+		{
+			compare = cpu1_tstprt_o_01_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_02
+		{
+			compare = cpu1_tstprt_o_02_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_03
+		{
+			compare = cpu1_tstprt_o_03_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_04
+		{
+			compare = cpu1_tstprt_o_04_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_05
+		{
+			compare = cpu1_tstprt_o_05_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_06
+		{
+			compare = cpu1_tstprt_o_06_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_07
+		{
+			compare = cpu1_tstprt_o_07_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_08
+		{
+			compare = cpu1_tstprt_o_08_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_09
+		{
+			compare = cpu1_tstprt_o_09_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_10
+		{
+			compare = cpu1_tstprt_o_10_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_11
+		{
+			compare = cpu1_tstprt_o_11_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_12
+		{
+			compare = cpu1_tstprt_o_12_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_13
+		{
+			compare = cpu1_tstprt_o_13_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_14
+		{
+			compare = cpu1_tstprt_o_14_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TSTPRT_O_15
+		{
+			compare = cpu1_tstprt_o_15_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+		CPU1_TRST
+		{
+			compare = dontCare;
+			drive = cpu1_trst_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TCK
+		{
+			Compare = 0;
+			EdgeCounter = "Off";
+			Ratio = cpu1_tck_ec_ratio;
+			TFall = cpu1_tck_tfall;
+			TRise = cpu1_tck_trise;
+		}
+		CPU1_TMS
+		{
+			compare = dontCare;
+			drive = cpu1_tms_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TDI
+		{
+			compare = dontCare;
+			drive = cpu1_tdi_drv;
+			EdgeCounter = "Off";
+		}
+		CPU1_TDO
+		{
+			compare = cpu1_tdo_stb;
+			drive = dontCare;
+			EdgeCounter = "Off";
+		}
+	}
+} #End of Timing Block cpu_hvm_timing

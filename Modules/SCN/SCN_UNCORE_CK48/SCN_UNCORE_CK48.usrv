@@ -1,0 +1,22 @@
+Version 1.0;
+
+SelectorRuleCollection  SCN_UNCORE_Rules
+{
+	SelectorRule If_C48_DS_AX_M(Outcome1, Outcome2, Outcome3, Outcome4)
+	{
+		Outcome1 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S16C";
+        Outcome2 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_AX16C";
+		Outcome3 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C";
+		Outcome4;
+	}
+}
+
+UserVars SCN_UNCORE_CK48_Specs
+{
+	String s16c_dnl_timing = "IPC::SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDEDS";
+	String AX_timing = "IPC::SCN_UNCORE_CX48::cpu_fun_timing_mts800_tstprtclk400_tck100_OVERRIDEPKG";
+	String h16c_p16c_timing = "IPC::SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE";
+	String others_timing = "IPC::SCN_UNCORE_CX48::cpu_fun_timing_mts800_tstprtclk400_tck100_OVERRIDEPKG";
+	String timingRules = SCN_UNCORE_Rules.If_C48_DS_AX_M(SCN_UNCORE_CK48_Specs.s16c_dnl_timing,SCN_UNCORE_CK48_Specs.AX_timing,SCN_UNCORE_CK48_Specs.h16c_p16c_timing,SCN_UNCORE_CK48_Specs.others_timing);
+	String timingRules2 = SCN_UNCORE_Rules.If_C48_DS_AX_M(SCN_UNCORE_CK48_Specs.s16c_dnl_timing,SCN_UNCORE_CK48_Specs.AX_timing,SCN_UNCORE_CK48_Specs.h16c_p16c_timing,SCN_UNCORE_CK48_Specs.others_timing);
+}

@@ -1,0 +1,8 @@
+
+#TPI_VCC_XXX Screentest for VCC Negative in START Subflow
+#Only execute VCC Negative instances for HOT and COLD condition
+START_SCREEN:VCCNEGFORK
+#RunOn	   	: TestName   	: Data Type    	: Param Type  	: Param1   				    		         : Operation    : Param Type  	: Param2  				: TmpStore 		: OnTrue		: OnFalse
+EXEC		; TEST01        ; STRING        ; GLOBAL        ; __shared__::SCVars.SC_CURRENT_PROCESS_STEP ; == ;          LITERAL ;       CLASSHOT                        ; -        ; 2          ;  Test02
+EXEC		; TEST02        ; STRING        ; GLOBAL        ; __shared__::SCVars.SC_CURRENT_PROCESS_STEP ; == ;          LITERAL ;       CSM                          ; -        ; 2          ; 1
+END_SCREEN

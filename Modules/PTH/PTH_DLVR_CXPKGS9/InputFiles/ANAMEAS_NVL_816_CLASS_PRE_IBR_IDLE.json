@@ -1,0 +1,60 @@
+{
+    "DC": [
+        {
+            "Measurements": {
+                "VCCIA": {
+                    "Pin": "IPC::VCCIA",
+                    "Average": 10,
+                    "Expect": 100
+                }
+            },
+            "Equations": [
+                {
+                    "Expression": "Round(SelectArrayElement([VCCIA], 0), 3)",
+                    "SaveToSharedStorage": "CPU_VCCIA_IDLE"
+                },
+            ]
+        },
+        {
+            "Token": "VCCIA_IDLE",
+            "Equations": [
+                {
+                    "Expression": "Round(SelectArrayElement([VCCIA], 1), 3)",
+                    "SaveToSharedStorage": "CPU_VCCIA_ATOM0_IDLE"
+                },
+                {
+                    "Expression": "Round(SelectArrayElement([VCCIA], 0)-SelectArrayElement([VCCIA], 1)+SelectArrayElement([VCCIA], 2), 3)",
+                    "SaveToSharedStorage": "CPU_VCCIA_ATOM1_IDLE"
+                },
+                {
+                    "Expression": "Round(SelectArrayElement([VCCIA], 0)-SelectArrayElement([VCCIA], 2)+SelectArrayElement([VCCIA], 3), 3)",
+                    "SaveToSharedStorage": "CPU_VCCIA_ATOM2_IDLE"
+                },
+                {
+                    "Expression": "Round(SelectArrayElement([VCCIA], 0)-SelectArrayElement([VCCIA], 3)+SelectArrayElement([VCCIA], 4), 3)",
+                    "SaveToSharedStorage": "CPU_VCCIA_ATOM3_IDLE"
+                },
+                {
+                    "Expression": "Round(SelectArrayElement([VCCIA], 0)-SelectArrayElement([VCCIA], 4)+SelectArrayElement([VCCIA], 5), 3)",
+                    "SaveToSharedStorage": "CPU_VCCIA_CORE0P_IDLE"
+                },
+                {
+                    "Expression": "Round(SelectArrayElement([VCCIA], 0)-SelectArrayElement([VCCIA], 5)+SelectArrayElement([VCCIA], 6), 3)",
+                    "SaveToSharedStorage": "CPU_VCCIA_CORE1P_IDLE"
+                },
+                {
+                    "Expression": "Round(SelectArrayElement([VCCIA], 0)-SelectArrayElement([VCCIA], 6)+SelectArrayElement([VCCIA], 7), 3)",
+                    "SaveToSharedStorage": "CPU_VCCIA_CORE2P_IDLE"
+                },
+                {
+                    "Expression": "Round(SelectArrayElement([VCCIA], 0)-SelectArrayElement([VCCIA], 7)+SelectArrayElement([VCCIA], 8), 3)",
+                    "SaveToSharedStorage": "CPU_VCCIA_CORE3P_IDLE"
+                },
+                {
+                    "Expression": "Round(SelectArrayElement([VCCIA], 0)-SelectArrayElement([VCCIA], 8)+SelectArrayElement([VCCIA], 9), 3)",
+                    "SaveToSharedStorage": "CPU_VCCIA_RINGPRIM_IDLE"
+                }
+            ]
+        },        
+    ]
+}

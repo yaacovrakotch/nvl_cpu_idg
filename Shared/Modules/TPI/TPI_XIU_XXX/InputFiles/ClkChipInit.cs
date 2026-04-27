@@ -1,0 +1,597 @@
+// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// INTEL CONFIDENTIAL
+// Copyright (2019) (2024) Intel Corporation
+//
+// The source code contained or described herein and all documents related to the source code ("Material") are
+// owned by Intel Corporation or its suppliers or licensors. Title to the Material remains with Intel Corporation
+// or its suppliers and licensors. The Material contains trade secrets and proprietary and confidential
+// information of Intel Corporation or its suppliers and licensors. The Material is protected by worldwide copyright
+// and trade secret laws and treaty provisions. No part of the Material may be used, copied, reproduced, modified,
+// published, uploaded, posted, transmitted, distributed, or disclosed in any way without Intel Corporation's prior express
+// written permission.
+//
+// No license under any patent, copyright, trade secret or other intellectual property right is granted to or
+// conferred upon you by disclosure or delivery of the Materials, either expressly, by implication, inducement,
+// estoppel or otherwise. Any license under such intellectual property rights must be express and approved by
+// Intel in writing.
+// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+namespace TPI
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Threading;
+    using System.Linq;
+    using Prime.ConsoleService;
+    using Prime.SessionService;
+    using Prime.UserVarService;
+	using Prime.TesterService;
+    
+
+    /// <summary>
+    /// Defines ClkChipInit static class.
+    /// </summary>
+    public class ClkChipInit
+    {
+        // Define TestPinName as a property of the class
+        public string TestPinName { get; set; } = "I2C_PORT";
+        
+        public string Main()
+        {	
+            List<byte> WriteData;
+            bool testStop = false;
+            byte testDeviceAddress;
+            
+            // Initialize tester I2C service
+            var testerService = Prime.Services.TesterService;
+       
+            // Read register 2; expect return 38 (0x26)
+            // Bits 5:0 represent the last two digits of the base part number: "38" for Si5338.
+            testDeviceAddress = 0xe0;
+			WriteData = new List<byte> {0x2};
+			testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+			testDeviceAddress = 0xe1;
+            var ReadDataEB = testerService.ReadI2cData(TestPinName, testDeviceAddress, 1);
+            
+            // Apply [5:0] mask
+            int devConfig2Value = ReadDataEB.First() & 0x3F;
+
+            // Print the debug information
+            var context = Prime.Services.SessionService.GetCurrentThreadSessionContextContainer();
+            Prime.Services.ConsoleService.PrintDebug(() => $"Dev_Config2[5:0] = 0x{devConfig2Value:X2}", context);
+            
+            // Read register 3; expect return 11 (0xB) for K
+            // Bits 7:3 represent the device grade: 1 through 24 = A thorugh Z.
+            testDeviceAddress = 0xe0;
+            WriteData = new List<byte> {0x3};
+			testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+			testDeviceAddress = 0xe1;
+            ReadDataEB = testerService.ReadI2cData(TestPinName, testDeviceAddress, 1);
+			
+            // Apply [7:3] mask and shift
+            int devConfig3Value = (ReadDataEB.First() & 0xF8) >> 3;
+
+            // Print the debug information
+            Prime.Services.ConsoleService.PrintDebug(() => $"Dev_Config3[7:3] = 0x{devConfig3Value:X2}", context);
+            
+            // Read config registers to validate I2C communication to Si5338 chip
+            // Check Dev_Config2 and DevConfig3 values
+            if (devConfig2Value != 0x26) {
+                return "0";
+            }
+            
+            // Initialize clk chip for 4Mhz
+            testDeviceAddress = 0xe0;
+            WriteData = new List<byte> {0xe6,0x10};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xf1,0xe5};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x06,0x08};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x1c,0x16};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x1d,0x90};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x1e,0xB0};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x1f,0xC4};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x20,0xC0};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x21,0xC4};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x22,0xE3};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x23,0x2A};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x24,0x01};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x25,0x01};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x26,0x01};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x27,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x28,0xB5};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x29,0x56};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x2a,0x27};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x2d,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x2e,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x2f,0x14};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x30,0x2F};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x31,0x10};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x32,0xC5};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x33,0x07};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x34,0x10};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x35,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x36,0x94};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x37,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x38,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x39,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x3a,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x3b,0x01};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x3c,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x3d,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x3e,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x3f,0x10};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x40,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x41,0x0A};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x42,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x43,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x44,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x45,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x46,0x01};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x47,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x48,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x49,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x4a,0x10};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x4b,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x4c,0x94};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x4d,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x4e,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x4f,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x50,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x51,0x01};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x52,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x53,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x54,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x55,0x10};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x56,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x57,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x58,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x59,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x5a,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x5b,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x5c,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x5d,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x5e,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x5f,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x61,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x62,0x2E};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x63,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x64,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x65,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x66,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x67,0x01};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x68,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x69,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x6a,0x80};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x6b,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x6c,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x6d,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x6e,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x6f,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x70,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x71,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x72,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x73,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x74,0x80};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x75,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x76,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x77,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x78,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x79,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x7a,0x40};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x7b,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x7c,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x7d,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x7e,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x7f,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x80,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x81,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x82,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x83,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x84,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x85,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x86,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x87,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x88,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x89,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x8a,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x8b,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x8c,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x8d,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x8e,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x8f,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x90,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x98,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x99,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x9a,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x9b,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x9c,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x9d,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x9e,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x9f,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xa0,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xa1,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xa2,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xa3,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xa4,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xa5,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xa6,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xa7,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xa8,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xa9,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xaa,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xab,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xac,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xad,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xae,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xaf,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xb0,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xb1,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xb2,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xb3,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xb4,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xb5,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xb6,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xb7,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xb8,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xb9,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xba,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xbb,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xbc,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xbd,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xbe,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xbf,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xc0,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xc1,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xc2,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xc3,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xc4,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xc5,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xc6,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xc7,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xc8,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xc9,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xca,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xcb,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xcc,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xcd,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xce,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xcf,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xd0,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xd1,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xd2,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xd3,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xd4,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xd5,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xd6,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xd7,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xd8,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xd9,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xe6,0x08};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xf2,0x02};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xff,0x1};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x1f,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x20,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x21,0x01};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x22,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x23,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x24,0x90};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x25,0x31};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x26,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x27,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x28,0x01};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x29,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x2a,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x2b,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x2f,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x30,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x31,0x01};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x32,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x33,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x34,0x90};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x35,0x31};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x36,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x37,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x38,0x01};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x39,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x3a,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x3b,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x3f,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x40,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x41,0x01};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x42,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x43,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x44,0x90};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x45,0x31};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x46,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x47,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x48,0x01};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x49,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x4a,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x4b,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x4f,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x50,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x51,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x52,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x53,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x54,0x90};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x55,0x31};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x56,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x57,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x58,0x01};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x59,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x5a,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x5b,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xff,0x0};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            Thread.Sleep(50);
+            WriteData = new List<byte> {0x31,0x00};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xf6,0x02};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            Thread.Sleep(50);
+            WriteData = new List<byte> {0xf1,0x65};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            Thread.Sleep(50);
+            WriteData = new List<byte> {0xeb};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            testDeviceAddress = 0xe1;
+            ReadDataEB = testerService.ReadI2cData(TestPinName, testDeviceAddress, 1);
+            WriteData = new List<byte> {0x2d}.Concat(ReadDataEB).ToList();
+            testDeviceAddress = 0xe0;
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xec};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            testDeviceAddress = 0xe1;
+            var ReadDataEC = testerService.ReadI2cData(TestPinName, testDeviceAddress, 1);
+            WriteData = new List<byte> {0x2e}.Concat(ReadDataEC).ToList();
+            testDeviceAddress = 0xe0;
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x2f,0x14};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0x31,0x80};
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+            WriteData = new List<byte> {0xe6,0x00};
+            testStop = true;
+            testerService.WriteI2cData(TestPinName, testDeviceAddress, WriteData, testStop);
+
+            return "1";
+        }
+    }
+}

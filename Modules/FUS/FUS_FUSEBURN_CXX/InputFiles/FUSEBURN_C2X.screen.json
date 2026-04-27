@@ -1,0 +1,159 @@
+{
+	"Screen_Config": [
+		{
+			"TestName": "AllInOneCheck",
+			"TestConfig": [
+				[ "Test1", "String", "UserVar", "SCVars.SC_ENGID", "==", "Literal", "CX", "Test5", "Test2" ],
+				[ "Test2", "String", "UserVar", "SCVars.SC_ENGID", "==", "Literal", "RX", "Test5", "Test3" ],
+				[ "Test3", "String", "UserVar", "SCVars.SC_ENGID", "==", "Literal", "PX", "Test5", "Test4" ],
+				[ "Test4", "String", "UserVar", "SCVars.SC_ENGID", "==", "Literal", "EX", "Test5", "3" ],
+				[ "Test5", "String", "UserVar", "SCVars.SC_ENGID", "==", "Literal", "CX", "3", "1" ] // keep in mind to change this manually to RX / PX / EX --> depend on the die that you are working on. CX indicate CPU die, RX indicate GCD die, PX indicate IOE die, EX indicate SOC die.
+			]
+		},
+		{
+			"TestName": "PerDieValuesInit_DUT",
+			"TestConfig": [
+				[ "Test11", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCST_Prog_CPU0", "SET", "Literal", "0.77", "Test12", "2" ],
+				[ "Test12", "Double", "SharedStorage", "DUT.FUSE_VOLTAGE_VCCST_NOMINAL_CPU0", "SET", "Literal", "0.77", "Test13", "2" ],
+				[ "Test13", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_PreProg_CPU0", "SET", "Literal", "0.00", "Test14", "2" ],
+				[ "Test14", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_Prog_0_CPU0", "SET", "Literal", "1.80", "Test15", "2" ],
+				[ "Test15", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_Prog_1_CPU0", "SET", "Literal", "1.80", "Test16", "2" ],				
+				[ "Test16", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_Nominal_CPU0", "SET", "Literal", "0.00", "Test17", "2" ],
+				[ "Test17", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCST_Prog_CPU1", "SET", "Literal", "0.77", "Test18", "2" ],
+				[ "Test18", "Double", "SharedStorage", "DUT.FUSE_VOLTAGE_VCCST_NOMINAL_CPU1", "SET", "Literal", "0.77", "Test19", "2" ],
+				[ "Test19", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_PreProg_CPU1", "SET", "Literal", "0.00", "Test20", "2" ],
+				[ "Test20", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_Prog_0_CPU1", "SET", "Literal", "1.80", "Test21", "2" ],
+				[ "Test21", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_Prog_1_CPU1", "SET", "Literal", "1.80", "Test22", "2" ],				
+				[ "Test22", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_Nominal_CPU1", "SET", "Literal", "0.00", "Test23", "2" ],
+				[ "Test23", "Double", "SharedStorage", "DUT.hCASIKT_FUSEBURN_STATUS", "SET", "Literal", "0", "1", "2" ]
+			]
+		},
+		{
+			"TestName": "PerDieValuesInit_LOT",
+			"TestConfig": [
+				[ "Test11", "Double", "SharedStorage", "LOT.Fuse_Voltage_VCCST_Prog_CPU0", "SET", "Literal", "0.77", "Test12", "2" ],
+				[ "Test12", "Double", "SharedStorage", "LOT.FUSE_VOLTAGE_VCCST_NOMINAL_CPU0", "SET", "Literal", "0.77", "Test13", "2" ],
+				[ "Test13", "Double", "SharedStorage", "LOT.Fuse_Voltage_VCCFPRGx_PreProg_CPU0", "SET", "Literal", "0.00", "Test14", "2" ],
+				[ "Test14", "Double", "SharedStorage", "LOT.Fuse_Voltage_VCCFPRGx_Prog_0_CPU0", "SET", "Literal", "1.80", "Test15", "2" ],
+				[ "Test15", "Double", "SharedStorage", "LOT.Fuse_Voltage_VCCFPRGx_Prog_1_CPU0", "SET", "Literal", "1.80", "Test16", "2" ],
+				[ "Test16", "Double", "SharedStorage", "LOT.Fuse_Voltage_VCCFPRGx_Nominal_CPU0", "SET", "Literal", "0.00", "Test17", "2" ],
+				[ "Test17", "Double", "SharedStorage", "LOT.Fuse_Voltage_VCCST_Prog_CPU1", "SET", "Literal", "0.77", "Test18", "2" ],
+				[ "Test18", "Double", "SharedStorage", "LOT.FUSE_VOLTAGE_VCCST_NOMINAL_CPU1", "SET", "Literal", "0.77", "Test19", "2" ],
+				[ "Test19", "Double", "SharedStorage", "LOT.Fuse_Voltage_VCCFPRGx_PreProg_CPU1", "SET", "Literal", "0.00", "Test20", "2" ],
+				[ "Test20", "Double", "SharedStorage", "LOT.Fuse_Voltage_VCCFPRGx_Prog_0_CPU1", "SET", "Literal", "1.80", "Test21", "2" ],
+				[ "Test21", "Double", "SharedStorage", "LOT.Fuse_Voltage_VCCFPRGx_Prog_1_CPU1", "SET", "Literal", "1.80", "Test22", "2" ],
+				[ "Test22", "Double", "SharedStorage", "LOT.Fuse_Voltage_VCCFPRGx_Nominal_CPU1", "SET", "Literal", "0.00", "1", "2" ]
+			]
+		},
+		{
+			"TestName": "SIM_PerDieValuesInit_DUT",
+			"TestConfig": [
+				[ "Test11", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCST_Prog_CPU0", "SET", "Literal", "0.77", "Test12", "2" ],
+				[ "Test12", "Double", "SharedStorage", "DUT.FUSE_VOLTAGE_VCCST_NOMINAL_CPU0", "SET", "Literal", "0.77", "Test13", "2" ],
+				[ "Test13", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_PreProg_CPU0", "SET", "Literal", "0.0", "Test14", "2" ],
+                [ "Test14", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_Prog_0_CPU0", "SET", "Literal", "1.80", "Test15", "2" ],
+				[ "Test15", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_Prog_1_CPU0", "SET", "Literal", "1.80", "Test16", "2" ],
+				[ "Test16", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_Nominal_CPU0", "SET", "Literal", "0.00", "Test17", "2" ],
+				[ "Test17", "Double", "SharedStorage", "LOT.Fuse_Voltage_VCCST_Prog_CPU1", "SET", "Literal", "0.77", "Test18", "2" ],
+				[ "Test18", "Double", "SharedStorage", "LOT.FUSE_VOLTAGE_VCCST_NOMINAL_CPU1", "SET", "Literal", "0.77", "Test19", "2" ],
+				[ "Test19", "Double", "SharedStorage", "LOT.Fuse_Voltage_VCCFPRGx_PreProg_CPU1", "SET", "Literal", "0.00", "Test20", "2" ],
+				[ "Test20", "Double", "SharedStorage", "LOT.Fuse_Voltage_VCCFPRGx_Prog_0_CPU1", "SET", "Literal", "1.80", "Test21", "2" ],
+				[ "Test21", "Double", "SharedStorage", "LOT.Fuse_Voltage_VCCFPRGx_Prog_1_CPU1", "SET", "Literal", "1.80", "Test22", "2" ],
+				[ "Test22", "Double", "SharedStorage", "LOT.Fuse_Voltage_VCCFPRGx_Nominal_CPU1", "SET", "Literal", "0.00", "Test23", "2" ],
+				[ "Test23", "Double", "SharedStorage", "DUT.hCASIKT_FUSEBURN_STATUS", "SET", "Literal", "0", "Test24", "2" ],
+				[ "Test24", "String", "SharedStorage", "DUT.hCASIKT1600",   "SET", "Literal",	"01101010111100110110101011110011", "Test25",	"2" ],
+				[ "Test25", "String", "SharedStorage", "DUT.hCASIKT4604K",  "SET", "Literal",	"01101010111100110110101011110011", "Test26",	"2" ],
+				[ "Test26", "String", "SharedStorage", "DUT.hCASIKT4605K",  "SET", "Literal",	"01101010111100110110101011110011", "Test27",	"2" ],
+				[ "Test27", "String", "SharedStorage", "DUT.hCASIKTPartId", "SET", "Literal",	"01101010111100110110101011110011", "Test28",	"2" ],
+				[ "Test28", "String", "SharedStorage", "DUT.hCASIKT4164",   "SET", "Literal",	"01101010111100110110101011110011", "Test29",	"2" ],
+				[ "Test29", "String", "SharedStorage", "DUT.hCASIKT77777",  "SET", "Literal",	"01101010111100110110101011110011", "Test30",	"2" ],
+				[ "Test30", "String", "SharedStorage", "DUT.hCASIKT4604",   "SET", "Literal",	"01101010111100110110101011110011", "Test31",	"2" ],
+				[ "Test31", "String", "SharedStorage", "DUT.hCASIKT4580",   "SET", "Literal",	"01101010111100110110101011110011", "Test32",	"2" ],
+				[ "Test32", "String", "SharedStorage", "DUT.hCASIKT4581",	"SET", "Literal",	"01101010111100110110101011110011", "Test33",	"2"],
+				[ "Test33", "String", "SharedStorage", "DUT.hCASIKT1600SNO","SET", "Literal",	"01101010111100110110101011110011", "Test34",	"2"],
+				[ "Test34", "String", "SharedStorage", "DUT.hCASIKT4604SNO","SET", "Literal",	"01101010111100110110101011110011", "Test35",	"2"],
+				[ "Test35", "String", "SharedStorage", "DUT.hCASIKT4605SNO","SET", "Literal",	"01101010111100110110101011110011", "Test36",	"2"],
+				[ "Test36", "String", "SharedStorage", "DUT.hCASIKT77777SNO","SET", "Literal",	"01101010111100110110101011110011", "Test37",	"2"],
+				[ "Test37", "String", "SharedStorage", "DUT.hCASIKT4164SNO","SET", "Literal",	"01101010111100110110101011110011", "Test38",	"2"],
+				[ "Test38", "String", "SharedStorage", "DUT.hCASIKT4581SNO","SET", "Literal",	"01101010111100110110101011110011", "1",	"2"]
+			]
+		},
+		{
+			"TestName": "HASH_SETUP_CPU",
+			"TestConfig": [
+				[ "Test1", "String", "SharedStorage", "DUT.HASH_VALUE_CPU0", "SET", "EXPRESSION", "Substring([G.U.S.hCASIKT1600], 0, 8)",		"Test2",	"2" ],	
+				[ "Test2", "String", "SharedStorage", "DUT.HASH_VALUE_CPU0", "SET", "EXPRESSION", "Hex2Bin([G.U.S.HASH_VALUE_CPU0], 32)",		"Test3",	"2" ],
+				[ "Test3", "String", "SharedStorage", "DUT.HASH_VALUE_CPU0", "SET", "EXPRESSION", "Reverse([G.U.S.HASH_VALUE_CPU0])", "Test4", "2" ],
+				[ "Test4", "String", "SharedStorage", "DUT.HASH_VALUE_CPU1", "SET", "EXPRESSION", "Substring([G.U.S.hCASIKT1599], 0, 8)",		"Test5",	"2" ],	
+				[ "Test5", "String", "SharedStorage", "DUT.HASH_VALUE_CPU1", "SET", "EXPRESSION", "Hex2Bin([G.U.S.HASH_VALUE_CPU1], 32)",		"Test6",	"2" ],
+				[ "Test6", "String", "SharedStorage", "DUT.HASH_VALUE_CPU1", "SET", "EXPRESSION", "Reverse([G.U.S.HASH_VALUE_CPU1])", "1", "2" ] 
+      ]
+    },
+		{
+			"TestName": "QualBurnVoltage_HIGH_DUT",
+			"TestConfig": [
+				[ "Test11", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCST_Prog_CPU0", "SET", "Literal", "0.77", "Test12", "2" ],
+				[ "Test12", "Double", "SharedStorage", "DUT.FUSE_VOLTAGE_VCCST_NOMINAL_CPU0", "SET", "Literal", "0.77", "Test13", "2" ],
+				[ "Test13", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_PreProg_CPU0", "SET", "Literal", "0.00", "Test14", "2" ],
+				[ "Test14", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_Prog_CPU0", "SET", "Literal", "0.00", "Test15", "2" ],
+				[ "Test15", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_Prog_0_CPU0", "SET", "Literal", "1.90", "Test16", "2" ],
+				[ "Test16", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_Prog_1_CPU0", "SET", "Literal", "1.90", "Test17", "2" ],				
+				[ "Test17", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_Nominal_CPU0", "SET", "Literal", "0.00", "1", "2" ]
+			]
+		},
+		{
+			"TestName": "QualBurnVoltage_low_DUT",
+			"TestConfig": [
+				[ "Test11", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCST_Prog_CPU0", "SET", "Literal", "0.77", "Test12", "2" ],
+				[ "Test12", "Double", "SharedStorage", "DUT.FUSE_VOLTAGE_VCCST_NOMINAL_CPU0", "SET", "Literal", "0.77", "Test13", "2" ],
+				[ "Test13", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_PreProg_CPU0", "SET", "Literal", "0.00", "Test14", "2" ],
+				[ "Test14", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_Prog_CPU0", "SET", "Literal", "0.00", "Test15", "2" ],
+				[ "Test15", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_Prog_0_CPU0", "SET", "Literal", "1.70", "Test16", "2" ],
+				[ "Test16", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_Prog_1_CPU0", "SET", "Literal", "1.70", "Test17", "2" ],				
+				[ "Test17", "Double", "SharedStorage", "DUT.Fuse_Voltage_VCCFPRGx_Nominal_CPU0", "SET", "Literal", "0.00", "1", "2" ]
+			]
+		},
+		{
+			"TestName": "WriteBurnVoltageToItuff",
+			"TestConfig": [
+			   ["Test1","Double","UserVar","FUS_FUSEBURN_CXX::FUS_FUSEBURN_CXX.QualBurnVoltage","SET","SharedStorage","DUT.Fuse_Voltage_VCCFPRGx_Prog_0_CPU0","Test2","2"],
+			   ["Test2","String","SharedStorage","DUT.TEST","SET","EXPRESSION","ExecCallback('PrintToItuff', '--body_type mrslt --body_data FUS_FUSEBURN_CXX::FUS_FUSEBURN_CXX.QualBurnVoltage --tname_suf _VALUE')","1","2"]
+			]
+		},
+		{
+			"TestName": "ValForkTest",
+			"TestConfig": [
+				[ "Test1", "String", "UserVar", "SCVars.SC_ENGID", "==", "LITERAL", "FX", "3", "1" ]
+			]
+		},
+		{
+			"TestName": "CheckFacilityID_TP_FUSE_Enabled",
+			"TestConfig": [
+				[ "Test1", "String", "UserVar", "SCVars.TP_FUSE_ENABLED", "==", "LITERAL", "", "2", "Test2" ],
+				[ "Test2", "String", "UserVar", "SCVars.TP_FUSE_ENABLED", "==", "LITERAL", "0", "2", "Test3" ],
+				[ "Test3", "String", "UserVar", "SCVars.TP_FUSE_ENABLED", "==", "LITERAL", "FALSE", "2", "Test4" ],
+				[ "Test4", "String", "UserVar", "SCVars.TP_FUSE_ENABLED", "==", "LITERAL", "1", "1", "Test5" ],
+				[ "Test5", "String", "UserVar", "SCVars.TP_FUSE_ENABLED", "==", "LITERAL", "TRUE", "1", "Test6" ],
+				[ "Test6", "String", "UserVar", "SCVars.TP_FUSE_ENABLED", "==", "LITERAL", "True", "1", "2" ]
+			]
+		},
+		{
+			"TestName": "EFUSE_CHECK",
+			"TestConfig": [
+				[ "Test1", "String",	"SharedStorage",	"DUT.fuseread_U1U5_EFUSE_ULT",	"!=",			"Literal",			"",																																	"Test2",	"Test5" ],
+				[ "Test2", "String",	"SharedStorage",	"DUT.fuseread_U1U5_ULT",		"!=",			"Literal",			"",																																	"Test3",	"Test6" ],
+				[ "Test3", "String",	"SharedStorage",	"DUT.fuseread_U1U5_ULT",		"==",			"SharedStorage",	"DUT.fuseread_U1U5_EFUSE_ULT",																										"Test1a",	"Test4" ],
+				[ "Test4", "String",	"SharedStorage",	"DUT.DUMMY",					"SET",			"EXPRESSION",		"ExecCallback('PrintToConsole', 'ERROR - EFUSE mismatch between ULT from EFUSE Vs. ULT from FuseRead')",								"2",	"2" ],
+				[ "Test5", "String",	"SharedStorage",	"DUT.DUMMY",					"SET",			"EXPRESSION",		"ExecCallback('PrintToConsole', 'ERROR - EFUSE ULT is not Valid')",																		"2",	"2" ],
+				[ "Test6", "String",	"SharedStorage",	"DUT.DUMMY",					"SET",			"EXPRESSION",		"ExecCallback('PrintToConsole', 'ERROR - FuseRead ULT is not Valid')",																	"2",	"2" ],
+				[ "Test1a", "String",	"SharedStorage",	"DUT.fuseread_U1U6_EFUSE_ULT",	"!=",			"Literal",			"",																																	"Test2a",	"Test5a" ],
+				[ "Test2a", "String",	"SharedStorage",	"DUT.fuseread_U1U6_ULT",		"!=",			"Literal",			"",																																	"Test3a",	"Test6a" ],
+				[ "Test3a", "String",	"SharedStorage",	"DUT.fuseread_U1U6_ULT",		"==",			"SharedStorage",	"DUT.fuseread_U1U6_EFUSE_ULT",																											"1",	"Test4a" ],
+				[ "Test4a", "String",	"SharedStorage",	"DUT.DUMMY",					"SET",			"EXPRESSION",		"ExecCallback('PrintToConsole', 'ERROR - EFUSE mismatch between ULT from EFUSE Vs. ULT from FuseRead')",								"2",	"2" ],
+				[ "Test5a", "String",	"SharedStorage",	"DUT.DUMMY",					"SET",			"EXPRESSION",		"ExecCallback('PrintToConsole', 'ERROR - EFUSE ULT is not Valid')",																		"2",	"2" ],
+				[ "Test6a", "String",	"SharedStorage",	"DUT.DUMMY",					"SET",			"EXPRESSION",		"ExecCallback('PrintToConsole', 'ERROR - FuseRead ULT is not Valid')",																	"2",	"2" ]
+			]
+		}
+	]
+}
+

@@ -1,0 +1,101 @@
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+START_SCREEN:MTL_CLASS_BT_CHECK
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#RunOn	    : TestName 		   			: Data Type  :Param Type  	 :Param1   					:Operation             :Param Type 					:Param2  				  		:TmpStore 	    :OnTrue             			:OnFalse
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+##########################################################
+# Port1 - SDS
+# Port2	- SDT
+##########################################################
+##########################################################
+#"PTHVars" setup
+##########################################################
+#CLASSHOT|CLASSHOTR
+#CLASSCOLD|CSM
+#FUSE
+#PHMHOT|PHMHOTR
+#PHMCOLD|PHMCOLDR|PHMECOLD
+#PHMROOM
+#EXTCOLD
+
+EXEC	: Test1		: STRING		: GLOBAL		: SCVars.SC_CURRENT_PROCESS_TYPE   	: ==			: LITERAL		: "CLASSHOT"	:     -			: Test2		: Test11
+EXEC	; Test2		; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU   			; SET			; LITERAL		; "100"			;     -			; Test2A	; 2
+EXEC	; Test2A	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU   	; SET			; LITERAL		; "100"			;     -			; Test3		; 2
+EXEC	; Test3		; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU_F6			; SET			; LITERAL		; "100"			;     -			; Test4		; 2
+EXEC	; Test4		; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU_15C   		; SET			; LITERAL		; "15"			;     -			; Test5		; 2
+EXEC	; Test5		; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_GPU   			; SET			; LITERAL		; "100"			;     -			; Test6		; 2
+EXEC	; Test6		; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_IOE   			; SET			; LITERAL		; "100"			;     -			; Test7		; 2
+EXEC	; Test7		; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_SOC   			; SET			; LITERAL		; "100"			;     -			; Test8 	; 2
+EXEC	; Test8		; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_FACT   		; SET			; LITERAL		; "40"			;     -			; Test11 	; 2
+
+EXEC	: Test11	: STRING		: GLOBAL		: SCVars.SC_CURRENT_PROCESS_TYPE   	: ==			: LITERAL		: "CLASSCOLD"	:     -			: Test12	: Test21
+EXEC	; Test12	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU   			; SET			; LITERAL		; "-5"			;     -			; Test12A	; 2
+EXEC	; Test12A	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU   	; SET			; LITERAL		; "-5"			;     -			; Test13		; 2
+EXEC	; Test13	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU_F6			; SET			; LITERAL		; "-5"			;     -			; Test14	; 2
+EXEC	; Test14	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU_15C   		; SET			; LITERAL		; "-5"			;     -			; Test15	; 2
+EXEC	; Test15	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_GPU   			; SET			; LITERAL		; "-5"			;     -			; Test16	; 2
+EXEC	; Test16	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_IOE   			; SET			; LITERAL		; "-5"			;     -			; Test17	; 2
+EXEC	; Test17	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_SOC   			; SET			; LITERAL		; "-5"			;     -			; Test21	; 2
+
+EXEC	: Test21	: STRING		: GLOBAL		: SCVars.SC_CURRENT_PROCESS_TYPE   	: ==			: LITERAL		: "CSM"			:     -			: Test22	: Test31
+EXEC	; Test22	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU   			; SET			; LITERAL		; "-5"			;     -			; Test22A	; 2
+EXEC	; Test22A	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU   	; SET			; LITERAL		; "-5"			;     -			; Test23		; 2
+EXEC	; Test23	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU_F6			; SET			; LITERAL		; "-5"			;     -			; Test24	; 2
+EXEC	; Test24	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU_15C   		; SET			; LITERAL		; "-5"			;     -			; Test25	; 2
+EXEC	; Test25	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_GPU   			; SET			; LITERAL		; "-5"			;     -			; Test26	; 2
+EXEC	; Test26	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_IOE   			; SET			; LITERAL		; "-5"			;     -			; Test27	; 2
+EXEC	; Test27	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_SOC   			; SET			; LITERAL		; "-5"			;     -			; Test31 	; 2
+
+EXEC	: Test31	: STRING		: GLOBAL		: SCVars.SC_CURRENT_PROCESS_TYPE   	: ==			: LITERAL		: "FUSE"		:     -			: Test32	: Test41
+EXEC	; Test32	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU   			; SET			; LITERAL		; "20"			;     -			; Test32A	; 2
+EXEC	; Test32A	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU   	; SET			; LITERAL		; "20"			;     -			; Test33		; 2
+EXEC	; Test33	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU_F6			; SET			; LITERAL		; "20"			;     -			; Test34	; 2
+EXEC	; Test34	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU_15C   		; SET			; LITERAL		; "20"			;     -			; Test35	; 2
+EXEC	; Test35	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_GPU   			; SET			; LITERAL		; "20"			;     -			; Test36	; 2
+EXEC	; Test36	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_IOE   			; SET			; LITERAL		; "20"			;     -			; Test37	; 2
+EXEC	; Test37	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_SOC   			; SET			; LITERAL		; "20"			;     -			; Test38	; 2
+EXEC	; Test38	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_FACT   		; SET			; LITERAL		; "20"			;     -			; Test41	; 2
+
+EXEC	: Test41	: STRING		: GLOBAL		: SCVars.SC_CURRENT_PROCESS_TYPE   	: ==			: LITERAL		: "PHMHOT"		:     -			: Test42	: Test51
+EXEC	; Test42	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU   			; SET			; LITERAL		; "100"			;     -			; Test42A	; 2
+EXEC	; Test42A	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU   	; SET			; LITERAL		; "100"			;     -			; Test43		; 2
+EXEC	; Test43	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU_F6			; SET			; LITERAL		; "100"			;     -			; Test44	; 2
+EXEC	; Test44	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU_15C   		; SET			; LITERAL		; "15"			;     -			; Test45	; 2
+EXEC	; Test45	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_GPU   			; SET			; LITERAL		; "100"			;     -			; Test46	; 2
+EXEC	; Test46	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_IOE   			; SET			; LITERAL		; "100"			;     -			; Test47	; 2
+EXEC	; Test47	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_SOC   			; SET			; LITERAL		; "100"			;     -			; Test48 	; 2
+EXEC	: Test48	: STRING		: GLOBAL		: SCVars.SC_TEMPERATURE_110			: SET			: LITERAL		: "100"			:     -			: Test49 	: 2
+EXEC	: Test49	: STRING		: GLOBAL		: SCVars.SC_TEMPERATURE_20			: SET			: LITERAL		: "100"			:     -			: Test51 	: 2
+
+
+EXEC	: Test51	: STRING		: GLOBAL		: SCVars.SC_CURRENT_PROCESS_TYPE   	: ==			: LITERAL		: "PHMCOLD"		:     -			: Test52	: Test61
+EXEC	; Test52	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU   			; SET			; LITERAL		; "0"			;     -			; Test52A	; 2
+EXEC	; Test52A	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU   	; SET			; LITERAL		; "0"			;     -			; Test53		; 2
+EXEC	; Test53	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU_F6			; SET			; LITERAL		; "0"			;     -			; Test54	; 2
+EXEC	; Test54	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU_15C   		; SET			; LITERAL		; "0"			;     -			; Test55	; 2
+EXEC	; Test55	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_GPU   			; SET			; LITERAL		; "0"			;     -			; Test56	; 2
+EXEC	; Test56	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_IOE   			; SET			; LITERAL		; "0"			;     -			; Test57	; 2
+EXEC	; Test57	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_SOC   			; SET			; LITERAL		; "0"			;     -			; Test61	; 2
+
+EXEC	: Test61	: STRING		: GLOBAL		: SCVars.SC_CURRENT_PROCESS_TYPE   	: ==			: LITERAL		: "PHMROOM"		:     -			: Test62	: Test68
+EXEC	; Test62	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU   			; SET			; LITERAL		; "20"			;     -			; Test62A	; 2
+EXEC	; Test62A	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU   	; SET			; LITERAL		; "20"			;     -			; Test63		; 2
+EXEC	; Test63	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU_F6			; SET			; LITERAL		; "20"			;     -			; Test64	; 2
+EXEC	; Test64	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_CPU_15C   		; SET			; LITERAL		; "20"			;     -			; Test65	; 2
+EXEC	; Test65	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_GPU   			; SET			; LITERAL		; "20"			;     -			; Test66	; 2
+EXEC	; Test66	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_IOE   			; SET			; LITERAL		; "20"			;     -			; Test67	; 2
+EXEC	; Test67	; STRING		; GLOBAL		; __shared__::PTHVars.TJSETPOINT_SOC   			; SET			; LITERAL		; "20"			;     -			; Test68	; 2
+
+
+##########################################################
+#"SCVars.SC_BENCHTOP" - integer user var
+##########################################################
+
+EXEC	:	Test68		:	INTEGER		:	GLOBAL		:	SCVars.SC_BENCHTOP					:	==			:	LITERAL				:	-1			:	-			:	Test68A	:	Test70
+EXEC	;	Test68A		;	INTEGER		;	GLOBAL		;	__shared__::SCVars.SC_BENCHTOP					;	==			;	LITERAL				;	-1			;	-			;	Test69	;	Test70
+EXEC 	;	Test69 		; 	INTEGER		;	GLOBAL		; 	PTH_DIODE_XXX::PTH_DIODE_XXX.bypass_benchtop_inv	;	SET			; 	LITERAL				; 	1			; -				;	1		;	2
+EXEC 	;	Test70 		; 	INTEGER		;	GLOBAL		; 	PTH_DIODE_XXX::PTH_DIODE_XXX.bypass_benchtop_inv	;	SET			; 	LITERAL				; 	-1			; -				;	1		;	2
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+END_SCREEN
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

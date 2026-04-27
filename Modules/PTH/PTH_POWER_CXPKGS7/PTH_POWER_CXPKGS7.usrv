@@ -1,0 +1,77 @@
+Version 1.0;
+
+SelectorRuleCollection  PTH_POWER_CXPKGS7_Rules
+{
+	SelectorRule PTHSICCFlowControl (Outcome1,Outcome2,Outcome3)
+	{
+		Outcome1 => contains(__shared__::LocationSets.CHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") ;
+		Outcome2 => contains(__shared__::LocationSets.RCHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") ;
+		Outcome3;
+	}
+	SelectorRule PTHSICC2Core(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_UL6C";
+		no;
+	}
+	SelectorRule PTHSICC4Core(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S8C";
+		no;
+	}
+	SelectorRule PTHSICC0Atom(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_UL6C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S8C";
+		no;
+	}
+	SelectorRule PTHSICC8Atom(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C";
+		no;
+	}
+	SelectorRule PTHSICCDARKCCF(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S8C";
+		no;
+	}
+	SelectorRule PTHSICCInputControl (D28,H16,HX,P16,S8,S16,S28,U8,UL6)
+	{
+		D28 => GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C";
+		H16 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C";
+		HX => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C";
+		P16 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C";
+		S8 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S8C";
+		S16 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C";
+		S28 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C";
+		U8 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C";
+		UL6 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_UL6C";
+	}	
+	SelectorRule PTHSICCDummy (D28,H16,HX,P16,S8,S16,S28,U8,UL6,OTHERS)
+	{
+		D28 => GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C";
+		H16 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C";
+		HX => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C";
+		P16 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C";
+		S8 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S8C";
+		S16 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C";
+		S28 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C";
+		U8 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C";
+		UL6 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_UL6C";
+		OTHERS;
+	}	
+	
+}
+UserVars PTH_POWER_CXPKGS7
+{
+	Double tdau_cpu_sicc_1 = -99;
+	Double tdau_cpu_sicc_2 = -99;
+	Double tdau_cpu_sicc_3 = -99;	
+	Double tdau_cpu_sicc_4 = -99;	
+	Double tdau_cpu_sicc_5 = -99;	
+	Double tdau_cpu_sicc_6 = -99;	
+    Double tdau_cpu_dicc_1 = -99;
+	Double tdau_cpu_dicc_2 = -99;
+	Double tdau_cpu_dicc_3 = -99;	
+	Double tdau_cpu_dicc_4 = -99;	
+	Double tdau_cpu_dicc_5 = -99;	
+	Double tdau_cpu_dicc_6 = -99;	
+}

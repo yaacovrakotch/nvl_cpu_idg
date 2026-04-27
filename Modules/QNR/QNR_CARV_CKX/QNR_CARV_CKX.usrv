@@ -1,0 +1,41 @@
+Version 1.0;
+
+SelectorRuleCollection  QNR_CARV_CKX_Rules
+{
+	SelectorRule CTRL_X_CALLBACK_K_INIT_X_X_X_X_CONTROL_ARV_VAL (Outcome1, Outcome2)
+	{
+		Outcome1 => __shared__::SCVars.SC_ENGID == "QG";
+		Outcome2;
+	}
+	SelectorRule CTRL_X_CALLBACK_K_INIT_X_X_X_X_CONTROL_ARV_Mode (Outcome1, Outcome2)
+	{
+		Outcome1 => __shared__::SCVars.SC_ENGID == "QZ" || (__shared__::SCVars.SC_ENGID == "4N" && __shared__::SCVars.SC_LOCN == "5980") || (__shared__::SCVars.SC_ENGID == "AE" && __shared__::SCVars.SC_LOCN == "5248") || (!(__shared__::SCVars.SC_ENGID == "QE"|| __shared__::SCVars.SC_ENGID == "QQ" || __shared__::SCVars.SC_ENGID == "QZ") && (__shared__::SCVars.SC_MASSVAL == "FALSE") && (__shared__::SCVars.SC_LOTNAME ~= ".+WTY"));
+		Outcome2;
+	}
+
+	SelectorRule CTRL_X_CALLBACK_K_INIT_X_X_X_X_CONTROL_ELT (Outcome1, Outcome2)
+	{
+		Outcome1 => __shared__::SCVars.SC_ENGID == "QE";
+		Outcome2;
+	}
+
+	SelectorRule CTRL_X_FLOWHOOKGEN_K_INIT_X_X_X_X_CONTROL_ARV_Mode (Outcome1, Outcome2)
+	{
+		Outcome1 => __shared__::SCVars.SC_ENGID == "QZ" || __shared__::SCVars.SC_ENGID == "QE";
+		Outcome2;
+	}
+
+	SelectorRule CTRL_X_CALLBACK_K_INIT_X_X_X_X_CONTROL_ADDEDEDC (Outcome1, Outcome2)
+	{
+		Outcome1 => __shared__::SCVars.SC_ENGID == "QZ" || (__shared__::SCVars.SC_ENGID == "4N" && __shared__::SCVars.SC_LOCN == "5980");
+		Outcome2;
+	}
+
+
+
+	
+}
+UserVars QNR_CARV_CKX
+{
+   String VAL = "NONE";
+}

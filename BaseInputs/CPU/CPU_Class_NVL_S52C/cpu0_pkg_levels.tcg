@@ -1,0 +1,424 @@
+Version 1.0;
+
+
+SpecificationSet cpu0_all_bf_x_x_pkg_lvl_BFUNC (max,min,nom)
+{
+	Boolean p_ip_level					= False;
+	
+	Voltage p_vnnaon_spec				= __shared__::PowerSpec.vnnaon_max,__shared__::PowerSpec.vnnaon_min,__shared__::PowerSpec.vnnaon_nom;
+	Voltage p_vccio_spec				= __shared__::PowerSpec.vccio_max,	__shared__::PowerSpec.vccio_min, __shared__::PowerSpec.vccio_nom;
+	Voltage p_v1p8_spec					= __shared__::PowerSpec.v1p8_max,	__shared__::PowerSpec.v1p8_min,	__shared__::PowerSpec.v1p8_nom;
+	Voltage p_vccia_spec				= __shared__::PowerSpec.vccia_max,	__shared__::PowerSpec.vccia_min, __shared__::PowerSpec.vccia_nom;
+
+	Double p_scale_all				    = 1;
+	Double p_vcc_gb_type				= 1,-1,0;
+
+	Voltage tester_gb_lc				= __shared__::_UserVars.uv_lc_vcc_gb*p_vcc_gb_type*__shared__::_UserVars.cl_qa_flag;
+	Voltage tester_gb_hc				= __shared__::_UserVars.uv_hc_vcc_gb*p_vcc_gb_type*__shared__::_UserVars.cl_qa_flag;	
+	
+	#Shared Rails linkages
+	Voltage c_vnnaon_prog                = (p_vnnaon_spec * p_scale_all) + tester_gb_hc;
+	Voltage c_vnnaon_fltr_h_prog         = (p_vnnaon_spec * p_scale_all) + tester_gb_lc;
+	Voltage c_vccio_prog                 = (p_vccio_spec  * p_scale_all) + tester_gb_hc;
+	Voltage c_vccio_fltr_h_prog          = (p_vccio_spec  * p_scale_all) + tester_gb_lc;
+	Voltage c_v1p8_prog                  = (p_v1p8_spec   * p_scale_all) + tester_gb_hc;
+	
+	Voltage p_vccfpgm_cpu0_0_prog		= 0V;
+	Voltage p_vccfpgm_cpu0_1_prog		= 0V;
+	Voltage p_vccfpgm_cpu1_0_prog		= 0V;
+	Voltage p_vccfpgm_cpu1_1_prog		= 0V;
+	Voltage p_cpu0_ext_bgref_trim_ana   = 0V;
+	Voltage p_cpu1_ext_bgref_trim_ana   = 0V;
+	Voltage c_hvmtestmode_prog			= c_vccio_prog*(__shared__::PowerSpec.hvmtestmode_vih_ratio);
+	
+	# IP supply linkages
+	Voltage c_vccia_prog				= p_vccia_spec;
+	
+	#=============== IO related links to supplies =============
+	
+	Voltage c_cpu_all_1_vcc_tstprt_prog			= c_vnnaon_prog;
+	Voltage c_cpu_all_1_vcc_tap_prog			= c_vnnaon_prog;
+	
+	Voltage c_cpu_all_vcc_tstprt_prog			= c_vnnaon_prog;
+	Voltage c_cpu_all_vcc_tap_prog				= c_vnnaon_prog;
+	
+	
+	Current c_cpu_all_vccia_clamp_hi			= __shared__::PowerSpec.uv_vccia_clamp_hi;
+	Current c_cpu_all_vnnaon_clamp_hi			= __shared__::PowerSpec.uv_vnnaon_clamp_hi;
+	Current c_cpu_all_vnnaon_fltr_clamp_hi		= __shared__::PowerSpec.uv_vnnaon_fltr_clamp_hi;
+	Current c_cpu_all_vccio_clamp_hi			= __shared__::PowerSpec.uv_vccio_clamp_hi;
+	Current c_cpu_all_vccio_fltr_clamp_hi		= __shared__::PowerSpec.uv_vccio_fltr_clamp_hi;
+	Current c_cpu_all_vccio_out_svid_clamp_hi	= __shared__::PowerSpec.uv_vccio_out_svid_clamp_hi;
+	Current c_cpu_all_v1p8_clamp_hi				= __shared__::PowerSpec.uv_v1p8_clamp_hi;
+	Current c_cpu_all_v1p8_fltr_clamp_hi		= __shared__::PowerSpec.uv_v1p8_fltr_clamp_hi;
+	Current c_cpu_all_v1p8_cpu_clamp_hi			= __shared__::PowerSpec.uv_v1p8_cpu_clamp_hi;
+	Current c_cpu_all_vccdftpcd_clamp_hi		= __shared__::PowerSpec.uv_vccdftpcd_clamp_hi;
+	Current c_cpu_all_vnnaon_fltr_h_clamp_hi    = 0.5A; # __shared__::PowerSpec.uv_vnnaon_fltr_h_clamp_hi;
+	Current c_cpu_all_vccio_fltr_h_clamp_hi     = 0.5A; # __shared__::PowerSpec.uv_vccio_fltr_h_clamp_hi;
+
+	#===================== CPU1 ===============================
+	
+	Double p_cpu_all_1_vnnaon_vih_ratio				= 1;
+	Double p_cpu_all_1_vnnaon_vil_ratio				= 0;
+	Double p_cpu_all_1_vnnaon_vox_ratio				= 0.5;
+	Double p_cpu_all_1_vccio_vih_ratio				= 1;
+	Double p_cpu_all_1_vccio_vil_ratio				= 0;
+	Double p_cpu_all_1_vccio_vox_ratio				= 0.5;
+	Double p_cpu_all_1_v1p8_vih_ratio				= 1;
+	Double p_cpu_all_1_v1p8_vil_ratio				= 0;
+	Double p_cpu_all_1_v1p8_vox_ratio				= 0.5;
+	
+	Double p_cpu_all_1_tstprt_i_ck_ec_vih_ratio		= 1;
+	Double p_cpu_all_1_tstprt_i_ck_ec_vil_ratio		= 0;
+	Double p_cpu_all_1_tstprt_i_ck_ec_vox_ratio		= 0.5;
+	Double p_cpu_all_1_tstprt_o_ck_ec_vih_ratio		= 1;
+	Double p_cpu_all_1_tstprt_o_ck_ec_vil_ratio		= 0;
+	Double p_cpu_all_1_tstprt_o_ck_ec_vox_ratio		= 0.5;
+	Double p_cpu_all_1_tstprt_i_ck_vih_ratio		= 1;
+	Double p_cpu_all_1_tstprt_i_ck_vil_ratio		= 0;
+	Double p_cpu_all_1_tstprt_i_ck_vox_ratio		= 0.5;
+	Double p_cpu_all_1_tstprt_o_ck_vih_ratio		= 1;
+	Double p_cpu_all_1_tstprt_o_ck_vil_ratio		= 0;
+	Double p_cpu_all_1_tstprt_o_ck_vox_ratio		= 0.5;
+	Double p_cpu_all_1_tstprt_i_data_vih_ratio		= 1;
+	Double p_cpu_all_1_tstprt_i_data_vil_ratio		= 0;
+	Double p_cpu_all_1_tstprt_i_data_vox_ratio		= 0.5;
+	Double p_cpu_all_1_tstprt_o_data_vih_ratio		= 1;
+	Double p_cpu_all_1_tstprt_o_data_vil_ratio		= 0;
+	Double p_cpu_all_1_tstprt_o_data_vox_ratio		= 0.5;
+	
+	Double p_cpu_all_1_tap_trst_vih_ratio			= 1;
+	Double p_cpu_all_1_tap_trst_vil_ratio			= 0;
+	Double p_cpu_all_1_tap_trst_vox_ratio			= 0.5;
+	Double p_cpu_all_1_tap_tck_vih_ratio			= 1;
+	Double p_cpu_all_1_tap_tck_vil_ratio			= 0;
+	Double p_cpu_all_1_tap_tck_vox_ratio			= 0.5;
+	Double p_cpu_all_1_tap_tms_vih_ratio			= 1;
+	Double p_cpu_all_1_tap_tms_vil_ratio			= 0;
+	Double p_cpu_all_1_tap_tms_vox_ratio			= 0.5;
+	Double p_cpu_all_1_tap_tdi_vih_ratio			= 1;
+	Double p_cpu_all_1_tap_tdi_vil_ratio			= 0;
+	Double p_cpu_all_1_tap_tdi_vox_ratio			= 0.5;
+	Double p_cpu_all_1_tap_tdo_vih_ratio			= 1;
+	Double p_cpu_all_1_tap_tdo_vil_ratio			= 0;
+	Double p_cpu_all_1_tap_tdo_vox_ratio			= 0.5;
+	
+	Voltage p_cpu_all_1_vnnaon_vih_offset			= 0V;
+	Voltage p_cpu_all_1_vnnaon_vil_offset			= 0V;
+	Voltage p_cpu_all_1_vnnaon_vox_offset			= 0V;
+	Voltage p_cpu_all_1_vccio_vih_offset			= 0V;
+	Voltage p_cpu_all_1_vccio_vil_offset			= 0V;
+	Voltage p_cpu_all_1_vccio_vox_offset			= 0V;
+	Voltage p_cpu_all_1_v1p8_vih_offset				= 0V;
+	Voltage p_cpu_all_1_v1p8_vil_offset				= 0V;
+	Voltage p_cpu_all_1_v1p8_vox_offset				= 0V;
+	
+	Voltage p_cpu_all_1_tstprt_i_ck_ec_vih_offset	= 0V;
+	Voltage p_cpu_all_1_tstprt_i_ck_ec_vil_offset	= 0V;
+	Voltage p_cpu_all_1_tstprt_i_ck_ec_vox_offset	= 0V;
+	Voltage p_cpu_all_1_tstprt_o_ck_ec_vih_offset	= 0V;
+	Voltage p_cpu_all_1_tstprt_o_ck_ec_vil_offset	= 0V;
+	Voltage p_cpu_all_1_tstprt_o_ck_ec_vox_offset	= 0V;
+	Voltage p_cpu_all_1_tstprt_i_ck_vih_offset		= 0V;
+	Voltage p_cpu_all_1_tstprt_i_ck_vil_offset		= 0V;
+	Voltage p_cpu_all_1_tstprt_i_ck_vox_offset		= 0V;
+	Voltage p_cpu_all_1_tstprt_o_ck_vih_offset		= 0V;
+	Voltage p_cpu_all_1_tstprt_o_ck_vil_offset		= 0V;
+	Voltage p_cpu_all_1_tstprt_o_ck_vox_offset		= 0V;
+	Voltage p_cpu_all_1_tstprt_i_data_vih_offset	= 0V;
+	Voltage p_cpu_all_1_tstprt_i_data_vil_offset	= 0V;
+	Voltage p_cpu_all_1_tstprt_i_data_vox_offset	= 0V;
+	Voltage p_cpu_all_1_tstprt_o_data_vih_offset	= 0V;
+	Voltage p_cpu_all_1_tstprt_o_data_vil_offset	= 0V;
+	Voltage p_cpu_all_1_tstprt_o_data_vox_offset	= 0V;
+	Voltage p_cpu_all_1_tstprt_i_vref_offset		= 0V;
+	Voltage p_cpu_all_1_tstprt_o_vref_offset		= 0V;
+
+	Voltage p_cpu_all_1_tap_trst_vih_offset			= 0V;
+	Voltage p_cpu_all_1_tap_trst_vil_offset			= 0V;
+	Voltage p_cpu_all_1_tap_trst_vox_offset			= 0V;
+	Voltage p_cpu_all_1_tap_tck_vih_offset			= 0V;
+	Voltage p_cpu_all_1_tap_tck_vil_offset			= 0V;
+	Voltage p_cpu_all_1_tap_tck_vox_offset			= 0V;
+	Voltage p_cpu_all_1_tap_tms_vih_offset			= 0V;
+	Voltage p_cpu_all_1_tap_tms_vil_offset			= 0V;
+	Voltage p_cpu_all_1_tap_tms_vox_offset			= 0V;
+	Voltage p_cpu_all_1_tap_tdi_vih_offset			= 0V;
+	Voltage p_cpu_all_1_tap_tdi_vil_offset			= 0V;
+	Voltage p_cpu_all_1_tap_tdi_vox_offset			= 0V;
+	Voltage p_cpu_all_1_tap_tdo_vih_offset			= 0V;
+	Voltage p_cpu_all_1_tap_tdo_vil_offset			= 0V;
+	Voltage p_cpu_all_1_tap_tdo_vox_offset			= 0V;
+	Voltage p_cpu_all_1_tap_tdo_vref_offset			= 0V;
+	
+	Voltage c_cpu_all_1_vnnaon_vih = (c_vnnaon_prog*p_cpu_all_1_vnnaon_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_vnnaon_vih_offset;
+	Voltage c_cpu_all_1_vnnaon_vil = (c_vnnaon_prog*p_cpu_all_1_vnnaon_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_vnnaon_vil_offset;
+	Voltage c_cpu_all_1_vnnaon_vox = (c_vnnaon_prog*p_cpu_all_1_vnnaon_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_1_vnnaon_vox_offset;
+
+	Voltage c_cpu_all_1_vccio_vih = (c_vccio_prog*p_cpu_all_1_vccio_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_vccio_vih_offset;
+	Voltage c_cpu_all_1_vccio_vil = (c_vccio_prog*p_cpu_all_1_vccio_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_vccio_vil_offset;
+	Voltage c_cpu_all_1_vccio_vox = (c_vccio_prog*p_cpu_all_1_vccio_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_1_vccio_vox_offset;
+
+	Voltage c_cpu_all_1_v1p8_vih = (c_v1p8_prog*p_cpu_all_1_v1p8_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_v1p8_vih_offset;
+	Voltage c_cpu_all_1_v1p8_vil = (c_v1p8_prog*p_cpu_all_1_v1p8_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_v1p8_vil_offset;
+	Voltage c_cpu_all_1_v1p8_vox = (c_v1p8_prog*p_cpu_all_1_v1p8_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_1_v1p8_vox_offset;
+	
+	Voltage c_cpu_all_1_tstprt_i_ck_ec_vih = (c_cpu_all_1_vcc_tstprt_prog*p_cpu_all_1_tstprt_i_ck_ec_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_tstprt_i_ck_ec_vih_offset;
+	Voltage c_cpu_all_1_tstprt_i_ck_ec_vil = (c_cpu_all_1_vcc_tstprt_prog*p_cpu_all_1_tstprt_i_ck_ec_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_tstprt_i_ck_ec_vil_offset;
+	Voltage c_cpu_all_1_tstprt_i_ck_ec_vox = (c_cpu_all_1_vcc_tstprt_prog*p_cpu_all_1_tstprt_i_ck_ec_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_1_tstprt_i_ck_ec_vox_offset;
+
+	Voltage c_cpu_all_1_tstprt_o_ck_ec_vih = (c_cpu_all_1_vcc_tstprt_prog*p_cpu_all_1_tstprt_o_ck_ec_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_tstprt_o_ck_ec_vih_offset;
+	Voltage c_cpu_all_1_tstprt_o_ck_ec_vil = (c_cpu_all_1_vcc_tstprt_prog*p_cpu_all_1_tstprt_o_ck_ec_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_tstprt_o_ck_ec_vil_offset;
+	Voltage c_cpu_all_1_tstprt_o_ck_ec_vox = (c_cpu_all_1_vcc_tstprt_prog*p_cpu_all_1_tstprt_o_ck_ec_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_1_tstprt_o_ck_ec_vox_offset;
+	
+	Voltage c_cpu_all_1_tstprt_i_ck_vih = (c_cpu_all_1_vcc_tstprt_prog*p_cpu_all_1_tstprt_i_ck_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_tstprt_i_ck_vih_offset;
+	Voltage c_cpu_all_1_tstprt_i_ck_vil = (c_cpu_all_1_vcc_tstprt_prog*p_cpu_all_1_tstprt_i_ck_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_tstprt_i_ck_vil_offset;
+	Voltage c_cpu_all_1_tstprt_i_ck_vox = (c_cpu_all_1_vcc_tstprt_prog*p_cpu_all_1_tstprt_i_ck_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_1_tstprt_i_ck_vox_offset;
+	
+	Voltage c_cpu_all_1_tstprt_o_ck_vih = (c_cpu_all_1_vcc_tstprt_prog*p_cpu_all_1_tstprt_o_ck_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_tstprt_o_ck_vih_offset;
+	Voltage c_cpu_all_1_tstprt_o_ck_vil = (c_cpu_all_1_vcc_tstprt_prog*p_cpu_all_1_tstprt_o_ck_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_tstprt_o_ck_vil_offset;
+	Voltage c_cpu_all_1_tstprt_o_ck_vox = (c_cpu_all_1_vcc_tstprt_prog*p_cpu_all_1_tstprt_o_ck_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_1_tstprt_o_ck_vox_offset;
+
+	Voltage c_cpu_all_1_tstprt_i_data_vih = (c_cpu_all_1_vcc_tstprt_prog*p_cpu_all_1_tstprt_i_data_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_tstprt_i_data_vih_offset;
+	Voltage c_cpu_all_1_tstprt_i_data_vil = (c_cpu_all_1_vcc_tstprt_prog*p_cpu_all_1_tstprt_i_data_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_tstprt_i_data_vil_offset;
+	Voltage c_cpu_all_1_tstprt_i_data_vox = (c_cpu_all_1_vcc_tstprt_prog*p_cpu_all_1_tstprt_i_data_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_1_tstprt_i_data_vox_offset;
+	
+	Voltage c_cpu_all_1_tstprt_o_data_vih = (c_cpu_all_1_vcc_tstprt_prog*p_cpu_all_1_tstprt_o_data_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_tstprt_o_data_vih_offset;
+	Voltage c_cpu_all_1_tstprt_o_data_vil = (c_cpu_all_1_vcc_tstprt_prog*p_cpu_all_1_tstprt_o_data_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_tstprt_o_data_vil_offset;
+	Voltage c_cpu_all_1_tstprt_o_data_vox = (c_cpu_all_1_vcc_tstprt_prog*p_cpu_all_1_tstprt_o_data_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_1_tstprt_o_data_vox_offset;
+	
+	Voltage c_cpu_all_1_tap_trst_vih = (c_cpu_all_1_vcc_tap_prog*p_cpu_all_1_tap_trst_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_tap_trst_vih_offset;
+	Voltage c_cpu_all_1_tap_trst_vil = (c_cpu_all_1_vcc_tap_prog*p_cpu_all_1_tap_trst_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_tap_trst_vil_offset;
+	Voltage c_cpu_all_1_tap_trst_vox = (c_cpu_all_1_vcc_tap_prog*p_cpu_all_1_tap_trst_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_1_tap_trst_vox_offset;
+	
+	Voltage c_cpu_all_1_tap_tck_vih = (c_cpu_all_1_vcc_tap_prog*p_cpu_all_1_tap_tck_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_tap_tck_vih_offset;
+	Voltage c_cpu_all_1_tap_tck_vil = (c_cpu_all_1_vcc_tap_prog*p_cpu_all_1_tap_tck_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_tap_tck_vil_offset;
+	Voltage c_cpu_all_1_tap_tck_vox = (c_cpu_all_1_vcc_tap_prog*p_cpu_all_1_tap_tck_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_1_tap_tck_vox_offset;
+	
+	Voltage c_cpu_all_1_tap_tms_vih = (c_cpu_all_1_vcc_tap_prog*p_cpu_all_1_tap_tms_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_tap_tms_vih_offset;
+	Voltage c_cpu_all_1_tap_tms_vil = (c_cpu_all_1_vcc_tap_prog*p_cpu_all_1_tap_tms_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_tap_tms_vil_offset;
+	Voltage c_cpu_all_1_tap_tms_vox = (c_cpu_all_1_vcc_tap_prog*p_cpu_all_1_tap_tms_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_1_tap_tms_vox_offset;
+	
+	Voltage c_cpu_all_1_tap_tdi_vih = (c_cpu_all_1_vcc_tap_prog*p_cpu_all_1_tap_tdi_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_tap_tdi_vih_offset;
+	Voltage c_cpu_all_1_tap_tdi_vil = (c_cpu_all_1_vcc_tap_prog*p_cpu_all_1_tap_tdi_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_tap_tdi_vil_offset;
+	Voltage c_cpu_all_1_tap_tdi_vox = (c_cpu_all_1_vcc_tap_prog*p_cpu_all_1_tap_tdi_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_1_tap_tdi_vox_offset;
+	
+	Voltage c_cpu_all_1_tap_tdo_vih = (c_cpu_all_1_vcc_tap_prog*p_cpu_all_1_tap_tdo_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_tap_tdo_vih_offset;
+	Voltage c_cpu_all_1_tap_tdo_vil = (c_cpu_all_1_vcc_tap_prog*p_cpu_all_1_tap_tdo_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_1_tap_tdo_vil_offset;
+	Voltage c_cpu_all_1_tap_tdo_vox = (c_cpu_all_1_vcc_tap_prog*p_cpu_all_1_tap_tdo_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_1_tap_tdo_vox_offset;
+	
+	Current	p_cpu_all_1_tstprt_ioh					= 0mA;
+	Current	p_cpu_all_1_tstprt_iol					= 1mA;
+	
+	String c_cpu_all_1_tstprt_o_data_term_mode		= "TermVRef";
+	Voltage c_cpu_all_1_tstprt_o_data_term_vref		= 0;
+	String c_cpu_all_1_tstprt_i_data_term_mode		= "TermVRef";
+	Voltage c_cpu_all_1_tstprt_i_data_term_vref		= 0;
+	
+	String p_cpu_all_1_epd_on_FixedDriveState 		= "VIL"; #this will kill the CPU1 (U1.U6)
+	String p_cpu_all_1_cbt_FixedDriveState			= "VIL"; #this will kill the CPU1 (U1.U6)
+
+	#===================== CPU =====================
+	
+	Double p_cpu_all_vnnaon_vih_ratio				= 1;
+	Double p_cpu_all_vnnaon_vil_ratio				= 0;
+	Double p_cpu_all_vnnaon_vox_ratio				= 0.5;
+	Double p_cpu_all_vccio_vih_ratio				= 1;
+	Double p_cpu_all_vccio_vil_ratio				= 0;
+	Double p_cpu_all_vccio_vox_ratio				= 0.5;
+	Double p_cpu_all_v1p8_vih_ratio					= 1;
+	Double p_cpu_all_v1p8_vil_ratio					= 0;
+	Double p_cpu_all_v1p8_vox_ratio					= 0.5;
+	
+	Double p_cpu_all_tstprt_i_ck_ec_vih_ratio		= 1;
+	Double p_cpu_all_tstprt_i_ck_ec_vil_ratio		= 0;
+	Double p_cpu_all_tstprt_i_ck_ec_vox_ratio		= 0.5;
+	Double p_cpu_all_tstprt_o_ck_ec_vih_ratio		= 1;
+	Double p_cpu_all_tstprt_o_ck_ec_vil_ratio		= 0;
+	Double p_cpu_all_tstprt_o_ck_ec_vox_ratio		= 0.5;
+	Double p_cpu_all_tstprt_i_ck_vih_ratio			= 1;
+	Double p_cpu_all_tstprt_i_ck_vil_ratio			= 0;
+	Double p_cpu_all_tstprt_i_ck_vox_ratio			= 0.5;
+	Double p_cpu_all_tstprt_o_ck_vih_ratio			= 1;
+	Double p_cpu_all_tstprt_o_ck_vil_ratio			= 0;
+	Double p_cpu_all_tstprt_o_ck_vox_ratio			= 0.5;
+	Double p_cpu_all_tstprt_i_data_vih_ratio		= 1;
+	Double p_cpu_all_tstprt_i_data_vil_ratio		= 0;
+	Double p_cpu_all_tstprt_i_data_vox_ratio		= 0.5;
+	Double p_cpu_all_tstprt_o_data_vih_ratio		= 1;
+	Double p_cpu_all_tstprt_o_data_vil_ratio		= 0;
+	Double p_cpu_all_tstprt_o_data_vox_ratio		= 0.5;
+	
+	Double p_cpu_all_tap_trst_vih_ratio				= 1;
+	Double p_cpu_all_tap_trst_vil_ratio				= 0;
+	Double p_cpu_all_tap_trst_vox_ratio				= 0.5;
+	Double p_cpu_all_tap_tck_vih_ratio				= 1;
+	Double p_cpu_all_tap_tck_vil_ratio				= 0;
+	Double p_cpu_all_tap_tck_vox_ratio				= 0.5;
+	Double p_cpu_all_tap_tms_vih_ratio				= 1;
+	Double p_cpu_all_tap_tms_vil_ratio				= 0;
+	Double p_cpu_all_tap_tms_vox_ratio				= 0.5;
+	Double p_cpu_all_tap_tdi_vih_ratio				= 1;
+	Double p_cpu_all_tap_tdi_vil_ratio				= 0;
+	Double p_cpu_all_tap_tdi_vox_ratio				= 0.5;
+	Double p_cpu_all_tap_tdo_vih_ratio				= 1;
+	Double p_cpu_all_tap_tdo_vil_ratio				= 0;
+	Double p_cpu_all_tap_tdo_vox_ratio				= 0.5;
+	
+	Voltage p_cpu_all_vnnaon_vih_offset				= 0V;
+	Voltage p_cpu_all_vnnaon_vil_offset				= 0V;
+	Voltage p_cpu_all_vnnaon_vox_offset				= 0V;
+	Voltage p_cpu_all_vccio_vih_offset				= 0V;
+	Voltage p_cpu_all_vccio_vil_offset				= 0V;
+	Voltage p_cpu_all_vccio_vox_offset				= 0V;
+	Voltage p_cpu_all_v1p8_vih_offset				= 0V;
+	Voltage p_cpu_all_v1p8_vil_offset				= 0V;
+	Voltage p_cpu_all_v1p8_vox_offset				= 0V;
+	
+	Voltage p_cpu_all_tstprt_i_ck_ec_vih_offset 	= 0V;
+	Voltage p_cpu_all_tstprt_i_ck_ec_vil_offset 	= 0V;
+	Voltage p_cpu_all_tstprt_i_ck_ec_vox_offset 	= 0V;
+	Voltage p_cpu_all_tstprt_o_ck_ec_vih_offset 	= 0V;
+	Voltage p_cpu_all_tstprt_o_ck_ec_vil_offset 	= 0V;
+	Voltage p_cpu_all_tstprt_o_ck_ec_vox_offset 	= 0V;
+	Voltage p_cpu_all_tstprt_i_ck_vih_offset		= 0V;
+	Voltage p_cpu_all_tstprt_i_ck_vil_offset		= 0V;
+	Voltage p_cpu_all_tstprt_i_ck_vox_offset		= 0V;
+	Voltage p_cpu_all_tstprt_o_ck_vih_offset		= 0V;
+	Voltage p_cpu_all_tstprt_o_ck_vil_offset		= 0V;
+	Voltage p_cpu_all_tstprt_o_ck_vox_offset		= 0V;
+	Voltage p_cpu_all_tstprt_i_data_vih_offset		= 0V;
+	Voltage p_cpu_all_tstprt_i_data_vil_offset		= 0V;
+	Voltage p_cpu_all_tstprt_i_data_vox_offset		= 0V;
+	Voltage p_cpu_all_tstprt_o_data_vih_offset		= 0V;
+	Voltage p_cpu_all_tstprt_o_data_vil_offset		= 0V;
+	Voltage p_cpu_all_tstprt_o_data_vox_offset		= 0V;
+	Voltage p_cpu_all_tstprt_i_vref_offset			= 0V;
+	Voltage p_cpu_all_tstprt_o_vref_offset			= 0V;
+
+	Voltage p_cpu_all_tap_trst_vih_offset			= 0V;
+	Voltage p_cpu_all_tap_trst_vil_offset			= 0V;
+	Voltage p_cpu_all_tap_trst_vox_offset			= 0V;
+	Voltage p_cpu_all_tap_tck_vih_offset			= 0V;
+	Voltage p_cpu_all_tap_tck_vil_offset			= 0V;
+	Voltage p_cpu_all_tap_tck_vox_offset			= 0V;
+	Voltage p_cpu_all_tap_tms_vih_offset			= 0V;
+	Voltage p_cpu_all_tap_tms_vil_offset			= 0V;
+	Voltage p_cpu_all_tap_tms_vox_offset			= 0V;
+	Voltage p_cpu_all_tap_tdi_vih_offset			= 0V;
+	Voltage p_cpu_all_tap_tdi_vil_offset			= 0V;
+	Voltage p_cpu_all_tap_tdi_vox_offset			= 0V;
+	Voltage p_cpu_all_tap_tdo_vih_offset			= 0V;
+	Voltage p_cpu_all_tap_tdo_vil_offset			= 0V;
+	Voltage p_cpu_all_tap_tdo_vox_offset			= 0V;
+	Voltage p_cpu_all_tap_tdo_vref_offset			= 0V;
+	
+	Voltage c_cpu_all_vnnaon_vih = (c_vnnaon_prog*p_cpu_all_vnnaon_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_vnnaon_vih_offset;
+	Voltage c_cpu_all_vnnaon_vil = (c_vnnaon_prog*p_cpu_all_vnnaon_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_vnnaon_vil_offset;
+	Voltage c_cpu_all_vnnaon_vox = (c_vnnaon_prog*p_cpu_all_vnnaon_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_vnnaon_vox_offset;
+
+	Voltage c_cpu_all_vccio_vih = (c_vccio_prog*p_cpu_all_vccio_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_vccio_vih_offset;
+	Voltage c_cpu_all_vccio_vil = (c_vccio_prog*p_cpu_all_vccio_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_vccio_vil_offset;
+	Voltage c_cpu_all_vccio_vox = (c_vccio_prog*p_cpu_all_vccio_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_vccio_vox_offset;
+
+	Voltage c_cpu_all_v1p8_vih = (c_v1p8_prog*p_cpu_all_v1p8_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_v1p8_vih_offset;
+	Voltage c_cpu_all_v1p8_vil = (c_v1p8_prog*p_cpu_all_v1p8_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_v1p8_vil_offset;
+	Voltage c_cpu_all_v1p8_vox = (c_v1p8_prog*p_cpu_all_v1p8_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_v1p8_vox_offset;
+	
+	Voltage c_cpu_all_tstprt_i_ck_ec_vih = (c_cpu_all_vcc_tstprt_prog*p_cpu_all_tstprt_i_ck_ec_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_tstprt_i_ck_ec_vih_offset;
+	Voltage c_cpu_all_tstprt_i_ck_ec_vil = (c_cpu_all_vcc_tstprt_prog*p_cpu_all_tstprt_i_ck_ec_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_tstprt_i_ck_ec_vil_offset;
+	Voltage c_cpu_all_tstprt_i_ck_ec_vox = (c_cpu_all_vcc_tstprt_prog*p_cpu_all_tstprt_i_ck_ec_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_tstprt_i_ck_ec_vox_offset;
+
+	Voltage c_cpu_all_tstprt_o_ck_ec_vih = (c_cpu_all_vcc_tstprt_prog*p_cpu_all_tstprt_o_ck_ec_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_tstprt_o_ck_ec_vih_offset;
+	Voltage c_cpu_all_tstprt_o_ck_ec_vil = (c_cpu_all_vcc_tstprt_prog*p_cpu_all_tstprt_o_ck_ec_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_tstprt_o_ck_ec_vil_offset;
+	Voltage c_cpu_all_tstprt_o_ck_ec_vox = (c_cpu_all_vcc_tstprt_prog*p_cpu_all_tstprt_o_ck_ec_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_tstprt_o_ck_ec_vox_offset;
+	
+	Voltage c_cpu_all_tstprt_i_ck_vih = (c_cpu_all_vcc_tstprt_prog*p_cpu_all_tstprt_i_ck_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_tstprt_i_ck_vih_offset;
+	Voltage c_cpu_all_tstprt_i_ck_vil = (c_cpu_all_vcc_tstprt_prog*p_cpu_all_tstprt_i_ck_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_tstprt_i_ck_vil_offset;
+	Voltage c_cpu_all_tstprt_i_ck_vox = (c_cpu_all_vcc_tstprt_prog*p_cpu_all_tstprt_i_ck_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_tstprt_i_ck_vox_offset;
+	
+	Voltage c_cpu_all_tstprt_o_ck_vih = (c_cpu_all_vcc_tstprt_prog*p_cpu_all_tstprt_o_ck_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_tstprt_o_ck_vih_offset;
+	Voltage c_cpu_all_tstprt_o_ck_vil = (c_cpu_all_vcc_tstprt_prog*p_cpu_all_tstprt_o_ck_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_tstprt_o_ck_vil_offset;
+	Voltage c_cpu_all_tstprt_o_ck_vox = (c_cpu_all_vcc_tstprt_prog*p_cpu_all_tstprt_o_ck_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_tstprt_o_ck_vox_offset;
+
+	Voltage c_cpu_all_tstprt_i_data_vih = (c_cpu_all_vcc_tstprt_prog*p_cpu_all_tstprt_i_data_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_tstprt_i_data_vih_offset;
+	Voltage c_cpu_all_tstprt_i_data_vil = (c_cpu_all_vcc_tstprt_prog*p_cpu_all_tstprt_i_data_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_tstprt_i_data_vil_offset;
+	Voltage c_cpu_all_tstprt_i_data_vox = (c_cpu_all_vcc_tstprt_prog*p_cpu_all_tstprt_i_data_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_tstprt_i_data_vox_offset;
+	
+	Voltage c_cpu_all_tstprt_o_data_vih = (c_cpu_all_vcc_tstprt_prog*p_cpu_all_tstprt_o_data_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_tstprt_o_data_vih_offset;
+	Voltage c_cpu_all_tstprt_o_data_vil = (c_cpu_all_vcc_tstprt_prog*p_cpu_all_tstprt_o_data_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_tstprt_o_data_vil_offset;
+	Voltage c_cpu_all_tstprt_o_data_vox = (c_cpu_all_vcc_tstprt_prog*p_cpu_all_tstprt_o_data_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_tstprt_o_data_vox_offset;
+	
+	Voltage c_cpu_all_tap_trst_vih = (c_cpu_all_vcc_tap_prog*p_cpu_all_tap_trst_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_tap_trst_vih_offset;
+	Voltage c_cpu_all_tap_trst_vil = (c_cpu_all_vcc_tap_prog*p_cpu_all_tap_trst_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_tap_trst_vil_offset;
+	Voltage c_cpu_all_tap_trst_vox = (c_cpu_all_vcc_tap_prog*p_cpu_all_tap_trst_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_tap_trst_vox_offset;
+	
+	Voltage c_cpu_all_tap_tck_vih = (c_cpu_all_vcc_tap_prog*p_cpu_all_tap_tck_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_tap_tck_vih_offset;
+	Voltage c_cpu_all_tap_tck_vil = (c_cpu_all_vcc_tap_prog*p_cpu_all_tap_tck_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_tap_tck_vil_offset;
+	Voltage c_cpu_all_tap_tck_vox = (c_cpu_all_vcc_tap_prog*p_cpu_all_tap_tck_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_tap_tck_vox_offset;
+	
+	Voltage c_cpu_all_tap_tms_vih = (c_cpu_all_vcc_tap_prog*p_cpu_all_tap_tms_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_tap_tms_vih_offset;
+	Voltage c_cpu_all_tap_tms_vil = (c_cpu_all_vcc_tap_prog*p_cpu_all_tap_tms_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_tap_tms_vil_offset;
+	Voltage c_cpu_all_tap_tms_vox = (c_cpu_all_vcc_tap_prog*p_cpu_all_tap_tms_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_tap_tms_vox_offset;
+	
+	Voltage c_cpu_all_tap_tdi_vih = (c_cpu_all_vcc_tap_prog*p_cpu_all_tap_tdi_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_tap_tdi_vih_offset;
+	Voltage c_cpu_all_tap_tdi_vil = (c_cpu_all_vcc_tap_prog*p_cpu_all_tap_tdi_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_tap_tdi_vil_offset;
+	Voltage c_cpu_all_tap_tdi_vox = (c_cpu_all_vcc_tap_prog*p_cpu_all_tap_tdi_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_tap_tdi_vox_offset;
+	
+	Voltage c_cpu_all_tap_tdo_vih = (c_cpu_all_vcc_tap_prog*p_cpu_all_tap_tdo_vih_ratio)-__shared__::_UserVars.uv_vix_gb+p_cpu_all_tap_tdo_vih_offset;
+	Voltage c_cpu_all_tap_tdo_vil = (c_cpu_all_vcc_tap_prog*p_cpu_all_tap_tdo_vil_ratio)+__shared__::_UserVars.uv_vix_gb+p_cpu_all_tap_tdo_vil_offset;
+	Voltage c_cpu_all_tap_tdo_vox = (c_cpu_all_vcc_tap_prog*p_cpu_all_tap_tdo_vox_ratio)+__shared__::_UserVars.uv_vox_gb+p_cpu_all_tap_tdo_vox_offset;
+	
+	Current	p_cpu_all_tstprt_ioh					= 0mA;
+	Current	p_cpu_all_tstprt_iol					= 1mA;
+	
+	String c_cpu_all_tstprt_o_data_term_mode		= "TermVRef";
+	Voltage c_cpu_all_tstprt_o_data_term_vref		= 0;
+	String c_cpu_all_tstprt_i_data_term_mode		= "TermVRef";
+	Voltage c_cpu_all_tstprt_i_data_term_vref		= 0;
+	
+	String p_cpu_all_epd_on_FixedDriveState 		= "Off";
+	String p_cpu_all_cbt_FixedDriveState			= "Off";
+	
+	Integer c_cpu_vloadmux_bit0_logical_value		= 1;
+	Integer c_cpu_vloadmux_bit1_logical_value		= 1;
+	Integer c_cpu_vloadmux_bit2_logical_value		= 1;
+	Integer c_cpu_vloadmux_bit3_logical_value		= 1;
+	Integer c_cpu_vloadmux_bit4_logical_value		= 1;
+	
+	String  c_cpu_all_tap_tdo_termmode    = "Off";                    #TermMode
+	Voltage c_cpu_all_tap_tdo_vref        = c_cpu_all_tap_tdo_vih;    #VRef  
+	Current c_cpu_all_tap_tdo_ioh         = 0A;                       #IOH   
+	Current c_cpu_all_tap_tdo_iol         = 0A;                       #IOL 
+	
+	String  c_cpu_all_1_tap_tdo_termmode  = "Off";                    #TermMode
+	Voltage c_cpu_all_1_tap_tdo_vref      = c_cpu_all_1_tap_tdo_vih;  #VRef  
+	Current c_cpu_all_1_tap_tdo_ioh       = 0A;                       #IOH   
+	Current c_cpu_all_1_tap_tdo_iol       = 0A;                       #IOL 
+	
+	
+}
+
+TestConditionGroup cpu0_all_bf_x_x_pkg_lvl_TCG
+{
+	SpecificationSet = cpu0_all_bf_x_x_pkg_lvl_BFUNC;
+	Level = cpu_all_bf_x_x_pkg_lvl;
+}
+
+TestCondition cpu0_all_bf_x_x_pkg_lvl_max
+{
+	TestConditionGroup = cpu0_all_bf_x_x_pkg_lvl_TCG;
+	Selector = max;
+}
+
+TestCondition cpu0_all_bf_x_x_pkg_lvl_min
+{
+	TestConditionGroup = cpu0_all_bf_x_x_pkg_lvl_TCG;
+	Selector = min;
+}
+
+TestCondition cpu0_all_bf_x_x_pkg_lvl_nom
+{
+	TestConditionGroup = cpu0_all_bf_x_x_pkg_lvl_TCG;
+	Selector = nom;
+}

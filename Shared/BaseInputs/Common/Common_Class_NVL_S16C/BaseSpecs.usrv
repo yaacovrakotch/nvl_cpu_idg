@@ -1,0 +1,50 @@
+Version 1.0;
+
+Shared
+{
+
+UserVars Specs
+{
+	Const String ATOMCORE_FUNC_PINMAP = "FUN_ATOM_M1,FUN_ATOM_M1,FUN_ATOM_M0,FUN_ATOM_M0";
+	Const String ATOMCORE_FUNC_PINMAP_1 = "FUN_ATOMM_1,FUN_ATOMM_1,FUN_ATOMM_0,FUN_ATOMM_0";
+	Const String ATOMCORE_PINMAP = "ATOM_M1,ATOM_M1,ATOM_M0,ATOM_M0";
+	Const String ATOMCORE_PINMAP_1 = "ATOMM_1,ATOMM_1,ATOMM_0,ATOMM_0";
+	Const String ATOMCORE_TRACKING = "ACRM1_23,ACRM1_01,ACRM0_23,ACRM0_01";
+	Const String BIG_CORE_PINMAP_28 = "CORE1,CORE0";
+	Const String BIG_CORE_PINMAP_28_1 = "CORE_1,CORE_0";
+	Const String BIG_CORE_PINMAP_68 = "CORE5, CORE4,CORE3,CORE2,CORE1,CORE0";
+	Const String BIG_CORE_PINMAP_68_1 = "CORE_5, CORE_4,CORE_3,CORE_2,CORE_1,CORE_0";
+	Const String BIG_CORE_TRACKING_28 = "CR1,CR0";
+	Const String BIG_CORE_TRACKING_68 = "CR5, CR4,CR3,CR2,CR1,CR0";
+	Const String CHK_EDGE_TICK = "3";
+	Const String CHK_MAX_FAILS = "20";
+	Const String SCR_EDGE_TICK = "0";
+	Const String SCR_MAX_FAILS = "20";
+	Const String SLICE_PINMAP_28 = "SLICE3,SLICE2,SLICE1,SLICE0";
+	Const String SLICE_PINMAP_28_1 = "SLICE_3,SLICE_2,SLICE_1,SLICE_0";
+	Const String SLICE_PINMAP_68 = "SLICE7,SLICE6,SLICE5,SLICE4,SLICE3,SLICE2,SLICE1,SLICE0";
+	Const String SLICE_PINMAP_68_1 = "SLICE_7,SLICE_6,SLICE_5,SLICE_4,SLICE_3,SLICE_2,SLICE_1,SLICE_0";
+	Const String SLICE_TRACKING_28 = "SLC3,SLC2,SLC1,SLC0";
+	Const String SLICE_TRACKING_68 = "SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0";
+	Const String VMX_EDGE_TICK = "0";
+	Const String VMX_MAX_FAILS = "20";
+}
+
+UserVars FlowMatrixManual
+{
+	String FlowIndex = FlowMatrixRule.BomGroupRule("7");
+	String BIGCORE_SLICE_SELECT = FlowMatrixRule.BomGroupRule("4");
+	String BIGCORE_CORE_SELECT = FlowMatrixRule.BomGroupRule("4");
+	String CLR_F6_FREQ = FlowMatrixRule.BomGroupRule("3.2");
+	String ATOMC_CORE_SELECT = FlowMatrixRule.BomGroupRule("4");
+	String GT_F6_FREQ = FlowMatrixRule.BomGroupRule("1.8");
+	String GT_F5_FREQ_Max = FlowMatrixRule.BomGroupRule("1.6");
+	String GT_F6_FREQ_Max = FlowMatrixRule.BomGroupRule("2.1");
+	String Die = FlowMatrixRule.BomGroupRule("8+1");
+	String CR_F6_FREQ = FlowMatrixRule.BomGroupRule("4.1");
+	String AT_F6_FREQ = FlowMatrixRule.BomGroupRule("3.2"); # BUG
+	String CRU_F6_FREQ = FlowMatrixRule.BomGroupRule("4.1"); # BUG
+	String CRUX_F6_FREQ = FlowMatrixRule.BomGroupRule("4.1"); # BUG
+}
+
+}

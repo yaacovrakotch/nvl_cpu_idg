@@ -1,0 +1,170 @@
+Version 1.0;
+
+SelectorRuleCollection  TPI_EDM_XKPKGMB_Rules
+{
+	SelectorRule EDM_Limit_HOT_COLD (CHOT, COLD, default)
+	{
+		CHOT => contains(__shared__::LocationSets.HOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		COLD => contains(__shared__::LocationSets.COLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		default;
+	}
+	SelectorRule If_CLASS_NVL_S52C(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+		no;
+	}
+	SelectorRule If_M_PKGs(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_UL6C";
+		no;
+	}
+}
+
+UserVars TPI_EDM_XKPKGMB
+{
+}
+
+UserVars TPI_EDM_XKPKGMB_HighLimit
+{
+	#HOT
+	String HOT_High_Limit_BASE_PRIME = "0.00031689691A";
+	String HOT_High_Limit_CPU_PRIME = "0.0000031368A";
+	String HOT_High_Limit_CPU1_PRIME = "0.00009A";
+	String HOT_High_Limit_GCD_PRIME = "0.0000131361A";
+	String HOT_High_Limit_HUB_PRIME = "0.0000061635A";
+	String HOT_High_Limit_GND_PRIME = "0.0000088627A";
+	String HOT_High_Limit_PCD_PRIME = "0.00006A";
+	
+	#COLD
+	String COLD_High_Limit_BASE_PRIME = "0.0004250000A";
+	String COLD_High_Limit_CPU_PRIME = "0.0000195000A";
+	String COLD_High_Limit_CPU1_PRIME = "0.00003A";
+	String COLD_High_Limit_GCD_PRIME = "0.0000303647A";
+	String COLD_High_Limit_HUB_PRIME = "0.0000075600A";
+	String COLD_High_Limit_GND_PRIME = "0.0000110000A";
+	String COLD_High_Limit_PCD_PRIME = "0.00003A";
+	
+	#Default
+	String Default_High_Limit_BASE_PRIME = "0.0009A";
+	String Default_High_Limit_CPU_PRIME	= "0.00003A";
+	String Default_High_Limit_CPU1_PRIME = "0.00003A";
+	String Default_High_Limit_GCD_PRIME	= "0.00002A";
+	String Default_High_Limit_HUB_PRIME	= "0.00002A";
+	String Default_High_Limit_GND_PRIME	= "0.00002A";
+	String Default_High_Limit_PCD_PRIME	= "0.00002A";
+}
+
+UserVars TPI_EDM_XKPKGMB_LowLimit
+{
+	#HOT
+	String HOT_Low_Limit_BASE_PRIME = "0.0002290841A";
+	String HOT_Low_Limit_CPU_PRIME = "0.0000007969A";
+	String HOT_Low_Limit_CPU1_PRIME = "0.000001A";
+	String HOT_Low_Limit_GCD_PRIME = "0.0000089939A";
+	String HOT_Low_Limit_HUB_PRIME = "0.0000029001A";
+	String HOT_Low_Limit_GND_PRIME = "0.0000059486A";
+	String HOT_Low_Limit_PCD_PRIME = "0.000001A";
+
+	#COLD
+	String COLD_Low_Limit_BASE_PRIME = "0.0002340000A";
+	String COLD_Low_Limit_CPU_PRIME = "-0.0000083800A";
+	String COLD_Low_Limit_CPU1_PRIME = "0.000001A";
+	String COLD_Low_Limit_GCD_PRIME = "-0.0000061669A";
+	String COLD_Low_Limit_HUB_PRIME = "0.0000026100A";
+	String COLD_Low_Limit_GND_PRIME = "0.0000058100A";
+	String COLD_Low_Limit_PCD_PRIME = "0.000001A";
+	
+	#Default
+	String Default_Low_Limit_BASE_PRIME	= "0.000001A";
+	String Default_Low_Limit_CPU_PRIME = "0.000001A";
+	String Default_Low_Limit_CPU1_PRIME = "0.000001A";
+	String Default_Low_Limit_GCD_PRIME = "0.000001A";
+	String Default_Low_Limit_HUB_PRIME = "0.000001A";
+	String Default_Low_Limit_GND_PRIME = "0.000001A";
+	String Default_Low_Limit_PCD_PRIME = "0.000001A";
+}
+
+UserVars TPI_EDM_XKPKGMB_HighLimit_P16C
+{
+	#HOT
+
+	String HOT_High_Limit_BASE_PRIME = "0.0009A";
+	String HOT_High_Limit_CPU_PRIME = "0.00009A";
+	String HOT_High_Limit_CPU1_PRIME = "0.00009A";
+	String HOT_High_Limit_GCD_PRIME = "0.00006A";
+	String HOT_High_Limit_HUB_PRIME = "0.00006A";
+	String HOT_High_Limit_GND_PRIME = "0.00006A";
+	String HOT_High_Limit_PCD_PRIME = "0.00006A";
+
+	#COLD
+	String COLD_High_Limit_BASE_PRIME = "0.0009A";
+	String COLD_High_Limit_CPU_PRIME = "0.00003A";
+	String COLD_High_Limit_CPU1_PRIME = "0.00003A";
+	String COLD_High_Limit_GCD_PRIME = "0.00002A";
+	String COLD_High_Limit_HUB_PRIME = "0.00002A";
+	String COLD_High_Limit_GND_PRIME = "0.00002A";
+	String COLD_High_Limit_PCD_PRIME = "0.00003A";
+	
+	#Default
+	String Default_High_Limit_BASE_PRIME = "0.0009A";
+	String Default_High_Limit_CPU_PRIME	= "0.00003A";
+	String Default_High_Limit_CPU1_PRIME = "0.00003A";
+	String Default_High_Limit_GCD_PRIME	= "0.00002A";
+	String Default_High_Limit_HUB_PRIME	= "0.00002A";
+	String Default_High_Limit_GND_PRIME	= "0.00002A";
+	String Default_High_Limit_PCD_PRIME	= "0.00002A";
+}
+
+UserVars TPI_EDM_XKPKGMB_LowLimit_P16C
+{
+	#HOT
+
+	String HOT_Low_Limit_BASE_PRIME = "0.000001A";
+	String HOT_Low_Limit_CPU_PRIME = "0.000001A";
+	String HOT_Low_Limit_CPU1_PRIME = "0.000001A";
+	String HOT_Low_Limit_GCD_PRIME = "0.000001A";
+	String HOT_Low_Limit_HUB_PRIME = "0.000001A";
+	String HOT_Low_Limit_GND_PRIME = "0.000001A";
+	String HOT_Low_Limit_PCD_PRIME = "0.000001A";
+	
+	#COLD
+	String COLD_Low_Limit_BASE_PRIME = "0.000001A";
+	String COLD_Low_Limit_CPU_PRIME = "0.000001A";
+	String COLD_Low_Limit_CPU1_PRIME = "0.000001A";
+	String COLD_Low_Limit_GCD_PRIME = "0.000001A";
+	String COLD_Low_Limit_HUB_PRIME = "0.000001A";
+	String COLD_Low_Limit_GND_PRIME = "0.000001A";
+	String COLD_Low_Limit_PCD_PRIME = "0.000001A";
+	
+	#Default
+	String Default_Low_Limit_BASE_PRIME	= "0.000001A";
+	String Default_Low_Limit_CPU_PRIME = "0.000001A";
+	String Default_Low_Limit_CPU1_PRIME = "0.000001A";
+	String Default_Low_Limit_GCD_PRIME = "0.000001A";
+	String Default_Low_Limit_HUB_PRIME = "0.000001A";
+	String Default_Low_Limit_GND_PRIME = "0.000001A";
+	String Default_Low_Limit_PCD_PRIME = "0.000001A";
+}
+
+UserVars TPI_EDM_XKPKGMB_Mobile_Limit
+{
+	String TPI_EDM_XKPKGMB_High_Default = TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD("0.000001A","0.000001A","0.000001A");
+	String TPI_EDM_XKPKGMB_High_BASE = __shared__::TpRule.If_HX28C_P16C(TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_HighLimit.HOT_High_Limit_BASE_PRIME, TPI_EDM_XKPKGMB_HighLimit.COLD_High_Limit_BASE_PRIME, TPI_EDM_XKPKGMB_HighLimit.Default_High_Limit_BASE_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_HighLimit_P16C.HOT_High_Limit_BASE_PRIME, TPI_EDM_XKPKGMB_HighLimit_P16C.COLD_High_Limit_BASE_PRIME, TPI_EDM_XKPKGMB_HighLimit_P16C.Default_High_Limit_BASE_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD("0.0009A","0.0009A","0.0009A"));
+	String TPI_EDM_XKPKGMB_High_CPU = __shared__::TpRule.If_HX28C_P16C(TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_HighLimit.HOT_High_Limit_CPU_PRIME, TPI_EDM_XKPKGMB_HighLimit.COLD_High_Limit_CPU_PRIME, TPI_EDM_XKPKGMB_HighLimit.Default_High_Limit_CPU_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_HighLimit_P16C.HOT_High_Limit_CPU_PRIME, TPI_EDM_XKPKGMB_HighLimit_P16C.COLD_High_Limit_CPU_PRIME, TPI_EDM_XKPKGMB_HighLimit_P16C.Default_High_Limit_CPU_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD("0.00009A","0.00003A","0.00003A"));
+	String TPI_EDM_XKPKGMB_High_CPU1 = __shared__::TpRule.If_HX28C_P16C(TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_HighLimit.HOT_High_Limit_CPU1_PRIME, TPI_EDM_XKPKGMB_HighLimit.COLD_High_Limit_CPU1_PRIME, TPI_EDM_XKPKGMB_HighLimit.Default_High_Limit_CPU1_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_HighLimit_P16C.HOT_High_Limit_CPU1_PRIME, TPI_EDM_XKPKGMB_HighLimit_P16C.COLD_High_Limit_CPU1_PRIME, TPI_EDM_XKPKGMB_HighLimit_P16C.Default_High_Limit_CPU1_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD("0.00009A","0.00003A","0.00003A"));
+	String TPI_EDM_XKPKGMB_High_GCD = __shared__::TpRule.If_HX28C_P16C(TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_HighLimit.HOT_High_Limit_GCD_PRIME, TPI_EDM_XKPKGMB_HighLimit.COLD_High_Limit_GCD_PRIME, TPI_EDM_XKPKGMB_HighLimit.Default_High_Limit_GCD_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_HighLimit_P16C.HOT_High_Limit_GCD_PRIME, TPI_EDM_XKPKGMB_HighLimit_P16C.COLD_High_Limit_GCD_PRIME, TPI_EDM_XKPKGMB_HighLimit_P16C.Default_High_Limit_GCD_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD("0.00006A","0.00002A","0.00002A"));
+	String TPI_EDM_XKPKGMB_High_HUB = __shared__::TpRule.If_HX28C_P16C(TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_HighLimit.HOT_High_Limit_HUB_PRIME, TPI_EDM_XKPKGMB_HighLimit.COLD_High_Limit_HUB_PRIME, TPI_EDM_XKPKGMB_HighLimit.Default_High_Limit_HUB_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_HighLimit_P16C.HOT_High_Limit_HUB_PRIME, TPI_EDM_XKPKGMB_HighLimit_P16C.COLD_High_Limit_HUB_PRIME, TPI_EDM_XKPKGMB_HighLimit_P16C.Default_High_Limit_HUB_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD("0.00006A","0.00002A","0.00002A"));
+	String TPI_EDM_XKPKGMB_High_GND = __shared__::TpRule.If_HX28C_P16C(TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_HighLimit.HOT_High_Limit_GND_PRIME, TPI_EDM_XKPKGMB_HighLimit.COLD_High_Limit_GND_PRIME, TPI_EDM_XKPKGMB_HighLimit.Default_High_Limit_GND_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_HighLimit_P16C.HOT_High_Limit_GND_PRIME, TPI_EDM_XKPKGMB_HighLimit_P16C.COLD_High_Limit_GND_PRIME, TPI_EDM_XKPKGMB_HighLimit_P16C.Default_High_Limit_GND_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD("0.00006A","0.00002A","0.00002A"));
+	String TPI_EDM_XKPKGMB_High_PCD = __shared__::TpRule.If_HX28C_P16C(TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_HighLimit.HOT_High_Limit_PCD_PRIME, TPI_EDM_XKPKGMB_HighLimit.COLD_High_Limit_PCD_PRIME, TPI_EDM_XKPKGMB_HighLimit.Default_High_Limit_PCD_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_HighLimit_P16C.HOT_High_Limit_PCD_PRIME, TPI_EDM_XKPKGMB_HighLimit_P16C.COLD_High_Limit_PCD_PRIME, TPI_EDM_XKPKGMB_HighLimit_P16C.Default_High_Limit_PCD_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD("0.00006A","0.00003A","0.00002A"));
+
+
+	String TPI_EDM_XKPKGMB_Low_Default = TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD("0.000001A","0.000001A","0.000001A");
+	String TPI_EDM_XKPKGMB_Low_BASE = __shared__::TpRule.If_HX28C_P16C(TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_LowLimit.HOT_Low_Limit_BASE_PRIME, TPI_EDM_XKPKGMB_LowLimit.COLD_Low_Limit_BASE_PRIME, TPI_EDM_XKPKGMB_LowLimit.Default_Low_Limit_BASE_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_LowLimit_P16C.HOT_Low_Limit_BASE_PRIME, TPI_EDM_XKPKGMB_LowLimit_P16C.COLD_Low_Limit_BASE_PRIME, TPI_EDM_XKPKGMB_LowLimit_P16C.Default_Low_Limit_BASE_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD("0.000001A","0.000001A","0.000001A"));
+	String TPI_EDM_XKPKGMB_Low_CPU = __shared__::TpRule.If_HX28C_P16C(TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_LowLimit.HOT_Low_Limit_CPU_PRIME, TPI_EDM_XKPKGMB_LowLimit.COLD_Low_Limit_CPU_PRIME, TPI_EDM_XKPKGMB_LowLimit.Default_Low_Limit_CPU_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_LowLimit_P16C.HOT_Low_Limit_CPU_PRIME, TPI_EDM_XKPKGMB_LowLimit_P16C.COLD_Low_Limit_CPU_PRIME, TPI_EDM_XKPKGMB_LowLimit_P16C.Default_Low_Limit_CPU_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD("0.000001A","0.000001A","0.000001A"));
+	String TPI_EDM_XKPKGMB_Low_CPU1 = __shared__::TpRule.If_HX28C_P16C(TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_LowLimit.HOT_Low_Limit_CPU1_PRIME, TPI_EDM_XKPKGMB_LowLimit.COLD_Low_Limit_CPU1_PRIME, TPI_EDM_XKPKGMB_LowLimit.Default_Low_Limit_CPU1_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_LowLimit_P16C.HOT_Low_Limit_CPU1_PRIME, TPI_EDM_XKPKGMB_LowLimit_P16C.COLD_Low_Limit_CPU1_PRIME, TPI_EDM_XKPKGMB_LowLimit_P16C.Default_Low_Limit_CPU1_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD("0.000001A","0.000001A","0.000001A"));
+	String TPI_EDM_XKPKGMB_Low_GCD = __shared__::TpRule.If_HX28C_P16C(TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_LowLimit.HOT_Low_Limit_GCD_PRIME, TPI_EDM_XKPKGMB_LowLimit.COLD_Low_Limit_GCD_PRIME, TPI_EDM_XKPKGMB_LowLimit.Default_Low_Limit_GCD_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_LowLimit_P16C.HOT_Low_Limit_GCD_PRIME, TPI_EDM_XKPKGMB_LowLimit_P16C.COLD_Low_Limit_GCD_PRIME, TPI_EDM_XKPKGMB_LowLimit_P16C.Default_Low_Limit_GCD_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD("0.000001A","0.000001A","0.000001A"));
+	String TPI_EDM_XKPKGMB_Low_HUB = __shared__::TpRule.If_HX28C_P16C(TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_LowLimit.HOT_Low_Limit_HUB_PRIME, TPI_EDM_XKPKGMB_LowLimit.COLD_Low_Limit_HUB_PRIME, TPI_EDM_XKPKGMB_LowLimit.Default_Low_Limit_HUB_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_LowLimit_P16C.HOT_Low_Limit_HUB_PRIME, TPI_EDM_XKPKGMB_LowLimit_P16C.COLD_Low_Limit_HUB_PRIME, TPI_EDM_XKPKGMB_LowLimit_P16C.Default_Low_Limit_HUB_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD("0.000001A","0.000001A","0.000001A"));
+	String TPI_EDM_XKPKGMB_Low_GND = __shared__::TpRule.If_HX28C_P16C(TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_LowLimit.HOT_Low_Limit_GND_PRIME, TPI_EDM_XKPKGMB_LowLimit.COLD_Low_Limit_GND_PRIME, TPI_EDM_XKPKGMB_LowLimit.Default_Low_Limit_GND_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_LowLimit_P16C.HOT_Low_Limit_GND_PRIME, TPI_EDM_XKPKGMB_LowLimit_P16C.COLD_Low_Limit_GND_PRIME, TPI_EDM_XKPKGMB_LowLimit_P16C.Default_Low_Limit_GND_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD("0.000001A","0.000001A","0.000001A"));
+	String TPI_EDM_XKPKGMB_Low_PCD = __shared__::TpRule.If_HX28C_P16C(TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_LowLimit.HOT_Low_Limit_PCD_PRIME, TPI_EDM_XKPKGMB_LowLimit.COLD_Low_Limit_PCD_PRIME, TPI_EDM_XKPKGMB_LowLimit.Default_Low_Limit_PCD_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD(TPI_EDM_XKPKGMB_LowLimit_P16C.HOT_Low_Limit_PCD_PRIME, TPI_EDM_XKPKGMB_LowLimit_P16C.COLD_Low_Limit_PCD_PRIME, TPI_EDM_XKPKGMB_LowLimit_P16C.Default_Low_Limit_PCD_PRIME), TPI_EDM_XKPKGMB_Rules.EDM_Limit_HOT_COLD("0.000001A","0.000001A","0.000001A"));
+
+}

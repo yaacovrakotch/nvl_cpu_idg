@@ -1,0 +1,796 @@
+{
+    "Module": "MCdrv",
+  "Groups": [
+    {
+      "Default": "enable",
+      "Name": "patmod_post_fuse_check",
+      "SetPoints": [
+        {
+          "Configurations": [
+            {
+              "Data": "X",
+              "Name": "patmod_dlcs_post_fuse_check"
+            },
+			{
+              "Data": "XXXXXXXX",
+              "Name": "patmod_policy_output_post_fuse_check_r1"
+            },
+			{
+              "Data": "XXXXXXXXXXXXXXXX",
+              "Name": "patmod_policy_output_post_fuse_check_r8_r16"
+            }
+          ],
+          "Name": "enable"
+		},
+		{
+          "Configurations": [
+            {
+              "Data": "L",
+              "Name": "patmod_dlcs_post_fuse_check"
+            },
+			{
+              "Data": "LLHLHHHL",
+              "Name": "patmod_policy_output_post_fuse_check_r1"
+            },
+			{
+              "Data": "XLXLXHXLXHXHXHXL",
+              "Name": "patmod_policy_output_post_fuse_check_r8_r16"
+            }
+          ],
+          "Name": "disable"
+        }
+      ]
+    },
+    {
+      "Default": "enable",
+      "Name": "patmod_dlvr_eor_check",
+      "SetPoints": [
+        {
+          "Configurations": [
+            {
+              "Data": "H",
+              "Name": "patmod_ps0_eor_check"
+            },
+            {
+              "Data": "L",
+              "Name": "patmod_ps7_eor_check"
+            }
+          ],
+          "Name": "enable"
+        }
+      ]
+    },
+	{
+		"Default": "enable", 
+		"Name": "Patmod_Skip_Ramzeroing", 
+		"SetPoints": [
+			{
+				"Configurations": [
+					{
+						"Data": "RPT 1",
+						"Name": "patmod_WaitRamZeroingDone_ipc"
+					}
+				],
+				"Name": "enable"
+			},
+			{
+				"Configurations": [
+					{
+						"Data": "RPT 199999",
+						"Name": "patmod_WaitRamZeroingDone_ipc"
+					}
+				],
+				"Name": "default"
+			}
+		]
+	},
+    {
+      "Default": "enable",
+      "Name": "Add_delay_FuseSenseState",
+      "SetPoints": [
+        {
+          "Configurations": [
+            {
+              "Data": "MOV 1000, R0",
+              "Name": "Add_delay_Infra_debug_ipc"
+            }
+          ],
+          "Name": "enable"
+        }
+      ]
+    },
+    {
+      "Default": "enable",
+      "Name": "Add_delay_FuseSenseState_non_mm",
+      "SetPoints": [
+        {
+          "Configurations": [
+            {
+              "Data": "RPT 1600000",
+              "Name": "Add_delay_Infra_debug_nonmm_ipc"
+            }
+          ],
+          "Name": "enable"
+        }
+      ]
+    },
+	{
+		"Default": "enable", 
+		"Name": "R1_Add_RPT_STICKY_ERROR", 
+		"SetPoints": [
+			{
+				"Configurations": [
+					{
+						"Data": "RPT 1001",
+						"Name": "R1_Add_RPT_STICKY_ERROR"
+					}
+				],
+				"Name": "enable"
+			}
+		]
+	},
+	{
+		"Default": "enable", 
+		"Name": "R8_Add_RPT_STICKY_ERROR", 
+		"SetPoints": [
+			{
+				"Configurations": [
+					{
+						"Data": "RPT 4015",
+						"Name": "R8_Add_RPT_STICKY_ERROR"
+					}
+				],
+				"Name": "enable"
+			}
+		]
+	},
+	{
+		"Default": "enable", 
+		"Name": "R16_Add_RPT_STICKY_ERROR", 
+		"SetPoints": [
+			{
+				"Configurations": [
+					{
+						"Data": "RPT 16031",
+						"Name": "R16_Add_RPT_STICKY_ERROR"
+					}
+				],
+				"Name": "enable"
+			}
+		]
+	},
+	{
+		"Default": "enable_pass", 
+		"Name": "R1_Add_RPT_JNZ", 
+		"SetPoints": [
+			{
+				"Configurations": [
+					{
+						"Data": "RPT 5999",
+						"Name": "R1_Add_RPT_JNZ"
+					}
+				],
+				"Name": "enable_pass"
+			},
+			{
+				"Configurations": [
+					{
+						"Data": "RPT 512",
+						"Name": "R1_Add_RPT_JNZ"
+					}
+				],
+				"Name": "enable_512"
+			},
+			{
+				"Configurations": [
+					{
+						"Data": "RPT 1000",
+						"Name": "R1_Add_RPT_JNZ"
+					}
+				],
+				"Name": "enable_1k"
+			},
+			{
+				"Configurations": [
+					{
+						"Data": "RPT 2000",
+						"Name": "R1_Add_RPT_JNZ"
+					}
+				],
+				"Name": "enable_2k"
+			},
+			{
+				"Configurations": [
+					{
+						"Data": "RPT 2500",
+						"Name": "R1_Add_RPT_JNZ"
+					}
+				],
+				"Name": "enable_2p5k"
+			},
+			{
+				"Configurations": [
+					{
+						"Data": "RPT 3000",
+						"Name": "R1_Add_RPT_JNZ"
+					}
+				],
+				"Name": "enable_3k"
+			},
+			{
+				"Configurations": [
+					{
+						"Data": "RPT 4000",
+						"Name": "R1_Add_RPT_JNZ"
+					}
+				],
+				"Name": "enable_4k"
+			},
+			{
+				"Configurations": [
+					{
+						"Data": "RPT 549",
+						"Name": "R1_Add_RPT_JNZ"
+					}
+				],
+				"Name": "enable_48pass"
+			}
+		]
+	},
+	{
+		"Default": "enable_pass", 
+		"Name": "R8_Add_RPT_JNZ", 
+		"SetPoints": [
+			{
+				"Configurations": [
+					{
+						"Data": "RPT 47999",
+						"Name": "R8_Add_RPT_JNZ"
+					}
+				],
+				"Name": "enable_pass"
+			},
+			{
+				"Configurations": [
+					{
+						"Data": "RPT 3000",
+						"Name": "R8_Add_RPT_JNZ"
+					}
+				],
+				"Name": "enable_3k"
+			},
+			{
+				"Configurations": [
+					{
+						"Data": "RPT 5000",
+						"Name": "R8_Add_RPT_JNZ"
+					}
+				],
+				"Name": "enable_5k"
+			},
+			{
+				"Configurations": [
+					{
+						"Data": "RPT 7000",
+						"Name": "R8_Add_RPT_JNZ"
+					}
+				],
+				"Name": "enable_5k"
+			},
+			{
+				"Configurations": [
+					{
+						"Data": "RPT 10000",
+						"Name": "R8_Add_RPT_JNZ"
+					}
+				],
+				"Name": "enable_10k"
+			},
+			{
+				"Configurations": [
+					{
+						"Data": "RPT 4399",
+						"Name": "R8_Add_RPT_JNZ"
+					}
+				],
+				"Name": "enable_48pass"
+			}
+		]
+	},
+	{
+		"Default": "enable_pass", 
+		"Name": "R16_Add_RPT_JNZ", 
+		"SetPoints": [
+			{
+				"Configurations": [
+					{
+						"Data": "RPT 95999",
+						"Name": "R16_Add_RPT_JNZ"
+					}
+				],
+				"Name": "enable_pass"
+			},
+			{
+				"Configurations": [
+					{
+						"Data": "RPT 10000",
+						"Name": "R16_Add_RPT_JNZ"
+					}
+				],
+				"Name": "enable_10k"
+			},
+			{
+				"Configurations": [
+					{
+						"Data": "RPT 20000",
+						"Name": "R16_Add_RPT_JNZ"
+					}
+				],
+				"Name": "enable_20k"
+			},
+			{
+				"Configurations": [
+					{
+						"Data": "RPT 8799",
+						"Name": "R16_Add_RPT_JNZ"
+					}
+				],
+				"Name": "enable_48pass"
+			}
+		]
+	},
+	{
+		"Default": "sort_mode",
+		"Name": "dlvrvoutpwrgood_local",
+		"SetPoints": [
+			{
+				"Configurations": [
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom0_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom0_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom1_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom1_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom2_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom2_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom3_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom3_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core0_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core0_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core1_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core1_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core2_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core2_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core3_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core3_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_ring0_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_ring0_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom0_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom0_1_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom1_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom1_1_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom2_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom2_1_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom3_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom3_1_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core0_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core0_1_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core1_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core1_1_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core2_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core2_1_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core3_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core3_1_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_ring0_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_ring0_1_TAP_OVR_EN"
+					}					
+				],
+				"Name": "burnin_mode"
+			},
+			{
+				"Configurations": [
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom0_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom0_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom1_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom1_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom2_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom2_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom3_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom3_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core0_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core0_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core1_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core1_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core2_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core2_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core3_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core3_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_ring0_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_ring0_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom0_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom0_1_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom1_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom1_1_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom2_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom2_1_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom3_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom3_1_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core0_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core0_1_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core1_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core1_1_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core2_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core2_1_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core3_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core3_1_TAP_OVR_EN"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_ring0_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "0",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_ring0_1_TAP_OVR_EN"
+					}
+				],
+				"Name": "class_mode"
+			},
+			{
+				"Configurations": [
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom0_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom0_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom1_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom1_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom2_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom2_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom3_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom3_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core0_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core0_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core1_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core1_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core2_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core2_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core3_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core3_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_ring0_0_TAP_OVR_DATA"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_ring0_0_TAP_OVR_EN"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom0_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom0_1_TAP_OVR_EN"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom1_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom1_1_TAP_OVR_EN"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom2_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom2_1_TAP_OVR_EN"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom3_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_atom3_1_TAP_OVR_EN"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core0_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core0_1_TAP_OVR_EN"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core1_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core1_1_TAP_OVR_EN"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core2_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core2_1_TAP_OVR_EN"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core3_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_core3_1_TAP_OVR_EN"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_ring0_1_TAP_OVR_DATA"
+					},
+					{
+						"Data": "1",
+						"Name": "MCdrv_patmod_dlvrvoutpwrgood_ring0_1_TAP_OVR_EN"
+					}
+				],
+				"Name": "sort_mode"
+			}
+		]
+	}
+  ]
+}

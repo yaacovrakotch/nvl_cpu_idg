@@ -1,0 +1,337 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan TPI_SKUCTRL_XXX;
+
+Import "TPI_SKUCTRL_XXX.usrv";
+
+# Test Counter Definition
+
+Counters
+{
+    n93600000_fail_AFORK_X_SCREEN_K_STARTPREPRL1_X_X_X_X_X_0,
+    n93600001_fail_CTRL_CPU1_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X_0,
+    n93600002_fail_CTRL_CPU_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X_0,
+    n93600003_fail_CTRL_GPU_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X_0,
+    n93600004_fail_CTRL_HUB_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X_0,
+    n93600005_fail_CTRL_X_GETINITIALFREQ_K_STARTPREPRL1_X_X_X_X_0,
+    n93600006_fail_CTRL_X_X_K_STARTPREPRL1_X_X_X_X_SKUMANAGER_0
+} # End of Test Counter Definition
+
+CSharpTest SkuDataInit CTRL_X_X_K_INIT_X_X_X_X_SKUDATAINIT
+{
+    SkuInputFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + __shared__::TpRule.If_CLASS_NVL_S52C("./Shared/Modules/TPI/TPI_SKUCTRL_XXX/InputFiles/SKUmanagerFreqConfig_52C.json", __shared__::TpRule.If_CLASS_NVL_HX28C("./Shared/Modules/TPI/TPI_SKUCTRL_XXX/InputFiles/SKUmanagerFreqConfig_HX.json", __shared__::TpRule.If_CLASS_NVL_S28C("./Shared/Modules/TPI/TPI_SKUCTRL_XXX/InputFiles/SKUmanagerFreqConfig.json", __shared__::TpRule.If_CLASS_NVL_P16C("./Shared/Modules/TPI/TPI_SKUCTRL_XXX/InputFiles/SKUmanagerFreqConfig_P16C.json", __shared__::TpRule.If_CLASS_NVL_S16C("./Shared/Modules/TPI/TPI_SKUCTRL_XXX/InputFiles/SKUmanagerFreqConfig_S16C.json", __shared__::TpRule.If_CLASS_DNL_S28C("./Shared/Modules/TPI/TPI_SKUCTRL_XXX/InputFiles/SKUmanagerFreqConfig_S28C_DNL.json", __shared__::TpRule.If_CLASS_NVL_H16C("./Shared/Modules/TPI/TPI_SKUCTRL_XXX/InputFiles/SKUmanagerFreqConfig_H16C.json", __shared__::TpRule.If_CLASS_NVL_U8C("./Shared/Modules/TPI/TPI_SKUCTRL_XXX/InputFiles/SKUmanagerFreqConfig_U8C.json","./Shared/Modules/TPI/TPI_SKUCTRL_XXX/InputFiles/SKUmanagerFreqConfig.json"))))))));
+}
+
+CSharpTest AuxiliaryTC AFORK_X_SCREEN_K_STARTPREPRL1_X_X_X_X_X
+{
+    BypassPort = __shared__::FlwSkpCollect.if_ahmt(2,1);
+    DataType = "Integer";
+    Expression = "1";
+    ResultPort = "1";
+}
+
+CSharpTest SkuManager CTRL_X_X_K_STARTPREPRL1_X_X_X_X_SKUMANAGER
+{
+    ClassHotProcessOptype = TPI_SKUCTRL_XXX_Rules.PredictorMode_ClassHotProcessOptype("CLASSHOT:RC_S1", "CLASSHOT:PBIC_DAB");
+    UpdateStartVoltagesMode = TPI_SKUCTRL_XXX_Rules.Run_only_in_CHOT_With_FRWD("Disable","Default","Disable");
+    CurrentOptype = "__shared__::DFFVars.WRITE_OPTYPE";
+    Mode = "Predictor";
+    PreInstance = "SetCurrentDieId(PKG)";
+    #PostInstance = "PrintSharedStorage()";
+}
+
+CSharpTest SkuManager CTRL_X_GETINITIALFREQ_K_STARTPREPRL1_X_X_X_X
+{
+    Domain = __shared__::TpRule.If_S_PKGs("CORE,RING,ATOM,GT,SAAT,SAC,SAQ","CORE,RING,ATOM,GT,SAAT,SAC,SAQ");
+    Mode = "GetInitialFreq";
+}
+
+CSharpTest VminForwardInit CTRL_CPU_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X
+{
+    BypassPort = __shared__::DieIndic.if_cpu(TPI_SKUCTRL_XXX_Rules.VminForwardInit_BypassPort(1, 1, -1), 1);
+    DFFPrefix = TPI_SKUCTRL_XXX_Rules.VminForwardInit_DFFPrefix("R", "H", "C", "E");
+    Domains = "CORE,RING,ATOM";
+    PrintToItuff = "TRUE";
+    ReadDffDieID = __shared__::DFFVars.DIEID_CPU;
+    ReadDffOptype = TPI_SKUCTRL_XXX_Rules.VminForwardInit_ReadDffOptype("RC_S1", "PBIC_DAB");
+    UpdateFLWD = "TRUE";
+    UpdateLimitCheck = "FALSE";
+}
+
+CSharpTest VminForwardInit CTRL_GPU_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X
+{
+    BypassPort = __shared__::DieIndic.if_gcd(TPI_SKUCTRL_XXX_Rules.VminForwardInit_BypassPort(1, 1, -1), 1);
+    DFFPrefix = TPI_SKUCTRL_XXX_Rules.VminForwardInit_DFFPrefix("R", "H", "C", "E");
+    Domains = "GT";
+    PrintToItuff = "TRUE";
+    ReadDffDieID = __shared__::DFFVars.DIEID_GPU;
+    ReadDffOptype = TPI_SKUCTRL_XXX_Rules.VminForwardInit_ReadDffOptype("RC_S1", "PBIC_DAB");
+    UpdateFLWD = "TRUE";
+    UpdateLimitCheck = "FALSE";
+}
+
+CSharpTest VminForwardInit CTRL_HUB_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X
+{
+    BypassPort = __shared__::DieIndic.if_hub(TPI_SKUCTRL_XXX_Rules.VminForwardInit_BypassPort(1, 1, -1), 1);
+    DFFPrefix = TPI_SKUCTRL_XXX_Rules.VminForwardInit_DFFPrefix("R", "H", "C", "E");
+    Domains = __shared__::TpRule.If_S_PKGs("SAAT,SAC,SAQ","SAAT,SAC,SAQ");
+    PrintToItuff = "TRUE";
+    ReadDffDieID = __shared__::DFFVars.DIEID_HUB;
+    ReadDffOptype = TPI_SKUCTRL_XXX_Rules.VminForwardInit_ReadDffOptype("RC_S1", "PBIC_DAB");
+    UpdateFLWD = "TRUE";
+    UpdateLimitCheck = "FALSE";
+}
+
+CSharpTest VminForwardInit CTRL_CPU1_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X
+{
+    BypassPort = __shared__::DieIndic.if_cpu(__shared__::TpRule.If_CLASS_NVL_S52C(__shared__::TpRule.If_CHOT(1, __shared__::TpRule.If_RCHOT(1, -1)), 1), 1);
+    DFFPrefix = TPI_SKUCTRL_XXX_Rules.VminForwardInit_DFFPrefix("R", "H", "C", "E");
+    Domains = "CORE,RING,ATOM";
+    PrintToItuff = "TRUE";
+    ReadDffDieID = __shared__::DFFVars.DIEID_CPU1;
+    ReadDffOptype = TPI_SKUCTRL_XXX_Rules.VminForwardInit_ReadDffOptype("RC_S1", "PBIC_DAB");
+    UpdateFLWD = "TRUE";
+    UpdateLimitCheck = "FALSE";
+}
+
+Flow TPI_SKUCTRL_XXX_INIT
+{
+    FlowItem CTRL_X_X_K_INIT_X_X_X_X_SKUDATAINIT CTRL_X_X_K_INIT_X_X_X_X_SKUDATAINIT
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99934500_fail_TPI_SKUCTRL_XXX_CTRL_X_X_K_INIT_X_X_X_X_SKUDATAINIT_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98934500_fail_TPI_SKUCTRL_XXX_CTRL_X_X_K_INIT_X_X_X_X_SKUDATAINIT_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow TPI_SKUCTRL_XXX_STARTPREPRL1
+{
+    FlowItem AFORK_X_SCREEN_K_STARTPREPRL1_X_X_X_X_X AFORK_X_SCREEN_K_STARTPREPRL1_X_X_X_X_X
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99934501_fail_TPI_SKUCTRL_XXX_AFORK_X_SCREEN_K_STARTPREPRL1_X_X_X_X_X_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98934501_fail_TPI_SKUCTRL_XXX_AFORK_X_SCREEN_K_STARTPREPRL1_X_X_X_X_X_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93600000_fail_TPI_SKUCTRL_XXX_AFORK_X_SCREEN_K_STARTPREPRL1_X_X_X_X_X_0;
+            IncrementCounters TPI_SKUCTRL_XXX::n93600000_fail_AFORK_X_SCREEN_K_STARTPREPRL1_X_X_X_X_X_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_X_K_STARTPREPRL1_X_X_X_X_SKUMANAGER;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+    FlowItem CTRL_X_X_K_STARTPREPRL1_X_X_X_X_SKUMANAGER CTRL_X_X_K_STARTPREPRL1_X_X_X_X_SKUMANAGER
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99934502_fail_TPI_SKUCTRL_XXX_CTRL_X_X_K_STARTPREPRL1_X_X_X_X_SKUMANAGER_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98934502_fail_TPI_SKUCTRL_XXX_CTRL_X_X_K_STARTPREPRL1_X_X_X_X_SKUMANAGER_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93600006_fail_TPI_SKUCTRL_XXX_CTRL_X_X_K_STARTPREPRL1_X_X_X_X_SKUMANAGER_0;
+            IncrementCounters TPI_SKUCTRL_XXX::n93600006_fail_CTRL_X_X_K_STARTPREPRL1_X_X_X_X_SKUMANAGER_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_GETINITIALFREQ_K_STARTPREPRL1_X_X_X_X;
+        }
+    }
+    
+    FlowItem CTRL_X_GETINITIALFREQ_K_STARTPREPRL1_X_X_X_X CTRL_X_GETINITIALFREQ_K_STARTPREPRL1_X_X_X_X
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99934503_fail_TPI_SKUCTRL_XXX_CTRL_X_GETINITIALFREQ_K_STARTPREPRL1_X_X_X_X_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98934503_fail_TPI_SKUCTRL_XXX_CTRL_X_GETINITIALFREQ_K_STARTPREPRL1_X_X_X_X_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93600005_fail_TPI_SKUCTRL_XXX_CTRL_X_GETINITIALFREQ_K_STARTPREPRL1_X_X_X_X_0;
+            IncrementCounters TPI_SKUCTRL_XXX::n93600005_fail_CTRL_X_GETINITIALFREQ_K_STARTPREPRL1_X_X_X_X_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_CPU_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+    FlowItem CTRL_CPU_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X CTRL_CPU_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99934504_fail_TPI_SKUCTRL_XXX_CTRL_CPU_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98934504_fail_TPI_SKUCTRL_XXX_CTRL_CPU_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93600002_fail_TPI_SKUCTRL_XXX_CTRL_CPU_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X_0;
+            IncrementCounters TPI_SKUCTRL_XXX::n93600002_fail_CTRL_CPU_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_GPU_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X;
+        }
+    }
+    
+    FlowItem CTRL_GPU_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X CTRL_GPU_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99934505_fail_TPI_SKUCTRL_XXX_CTRL_GPU_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98934505_fail_TPI_SKUCTRL_XXX_CTRL_GPU_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93600003_fail_TPI_SKUCTRL_XXX_CTRL_GPU_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X_0;
+            IncrementCounters TPI_SKUCTRL_XXX::n93600003_fail_CTRL_GPU_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_HUB_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X;
+        }
+    }
+    
+    FlowItem CTRL_HUB_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X CTRL_HUB_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99934506_fail_TPI_SKUCTRL_XXX_CTRL_HUB_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98934506_fail_TPI_SKUCTRL_XXX_CTRL_HUB_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93600004_fail_TPI_SKUCTRL_XXX_CTRL_HUB_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X_0;
+            IncrementCounters TPI_SKUCTRL_XXX::n93600004_fail_CTRL_HUB_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_CPU1_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X;
+        }
+    }
+    
+    FlowItem CTRL_CPU1_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X CTRL_CPU1_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99934507_fail_TPI_SKUCTRL_XXX_CTRL_CPU1_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98934507_fail_TPI_SKUCTRL_XXX_CTRL_CPU1_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93600001_fail_TPI_SKUCTRL_XXX_CTRL_CPU1_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X_0;
+            IncrementCounters TPI_SKUCTRL_XXX::n93600001_fail_CTRL_CPU1_DOWNSTREAMFLOWCONTROL_K_STARTPREPRL1_X_X_X_X_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}

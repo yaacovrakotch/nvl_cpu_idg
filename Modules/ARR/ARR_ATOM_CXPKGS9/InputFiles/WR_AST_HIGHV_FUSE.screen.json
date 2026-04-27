@@ -1,0 +1,40 @@
+{
+	"Screen_Config": [
+		{
+			"TestName": "TPREV_CHECK_WR_AST_HIGHV_FUSE_FOR_VMAX",
+			"TestConfig": [
+				[ "Test1"						, "String", "DFF"			, "U1.U5.SORT.TPREV"		, "=="	, "Literal"	, "NCXSDJXA0H24A002523"	, "SetHIGHVFUSE_L2D"			, "Test2" ],
+				[ "Test2"						, "String", "DFF"			, "U1.U5.SORT.TPREV"		, "=="	, "Literal"	, "NCXSDJXA0H24B002524"	, "SetHIGHVFUSE_L2D"			, "Test3" ],
+				[ "Test3"						, "String", "DFF"			, "U1.U5.SORT.TPREV"		, "=="	, "Literal"	, "NCXSDJXA0H24C002525"	, "SetHIGHVFUSE_L2D"			, "Test4" ],
+				[ "Test4"						, "String", "DFF"			, "U1.U5.SORT.TPREV"		, "=="	, "Literal"	, "NCXSDJXA0H24C012525"	, "SetHIGHVFUSE_L2D"			, "Test5" ],
+				[ "Test5"						, "String", "DFF"			, "U1.U5.SORT.TPREV"		, "=="	, "Literal"	, "NCXSDJXA0H24D002527"	, "SetHIGHVFUSE_L2D"			, "Test6" ],
+				[ "Test6"						, "String", "DFF"			, "U1.U5.SORT.TPREV"		, "=="	, "Literal"	, "NCXSDJXA0H24E002528"	, "SetHIGHVFUSE_L2D"			, "Test7" ],
+				[ "Test7"						, "String", "DFF"			, "U1.U5.SORT.TPREV"		, "=="	, "Literal"	, "NCXSDJXA0H24F002530"	, "SetHIGHVFUSE_L2D"			, "Test8" ],
+				[ "Test8"						, "String", "DFF"			, "U1.U5.SORT.TPREV"		, "=="	, "Literal"	, "NCXSDJXA0H24F00FMAX"	, "SetHIGHVFUSE_L2D"			, "Test9" ],
+				[ "Test9"						, "String", "DFF"			, "U1.U5.SORT.TPREV"		, "=="	, "Literal"	, "NCXSDJXA0H24G102531"	, "SetHIGHVFUSE_L2D"			, "SetHIGHVFUSE_FROM_DFF_L2D" ],
+				[ "SetHIGHVFUSE_L2D"			, "String", "SharedStorage"	, "DUT.HIGHV_FUSE_L2D_CPU0"	, "SET"	, "Literal"	, "001"					, "SetHIGHVFUSE_L2T"			, "2" ],
+				[ "SetHIGHVFUSE_L2T"			, "String", "SharedStorage"	, "DUT.HIGHV_FUSE_L2T_CPU0"	, "SET"	, "Literal"	, "001"					, "SetLOWVFUSE_FROM_DFF_L2D"	, "2" ],
+				[ "SetHIGHVFUSE_FROM_DFF_L2D"	, "String", "SharedStorage"	, "DUT.HIGHV_FUSE_L2D_CPU0"	, "SET"	, "DFF"		, "U1.U5.SORT.SL2DWAHV"	, "SetHIGHVFUSE_FROM_DFF_L2T"	, "2" ],
+				[ "SetHIGHVFUSE_FROM_DFF_L2T"	, "String", "SharedStorage"	, "DUT.HIGHV_FUSE_L2T_CPU0"	, "SET"	, "DFF"		, "U1.U5.SORT.SL2TWAHV"	, "SetLOWVFUSE_FROM_DFF_L2D"	, "2" ],
+				[ "SetLOWVFUSE_FROM_DFF_L2D"	, "String", "SharedStorage"	, "DUT.LOWV_FUSE_L2D_CPU0"	, "SET"	, "DFF"		, "U1.U5.SORT.SL2DWAS"	, "SetLOWVFUSE_FROM_DFF_L2T"	, "2" ],
+				[ "SetLOWVFUSE_FROM_DFF_L2T"	, "String", "SharedStorage"	, "DUT.LOWV_FUSE_L2T_CPU0"	, "SET"	, "DFF"		, "U1.U5.SORT.SL2TWAS"	, "C1Test1"							, "2" ],
+				[ "C1Test1"						, "String", "DFF"			, "U1.U6.SORT.TPREV"		, "=="	, "Literal"	, "NCXSDJXA0H24A002523"	, "C1SetHIGHVFUSE_L2D"			, "C1Test2" ],
+				[ "C1Test2"						, "String", "DFF"			, "U1.U6.SORT.TPREV"		, "=="	, "Literal"	, "NCXSDJXA0H24B002524"	, "C1SetHIGHVFUSE_L2D"			, "C1Test3" ],
+				[ "C1Test3"						, "String", "DFF"			, "U1.U6.SORT.TPREV"		, "=="	, "Literal"	, "NCXSDJXA0H24C002525"	, "C1SetHIGHVFUSE_L2D"			, "C1Test4" ],
+				[ "C1Test4"						, "String", "DFF"			, "U1.U6.SORT.TPREV"		, "=="	, "Literal"	, "NCXSDJXA0H24C012525"	, "C1SetHIGHVFUSE_L2D"			, "C1Test5" ],
+				[ "C1Test5"						, "String", "DFF"			, "U1.U6.SORT.TPREV"		, "=="	, "Literal"	, "NCXSDJXA0H24D002527"	, "C1SetHIGHVFUSE_L2D"			, "C1Test6" ],
+				[ "C1Test6"						, "String", "DFF"			, "U1.U6.SORT.TPREV"		, "=="	, "Literal"	, "NCXSDJXA0H24E002528"	, "C1SetHIGHVFUSE_L2D"			, "C1Test7" ],
+				[ "C1Test7"						, "String", "DFF"			, "U1.U6.SORT.TPREV"		, "=="	, "Literal"	, "NCXSDJXA0H24F002530"	, "C1SetHIGHVFUSE_L2D"			, "C1Test8" ],
+				[ "C1Test8"						, "String", "DFF"			, "U1.U6.SORT.TPREV"		, "=="	, "Literal"	, "NCXSDJXA0H24F00FMAX"	, "C1SetHIGHVFUSE_L2D"			, "C1Test9" ],
+				[ "C1Test9"						, "String", "DFF"			, "U1.U6.SORT.TPREV"		, "=="	, "Literal"	, "NCXSDJXA0H24G102531"	, "C1SetHIGHVFUSE_L2D"			, "C1SetHIGHVFUSE_FROM_DFF_L2D" ],
+				[ "C1SetHIGHVFUSE_L2D"			, "String", "SharedStorage"	, "DUT.HIGHV_FUSE_L2D_CPU1"	, "SET"	, "Literal"	, "001"					, "C1SetHIGHVFUSE_L2T"			, "2" ],
+				[ "C1SetHIGHVFUSE_L2T"			, "String", "SharedStorage"	, "DUT.HIGHV_FUSE_L2T_CPU1"	, "SET"	, "Literal"	, "001"					, "C1SetLOWVFUSE_FROM_DFF_L2D"	, "2" ],
+				[ "C1SetHIGHVFUSE_FROM_DFF_L2D"	, "String", "SharedStorage"	, "DUT.HIGHV_FUSE_L2D_CPU1"	, "SET"	, "DFF"		, "U1.U6.SORT.SL2DWAHV"	, "C1SetHIGHVFUSE_FROM_DFF_L2T"	, "2" ],
+				[ "C1SetHIGHVFUSE_FROM_DFF_L2T"	, "String", "SharedStorage"	, "DUT.HIGHV_FUSE_L2T_CPU1"	, "SET"	, "DFF"		, "U1.U6.SORT.SL2TWAHV"	, "C1SetLOWVFUSE_FROM_DFF_L2D"	, "2" ],
+				[ "C1SetLOWVFUSE_FROM_DFF_L2D"	, "String", "SharedStorage"	, "DUT.LOWV_FUSE_L2D_CPU1"	, "SET"	, "DFF"		, "U1.U6.SORT.SL2DWAS"	, "C1SetLOWVFUSE_FROM_DFF_L2T"	, "2" ],
+				[ "C1SetLOWVFUSE_FROM_DFF_L2T"	, "String", "SharedStorage"	, "DUT.LOWV_FUSE_L2T_CPU1"	, "SET"	, "DFF"		, "U1.U6.SORT.SL2TWAS"	, "1"							, "2" ]
+			]
+		}
+	]
+}
+

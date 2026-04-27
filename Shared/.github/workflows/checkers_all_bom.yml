@@ -1,0 +1,182 @@
+name: checkers_all_boms
+env:
+  TARGET: "All"
+
+on:
+  pull_request:
+    branches: [ main* ]
+
+jobs:
+  checkers:
+    name: Checkers_${{ matrix.bom.name }}
+    runs-on: [self-hosted, checkers]
+    timeout-minutes: 60
+
+    # This is the section where PKG Owner add respective Boms
+    # bypass is for bom creation place holder use (true | false)
+    strategy:
+      fail-fast: false
+      matrix:
+        bom: 
+          - name: "NS28C"
+            class: "Class_NVL_S28C"
+            passed_label: "PASSED_S28C"
+            remove_labels: "READY,FAILED,AAREADY,PASSED_S28C,tprobot_S28,FAILED_S28C"
+            output_dir: "10056187_class"
+            bypass: false
+          - name: "NS52C"
+            class: "Class_NVL_S52C"
+            passed_label: "PASSED_S52C"
+            remove_labels: "READY,FAILED,AAREADY,PASSED_S52C,tprobot_S52,FAILED_S52C"
+            output_dir: "10056187_class"
+            bypass: false
+          - name: "NHX28C"
+            class: "Class_NVL_HX28C"
+            passed_label: "PASSED_HX28C"
+            remove_labels: "READY,FAILED,AAREADY,PASSED_HX28C,tprobot_HX28,FAILED_HX28C"
+            output_dir: "10056163_class"
+            bypass: false
+          - name: "NH16C"
+            class: "Class_NVL_H16C"
+            passed_label: "PASSED_H16C"
+            remove_labels: "READY,FAILED,AAREADY,PASSED_H16C,tprobot_H16,FAILED_H16C"
+            output_dir: "10056187_class"
+            bypass: false
+          - name: "NP16C"
+            class: "Class_NVL_P16C"
+            passed_label: "PASSED_P16C"
+            remove_labels: "READY,FAILED,AAREADY,PASSED_P16C,tprobot_P16,FAILED_P16C"
+            output_dir: "10056187_class"
+            bypass: false
+          - name: "NS16C"
+            class: "Class_NVL_S16C"
+            passed_label: "PASSED_S16C"
+            remove_labels: "READY,FAILED,AAREADY,PASSED_S16C,tprobot_S16,FAILED_S16C"
+            output_dir: "10056187_class"
+            bypass: false
+          - name: "DS28C"
+            class: "Class_DNL_S28C"
+            passed_label: "PASSED_DS28C"
+            remove_labels: "READY,FAILED,AAREADY,PASSED_DS28C,tprobot_DS28,FAILED_DS28C"
+            output_dir: "10056187_class"
+            bypass: false
+          - name: "NU8C"
+            class: "Class_NVL_U8C"
+            passed_label: "PASSED_U8C"
+            remove_labels: "READY,FAILED,AAREADY,PASSED_U8C,tprobot_U8,FAILED_U8C"
+            output_dir: "10056187_class"
+            bypass: false
+
+    concurrency:
+     group: checkers_${{ matrix.bom.name }}-${{ github.event.pull_request.number }}
+     cancel-in-progress: true
+
+    outputs:
+      runner_name: ${{ steps.step1.outputs.runner1 }}
+      workspace: ${{ steps.step2.outputs.runner2 }}
+
+    # This step always runs (both bypass and normal flow)
+    steps:
+    - id: step1
+      shell: powershell
+      run: Write-Host '::set-output name=runner1::$(hostname)'
+      
+    - id: step2
+      shell: powershell
+      run: Write-Host '::set-output name=runner2::$env:GITHUB_WORKSPACE'
+
+    # This step always runs (both bypass and normal flow)
+    - name: i drive check
+      shell: powershell
+      run: >
+        python -c "import os, socket;
+        assert os.path.isdir('I:/tpvalidation'),
+        f'I:/ drive is not accessible. Pls contact TPD to fix drive mapping on {socket.gethostname()} right away.'"
+
+    # This step always runs (both bypass and normal flow)
+    - name: repo_init_check
+      continue-on-error: true
+      shell: powershell
+      run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/tprobot.py REPO_INIT main
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    # This step always runs (both bypass and normal flow)
+    - uses: actions/checkout@v6
+      with:
+          fetch-depth: 0
+          clean: true
+          ref: ${{ github.event.pull_request.head.ref }}
+
+    # This step always runs (both bypass and normal flow)
+    - name: Checkout submodules
+      shell: powershell
+      run: |
+          git submodule sync --recursive
+          git submodule update --init --recursive
+
+    # This step always runs (both bypass and normal flow)
+    - name: remove labels for ${{ matrix.bom.name }}
+      shell: powershell
+      run: gh pr edit --remove-label "${{ matrix.bom.remove_labels }}"
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    # This step always runs (both bypass and normal flow)
+    - name: info status
+      shell: powershell
+      run: |
+          Write-Host 'BOM: ${{ matrix.bom.name }}'
+          Write-Host 'CLASS: ${{ matrix.bom.class }}'
+          Write-Host 'RUNNER_NAME: ${{ steps.step1.outputs.runner1 }}'
+          Write-Host 'CURRENT_WORKSPACE: ${{ steps.step2.outputs.runner2 }}'
+
+    - name: merge_master
+      if: ${{ !matrix.bom.bypass }}
+      shell: powershell
+      run: |
+        Write-Host $(git remote get-url origin)
+        git config user.name "GitHub Action Bot"
+        git config user.email "<>"
+        git fetch
+        git merge origin/${{ github.base_ref }} --no-commit
+        git submodule update --init --recursive --force
+
+    - name: clone dielets for ${{ matrix.bom.name }}
+      if: ${{ !matrix.bom.bypass }}
+      shell: powershell
+      run: python I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/nvl_buildtp.py ${{ matrix.bom.class }} -clone
+      env:
+          IS_PR_COMMON: True
+          BASE_REF: ${{ github.base_ref }}
+
+    - name: Checkers for ${{ matrix.bom.name }}
+      if: ${{ !matrix.bom.bypass }}
+      shell: powershell
+      run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/nvl_buildtp.py ${{ matrix.bom.class }} -flow -common -output ${{ runner.temp }}/tpbuild
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BASE_REF: ${{ github.base_ref }}
+          FROM_PR: True
+          REPO_DIR: ${{ github.workspace }}
+          CLEANTP: False
+
+    - name: CTP for ${{ matrix.bom.name }}
+      if: ${{ !matrix.bom.bypass }}
+      shell: powershell
+      run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/tp_plans.py . -tp ${{ runner.temp }}/tpbuild/POR_TP/${{ matrix.bom.class }}/EnvironmentFile.env -frompr -out I:/tpvalidation/engtools/tptools/mtl/plan_waivers/outputs_ctp2/${{ matrix.bom.output_dir }}
+      env:
+          GH_TOKEN: ${{ secrets.PAT_GH_CROSS_REPO }}
+
+    - name: Bypass notification for ${{ matrix.bom.name }}
+      if: ${{ matrix.bom.bypass }}
+      shell: powershell
+      run: echo "Bypassing full workflow for ${{ matrix.bom.name }} - only adding success label"
+
+    # This step always runs (both bypass and normal flow)
+    - name: Add success label for ${{ matrix.bom.name }}
+      shell: powershell
+      run: gh pr edit --add-label "${{ matrix.bom.passed_label }}"
+      env:
+
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

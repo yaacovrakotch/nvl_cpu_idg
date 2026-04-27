@@ -1,0 +1,5 @@
+- Content: CLK
+- Contact: mpe_ddg_pde_analog_clk_my@intel.com
+- Dielet: CPU
+- Scope: Main module tests the kill screen and process monitor EDC content for the CLK team.
+- SIRP: https://wiki.ith.intel.com/display/ATVSecureWiki/NVL+Clock+HVM+SiRP

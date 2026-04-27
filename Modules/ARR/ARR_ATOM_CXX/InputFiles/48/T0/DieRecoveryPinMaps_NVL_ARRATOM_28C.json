@@ -1,0 +1,58 @@
+[
+  {
+    "Name": "NVL_ARRATOM",
+    "Size": 2,
+    "PatConfigSetPoints": [
+
+      {
+        "Indexes": "1",
+        "Values": [ 0 ],
+        "SetPoints": [ "MCdrv:atomcoremod_disable_atom0_0:all_enabled" ]
+      },
+      {
+        "Indexes": "1",
+        "Values": [ 1 ],
+        "SetPoints": [ "MCdrv:atomcoremod_disable_atom0_0:all_disabled" ]
+      },
+      {
+        "Indexes": "0",
+        "Values": [ 0 ],
+        "SetPoints": [ "MCdrv:atomcoremod_disable_atom1_0:all_enabled" ]
+      },
+      {
+        "Indexes": "0",
+        "Values": [ 1 ],
+        "SetPoints": [ "MCdrv:atomcoremod_disable_atom1_0:all_disabled" ]
+      },
+      
+	  {
+        "Indexes": "0-1",
+        "SharedStorageTokens":{
+            "G.U.S.R1_SET_OPERAND": "'MOV '+Bin2Dec('000000000000'+'00'+value+'0000')+',R1'"
+        },
+        "SetPoints": [ "MCdrv:R1_SET" ]
+      }    
+
+    ],
+
+    "FailDataIndexMap": [
+      {
+        "PatternName": "[dg]\\d{7}C\\d{7}._.._..XCA.._.*_N48.*",
+        "Label": "disable_ignore_fail_on_.*atom0.*",
+        "Domain": "IPC::CPU_ALL",
+        "PinName": [ "IPC::CPU_TDO" ],
+        "Index": [ 1 ]
+      },
+      
+	  {
+        "PatternName": "[dg]\\d{7}C\\d{7}._.._..XCA.._.*_N48.*",
+        "Label": "disable_ignore_fail_on_.*atom1.*",
+        "Domain": "IPC::CPU_ALL",
+        "PinName": [ "IPC::CPU_TDO" ],
+        "Index": [ 0 ]
+      }
+
+    ]
+	
+  }
+]

@@ -1,0 +1,92 @@
+{
+    "DC": [
+        {
+            "Measurements": {
+				 "VCCIA": {
+                    "Pin": "IPC::VCCIA",
+                    "Average": 10,
+                    "Expect": 20
+                },
+                "VCCIO": {
+                    "Pin": "VCCIO",
+                    "Average": 10,
+                    "Expect": 20
+                },
+                "VCCIO_OUT_SVID": {
+                    "Pin": "VCCIO_OUT_SVID",
+                    "Average": 10,
+                    "Expect": 20
+                }
+            },
+            "Equations": [
+				{
+                    "Name": "VCCIA0",
+                    "Expression": "SelectArrayElement([VCCIA], 0)",
+                    "DatalogFormat": "DBL",
+                    "SaveResult": true
+                },
+                {
+                    "Name": "IN0",
+                    "Expression": "SelectArrayElement([VCCIO], 0)",
+                    "DatalogFormat": "DBL",
+                    "SaveResult": true
+                },
+                {
+                    "Name": "OUT0",
+                    "Expression": "SelectArrayElement([VCCIO_OUT_SVID], 0)",
+                    "DatalogFormat": "DBL",
+                    "SaveResult": true
+                },
+				{
+                    "Name": "VCCIA1",
+                    "Expression": "SelectArrayElement([VCCIA], 1)",
+                    "DatalogFormat": "DBL",
+                    "SaveResult": true
+                },
+                {
+                    "Name": "IN1",
+                    "Expression": "SelectArrayElement([VCCIO], 1)",
+                    "DatalogFormat": "DBL",
+                    "SaveResult": true
+                },
+                {
+                    "Name": "OUT1",
+                    "Expression": "SelectArrayElement([VCCIO_OUT_SVID], 1)",
+                    "DatalogFormat": "DBL",
+                    "SaveResult": true
+                }
+            ]
+        },
+        {
+      "Token": "VCCIO_IN_OUT_DIFF",
+      "Equations": [
+       {
+          "Expression": "Round(VCCIA0, 4)"
+        },
+
+      {
+          "Expression": "Round(IN0, 4)"
+        },
+		{
+          "Expression": "Round(OUT0, 4)"
+        },
+        {
+          "Expression": "Round((IN0-OUT0)*1000, 2)"
+        },
+       {
+          "Expression": "Round(VCCIA1, 4)"
+        },
+		{
+          "Expression": "Round(IN1, 4)"
+        },
+		{
+          "Expression": "Round(OUT1, 4)"
+        },
+        {
+          "Expression": "Round((IN1-OUT1)*1000, 2)"
+        }
+
+      ]
+    }
+    ]
+}

@@ -1,0 +1,608 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan ARR_CORE_CKX;
+
+Import "ARR_CORE_CKX.usrv";
+Import "ARR_CORE_CKX_Level.tcg";
+Import "ARR_CORE_CKX_Timing.tcg";
+
+# Test Counter Definition
+
+Counters
+{
+    n60192081_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_5,
+    n60192082_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C0C1_5,
+    n60192083_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C2C3_5,
+    n60192085_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_5,
+    n60192086_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C0C1_5,
+    n60192087_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C2C3_5,
+    n60202006_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_0,
+    n60202007_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_2,
+    n60202008_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C0C1_0,
+    n60202009_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C0C1_2,
+    n60202010_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C2C3_0,
+    n60202011_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C2C3_2,
+    n60202014_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_0,
+    n60202015_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_2,
+    n60202016_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C0C1_0,
+    n60202017_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C0C1_2,
+    n60202018_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C2C3_0,
+    n60202019_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C2C3_2,
+    n97602081_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_4,
+    n97602082_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C0C1_4,
+    n97602083_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C2C3_4,
+    n97602085_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_4,
+    n97602086_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C0C1_4,
+    n97602087_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C2C3_4
+} # End of Test Counter Definition
+
+CSharpTest VminTC SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL
+{
+    Patlist = ARR_CORE_Rules.TPRules(ARR_CORE_CKX_Specs.allplist_min_48,ARR_CORE_CKX_Specs.allplist_min_48,ARR_CORE_CKX_Specs.dcm01plist_min_others,ARR_CORE_CKX_Specs.allplist_min_48,ARR_CORE_CKX_Specs.allplist_min_48,ARR_CORE_CKX_Specs.allplist_min_48,ARR_CORE_CKX_Specs.allplist_min_48,ARR_CORE_CKX_Specs.allplist_min_48);
+    LevelsTc = "ARR_CORE_CKX::arr_cpu_all_bf_x_x_ipc_lvl_PKG_BFUNC_ARR_MBIST_min_lvl";
+    TimingsTc = ARR_CORE_CKX_Specs.timingRules;
+    BaseNumbers = "12151";
+    BypassPort = ARR_CORE_Rules.TPRules(-1,1,1,-1,-1,-1,-1,-1);
+    EndVoltageLimits = "0.625";
+    ExecutionMode = "SearchWithScoreboard";
+    FivrCondition = ARR_CORE_CKX_Specs.FivrConditionNom;
+    FailCaptureCount = toInteger(1);
+    FeatureSwitchSettings = ARR_CORE_CKX_Specs.FeatureSwitchNonMTT;
+    ForwardingMode = ARR_CORE_CKX_Specs.ForwardingMode_EDC;
+    MaxFailsNum = toInteger(20);
+    MaxRepetitionCount = 1;
+    PatternNameCounterIndexes = ARR_CORE_CKX_Specs.PatternMap;
+    PinMap = ARR_CORE_CKX_Specs.Recovery_PinMap;
+    RecoveryMode = ARR_CORE_CKX_Specs.Recovery_Mode;
+    RecoveryOptions = __shared__::Recovery_Single.F1F4_recovery_opt_CR;
+    RecoveryTrackingIncoming = ARR_CORE_CKX_Specs.RecoveryTracker_In_Rules;
+    RecoveryTrackingOutgoing = ARR_CORE_CKX_Specs.RecoveryTracker_Out_Rules;
+    ScoreboardEdgeTicks = toInteger(0);
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPreInstance = "MCdrv:"+ARR_CORE_CKX_Specs.corefreq+":"+__shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:"+ARR_CORE_CKX_Specs.ringfreq+":"+__shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz,MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F1_FREQ+"GHz";  
+    StartVoltages = "0.625";
+    StepSize = toDouble(0.01);
+    TestMode = "Scoreboard";
+    VoltageTargets = ARR_CORE_CKX_Specs.CORE_PMUCS_VoltageTarget;
+}
+
+CSharpTest VminTC SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL
+{
+    Patlist = ARR_CORE_Rules.TPRules(ARR_CORE_CKX_Specs.allplist_max_48,ARR_CORE_CKX_Specs.allplist_max_48,ARR_CORE_CKX_Specs.dcm01plist_max_others,ARR_CORE_CKX_Specs.allplist_max_48,ARR_CORE_CKX_Specs.allplist_max_48,ARR_CORE_CKX_Specs.allplist_max_48,ARR_CORE_CKX_Specs.allplist_max_48,ARR_CORE_CKX_Specs.allplist_max_48);
+    LevelsTc = "ARR_CORE_CKX::arr_cpu_all_bf_x_x_ipc_lvl_PKG_BFUNC_ARR_MBIST_max_lvl";
+    TimingsTc = ARR_CORE_CKX_Specs.timingRules;
+    BaseNumbers = "12153";
+    BypassPort = ARR_CORE_Rules.TPRules(-1,1,1,-1,-1,-1,-1,-1);
+    EndVoltageLimits = "0.825";
+    ExecutionMode = "SearchWithScoreboard";
+    FivrCondition = ARR_CORE_CKX_Specs.FivrConditionNom;
+    FailCaptureCount = toInteger(1);
+    FeatureSwitchSettings = ARR_CORE_CKX_Specs.FeatureSwitchNonMTT;
+    ForwardingMode = ARR_CORE_CKX_Specs.ForwardingMode_EDC;
+    MaxFailsNum = toInteger(20);
+    MaxRepetitionCount = 1;
+    PatternNameCounterIndexes = ARR_CORE_CKX_Specs.PatternMap;
+    PinMap = ARR_CORE_CKX_Specs.Recovery_PinMap;
+    RecoveryMode = ARR_CORE_CKX_Specs.Recovery_Mode;
+    RecoveryOptions = __shared__::Recovery_Single.F1F4_recovery_opt_CR;
+    RecoveryTrackingIncoming = ARR_CORE_CKX_Specs.RecoveryTracker_In_Rules;
+    RecoveryTrackingOutgoing = ARR_CORE_CKX_Specs.RecoveryTracker_Out_Rules;
+    ScoreboardEdgeTicks = toInteger(0);
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPreInstance = "MCdrv:"+ARR_CORE_CKX_Specs.corefreq+":"+__shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:"+ARR_CORE_CKX_Specs.ringfreq+":"+__shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz";   
+    StartVoltages = "0.825";
+    StepSize = toDouble(0.01);
+    TestMode = "Scoreboard";
+    VoltageTargets = ARR_CORE_CKX_Specs.CORE_PMUCS_VoltageTarget;
+}
+
+CSharpTest DDGShmooTC ARR_CORE_SHMOO_E_BEGINCPUPKG_X_X_X_X_SHMOO_FOR_DEDC_1
+{
+    Patlist = "IPC::arr_cdie_f1xcr_mbist_core_all_all_all_limiter_f1_class_hptp_list_master";    
+    LevelsTc = "ARR_CORE_CKX::arr_cpu_all_bf_x_x_ipc_lvl_PKG_BFUNC_ARR_MBIST_max_lvl";
+    TimingsTc = ARR_CORE_CKX_Specs.timingRules;
+    BypassPort = 1;
+    LogLevel = "Enabled";
+    PrintFormat = "ShmooHub";
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPreInstance = "";
+    VoltageConverter = "--dlvrpins VCCIA --expressions CORE --fivrcondition NOM_CCF_CORE";
+    XAxisType = "SpecSetVariable";
+    XAxisParam = "p_all_mts";
+    XAxisParamType = "UserDefined";
+    XAxisRange = "700e6:50e6:6";
+    YAxisParam = "CORE3,CORE2,CORE1,CORE0";
+    YAxisParamType = "UserDefined";
+    YAxisRange = "0.9:-0.05:12";
+    YAxisType = "FIVR";
+} # End of Test Counter Definition
+
+CSharpTest VminTC SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C0C1
+{
+    #Patlist = "IPC::arr_cdie_endcpupkg_mbist_core_pnc_pm_dcm01_ssa_vccinf_ks_x_class_hptp_min_list";
+    Patlist = ARR_CORE_Rules.TPRules(ARR_CORE_CKX_Specs.allplist_min_48,ARR_CORE_CKX_Specs.allplist_min_48,ARR_CORE_CKX_Specs.dcm01plist_min_others,ARR_CORE_CKX_Specs.allplist_min_48,ARR_CORE_CKX_Specs.allplist_min_48,ARR_CORE_CKX_Specs.allplist_min_48,ARR_CORE_CKX_Specs.allplist_min_48,ARR_CORE_CKX_Specs.allplist_min_48);
+    LevelsTc = "ARR_CORE_CKX::arr_cpu_all_bf_x_x_ipc_lvl_PKG_BFUNC_ARR_MBIST_min_lvl";
+    TimingsTc = ARR_CORE_CKX_Specs.timingRules;
+    BaseNumbers = "12196";
+    BypassPort = ARR_CORE_Rules.TPRules(1,1,-1,1,1,1,1,1);
+    EndVoltageLimits = "0.625";
+    ExecutionMode = "SearchWithScoreboard";
+    FivrCondition = ARR_CORE_CKX_Specs.FivrConditionNom;
+    FailCaptureCount = toInteger(1);
+    InitialMaskBits = "1100";
+    FeatureSwitchSettings = ARR_CORE_CKX_Specs.FeatureSwitchNonMTT;
+    ForwardingMode = ARR_CORE_CKX_Specs.ForwardingMode_EDC;
+    MaxFailsNum = toInteger(20);
+    MaxRepetitionCount = 1;
+    PatternNameCounterIndexes = ARR_CORE_CKX_Specs.PatternMap;
+    PinMap = ARR_CORE_CKX_Specs.Recovery_PinMap;
+    RecoveryMode = ARR_CORE_CKX_Specs.Recovery_Mode;
+    RecoveryOptions = __shared__::Recovery_Single.F1F4_recovery_opt_CR;
+    RecoveryTrackingIncoming = ARR_CORE_CKX_Specs.RecoveryTracker_Incoming;
+    RecoveryTrackingOutgoing = ARR_CORE_CKX_Specs.RecoveryTracker_Outgoing;
+    ScoreboardEdgeTicks = toInteger(0);
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPreInstance = "MCdrv:corefreq3_0:"+"0.8GHz,"+"MCdrv:corefreq2_0:"+"0.8GHz,"+"MCdrv:corefreq1_0:"+__shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,"+"MCdrv:corefreq0_0:"+__shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,"+"MCdrv:"+ARR_CORE_CKX_Specs.ringfreq+":"+__shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz";    
+    StartVoltages = "0.625";
+    StepSize = toDouble(0.01);
+    TestMode = "Scoreboard";
+    VoltageTargets = ARR_CORE_CKX_Specs.CORE_PMUCS_VoltageTarget;
+} # End of Test Counter Definition
+
+CSharpTest VminTC SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C2C3
+{
+    #Patlist = "IPC::arr_cdie_endcpupkg_mbist_core_pnc_pm_dcm23_ssa_vccinf_ks_x_class_hptp_min_list";
+    Patlist = ARR_CORE_Rules.TPRules(ARR_CORE_CKX_Specs.allplist_min_48,ARR_CORE_CKX_Specs.allplist_min_48,ARR_CORE_CKX_Specs.dcm23plist_min_others,ARR_CORE_CKX_Specs.allplist_min_48,ARR_CORE_CKX_Specs.allplist_min_48,ARR_CORE_CKX_Specs.allplist_min_48,ARR_CORE_CKX_Specs.allplist_min_48,ARR_CORE_CKX_Specs.allplist_min_48);
+    LevelsTc = "ARR_CORE_CKX::arr_cpu_all_bf_x_x_ipc_lvl_PKG_BFUNC_ARR_MBIST_min_lvl";
+    TimingsTc = ARR_CORE_CKX_Specs.timingRules;
+    BaseNumbers = "12200";
+    BypassPort = ARR_CORE_Rules.TPRules(1,1,-1,1,1,1,1,1);
+    EndVoltageLimits = "0.625";
+    ExecutionMode = "SearchWithScoreboard";
+    FivrCondition = ARR_CORE_CKX_Specs.FivrConditionNom;
+    FailCaptureCount = toInteger(1);
+    InitialMaskBits = "0011";
+    FeatureSwitchSettings = ARR_CORE_CKX_Specs.FeatureSwitchNonMTT;
+    ForwardingMode = ARR_CORE_CKX_Specs.ForwardingMode_EDC;
+    MaxFailsNum = toInteger(20);
+    MaxRepetitionCount = 1;
+    PatternNameCounterIndexes = ARR_CORE_CKX_Specs.PatternMap;
+    PinMap = ARR_CORE_CKX_Specs.Recovery_PinMap;
+    RecoveryMode = ARR_CORE_CKX_Specs.Recovery_Mode;
+    RecoveryOptions = __shared__::Recovery_Single.F1F4_recovery_opt_CR;
+    RecoveryTrackingIncoming = ARR_CORE_CKX_Specs.RecoveryTracker_Incoming;
+    RecoveryTrackingOutgoing = ARR_CORE_CKX_Specs.RecoveryTracker_Outgoing;
+    ScoreboardEdgeTicks = toInteger(0);
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPreInstance = "MCdrv:corefreq0_0:"+"0.8GHz,"+"MCdrv:corefreq1_0:"+"0.8GHz,"+"MCdrv:corefreq2_0:"+__shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,"+"MCdrv:corefreq3_0:"+__shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,"+"MCdrv:"+ARR_CORE_CKX_Specs.ringfreq+":"+__shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz,MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F1_FREQ+"GHz"; 
+    StartVoltages = "0.625";
+    StepSize = toDouble(0.01);
+    TestMode = "Scoreboard";
+    VoltageTargets = ARR_CORE_CKX_Specs.CORE_PMUCS_VoltageTarget;
+}
+
+CSharpTest VminTC SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C0C1
+{
+    #Patlist = "IPC::arr_cdie_endcpupkg_mbist_core_pnc_pm_dcm01_ssa_vccinf_ks_x_class_hptp_max_list";
+    Patlist = ARR_CORE_Rules.TPRules(ARR_CORE_CKX_Specs.allplist_max_48,ARR_CORE_CKX_Specs.allplist_max_48,ARR_CORE_CKX_Specs.dcm01plist_max_others,ARR_CORE_CKX_Specs.allplist_max_48,ARR_CORE_CKX_Specs.allplist_max_48,ARR_CORE_CKX_Specs.allplist_max_48,ARR_CORE_CKX_Specs.allplist_max_48,ARR_CORE_CKX_Specs.allplist_max_48);
+    LevelsTc = "ARR_CORE_CKX::arr_cpu_all_bf_x_x_ipc_lvl_PKG_BFUNC_ARR_MBIST_max_lvl";
+    TimingsTc = ARR_CORE_CKX_Specs.timingRules;
+    BaseNumbers = "12198";
+    BypassPort = ARR_CORE_Rules.TPRules(1,1,-1,1,1,1,1,1);
+    EndVoltageLimits = "0.825";
+    ExecutionMode = "SearchWithScoreboard";
+    FivrCondition = ARR_CORE_CKX_Specs.FivrConditionNom;
+    FailCaptureCount = toInteger(1);
+    InitialMaskBits = "1100";
+    FeatureSwitchSettings = ARR_CORE_CKX_Specs.FeatureSwitchNonMTT;
+    ForwardingMode = ARR_CORE_CKX_Specs.ForwardingMode_EDC;
+    MaxFailsNum = toInteger(20);
+    MaxRepetitionCount = 1;
+    PatternNameCounterIndexes = ARR_CORE_CKX_Specs.PatternMap;
+    PinMap = ARR_CORE_CKX_Specs.Recovery_PinMap;
+    RecoveryMode = ARR_CORE_CKX_Specs.Recovery_Mode;
+    RecoveryOptions = __shared__::Recovery_Single.F1F4_recovery_opt_CR;
+    RecoveryTrackingIncoming = ARR_CORE_CKX_Specs.RecoveryTracker_Incoming;
+    RecoveryTrackingOutgoing = ARR_CORE_CKX_Specs.RecoveryTracker_Outgoing;
+    ScoreboardEdgeTicks = toInteger(0);
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPreInstance = "MCdrv:corefreq3_0:"+"0.8GHz,"+"MCdrv:corefreq2_0:"+"0.8GHz,"+"MCdrv:corefreq1_0:"+__shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,"+"MCdrv:corefreq0_0:"+__shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,"+"MCdrv:"+ARR_CORE_CKX_Specs.ringfreq+":"+__shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz";    
+    StartVoltages = "0.825";
+    StepSize = toDouble(0.01);
+    TestMode = "Scoreboard";
+    VoltageTargets = ARR_CORE_CKX_Specs.CORE_PMUCS_VoltageTarget;
+}
+
+CSharpTest VminTC SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C2C3
+{
+    #Patlist = "IPC::arr_cdie_endcpupkg_mbist_core_pnc_pm_dcm23_ssa_vccinf_ks_x_class_hptp_max_list";
+    Patlist = ARR_CORE_Rules.TPRules(ARR_CORE_CKX_Specs.allplist_max_48,ARR_CORE_CKX_Specs.allplist_max_48,ARR_CORE_CKX_Specs.dcm23plist_max_others,ARR_CORE_CKX_Specs.allplist_max_48,ARR_CORE_CKX_Specs.allplist_max_48,ARR_CORE_CKX_Specs.allplist_max_48,ARR_CORE_CKX_Specs.allplist_max_48,ARR_CORE_CKX_Specs.allplist_max_48);
+    LevelsTc = "ARR_CORE_CKX::arr_cpu_all_bf_x_x_ipc_lvl_PKG_BFUNC_ARR_MBIST_max_lvl";
+    TimingsTc = ARR_CORE_CKX_Specs.timingRules;
+    BaseNumbers = "12199";
+    BypassPort = ARR_CORE_Rules.TPRules(1,1,-1,1,1,1,1,1);
+    EndVoltageLimits = "0.825";
+    ExecutionMode = "SearchWithScoreboard";
+    FivrCondition = ARR_CORE_CKX_Specs.FivrConditionNom;
+    FailCaptureCount = toInteger(1);
+    InitialMaskBits = "0011";
+    FeatureSwitchSettings = ARR_CORE_CKX_Specs.FeatureSwitchNonMTT;
+    ForwardingMode = ARR_CORE_CKX_Specs.ForwardingMode_EDC;
+    MaxFailsNum = toInteger(20);
+    MaxRepetitionCount = 1;
+    PatternNameCounterIndexes = ARR_CORE_CKX_Specs.PatternMap;
+    PinMap = ARR_CORE_CKX_Specs.Recovery_PinMap;
+    RecoveryMode = ARR_CORE_CKX_Specs.Recovery_Mode;
+    RecoveryOptions = __shared__::Recovery_Single.F1F4_recovery_opt_CR;
+    RecoveryTrackingIncoming = ARR_CORE_CKX_Specs.RecoveryTracker_Incoming;
+    RecoveryTrackingOutgoing = ARR_CORE_CKX_Specs.RecoveryTracker_Outgoing;
+    ScoreboardEdgeTicks = toInteger(0);
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPreInstance = "MCdrv:corefreq0_0:"+"0.8GHz,"+"MCdrv:corefreq1_0:"+"0.8GHz,"+"MCdrv:corefreq2_0:"+__shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,"+"MCdrv:corefreq3_0:"+__shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,"+"MCdrv:"+ARR_CORE_CKX_Specs.ringfreq+":"+__shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz";       
+    StartVoltages = "0.825";
+    StepSize = toDouble(0.01);
+    TestMode = "Scoreboard";
+    VoltageTargets = ARR_CORE_CKX_Specs.CORE_PMUCS_VoltageTarget;
+}
+
+Flow ARR_CORE_CKX_ENDCPUPKG
+{
+    FlowItem SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99602751_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98602751_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60202014_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_0;
+            IncrementCounters ARR_CORE_CKX::n60202014_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_0;
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C0C1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C0C1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60202015_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_2;
+            IncrementCounters ARR_CORE_CKX::n60202015_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_2;
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C0C1;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C0C1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b97602085_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_4;
+            IncrementCounters ARR_CORE_CKX::n97602085_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_4;
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C0C1;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60192085_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_5;
+            IncrementCounters ARR_CORE_CKX::n60192085_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_5;
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C0C1;
+        }
+    }
+    FlowItem SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99602747_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98602747_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60202006_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_0;
+            IncrementCounters ARR_CORE_CKX::n60202006_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_0;
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C0C1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C0C1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60202007_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_2;
+            IncrementCounters ARR_CORE_CKX::n60202007_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_2;
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C0C1;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C0C1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b97602081_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_4;
+            IncrementCounters ARR_CORE_CKX::n97602081_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_4;
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C0C1;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60192081_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_5;
+            IncrementCounters ARR_CORE_CKX::n60192081_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_5;
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C0C1;
+        }
+    }
+    FlowItem SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C0C1 SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C0C1 @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99602752_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C0C1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98602752_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C0C1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60202016_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C0C1_0;
+            IncrementCounters ARR_CORE_CKX::n60202016_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C0C1_0;
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C2C3;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C2C3;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60202017_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C0C1_2;
+            IncrementCounters ARR_CORE_CKX::n60202017_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C0C1_2;
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C2C3;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C2C3;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b97602086_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C0C1_4;
+            IncrementCounters ARR_CORE_CKX::n97602086_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C0C1_4;
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C2C3;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60192086_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C0C1_5;
+            IncrementCounters ARR_CORE_CKX::n60192086_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C0C1_5;
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C2C3;
+        }
+    }
+    FlowItem SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C2C3 SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C2C3 @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99602753_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C2C3_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98602753_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C2C3_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60202018_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C2C3_0;
+            IncrementCounters ARR_CORE_CKX::n60202018_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C2C3_0;
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60202019_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C2C3_2;
+            IncrementCounters ARR_CORE_CKX::n60202019_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C2C3_2;
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b97602087_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C2C3_4;
+            IncrementCounters ARR_CORE_CKX::n97602087_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C2C3_4;
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60192087_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C2C3_5;
+            IncrementCounters ARR_CORE_CKX::n60192087_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MIN_X_PMUCS_ALL_C2C3_5;
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL;
+        }
+    }
+    FlowItem SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C0C1 SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C0C1 @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99602748_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C0C1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98602748_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C0C1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60202008_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C0C1_0;
+            IncrementCounters ARR_CORE_CKX::n60202008_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C0C1_0;
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C2C3;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C2C3;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60202009_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C0C1_2;
+            IncrementCounters ARR_CORE_CKX::n60202009_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C0C1_2;
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C2C3;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C2C3;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b97602082_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C0C1_4;
+            IncrementCounters ARR_CORE_CKX::n97602082_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C0C1_4;
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C2C3;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60192082_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C0C1_5;
+            IncrementCounters ARR_CORE_CKX::n60192082_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C0C1_5;
+			GoTo SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C2C3;
+        }
+    }
+    FlowItem SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C2C3 SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C2C3 @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99602749_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C2C3_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98602749_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C2C3_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60202010_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C2C3_0;
+            IncrementCounters ARR_CORE_CKX::n60202010_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C2C3_0;
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60202011_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C2C3_2;
+            IncrementCounters ARR_CORE_CKX::n60202011_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C2C3_2;
+            Return 1;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b97602083_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C2C3_4;
+            IncrementCounters ARR_CORE_CKX::n97602083_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C2C3_4;
+            Return 1;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60192083_fail_ARR_CORE_CKX_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C2C3_5;
+            IncrementCounters ARR_CORE_CKX::n60192083_fail_SSA_CORE_VMIN_K_ENDCPUPKG_X_CRA_MAX_X_PMUCS_ALL_C2C3_5;
+            Return 1;
+        }
+    }
+
+
+}
+
+
+Flow ARR_CORE_CKX_BEGINCPUPKG
+{
+    FlowItem ARR_CORE_SHMOO_E_BEGINCPUPKG_X_X_X_X_SHMOO_FOR_DEDC_1 ARR_CORE_SHMOO_E_BEGINCPUPKG_X_X_X_X_SHMOO_FOR_DEDC_1 @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99602220_fail_ARR_CORE_CKX_ARR_CORE_SHMOO_E_BEGINCPUPKG_X_X_X_X_SHMOO_FOR_DEDC_1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98602220_fail_ARR_CORE_CKX_ARR_CORE_SHMOO_E_BEGINCPUPKG_X_X_X_X_SHMOO_FOR_DEDC_1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+
+}

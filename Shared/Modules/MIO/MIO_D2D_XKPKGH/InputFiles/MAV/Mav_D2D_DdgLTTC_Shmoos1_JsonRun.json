@@ -1,0 +1,190 @@
+{
+  "instances": 
+  {
+    "HUB2CPU_LTTC": 
+	{
+      "skip": false,
+      "restore": true,
+      "instance": "MIO_D2D_XKPKGH::FBIST_D2D_SHMOO_E_LTTCCOMMON_X_X_X_X_VNNAONFREQ_TRY",
+      "stop_on_fail": false,
+      "nested_loops": {
+        "plist": 
+		[
+			"hnoc0_cnoc0_all_edc",
+			"hnoc0_cnoc0_all"
+        ],
+		"freqSet":
+		[
+			"MNCdrv:c2hfreq_MAV:3.6GHz,MNHdrv:H2C_PLL_H2C_PLL_FUSE_FRACTIONAL_CONTROL_INT_RATIO_MAV:3600MHz",
+			"MNCdrv:c2hfreq_MAV:3.7GHz,MNHdrv:H2C_PLL_H2C_PLL_FUSE_FRACTIONAL_CONTROL_INT_RATIO_MAV:3700MHz",
+			"MNCdrv:c2hfreq_MAV:3.8GHz,MNHdrv:H2C_PLL_H2C_PLL_FUSE_FRACTIONAL_CONTROL_INT_RATIO_MAV:3800MHz",
+			"MNCdrv:c2hfreq_MAV:3.9GHz,MNHdrv:H2C_PLL_H2C_PLL_FUSE_FRACTIONAL_CONTROL_INT_RATIO_MAV:3900MHz",
+			"MNCdrv:c2hfreq_MAV:4.0GHz,MNHdrv:H2C_PLL_H2C_PLL_FUSE_FRACTIONAL_CONTROL_INT_RATIO_MAV:4000MHz",
+			"MNCdrv:c2hfreq_MAV:4.1GHz,MNHdrv:H2C_PLL_H2C_PLL_FUSE_FRACTIONAL_CONTROL_INT_RATIO_MAV:4100MHz",
+			"MNCdrv:c2hfreq_MAV:4.2GHz,MNHdrv:H2C_PLL_H2C_PLL_FUSE_FRACTIONAL_CONTROL_INT_RATIO_MAV:4200MHz",
+			"MNCdrv:c2hfreq_MAV:4.3GHz,MNHdrv:H2C_PLL_H2C_PLL_FUSE_FRACTIONAL_CONTROL_INT_RATIO_MAV:4300MHz",
+			"MNCdrv:c2hfreq_MAV:4.4GHz,MNHdrv:H2C_PLL_H2C_PLL_FUSE_FRACTIONAL_CONTROL_INT_RATIO_MAV:4400MHz",
+			"MNCdrv:c2hfreq_MAV:4.5GHz,MNHdrv:H2C_PLL_H2C_PLL_FUSE_FRACTIONAL_CONTROL_INT_RATIO_MAV:4500MHz",
+			"MNCdrv:c2hfreq_MAV:4.6GHz,MNHdrv:H2C_PLL_H2C_PLL_FUSE_FRACTIONAL_CONTROL_INT_RATIO_MAV:4600MHz",
+			"MNCdrv:c2hfreq_MAV:4.7GHz,MNHdrv:H2C_PLL_H2C_PLL_FUSE_FRACTIONAL_CONTROL_INT_RATIO_MAV:4700MHz",
+			"MNCdrv:c2hfreq_MAV:4.8GHz,MNHdrv:H2C_PLL_H2C_PLL_FUSE_FRACTIONAL_CONTROL_INT_RATIO_MAV:4800MHz",
+			"MNCdrv:c2hfreq_MAV:4.9GHz,MNHdrv:H2C_PLL_H2C_PLL_FUSE_FRACTIONAL_CONTROL_INT_RATIO_MAV:4900MHz",
+			"MNCdrv:c2hfreq_MAV:5.0GHz,MNHdrv:H2C_PLL_H2C_PLL_FUSE_FRACTIONAL_CONTROL_INT_RATIO_MAV:5000MHz",
+			"MNCdrv:c2hfreq_MAV:5.1GHz,MNHdrv:H2C_PLL_H2C_PLL_FUSE_FRACTIONAL_CONTROL_INT_RATIO_MAV:5100MHz",
+			"MNCdrv:c2hfreq_MAV:5.2GHz,MNHdrv:H2C_PLL_H2C_PLL_FUSE_FRACTIONAL_CONTROL_INT_RATIO_MAV:5200MHz",
+			"MNCdrv:c2hfreq_MAV:5.3GHz,MNHdrv:H2C_PLL_H2C_PLL_FUSE_FRACTIONAL_CONTROL_INT_RATIO_MAV:5300MHz",
+			"MNCdrv:c2hfreq_MAV:5.4GHz,MNHdrv:H2C_PLL_H2C_PLL_FUSE_FRACTIONAL_CONTROL_INT_RATIO_MAV:5400MHz"	
+		]
+      },
+      "parameters": 
+	  {
+		"BypassPort":  "-1",
+		"PreInstance": "SetAltInstanceName(HUB2CPU_LTTC_${plist})",
+		"Patlist": "${plist}",
+	    "LevelsTc": "MIO_D2D_XKPKGH::d2d_bf_x_x_pkg_lvl_nom_710VNNAON",
+		"TimingsTc": "BASE::d2d_timing_mts100_tstprtclk50_tck100",
+		"XAxisParam": "p_vnnaon_spec",
+		"XAxisParamType": "LevelsTestCondition",
+		"XAxisRange": "0.6:0.01:23",
+		"PrintFormat": "ShmooHub",
+		"SetPointsPreInstance": "${freqSet}"
+      }
+    },
+		
+    "HUB2GCD_LTTC": 
+	{
+      "skip": false,
+      "restore": true,
+      "instance": "MIO_D2D_XKPKGH::FBIST_D2D_SHMOO_E_LTTCCOMMON_X_X_X_X_VNNAONFREQ_TRY",
+      "stop_on_fail": false,
+      "nested_loops": {
+        "plist": 
+		[
+			"hubgcd_all_slt_speed_edc",
+			"hubgcd_all_slt_speed"
+        ],
+		"freqSet":
+		[
+			"MNHdrv:h2gfreq_MAV:3600MHz,MNGdrv:g2hfreq_MAV:3.6GHz",
+			"MNHdrv:h2gfreq_MAV:3700MHz,MNGdrv:g2hfreq_MAV:3.7GHz",
+			"MNHdrv:h2gfreq_MAV:3800MHz,MNGdrv:g2hfreq_MAV:3.8GHz",
+			"MNHdrv:h2gfreq_MAV:3900MHz,MNGdrv:g2hfreq_MAV:3.9GHz",
+			"MNHdrv:h2gfreq_MAV:4000MHz,MNGdrv:g2hfreq_MAV:4.0GHz",
+			"MNHdrv:h2gfreq_MAV:4100MHz,MNGdrv:g2hfreq_MAV:4.1GHz",
+			"MNHdrv:h2gfreq_MAV:4200MHz,MNGdrv:g2hfreq_MAV:4.2GHz",
+			"MNHdrv:h2gfreq_MAV:4300MHz,MNGdrv:g2hfreq_MAV:4.3GHz",
+			"MNHdrv:h2gfreq_MAV:4400MHz,MNGdrv:g2hfreq_MAV:4.4GHz",
+			"MNHdrv:h2gfreq_MAV:4500MHz,MNGdrv:g2hfreq_MAV:4.5GHz",
+			"MNHdrv:h2gfreq_MAV:4600MHz,MNGdrv:g2hfreq_MAV:4.6GHz",
+			"MNHdrv:h2gfreq_MAV:4700MHz,MNGdrv:g2hfreq_MAV:4.7GHz",
+			"MNHdrv:h2gfreq_MAV:4800MHz,MNGdrv:g2hfreq_MAV:4.8GHz",
+			"MNHdrv:h2gfreq_MAV:4900MHz,MNGdrv:g2hfreq_MAV:4.9GHz",
+			"MNHdrv:h2gfreq_MAV:5000MHz,MNGdrv:g2hfreq_MAV:5.0GHz"
+		]		
+      },
+      "parameters": 
+	  {
+		"BypassPort":  "-1",
+		"PreInstance": "SetAltInstanceName(HUB2GCD_LTTC_${plist})",
+		"Patlist": "${plist}",
+	    "LevelsTc": "MIO_D2D_XKPKGH::d2d_bf_x_x_pkg_lvl_nom_710VNNAON",
+		"TimingsTc": "BASE::d2d_timing_mts100_tstprtclk50_tck100",
+		"XAxisParam": "p_vnnaon_spec",
+		"XAxisParamType": "LevelsTestCondition",
+		"XAxisRange": "0.6:0.01:23",
+		"PrintFormat": "ShmooHub",
+		"SetPointsPreInstance": "${freqSet}"
+      }
+    },
+		
+    "HUB2PCD_LTTC": 
+	{
+      "skip": false,
+      "restore": true,
+      "instance": "MIO_D2D_XKPKGH::FBIST_D2D_SHMOO_E_LTTCCOMMON_X_X_X_X_VNNAONFREQ_TRY",
+      "stop_on_fail": false,
+      "nested_loops": {
+        "plist": 
+		[
+			"hubpcd_all_slt_speed_edc",
+			"hubpcd_all_slt_speed"
+        ]	
+      },
+      "parameters": 
+	  {
+		"BypassPort":  "-1",
+		"PreInstance": "SetAltInstanceName(HUB2PCD_LTTC_${plist})",
+		"Patlist": "${plist}",
+	    "LevelsTc": "MIO_D2D_XKPKGH::d2d_H_bf_x_x_pkg_lvl_nom_710VNNAON",
+		"TimingsTc": "BASE::d2d_timing_mts100_tstprtclk50_tck100",
+		"XAxisParam": "p_vnnaon_spec",
+		"XAxisParamType": "LevelsTestCondition",
+		"XAxisRange": "0.6:0.01:23",
+		"PrintFormat": "ShmooHub",
+		"SetPointsPreInstance": ""
+      }
+    },
+	
+    "HUB2CPU_RECOVERY_LTTC": 
+	{
+      "skip": false,
+      "restore": true,
+      "instance": "MIO_D2D_XKPKGH::FBIST_D2D_SHMOO_E_LTTCCOMMON_X_X_X_X_VNNAONFREQ_TRY",
+      "stop_on_fail": false,
+      "nested_loops": {
+        "plist": 
+		[
+
+			"hnoc0_cnoc0_all"
+        ],
+		"freqSet":
+		[
+			"MNCdrv:c2hfreq:4.4GHz,MNHdrv:H2C_PLL_H2C_PLL_FUSE_FRACTIONAL_CONTROL_INT_RATIO:4400MHz"
+		]
+		
+      },
+      "parameters": 
+	  {
+		"BypassPort":  "-1",
+		"PreInstance": "SetAltInstanceName(HUB2CPU_RECOVERY_LTTC_${plist})",
+		"Patlist": "${plist}",
+	    "LevelsTc": "MIO_D2D_XKPKGH::d2d_bf_x_x_pkg_lvl_nom_710VNNAON",
+		"TimingsTc": "BASE::d2d_timing_mts100_tstprtclk50_tck100",
+		"XAxisParam": "p_vnnaon_spec",
+		"XAxisParamType": "LevelsTestCondition",
+		"XAxisRange": "0.71:0.01:1",
+		"PrintFormat": "ShmooHub",
+		"SetPointsPreInstance": "${freqSet}"
+      }
+    },
+	
+    "HUB2PCD_RECOVERY_LTTC": 
+	{
+      "skip": false,
+      "restore": true,
+      "instance": "MIO_D2D_XKPKGH::FBIST_D2D_SHMOO_E_LTTCCOMMON_X_X_X_X_VNNAONFREQ_TRY",
+      "stop_on_fail": false,
+      "nested_loops": {
+        "plist": 
+		[
+
+			"hubpcd_all_slt_speed"
+        ]	
+      },
+      "parameters": 
+	  {
+		"BypassPort":  "-1",
+		"PreInstance": "SetAltInstanceName(HUB2PCD_RECOVERY_LTTC_${plist})",
+		"Patlist": "${plist}",
+	    "LevelsTc": "MIO_D2D_XKPKGH::d2d_H_bf_x_x_pkg_lvl_nom_710VNNAON",
+		"TimingsTc": "BASE::d2d_timing_mts100_tstprtclk50_tck100",
+		"XAxisParam": "p_vnnaon_spec",
+		"XAxisParamType": "LevelsTestCondition",
+		"XAxisRange": "0.71:0.01:1",
+		"PrintFormat": "ShmooHub",
+		"SetPointsPreInstance": ""
+      }
+    }
+	
+  }
+}

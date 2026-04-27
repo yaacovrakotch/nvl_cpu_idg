@@ -1,0 +1,116 @@
+Version 1.0;
+
+SelectorRuleCollection  FUS_FUSEREAD_CXX_Rules
+{	
+	###Prime###  
+	SelectorRule FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_FUSED_SSPEC_BypassPort (Outcome1, Outcome2, Outcome3, Outcome4, Outcome5, Outcome6, Outcome7, Outcome8, Outcome9, Outcome10, Outcome11, default)
+    {
+        Outcome1 => contains(__shared__::LocationSets.FUSE,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+        Outcome2 => contains(__shared__::LocationSets.PBIC_DAB,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+        Outcome3 => contains(__shared__::LocationSets.RV,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+        Outcome4 => (contains(__shared__::LocationSets.FH_ENG,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.CH_QUAL,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]"));
+        Outcome5 => (contains(__shared__::LocationSets.FC_ENG,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.CC_QUAL,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]"));
+        Outcome6 => __shared__::SCVars.SC_CURRENT_PROCESS_TYPE == "PHMHOT" && __shared__::SCVars.SC_ENGID == "4R";
+        Outcome7 => __shared__::SCVars.SC_CURRENT_PROCESS_TYPE == "PHMHOT" && __shared__::SCVars.SC_ENGID == "4P";
+        Outcome8 => __shared__::SCVars.SC_CURRENT_PROCESS_TYPE == "PHMCOLD" && __shared__::SCVars.SC_ENGID == "4R";
+        Outcome9 => __shared__::SCVars.SC_CURRENT_PROCESS_TYPE == "PHMCOLD" && __shared__::SCVars.SC_ENGID == "4P";
+        Outcome10 => __shared__::SCVars.SC_CURRENT_PROCESS_TYPE == "PHMROOM" && __shared__::SCVars.SC_ENGID == "4R";
+        Outcome11 => __shared__::SCVars.SC_CURRENT_PROCESS_TYPE == "PHMROOM" && __shared__::SCVars.SC_ENGID == "4P";
+        default;
+    }
+
+
+	SelectorRule FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_PRINT_SSPEC_TO_ITUFF_BypassPort (Outcome1, Outcome2, Outcome3, Outcome4, Outcome5, Outcome6, Outcome7, Outcome8, Outcome9, Outcome10, Outcome11, default)
+    {
+        Outcome1 => contains(__shared__::LocationSets.FUSE,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+        Outcome2 => contains(__shared__::LocationSets.PBIC_DAB,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+        Outcome3 => contains(__shared__::LocationSets.RV,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+        Outcome4 => (contains(__shared__::LocationSets.FH_ENG,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.CH_QUAL,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]"));
+        Outcome5 => (contains(__shared__::LocationSets.FC_ENG,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.CC_QUAL,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]"));
+        Outcome6 => __shared__::SCVars.SC_CURRENT_PROCESS_TYPE == "PHMHOT" && __shared__::SCVars.SC_ENGID == "4R";
+        Outcome7 => __shared__::SCVars.SC_CURRENT_PROCESS_TYPE == "PHMHOT" && __shared__::SCVars.SC_ENGID == "4P";
+        Outcome8 => __shared__::SCVars.SC_CURRENT_PROCESS_TYPE == "PHMCOLD" && __shared__::SCVars.SC_ENGID == "4R";
+        Outcome9 => __shared__::SCVars.SC_CURRENT_PROCESS_TYPE == "PHMCOLD" && __shared__::SCVars.SC_ENGID == "4P";
+        Outcome10 => __shared__::SCVars.SC_CURRENT_PROCESS_TYPE == "PHMROOM" && __shared__::SCVars.SC_ENGID == "4R";
+        Outcome11 => __shared__::SCVars.SC_CURRENT_PROCESS_TYPE == "PHMROOM" && __shared__::SCVars.SC_ENGID == "4P";
+        default;
+    }
+
+	SelectorRule FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_CANARY_READ_FUNC_BypassPort (Outcome1, Outcome2, Outcome3, Outcome4)
+	{
+		Outcome1 => __shared__::_UserVars.IF_18AP == "YES";
+		Outcome2 => contains(__shared__::LocationSets.FUSE,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") &&  (__shared__::_UserVars.IF_18AP == "NO");
+		Outcome3 => contains(__shared__::LocationSets.QA_S1,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") &&  (__shared__::_UserVars.IF_18AP == "NO");
+        Outcome4;
+	}
+	
+	SelectorRule FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_SetPoint (Outcome1, Outcome2)
+	{
+		Outcome1 => contains(__shared__::LocationSets.PHMF,"[" + __shared__::TorchRulesVars.locationCode + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome2;
+	}
+
+	SelectorRule FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC_BypassPort (Outcome1, Outcome2, Outcome3, Outcome4, Outcome5, Outcome6, Outcome7, Outcome8, Outcome9, Outcome10, Outcome11, default)
+    {
+        Outcome1 => contains(__shared__::LocationSets.FUSE,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+        Outcome2 => contains(__shared__::LocationSets.PBIC_DAB,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+        Outcome3 => contains(__shared__::LocationSets.RV,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+        Outcome4 => (contains(__shared__::LocationSets.FH_ENG,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.CH_QUAL,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]"));
+        Outcome5 => (contains(__shared__::LocationSets.FC_ENG,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.CC_QUAL,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]"));
+        Outcome6 => __shared__::SCVars.SC_CURRENT_PROCESS_TYPE == "PHMHOT" && __shared__::SCVars.SC_ENGID == "4R";
+        Outcome7 => __shared__::SCVars.SC_CURRENT_PROCESS_TYPE == "PHMHOT" && __shared__::SCVars.SC_ENGID == "4P";
+        Outcome8 => __shared__::SCVars.SC_CURRENT_PROCESS_TYPE == "PHMCOLD" && __shared__::SCVars.SC_ENGID == "4R";
+        Outcome9 => __shared__::SCVars.SC_CURRENT_PROCESS_TYPE == "PHMCOLD" && __shared__::SCVars.SC_ENGID == "4P";
+        Outcome10 => __shared__::SCVars.SC_CURRENT_PROCESS_TYPE == "PHMROOM" && __shared__::SCVars.SC_ENGID == "4R";
+        Outcome11 => __shared__::SCVars.SC_CURRENT_PROCESS_TYPE == "PHMROOM" && __shared__::SCVars.SC_ENGID == "4P";
+        default;
+    }
+
+	SelectorRule FUSE_X_PATCONFIG_K_INIT_X_X_X_X_READ_MARGIN_SETUP_SetPoint (Outcome1, Outcome2, Outcome3)
+	{
+		Outcome1 => contains(__shared__::LocationSets.QA_S1,"[" + __shared__::TorchRulesVars.locationCode + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome2 => contains(__shared__::LocationSets.QA_S1_COLD,"[" + __shared__::TorchRulesVars.locationCode + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome3;
+	}	
+	
+	SelectorRule FUSE_X_PATCONFIG_K_STARTCPUNOM_X_X_X_X_READ_MARGIN_SET_SetPoint (Outcome1, Outcome2, Outcome3)
+	{
+		Outcome1 => contains(__shared__::LocationSets.QA_S1,"[" + __shared__::TorchRulesVars.locationCode + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome2 => contains(__shared__::LocationSets.QA_S1_COLD,"[" + __shared__::TorchRulesVars.locationCode + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome3;
+	}
+	
+	SelectorRule FUSE_X_PATCONFIG_K_INIT_X_X_X_X_READ_MARGIN_SETUP_CfgFile (Outcome1, Outcome2, Outcome3, Outcome4, Outcome5)
+	{
+		Outcome1 => __shared__::_UserVars.IF_ProcessType == "INT" && GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+		Outcome2 => __shared__::_UserVars.IF_ProcessType == "EXT";
+		Outcome3 => __shared__::_UserVars.IF_ProcessType == "BLLC" && (GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52CB" || GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S52CB");
+		Outcome4 => __shared__::_UserVars.IF_ProcessType == "BLLC" && GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28CB";
+		Outcome5;
+	}	
+	
+	SelectorRule FUSE_X_PATCONFIG_K_STARTCPUNOM_X_X_X_X_READ_MARGIN_SET_CfgFile (Outcome1, Outcome2, Outcome3, Outcome4, Outcome5)
+	{
+		Outcome1 => __shared__::_UserVars.IF_ProcessType == "INT" && GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+		Outcome2 => __shared__::_UserVars.IF_ProcessType == "EXT";
+		Outcome3 => __shared__::_UserVars.IF_ProcessType == "BLLC" && (GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52CB" || GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S52CB");
+		Outcome4 => __shared__::_UserVars.IF_ProcessType == "BLLC" && GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28CB";
+		Outcome5;
+	}
+	
+	SelectorRule FUSEREAD_CfgFile (Outcome1, Outcome2, Outcome3, Outcome4)
+	{
+		Outcome1 => __shared__::_UserVars.IF_ProcessType == "INT" && GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+		Outcome2 => __shared__::_UserVars.IF_ProcessType == "BLLC" && (GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52CB" || GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S52CB");
+		Outcome3 => __shared__::_UserVars.IF_ProcessType == "BLLC" && GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28CB";
+		Outcome4;
+	}
+}
+
+UserVars FUS_FUSEREAD_CXX
+{
+	String FuseReadOutputStr_CPU0 = "";
+    String FuseReadOutputStr_CPU1 = "";
+	String FuseQualSort = "";
+	String FuseQualClass = "";
+}

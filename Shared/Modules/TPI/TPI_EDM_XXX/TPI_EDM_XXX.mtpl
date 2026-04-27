@@ -1,0 +1,2283 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan TPI_EDM_XXX;
+
+Import "TPI_EDM_XXX.usrv";
+Import "TPI_EDM_XKPKGMB.usrv";
+Import "LevelsSequences_EDM.lvl";
+Import "BaseLevels_EDM.tcg";
+
+# Test Counter Definition
+
+Counters
+{
+    n10900000_fail_EDM_X_DC_K_DCFF_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_4,
+    n10900001_fail_EDM_X_DC_K_START_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_4,
+    n10910000_fail_EDM_X_DC_K_DCFF_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_4,
+    n10910001_fail_EDM_X_DC_K_START_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_4,
+    n10930000_fail_EDM_X_DC_K_DCFF_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_4,
+    n10930001_fail_EDM_X_DC_K_START_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_4,
+    n10940000_fail_EDM_X_DC_K_DCFF_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_4,
+    n10940001_fail_EDM_X_DC_K_START_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_4,
+    n10950000_fail_EDM_X_DC_K_DCFF_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_4,
+    n10950001_fail_EDM_X_DC_K_DCFF_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_4,
+    n10950002_fail_EDM_X_DC_K_START_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_4,
+    n10950003_fail_EDM_X_DC_K_START_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_4,
+    n10960000_fail_EDM_X_DC_K_DCFF_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_4,
+    n10960001_fail_EDM_X_DC_K_START_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_4,
+    n10990000_fail_EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK2_FAIL_0,
+    n10990001_fail_EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK2_FAIL_2,
+    n10990002_fail_EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK2_FAIL_3,
+    n10990003_fail_EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK2_FAIL_1,
+    n15900000_fail_EDM_X_DC_K_DCFF_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_0,
+    n15900001_fail_EDM_X_DC_K_DCFF_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_3,
+    n15900002_fail_EDM_X_DC_K_START_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_0,
+    n15900003_fail_EDM_X_DC_K_START_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_3,
+    n15910000_fail_EDM_X_DC_K_DCFF_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_0,
+    n15910001_fail_EDM_X_DC_K_DCFF_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_3,
+    n15910002_fail_EDM_X_DC_K_START_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_0,
+    n15910003_fail_EDM_X_DC_K_START_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_3,
+    n15930000_fail_EDM_X_DC_K_DCFF_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_0,
+    n15930001_fail_EDM_X_DC_K_DCFF_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_3,
+    n15930002_fail_EDM_X_DC_K_START_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_0,
+    n15930003_fail_EDM_X_DC_K_START_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_3,
+    n15940000_fail_EDM_X_DC_K_DCFF_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_0,
+    n15940001_fail_EDM_X_DC_K_DCFF_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_3,
+    n15940002_fail_EDM_X_DC_K_START_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_0,
+    n15940003_fail_EDM_X_DC_K_START_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_3,
+    n15950000_fail_EDM_X_DC_K_DCFF_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_0,
+    n15950001_fail_EDM_X_DC_K_DCFF_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_3,
+    n15950002_fail_EDM_X_DC_K_DCFF_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_0,
+    n15950003_fail_EDM_X_DC_K_DCFF_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_3,
+    n15950004_fail_EDM_X_DC_K_START_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_0,
+    n15950005_fail_EDM_X_DC_K_START_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_3,
+    n15950006_fail_EDM_X_DC_K_START_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_0,
+    n15950007_fail_EDM_X_DC_K_START_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_3,
+    n15960000_fail_EDM_X_DC_K_DCFF_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_0,
+    n15960001_fail_EDM_X_DC_K_DCFF_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_3,
+    n15960002_fail_EDM_X_DC_K_START_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_0,
+    n15960003_fail_EDM_X_DC_K_START_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_3,
+    n53060002_fail_EDM_X_PRIMEULT_K_DCFF_X_X_X_X_ULTLOGGER_EDM_0,
+    n90100000_fail_EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK1_0,
+    n90100001_fail_EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK1_4,
+    n90100002_fail_EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK2_PASS_0,
+    n99100000_fail_EDM_X_DC_K_DCFF_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_2,
+    n99100001_fail_EDM_X_DC_K_DCFF_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_2,
+    n99100002_fail_EDM_X_DC_K_DCFF_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_2,
+    n99100004_fail_EDM_X_DC_K_DCFF_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_2,
+    n99100005_fail_EDM_X_DC_K_DCFF_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_2,
+    n99100006_fail_EDM_X_DC_K_DCFF_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_2,
+    n99100007_fail_EDM_X_DC_K_DCFF_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_2,
+    n99100008_fail_EDM_X_DC_K_START_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_2,
+    n99100009_fail_EDM_X_DC_K_START_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_2,
+    n99100010_fail_EDM_X_DC_K_START_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_2,
+    n99100011_fail_EDM_X_DC_K_START_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_2,
+    n99100012_fail_EDM_X_DC_K_START_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_2,
+    n99100013_fail_EDM_X_DC_K_START_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_2,
+    n99100014_fail_EDM_X_DC_K_START_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_2
+} # End of Test Counter Definition
+
+CSharpTest IVCurve EDM_X_DC_K_START_X_X_X_X_BASE_EDM_OPEN_SHORT_IV
+{
+    LevelsTc = "TPI_EDM_XXX::all_tpi_edm_x_vsim_pkg_level_cat0";
+    AlarmMode = "Enabled";
+    BypassPort = -1;
+    DatalogLevel = "ALL";
+    ForceSetPoint = "0.3V";
+    ForceStartValue = "0V";
+    ForceStepSize = "0.1V";
+    ForceStopValue = "1V";
+    FreeDriveTime = "2ms";
+    HighLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_High_BASE,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_High_BASE);
+    IClampHi = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("1mA", "1mA", "1mA");
+    IClampLo = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("-1mA", "-1mA", "-1mA");
+    IRange = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("IR1mA", "IR1mA", "IR1mA");
+    LogLevel = "Disabled";
+    LowLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_Low_BASE,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_Low_BASE);
+    Mode = "Levels";
+    Pins = "BASE_EDM";
+    PostInstance = "";
+    PreInstance = "";
+    PreMeasurementDelay = "10ms";
+    SamplingCount = "1";
+    Type = "Current";
+}
+
+CSharpTest IVCurve EDM_X_DC_K_START_X_X_X_X_CPU_EDM_OPEN_SHORT_IV
+{
+    LevelsTc = "TPI_EDM_XXX::all_tpi_edm_x_vsim_pkg_level_cat0";
+    AlarmMode = "Enabled";
+    BypassPort = -1;
+    DatalogLevel = "ALL";
+    ForceSetPoint = "0.3V";
+    ForceStartValue = "0V";
+    ForceStepSize = "0.1V";
+    ForceStopValue = "1V";
+    FreeDriveTime = "2ms";
+    HighLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_High_CPU,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_High_CPU);
+    IClampHi = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("100uA", "100uA", "100uA");
+    IClampLo = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("-100uA", "-100uA", "-100uA");
+    IRange = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("IR100uA", "IR100uA", "IR100uA");
+    LogLevel = "Disabled";
+    LowLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_Low_CPU,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_Low_CPU);
+    Mode = "Levels";
+    Pins = "CPU_EDM";
+    PostInstance = "";
+    PreInstance = "";
+    PreMeasurementDelay = "10ms";
+    SamplingCount = "1";
+    Type = "Current";
+}
+
+CSharpTest IVCurve EDM_X_DC_K_START_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV
+{
+    LevelsTc = "TPI_EDM_XXX::all_tpi_edm_x_vsim_pkg_level_cat0";
+    AlarmMode = "Enabled";
+    BypassPort = __shared__::TpRule.If_DS0_DS1_M(1,-1,1,1);
+    DatalogLevel = "ALL";
+    ForceSetPoint = "0.3V";
+    ForceStartValue = "0V";
+    ForceStepSize = "0.1V";
+    ForceStopValue = "1V";
+    FreeDriveTime = "2ms";
+    HighLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_High_CPU1,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_High_CPU1);
+    IClampHi = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("100uA", "100uA", "100uA");
+    IClampLo = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("-100uA", "-100uA", "-100uA");
+    IRange = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("IR100uA", "IR100uA", "IR100uA");
+    LogLevel = "Disabled";
+    LowLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_Low_CPU1,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_Low_CPU1);
+    Mode = "Levels";
+    Pins = "CPU1_EDM";
+    PostInstance = "";
+    PreInstance = "";
+    PreMeasurementDelay = "10ms";
+    SamplingCount = "1";
+    Type = "Current";
+}
+
+CSharpTest IVCurve EDM_X_DC_K_START_X_X_X_X_GCD_EDM_OPEN_SHORT_IV
+{
+    LevelsTc = "TPI_EDM_XXX::all_tpi_edm_x_vsim_pkg_level_cat0";
+    AlarmMode = "Enabled";
+    BypassPort = -1;
+    DatalogLevel = "ALL";
+    ForceSetPoint = "0.3V";
+    ForceStartValue = "0V";
+    ForceStepSize = "0.1V";
+    ForceStopValue = "1V";
+    FreeDriveTime = "2ms";
+    HighLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_High_GCD,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_High_GCD);
+    IClampHi = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("100uA", "100uA", "100uA");
+    IClampLo = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("-100uA", "-100uA", "-100uA");
+    IRange = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("IR100uA", "IR100uA", "IR100uA");
+    LogLevel = "Disabled";
+    LowLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_Low_GCD,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_Low_GCD);
+    Mode = "Levels";
+    Pins = "GCD_EDM";
+    PostInstance = "";
+    PreInstance = "";
+    PreMeasurementDelay = "10ms";
+    SamplingCount = "1";
+    Type = "Current";
+}
+
+CSharpTest IVCurve EDM_X_DC_K_START_X_X_X_X_HUB_EDM_OPEN_SHORT_IV
+{
+    LevelsTc = "TPI_EDM_XXX::all_tpi_edm_x_vsim_pkg_level_cat0";
+    AlarmMode = "Enabled";
+    BypassPort = -1;
+    DatalogLevel = "ALL";
+    ForceSetPoint = "0.3V";
+    ForceStartValue = "0V";
+    ForceStepSize = "0.1V";
+    ForceStopValue = "1V";
+    FreeDriveTime = "2ms";
+    HighLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_High_HUB,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_High_HUB);
+    IClampHi = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("100uA", "100uA", "100uA");
+    IClampLo = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("-100uA", "-100uA", "-100uA");
+    IRange = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("IR100uA", "IR100uA", "IR100uA");
+    LogLevel = "Disabled";
+    LowLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_Low_HUB,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_Low_HUB);
+    Mode = "Levels";
+    Pins = "HUB_EDM";
+    PostInstance = "";
+    PreInstance = "";
+    PreMeasurementDelay = "10ms";
+    SamplingCount = "1";
+    Type = "Current";
+}
+
+CSharpTest IVCurve EDM_X_DC_K_START_X_X_X_X_PCD_EDM_OPEN_SHORT_IV
+{
+    LevelsTc = "TPI_EDM_XXX::all_tpi_edm_x_vsim_pkg_level_cat0";
+    AlarmMode = "Enabled";
+    BypassPort = __shared__::TpRule.If_DS0_DS1_M(1,1,-1,1);
+    DatalogLevel = "ALL";
+    ForceSetPoint = "0.3V";
+    ForceStartValue = "0V";
+    ForceStepSize = "0.1V";
+    ForceStopValue = "1V";
+    FreeDriveTime = "2ms";
+    HighLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_High_GND,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_High_GND);
+    IClampHi = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("100uA", "100uA", "100uA");
+    IClampLo = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("-100uA", "-100uA", "-100uA");
+    IRange = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("IR100uA", "IR100uA", "IR100uA");
+    LogLevel = "Disabled";
+    LowLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_Low_GND,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_Low_GND);
+    Mode = "Levels";
+    Pins = "PCD_EDM";
+    PostInstance = "";
+    PreInstance = "";
+    PreMeasurementDelay = "10ms";
+    SamplingCount = "1";
+    Type = "Current";
+}
+
+CSharpTest IVCurve EDM_X_DC_K_START_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV
+{
+    LevelsTc = "TPI_EDM_XXX::all_tpi_edm_x_vsim_pkg_level_cat0";
+    AlarmMode = "Enabled";
+    BypassPort = __shared__::TpRule.If_DS0_DS1_M(-1,-1,1,-1);
+    DatalogLevel = "ALL";
+    ForceSetPoint = "0.3V";
+    ForceStartValue = "0V";
+    ForceStepSize = "0.1V";
+    ForceStopValue = "1V";
+    FreeDriveTime = "2ms";
+    HighLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_High_PCD,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_High_PCD);
+    IClampHi = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("100uA", "100uA", "100uA");
+    IClampLo = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("-100uA", "-100uA", "-100uA");
+    IRange = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("IR100uA", "IR100uA", "IR100uA");
+    LogLevel = "Disabled";
+    LowLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_Low_PCD,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_Low_PCD);
+    Mode = "Levels";
+    Pins = "PCD_TMUX_07";
+    PostInstance = "SetPinAttributes(--settings=pcd_tmux_all:LogicalValue:0)";
+    PreInstance = "SetPinAttributes(--settings=PCD_TMUXCBIT2:LogicalValue:0 PCD_TMUXCBIT1:LogicalValue:0 PCD_TMUXCBIT0:LogicalValue:1)";
+    PreMeasurementDelay = "10ms";
+    SamplingCount = "1";
+    Type = "Current";
+}
+
+CSharpTest IVCurve EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_BASE_EDM_OPEN_IV
+{
+    LevelsTc = "TPI_EDM_XXX::all_tpi_edm_x_isvm_pkg_level_cat0";
+    AlarmMode = "Enabled";
+    BypassPort = -1;
+    DatalogLevel = "ALL";
+    ForceSetPoint = "0.0004A";
+    ForceStartValue = "0A";
+    ForceStepSize = "0.0001A";
+    ForceStopValue = "0.001A";
+    FreeDriveTime = "2ms";
+    HighLimits = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("6V", "2V", "2V");
+    IRange = "IR1mA";
+    LogLevel = "Disabled";
+    LowLimits = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("0.3V", "0.1V", "0.1V");
+    Mode = "Levels";
+    Pins = "BASE_EDM";
+    PostInstance = "";
+    PreInstance = "";
+    PreMeasurementDelay = "20ms";
+    SamplingCount = "1";
+    Type = "Voltage";
+    VClampHi = "3.3V";
+    VClampLo = "-0.5V";
+}
+
+CSharpTest IVCurve EDM_X_DC_K_DCFF_X_X_X_X_BASE_EDM_OPEN_SHORT_IV
+{
+    LevelsTc = "TPI_EDM_XXX::all_tpi_edm_x_vsim_pkg_level_cat0";
+    AlarmMode = "Enabled";
+    BypassPort = -1;
+    DatalogLevel = "ALL";
+    ForceSetPoint = "0.3V";
+    ForceStartValue = "0V";
+    ForceStepSize = "0.1V";
+    ForceStopValue = "1V";
+    FreeDriveTime = "2ms";
+    HighLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_High_BASE,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_High_BASE);
+    IClampHi = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("1mA", "1mA", "1mA");
+    IClampLo = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("-1mA", "-1mA", "-1mA");
+    IRange = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("IR1mA", "IR1mA", "IR1mA");
+    LogLevel = "Disabled";
+    LowLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_Low_BASE,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_Low_BASE);
+    Mode = "Levels";
+    Pins = "BASE_EDM";
+    PostInstance = "";
+    PreInstance = "";
+    PreMeasurementDelay = "10ms";
+    SamplingCount = "1";
+    Type = "Current";
+}
+
+CSharpTest IVCurve EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_CPU_EDM_OPEN_IV
+{
+    LevelsTc = "TPI_EDM_XXX::all_tpi_edm_x_isvm_pkg_level_cat0";
+    AlarmMode = "Enabled";
+    BypassPort = -1;
+    DatalogLevel = "ALL";
+    ForceSetPoint = "0.0004A";
+    ForceStartValue = "0A";
+    ForceStepSize = "0.0001A";
+    ForceStopValue = "0.001A";
+    FreeDriveTime = "2ms";
+    HighLimits = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("6V", "2V", "2V");
+    IRange = "IR1mA";
+    LogLevel = "Disabled";
+    LowLimits = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("0.3V", "0.1V", "0.1V");
+    Mode = "Levels";
+    Pins = "CPU_EDM";
+    PostInstance = "";
+    PreInstance = "";
+    PreMeasurementDelay = "20ms";
+    SamplingCount = "1";
+    Type = "Voltage";
+    VClampHi = "3.3V";
+    VClampLo = "-0.5V";
+}
+
+CSharpTest IVCurve EDM_X_DC_K_DCFF_X_X_X_X_CPU_EDM_OPEN_SHORT_IV
+{
+    LevelsTc = "TPI_EDM_XXX::all_tpi_edm_x_vsim_pkg_level_cat0";
+    AlarmMode = "Enabled";
+    BypassPort = -1;
+    DatalogLevel = "ALL";
+    ForceSetPoint = "0.3V";
+    ForceStartValue = "0V";
+    ForceStepSize = "0.1V";
+    ForceStopValue = "1V";
+    FreeDriveTime = "2ms";
+    HighLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_High_CPU,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_High_CPU);
+    IClampHi = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("100uA", "100uA", "100uA");
+    IClampLo = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("-100uA", "-100uA", "-100uA");
+    IRange = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("IR100uA", "IR100uA", "IR100uA");
+    LogLevel = "Disabled";
+    LowLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_Low_CPU,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_Low_CPU);
+    Mode = "Levels";
+    Pins = "CPU_EDM";
+    PostInstance = "";
+    PreInstance = "";
+    PreMeasurementDelay = "10ms";
+    SamplingCount = "1";
+    Type = "Current";
+}
+
+CSharpTest IVCurve EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_CPU1_EDM_OPEN_IV
+{
+    LevelsTc = "TPI_EDM_XXX::all_tpi_edm_x_isvm_pkg_level_cat0";
+    AlarmMode = "Enabled";
+    BypassPort = __shared__::TpRule.If_DS0_DS1_M(1,-1,1,1);
+    DatalogLevel = "ALL";
+    ForceSetPoint = "0.0004A";
+    ForceStartValue = "0A";
+    ForceStepSize = "0.0001A";
+    ForceStopValue = "0.001A";
+    FreeDriveTime = "2ms";
+    HighLimits = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("6V", "2V", "2V");
+    IRange = "IR1mA";
+    LogLevel = "Disabled";
+    LowLimits = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("0.3V", "0.1V", "0.1V");
+    Mode = "Levels";
+    Pins = "CPU1_EDM";
+    PostInstance = "";
+    PreInstance = "";
+    PreMeasurementDelay = "20ms";
+    SamplingCount = "1";
+    Type = "Voltage";
+    VClampHi = "3.3V";
+    VClampLo = "-0.5V";
+}
+
+CSharpTest IVCurve EDM_X_DC_K_DCFF_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV
+{
+    LevelsTc = "TPI_EDM_XXX::all_tpi_edm_x_vsim_pkg_level_cat0";
+    AlarmMode = "Enabled";
+    BypassPort = __shared__::TpRule.If_DS0_DS1_M(1,-1,1,1);
+    DatalogLevel = "ALL";
+    ForceSetPoint = "0.3V";
+    ForceStartValue = "0V";
+    ForceStepSize = "0.1V";
+    ForceStopValue = "1V";
+    FreeDriveTime = "2ms";
+    HighLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_High_CPU1,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_High_CPU1);
+    IClampHi = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("100uA", "100uA", "100uA");
+    IClampLo = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("-100uA", "-100uA", "-100uA");
+    IRange = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("IR100uA", "IR100uA", "IR100uA");
+    LogLevel = "Disabled";
+    LowLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_Low_CPU1,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_Low_CPU1);
+    Mode = "Levels";
+    Pins = "CPU1_EDM";
+    PostInstance = "";
+    PreInstance = "";
+    PreMeasurementDelay = "10ms";
+    SamplingCount = "1";
+    Type = "Current";
+}
+
+CSharpTest IVCurve EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_GCD_EDM_OPEN_IV
+{
+    LevelsTc = "TPI_EDM_XXX::all_tpi_edm_x_isvm_pkg_level_cat0";
+    AlarmMode = "Enabled";
+    BypassPort = -1;
+    DatalogLevel = "ALL";
+    ForceSetPoint = "0.0004A";
+    ForceStartValue = "0A";
+    ForceStepSize = "0.0001A";
+    ForceStopValue = "0.001A";
+    FreeDriveTime = "2ms";
+    HighLimits = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("6V", "2V", "2V");
+    IRange = "IR1mA";
+    LogLevel = "Disabled";
+    LowLimits = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("0.3V", "0.1V", "0.1V");
+    Mode = "Levels";
+    Pins = "GCD_EDM";
+    PostInstance = "";
+    PreInstance = "";
+    PreMeasurementDelay = "20ms";
+    SamplingCount = "1";
+    Type = "Voltage";
+    VClampHi = "3.3V";
+    VClampLo = "-0.5V";
+}
+
+CSharpTest IVCurve EDM_X_DC_K_DCFF_X_X_X_X_GCD_EDM_OPEN_SHORT_IV
+{
+    LevelsTc = "TPI_EDM_XXX::all_tpi_edm_x_vsim_pkg_level_cat0";
+    AlarmMode = "Enabled";
+    BypassPort = -1;
+    DatalogLevel = "ALL";
+    ForceSetPoint = "0.3V";
+    ForceStartValue = "0V";
+    ForceStepSize = "0.1V";
+    ForceStopValue = "1V";
+    FreeDriveTime = "2ms";
+    HighLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_High_GCD,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_High_GCD);
+    IClampHi = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("100uA", "100uA", "100uA");
+    IClampLo = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("-100uA", "-100uA", "-100uA");
+    IRange = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("IR100uA", "IR100uA", "IR100uA");
+    LogLevel = "Disabled";
+    LowLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_Low_GCD,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_Low_GCD);
+    Mode = "Levels";
+    Pins = "GCD_EDM";
+    PostInstance = "";
+    PreInstance = "";
+    PreMeasurementDelay = "10ms";
+    SamplingCount = "1";
+    Type = "Current";
+}
+
+CSharpTest IVCurve EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_HUB_EDM_OPEN_IV
+{
+    LevelsTc = "TPI_EDM_XXX::all_tpi_edm_x_isvm_pkg_level_cat0";
+    AlarmMode = "Enabled";
+    BypassPort = -1;
+    DatalogLevel = "ALL";
+    ForceSetPoint = "0.0004A";
+    ForceStartValue = "0A";
+    ForceStepSize = "0.0001A";
+    ForceStopValue = "0.001A";
+    FreeDriveTime = "2ms";
+    HighLimits = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("6V", "2V", "2V");
+    IRange = "IR1mA";
+    LogLevel = "Disabled";
+    LowLimits = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("0.3V", "0.1V", "0.1V");
+    Mode = "Levels";
+    Pins = "HUB_EDM";
+    PostInstance = "";
+    PreInstance = "";
+    PreMeasurementDelay = "20ms";
+    SamplingCount = "1";
+    Type = "Voltage";
+    VClampHi = "3.3V";
+    VClampLo = "-0.5V";
+}
+
+CSharpTest IVCurve EDM_X_DC_K_DCFF_X_X_X_X_HUB_EDM_OPEN_SHORT_IV
+{
+    LevelsTc = "TPI_EDM_XXX::all_tpi_edm_x_vsim_pkg_level_cat0";
+    AlarmMode = "Enabled";
+    BypassPort = -1;
+    DatalogLevel = "ALL";
+    ForceSetPoint = "0.3V";
+    ForceStartValue = "0V";
+    ForceStepSize = "0.1V";
+    ForceStopValue = "1V";
+    FreeDriveTime = "2ms";
+    HighLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_High_HUB,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_High_HUB);
+    IClampHi = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("100uA", "100uA", "100uA");
+    IClampLo = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("-100uA", "-100uA", "-100uA");
+    IRange = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("IR100uA", "IR100uA", "IR100uA");
+    LogLevel = "Disabled";
+    LowLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_Low_HUB,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_Low_HUB);
+    Mode = "Levels";
+    Pins = "HUB_EDM";
+    PostInstance = "";
+    PreInstance = "";
+    PreMeasurementDelay = "10ms";
+    SamplingCount = "1";
+    Type = "Current";
+}
+
+CSharpTest IVCurve EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_PCD_EDM_OPEN_IV
+{
+    LevelsTc = "TPI_EDM_XXX::all_tpi_edm_x_isvm_pkg_level_cat0";
+    AlarmMode = "Enabled";
+    BypassPort = __shared__::TpRule.If_DS0_DS1_M(1,1,-1,1);
+    DatalogLevel = "ALL";
+    ForceSetPoint = "0.0004A";
+    ForceStartValue = "0A";
+    ForceStepSize = "0.0001A";
+    ForceStopValue = "0.001A";
+    FreeDriveTime = "2ms";
+    HighLimits = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("6V", "2V", "2V");
+    IRange = "IR1mA";
+    LogLevel = "Disabled";
+    LowLimits = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("0.3V", "0.1V", "0.1V");
+    Mode = "Levels";
+    Pins = "PCD_EDM";
+    PostInstance = "";
+    PreInstance = "";
+    PreMeasurementDelay = "20ms";
+    SamplingCount = "1";
+    Type = "Voltage";
+    VClampHi = "3.3V";
+    VClampLo = "-0.5V";
+}
+
+CSharpTest IVCurve EDM_X_DC_K_DCFF_X_X_X_X_PCD_EDM_OPEN_SHORT_IV
+{
+    LevelsTc = "TPI_EDM_XXX::all_tpi_edm_x_vsim_pkg_level_cat0";
+    AlarmMode = "Enabled";
+    BypassPort = __shared__::TpRule.If_DS0_DS1_M(1,1,-1,1);
+    DatalogLevel = "ALL";
+    ForceSetPoint = "0.3V";
+    ForceStartValue = "0V";
+    ForceStepSize = "0.1V";
+    ForceStopValue = "1V";
+    FreeDriveTime = "2ms";
+    HighLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_High_GND,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_High_GND);
+    IClampHi = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("100uA", "100uA", "100uA");
+    IClampLo = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("-100uA", "-100uA", "-100uA");
+    IRange = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("IR100uA", "IR100uA", "IR100uA");
+    LogLevel = "Disabled";
+    LowLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_Low_GND,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_Low_GND);
+    Mode = "Levels";
+    Pins = "PCD_EDM";
+    PostInstance = "";
+    PreInstance = "";
+    PreMeasurementDelay = "10ms";
+    SamplingCount = "1";
+    Type = "Current";
+}
+
+CSharpTest IVCurve EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_PCD_TMUX_07_OPEN_IV
+{
+    LevelsTc = "TPI_EDM_XXX::all_tpi_edm_x_isvm_pkg_level_cat0";
+    AlarmMode = "Enabled";
+    BypassPort = __shared__::TpRule.If_DS0_DS1_M(-1,-1,1,-1);
+    DatalogLevel = "ALL";
+    ForceSetPoint = "0.0004A";
+    ForceStartValue = "0A";
+    ForceStepSize = "0.0001A";
+    ForceStopValue = "0.001A";
+    FreeDriveTime = "2ms";
+    HighLimits = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("6V", "2V", "2V");
+    IRange = "IR1mA";
+    LogLevel = "Disabled";
+    LowLimits = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("0.3V", "0.1V", "0.1V");
+    Mode = "Levels";
+    Pins = "PCD_TMUX_07";
+    PostInstance = "SetPinAttributes(--settings=pcd_tmux_all:LogicalValue:0)";
+    PreInstance = "SetPinAttributes(--settings=PCD_TMUXCBIT2:LogicalValue:0 PCD_TMUXCBIT1:LogicalValue:0 PCD_TMUXCBIT0:LogicalValue:1)";
+    PreMeasurementDelay = "20ms";
+    SamplingCount = "1";
+    Type = "Voltage";
+    VClampHi = "3.3V";
+    VClampLo = "-0.5V";
+}
+
+CSharpTest IVCurve EDM_X_DC_K_DCFF_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV
+{
+    LevelsTc = "TPI_EDM_XXX::all_tpi_edm_x_vsim_pkg_level_cat0";
+    AlarmMode = "Enabled";
+    BypassPort = __shared__::TpRule.If_DS0_DS1_M(-1,-1,1,-1);
+    DatalogLevel = "ALL";
+    ForceSetPoint = "0.3V";
+    ForceStartValue = "0V";
+    ForceStepSize = "0.1V";
+    ForceStopValue = "1V";
+    FreeDriveTime = "2ms";
+    HighLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_High_PCD,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_High_PCD);
+    IClampHi = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("100uA", "100uA", "100uA");
+    IClampLo = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("-100uA", "-100uA", "-100uA");
+    IRange = TPI_EDM_XXX_Rules.EDM_Limit_HOT_COLD("IR100uA", "IR100uA", "IR100uA");
+    LogLevel = "Disabled";
+    LowLimits = __shared__::TpRule.If_PACKAGE(TPI_EDM_XXX_Desktop_Limit.TPI_EDM_XXX_Low_PCD,TPI_EDM_XKPKGMB_Mobile_Limit.TPI_EDM_XKPKGMB_Low_PCD);
+    Mode = "Levels";
+    Pins = "PCD_TMUX_07";
+    PostInstance = "SetPinAttributes(--settings=pcd_tmux_all:LogicalValue:0)";
+    PreInstance = "SetPinAttributes(--settings=PCD_TMUXCBIT2:LogicalValue:0 PCD_TMUXCBIT1:LogicalValue:0 PCD_TMUXCBIT0:LogicalValue:1)";
+    PreMeasurementDelay = "10ms";
+    SamplingCount = "1";
+    Type = "Current";
+}
+
+CSharpTest ScreenTC EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK1
+{
+    ScreenTestSet = "SHOPSBINCHECK1";
+    ScreenTestsFile = "InputFiles/TPI_EDM_XXX_ScreenTest.txt";
+}
+
+CSharpTest ScreenTC EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK2_FAIL
+{
+    ScreenTestSet = "SHOPSBINCHECK2";
+    ScreenTestsFile = "InputFiles/TPI_EDM_XXX_ScreenTest.txt";
+}
+
+CSharpTest ScreenTC EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK2_PASS
+{
+    ScreenTestSet = "SHOPSBINCHECK2";
+    ScreenTestsFile = "InputFiles/TPI_EDM_XXX_ScreenTest.txt";
+}
+
+CSharpTest ULTLoggerTC EDM_X_PRIMEULT_K_DCFF_X_X_X_X_ULTLOGGER_EDM
+{
+    BypassPort = __shared__::TpRule.If_M_PKGs(1,-1);
+    DieId = __shared__::TpRule.If_CLASS_NVL_S52C((__shared__::DFFVars.DIEID_BASE+","+__shared__::DFFVars.DIEID_CPU+","+__shared__::DFFVars.DIEID_CPU1+","+__shared__::DFFVars.DIEID_GPU+","+__shared__::DFFVars.DIEID_PCD+","+__shared__::DFFVars.DIEID_HUB),(__shared__::DFFVars.DIEID_BASE+","+__shared__::DFFVars.DIEID_CPU+","+__shared__::DFFVars.DIEID_GPU+","+__shared__::DFFVars.DIEID_PCD+","+__shared__::DFFVars.DIEID_HUB));
+    LogLevel = "Disabled";
+    SetUltDataPerDieId = "DISABLED";
+    ValueExpression = __shared__::TpRule.If_CLASS_NVL_S52C((__shared__::DFFVars.DIEID_BAS_IDENTIFIER+","+__shared__::DFFVars.DIEID_CPU_IDENTIFIER+","+__shared__::DFFVars.DIEID_CPU1_IDENTIFIER+","+__shared__::DFFVars.DIEID_GPU_IDENTIFIER+","+__shared__::DFFVars.DIEID_PCD_IDENTIFIER+","+__shared__::DFFVars.DIEID_HUB_IDENTIFIER),(__shared__::DFFVars.DIEID_BAS_IDENTIFIER+","+__shared__::DFFVars.DIEID_CPU_IDENTIFIER+","+__shared__::DFFVars.DIEID_GPU_IDENTIFIER+","+__shared__::DFFVars.DIEID_PCD_IDENTIFIER+","+__shared__::DFFVars.DIEID_HUB_IDENTIFIER));
+}
+
+Flow EDM_BASE
+{
+    FlowItem EDM_X_DC_K_START_X_X_X_X_BASE_EDM_OPEN_SHORT_IV EDM_X_DC_K_START_X_X_X_X_BASE_EDM_OPEN_SHORT_IV
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150029_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150029_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b15960002_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_0;
+            IncrementCounters TPI_EDM_XXX::n15960002_fail_EDM_X_DC_K_START_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b99100008_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_2;
+            IncrementCounters TPI_EDM_XXX::n99100008_fail_EDM_X_DC_K_START_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_2;
+            Return 2;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b15960003_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_3;
+            IncrementCounters TPI_EDM_XXX::n15960003_fail_EDM_X_DC_K_START_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b10960001_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_4;
+            IncrementCounters TPI_EDM_XXX::n10960001_fail_EDM_X_DC_K_START_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_4;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow EDM_CPU
+{
+    FlowItem EDM_X_DC_K_START_X_X_X_X_CPU_EDM_OPEN_SHORT_IV EDM_X_DC_K_START_X_X_X_X_CPU_EDM_OPEN_SHORT_IV
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150035_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150033_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b15900002_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_0;
+            IncrementCounters TPI_EDM_XXX::n15900002_fail_EDM_X_DC_K_START_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b99100010_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_2;
+            IncrementCounters TPI_EDM_XXX::n99100010_fail_EDM_X_DC_K_START_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_2;
+            Return 2;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b15900003_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_3;
+            IncrementCounters TPI_EDM_XXX::n15900003_fail_EDM_X_DC_K_START_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b10900001_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_4;
+            IncrementCounters TPI_EDM_XXX::n10900001_fail_EDM_X_DC_K_START_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_4;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow EDM_CPU1
+{
+    FlowItem EDM_X_DC_K_START_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV EDM_X_DC_K_START_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150032_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150031_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b15910002_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_0;
+            IncrementCounters TPI_EDM_XXX::n15910002_fail_EDM_X_DC_K_START_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b99100009_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_2;
+            IncrementCounters TPI_EDM_XXX::n99100009_fail_EDM_X_DC_K_START_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_2;
+            Return 2;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b15910003_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_3;
+            IncrementCounters TPI_EDM_XXX::n15910003_fail_EDM_X_DC_K_START_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b10910001_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_4;
+            IncrementCounters TPI_EDM_XXX::n10910001_fail_EDM_X_DC_K_START_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_4;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow EDM_GCD
+{
+    FlowItem EDM_X_DC_K_START_X_X_X_X_GCD_EDM_OPEN_SHORT_IV EDM_X_DC_K_START_X_X_X_X_GCD_EDM_OPEN_SHORT_IV
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150038_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150035_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b15930002_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_0;
+            IncrementCounters TPI_EDM_XXX::n15930002_fail_EDM_X_DC_K_START_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b99100011_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_2;
+            IncrementCounters TPI_EDM_XXX::n99100011_fail_EDM_X_DC_K_START_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_2;
+            Return 2;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b15930003_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_3;
+            IncrementCounters TPI_EDM_XXX::n15930003_fail_EDM_X_DC_K_START_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b10930001_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_4;
+            IncrementCounters TPI_EDM_XXX::n10930001_fail_EDM_X_DC_K_START_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_4;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow EDM_HUB
+{
+    FlowItem EDM_X_DC_K_START_X_X_X_X_HUB_EDM_OPEN_SHORT_IV EDM_X_DC_K_START_X_X_X_X_HUB_EDM_OPEN_SHORT_IV
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150041_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150037_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b15940002_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_0;
+            IncrementCounters TPI_EDM_XXX::n15940002_fail_EDM_X_DC_K_START_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b99100012_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_2;
+            IncrementCounters TPI_EDM_XXX::n99100012_fail_EDM_X_DC_K_START_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_2;
+            Return 2;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b15940003_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_3;
+            IncrementCounters TPI_EDM_XXX::n15940003_fail_EDM_X_DC_K_START_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b10940001_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_4;
+            IncrementCounters TPI_EDM_XXX::n10940001_fail_EDM_X_DC_K_START_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_4;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow EDM_PCD_H
+{
+    FlowItem EDM_X_DC_K_START_X_X_X_X_PCD_EDM_OPEN_SHORT_IV EDM_X_DC_K_START_X_X_X_X_PCD_EDM_OPEN_SHORT_IV
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150044_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150039_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b15950004_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_0;
+            IncrementCounters TPI_EDM_XXX::n15950004_fail_EDM_X_DC_K_START_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b99100013_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_2;
+            IncrementCounters TPI_EDM_XXX::n99100013_fail_EDM_X_DC_K_START_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_2;
+            Return 2;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b15950005_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_3;
+            IncrementCounters TPI_EDM_XXX::n15950005_fail_EDM_X_DC_K_START_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b10950002_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_4;
+            IncrementCounters TPI_EDM_XXX::n10950002_fail_EDM_X_DC_K_START_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_4;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow EDM_PCD
+{
+    FlowItem EDM_X_DC_K_START_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV EDM_X_DC_K_START_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150047_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150041_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b15950006_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_0;
+            IncrementCounters TPI_EDM_XXX::n15950006_fail_EDM_X_DC_K_START_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b99100014_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_2;
+            IncrementCounters TPI_EDM_XXX::n99100014_fail_EDM_X_DC_K_START_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_2;
+            Return 2;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b15950007_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_3;
+            IncrementCounters TPI_EDM_XXX::n15950007_fail_EDM_X_DC_K_START_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b10950003_fail_TPI_EDM_XXX_EDM_X_DC_K_START_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_4;
+            IncrementCounters TPI_EDM_XXX::n10950003_fail_EDM_X_DC_K_START_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_4;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow EDM_DCFF_BASE
+{
+    FlowItem EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_BASE_EDM_OPEN_IV EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_BASE_EDM_OPEN_IV @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150015_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_BASE_EDM_OPEN_IV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150015_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_BASE_EDM_OPEN_IV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_BASE_EDM_OPEN_SHORT_IV;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_BASE_EDM_OPEN_SHORT_IV;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_BASE_EDM_OPEN_SHORT_IV;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_BASE_EDM_OPEN_SHORT_IV;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_BASE_EDM_OPEN_SHORT_IV;
+        }
+    }
+    
+    FlowItem EDM_X_DC_K_DCFF_X_X_X_X_BASE_EDM_OPEN_SHORT_IV EDM_X_DC_K_DCFF_X_X_X_X_BASE_EDM_OPEN_SHORT_IV
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150022_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150022_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b15960000_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_0;
+            IncrementCounters TPI_EDM_XXX::n15960000_fail_EDM_X_DC_K_DCFF_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b99100000_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_2;
+            IncrementCounters TPI_EDM_XXX::n99100000_fail_EDM_X_DC_K_DCFF_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_2;
+            Return 2;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b15960001_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_3;
+            IncrementCounters TPI_EDM_XXX::n15960001_fail_EDM_X_DC_K_DCFF_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b10960000_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_4;
+            IncrementCounters TPI_EDM_XXX::n10960000_fail_EDM_X_DC_K_DCFF_X_X_X_X_BASE_EDM_OPEN_SHORT_IV_4;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow EDM_DCFF_CPU
+{
+    FlowItem EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_CPU_EDM_OPEN_IV EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_CPU_EDM_OPEN_IV @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150017_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_CPU_EDM_OPEN_IV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150017_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_CPU_EDM_OPEN_IV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_CPU_EDM_OPEN_SHORT_IV;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_CPU_EDM_OPEN_SHORT_IV;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_CPU_EDM_OPEN_SHORT_IV;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_CPU_EDM_OPEN_SHORT_IV;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_CPU_EDM_OPEN_SHORT_IV;
+        }
+    }
+    
+    FlowItem EDM_X_DC_K_DCFF_X_X_X_X_CPU_EDM_OPEN_SHORT_IV EDM_X_DC_K_DCFF_X_X_X_X_CPU_EDM_OPEN_SHORT_IV
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150024_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150024_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b15900000_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_0;
+            IncrementCounters TPI_EDM_XXX::n15900000_fail_EDM_X_DC_K_DCFF_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b99100002_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_2;
+            IncrementCounters TPI_EDM_XXX::n99100002_fail_EDM_X_DC_K_DCFF_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_2;
+            Return 2;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b15900001_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_3;
+            IncrementCounters TPI_EDM_XXX::n15900001_fail_EDM_X_DC_K_DCFF_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b10900000_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_4;
+            IncrementCounters TPI_EDM_XXX::n10900000_fail_EDM_X_DC_K_DCFF_X_X_X_X_CPU_EDM_OPEN_SHORT_IV_4;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow EDM_DCFF_CPU1
+{
+    FlowItem EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_CPU1_EDM_OPEN_IV EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_CPU1_EDM_OPEN_IV @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150016_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_CPU1_EDM_OPEN_IV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150016_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_CPU1_EDM_OPEN_IV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV;
+        }
+    }
+    
+    FlowItem EDM_X_DC_K_DCFF_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV EDM_X_DC_K_DCFF_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150023_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150023_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b15910000_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_0;
+            IncrementCounters TPI_EDM_XXX::n15910000_fail_EDM_X_DC_K_DCFF_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b99100001_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_2;
+            IncrementCounters TPI_EDM_XXX::n99100001_fail_EDM_X_DC_K_DCFF_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_2;
+            Return 2;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b15910001_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_3;
+            IncrementCounters TPI_EDM_XXX::n15910001_fail_EDM_X_DC_K_DCFF_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b10910000_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_4;
+            IncrementCounters TPI_EDM_XXX::n10910000_fail_EDM_X_DC_K_DCFF_X_X_X_X_CPU1_EDM_OPEN_SHORT_IV_4;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow EDM_DCFF_GCD
+{
+    FlowItem EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_GCD_EDM_OPEN_IV EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_GCD_EDM_OPEN_IV @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150018_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_GCD_EDM_OPEN_IV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150018_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_GCD_EDM_OPEN_IV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_GCD_EDM_OPEN_SHORT_IV;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_GCD_EDM_OPEN_SHORT_IV;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_GCD_EDM_OPEN_SHORT_IV;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_GCD_EDM_OPEN_SHORT_IV;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_GCD_EDM_OPEN_SHORT_IV;
+        }
+    }
+    
+    FlowItem EDM_X_DC_K_DCFF_X_X_X_X_GCD_EDM_OPEN_SHORT_IV EDM_X_DC_K_DCFF_X_X_X_X_GCD_EDM_OPEN_SHORT_IV
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150025_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150025_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b15930000_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_0;
+            IncrementCounters TPI_EDM_XXX::n15930000_fail_EDM_X_DC_K_DCFF_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b99100004_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_2;
+            IncrementCounters TPI_EDM_XXX::n99100004_fail_EDM_X_DC_K_DCFF_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_2;
+            Return 2;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b15930001_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_3;
+            IncrementCounters TPI_EDM_XXX::n15930001_fail_EDM_X_DC_K_DCFF_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b10930000_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_4;
+            IncrementCounters TPI_EDM_XXX::n10930000_fail_EDM_X_DC_K_DCFF_X_X_X_X_GCD_EDM_OPEN_SHORT_IV_4;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow EDM_DCFF_HUB
+{
+    FlowItem EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_HUB_EDM_OPEN_IV EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_HUB_EDM_OPEN_IV @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150019_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_HUB_EDM_OPEN_IV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150019_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_HUB_EDM_OPEN_IV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_HUB_EDM_OPEN_SHORT_IV;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_HUB_EDM_OPEN_SHORT_IV;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_HUB_EDM_OPEN_SHORT_IV;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_HUB_EDM_OPEN_SHORT_IV;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_HUB_EDM_OPEN_SHORT_IV;
+        }
+    }
+    
+    FlowItem EDM_X_DC_K_DCFF_X_X_X_X_HUB_EDM_OPEN_SHORT_IV EDM_X_DC_K_DCFF_X_X_X_X_HUB_EDM_OPEN_SHORT_IV
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150026_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150026_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b15940000_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_0;
+            IncrementCounters TPI_EDM_XXX::n15940000_fail_EDM_X_DC_K_DCFF_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b99100005_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_2;
+            IncrementCounters TPI_EDM_XXX::n99100005_fail_EDM_X_DC_K_DCFF_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_2;
+            Return 2;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b15940001_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_3;
+            IncrementCounters TPI_EDM_XXX::n15940001_fail_EDM_X_DC_K_DCFF_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b10940000_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_4;
+            IncrementCounters TPI_EDM_XXX::n10940000_fail_EDM_X_DC_K_DCFF_X_X_X_X_HUB_EDM_OPEN_SHORT_IV_4;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow EDM_DCFF_PCD_H
+{
+    FlowItem EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_PCD_EDM_OPEN_IV EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_PCD_EDM_OPEN_IV @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150020_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_PCD_EDM_OPEN_IV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150020_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_PCD_EDM_OPEN_IV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_PCD_EDM_OPEN_SHORT_IV;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_PCD_EDM_OPEN_SHORT_IV;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_PCD_EDM_OPEN_SHORT_IV;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_PCD_EDM_OPEN_SHORT_IV;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_PCD_EDM_OPEN_SHORT_IV;
+        }
+    }
+    
+    FlowItem EDM_X_DC_K_DCFF_X_X_X_X_PCD_EDM_OPEN_SHORT_IV EDM_X_DC_K_DCFF_X_X_X_X_PCD_EDM_OPEN_SHORT_IV
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150027_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150027_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b15950000_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_0;
+            IncrementCounters TPI_EDM_XXX::n15950000_fail_EDM_X_DC_K_DCFF_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b99100006_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_2;
+            IncrementCounters TPI_EDM_XXX::n99100006_fail_EDM_X_DC_K_DCFF_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_2;
+            Return 2;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b15950001_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_3;
+            IncrementCounters TPI_EDM_XXX::n15950001_fail_EDM_X_DC_K_DCFF_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b10950000_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_4;
+            IncrementCounters TPI_EDM_XXX::n10950000_fail_EDM_X_DC_K_DCFF_X_X_X_X_PCD_EDM_OPEN_SHORT_IV_4;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow EDM_DCFF_PCD
+{
+    FlowItem EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_PCD_TMUX_07_OPEN_IV EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_PCD_TMUX_07_OPEN_IV @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150021_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_PCD_TMUX_07_OPEN_IV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150021_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_400UA_DIODE_CHECK_PCD_TMUX_07_OPEN_IV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV;
+        }
+    }
+    
+    FlowItem EDM_X_DC_K_DCFF_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV EDM_X_DC_K_DCFF_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150028_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150028_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b15950002_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_0;
+            IncrementCounters TPI_EDM_XXX::n15950002_fail_EDM_X_DC_K_DCFF_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b99100007_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_2;
+            IncrementCounters TPI_EDM_XXX::n99100007_fail_EDM_X_DC_K_DCFF_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_2;
+            Return 2;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b15950003_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_3;
+            IncrementCounters TPI_EDM_XXX::n15950003_fail_EDM_X_DC_K_DCFF_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b10950001_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_4;
+            IncrementCounters TPI_EDM_XXX::n10950001_fail_EDM_X_DC_K_DCFF_X_X_X_X_PCD_TMUX_07_OPEN_SHORT_IV_4;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow EDM_DCFAILFLOW
+{
+    FlowItem EDM_DCFF_BASE EDM_DCFF_BASE
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo EDM_DCFF_CPU;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 2;
+        }
+    }
+    
+    FlowItem EDM_DCFF_CPU EDM_DCFF_CPU
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo EDM_DCFF_CPU1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 2;
+        }
+    }
+    
+    FlowItem EDM_DCFF_CPU1 EDM_DCFF_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo EDM_DCFF_GCD;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 2;
+        }
+    }
+    
+    FlowItem EDM_DCFF_GCD EDM_DCFF_GCD
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo EDM_DCFF_HUB;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 2;
+        }
+    }
+    
+    FlowItem EDM_DCFF_HUB EDM_DCFF_HUB
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo EDM_DCFF_PCD_H;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 2;
+        }
+    }
+    
+    FlowItem EDM_DCFF_PCD_H EDM_DCFF_PCD_H
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo EDM_DCFF_PCD;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 2;
+        }
+    }
+    
+    FlowItem EDM_DCFF_PCD EDM_DCFF_PCD
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 2;
+        }
+    }
+    
+}
+
+Flow TPI_EDM_XXX_START
+{
+    FlowItem EDM_BASE EDM_BASE
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo EDM_CPU;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 2;
+        }
+    }
+    
+    FlowItem EDM_CPU EDM_CPU
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo EDM_CPU1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 2;
+        }
+    }
+    
+    FlowItem EDM_CPU1 EDM_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo EDM_GCD;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 2;
+        }
+    }
+    
+    FlowItem EDM_GCD EDM_GCD
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo EDM_HUB;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 2;
+        }
+    }
+    
+    FlowItem EDM_HUB EDM_HUB
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo EDM_PCD_H;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 2;
+        }
+    }
+    
+    FlowItem EDM_PCD_H EDM_PCD_H
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo EDM_PCD;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 2;
+        }
+    }
+    
+    FlowItem EDM_PCD EDM_PCD
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 2;
+        }
+    }
+    
+}
+
+Flow TPI_EDM_XXX_DCFF
+{
+    FlowItem EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK1 EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99900000_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98900000_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b90100000_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK1_0;
+            IncrementCounters TPI_EDM_XXX::n90100000_fail_EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo EDM_DCFAILFLOW;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            GoTo EDM_DCFAILFLOW;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b90100001_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK1_4;
+            IncrementCounters TPI_EDM_XXX::n90100001_fail_EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK1_4;
+            Return 0;
+        }
+    }
+    
+    FlowItem EDM_DCFAILFLOW EDM_DCFAILFLOW
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK2_FAIL;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK2_PASS;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 2;
+        }
+    }
+    
+    FlowItem EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK2_FAIL EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK2_FAIL
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99100003_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK2_FAIL_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98100000_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK2_FAIL_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b10990000_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK2_FAIL_0;
+            IncrementCounters TPI_EDM_XXX::n10990000_fail_EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK2_FAIL_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Fail";
+            IncrementCounters TPI_EDM_XXX::n10990003_fail_EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK2_FAIL_1;
+            Return 2;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b10990001_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK2_FAIL_2;
+            IncrementCounters TPI_EDM_XXX::n10990001_fail_EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK2_FAIL_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b10990002_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK2_FAIL_3;
+            IncrementCounters TPI_EDM_XXX::n10990002_fail_EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK2_FAIL_3;
+            Return 2;
+        }
+    }
+    
+    FlowItem EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK2_PASS EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK2_PASS
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99900001_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK2_PASS_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98900001_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK2_PASS_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b90100002_fail_TPI_EDM_XXX_EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK2_PASS_0;
+            IncrementCounters TPI_EDM_XXX::n90100002_fail_EDM_X_DC_K_DCFF_X_X_X_X_FLAGCHECK2_PASS_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo EDM_X_PRIMEULT_K_DCFF_X_X_X_X_ULTLOGGER_EDM;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+    FlowItem EDM_X_PRIMEULT_K_DCFF_X_X_X_X_ULTLOGGER_EDM EDM_X_PRIMEULT_K_DCFF_X_X_X_X_ULTLOGGER_EDM
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99530006_fail_TPI_EDM_XXX_EDM_X_PRIMEULT_K_DCFF_X_X_X_X_ULTLOGGER_EDM_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98530006_fail_TPI_EDM_XXX_EDM_X_PRIMEULT_K_DCFF_X_X_X_X_ULTLOGGER_EDM_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b53060002_fail_TPI_EDM_XXX_EDM_X_PRIMEULT_K_DCFF_X_X_X_X_ULTLOGGER_EDM_0;
+            IncrementCounters TPI_EDM_XXX::n53060002_fail_EDM_X_PRIMEULT_K_DCFF_X_X_X_X_ULTLOGGER_EDM_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}

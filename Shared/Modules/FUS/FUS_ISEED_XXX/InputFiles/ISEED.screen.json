@@ -1,0 +1,53 @@
+{
+  "Screen_Config": [
+    {
+      "TestName": "ISEED_UNLOCK_SET_PIC8_PrimeCtvDecoderTestMethod",
+      "TestConfig": [
+        [ "LGUNLOCK", "String", "SharedStorage", "DUT.G_PCD_STATUS_0_POLICY_OUTPUT", "==", "Literal", "46", "1", "REDUNLOCK" ],
+        [ "REDUNLOCK", "String", "SharedStorage", "DUT.G_PCD_STATUS_0_POLICY_OUTPUT", "==", "Literal", "70", "3", "2" ]
+      ]
+    },
+    {
+      "TestName": "SIM_ISEED_UNLOCK_SET_PIC8_PrimeCtvDecoderTestMethod",
+      "TestConfig": [
+        [ "SET_G_PCD_STATUS_0_POLICY_OUTPUT", "String", "SharedStorage", "DUT.G_PCD_STATUS_0_POLICY_OUTPUT", "SET", "LITERAL", "46", "LGUNLOCK", "2" ],
+        [ "LGUNLOCK", "String", "SharedStorage", "DUT.G_PCD_STATUS_0_POLICY_OUTPUT", "==", "Literal", "46", "1", "REDUNLOCK" ],
+        [ "REDUNLOCK", "String", "SharedStorage", "DUT.G_PCD_STATUS_0_POLICY_OUTPUT", "==", "Literal", "70", "3", "2" ]
+      ]
+    },
+    {
+      "TestName": "TP_FUSE_Enabled",
+      "TestConfig": [
+        [ "Test1", "String", "UserVar", "SCVars.TP_FUSE_ENABLED", "==", "LITERAL", "", "2", "Test2" ],
+        [ "Test2", "String", "UserVar", "SCVars.TP_FUSE_ENABLED", "==", "LITERAL", "0", "2", "Test3" ],
+        [ "Test3", "String", "UserVar", "SCVars.TP_FUSE_ENABLED", "==", "LITERAL", "FALSE", "2", "Test4" ],
+        [ "Test4", "String", "UserVar", "SCVars.TP_FUSE_ENABLED", "==", "LITERAL", "1", "1", "Test5" ],
+        [ "Test5", "String", "UserVar", "SCVars.TP_FUSE_ENABLED", "==", "LITERAL", "TRUE", "1", "Test6" ],
+        [ "Test6", "String", "UserVar", "SCVars.TP_FUSE_ENABLED", "==", "LITERAL", "True", "1", "2" ]
+      ]
+    },
+    {
+      "TestName" : "Check_BOMGROUP",
+      "TestConfig": [
+        [ "IsMatchS16C", "Integer", "SharedStorage", "DUT.CHECKBOMS16C", "SET", "EXPRESSION", "IsMatch([E.BOMGROUP], 'CLASS_NVL_S16C')", "PassBOMSS16C", "FailBOMCheck" ],
+        [ "PassBOMSS16C", "Integer", "SharedStorage", "DUT.CHECKBOMS16C", "==", "Literal", "1", "1", "IsMatchS28C" ],
+        [ "IsMatchS28C", "Integer", "SharedStorage", "DUT.CHECKBOMS28C", "SET", "EXPRESSION", "IsMatch([E.BOMGROUP], 'CLASS_NVL_S28C')", "PassBOMS28C", "FailBOMCheck" ],
+        [ "PassBOMS28C", "Integer", "SharedStorage", "DUT.CHECKBOMS28C", "==", "Literal", "1", "1", "IsMatchS52C" ],
+        [ "IsMatchS52C", "Integer", "SharedStorage", "DUT.CHECKBOMS52C", "SET", "EXPRESSION", "IsMatch([E.BOMGROUP], 'CLASS_NVL_S52C')", "PassBOMS52C", "FailBOMCheck" ],
+        [ "PassBOMS52C", "Integer", "SharedStorage", "DUT.CHECKBOMS52C", "==", "Literal", "1", "2", "IsMatchDNLS28C" ],
+        [ "IsMatchDNLS28C", "Integer", "SharedStorage", "DUT.CHECKBOMDNLS28C", "SET", "EXPRESSION", "IsMatch([E.BOMGROUP], 'CLASS_DNL_S28C')", "PassBOMDNLS28C", "FailBOMCheck" ],
+        [ "PassBOMDNLS28C", "Integer", "SharedStorage", "DUT.CHECKBOMDNLS28C", "==", "Literal", "1", "2", "IsMatchHX28C" ],
+        [ "IsMatchHX28C", "Integer", "SharedStorage", "DUT.CHECKBOMHX28C", "SET", "EXPRESSION", "IsMatch([E.BOMGROUP], 'CLASS_NVL_HX28C')", "PassBOMHX28C", "FailBOMCheck" ],
+        [ "PassBOMHX28C", "Integer", "SharedStorage", "DUT.CHECKBOMHX28C", "==", "Literal", "1", "3", "IsMatchP16C" ],
+        [ "IsMatchP16C", "Integer", "SharedStorage", "DUT.CHECKBOMP16C", "SET", "EXPRESSION", "IsMatch([E.BOMGROUP], 'CLASS_NVL_P16C')", "PassBOMP16C", "FailBOMCheck" ],
+        [ "PassBOMP16C", "Integer", "SharedStorage", "DUT.CHECKBOMP16C", "==", "Literal", "1", "3", "IsMatchH16C" ],
+        [ "IsMatchH16C", "Integer", "SharedStorage", "DUT.CHECKBOMH16C", "SET", "EXPRESSION", "IsMatch([E.BOMGROUP], 'CLASS_NVL_H16C')", "PassBOMH16C", "FailBOMCheck" ],
+        [ "PassBOMH16C", "Integer", "SharedStorage", "DUT.CHECKBOMH16C", "==", "Literal", "1", "3", "IsMatchU8C" ],
+        [ "IsMatchU8C", "Integer", "SharedStorage", "DUT.CHECKBOMU8C", "SET", "EXPRESSION", "IsMatch([E.BOMGROUP], 'CLASS_NVL_U8C')", "PassBOMU8C", "FailBOMCheck" ],
+        [ "PassBOMU8C", "Integer", "SharedStorage", "DUT.CHECKBOMU8C", "==", "Literal", "1", "3", "FailFlagSet" ],
+        [ "FailBOMCheck", "String", "SharedStorage", "DUT.DUMMY", "SET", "EXPRESSION", "ExecCallback('PrintToConsole', 'ERROR: NOT VALID BOM GROUP FROM ENVIRONMENT FILE!')", "0", "0" ],
+        [ "FailFlagSet", "String", "SharedStorage", "DUT.DUMMY", "SET", "EXPRESSION", "ExecCallback('PrintToConsole', 'ERROR: FAILING CHECK FLAG SET!')", "0", "0" ]
+      ]
+    }		
+  ]
+}

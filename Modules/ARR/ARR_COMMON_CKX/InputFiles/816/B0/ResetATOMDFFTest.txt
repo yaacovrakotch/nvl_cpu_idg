@@ -1,0 +1,138 @@
+
+START_SCREEN:SetGSDS2DFFATOMREPAIR
+#RunOn 	: TestName : DataType 	: ParamType 	: Param1				: Operation 	: ParamType 	: Param2   			: TmpStore 		: OnTrue 		: OnFalse
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+EXEC 	: SETDFFSRAM   				: STRING 	: DFF 			: CURRENT.CURRENT.XL2SSAR   			: SET 			:   GSDS 	: I.S.REPSRAM 			:   -    	 : SETDFFRF   					 : 2
+EXEC 	: SETDFFRF   				: STRING 	: DFF 			: CURRENT.CURRENT.XRFLRUR   			: SET 			:   GSDS 	: I.S.REPRF 			:   -    	 : 1   					 		 : 2
+END_SCREEN
+
+
+START_SCREEN:ResetRepairATOMSDTDFF
+#RunOn 	: TestName : DataType 	: ParamType 	: Param1				: Operation 	: ParamType 	: Param2   			: TmpStore 		: OnTrue 		: OnFalse
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+EXEC	: ATOM0R_CORE0				: STRING	: GSDS			: I.S.VFDM_ATOM0R				: SET			: LITERAL			: "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"		: -			 : ATOM1R_CORE0		 : 2
+EXEC	: ATOM1R_CORE0				: STRING	: GSDS			: I.S.VFDM_ATOM1R				: SET			: LITERAL			: "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"		: -			 : ATOM2R_CORE0		 : 2
+EXEC	: ATOM2R_CORE0				: STRING	: GSDS			: I.S.VFDM_ATOM2R				: SET			: LITERAL			: "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"		: -			 : ATOM3R_CORE0		 : 2
+EXEC	: ATOM3R_CORE0				: STRING	: GSDS			: I.S.VFDM_ATOM3R				: SET			: LITERAL			: "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||"		: -			 : ATOMREPSRAM		 : 2
+EXEC	: ATOMREPSRAM				: STRING	: GSDS			: I.S.REPSRAM					: SET           : EXPRESSION        : D.CURRENT.CURRENT.SL2SSAR																												: - 		 : ATOMREPRF		 : 2
+EXEC	: ATOMREPRF					: STRING	: GSDS			: I.S.REPRF						: SET			: EXPRESSION		: D.CURRENT.CURRENT.SRFLRUR																												: - 		 : ATOMMODULESTATUS	 : 2
+EXEC	: ATOMMODULESTATUS			: STRING	: GSDS			: I.S.MODULESTATUS				: SET			: LITERAL			: "00"																																	: - 		 : ATOMREPMODULES	 : 2
+EXEC	: ATOMREPMODULES			: STRING	: GSDS			: I.S.REPAIRED_MODULES			: SET			: LITERAL			: "00"																																	: - 		 : ATOMDISMODULES	 : 2
+EXEC	: ATOMDISMODULES			: STRING	: GSDS			: I.S.MODULES_DIS				: SET			: LITERAL			: "00"																																	: - 		 : SDTSRAMREPAIRDFF	 : 2
+EXEC	: SDTSRAMREPAIRDFF		    : STRING    : DFF	        : CURRENT.CURRENT.XL2SSAR				: SET	      	: EXPRESSION 		: "0"			    																									:    -       : SDTRFREPAIRDFF	 : 2
+EXEC	: SDTRFREPAIRDFF		    : STRING    : DFF	        : CURRENT.CURRENT.XRFLRUR				: SET	      	: EXPRESSION 		: "0"			    																									:    -       : 1			 	 : 2
+
+#SetGSDS2DFFATOMREPAIR
+END_SCREEN
+
+#SETTING RWA to default value
+START_SCREEN:DFF_ATOMRWA_SETTODEFAULT
+#RunOn 	: TestName 	: DataType 	: ParamType 	: Param1								: Operation 	: ParamType 	: Param2   			    : TmpStore 	 : OnTrue 		     : OnFalse
+#RunOn:	TestName:	Data Type:		Param Type:	Param1:										Operation:		Param Type:		Param2:					TmpStore:		OnTrue:		OnFalse
+EXEC:   SL2DRA_DEF 						: STRING      : DFF	   		: CURRENT.CURRENT.SL2DRA							:  SET	      : LITERAL	  		: "001"			    	:    -          : SL2DSRA_DEF	: 2		
+EXEC:   SL2DSRA_DEF						: STRING      : DFF	   		: CURRENT.CURRENT.SL2DSRA							:  SET	      : LITERAL	  		: "001"			    	:    -          : SL2DERA_DEF	: 2		
+EXEC:   SL2DERA_DEF						: STRING      : DFF	   		: CURRENT.CURRENT.SL2DERA							:  SET	      : LITERAL	  		: "1"			    	:    -          : SL2DWAP_DEF	: 2			
+EXEC:   SL2DWAP_DEF						: STRING      : DFF	   		: CURRENT.CURRENT.SL2DWAP							:  SET	      : LITERAL	  		: "0001"			    :    -      	: SL2DWAS_DEF	: 2		
+EXEC:   SL2DWAS_DEF						: STRING      : DFF	   		: CURRENT.CURRENT.SL2DWAS							:  SET	      : LITERAL	  		: "010"			    	:    -          : SL2DWAHV_DEF	: 2		
+EXEC:   SL2DWAHV_DEF 					: STRING      : DFF	   		: CURRENT.CURRENT.SL2DWAHV							:  SET	      : LITERAL	  		: "000"			    	:    -          : SL2DSRAM_DEF	: 2		
+EXEC:   SL2DSRAM_DEF					: STRING      : DFF	   		: CURRENT.CURRENT.SL2DSRAM							:  SET	      : LITERAL	  		: "00100001"	    	:    -          : SL2TRA_DEF	: 2		
+EXEC:   SL2TRA_DEF						: STRING      : DFF	   		: CURRENT.CURRENT.SL2TRA							:  SET	      : LITERAL	  		: "001"			    	:    -          : SL2TSRA_DEF	: 2			
+EXEC:   SL2TSRA_DEF						: STRING      : DFF	   		: CURRENT.CURRENT.SL2TSRA							:  SET	      : LITERAL	  		: "001"				    :    -      	: SL2TERA_DEF	: 2		
+EXEC:   SL2TERA_DEF						: STRING      : DFF	   		: CURRENT.CURRENT.SL2TERA							:  SET	      : LITERAL	  		: "1"			    	:    -          : SL2TWAP_DEF	: 2	
+EXEC:   SL2TWAP_DEF 					: STRING      : DFF	   		: CURRENT.CURRENT.SL2TWAP							:  SET	      : LITERAL	  		: "0001"			    	:    -          : SL2TWAS_DEF	: 2		
+EXEC:   SL2TWAS_DEF						: STRING      : DFF	   		: CURRENT.CURRENT.SL2TWAS							:  SET	      : LITERAL	  		: "010"			    	:    -          : SL2TWAHV_DEF	: 2		
+EXEC:   SL2TWAHV_DEF					: STRING      : DFF	   		: CURRENT.CURRENT.SL2TWAHV							:  SET	      : LITERAL	  		: "000"			    	:    -          : SL2TSRAM_DEF	: 2			
+EXEC:   SL2TSRAM_DEF					: STRING      : DFF	   		: CURRENT.CURRENT.SL2TSRAM							:  SET	      : LITERAL	  		: "00100001"			    :    -      	: 1	: 2		
+
+
+
+#ATOM RWA RECOMMENDATIONS for 68W
+#L2 DATA 
+#IDV_3017_0650 <2000 -> W6P7R3 (SETTING_4)
+#IDV_3017_0650 >2000 -> W0P7R4 (DEFAULT)
+
+#L2C6/TSP
+#IDV_3017_0650 <2000 -> W0P7R0 (SETTING_1)
+#IDV_3017_0650 >2000 -> W0P7R4 (DEFAULT)
+
+
+
+#START_SCREEN:DFF_ATOMRWA_WRITE
+#RunOn 	: TestName 	: DataType 	: ParamType 	: Param1								: Operation 	: ParamType 	: Param2   			    : TmpStore 	 : OnTrue 		     : OnFalse
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------
+#EXEC	: TEST01	: DOUBLE    : EXPRESSION    : (G.I.D.IDV_3017_CORE0CORE_0650) < 1700	    	: -	            : -         	: - 	                : - 	     : SL2DRA_S4	 	: SL2DRA_DEF
+
+# Globals Reset flow
+#RWA NON_DEFAULT 
+#SETTING_4 for L2DATA(W6P7R3) and SETTING_2(W0P7R3/W8P7R3) for L2C6/TSP
+#RunOn:	TestName:	Data Type:		Param Type:	Param1:										Operation:		Param Type:		Param2:					TmpStore:		OnTrue:		OnFalse
+#EXEC:   SL2DRA_S4 						: STRING      : DFF	   		: CURRENT.CURRENT.SL2DRA							:  SET	      : LITERAL	  		: "000"			    	:    -          : SL2DSRA_S4	: 2		
+#EXEC:   SL2DSRA_S4						: STRING      : DFF	   		: CURRENT.CURRENT.SL2DSRA							:  SET	      : LITERAL	  		: "000"			    	:    -          : SL2DERA_S4	: 2		
+#EXEC:   SL2DERA_S4						: STRING      : DFF	   		: CURRENT.CURRENT.SL2DERA							:  SET	      : LITERAL	  		: "1"			    	:    -          : SL2DWAP_S4	: 2		
+#EXEC:   SL2DDWA_S4						: STRING      : DFF	   		: CURRENT.CURRENT.SL2DDWA							:  SET	      : LITERAL	  		: "0"			    	:    -          : SL2DWAP_S4	: 2		
+#EXEC:   SL2DWAP_S4						: STRING      : DFF	   		: CURRENT.CURRENT.SL2DWAP							:  SET	      : LITERAL	  		: "0001"			    :    -      	: SL2DWAS_S4	: 2		
+#EXEC:   SL2DWAS_S4						: STRING      : DFF	   		: CURRENT.CURRENT.SL2DWAS							:  SET	      : LITERAL	  		: "010"			    	:    -          : SL2TRA_S2		: 2		
+#RunOn:	TestName:	Data Type:		Param Type:	Param1:										Operation:		Param Type:		Param2:					TmpStore:		OnTrue:		OnFalse
+#EXEC:   SL2TRA_S2 						: STRING      : DFF	   		: CURRENT.CURRENT.SL2TRA							:  SET	      : LITERAL	  		: "000"			    	:    -          : SL2TSRA_S2	: 2		
+#EXEC:   SL2TSRA_S2						: STRING      : DFF	   		: CURRENT.CURRENT.SL2TSRA							:  SET	      : LITERAL	  		: "000"			    	:    -          : SL2TERA_S2	: 2		
+#EXEC:   SL2TERA_S2						: STRING      : DFF	   		: CURRENT.CURRENT.SL2TERA							:  SET	      : LITERAL	  		: "1"			    	:    -          : SL2TWAP_S2	: 2		
+#EXEC:   SL2TDWA_S2						: STRING      : DFF	   		: CURRENT.CURRENT.SL2TDWA							:  SET	      : LITERAL	  		: "0"			    	:    -          : SL2TWAP_S2	: 2		
+#EXEC:   SL2TWAP_S2						: STRING      : DFF	   		: CURRENT.CURRENT.SL2TWAP							:  SET	      : LITERAL	  		: "0001"			    :    -          : SL2TWAS_S2	: 2		
+#EXEC:   SL2TWAS_S2						: STRING      : DFF	   		: CURRENT.CURRENT.SL2TWAS							:  SET	      : LITERAL	  		: "010"			    :    -          : SL2C6RA_S2	: 2		
+#RunOn:	TestName:	Data Type:		Param Type:	Param1:										Operation:		Param Type:		Param2:					TmpStore:		OnTrue:		OnFalse
+#EXEC:   SL2C6RA_S2 						: STRING      : DFF	   		: CURRENT.CURRENT.SL2C6RA							:  SET	      : LITERAL	  		: "011"			    	:    -          : SL2C6SRA_S2	: 2		
+#EXEC:   SL2C6SRA_S2						: STRING      : DFF	   		: CURRENT.CURRENT.SL2C6SRA							:  SET	      : LITERAL	  		: "011"			    	:    -          : SL2C6ERA_S2	: 2		
+#EXEC:   SL2C6ERA_S2 					: STRING      : DFF	   		: CURRENT.CURRENT.SL2C6ERA							:  SET	      : LITERAL	  		: "1"			    	:    -          : SL2C6DWA_S2	: 2		
+#EXEC:   SL2C6DWA_S2						: STRING      : DFF	   		: CURRENT.CURRENT.SL2C6DWA							:  SET	      : LITERAL	  		: "0"			    	:    -          : SL2C6WAP_S2	: 2		
+#EXEC:   SL2C6WAP_S2						: STRING      : DFF	   		: CURRENT.CURRENT.SL2C6WAP							:  SET	      : LITERAL	  		: "0111"			    :    -          : SL2C6WAS_S2	: 2		
+#EXEC:   SL2C6WAS_S2						: STRING      : DFF	   		: CURRENT.CURRENT.SL2C6WAS							:  SET	      : LITERAL	  		: "000"			    	:    -          : 1				: 2		
+
+# RWA SETTING_DEFAULT 
+#SETTING_DEF for L2DATA(W0P7R4) and SETTING_2(W0P7R3/W8P7R3) for L2C6/TSP
+#RunOn:	TestName:	Data Type:		Param Type:	Param1:										Operation:		Param Type:		Param2:					TmpStore:		OnTrue:		OnFalse
+#EXEC:   SL2DRA_DEF 						: STRING      : DFF	   		: CURRENT.CURRENT.SL2DRA							:  SET	      : LITERAL	  		: "000"			    	:    -          : SL2DSRA_DEF	: 2		
+#EXEC:   SL2DSRA_DEF						: STRING      : DFF	   		: CURRENT.CURRENT.SL2DSRA							:  SET	      : LITERAL	  		: "000"			    	:    -          : SL2DERA_DEF	: 2		
+#EXEC:   SL2DERA_DEF						: STRING      : DFF	   		: CURRENT.CURRENT.SL2DERA							:  SET	      : LITERAL	  		: "1"			    	:    -          : SL2DWAP_DEF	: 2		
+#EXEC:   SL2DDWA_DEF						: STRING      : DFF	   		: CURRENT.CURRENT.SL2DDWA							:  SET	      : LITERAL	  		: "0"			    	:    -          : SL2DWAP_DEF	: 2		
+#EXEC:   SL2DWAP_DEF						: STRING      : DFF	   		: CURRENT.CURRENT.SL2DWAP							:  SET	      : LITERAL	  		: "0001"			    :    -      	: SL2DWAS_DEF	: 2		
+#EXEC:   SL2DWAS_DEF						: STRING      : DFF	   		: CURRENT.CURRENT.SL2DWAS							:  SET	      : LITERAL	  		: "010"			    	:    -          : SL2DWAHV_DEF  : 2		
+#EXEC:   SL2DWAHV_DEF					: STRING      : DFF	   		: CURRENT.CURRENT.SL2DWAHV							:  SET	      : LITERAL	  		: "010"			    	:    -          : SL2TRA_DEF     : 2		
+#RunOn:	TestName:	Data Type:		Param Type:	Param1:										Operation:		Param Type:		Param2:					TmpStore:		OnTrue:		OnFalse
+#EXEC:   SL2TRA_DEF 						: STRING      : DFF	   		: CURRENT.CURRENT.SL2TRA							:  SET	      : LITERAL	  		: "000"			    	:    -          : SL2TSRA_DEF	: 2		
+#EXEC:   SL2TSRA_DEF						: STRING      : DFF	   		: CURRENT.CURRENT.SL2TSRA							:  SET	      : LITERAL	  		: "000"			    	:    -          : SL2TERA_DEF	: 2		
+#EXEC:   SL2TERA_DEF						: STRING      : DFF	   		: CURRENT.CURRENT.SL2TERA							:  SET	      : LITERAL	  		: "1"			    	:    -          : SL2TWAP_DEF	: 2		
+#EXEC:   SL2TDWA_DEF						: STRING      : DFF	   		: CURRENT.CURRENT.SL2TDWA							:  SET	      : LITERAL	  		: "0"			    	:    -          : SL2TWAP_DEF	: 2		
+#EXEC:   SL2TWAP_DEF						: STRING      : DFF	   		: CURRENT.CURRENT.SL2TWAP							:  SET	      : LITERAL	  		: "0001"			    :    -          : SL2TWAS_DEF	: 2		
+#EXEC:   SL2TWAS_DEF						: STRING      : DFF	   		: CURRENT.CURRENT.SL2TWAS							:  SET	      : LITERAL	  		: "010"			    :    -          : SL2TWAHV_DEF	: 2		
+#EXEC:   SL2TWAHV_DEF					: STRING      : DFF	   		: CURRENT.CURRENT.SL2TWAHV							:  SET	      : LITERAL	  		: "010"			    :    -          : 1	: 2		
+
+#RunOn:	TestName:	Data Type:		Param Type:	Param1:										Operation:		Param Type:		Param2:					TmpStore:		OnTrue:		OnFalse
+
+#EXEC:   SL2C6RA_DEF 						: STRING      : DFF	   		: CURRENT.CURRENT.SL2C6RA							:  SET	      : LITERAL	  		: "011"			    	:    -          : SL2C6SRA_DEF	: 2		
+#EXEC:   SL2C6SRA_DEF						: STRING      : DFF	   		: CURRENT.CURRENT.SL2C6SRA							:  SET	      : LITERAL	  		: "011"			    	:    -          : SL2C6ERA_DEF	: 2		
+#EXEC:   SL2C6ERA_DEF 					: STRING      : DFF	   		: CURRENT.CURRENT.SL2C6ERA							:  SET	      : LITERAL	  		: "1"			    	:    -          : SL2C6DWA_DEF	: 2		
+#EXEC:   SL2C6DWA_DEF						: STRING      : DFF	   		: CURRENT.CURRENT.SL2C6DWA							:  SET	      : LITERAL	  		: "0"			    	:    -          : SL2C6WAP_DEF	: 2		
+#EXEC:   SL2C6WAP_DEF						: STRING      : DFF	   		: CURRENT.CURRENT.SL2C6WAP							:  SET	      : LITERAL	  		: "0111"			    :    -          : SL2C6WAS_DEF	: 2		
+#EXEC:   SL2C6WAS_DEF						: STRING      : DFF	   		: CURRENT.CURRENT.SL2C6WAS							:  SET	      : LITERAL	  		: "000"			    	:    -          : 1				: 2
+
+END_SCREEN
+
+START_SCREEN:DFF_ATOMRWA_CHECK
+#RunOn 	: TestName 	: DataType 	: ParamType 	: Param1								: Operation 	: ParamType 	: Param2   			    : TmpStore 	: OnTrue 		: OnFalse
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+EXEC	: TEST01	: DOUBLE    : EXPRESSION    : (G.I.D.IDV_3006_0950) <= 6700	    	: -	            : -         	: - 	                : - 	     : 1		 	: TEST02
+EXEC	: TEST02	: DOUBLE	: EXPRESSION	: (G.I.D.IDV_3006_0950) <= 7000			: -	            : -         	: - 	                : - 	     : 2		 	: TEST03
+EXEC	: TEST03	: DOUBLE	: EXPRESSION	: (G.I.D.IDV_3006_0950) > 7000			: -	            : -         	: - 	                : - 	     : 3		 	: 4
+END_SCREEN
+
+START_SCREEN:DFF_ATOMRWA_CHECK_SDT
+#RunOn 	: TestName 	: DataType 	: ParamType 	: Param1								: Operation 	: ParamType 	: Param2   			    : TmpStore 	: OnTrue 		: OnFalse
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------
+EXEC: 	CHK_L2DATA		: STRING      : DFF	   		: CURRENT.CURRENT.SL2DRA   	  			:  ==        : LITERAL   		: "011"          	    :    -          : CHK_L2TSP   		: CHK_L2DEF
+EXEC: 	CHK_L2TSP		: STRING      : DFF	   		: CURRENT.CURRENT.SL2TRA   	  			:  ==        : LITERAL   		: "000"          	    :    -          : 1   				: 3
+#EXEC: 	CHK_L2C6		: STRING      : DFF	   		: CURRENT.CURRENT.SL2C6RA   	  			:  ==        : LITERAL   		: "000"          	    :    -          : 1   				: 3
+EXEC: 	CHK_L2DEF		: STRING      : DFF	   		: CURRENT.CURRENT.SL2DRA   	  			:  ==        : LITERAL   		: "100"          	    :    -          : 2   				: 3
+END_SCREEN

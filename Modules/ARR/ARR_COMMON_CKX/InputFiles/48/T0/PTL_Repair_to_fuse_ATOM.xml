@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="utf-8"?>
+<repair_to_fuse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="GEN_RepairToFuse.xsd">
+        <xmlversion>
+                <version rev="01">     y23ww45  ajrojasa        First Version / proposal for CWF                                                </version>
+                <version rev="02">     y24ww08  ajrojasa        Product setup name fixed                                                        </version>
+                <version rev="03">     y24ww10  ajrojasa        File updated to match Tap2Cri_ArraySuperGroups_fusedef_v1  Split by die         </version>
+                <version rev="04">     y24ww10  ajrojasa        File updated to match Tap2Cri_ArraySuperGroups_fusedef_v2  Split by die         </version>
+                <version rev="05">     y24ww13  ajrojasa        Fuse data sizes fixed based on the VFDM setup.  Only keep CWF product setup     </version>
+                <version rev="06">     y24ww19  ajrojasa        Adjust L2 tag row repair + valid bits lenght -1 bit based on Fuse team feedback </version>
+                <version rev="07">     y24ww20  ajrojasa        Merged with initial version 03 to order the fuses by receiving address          </version>
+                <version rev="08">     y24ww21  ajrojasa        Tap2Cri setup validated for one defect inserted at L2Tag.  Pattern mod ok       </version>
+                <version rev="09">     y24ww21  ajrojasa        Let's use VFDM_IN_MODULE for Tap2Cri.  So Tap2Cri and VFDM can be run B2B       </version>
+                <version rev="10">     y24ww21  ajrojasa        Added VFDM setup to reuse Tap2Cri string but for VFDM purposes                  </version>
+                <version rev="11">     y24ww21  ajrojasa        Adjust the size of the L2C6 valid shared bits at segment 18                     </version>
+                <version rev="12">     y24ww23  ajrojasa        Added LDR0, LDR1 and LDR2                                                       </version>
+                <version rev="13">     y24ww23  ajrojasa        L2C6 and L2STA Row repair fixes                                                 </version>
+        </xmlversion>
+        <product_setup name="PTL"              description="Repair to fuse setup for PTL to be used for SDKTR with the R2F mapping where CRF BUS is first">
+                <input>
+                        <variable id="inpLDC"   gsds="G.I.S.REPL2D"     fuse_group_size="24" array_match_bits="15-17"       port_bits="18-22" />      <!-- L2 DaT used for column match conditions -->
+                        <variable id="inpLDR"   gsds="G.I.S.REPL2D"     fuse_group_size="24" array_match_bits="8-9,15-17"   port_bits="18-22" />      <!-- L2 DaT used for row match conditions -->
+                        <variable id="inpLTC"   gsds="G.I.S.REPL2T"     fuse_group_size="20" array_match_bits="11-14"       port_bits="15-19" />      <!-- L2 Tag/State and C6 -->
+                        <variable id="inpCRF"   gsds="G.I.S.REPCRF"     fuse_group_size="28" array_match_bits="19-22"       port_bits="23-27" />      <!-- Core RF FEC/MEC and LRU -->
+                </input>
+                <output>
+                        <variable id="outCORE"  gsds="G.I.S.SDKT" total_ports="3" size="5560"  default="X" type="virtual" direction="lsb-msb">
+                                <segment        size_multiple_of="16"   default="X"     start_at="0"/>                                          <!-- segment 0  for BUSR (LRU)                       -->
+                                <segment        size_multiple_of="16"   default="X"     start_at="32"/>                                         <!-- segment 1  for MECR C0                          -->
+                                <segment        size_multiple_of="16"   default="X"     start_at="128"/>                                        <!-- segment 2  for FECR C0                          -->
+                                <segment        size_multiple_of="16"   default="X"     start_at="608"/>                                        <!-- segment 3  for MECR C1                          -->
+                                <segment        size_multiple_of="16"   default="X"     start_at="704"/>                                        <!-- segment 4  for FECR C1                          -->
+                                <segment        size_multiple_of="16"   default="X"     start_at="1184"/>                                       <!-- segment 5  for MECR C2                          -->
+                                <segment        size_multiple_of="16"   default="X"     start_at="1280"/>                                       <!-- segment 6  for FECR C2                          -->
+                                <segment        size_multiple_of="16"   default="X"     start_at="1760"/>                                       <!-- segment 7  for MECR C3                          -->
+                                <segment        size_multiple_of="16"   default="X"     start_at="1856"/>                                       <!-- segment 8  for FECR C3                          -->
+                                <segment        size_multiple_of="1536" default="X"     start_at="2336"/>                                       <!-- segment 9  for L2 data col repair               -->
+                                <segment        size_multiple_of="128"  default="X"     start_at="3872"/>                                       <!-- segment 10 for L2 tag col repair                -->
+                                <segment        size_multiple_of="16"   default="X"     start_at="4000"/>                                       <!-- segment 11 for L2 C6 column repair              -->
+                                <segment        size_multiple_of="8"    default="X"     start_at="4016"/>                                       <!-- segment 12 for L2 data row repair ADDR MID      -->
+                                <segment        size_multiple_of="8"    default="X"     start_at="4880"/>                                       <!-- segment 13 for L2 data row repair VALID MID     -->
+                                <segment        size_multiple_of="8"    default="X"     start_at="5024"/>                                       <!-- segment 14 for L2 data row repair ADDR LEFT     -->
+                                <segment        size_multiple_of="8"    default="X"     start_at="5312"/>                                       <!-- segment 15 for L2 data row repair VALID LEFT    -->
+                                <segment        size_multiple_of="8"    default="X"     start_at="5360"/>                                       <!-- segment 16 for L2 tag row repair ADDR bits      -->
+                                <segment        size_multiple_of="8"    default="X"     start_at="5488"/>                                       <!-- segment 17 for L2 C6 row repair + valid bits    -->
+                                <segment        size_multiple_of="4"    default="X"     start_at="5504"/>                                       <!-- segment 18 for L2 C6 row repair. SHARED bits    -->
+                                <segment        size_multiple_of="8"    default="X"     start_at="5512"/>                                       <!-- segment 19 for L2 state row repair + valid bits -->
+                                <segment        size_multiple_of="8"    default="X"     start_at="5528"/>                                       <!-- segment 20 for L2 state row repair. SHARED bits -->
+                                <segment        size_multiple_of="8"    default="X"     start_at="5536"/>                                       <!-- segment 21 for L2 tag row repair VALID bits     -->
+                        </variable>
+                </output>
+                <match_conditions>
+                        <condition input_id="inpCRF" array_match="4">                                                                           <!-- L2 LRU RF row repair -->
+                                <output id="outCORE" segment="0">
+                                        <fuse_group data_bits="21,0-13,15" index_bits="14" />                                                   <!-- Note, the dummy bit 15 is required for proper 16 bits group indexing -->
+                                </output>
+                        </condition>
+                        <condition input_id="inpCRF" array_match="8">                                                                           <!-- MEC C0 Row repair -->
+                                <output id="outCORE" segment="1">
+                                        <fuse_group data_bits="22,0-13,15" index_bits="14,17-18" />
+                                </output>
+                        </condition>
+                        <condition input_id="inpCRF" array_match="12">                                                                          <!-- FEC C0 Row repair -->
+                                <output id="outCORE" segment="2">
+                                        <fuse_group data_bits="22,0-13,9" index_bits="14-18" />                                                 <!-- Bit 9 of the fixed set is always zero for FEC -->
+                                </output>
+                        </condition>
+                        <condition input_id="inpCRF" array_match="9">                                                                           <!-- MEC C1 Row repair -->
+                                <output id="outCORE" segment="3">
+                                        <fuse_group data_bits="22,0-13,15" index_bits="14,17-18" />
+                                </output>
+                        </condition>
+                        <condition input_id="inpCRF" array_match="13">                                                                          <!-- FEC C1 Row repair -->
+                                <output id="outCORE" segment="4">
+                                        <fuse_group data_bits="22,0-13,9" index_bits="14-18" />                                                 <!-- Bit 9 of the fixed set is always zero for FEC -->
+                                </output>
+                        </condition>
+                        <condition input_id="inpCRF" array_match="10">                                                                          <!-- MEC C2 Row repair -->
+                                <output id="outCORE" segment="5">
+                                        <fuse_group data_bits="22,0-13,15" index_bits="14,17-18" />
+                                </output>
+                        </condition>
+                        <condition input_id="inpCRF" array_match="14">                                                                          <!-- FEC C2 Row repair -->
+                                <output id="outCORE" segment="6">
+                                        <fuse_group data_bits="22,0-13,9" index_bits="14-18" />                                                 <!-- Bit 9 of the fixed set is always zero for FEC -->
+                                </output>
+                        </condition>
+                        <condition input_id="inpCRF" array_match="11">                                                                          <!-- MEC C3 Row repair -->
+                                <output id="outCORE" segment="7">
+                                        <fuse_group data_bits="22,0-13,15" index_bits="14,17-18" />
+                                </output>
+                        </condition>
+                        <condition input_id="inpCRF" array_match="15">                                                                          <!-- FEC C3 Row repair -->
+                                <output id="outCORE" segment="8">
+                                        <fuse_group data_bits="22,0-13,9" index_bits="14-18" />                                                 <!-- Bit 9 of the fixed set is always zero for FEC -->
+                                </output>
+                        </condition>
+                        <condition input_id="inpLDC" array_match="1">                                                                           <!-- L2 data col repair -->
+                                <output id="outCORE" segment="9">
+                                        <fuse_group data_bits="0-6,6" index_bits="7-14" >                                                       <!-- Source : CWF_FuseGroup.xlsx -->
+                                                <map_bits  key="2"   value="0"/>
+                                                <map_bits  key="3"   value="8"/>
+                                                <map_bits  key="4"   value="16"/>
+                                                <map_bits  key="5"   value="24"/>
+                                                <map_bits  key="6"   value="32"/>
+                                                <map_bits  key="7"   value="40"/>
+                                                <map_bits  key="10"  value="48"/>
+                                                <map_bits  key="11"  value="56"/>
+                                                <map_bits  key="12"  value="64"/>
+                                                <map_bits  key="13"  value="72"/>
+                                                <map_bits  key="14"  value="80"/>
+                                                <map_bits  key="15"  value="88"/>
+                                                <map_bits  key="18"  value="96"/>
+                                                <map_bits  key="19"  value="104"/>
+                                                <map_bits  key="20"  value="112"/>
+                                                <map_bits  key="21"  value="120"/>
+                                                <map_bits  key="22"  value="128"/>
+                                                <map_bits  key="23"  value="136"/>
+                                                <map_bits  key="26"  value="144"/>
+                                                <map_bits  key="27"  value="152"/>
+                                                <map_bits  key="28"  value="160"/>
+                                                <map_bits  key="29"  value="168"/>
+                                                <map_bits  key="30"  value="176"/>
+                                                <map_bits  key="31"  value="184"/>
+                                                <map_bits  key="34"  value="192"/>
+                                                <map_bits  key="35"  value="200"/>
+                                                <map_bits  key="36"  value="208"/>
+                                                <map_bits  key="37"  value="216"/>
+                                                <map_bits  key="38"  value="224"/>
+                                                <map_bits  key="39"  value="232"/>
+                                                <map_bits  key="42"  value="240"/>
+                                                <map_bits  key="43"  value="248"/>
+                                                <map_bits  key="44"  value="256"/>
+                                                <map_bits  key="45"  value="264"/>
+                                                <map_bits  key="46"  value="272"/>
+                                                <map_bits  key="47"  value="280"/>
+                                                <map_bits  key="66"  value="288"/>
+                                                <map_bits  key="67"  value="296"/>
+                                                <map_bits  key="68"  value="304"/>
+                                                <map_bits  key="69"  value="312"/>
+                                                <map_bits  key="70"  value="320"/>
+                                                <map_bits  key="71"  value="328"/>
+                                                <map_bits  key="74"  value="336"/>
+                                                <map_bits  key="75"  value="344"/>
+                                                <map_bits  key="76"  value="352"/>
+                                                <map_bits  key="77"  value="360"/>
+                                                <map_bits  key="78"  value="368"/>
+                                                <map_bits  key="79"  value="376"/>
+                                                <map_bits  key="82"  value="384"/>
+                                                <map_bits  key="83"  value="392"/>
+                                                <map_bits  key="84"  value="400"/>
+                                                <map_bits  key="85"  value="408"/>
+                                                <map_bits  key="86"  value="416"/>
+                                                <map_bits  key="87"  value="424"/>
+                                                <map_bits  key="90"  value="432"/>
+                                                <map_bits  key="91"  value="440"/>
+                                                <map_bits  key="92"  value="448"/>
+                                                <map_bits  key="93"  value="456"/>
+                                                <map_bits  key="94"  value="464"/>
+                                                <map_bits  key="95"  value="472"/>
+                                                <map_bits  key="98"  value="480"/>
+                                                <map_bits  key="99"  value="488"/>
+                                                <map_bits  key="100"  value="496"/>
+                                                <map_bits  key="101"  value="504"/>
+                                                <map_bits  key="102"  value="512"/>
+                                                <map_bits  key="103"  value="520"/>
+                                                <map_bits  key="106"  value="528"/>
+                                                <map_bits  key="107"  value="536"/>
+                                                <map_bits  key="108"  value="544"/>
+                                                <map_bits  key="109"  value="552"/>
+                                                <map_bits  key="110"  value="560"/>
+                                                <map_bits  key="111"  value="568"/>
+                                                <map_bits  key="130"  value="576"/>
+                                                <map_bits  key="131"  value="584"/>
+                                                <map_bits  key="132"  value="592"/>
+                                                <map_bits  key="133"  value="600"/>
+                                                <map_bits  key="134"  value="608"/>
+                                                <map_bits  key="135"  value="616"/>
+                                                <map_bits  key="138"  value="624"/>
+                                                <map_bits  key="139"  value="632"/>
+                                                <map_bits  key="140"  value="640"/>
+                                                <map_bits  key="141"  value="648"/>
+                                                <map_bits  key="142"  value="656"/>
+                                                <map_bits  key="143"  value="664"/>
+                                                <map_bits  key="146"  value="672"/>
+                                                <map_bits  key="147"  value="680"/>
+                                                <map_bits  key="148"  value="688"/>
+                                                <map_bits  key="149"  value="696"/>
+                                                <map_bits  key="150"  value="704"/>
+                                                <map_bits  key="151"  value="712"/>
+                                                <map_bits  key="154"  value="720"/>
+                                                <map_bits  key="155"  value="728"/>
+                                                <map_bits  key="156"  value="736"/>
+                                                <map_bits  key="157"  value="744"/>
+                                                <map_bits  key="158"  value="752"/>
+                                                <map_bits  key="159"  value="760"/>
+                                                <map_bits  key="162"  value="768"/>
+                                                <map_bits  key="163"  value="776"/>
+                                                <map_bits  key="164"  value="784"/>
+                                                <map_bits  key="165"  value="792"/>
+                                                <map_bits  key="166"  value="800"/>
+                                                <map_bits  key="167"  value="808"/>
+                                                <map_bits  key="170"  value="816"/>
+                                                <map_bits  key="171"  value="824"/>
+                                                <map_bits  key="172"  value="832"/>
+                                                <map_bits  key="173"  value="840"/>
+                                                <map_bits  key="174"  value="848"/>
+                                                <map_bits  key="175"  value="856"/>
+                                                <map_bits  key="194"  value="864"/>
+                                                <map_bits  key="195"  value="872"/>
+                                                <map_bits  key="196"  value="880"/>
+                                                <map_bits  key="197"  value="888"/>
+                                                <map_bits  key="198"  value="896"/>
+                                                <map_bits  key="199"  value="904"/>
+                                                <map_bits  key="202"  value="912"/>
+                                                <map_bits  key="203"  value="920"/>
+                                                <map_bits  key="204"  value="928"/>
+                                                <map_bits  key="205"  value="936"/>
+                                                <map_bits  key="206"  value="944"/>
+                                                <map_bits  key="207"  value="952"/>
+                                                <map_bits  key="210"  value="960"/>
+                                                <map_bits  key="211"  value="968"/>
+                                                <map_bits  key="212"  value="976"/>
+                                                <map_bits  key="213"  value="984"/>
+                                                <map_bits  key="214"  value="992"/>
+                                                <map_bits  key="215"  value="1000"/>
+                                                <map_bits  key="218"  value="1008"/>
+                                                <map_bits  key="219"  value="1016"/>
+                                                <map_bits  key="220"  value="1024"/>
+                                                <map_bits  key="221"  value="1032"/>
+                                                <map_bits  key="222"  value="1040"/>
+                                                <map_bits  key="223"  value="1048"/>
+                                                <map_bits  key="226"  value="1056"/>
+                                                <map_bits  key="227"  value="1064"/>
+                                                <map_bits  key="228"  value="1072"/>
+                                                <map_bits  key="229"  value="1080"/>
+                                                <map_bits  key="230"  value="1088"/>
+                                                <map_bits  key="231"  value="1096"/>
+                                                <map_bits  key="234"  value="1104"/>
+                                                <map_bits  key="235"  value="1112"/>
+                                                <map_bits  key="236"  value="1120"/>
+                                                <map_bits  key="237"  value="1128"/>
+                                                <map_bits  key="238"  value="1136"/>
+                                                <map_bits  key="239"  value="1144"/>
+                                                <map_bits  key="0"  value="1152"/>
+                                                <map_bits  key="1"  value="1160"/>
+                                                <map_bits  key="8"  value="1168"/>
+                                                <map_bits  key="9"  value="1176"/>
+                                                <map_bits  key="16"  value="1184"/>
+                                                <map_bits  key="17"  value="1192"/>
+                                                <map_bits  key="24"  value="1200"/>
+                                                <map_bits  key="25"  value="1208"/>
+                                                <map_bits  key="32"  value="1216"/>
+                                                <map_bits  key="33"  value="1224"/>
+                                                <map_bits  key="40"  value="1232"/>
+                                                <map_bits  key="41"  value="1240"/>
+                                                <map_bits  key="64"  value="1248"/>
+                                                <map_bits  key="65"  value="1256"/>
+                                                <map_bits  key="72"  value="1264"/>
+                                                <map_bits  key="73"  value="1272"/>
+                                                <map_bits  key="80"  value="1280"/>
+                                                <map_bits  key="81"  value="1288"/>
+                                                <map_bits  key="88"  value="1296"/>
+                                                <map_bits  key="89"  value="1304"/>
+                                                <map_bits  key="96"  value="1312"/>
+                                                <map_bits  key="97"  value="1320"/>
+                                                <map_bits  key="104"  value="1328"/>
+                                                <map_bits  key="105"  value="1336"/>
+                                                <map_bits  key="128"  value="1344"/>
+                                                <map_bits  key="129"  value="1352"/>
+                                                <map_bits  key="136"  value="1360"/>
+                                                <map_bits  key="137"  value="1368"/>
+                                                <map_bits  key="144"  value="1376"/>
+                                                <map_bits  key="145"  value="1384"/>
+                                                <map_bits  key="152"  value="1392"/>
+                                                <map_bits  key="153"  value="1400"/>
+                                                <map_bits  key="160"  value="1408"/>
+                                                <map_bits  key="161"  value="1416"/>
+                                                <map_bits  key="168"  value="1424"/>
+                                                <map_bits  key="169"  value="1432"/>
+                                                <map_bits  key="192"  value="1440"/>
+                                                <map_bits  key="193"  value="1448"/>
+                                                <map_bits  key="200"  value="1456"/>
+                                                <map_bits  key="201"  value="1464"/>
+                                                <map_bits  key="208"  value="1472"/>
+                                                <map_bits  key="209"  value="1480"/>
+                                                <map_bits  key="216"  value="1488"/>
+                                                <map_bits  key="217"  value="1496"/>
+                                                <map_bits  key="224"  value="1504"/>
+                                                <map_bits  key="225"  value="1512"/>
+                                                <map_bits  key="232"  value="1520"/>
+                                                <map_bits  key="233"  value="1528"/>
+                                        </fuse_group>
+                                </output>
+                        </condition>
+                        <condition input_id="inpLTC" array_match="1">                                                                           <!-- L2 tag col redundancy -->
+                                <output id="outCORE" segment="10">
+                                        <fuse_group data_bits="0-6,6" index_bits="7-10" >                                                       <!-- Source : CWF_FuseGroup.xlsx -->
+                                                <map_bits  key="1"  value="0"/>
+                                                <map_bits  key="2"  value="8"/>
+                                                <map_bits  key="3"  value="16"/>
+                                                <map_bits  key="5"  value="24"/>
+                                                <map_bits  key="6"  value="32"/>
+                                                <map_bits  key="7"  value="40"/>
+                                                <map_bits  key="9"  value="48"/>
+                                                <map_bits  key="10"  value="56"/>
+                                                <map_bits  key="11"  value="64"/>
+                                                <map_bits  key="13"  value="72"/>
+                                                <map_bits  key="14"  value="80"/>
+                                                <map_bits  key="15"  value="88"/>
+                                                <map_bits  key="0"  value="96"/>
+                                                <map_bits  key="4"  value="104"/>
+                                                <map_bits  key="8"  value="112"/>
+                                                <map_bits  key="12"  value="120"/>
+                                        </fuse_group>
+                                </output>
+                        </condition>
+                        <condition input_id="inpLTC" array_match="6">                                                                           <!-- L2 C6 col redundancy -->
+                                <output id="outCORE" segment="11">
+                                        <fuse_group data_bits="0-6,7" index_bits="10" />
+                                </output>
+                        </condition>
+                        <condition input_id="inpLDR" array_match="9,10,11,13,14,15,17,18,19">                                                   <!-- L2 data row repair ADDR MID -->
+                                <output id="outCORE" segment="12">
+                                        <fuse_group data_bits="0-7" index_bits="15,17,8-12,14" >                                                <!-- 15,17 is used for Row spare index -->
+                                                <map_bits  key="4"  value="0"/>
+                                                <map_bits  key="5"  value="8"/>
+                                                <map_bits  key="6"  value="16"/>
+                                                <map_bits  key="8"  value="24"/>
+                                                <map_bits  key="9"  value="32"/>
+                                                <map_bits  key="10"  value="40"/>
+                                                <map_bits  key="12"  value="48"/>
+                                                <map_bits  key="13"  value="56"/>
+                                                <map_bits  key="14"  value="64"/>
+                                                <map_bits  key="20"  value="72"/>
+                                                <map_bits  key="21"  value="80"/>
+                                                <map_bits  key="22"  value="88"/>
+                                                <map_bits  key="24"  value="96"/>
+                                                <map_bits  key="25"  value="104"/>
+                                                <map_bits  key="26"  value="112"/>
+                                                <map_bits  key="28"  value="120"/>
+                                                <map_bits  key="29"  value="128"/>
+                                                <map_bits  key="30"  value="136"/>
+                                                <map_bits  key="36"  value="144"/>
+                                                <map_bits  key="37"  value="152"/>
+                                                <map_bits  key="38"  value="160"/>
+                                                <map_bits  key="40"  value="168"/>
+                                                <map_bits  key="41"  value="176"/>
+                                                <map_bits  key="42"  value="184"/>
+                                                <map_bits  key="44"  value="192"/>
+                                                <map_bits  key="45"  value="200"/>
+                                                <map_bits  key="46"  value="208"/>
+                                                <map_bits  key="52"  value="216"/>
+                                                <map_bits  key="53"  value="224"/>
+                                                <map_bits  key="54"  value="232"/>
+                                                <map_bits  key="56"  value="240"/>
+                                                <map_bits  key="57"  value="248"/>
+                                                <map_bits  key="58"  value="256"/>
+                                                <map_bits  key="60"  value="264"/>
+                                                <map_bits  key="61"  value="272"/>
+                                                <map_bits  key="62"  value="280"/>
+                                                <map_bits  key="68"  value="288"/>
+                                                <map_bits  key="69"  value="296"/>
+                                                <map_bits  key="70"  value="304"/>
+                                                <map_bits  key="72"  value="312"/>
+                                                <map_bits  key="73"  value="320"/>
+                                                <map_bits  key="74"  value="328"/>
+                                                <map_bits  key="76"  value="336"/>
+                                                <map_bits  key="77"  value="344"/>
+                                                <map_bits  key="78"  value="352"/>
+                                                <map_bits  key="84"  value="360"/>
+                                                <map_bits  key="85"  value="368"/>
+                                                <map_bits  key="86"  value="376"/>
+                                                <map_bits  key="88"  value="384"/>
+                                                <map_bits  key="89"  value="392"/>
+                                                <map_bits  key="90"  value="400"/>
+                                                <map_bits  key="92"  value="408"/>
+                                                <map_bits  key="93"  value="416"/>
+                                                <map_bits  key="94"  value="424"/>
+                                                <map_bits  key="132"  value="432"/>
+                                                <map_bits  key="133"  value="440"/>
+                                                <map_bits  key="134"  value="448"/>
+                                                <map_bits  key="136"  value="456"/>
+                                                <map_bits  key="137"  value="464"/>
+                                                <map_bits  key="138"  value="472"/>
+                                                <map_bits  key="140"  value="480"/>
+                                                <map_bits  key="141"  value="488"/>
+                                                <map_bits  key="142"  value="496"/>
+                                                <map_bits  key="148"  value="504"/>
+                                                <map_bits  key="149"  value="512"/>
+                                                <map_bits  key="150"  value="520"/>
+                                                <map_bits  key="152"  value="528"/>
+                                                <map_bits  key="153"  value="536"/>
+                                                <map_bits  key="154"  value="544"/>
+                                                <map_bits  key="156"  value="552"/>
+                                                <map_bits  key="157"  value="560"/>
+                                                <map_bits  key="158"  value="568"/>
+                                                <map_bits  key="164"  value="576"/>
+                                                <map_bits  key="165"  value="584"/>
+                                                <map_bits  key="166"  value="592"/>
+                                                <map_bits  key="168"  value="600"/>
+                                                <map_bits  key="169"  value="608"/>
+                                                <map_bits  key="170"  value="616"/>
+                                                <map_bits  key="172"  value="624"/>
+                                                <map_bits  key="173"  value="632"/>
+                                                <map_bits  key="174"  value="640"/>
+                                                <map_bits  key="180"  value="648"/>
+                                                <map_bits  key="181"  value="656"/>
+                                                <map_bits  key="182"  value="664"/>
+                                                <map_bits  key="184"  value="672"/>
+                                                <map_bits  key="185"  value="680"/>
+                                                <map_bits  key="186"  value="688"/>
+                                                <map_bits  key="188"  value="696"/>
+                                                <map_bits  key="189"  value="704"/>
+                                                <map_bits  key="190"  value="712"/>
+                                                <map_bits  key="196"  value="720"/>
+                                                <map_bits  key="197"  value="728"/>
+                                                <map_bits  key="198"  value="736"/>
+                                                <map_bits  key="200"  value="744"/>
+                                                <map_bits  key="201"  value="752"/>
+                                                <map_bits  key="202"  value="760"/>
+                                                <map_bits  key="204"  value="768"/>
+                                                <map_bits  key="205"  value="776"/>
+                                                <map_bits  key="206"  value="784"/>
+                                                <map_bits  key="212"  value="792"/>
+                                                <map_bits  key="213"  value="800"/>
+                                                <map_bits  key="214"  value="808"/>
+                                                <map_bits  key="216"  value="816"/>
+                                                <map_bits  key="217"  value="824"/>
+                                                <map_bits  key="218"  value="832"/>
+                                                <map_bits  key="220"  value="840"/>
+                                                <map_bits  key="221"  value="848"/>
+                                                <map_bits  key="222"  value="856"/>
+                                        </fuse_group>
+                                </output>
+                        </condition>
+                        <condition input_id="inpLDR" array_match="9,10,11,13,14,15,17,18,19">                                                   <!-- L2 data row repair VALID MID -->
+                                <output id="outCORE" segment="13">
+                                        <fuse_group data_bits="23" index_bits="15,17,8-12,14" >
+                                                <map_bits  key="4"    value="0" />
+                                                <map_bits  key="20"   value="1" />
+                                                <map_bits  key="36"   value="2" />
+                                                <map_bits  key="52"   value="3" />
+                                                <map_bits  key="68"   value="4" />
+                                                <map_bits  key="84"   value="5" />
+                                                <map_bits  key="5"    value="8" />
+                                                <map_bits  key="21"   value="9" />
+                                                <map_bits  key="37"   value="10" />
+                                                <map_bits  key="53"   value="11" />
+                                                <map_bits  key="69"   value="12" />
+                                                <map_bits  key="85"   value="13" />
+                                                <map_bits  key="6"    value="16" />
+                                                <map_bits  key="22"   value="17" />
+                                                <map_bits  key="38"   value="18" />
+                                                <map_bits  key="54"   value="19" />
+                                                <map_bits  key="70"   value="20" />
+                                                <map_bits  key="86"   value="21" />
+                                                <map_bits  key="8"    value="24" />
+                                                <map_bits  key="24"   value="25" />
+                                                <map_bits  key="40"   value="26" />
+                                                <map_bits  key="56"   value="27" />
+                                                <map_bits  key="72"   value="28" />
+                                                <map_bits  key="88"   value="29" />
+                                                <map_bits  key="9"    value="32" />
+                                                <map_bits  key="25"   value="33" />
+                                                <map_bits  key="41"   value="34" />
+                                                <map_bits  key="57"   value="35" />
+                                                <map_bits  key="73"   value="36" />
+                                                <map_bits  key="89"   value="37" />
+                                                <map_bits  key="10"   value="40" />
+                                                <map_bits  key="26"   value="41" />
+                                                <map_bits  key="42"   value="42" />
+                                                <map_bits  key="58"   value="43" />
+                                                <map_bits  key="74"   value="44" />
+                                                <map_bits  key="90"   value="45" />
+                                                <map_bits  key="12"   value="48" />
+                                                <map_bits  key="28"   value="49" />
+                                                <map_bits  key="44"   value="50" />
+                                                <map_bits  key="60"   value="51" />
+                                                <map_bits  key="76"   value="52" />
+                                                <map_bits  key="92"   value="53" />
+                                                <map_bits  key="13"   value="56" />
+                                                <map_bits  key="29"   value="57" />
+                                                <map_bits  key="45"   value="58" />
+                                                <map_bits  key="61"   value="59" />
+                                                <map_bits  key="77"   value="60" />
+                                                <map_bits  key="93"   value="61" />
+                                                <map_bits  key="14"   value="64" />
+                                                <map_bits  key="30"   value="65" />
+                                                <map_bits  key="46"   value="66" />
+                                                <map_bits  key="62"   value="67" />
+                                                <map_bits  key="78"   value="68" />
+                                                <map_bits  key="94"   value="69" />
+                                                <map_bits  key="132"  value="72" />
+                                                <map_bits  key="148"  value="73" />
+                                                <map_bits  key="164"  value="74" />
+                                                <map_bits  key="180"  value="75" />
+                                                <map_bits  key="196"  value="76" />
+                                                <map_bits  key="212"  value="77" />
+                                                <map_bits  key="133"  value="80" />
+                                                <map_bits  key="149"  value="81" />
+                                                <map_bits  key="165"  value="82" />
+                                                <map_bits  key="181"  value="83" />
+                                                <map_bits  key="197"  value="84" />
+                                                <map_bits  key="213"  value="85" />
+                                                <map_bits  key="134"  value="88" />
+                                                <map_bits  key="150"  value="89" />
+                                                <map_bits  key="166"  value="90" />
+                                                <map_bits  key="182"  value="91" />
+                                                <map_bits  key="198"  value="92" />
+                                                <map_bits  key="214"  value="93" />
+                                                <map_bits  key="136"  value="96" />
+                                                <map_bits  key="152"  value="97" />
+                                                <map_bits  key="168"  value="98" />
+                                                <map_bits  key="184"  value="99" />
+                                                <map_bits  key="200"  value="100" />
+                                                <map_bits  key="216"  value="101" />
+                                                <map_bits  key="137"  value="104" />
+                                                <map_bits  key="153"  value="105" />
+                                                <map_bits  key="169"  value="106" />
+                                                <map_bits  key="185"  value="107" />
+                                                <map_bits  key="201"  value="108" />
+                                                <map_bits  key="217"  value="109" />
+                                                <map_bits  key="138"  value="112" />
+                                                <map_bits  key="154"  value="113" />
+                                                <map_bits  key="170"  value="114" />
+                                                <map_bits  key="186"  value="115" />
+                                                <map_bits  key="202"  value="116" />
+                                                <map_bits  key="218"  value="117" />
+                                                <map_bits  key="140"  value="120" />
+                                                <map_bits  key="156"  value="121" />
+                                                <map_bits  key="172"  value="122" />
+                                                <map_bits  key="188"  value="123" />
+                                                <map_bits  key="204"  value="124" />
+                                                <map_bits  key="220"  value="125" />
+                                                <map_bits  key="141"  value="128" />
+                                                <map_bits  key="157"  value="129" />
+                                                <map_bits  key="173"  value="130" />
+                                                <map_bits  key="189"  value="131" />
+                                                <map_bits  key="205"  value="132" />
+                                                <map_bits  key="221"  value="133" />
+                                                <map_bits  key="142"  value="136" />
+                                                <map_bits  key="158"  value="137" />
+                                                <map_bits  key="174"  value="138" />
+                                                <map_bits  key="190"  value="139" />
+                                                <map_bits  key="206"  value="140" />
+                                                <map_bits  key="222"  value="141" />
+                                        </fuse_group>
+                                </output>
+                        </condition>
+                        <condition input_id="inpLDR" array_match="8,12,16">                                                                     <!-- L2 data row repair ADDR LEFT -->
+                                <output id="outCORE" segment="14">
+                                        <fuse_group data_bits="0-7" index_bits="15,17,8-12,14" >
+                                                <map_bits  key="0"    value="0"/>
+                                                <map_bits  key="1"    value="8"/>
+                                                <map_bits  key="2"    value="16"/>
+                                                <map_bits  key="16"   value="24"/>
+                                                <map_bits  key="17"   value="32"/>
+                                                <map_bits  key="18"   value="40"/>
+                                                <map_bits  key="32"   value="48"/>
+                                                <map_bits  key="33"   value="56"/>
+                                                <map_bits  key="34"   value="64"/>
+                                                <map_bits  key="48"   value="72"/>
+                                                <map_bits  key="49"   value="80"/>
+                                                <map_bits  key="50"   value="88"/>
+                                                <map_bits  key="64"   value="96"/>
+                                                <map_bits  key="65"   value="104"/>
+                                                <map_bits  key="66"   value="112"/>
+                                                <map_bits  key="80"   value="120"/>
+                                                <map_bits  key="81"   value="128"/>
+                                                <map_bits  key="82"   value="136"/>
+                                                <map_bits  key="128"  value="144"/>
+                                                <map_bits  key="129"  value="152"/>
+                                                <map_bits  key="130"  value="160"/>
+                                                <map_bits  key="144"  value="168"/>
+                                                <map_bits  key="145"  value="176"/>
+                                                <map_bits  key="146"  value="184"/>
+                                                <map_bits  key="160"  value="192"/>
+                                                <map_bits  key="161"  value="200"/>
+                                                <map_bits  key="162"  value="208"/>
+                                                <map_bits  key="176"  value="216"/>
+                                                <map_bits  key="177"  value="224"/>
+                                                <map_bits  key="178"  value="232"/>
+                                                <map_bits  key="192"  value="240"/>
+                                                <map_bits  key="193"  value="248"/>
+                                                <map_bits  key="194"  value="256"/>
+                                                <map_bits  key="208"  value="264"/>
+                                                <map_bits  key="209"  value="272"/>
+                                                <map_bits  key="210"  value="280"/>
+                                        </fuse_group>
+                                </output>
+                        </condition>
+                        <condition input_id="inpLDR" array_match="8,12,16">                                                                     <!-- L2 data row repair VALID LEFT -->
+                                <output id="outCORE" segment="15">
+                                        <fuse_group data_bits="17" index_bits="15,17,8-12,14" >
+                                                <map_bits  key="0"    value="0" />
+                                                <map_bits  key="16"   value="1" />
+                                                <map_bits  key="32"   value="2" />
+                                                <map_bits  key="48"   value="3" />
+                                                <map_bits  key="64"   value="4" />
+                                                <map_bits  key="80"   value="5" />
+                                                <map_bits  key="1"    value="8" />
+                                                <map_bits  key="17"   value="9" />
+                                                <map_bits  key="33"   value="10" />
+                                                <map_bits  key="49"   value="11" />
+                                                <map_bits  key="65"   value="12" />
+                                                <map_bits  key="81"   value="13" />
+                                                <map_bits  key="2"    value="16" />
+                                                <map_bits  key="18"   value="17" />
+                                                <map_bits  key="34"   value="18" />
+                                                <map_bits  key="50"   value="19" />
+                                                <map_bits  key="66"   value="20" />
+                                                <map_bits  key="82"   value="21" />
+                                                <map_bits  key="128"  value="24" />
+                                                <map_bits  key="144"  value="25" />
+                                                <map_bits  key="160"  value="26" />
+                                                <map_bits  key="176"  value="27" />
+                                                <map_bits  key="192"  value="28" />
+                                                <map_bits  key="208"  value="29" />
+                                                <map_bits  key="129"  value="32" />
+                                                <map_bits  key="145"  value="33" />
+                                                <map_bits  key="161"  value="34" />
+                                                <map_bits  key="177"  value="35" />
+                                                <map_bits  key="193"  value="36" />
+                                                <map_bits  key="209"  value="37" />
+                                                <map_bits  key="130"  value="40" />
+                                                <map_bits  key="146"  value="41" />
+                                                <map_bits  key="162"  value="42" />
+                                                <map_bits  key="178"  value="43" />
+                                                <map_bits  key="194"  value="44" />
+                                                <map_bits  key="210"  value="45" />
+                                        </fuse_group>
+                                </output>
+                        </condition>
+                        <condition input_id="inpLTC" array_match="2,3,4,5">                                                                     <!-- L2 tag row repair ADDR bits -->
+                                <output id="outCORE" segment="16">
+                                        <fuse_group data_bits="0-7" index_bits="9-13" >                                                         <!-- REV06 : MSB removed, values updated -->
+                                                <map_bits  key="12"  value="0" />
+                                                <map_bits  key="16"  value="8" />
+                                                <map_bits  key="20"  value="16" />
+                                                <map_bits  key="13"  value="24" />
+                                                <map_bits  key="17"  value="32" />
+                                                <map_bits  key="21"  value="40" />
+                                                <map_bits  key="14"  value="48" />
+                                                <map_bits  key="18"  value="56" />
+                                                <map_bits  key="22"  value="64" />
+                                                <map_bits  key="15"  value="72" />
+                                                <map_bits  key="19"  value="80" />
+                                                <map_bits  key="23"  value="88" />
+                                                <map_bits  key="8"   value="96" />
+                                                <map_bits  key="9"   value="104" />
+                                                <map_bits  key="10"  value="112" />
+                                                <map_bits  key="11"  value="120" />
+                                        </fuse_group>
+                                </output>
+                        </condition>
+                        <condition input_id="inpLTC" array_match="8,9">                                                                         <!-- L2 C6 row repair + valid bits -->
+                                <output id="outCORE" segment="17">
+                                        <fuse_group data_bits="14,0-6" index_bits="11" />                                                       <!-- Enable valid bit (14) + first 7 bits of the wordline -->
+                                </output>
+                        </condition>
+                        <condition input_id="inpLTC" array_match="8,9">                                                                         <!-- L2 C6 row repair. SHARED bits -->
+                                <output id="outCORE" segment="18">
+                                        <fuse_group data_bits="7-10" index_bits="11" />                                                         <!-- MSB of the wordline. No dummy bits used here -->
+                                </output>
+                        </condition>
+                        <condition input_id="inpLTC" array_match="7">                                                                           <!-- L2 state row repair + valid bits -->
+                                <output id="outCORE" segment="19">
+                                        <fuse_group data_bits="11,0-6" index_bits="9" />                                                        <!-- Enable valid bit (11) + first 7 bits of the wordline -->
+                                </output>
+                        </condition>
+                        <condition input_id="inpLTC" array_match="7">                                                                           <!-- L2 state row repair. SHARED bits -->
+                                <output id="outCORE" segment="20">
+                                        <fuse_group data_bits="7-8" index_bits="9" />                                                           <!-- MSB of the wordline -->
+                                </output>
+                        </condition>
+                        <condition input_id="inpLTC" array_match="2,3,4,5">                                                                     <!-- REV06 : NEW:  L2 tag row repair VALID bits -->
+                                <output id="outCORE" segment="21">
+                                        <fuse_group data_bits="7" index_bits="9-13" >
+                                                <map_bits  key="12"  value="0" />
+                                                <map_bits  key="16"  value="1" />
+                                                <map_bits  key="20"  value="2" />
+                                                <map_bits  key="13"  value="3" />
+                                                <map_bits  key="17"  value="4" />
+                                                <map_bits  key="21"  value="5" />
+                                                <map_bits  key="14"  value="8" />
+                                                <map_bits  key="18"  value="9" />
+                                                <map_bits  key="22"  value="10" />
+                                                <map_bits  key="15"  value="11" />
+                                                <map_bits  key="19"  value="12" />
+                                                <map_bits  key="23"  value="13" />
+                                                <map_bits  key="8"   value="16" />
+                                                <map_bits  key="9"   value="17" />
+                                                <map_bits  key="10"  value="18" />
+                                                <map_bits  key="11"  value="19" />
+										</fuse_group>
+                                </output>
+                        </condition>
+                </match_conditions>
+        </product_setup>
+</repair_to_fuse>

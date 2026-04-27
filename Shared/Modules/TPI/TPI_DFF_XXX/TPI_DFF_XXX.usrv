@@ -1,0 +1,57 @@
+Version 1.0;
+
+SelectorRuleCollection  TPI_DFF_XXX_Rules
+{
+#	SelectorRule DFFX_X_PRIMEULT_K_START_X_X_X_X_BASEULT_BypassPort (Outcome1, Outcome2)
+#	{
+#		Outcome1 => _UserVars.UFG_PgmRules_BomGroup=="CLASS_M28G1";
+#		Outcome2;
+#	}	
+		
+	
+	SelectorRule DFFX_X_DFFENDFLOW_K_FINAL_X_X_X_X_DFFVAL_BypassPort (Outcome1, Outcome2, Outcome3, Outcome4)
+	{
+		Outcome1 => __shared__::SCVars.SC_LOCN == "6167" || __shared__::SCVars.SC_LOCN == "5167" || __shared__::SCVars.SC_LOCN == "6168" || __shared__::SCVars.SC_LOCN == "5168";
+		Outcome2 => __shared__::SCVars.SC_DIESLCT == "NA" && contains(__shared__::LocationSets.CH_CHVM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome3 => __shared__::SCVars.SC_DIESLCT == "NA" && contains(__shared__::LocationSets.RCHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome4;
+	}	
+	
+	
+	#SelectorRule DFFKILL (Outcome1, Outcome2, Outcome3, Outcome4)
+	#{
+	#	Outcome1 => contains(__shared__::LocationSets.CH_CHVM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::SCVars.SC_ENGID != "QZ";
+	#	Outcome2 => contains(__shared__::LocationSets.CH_CHVM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::SCVars.SC_ENGID != "QE";
+	#	Outcome3 => contains(__shared__::LocationSets.CH_CHVM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::SCVars.SC_ENGID != "QQ";
+	#	Outcome4 => __shared__::TpRule.If_S28_S52_HX28
+	#}
+	SelectorRule BASEULT (Outcome1, Outcome2, Outcome3)
+	{
+		Outcome1 => __shared__::SCVars.SC_BENCHTOP==1;
+		Outcome2 => __shared__::SCVars.SC_BENCHTOP==-1;
+		Outcome3;
+	}
+	
+	SelectorRule BOMSWITCH (Outcome1, Outcome2, Outcome3, Outcome4)
+	{
+		Outcome1 => __shared__::FlowMatrix.BomGroupName =="CLASS_NVL_S28C";
+		Outcome2 => __shared__::FlowMatrix.BomGroupName =="CLASS_NVL_S52C";
+		Outcome3 => __shared__::FlowMatrix.BomGroupName =="CLASS_NVL_HX28C";
+		Outcome4;
+	}
+
+	SelectorRule If_P16C_Z0 (Outcome1, Outcome2)
+	{
+		Outcome1 => __shared__::FlowMatrix.BomGroupName =="CLASS_NVL_P16C" && __shared__::SCVars.SC_STEP == "Z" && __shared__::SCVars.SC_REV == "";
+		Outcome2;
+	}
+}
+UserVars TPI_DFF_XXX
+{
+	String DEFAULT = "0";
+	String DEFAULT1 = "NA";
+	String DEFAULT2 = "-999";
+	String DEFAULT3 = "00000";
+	String FRV = "DEFAULT";
+	String KILLMODE = "ALLKILL";
+}

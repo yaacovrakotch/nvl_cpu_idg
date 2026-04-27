@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TestProgram>
+    <ProductCodeName>NVL_S28C</ProductCodeName>
+    <TestProgramDescriptiveName>NVL_S28C</TestProgramDescriptiveName>
+    <TeamEmailAddress>mpe_ddg_pde_10n_tp_team@intel.com</TeamEmailAddress>
+    <SortClassType>CLASS</SortClassType>
+    <TPNameUservar>TPNameVars.TPName1</TPNameUservar>
+    <TpTag></TpTag>
+  </TestProgram>
+  <TestProgramFiles>
+    <BaseTplPath>..\..\BaseTestPlan.tpl</BaseTplPath>
+    <ENVPath>EnvironmentFile.env</ENVPath>
+    <STPLPath>SubTestPlan.stpl</STPLPath>
+    <PlistPath>PLIST_ALL_CLASS_NVL_S28C.plist.xml</PlistPath>
+    <SOCPath>..\..\Shared\BaseInputs\Common\Common_Class_NVL_S28C\HVM.soc</SOCPath>
+    <RootPath>..\..\</RootPath>
+  </TestProgramFiles>
+  <LTLTestProgramNameToSocketMapping>
+    <TPToSocketMapping TPNameUservar="TPNameVars.TPName_S28C" SocketFile="..\..\Shared\BaseInputs\Common\Common_Class_NVL_S28C\HVM.soc" />
+  </LTLTestProgramNameToSocketMapping>
+  <!--Delete this SupportedBomGroups section if you don't need Bom groups support-->
+  <!--Enter the Flow Matrix relative path-->
+  <SupportedBomGroups FlowMatrixPath="..\..\BaseInputs\Common\Common_NVL_S28C\BinMatrix.flm.xml">
+    <!--Enter the Bom group name and the Plist reference files path-->
+    <BomGroup name="CLASS_NVL_S28C" plist="PLIST_ALL_CLASS_NVL_S28C.plist.xml" slimplist="PLIST_SLIM_CLASS_NVL_S28C.slimplist.xml" />
+    <!--Add more BomGroup tags as needed-->
+  </SupportedBomGroups>
+  <!--Delete the Recipes section if you don't need Class ASTRA recipe generation-->
+  <Recipes>
+    <Seeds DirectoryName="I:\engineering\dev\sctp\recipe_gen\hdmx\nvl\seed\R00_NVL" />
+    <LocationsStandard FileName="..\..\Shared\BaseInputs\Common\Common_Files\MPS_LocationStandard.xlsx" />
+    <Settings FileName="CLASS_NVL_S28C.xlsx" />
+  </Recipes>
+  <TPCustomAttributes>
+    <!--Define any custom XML tags here-->
+  </TPCustomAttributes>
+</Configuration>

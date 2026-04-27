@@ -1,0 +1,24 @@
+#####################################################
+##### Reset Repair DFF
+#####################################################
+
+START_SCREEN:HcsFdsAppend_CPU0
+EXEC: 	FDS1		    : STRING      : GSDS   		: U.S.CPU0_FUSE_EMB_VFDM_FDS_BINARY  	  			:  SET     : GSDS 	        : U.S.CPU0_FUSE_EMB_VFDM_FDS1_BINARY     :    -          : FDS2  : 2
+EXEC: 	FDS2		    : STRING      : GSDS   		: U.S.CPU0_FUSE_EMB_VFDM_FDS_BINARY  	  			:  APPEND  : GSDS 	        : U.S.CPU0_FUSE_EMB_VFDM_FDS2_BINARY  	:    -          : FDS 	: 2
+EXEC: 	FDS		        : STRING      : GSDS   		: U.S.CPU0_FUSE_EMB_VFDM_FDS_BINARY  	:  SET     : EXPRESSION 	: Hex2Bin([G.U.S.CPU0_FUSE_EMB_VFDM_FDS_BINARY],17632)		:    -          : HCS 	: 2
+EXEC: 	HCS	            : STRING      : GSDS   		: U.S.CPU0_FUSE_EMB_VFDM_HCS_BINARY	    :  SET     : EXPRESSION   	: Hex2Bin([G.U.S.CPU0_FUSE_EMB_VFDM_HCS1_BINARY],7232)	:    -          : 1 	: 2
+END_SCREEN
+
+START_SCREEN:HcsFdsAppend_CPU1
+EXEC: 	FDS1		    : STRING      : GSDS   		: U.S.CPU1_FUSE_EMB_VFDM_FDS_BINARY  	  			:  SET     : GSDS 	        : U.S.CPU1_FUSE_EMB_VFDM_FDS1_BINARY     :    -          : FDS2  : 2
+EXEC: 	FDS2		    : STRING      : GSDS   		: U.S.CPU1_FUSE_EMB_VFDM_FDS_BINARY  	  			:  APPEND  : GSDS 	        : U.S.CPU1_FUSE_EMB_VFDM_FDS2_BINARY  	:    -          : FDS 	: 2
+EXEC: 	FDS		        : STRING      : GSDS   		: U.S.CPU1_FUSE_EMB_VFDM_FDS_BINARY  	:  SET     : EXPRESSION 	: Hex2Bin([G.U.S.CPU1_FUSE_EMB_VFDM_FDS_BINARY],17632)		:    -          : HCS 	: 2
+EXEC: 	HCS	            : STRING      : GSDS   		: U.S.CPU1_FUSE_EMB_VFDM_HCS_BINARY	    :  SET     : EXPRESSION   	: Hex2Bin([G.U.S.CPU1_FUSE_EMB_VFDM_HCS1_BINARY],7232)	:    -          : 1 	: 2
+END_SCREEN
+
+START_SCREEN:HcsFdsAppendCSM_CPU1
+#EXEC: 	FDS1		    : STRING      : GSDS   		: U.S.CPU1_FUSE_EMB_VFDM_FDS_BINARY  	  			:  SET     : GSDS 	        : U.S.CPU1_FUSE_EMB_VFDM_FDS1_BINARY     :    -          : FDS2  : 2
+#EXEC: 	FDS2		    : STRING      : GSDS   		: U.S.CPU1_FUSE_EMB_VFDM_FDS_BINARY  	  			:  APPEND  : GSDS 	        : U.S.CPU1_FUSE_EMB_VFDM_FDS2_BINARY  	:    -          : FDS 	: 2
+EXEC: 	FDS		        : STRING      : GSDS   		: U.S.CPU1_FUSE_EMB_VFDM_FDS_BINARY  	:  SET     : EXPRESSION 	: Hex2Bin([G.U.S.CPU1_FUSE_EMB_VFDM_FDS_BINARY],17632)		:    -          : HCS 	: 2
+EXEC: 	HCS	            : STRING      : GSDS   		: U.S.CPU1_FUSE_EMB_VFDM_HCS_BINARY	    :  SET     : EXPRESSION   	: Hex2Bin([G.U.S.CPU1_FUSE_EMB_VFDM_HCS_BINARY],7232)	:    -          : 1 	: 2
+END_SCREEN

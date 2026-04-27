@@ -1,0 +1,54 @@
+{
+    "Screen_Config": [
+        {
+            "TestName": "AllInOneCheck",
+            "TestConfig": [
+                [ "Test1", "String", "UserVar", "SCVars.SC_ENGID", "==", "Literal", "CX", "Test5",  "Test2" ],
+                [ "Test2", "String", "UserVar", "SCVars.SC_ENGID", "==", "Literal", "RX", "Test5",  "Test3" ],
+                [ "Test3", "String", "UserVar", "SCVars.SC_ENGID", "==", "Literal", "PX", "Test5",  "Test4" ],
+                [ "Test4", "String", "UserVar", "SCVars.SC_ENGID", "==", "Literal", "EX", "Test5",  "3" ],
+                [ "Test5", "String", "UserVar", "SCVars.SC_ENGID", "==", "Literal", "CX", "3",      "1" ] // keep in mind to change this manually to RX / PX / EX --> depend on the die that you are working on. CX indicate CPU die, RX indicate GCD die, PX indicate IOE die, EX indicate SOC die.
+            ]
+        },
+        {
+			"TestName": "HASH_SETUP_CPU",
+			"TestConfig": [
+				[ "Test1", "String", "SharedStorage", "DUT.HASH_VALUE_CPU0", "SET", "EXPRESSION", "Substring([G.U.S.hCASIKT1600], 0, 8)",		"Test2",	"2" ],	
+				[ "Test2", "String", "SharedStorage", "DUT.HASH_VALUE_CPU0", "SET", "EXPRESSION", "Hex2Bin([G.U.S.HASH_VALUE_CPU0], 32)",		"Test3",	"2" ],
+				[ "Test3", "String", "SharedStorage", "DUT.HASH_VALUE_CPU0", "SET", "EXPRESSION", "Reverse([G.U.S.HASH_VALUE_CPU0])", "1", "2" ] 
+            ]
+        },
+        {
+            "TestName": "POP_SSPEC",
+            "TestConfig": [
+                [ "Test1", "String", "DFF",             "D.PKG.PBIC_DAB.SSPEC", "==",           "Literal",      "OFF",                      "Test3",    "Test2" ],
+                [ "Test2", "String", "SharedStorage",   "DUT.SSPEC",            "SET",          "DFF",          "D.PKG.PBIC_DAB.SSPEC",     "Test5",    "4" ],
+                [ "Test3", "String", "DFF",             "D.PKG.FIF_S1.SSPEC",   "==",           "Literal",      "OFF",                      "Test6",    "Test4" ],
+                [ "Test4", "String", "SharedStorage",   "DUT.SSPEC",            "SET",          "DFF",          "D.PKG.FIF_S1.SSPEC",       "Test5",    "4" ],
+                [ "Test5", "String", "SharedStorage",   "DUT.SSPEC",            "==",           "Literal",      "-",                        "Test6",    "1" ],
+                [ "Test6", "String", "UserVar",         "SCVars.SC_SSPEC",      "==",           "Literal",      "",                         "Test7",    "Test8" ],
+                [ "Test7", "String", "SharedStorage",   "DUT.DUMMY",            "SET",          "EXPRESSION",   "ExecCallback('PrintToConsole', 'ERROR - Missing DFF data for SSPEC')",                                                     "2",        "2"     ],
+                [ "Test8", "String", "SharedStorage",   "DUT.SSPEC",            "SET",          "UserVar",      "SCVars.SC_SSPEC",          "1",        "4" ]
+            ]
+        },
+        {
+            "TestName": "POP_SSPEC_QA",
+            "TestConfig": [
+                [ "Test1", "String", "UserVar",         "SCVars.SC_SSPEC",  "==",   "Literal",      "",                                                                     "Test2",    "Test3" ],
+                [ "Test2", "String", "SharedStorage",   "DUT.DUMMY",        "SET",  "EXPRESSION",   "ExecCallback('PrintToConsole',   'ERROR - Missing DFF data for SSPEC')", "2",        "2"     ],
+                [ "Test3", "String", "SharedStorage",   "DUT.SSPEC",        "SET",  "UserVar",      "SCVars.SC_SSPEC",                                                      "1",        "4"     ]
+            ]
+        },
+        {
+            "TestName": "EFUSE_CHECK",
+            "TestConfig": [
+                [ "Test1", "String", "SharedStorage",   "DUT.fuseread_U1U5_EFUSE_ULT",  "!=",       "Literal",          "",                                                                                                         "Test2",    "Test5" ],
+                [ "Test2", "String", "SharedStorage",   "DUT.fuseread_U1U5_ULT",        "!=",       "Literal",          "",                                                                                                         "Test3",    "Test6" ],
+                [ "Test3", "String", "SharedStorage",   "DUT.fuseread_U1U5_ULT",        "==",       "SharedStorage",    "DUT.fuseread_U1U5_EFUSE_ULT",                                                                              "1",        "Test4" ],
+                [ "Test4", "String", "SharedStorage",   "DUT.DUMMY",                    "SET",      "EXPRESSION",       "ExecCallback('PrintToConsole', 'ERROR - EFUSE mismatch between ULT from EFUSE Vs. ULT from FuseRead')",    "2",        "2" ],
+                [ "Test5", "String", "SharedStorage",   "DUT.DUMMY",                    "SET",      "EXPRESSION",       "ExecCallback('PrintToConsole', 'ERROR - EFUSE ULT is not Valid')",                                         "2",        "2" ],
+                [ "Test6", "String", "SharedStorage",   "DUT.DUMMY",                    "SET",      "EXPRESSION",       "ExecCallback('PrintToConsole', 'ERROR - FuseRead ULT is not Valid')",                                      "2",        "2" ]
+            ]
+        }
+    ]
+}

@@ -1,0 +1,136 @@
+################################################################################################################################################################################################################################
+#																		 						FAIL_INDICATOR_PART				 																					   #
+################################################################################################################################################################################################################################
+
+#port 2 - 2752 - Irefp1
+#port 3 - 2753 - ADC01
+#port 4 - 2754 - pt23csx
+#port 5 - 2756 - UGBMRCSX
+#port 6 - 2762 - VOUTMEAS
+#port 7 - 2757 - DAC
+#port 8 - 2765 - IBR/GANG/CSXGAIN
+#port 9 - 2763 - vcciavmin
+#port 10 -2761 - POD
+#port 11 -2766 - s2c
+#DYN fuse 2767 > direct kill at ctv
+#port 4 - 2771 - anaprbLVR 
+#port 1 - 2772 - Powerloss > direct kill anadctc
+
+START_SCREEN:FAIL_INDICATOR
+#Run 	: Test						: Data 	: Param Type 	: Param1 	 						: Operation : Param 		: Param2 	:TmpStore 	:OnTrue	 					: OnFalse
+EXEC   	: KILL_DLVR_ANAPRBLVR		: INT   : GSDS      	: G.U.I.DLVR_ANAPRBLVR_FAILED		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_POD		: 4
+#EXEC   	: KILL_DLVR_VOUTMEAS		: INT   : GSDS      	: G.U.I.DLVR_VOUTMEAS_FAILED		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_POD				: 6
+EXEC   	: KILL_DLVR_POD				: INT   : GSDS      	: G.U.I.DLVR_POD_FAILED				: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_ADC_CHK			: 10
+EXEC   	: KILL_DLVR_ADC_CHK  		: INT   : GSDS      	: G.U.I.DLVR_ADC_CHK_FAILED      	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_IREF_TRIM_P1   	: 3
+EXEC   	: KILL_DLVR_IREF_TRIM_P1    : INT   : GSDS      	: G.U.I.DLVR_IREF_TRIM_P1_FAILED   	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_MRCSXTRIM  		: 2
+EXEC   	: KILL_DLVR_MRCSXTRIM       : INT   : GSDS      	: G.U.I.DLVR_MRCSXTRIM_FAILED      	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_UGBTRIM     	: 5
+EXEC   	: KILL_DLVR_UGBTRIM      	: INT   : GSDS      	: G.U.I.DLVR_UGBTRIM_FAILED   		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_DIG_TRIM     	: 5
+EXEC   	: KILL_DLVR_DIG_TRIM     	: INT   : GSDS      	: G.U.I.DLVR_DIG_TRIM_FAILED       	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_DAC_CAL 		: 5
+EXEC   	: KILL_DLVR_DAC_CAL 		: INT   : GSDS      	: G.U.I.DLVR_DAC_CAL_FAILED 		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_DAC_CHK  		: 7
+EXEC   	: KILL_DLVR_DAC_CHK 		: INT   : GSDS      	: G.U.I.DLVR_DAC_CHK_FAILED 		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_PRE_IBR			: 7
+EXEC   	: KILL_DLVR_PRE_IBR 		: INT   : GSDS      	: G.U.I.DLVR_PRE_IBR_FAILED 		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_POST_IBR		: 8
+EXEC   	: KILL_DLVR_POST_IBR 		: INT   : GSDS      	: G.U.I.DLVR_POST_IBR_FAILED 		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_GANG			: 8
+EXEC   	: KILL_DLVR_GANG			: INT   : GSDS      	: G.U.I.DLVR_GANG_FAILED	 		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_VCCIAVMIN		: 8
+EXEC   	: KILL_DLVR_VCCIAVMIN		: INT   : GSDS      	: G.U.I.DLVR_VCCIAVMIN_FAILED		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_S2C_TRIM		: 9
+EXEC   	: KILL_DLVR_S2C_TRIM		: INT   : GSDS      	: G.U.I.DLVR_S2C_TRIM_FAILED		: ==  		: LITERAL    	: 0 		: - 		: 1 						: 11
+END_SCREEN
+
+START_SCREEN:FAIL_INDICATOR_CSM
+#Run 	: Test						: Data 	: Param Type 	: Param1 	 						: Operation : Param 		: Param2 	:TmpStore 	:OnTrue	 					: OnFalse
+EXEC   	: KILL_DLVR_ANAPRBLVR		: INT   : GSDS      	: G.U.I.DLVR_ANAPRBLVR_FAILED		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_POD		: 4
+#EXEC   	: KILL_DLVR_VOUTMEAS		: INT   : GSDS      	: G.U.I.DLVR_VOUTMEAS_FAILED		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_POD				: 6
+EXEC   	: KILL_DLVR_POD				: INT   : GSDS      	: G.U.I.DLVR_POD_FAILED				: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_ADC_CHK			: 10
+EXEC   	: KILL_DLVR_ADC_CHK  		: INT   : GSDS      	: G.U.I.DLVR_ADC_CHK_FAILED      	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_IREF_TRIM_P1   	: 3
+EXEC   	: KILL_DLVR_IREF_TRIM_P1    : INT   : GSDS      	: G.U.I.DLVR_IREF_TRIM_P1_FAILED   	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_MRCSXTRIM  		: 2
+EXEC   	: KILL_DLVR_MRCSXTRIM       : INT   : GSDS      	: G.U.I.DLVR_MRCSXTRIM_FAILED      	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_UGBTRIM     	: 5
+EXEC   	: KILL_DLVR_UGBTRIM      	: INT   : GSDS      	: G.U.I.DLVR_UGBTRIM_FAILED   		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_DIG_TRIM     	: 5
+EXEC   	: KILL_DLVR_DIG_TRIM     	: INT   : GSDS      	: G.U.I.DLVR_DIG_TRIM_FAILED       	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_DAC_CHK 		: 5
+EXEC   	: KILL_DLVR_DAC_CHK 		: INT   : GSDS      	: G.U.I.DLVR_DAC_CHK_FAILED 		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_POST_IBR		: 7
+EXEC   	: KILL_DLVR_POST_IBR 		: INT   : GSDS      	: G.U.I.DLVR_POST_IBR_FAILED 		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_GANG			: 8
+EXEC   	: KILL_DLVR_GANG			: INT   : GSDS      	: G.U.I.DLVR_GANG_FAILED	 		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_VCCIAVMIN		: 8
+EXEC   	: KILL_DLVR_VCCIAVMIN		: INT   : GSDS      	: G.U.I.DLVR_VCCIAVMIN_FAILED		: ==  		: LITERAL    	: 0 		: - 		: 1							: 9
+END_SCREEN
+
+START_SCREEN:FAIL_INDICATOR_SORT
+#Run 	: Test						: Data 	: Param Type 	: Param1 	 							: Operation : Param 		: Param2 	:TmpStore 	:OnTrue	 					: OnFalse
+EXEC   	: KILL_DLVR_VOUTMEAS		: INT   : GSDS      	: G.U.I.DLVR_VOUTMEAS_FAILED		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_POD				: 6
+EXEC   	: KILL_DLVR_POD				: INT   : GSDS      	: G.U.I.DLVR_POD_FAILED				: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_ADC_CHK			: 10
+EXEC   	: KILL_DLVR_ADC_CHK  		: INT   : GSDS      	: G.U.I.DLVR_ADC_CHK_FAILED      	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_IREF_TRIM_P1   	: 3
+EXEC   	: KILL_DLVR_IREF_TRIM_P1    : INT   : GSDS      	: G.U.I.DLVR_IREF_TRIM_P1_FAILED   	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_MRCSXTRIM  		: 2
+EXEC   	: KILL_DLVR_MRCSXTRIM       : INT   : GSDS      	: G.U.I.DLVR_MRCSXTRIM_FAILED      	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_UGBTRIM     	: 5
+EXEC   	: KILL_DLVR_UGBTRIM      	: INT   : GSDS      	: G.U.I.DLVR_UGBTRIM_FAILED   		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_DIG_TRIM     	: 5
+EXEC   	: KILL_DLVR_DIG_TRIM     	: INT   : GSDS      	: G.U.I.DLVR_DIG_TRIM_FAILED       	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_DAC_CAL 		: 5
+EXEC   	: KILL_DLVR_DAC_CAL 		: INT   : GSDS      	: G.U.I.DLVR_DAC_CAL_FAILED 		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_DAC_CHK  		: 7
+EXEC   	: KILL_DLVR_DAC_CHK 		: INT   : GSDS      	: G.U.I.DLVR_DAC_CHK_FAILED 		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_VCCIAVMIN		: 7
+EXEC   	: KILL_DLVR_VCCIAVMIN		: INT   : GSDS      	: G.U.I.DLVR_VCCIAVMIN_FAILED		: ==  		: LITERAL    	: 0 		: - 		: 1 						: 8
+END_SCREEN
+
+START_SCREEN:FAIL_INDICATOR_S52C
+#Run 	: Test						: Data 	: Param Type 	: Param1 	 						: Operation : Param 		: Param2 	:TmpStore 	:OnTrue	 					: OnFalse
+EXEC   	: KILL_DLVR_ANAPRBLVR		: INT   : GSDS      	: G.U.I.DLVR_ANAPRBLVR_FAILED		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_POD		: 4
+#EXEC   	: KILL_DLVR_VOUTMEAS		: INT   : GSDS      	: G.U.I.DLVR_VOUTMEAS_FAILED		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_POD				: 6
+EXEC   	: KILL_DLVR_POD				: INT   : GSDS      	: G.U.I.DLVR_POD_FAILED				: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_ADC_CHK			: 10
+EXEC   	: KILL_DLVR_ADC_CHK  		: INT   : GSDS      	: G.U.I.DLVR_ADC_CHK_FAILED      	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_IREF_TRIM_P1   	: 3
+EXEC   	: KILL_DLVR_IREF_TRIM_P1    : INT   : GSDS      	: G.U.I.DLVR_IREF_TRIM_P1_FAILED   	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_MRCSXTRIM  		: 2
+EXEC   	: KILL_DLVR_MRCSXTRIM       : INT   : GSDS      	: G.U.I.DLVR_MRCSXTRIM_FAILED      	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_UGBTRIM     	: 5
+EXEC   	: KILL_DLVR_UGBTRIM      	: INT   : GSDS      	: G.U.I.DLVR_UGBTRIM_FAILED   		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_DIG_TRIM     	: 5
+EXEC   	: KILL_DLVR_DIG_TRIM     	: INT   : GSDS      	: G.U.I.DLVR_DIG_TRIM_FAILED       	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_DAC_CAL 		: 5
+EXEC   	: KILL_DLVR_DAC_CAL 		: INT   : GSDS      	: G.U.I.DLVR_DAC_CAL_FAILED 		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_DAC_CHK  		: 7
+EXEC   	: KILL_DLVR_DAC_CHK 		: INT   : GSDS      	: G.U.I.DLVR_DAC_CHK_FAILED 		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_PRE_IBR			: 7
+EXEC   	: KILL_DLVR_PRE_IBR 		: INT   : GSDS      	: G.U.I.DLVR_PRE_IBR_FAILED 		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_POST_IBR		: 8
+EXEC   	: KILL_DLVR_POST_IBR 		: INT   : GSDS      	: G.U.I.DLVR_POST_IBR_FAILED 		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_GANG			: 8
+EXEC   	: KILL_DLVR_GANG			: INT   : GSDS      	: G.U.I.DLVR_GANG_FAILED	 		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_VCCIAVMIN		: 8
+EXEC   	: KILL_DLVR_VCCIAVMIN		: INT   : GSDS      	: G.U.I.DLVR_VCCIAVMIN_FAILED		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_S2C_TRIM		: 9
+EXEC   	: KILL_DLVR_S2C_TRIM		: INT   : GSDS      	: G.U.I.DLVR_S2C_TRIM_FAILED		: ==  		: LITERAL    	: 0 		: - 		: 1 						: 11
+END_SCREEN
+
+START_SCREEN:FAIL_INDICATOR_S52C_CSM
+#Run 	: Test						: Data 	: Param Type 	: Param1 	 						: Operation : Param 		: Param2 	:TmpStore 	:OnTrue	 					: OnFalse
+EXEC   	: KILL_DLVR_ANAPRBLVR		: INT   : GSDS      	: G.U.I.DLVR_ANAPRBLVR_FAILED		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_POD		: 4
+#EXEC   	: KILL_DLVR_VOUTMEAS		: INT   : GSDS      	: G.U.I.DLVR_VOUTMEAS_FAILED		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_POD				: 6
+EXEC   	: KILL_DLVR_POD				: INT   : GSDS      	: G.U.I.DLVR_POD_FAILED				: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_ADC_CHK			: 10
+EXEC   	: KILL_DLVR_ADC_CHK  		: INT   : GSDS      	: G.U.I.DLVR_ADC_CHK_FAILED      	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_IREF_TRIM_P1   	: 3
+EXEC   	: KILL_DLVR_IREF_TRIM_P1    : INT   : GSDS      	: G.U.I.DLVR_IREF_TRIM_P1_FAILED   	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_MRCSXTRIM  		: 2
+EXEC   	: KILL_DLVR_MRCSXTRIM       : INT   : GSDS      	: G.U.I.DLVR_MRCSXTRIM_FAILED      	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_UGBTRIM     	: 5
+EXEC   	: KILL_DLVR_UGBTRIM      	: INT   : GSDS      	: G.U.I.DLVR_UGBTRIM_FAILED   		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_DIG_TRIM     	: 5
+EXEC   	: KILL_DLVR_DIG_TRIM     	: INT   : GSDS      	: G.U.I.DLVR_DIG_TRIM_FAILED       	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_DAC_CHK 		: 5
+EXEC   	: KILL_DLVR_DAC_CHK 		: INT   : GSDS      	: G.U.I.DLVR_DAC_CHK_FAILED 		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_POST_IBR		: 7
+EXEC   	: KILL_DLVR_POST_IBR 		: INT   : GSDS      	: G.U.I.DLVR_POST_IBR_FAILED 		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_GANG			: 8
+EXEC   	: KILL_DLVR_GANG			: INT   : GSDS      	: G.U.I.DLVR_GANG_FAILED	 		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_VCCIAVMIN		: 8
+EXEC   	: KILL_DLVR_VCCIAVMIN		: INT   : GSDS      	: G.U.I.DLVR_VCCIAVMIN_FAILED		: ==  		: LITERAL    	: 0 		: - 		: 1							: 9
+END_SCREEN
+
+START_SCREEN:FAIL_INDICATOR_HX
+#Run 	: Test						: Data 	: Param Type 	: Param1 	 						: Operation : Param 		: Param2 	:TmpStore 	:OnTrue	 					: OnFalse
+EXEC   	: KILL_DLVR_ANAPRBLVR		: INT   : GSDS      	: G.U.I.DLVR_ANAPRBLVR_FAILED		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_POD		: 4
+#EXEC   	: KILL_DLVR_VOUTMEAS		: INT   : GSDS      	: G.U.I.DLVR_VOUTMEAS_FAILED		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_POD				: 6
+EXEC   	: KILL_DLVR_POD				: INT   : GSDS      	: G.U.I.DLVR_POD_FAILED				: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_ADC_CHK			: 10
+EXEC   	: KILL_DLVR_ADC_CHK  		: INT   : GSDS      	: G.U.I.DLVR_ADC_CHK_FAILED      	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_IREF_TRIM_P1   	: 3
+EXEC   	: KILL_DLVR_IREF_TRIM_P1    : INT   : GSDS      	: G.U.I.DLVR_IREF_TRIM_P1_FAILED   	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_MRCSXTRIM  		: 2
+EXEC   	: KILL_DLVR_MRCSXTRIM       : INT   : GSDS      	: G.U.I.DLVR_MRCSXTRIM_FAILED      	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_UGBTRIM     	: 5
+EXEC   	: KILL_DLVR_UGBTRIM      	: INT   : GSDS      	: G.U.I.DLVR_UGBTRIM_FAILED   		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_DIG_TRIM     	: 5
+EXEC   	: KILL_DLVR_DIG_TRIM     	: INT   : GSDS      	: G.U.I.DLVR_DIG_TRIM_FAILED       	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_DAC_CAL 		: 5
+EXEC   	: KILL_DLVR_DAC_CAL 		: INT   : GSDS      	: G.U.I.DLVR_DAC_CAL_FAILED 		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_DAC_CHK  		: 7
+EXEC   	: KILL_DLVR_DAC_CHK 		: INT   : GSDS      	: G.U.I.DLVR_DAC_CHK_FAILED 		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_PRE_IBR			: 7
+EXEC   	: KILL_DLVR_PRE_IBR 		: INT   : GSDS      	: G.U.I.DLVR_PRE_IBR_FAILED 		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_POST_IBR		: 8
+EXEC   	: KILL_DLVR_POST_IBR 		: INT   : GSDS      	: G.U.I.DLVR_POST_IBR_FAILED 		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_GANG			: 8
+EXEC   	: KILL_DLVR_GANG			: INT   : GSDS      	: G.U.I.DLVR_GANG_FAILED	 		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_VCCIAVMIN		: 8
+EXEC   	: KILL_DLVR_VCCIAVMIN		: INT   : GSDS      	: G.U.I.DLVR_VCCIAVMIN_FAILED		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_S2C_TRIM		: 9
+EXEC   	: KILL_DLVR_S2C_TRIM		: INT   : GSDS      	: G.U.I.DLVR_S2C_TRIM_FAILED		: ==  		: LITERAL    	: 0 		: - 		: 1 						: 11
+END_SCREEN
+
+START_SCREEN:FAIL_INDICATOR_HX_CSM
+#Run 	: Test						: Data 	: Param Type 	: Param1 	 						: Operation : Param 		: Param2 	:TmpStore 	:OnTrue	 					: OnFalse
+EXEC   	: KILL_DLVR_ANAPRBLVR		: INT   : GSDS      	: G.U.I.DLVR_ANAPRBLVR_FAILED		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_POD		: 4
+#EXEC   	: KILL_DLVR_VOUTMEAS		: INT   : GSDS      	: G.U.I.DLVR_VOUTMEAS_FAILED		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_POD				: 6
+EXEC   	: KILL_DLVR_POD				: INT   : GSDS      	: G.U.I.DLVR_POD_FAILED				: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_ADC_CHK			: 10
+EXEC   	: KILL_DLVR_ADC_CHK  		: INT   : GSDS      	: G.U.I.DLVR_ADC_CHK_FAILED      	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_IREF_TRIM_P1   	: 3
+EXEC   	: KILL_DLVR_IREF_TRIM_P1    : INT   : GSDS      	: G.U.I.DLVR_IREF_TRIM_P1_FAILED   	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_MRCSXTRIM  		: 2
+EXEC   	: KILL_DLVR_MRCSXTRIM       : INT   : GSDS      	: G.U.I.DLVR_MRCSXTRIM_FAILED      	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_UGBTRIM     	: 5
+EXEC   	: KILL_DLVR_UGBTRIM      	: INT   : GSDS      	: G.U.I.DLVR_UGBTRIM_FAILED   		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_DIG_TRIM     	: 5
+EXEC   	: KILL_DLVR_DIG_TRIM     	: INT   : GSDS      	: G.U.I.DLVR_DIG_TRIM_FAILED       	: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_DAC_CHK 		: 5
+EXEC   	: KILL_DLVR_DAC_CHK 		: INT   : GSDS      	: G.U.I.DLVR_DAC_CHK_FAILED 		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_POST_IBR		: 7
+EXEC   	: KILL_DLVR_POST_IBR 		: INT   : GSDS      	: G.U.I.DLVR_POST_IBR_FAILED 		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_GANG			: 8
+EXEC   	: KILL_DLVR_GANG			: INT   : GSDS      	: G.U.I.DLVR_GANG_FAILED	 		: ==  		: LITERAL    	: 0 		: - 		: KILL_DLVR_VCCIAVMIN		: 8
+EXEC   	: KILL_DLVR_VCCIAVMIN		: INT   : GSDS      	: G.U.I.DLVR_VCCIAVMIN_FAILED		: ==  		: LITERAL    	: 0 		: - 		: 1							: 9
+END_SCREEN

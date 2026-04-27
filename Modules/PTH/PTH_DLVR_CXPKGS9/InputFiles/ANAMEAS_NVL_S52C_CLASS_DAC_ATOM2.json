@@ -1,0 +1,240 @@
+{
+    "IndexAllMeasurements": false,
+    "CONSTANTS": {
+        "DVDACG_TGT": "1.2, 1.1, 1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4"
+    },
+    "CTV": [
+        {
+            "PinName": "CPU_TDO",
+            "Equations": [
+                {
+                    "RegName": "CPU_ADC0_1p2_ATOM2",
+                    "StartBit": 0,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU_ADC0_1p2_ATOM2"
+                },
+                {
+                    "RegName": "CPU_ADC0_1p1_ATOM2",
+                    "StartBit": 0,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU_ADC0_1p1_ATOM2"
+                },
+                {
+                    "RegName": "CPU_ADC0_1p0_ATOM2",
+                    "StartBit": 0,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU_ADC0_1p0_ATOM2"
+                },
+                {
+                    "RegName": "CPU_ADC0_0p9_ATOM2",
+                    "StartBit": 10,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU_ADC0_0p9_ATOM2"
+                },
+                {
+                    "RegName": "CPU_ADC0_0p8_ATOM2",
+                    "StartBit": 20,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU_ADC0_0p8_ATOM2"
+                },
+                {
+                    "RegName": "CPU_ADC0_0p7_ATOM2",
+                    "StartBit": 30,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU_ADC0_0p7_ATOM2"
+                },
+                {
+                    "RegName": "CPU_ADC0_0p6_ATOM2",
+                    "StartBit": 40,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU_ADC0_0p6_ATOM2"
+                },
+                {
+                    "RegName": "CPU_ADC0_0p5_ATOM2",
+                    "StartBit": 50,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU_ADC0_0p5_ATOM2"
+                },
+                {
+                    "RegName": "CPU_ADC0_0p4_ATOM2",
+                    "StartBit": 0,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU_ADC0_0p4_ATOM2"
+                }
+            ]
+        },
+		{
+            "PinName": "CPU1_TDO",
+            "Equations": [
+                {
+                    "RegName": "CPU1_ADC0_1p2_ATOM2",
+                    "StartBit": 0,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU1_ADC0_1p2_ATOM2"
+                },
+                {
+                    "RegName": "CPU1_ADC0_1p1_ATOM2",
+                    "StartBit": 0,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU1_ADC0_1p1_ATOM2"
+                },
+                {
+                    "RegName": "CPU1_ADC0_1p0_ATOM2",
+                    "StartBit": 0,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU1_ADC0_1p0_ATOM2"
+                },
+                {
+                    "RegName": "CPU1_ADC0_0p9_ATOM2",
+                    "StartBit": 10,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU1_ADC0_0p9_ATOM2"
+                },
+                {
+                    "RegName": "CPU1_ADC0_0p8_ATOM2",
+                    "StartBit": 20,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU1_ADC0_0p8_ATOM2"
+                },
+                {
+                    "RegName": "CPU1_ADC0_0p7_ATOM2",
+                    "StartBit": 30,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU1_ADC0_0p7_ATOM2"
+                },
+                {
+                    "RegName": "CPU1_ADC0_0p6_ATOM2",
+                    "StartBit": 40,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU1_ADC0_0p6_ATOM2"
+                },
+                {
+                    "RegName": "CPU1_ADC0_0p5_ATOM2",
+                    "StartBit": 50,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU1_ADC0_0p5_ATOM2"
+                },
+                {
+                    "RegName": "CPU1_ADC0_0p4_ATOM2",
+                    "StartBit": 0,
+                    "Length": 10,
+                    "SaveResult": true,
+                    "SaveToSharedStorage": "CPU1_ADC0_0p4_ATOM2"
+                }
+            ]
+        }
+    ],
+    "DC": [
+        {
+            "Domains": ["ATOM2"],
+            
+            "Measurements": {
+                "CPU_ATOM2_DVDACG": {
+                    "Pin": "IPC::CPU_ATOM2_DLVROUT",
+                    "Average": 10,
+                    "Expect": 90
+                },
+				"CPU1_ATOM2_DVDACG": {
+                    "Pin": "IPC::CPU1_ATOM2_DLVROUT",
+                    "Average": 10,
+                    "Expect": 90
+                }
+            },
+			"Token": "CPU_LINEARFIT_ATOM2",
+            "Equations": [
+                {
+                    "Name": "CPU_LINEARFIT_{DOMAIN}",
+                    "Expression": "LinearFit(SelectArrayElements([CPU_{DOMAIN}_DVDACG],'0-8', ','), SelectArrayElements([DVDACG_TGT], '0-8', ','), ',')",
+                    "SaveResult": true,
+                    "DatalogFormat": "STR"
+                }
+            ],
+	    "Token": "CPU1_LINEARFIT_ATOM2",
+			"Equations": [
+                {
+                    "Name": "CPU1_LINEARFIT_{DOMAIN}",
+                    "Expression": "LinearFit(SelectArrayElements([CPU1_{DOMAIN}_DVDACG],'0-8', ','), SelectArrayElements([DVDACG_TGT], '0-8', ','), ',')",
+                    "SaveResult": true,
+                    "DatalogFormat": "STR"
+                }
+            ]
+        },
+        {
+           "Domains": ["0","1","2","3","4","5","6","7","8"],
+           "Token": "DVDACG_ATOM2",
+            "Equations": [
+                {
+                    "Expression": "Round(SelectArrayElement([CPU_ATOM2_DVDACG], {DOMAIN}), 4)",
+                    "SaveToSharedStorage": "CPU_ATOM2_DVDACG_{DOMAIN}",
+                    "DatalogFormat": "DBL"
+                }
+            ]
+        },
+        {
+            "Domains": ["0","1","2","3","4","5","6","7","8"],
+	    "Token": "CPU1_ATOM2_DVDACG",
+            "Equations": [
+                {
+                    "Expression": "Round(SelectArrayElement([CPU1_ATOM2_DVDACG], {DOMAIN}), 4)",
+                    "SaveToSharedStorage": "CPU1_ATOM2_DVDACG_{DOMAIN}",
+                    "DatalogFormat": "DBL"
+                }
+            ]
+        },
+        {
+            "Domains": ["ATOM2"],
+            "Equations": [
+                {
+                    "Expression": "ToInt32(Round(GetDelimitedData([CPU_LINEARFIT_ATOM2], ',', 1) * 2048, 0))",
+                    "DatalogFormat": "INT",
+                    "SaveToSharedStorage": "CPU_ATOM2_DLVR_DAC_CAL_SLOPE"
+                },
+                {
+                    "Expression": "ToInt32(Round(ToDouble(GetDelimitedData([CPU_LINEARFIT_ATOM2], ',', 0)) * 2/0.0025, 0))",
+                    "SaveToSharedStorage": "CPU_ATOM2_DLVR_DAC_CAL_OFFSET_1",
+                    "DatalogFormat": "INT"
+                },
+                {
+                    "Expression": "ToDouble(GetDelimitedData([CPU_LINEARFIT_ATOM2], ',', 2))",
+                    "SaveToSharedStorage": "CPU_ATOM2_DLVR_DAC_CAL_R2"
+                }
+            ]
+        },
+		{
+            "Domains": ["ATOM2"],
+            "Equations": [
+                {
+                    "Expression": "ToInt32(Round(GetDelimitedData([CPU1_LINEARFIT_ATOM2], ',', 1) * 2048, 0))",
+                    "DatalogFormat": "INT",
+                    "SaveToSharedStorage": "CPU1_ATOM2_DLVR_DAC_CAL_SLOPE"
+                },
+                {
+                    "Expression": "ToInt32(Round(ToDouble(GetDelimitedData([CPU1_LINEARFIT_ATOM2], ',', 0)) * 2/0.0025, 0))",
+                    "SaveToSharedStorage": "CPU1_ATOM2_DLVR_DAC_CAL_OFFSET_1",
+                    "DatalogFormat": "INT"
+                },
+                {
+                    "Expression": "ToDouble(GetDelimitedData([CPU1_LINEARFIT_ATOM2], ',', 2))",
+                    "SaveToSharedStorage": "CPU1_ATOM2_DLVR_DAC_CAL_R2"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,84 @@
+Version 1.0;
+
+SelectorRuleCollection  PTH_THRSOAK_XXX_Rules
+{
+	SelectorRule If_CH_CHVM(yes, no) ####By Testing Condition + Temperature####
+	{
+		yes => contains(__shared__::LocationSets.CH_CHVM, "[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		no;
+	}
+
+	SelectorRule PTHControlSetRule (Outcome1, Outcome2, Outcome3, Outcome4)
+	{
+		Outcome1 => contains(__shared__::LocationSets.COLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome2 => contains(__shared__::LocationSets.HOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome3 => contains(__shared__::LocationSets.FUSE,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome4;
+	}	
+	
+	SelectorRule If_HOT(yes, no) ####By Testing Condition + Temperature####
+	{
+		yes => contains(__shared__::LocationSets.HOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		no;
+	}
+	
+	
+	SelectorRule If_FUSE (yes, no)
+	{
+		yes => contains(__shared__::LocationSets.FUSE,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		no;
+	}
+
+
+	SelectorRule Select_S28_S52_Otherwise (Outcome1, Outcome2, Outcome3, Outcome4, Outcome5, Outcome6, Outcome7, Outcome8)
+	{
+		
+		Outcome1 => __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_S28C";
+		Outcome2 => __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_S52C";
+		Outcome3 => __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_HX28C";
+		Outcome4 => __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_P16C";
+		Outcome5 => __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_H16C";
+		Outcome6 => __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_S16C";
+		Outcome7 => __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_DNL_S28C";
+		Outcome8;
+	}
+	
+	
+		SelectorRule Select_by_BOM_and_LocationSets ( CLASS_NVL_S28C_HOT, CLASS_NVL_S52C_HOT, CLASS_NVL_S28C_COLD, CLASS_NVL_S52C_COLD, CLASS_NVL_S28C_FUSE, CLASS_NVL_S52C_FUSE, CLASS_NVL_S28C_ROOM, CLASS_NVL_S52C_ROOM, CLASS_NVL_HX28C_HOT, CLASS_NVL_HX28C_COLD, CLASS_NVL_HX28C_FUSE, CLASS_NVL_HX28C_ROOM,CLASS_NVL_P16C_HOT, CLASS_NVL_P16C_COLD, CLASS_NVL_P16C_FUSE, CLASS_NVL_P16C_ROOM,CLASS_NVL_H16C_HOT, CLASS_NVL_H16C_COLD, CLASS_NVL_H16C_FUSE, CLASS_NVL_H16C_ROOM, CLASS_NVL_S16C_HOT, CLASS_NVL_S16C_COLD, CLASS_NVL_S16C_FUSE, CLASS_NVL_S16C_ROOM, CLASS_NVL_DNLS28C_HOT,  CLASS_NVL_DNLS28C_COLD, CLASS_NVL_DNLS28C_FUSE, CLASS_NVL_DNLS28C_ROOM, Otherwise)
+	{
+		
+		CLASS_NVL_S28C_HOT  =>  contains(__shared__::LocationSets.HOT,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_S28C";
+		CLASS_NVL_S52C_HOT  =>  contains(__shared__::LocationSets.HOT,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_S52C";
+		CLASS_NVL_S28C_COLD  => contains(__shared__::LocationSets.COLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_S28C";
+		CLASS_NVL_S52C_COLD  => contains(__shared__::LocationSets.COLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_S52C";
+		CLASS_NVL_S28C_ROOM  => contains(__shared__::LocationSets.ROOM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_S28C";
+		CLASS_NVL_S52C_ROOM  => contains(__shared__::LocationSets.ROOM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_S52C";
+		CLASS_NVL_S28C_FUSE  => contains(__shared__::LocationSets.FUSE,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_S28C";
+		CLASS_NVL_S52C_FUSE  => contains(__shared__::LocationSets.FUSE,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_S52C";
+		CLASS_NVL_HX28C_HOT  =>  contains(__shared__::LocationSets.HOT,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_HX28C";
+		CLASS_NVL_HX28C_COLD  => contains(__shared__::LocationSets.COLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_HX28C";
+		CLASS_NVL_HX28C_ROOM  => contains(__shared__::LocationSets.ROOM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_HX28C";
+		CLASS_NVL_HX28C_FUSE  => contains(__shared__::LocationSets.FUSE,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_HX28C";
+		CLASS_NVL_P16C_HOT  =>  contains(__shared__::LocationSets.HOT,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_P16C";
+		CLASS_NVL_P16C_COLD  => contains(__shared__::LocationSets.COLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_P16C";
+		CLASS_NVL_P16C_ROOM  => contains(__shared__::LocationSets.ROOM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_P16C";
+		CLASS_NVL_P16C_FUSE  => contains(__shared__::LocationSets.FUSE,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_P16C";
+		CLASS_NVL_H16C_HOT  =>  contains(__shared__::LocationSets.HOT,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_H16C";
+		CLASS_NVL_H16C_COLD  => contains(__shared__::LocationSets.COLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_H16C";
+		CLASS_NVL_H16C_ROOM  => contains(__shared__::LocationSets.ROOM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_H16C";
+		CLASS_NVL_H16C_FUSE  => contains(__shared__::LocationSets.FUSE,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_H16C";
+		CLASS_NVL_S16C_HOT  =>  contains(__shared__::LocationSets.HOT,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_S16C";
+		CLASS_NVL_S16C_COLD  => contains(__shared__::LocationSets.COLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_S16C";
+		CLASS_NVL_S16C_ROOM  => contains(__shared__::LocationSets.ROOM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_S16C";
+		CLASS_NVL_S16C_FUSE   => contains(__shared__::LocationSets.FUSE,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_S16C";
+		CLASS_NVL_DNLS28C_HOT  =>  contains(__shared__::LocationSets.HOT,"[" +  __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_DNL_S28C";
+		CLASS_NVL_DNLS28C_COLD  => contains(__shared__::LocationSets.COLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_DNL_S28C";
+		CLASS_NVL_DNLS28C_ROOM  => contains(__shared__::LocationSets.ROOM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_DNL_S28C";
+		CLASS_NVL_DNLS28C_FUSE   => contains(__shared__::LocationSets.FUSE,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_DNL_S28C";
+		Otherwise;
+	}		
+	
+}
+UserVars PTH_THRSOAK_XXX
+{
+}

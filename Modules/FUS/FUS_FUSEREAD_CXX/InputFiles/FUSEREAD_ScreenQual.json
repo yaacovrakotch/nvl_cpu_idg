@@ -1,0 +1,30 @@
+{
+	"Screen_Config": [
+		{
+			"TestName": "QualUservarInit",
+			"TestConfig": [
+				[ "Test1", "String", "SharedStorage", "DUT.FuseQualSort",  "SET", "LITERAL", "FAIL", "Test2", "2" ],
+				[ "Test2", "String", "SharedStorage", "DUT.FuseQualClass", "SET", "LITERAL", "FAIL", "1",     "2" ]
+			]
+		},
+		{
+			"TestName": "QualResultClass",
+			"TestConfig": [
+				[ "Test1", "String", "SharedStorage", "DUT.FuseQualClass",  "SET", "LITERAL", "PASS", "1", "2" ]
+			]
+		},
+		{
+			"TestName": "QualResultSort",
+			"TestConfig": [
+				[ "Test1", "String", "SharedStorage", "DUT.FuseQualSort",  "SET", "LITERAL", "PASS", "1", "2" ]
+			]
+		},
+		{
+			"TestName": "WriteQualResult",
+			"TestConfig": [
+				[ "Test1", "String", "SharedStorage", "DUT.DUMMY", "SET", "EXPRESSION", "ExecCallback('PrintToItuff', '--tname_suf _SORT  --body_type strgval --body_data G.U.S.FuseQualSort')", "Test2", "Test2" ],
+				[ "Test2", "String", "SharedStorage", "DUT.DUMMY", "SET", "EXPRESSION", "ExecCallback('PrintToItuff', '--tname_suf _CLASS --body_type strgval --body_data G.U.S.FuseQualClass')", "1",     "2"    ]
+			]
+		}
+	]
+}

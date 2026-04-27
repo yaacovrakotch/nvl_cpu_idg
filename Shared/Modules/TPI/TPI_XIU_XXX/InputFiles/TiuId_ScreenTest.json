@@ -1,0 +1,57 @@
+{
+    "JsonScreenConfig":
+    [
+        {
+            "TestName" : "TIUIDASSIGNMENTS",
+            "TestConfig" :
+            [
+                ["TEST00", "STRING", "SharedStorage", "G.U.S.LocalTestBoardId",      "SET", "GLOBAL",        "__shared__::SCVars.TP_TESTBOARD_ID" ,                                                                         "TEST01", "0"],
+                ["TEST01", "INTEGER","SharedStorage", "G.U.S.BBCTADelimiter",        "SET", "EXPRESSION",    "ToInt32(IndexOf([G.U.S.LocalTestBoardId],':'))" ,                                                             "TEST02", "0"],
+                ["TEST02", "STRING", "SharedStorage", "G.U.S.TIU.BaseBoardId",       "SET", "EXPRESSION",    "Substring([G.U.S.LocalTestBoardId],0,ToInt32([G.U.S.BBCTADelimiter]))" ,                                      "TEST03", "0"],
+                ["TEST03", "STRING","SharedStorage",  "G.U.S.CtaId",                 "SET", "EXPRESSION",    "Substring([G.U.S.LocalTestBoardId],ToInt32([G.U.S.BBCTADelimiter])+1,Length([G.U.S.LocalTestBoardId]) - (Length([G.U.S.TIU.BaseBoardId])+1))" ,"TEST04", "0"],
+                ["TEST04", "STRING","SharedStorage",  "G.U.S.CtaPackage",            "SET", "EXPRESSION",    "Substring([G.U.S.CtaId],3,1)" ,                                                                               "TEST05", "0"],
+                ["TEST05", "STRING","SharedStorage",  "G.U.S.CtaTypeLetter",         "SET", "EXPRESSION",    "Substring([G.U.S.CtaId],7,1)" ,                                                                               "TEST06", "0"],
+                ["TEST06", "STRING","SharedStorage",  "G.U.S.CtaTypeLetter",         "==",  "LITERAL",       "T" ,                                                                                                          "TEST09", "TEST07"],
+                ["TEST07", "STRING","SharedStorage",  "G.U.S.CtaTypeLetter",         "==",  "LITERAL",       "F" ,                                                                                                          "TEST08", "0"],
+                ["TEST08", "STRING","SharedStorage",  "G.U.S.CtaType",               "SET", "LITERAL",       "FULL" ,                                                                                                       "TEST10", "0"],
+                ["TEST09", "STRING","SharedStorage",  "G.U.S.CtaType",               "SET", "LITERAL",       "HVM" ,                                                                                                        "TEST10", "0"],
+                
+                ["TEST10", "STRING", "GLOBAL",        "__shared__::TIU.BaseBoardId", "SET", "SharedStorage", "G.U.S.TIU.BaseBoardId" ,                                                                                      "TEST11", "0"],
+                ["TEST11", "STRING", "GLOBAL",        "__shared__::TIU.CtaId",       "SET", "SharedStorage", "G.U.S.CtaId" ,                                                                                                "TEST12", "0"],
+                ["TEST12", "STRING", "GLOBAL",        "__shared__::TIU.Package",     "SET", "SharedStorage", "G.U.S.CtaPackage" ,                                                                                           "TEST13", "0"],
+                ["TEST13", "STRING", "GLOBAL",        "__shared__::TIU.Type",        "SET", "SharedStorage", "G.U.S.CtaType" ,                                                                                                "1",    "0"]
+                
+                
+            ]
+        },
+
+		{
+            "TestName" : "TIUPACKAGE_S_H_A",
+            "TestConfig" :
+			[
+					["CHK01", "STRING", "GLOBAL",                     "__shared__::TIU.Package", "==", "LITERAL", "S" ,                                                                                 "CHK02", "CHK03"],
+					["CHK02", "STRING", "EXPRESSION",                 "[E.TIUGROUP]", "==", "LITERAL", "CLASS_NVL_S" ,                                                                      "1", "0"],
+					["CHK03", "STRING", "GLOBAL",                     "__shared__::TIU.Package", "==", "LITERAL", "H" ,                                                                                  "CHK04", "CHK05"],
+					["CHK04", "STRING", "EXPRESSION",        		"[E.TIUGROUP]", "==", "LITERAL", "CLASS_NVL_H" ,                                                                      "1", "CHK09"],
+					["CHK05", "STRING", "GLOBAL",                     "__shared__::TIU.Package", "==", "LITERAL", "A" ,                                                                                      "CHK06", "CHK07"],
+					["CHK06", "STRING", "EXPRESSION",        		"[E.TIUGROUP]", "==", "LITERAL", "CLASS_NVL_A" ,                                                                      "1", "0"],
+					["CHK07", "STRING", "GLOBAL",                     "__shared__::TIU.Package", "==", "LITERAL", "P" ,                                                                                      "CHK08", "CHK09"],
+					["CHK08", "STRING", "EXPRESSION",        		"[E.TIUGROUP]", "==", "LITERAL", "CLASS_NVL_H" ,                                                                      "1", "0"],
+					["CHK09", "STRING", "GLOBAL",                     "__shared__::TIU.Package", "==", "LITERAL", "H" ,                                                                                      "CHK10", "0"],
+					["CHK10", "STRING", "EXPRESSION",        		"[E.TIUGROUP]", "==", "LITERAL", "CLASS_NVL_U" ,                                                                      "1", "0"],
+			]
+			
+		},
+		
+		
+		{
+            "TestName" : "TIU_HVM_DBG",
+            "TestConfig" :
+			[
+					["CHK01", "STRING", "GLOBAL",                     "__shared__::TIU.Type", "==", "LITERAL", "HVM" ,                                                                             "1", "CHK02"],
+					["CHK02", "STRING", "GLOBAL",                     "__shared__::TIU.Type", "==", "LITERAL", "FULL" ,                                                                            "2", "0"],
+			]
+			
+		}
+	]
+}

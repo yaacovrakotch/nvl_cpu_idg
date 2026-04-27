@@ -1,0 +1,553 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan TPI_XIU_XXX;
+
+Import "TPI_XIU_XXX.usrv";
+Import "TPI_XIU_XXX.lvl";
+Import "TPI_XIU_XXX_levels.tcg";
+
+CSharpTest PrimeApplyTestConditionTestMethod CTRL_X_PWRDWN_K_INIT_X_X_X_X_SET_DEFAULT_RELAY
+{
+    TestConditionCategory = "RELAY";
+    TestConditionName = "TPI_XIU_XXX::Rly_set_default_PKG_all_default";
+}
+
+CSharpTest PowerSequenceHandler CTRL_X_PWR_K_INIT_X_X_X_X_PWRUPTCDC
+{
+    # 1st test in the flow, power up 
+    ApplyPowerDown = "Always";
+    ApplyPowerOn = "Always";
+    PowerDownTc = "BASE::Power_dwn_PKG_xxx_pwrd_zerzer";
+    PowerOnTc = "BASE::Power_Up_TC_DC_PKG_force_0V_lvl";
+}
+
+CSharpTest TesterScreenTC CTRL_X_TESTERSCREEN_K_INIT_X_X_X_X_XIUBYPASS
+{
+}
+
+CSharpTest PrimeTiuIdentityTestMethod CTRL_X_XIUIDENTITY_K_INIT_X_X_X_X_XIUNAME
+{
+    # NVL XIU Name
+    ValidElastomerSheetRegex = __shared__::TpRule.If_DS0_DS1_M("I01954L1010E[0-9]*","I01954L1010E[0-9]*","","");
+    ValidBottomElastomerSheetRegex = __shared__::TpRule.If_DS0_DS1_M("I01954L1020E[0-9]*","I01954L1020E[0-9]*","","");
+ValidTiuRegex = __shared__::TpRule.If_CLASS_NVL_HX28C("^BB2T4H1P[0-9]+:NVLHX[a-zA-Z0-9]+[T|F][0-9]+$",__shared__::TpRule.If_SS_NVL_U8C("^BB2T4H1P[0-9]+:NVLHX[a-zA-Z0-9]+[T|F][0-9]+$", "^BB2T4H1P[0-9]+:NVL[S|A|W|H][L|B][0-9]+[T|F][0-9]+$"));}
+
+CSharpTest PrimeScreenTestTestMethod CTRL_X_SCREEN_K_INIT_X_X_X_X_TIUID
+{
+    ScreenTestSet = "TIUIDASSIGNMENTS";
+    ScreenTestsFile = "./InputFiles/TiuId_ScreenTest.json";
+}
+
+CSharpTest PrimeScreenTestTestMethod CTRL_X_SCREEN_K_INIT_X_X_X_X_TIUPACKAGE
+{
+    ScreenTestSet = "TIUPACKAGE_S_H_A";
+    ScreenTestsFile = "./InputFiles/TiuId_ScreenTest.json";
+}
+
+CSharpTest PrimeTdrCalibrationTestMethod CTRL_X_TDRCAL_K_INIT_X_X_X_X_TDRCLIBRATION
+{
+    AlwaysExecute = "FALSE";
+    PinGroups = "all_tdr";
+    TdrHiLimit = "16.2E-9S";
+    TdrLoLimit = "2.2E-9S";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_INIT_X_X_X_X_TDRLOG
+{
+    BypassPort = toInteger(__shared__::SCVars.SC_TDRLOG);
+    Callback = "LogFile";
+    Parameters = "--directory D:/Calibration --file TDRFile_BB2T4H1P*.txt --altname TDR";
+    PostInstance = "WriteUserVar(--uservar __shared__::SCVars.SC_TDRLOG --value 1 --type String)";
+}
+
+CSharpTest PrimeTiuPowerSupplyContinuityTestMethod CTRL_X_XIUPOWERSUPPLY_K_INIT_X_X_X_X_XIUCONTINUITY
+{
+    LevelsTc = "TPI_XIU_XXX::all_tpi_xiucontinuity_x_x_pkg_level_force_0V_lvl";
+    HighLimit = __shared__::TpRule.If_DS0_DS1_M ("0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49", "0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49", "0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49", "0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49,0.49");
+    LowLimit = __shared__::TpRule.If_DS0_DS1_M ("-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49", "-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49", "-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49", "-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49,-0.49");
+    Pins = __shared__::TpRule.If_DS0_DS1_M(TPI_XIU_XXX::Continuity.s28c_continuity,TPI_XIU_XXX::Continuity.s52c_continuity, TPI_XIU_XXX::Continuity.hx28c_continuity, TPI_XIU_XXX::Continuity.s28c_continuity);
+}
+
+CSharpTest PrimeScreenTestTestMethod CTRL_X_SCREEN_K_INIT_X_X_X_X_TIUTYPE
+{
+    ScreenTestSet = "TIU_HVM_DBG";
+    ScreenTestsFile = "./InputFiles/TiuId_ScreenTest.json";
+}
+
+CSharpTest PrimeTiuSignalPinLeakageTestMethod CTRL_X_XIUPINLEAKGE_K_INIT_X_X_X_X_XIUHVMLEAKAGE
+{
+    LevelsTc = "TPI_XIU_XXX::all_tpi_xiuleakage_x_s28c_hvm_level_force_0V_lvl";
+    BypassPort = __shared__::TpRule.If_DS0_DS1_M (-1,1,-1,1);
+    HighLimit = "0.0000069";
+    LowLimit = "-0.00000489";
+    Pins = __shared__::TpRule.If_DS0_DS1_M("pkg_dpin_nvl_s28c_hvm_leakage","pkg_dpin_nvl_s52c_hvm_leakage", "pkg_dpin_nvl_hx28c_hvm_leakage", "pkg_dpin_nvl_s28c_hvm_leakage");
+}
+
+CSharpTest PrimeTiuSignalPinLeakageTestMethod CTRL_X_XIUPINLEAKGE_K_INIT_X_X_X_X_XIUDBGLEAKAGE
+{
+    LevelsTc = "TPI_XIU_XXX::all_tpi_xiuleakage_x_s28c_dbg_level_force_0V_lvl";
+    BypassPort = __shared__::TpRule.If_DS0_DS1_M (-1,1,-1,1);
+    HighLimit = "0.0000069";
+    LowLimit = "-0.00000489";
+    Pins = __shared__::TpRule.If_DS0_DS1_M("pkg_dpin_nvl_s28c_dbg_leakage","pkg_dpin_nvl_s52c_dbg_leakage", "pkg_dpin_nvl_hx28c_dbg_leakage", "pkg_dpin_nvl_s28c_dbg_leakage");
+}
+
+CSharpTest UserCodeTC CTRL_X_USERCODE_K_INIT_X_X_X_X_CLKCHIPINIT
+{
+    InputFile = "./InputFiles/ClkChipInit.cs";
+    Method = "Main";
+    NamespaceClass = "TPI.ClkChipInit";
+}
+
+CSharpTest PrimeFunctionalTestMethod CTRL_X_USERCODE_K_PKGFF_X_X_X_X_CLKCHIPREAD
+{
+    Patlist = "IPP::mtpi_rtc_clkchip_val_hvm_list";
+    LevelsTc = "IPP::PCD_IP_BASE::pcd_all_bf_x_x_ipp_lvl_min";
+    TimingsTc = "IPP::PCD_IP_BASE::pcd_fun_timing_mts800_tstprtclk400_tck100";
+    BypassPort = 1;
+    FailuresToCapturePerPattern = 10;
+    FailuresToCaptureTotal = 10;
+    FunctionalTestPlugin = "FrequencyMeasurePlugin";
+    FunctionalTestPluginInput = GetEnvironmentVariable("~HDMT_TPL_DIR")+ "/Shared/Modules/TPI/TPI_XIU_XXX/InputFiles/ClkChipFreqMeasure.json";
+    LogLevel = "Enabled";
+    MaxFailuresPerPatternToItuff = 10;
+    MaxFailuresToItuff = 10;
+    ProcessFailuresPlugin = "Prime.Plugins.Functional.FailuresToDatalog";
+}
+
+CSharpTest AuxiliaryTC CTRL_X_USERCODE_K_PKGFF_X_X_X_X_CLKCHIPCHECK
+{
+    BypassPort = 1;
+    DataType = "Double";
+    Datalog = "Enabled";
+    Expression = "[G.U.D.PCD_ClkChipOutputMonitor_FREQ]";
+    ResultPort = "[R]<3.9 || [R]>4.1 ? 0 : 1";
+    Storage = "SharedStorage";
+}
+
+Flow TPI_XIU_XXX_INIT
+{
+    FlowItem CTRL_X_PWRDWN_K_INIT_X_X_X_X_SET_DEFAULT_RELAY CTRL_X_PWRDWN_K_INIT_X_X_X_X_SET_DEFAULT_RELAY
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150000_fail_TPI_XIU_XXX_CTRL_X_PWRDWN_K_INIT_X_X_X_X_SET_DEFAULT_RELAY_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150000_fail_TPI_XIU_XXX_CTRL_X_PWRDWN_K_INIT_X_X_X_X_SET_DEFAULT_RELAY_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_PWR_K_INIT_X_X_X_X_PWRUPTCDC;
+        }
+    }
+    
+    FlowItem CTRL_X_PWR_K_INIT_X_X_X_X_PWRUPTCDC CTRL_X_PWR_K_INIT_X_X_X_X_PWRUPTCDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150001_fail_TPI_XIU_XXX_CTRL_X_PWR_K_INIT_X_X_X_X_PWRUPTCDC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150001_fail_TPI_XIU_XXX_CTRL_X_PWR_K_INIT_X_X_X_X_PWRUPTCDC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_TESTERSCREEN_K_INIT_X_X_X_X_XIUBYPASS;
+        }
+    }
+    
+    FlowItem CTRL_X_TESTERSCREEN_K_INIT_X_X_X_X_XIUBYPASS CTRL_X_TESTERSCREEN_K_INIT_X_X_X_X_XIUBYPASS
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150007_fail_TPI_XIU_XXX_CTRL_X_TESTERSCREEN_K_INIT_X_X_X_X_XIUBYPASS_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150007_fail_TPI_XIU_XXX_CTRL_X_TESTERSCREEN_K_INIT_X_X_X_X_XIUBYPASS_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_XIUIDENTITY_K_INIT_X_X_X_X_XIUNAME;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_XIUIDENTITY_K_INIT_X_X_X_X_XIUNAME;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_XIUIDENTITY_K_INIT_X_X_X_X_XIUNAME;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_XIUIDENTITY_K_INIT_X_X_X_X_XIUNAME;
+        }
+        Result 4
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_XIUIDENTITY_K_INIT_X_X_X_X_XIUNAME;
+        }
+        Result 5
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+    FlowItem CTRL_X_XIUIDENTITY_K_INIT_X_X_X_X_XIUNAME CTRL_X_XIUIDENTITY_K_INIT_X_X_X_X_XIUNAME
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150011_fail_TPI_XIU_XXX_CTRL_X_XIUIDENTITY_K_INIT_X_X_X_X_XIUNAME_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150011_fail_TPI_XIU_XXX_CTRL_X_XIUIDENTITY_K_INIT_X_X_X_X_XIUNAME_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_SCREEN_K_INIT_X_X_X_X_TIUID;
+        }
+    }
+    
+    FlowItem CTRL_X_SCREEN_K_INIT_X_X_X_X_TIUID CTRL_X_SCREEN_K_INIT_X_X_X_X_TIUID
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150003_fail_TPI_XIU_XXX_CTRL_X_SCREEN_K_INIT_X_X_X_X_TIUID_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150003_fail_TPI_XIU_XXX_CTRL_X_SCREEN_K_INIT_X_X_X_X_TIUID_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_SCREEN_K_INIT_X_X_X_X_TIUPACKAGE;
+        }
+    }
+    
+    FlowItem CTRL_X_SCREEN_K_INIT_X_X_X_X_TIUPACKAGE CTRL_X_SCREEN_K_INIT_X_X_X_X_TIUPACKAGE
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150004_fail_TPI_XIU_XXX_CTRL_X_SCREEN_K_INIT_X_X_X_X_TIUPACKAGE_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150004_fail_TPI_XIU_XXX_CTRL_X_SCREEN_K_INIT_X_X_X_X_TIUPACKAGE_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_TDRCAL_K_INIT_X_X_X_X_TDRCLIBRATION;
+        }
+    }
+    
+    FlowItem CTRL_X_TDRCAL_K_INIT_X_X_X_X_TDRCLIBRATION CTRL_X_TDRCAL_K_INIT_X_X_X_X_TDRCLIBRATION
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150006_fail_TPI_XIU_XXX_CTRL_X_TDRCAL_K_INIT_X_X_X_X_TDRCLIBRATION_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150006_fail_TPI_XIU_XXX_CTRL_X_TDRCAL_K_INIT_X_X_X_X_TDRCLIBRATION_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_INIT_X_X_X_X_TDRLOG;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_INIT_X_X_X_X_TDRLOG CTRL_X_RUNCALLBACK_K_INIT_X_X_X_X_TDRLOG
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150002_fail_TPI_XIU_XXX_CTRL_X_RUNCALLBACK_K_INIT_X_X_X_X_TDRLOG_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150002_fail_TPI_XIU_XXX_CTRL_X_RUNCALLBACK_K_INIT_X_X_X_X_TDRLOG_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_XIUPOWERSUPPLY_K_INIT_X_X_X_X_XIUCONTINUITY;
+        }
+    }
+    
+    FlowItem CTRL_X_XIUPOWERSUPPLY_K_INIT_X_X_X_X_XIUCONTINUITY CTRL_X_XIUPOWERSUPPLY_K_INIT_X_X_X_X_XIUCONTINUITY
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150014_fail_TPI_XIU_XXX_CTRL_X_XIUPOWERSUPPLY_K_INIT_X_X_X_X_XIUCONTINUITY_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150014_fail_TPI_XIU_XXX_CTRL_X_XIUPOWERSUPPLY_K_INIT_X_X_X_X_XIUCONTINUITY_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_SCREEN_K_INIT_X_X_X_X_TIUTYPE;
+        }
+    }
+    
+    FlowItem CTRL_X_SCREEN_K_INIT_X_X_X_X_TIUTYPE CTRL_X_SCREEN_K_INIT_X_X_X_X_TIUTYPE
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150005_fail_TPI_XIU_XXX_CTRL_X_SCREEN_K_INIT_X_X_X_X_TIUTYPE_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150005_fail_TPI_XIU_XXX_CTRL_X_SCREEN_K_INIT_X_X_X_X_TIUTYPE_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_XIUPINLEAKGE_K_INIT_X_X_X_X_XIUHVMLEAKAGE;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_XIUPINLEAKGE_K_INIT_X_X_X_X_XIUDBGLEAKAGE;
+        }
+    }
+    
+    FlowItem CTRL_X_XIUPINLEAKGE_K_INIT_X_X_X_X_XIUHVMLEAKAGE CTRL_X_XIUPINLEAKGE_K_INIT_X_X_X_X_XIUHVMLEAKAGE
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150013_fail_TPI_XIU_XXX_CTRL_X_XIUPINLEAKGE_K_INIT_X_X_X_X_XIUHVMLEAKAGE_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150013_fail_TPI_XIU_XXX_CTRL_X_XIUPINLEAKGE_K_INIT_X_X_X_X_XIUHVMLEAKAGE_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_USERCODE_K_INIT_X_X_X_X_CLKCHIPINIT;
+        }
+    }
+    
+    FlowItem CTRL_X_XIUPINLEAKGE_K_INIT_X_X_X_X_XIUDBGLEAKAGE CTRL_X_XIUPINLEAKGE_K_INIT_X_X_X_X_XIUDBGLEAKAGE
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150012_fail_TPI_XIU_XXX_CTRL_X_XIUPINLEAKGE_K_INIT_X_X_X_X_XIUDBGLEAKAGE_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150012_fail_TPI_XIU_XXX_CTRL_X_XIUPINLEAKGE_K_INIT_X_X_X_X_XIUDBGLEAKAGE_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_USERCODE_K_INIT_X_X_X_X_CLKCHIPINIT;
+        }
+    }
+    
+    FlowItem CTRL_X_USERCODE_K_INIT_X_X_X_X_CLKCHIPINIT CTRL_X_USERCODE_K_INIT_X_X_X_X_CLKCHIPINIT
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150008_fail_TPI_XIU_XXX_CTRL_X_USERCODE_K_INIT_X_X_X_X_CLKCHIPINIT_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150008_fail_TPI_XIU_XXX_CTRL_X_USERCODE_K_INIT_X_X_X_X_CLKCHIPINIT_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow TPI_XIU_XXX_PKGFF
+{
+    FlowItem CTRL_X_USERCODE_K_PKGFF_X_X_X_X_CLKCHIPREAD CTRL_X_USERCODE_K_PKGFF_X_X_X_X_CLKCHIPREAD
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150010_fail_TPI_XIU_XXX_CTRL_X_USERCODE_K_PKGFF_X_X_X_X_CLKCHIPREAD_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150010_fail_TPI_XIU_XXX_CTRL_X_USERCODE_K_PKGFF_X_X_X_X_CLKCHIPREAD_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b15890001_fail_TPI_XIU_XXX_CTRL_X_USERCODE_K_PKGFF_X_X_X_X_CLKCHIPREAD_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_USERCODE_K_PKGFF_X_X_X_X_CLKCHIPCHECK;
+        }
+    }
+    
+    FlowItem CTRL_X_USERCODE_K_PKGFF_X_X_X_X_CLKCHIPCHECK CTRL_X_USERCODE_K_PKGFF_X_X_X_X_CLKCHIPCHECK
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99150009_fail_TPI_XIU_XXX_CTRL_X_USERCODE_K_PKGFF_X_X_X_X_CLKCHIPCHECK_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98150009_fail_TPI_XIU_XXX_CTRL_X_USERCODE_K_PKGFF_X_X_X_X_CLKCHIPCHECK_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b15890000_fail_TPI_XIU_XXX_CTRL_X_USERCODE_K_PKGFF_X_X_X_X_CLKCHIPCHECK_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}

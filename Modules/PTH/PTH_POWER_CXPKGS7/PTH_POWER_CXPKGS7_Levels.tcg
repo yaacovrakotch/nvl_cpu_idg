@@ -1,0 +1,111 @@
+Version 1.0;
+
+
+SpecificationSet cpu_pth_sicc_0p70_24A_lvl_PTH (trigger)
+{
+	Voltage p_vbump_val_ia = 700mV;
+}
+
+TestConditionGroup cpu_pth_sicc_0p70_24A_lvl_TCG
+{
+	SpecificationSet = cpu_pth_sicc_0p70_24A_lvl_PTH;
+	Level = PTH_POWER_CXPKGS7::cpu_pth_sicc_0p70_24A_lvl;
+}
+
+TestCondition cpu_pth_sicc_0p70_24A_lvl_trigger
+{
+	TestConditionGroup  = cpu_pth_sicc_0p70_24A_lvl_TCG;
+	Selector = trigger;
+}
+
+SpecificationSet cpu_pth_sicc_0p95_24A_lvl_PTH (trigger)
+{
+	Voltage p_vbump_val_ia = 950mV;
+}
+
+TestConditionGroup cpu_pth_sicc_0p95_24A_lvl_TCG
+{
+	SpecificationSet = cpu_pth_sicc_0p95_24A_lvl_PTH;
+	Level = PTH_POWER_CXPKGS7::cpu_pth_sicc_0p95_24A_lvl;
+}
+
+TestCondition cpu_pth_sicc_0p95_24A_lvl_trigger
+{
+	TestConditionGroup  = cpu_pth_sicc_0p95_24A_lvl_TCG;
+	Selector = trigger;
+}
+
+SpecificationSet power_dwn_step_lvl_PARAMS (nom)
+{
+}
+
+TestConditionGroup power_dwn_step_lvl_TCG
+{
+	SpecificationSet = power_dwn_step_lvl_PARAMS;
+	Level = PTH_POWER_CXPKGS7::power_dwn_step_lvl;
+}
+
+TestCondition power_dwn_step_lvl
+{
+	TestConditionGroup = power_dwn_step_lvl_TCG;
+	Selector = nom;
+}
+
+SpecificationSet  PWR_VCCIA_0P70V (max, min, nom) Inherits CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC
+{
+	Voltage p_vccia_spec = 0.7V;
+}
+
+SpecificationSet  PWR_VCCIA_0P95V (max, min, nom) Inherits CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC
+{
+	Voltage p_vccia_spec = 0.95V;
+}
+
+TestConditionGroup PWR_VCCIA_0P70V_TCG #NOCLEAN
+{
+	SpecificationSet = PWR_VCCIA_0P70V;
+	Level = CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl;
+}
+
+TestConditionGroup PWR_VCCIA_0P95V_TCG #NOCLEAN
+{
+	SpecificationSet = PWR_VCCIA_0P95V;
+	Level = CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl;
+}
+
+TestCondition PWR_VCCIA_0P70V_MIN
+{
+	TestConditionGroup  = PWR_VCCIA_0P70V_TCG;
+	Selector = min;
+}
+
+TestCondition PWR_VCCIA_0P70V_NOM
+{
+	TestConditionGroup  = PWR_VCCIA_0P70V_TCG;
+	Selector = nom;
+}
+
+TestCondition PWR_VCCIA_0P70V_MAX
+{
+	TestConditionGroup  = PWR_VCCIA_0P70V_TCG;
+	Selector = max;
+}
+
+TestCondition PWR_VCCIA_0P95V_MIN
+{
+	TestConditionGroup  = PWR_VCCIA_0P95V_TCG;
+	Selector = min;
+}
+
+TestCondition PWR_VCCIA_0P95V_NOM
+{
+	TestConditionGroup  = PWR_VCCIA_0P95V_TCG;
+	Selector = nom;
+}
+
+TestCondition PWR_VCCIA_0P95V_MAX
+{
+	TestConditionGroup  = PWR_VCCIA_0P95V_TCG;
+	Selector = max;
+}
+

@@ -1,0 +1,52 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan TPI_MOTEST_XXX;
+
+
+# Test Counter Definition
+
+Counters
+{
+    n63500000_fail_CTRL_X_AUX_K_START_X_X_X_X_MOTEST_0
+} # End of Test Counter Definition
+
+CSharpTest AuxiliaryTC CTRL_X_AUX_K_START_X_X_X_X_MOTEST
+{
+    DataType = "Integer";
+    Expression = "1";
+    ResultPort = "1";
+}
+Flow TPI_MOTEST_XXX_START
+{
+    FlowItem CTRL_X_AUX_K_START_X_X_X_X_MOTEST CTRL_X_AUX_K_START_X_X_X_X_MOTEST
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b90990101_fail_FAIL_DPS_ALARM;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b90980101_fail_FAIL_SYSTEM_SOFTWARE;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b90934400_fail_TPI_FLWFLGS_PXX_CTRL_X_AUX_K_STARTPCDNOM_X_X_X_X_FLWSKP;
+            IncrementCounters TPI_MOTEST_XXX::n63500000_fail_CTRL_X_AUX_K_START_X_X_X_X_MOTEST_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+
+    
+}

@@ -1,0 +1,21 @@
+name: 'Clone CPU repo'
+description: 'Clone CPU repo'
+inputs:
+  cpurepo:
+    description: 'CPU repo to clone'
+    required: true
+    default: https://github.com/intel-restricted/nvl.cpu.git
+runs:
+  using: "composite"
+  steps:
+    - name: Clone CPU repo
+      run: |
+        git clone https://$GH_TOKEN@github.com/intel-restricted/nvl.cpu.git
+        cd nvl.cpu
+        git pull
+        git --no-pager log -n 1
+        cd ..
+        pwd
+      shell: PowerShell
+      env:
+        GH_TOKEN: ${{ secrets.CPU_TOKEN }}

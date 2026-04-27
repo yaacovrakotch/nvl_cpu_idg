@@ -1,0 +1,60 @@
+Version 1.0;
+
+UserVars ARR_CORE_CXPKGS9_Specs
+{
+	Const String ringfreq = "ringfreq_0";
+	Const String corefreq = "corefreq";
+	Const Integer RASTER_BYPASS = 1;
+	Const String CORE_PMTM_RecoveryModeDownbin = "Disabled";
+	Const String CORE_PMTM_RecoveryConfigurationFile = ""; # WIP - GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "/Modules/ARR_CORE/InputFiles/CoreRecoveryMap.json"
+	Array<String> Apex_Multipass = ["1110","1101","1011","0111"];
+	Const String FeatureSwitchNonMTT = "disable_masked_targets,fivr_mode_on";
+	Const String FeatureSwitchMTT = "disable_masked_targets,print_per_target_increments,print_scoreboard_counters,fivr_mode_on";
+	Const String DTSConfig = "nvl_cpu816_all";
+	Const String PatternMap = "9,10,11,12,13,14,15";
+	Const String CORE_PMUCS_VoltageTarget = "CCF1,CCF1,CCF1,CCF1,CCF,CCF,CCF,CCF";
+	Const String CORE_NonPMUCS_VoltageTarget = "CORE31,CORE21,CORE11,CORE01,CORE3,CORE2,CORE1,CORE0";
+	Const String dtsconfig_ctv = "ALL_CDIE_S52C";
+	Const String dtsconfig_noctv = "nvl_cpu_all_noctv";
+	Const String Recovery_PinMap = "CPU1_ARR_DCM_3,CPU1_ARR_DCM_2,CPU1_ARR_DCM_1,CPU1_ARR_DCM_0,ARR_DCM_3,ARR_DCM_2,ARR_DCM_1,ARR_DCM_0";
+	Const String ForwardingMode_EDC = "Input";
+	Const String ForwardingMode_Kill = "InputOutput";
+	Const String Recovery_Mode = "RecoveryPort";
+	Const String Recovery_Mode_Speedflow = "RecoveryPort";
+	Const String Recovery_Options = "CLASS_NVL_S52C_12C";
+	Const String CORE_RecoveryMode_VMAX = "Default";
+	Const String Recovery_Options_Speedflow = "";
+	Const String RecoveryTracker_Incoming = "CR_B,CR";
+	Const String RecoveryTracker_Outgoing = "CR_B,CR";
+	Const String RecoveryTracker_Outgoing_Speedflow = "CR_B,CR";
+	Const String VoltageConverter_rail = "--dlvrpins VCCIA --railconfigurations CDIE_CORE_NBLCTRL0 CDIE_CORE_NBLCTRL1 CDIE_CORE_NBLCTRL2 CDIE_CORE_NBLCTRL3 CDIE1_CORE_NBLCTRL0 CDIE1_CORE_NBLCTRL1 CDIE1_CORE_NBLCTRL2 CDIE1_CORE_NBLCTRL3 --expressions ";
+	Const String VoltageConverter_rail_noexp = "--dlvrpins VCCIA --railconfigurations CDIE_CORE_NBLCTRL0 CDIE_CORE_NBLCTRL1 CDIE_CORE_NBLCTRL2 CDIE_CORE_NBLCTRL3 CDIE1_CORE_NBLCTRL0 CDIE1_CORE_NBLCTRL1 CDIE1_CORE_NBLCTRL2 CDIE1_CORE_NBLCTRL3";
+	Const String nbl_off = "CORE:nblctrl_core_l2:nbloff,CORE:nblctrl1_core_l2:nbloff,CCF:nblctrl_ccf:ccfnbloff,CCF:nblctrl1_ccf:ccfnbloff";
+	Const String nbl_on = "CORE:nblctrl_core_l2:nblon,CORE:nblctrl1_core_l2:nblon,CCF:nblctrl_ccf:ccfnblon,CCF:nblctrl1_ccf:ccfnblon";
+	Const String FivrConditionNom = "NOM_CCF_CORE";
+	Const String Apex_CPU0_C0C1 = "CPU_TSTPRT_O_06,CPU_TSTPRT_O_07,CPU1_TSTPRT_O_04,CPU1_TSTPRT_O_05,CPU1_TSTPRT_O_06,CPU1_TSTPRT_O_07";
+	Const String Apex_CPU0_C2C3 = "CPU_TSTPRT_O_04,CPU_TSTPRT_O_05,CPU1_TSTPRT_O_04,CPU1_TSTPRT_O_05,CPU1_TSTPRT_O_06,CPU1_TSTPRT_O_07";
+	Const String Apex_CPU1_C0C1 = "CPU1_TSTPRT_O_06,CPU1_TSTPRT_O_07,CPU_TSTPRT_O_04,CPU_TSTPRT_O_05,CPU_TSTPRT_O_06,CPU_TSTPRT_O_07";
+	Const String Apex_CPU1_C2C3 = "CPU1_TSTPRT_O_04,CPU1_TSTPRT_O_05,CPU_TSTPRT_O_04,CPU_TSTPRT_O_05,CPU_TSTPRT_O_06,CPU_TSTPRT_O_07";
+	Const String Apex_CPU0 = "CR";
+	Const String Apex_CPU1 = "CR_B";
+	Const String RASTER_LIST = GetEnvironmentVariable("MCARR_PATMODIFY_PATH") + "\\NVLCPU_A\\RASTER\\MBIST\\MBIST_RASTER_list.json";
+	Const String RASTER_DIE1_LIST = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "\\Modules\\ARR\\ARR_COMMON_CKPKGS9\\InputFiles\\1Die\\MBIST_RASTER_list.json";
+	Const String RASTER_DIE2_LIST = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "\\Modules\\ARR\\ARR_COMMON_CKPKGS9\\InputFiles\\2Die\\MBIST_RASTER_list.json";
+	Const Integer RASTER_ENABLE = 1;
+}
+
+SelectorRuleCollection  ARR_CORE_Rules
+{
+	SelectorRule QA_HOT_Default (QA,HOT, Default)
+	{
+		QA => contains("[5M],[5S],[4M],[4S],[QQ],[QE],[QP],[QC],[QZ],[Q8]","[" + __shared__::SCVars.SC_ENGID + "]") && contains(__shared__::LocationSets.QA_S1,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		HOT => contains(__shared__::LocationSets.CH_CHVM + "," + __shared__::LocationSets.CH_CRV + "," + __shared__::LocationSets.CHM_ENG,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.RCHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Default;
+	}
+	SelectorRule RC_S1 (RC, Default)
+	{
+		RC => contains(__shared__::LocationSets.RC_S1,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Default;
+	}
+}

@@ -1,0 +1,19 @@
+Version 1.0;
+
+SpecificationSet cpu_all_bf_x_x_pkg_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE (max,min,nom) Inherits  __main__::cpu_all_bf_x_x_pkg_lvl_BFUNC
+{
+	Voltage c_cpu_all_tstprt_i_data_vox = 0.2;
+	Voltage c_cpu_all_tstprt_o_data_vox = 0.17;
+}
+
+TestConditionGroup cpu_all_bf_x_x_pkg_lvl_SCNUNCOREB0_OVERRIDE_TCG
+{
+	SpecificationSet = cpu_all_bf_x_x_pkg_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE;
+	Level =  __main__::cpu_all_bf_x_x_pkg_lvl;
+}
+
+TestCondition cpu_all_bf_x_x_pkg_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_max
+{
+	TestConditionGroup = cpu_all_bf_x_x_pkg_lvl_SCNUNCOREB0_OVERRIDE_TCG;
+	Selector = max;
+}

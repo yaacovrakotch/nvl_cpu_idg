@@ -1,0 +1,43 @@
+START_SCREEN:CoreFinalStatus
+#RunOn	: TestName  	: DataType  : ParamType 	: Param1                    		: Operation 	 : ParamType    : Param2 		: TmpStore : OnTrue  		: OnFalse
+# 4 Core
+EXEC  	: Test1a 	: STRING    : EXPRESSION	: G.U.S.DFFCHECK_SLICE like '00001111' :	-	 : -		: -			:    -	: 	ItuffPrint   	:  Test2a
+
+# 2 Core Recovery
+EXEC  	: Test2a 		: STRING    : EXPRESSION	: G.U.S.DFFCHECK_SLICE like '00??1111' 	:	-	 : -		: -				:    -	: 	DISABLEUPAIR   	:  Test2b
+EXEC  	: DISABLEUPAIR  : STRING    : GSDS			: U.S.DFFCHECK_SLICE				 	:	SET	 : LITERAL	: "00111111"	:    -	: 	ItuffPrint   		:  2
+EXEC  	: Test2b 		: STRING    : EXPRESSION	: G.U.S.DFFCHECK_SLICE like '??001111' 	:	-	 : -		: -				:    -	: 	DISABLELPAIR   	:  2
+EXEC  	: DISABLELPAIR  : STRING    : GSDS			: U.S.DFFCHECK_SLICE				 	:	SET	 : LITERAL	: "11001111"	:    -	: 	ItuffPrint   		:  2
+
+# Print to ituff
+EXEC 	: ItuffPrint	: -    	    : FUNCTION   	: EXECUSERFUNC(CPD_DEBUG!PrintToItuff, -body_type strgval -body_data G.U.S.DFFCHECK_SLICE)  	: - : - : - : - : 1 		:  2
+END_SCREEN  
+
+
+START_SCREEN:DisablePair2
+#RunOn	: TestName  	: DataType  : ParamType 	: Param1                    		: Operation 	 : ParamType    : Param2 		: TmpStore : OnTrue  		: OnFalse
+# 4 Core
+EXEC  	: Test1a 	: STRING    : EXPRESSION	: G.U.S.CumulativeBitVectorResult like '00001111' :	-	 : -		: -			:    -	: 	FULLPAIR   	:  Test2a
+EXEC  	: FULLPAIR  : STRING    : GSDS			: U.S.SLICEPAIRDISABLE				 	:	SET	 : LITERAL	: "00001111"	:    -	: 	1   		:  2
+
+# 2 Core Recovery
+EXEC  	: Test2a 		: STRING    : EXPRESSION	: G.U.S.CumulativeBitVectorResult like '00??1111' 	:	-	 : -		: -				:    -	: 	DISABLEUPAIR   	:  Test2b
+EXEC  	: DISABLEUPAIR  : STRING    : GSDS			: U.S.SLICEPAIRDISABLE				 	:	SET	 : LITERAL	: "00111111"	:    -	: 	1   		:  2
+EXEC  	: Test2b 		: STRING    : EXPRESSION	: G.U.S.CumulativeBitVectorResult like '??001111' 	:	-	 : -		: -				:    -	: 	DISABLELPAIR   	:  2
+EXEC  	: DISABLELPAIR  : STRING    : GSDS			: U.S.SLICEPAIRDISABLE				 	:	SET	 : LITERAL	: "11001111"	:    -	: 	1   		:  2
+
+END_SCREEN
+
+START_SCREEN:DisablePair
+#RunOn	: TestName  	: DataType  : ParamType 	: Param1                    		: Operation 	 : ParamType    : Param2 		: TmpStore : OnTrue  		: OnFalse
+# 4 Core
+EXEC  	: Test1a 	: STRING    : EXPRESSION	: G.U.S.SLICESTATUS like '00001111' :	-	 : -		: -			:    -	: 	FULLPAIR   	:  Test2a
+EXEC  	: FULLPAIR  : STRING    : GSDS			: U.S.SLICEPAIRDISABLE				 	:	SET	 : LITERAL	: "00001111"	:    -	: 	1   		:  2
+
+# 2 Core Recovery
+EXEC  	: Test2a 		: STRING    : EXPRESSION	: G.U.S.SLICESTATUS like '00??1111' 	:	-	 : -		: -				:    -	: 	DISABLEUPAIR   	:  Test2b
+EXEC  	: DISABLEUPAIR  : STRING    : GSDS			: U.S.SLICEPAIRDISABLE				 	:	SET	 : LITERAL	: "00111111"	:    -	: 	1   		:  2
+EXEC  	: Test2b 		: STRING    : EXPRESSION	: G.U.S.SLICESTATUS like '??001111' 	:	-	 : -		: -				:    -	: 	DISABLELPAIR   	:  2
+EXEC  	: DISABLELPAIR  : STRING    : GSDS			: U.S.SLICEPAIRDISABLE				 	:	SET	 : LITERAL	: "11001111"	:    -	: 	1   		:  2
+
+END_SCREEN

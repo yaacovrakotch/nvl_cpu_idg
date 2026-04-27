@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	This file enables the definition of the flexbom of a specific project/product.
+  Below we show a set of possible valid values.
+  
+  Bucket matrix path (FULL_UNC_PATH_TO_BUCKET_MATRIX_REVISION)
+	-> The bucket matrix path should be a full unc path referencing an existing location in the lava export
+     Example:
+			 * \\amr.corp.intel.com\ec\proj\mpe\Lava\Production\Releases\GNR_UCC_XCC\BucketMatrix\Bucketing_UCC_XCC_GROUP_Dummy\Release V1.0.0
+      
+  Hri (HRI_VALUE)
+  -> A 12 characters HRI with no spaces and a comma separated value list of boms.
+     Example:
+       * GNRUCCXCC123
+       
+  Boms (BOMS_ASSOCIATED)
+  -> A comma separated list of boms.
+     Example:
+      * NE4QCNCV_E,NE4QCNRV_E
+      * all
+      
+  Enabled Bins:
+  -> One or more enabled bins for a specific HRI. <allEnabled> can be used just one and without any other enabled bins defined. The olb_bin is the one from bucket matrix.
+     Example: 
+      <enabled olb_bin ="1"/>
+      <allEnabled/>
+-->
+<flexboms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <bucket_matrix path="\\amr.corp.intel.com\ec\proj\MPE\Lava\Production\Releases\NVL-S16C\BucketMatrix\NVL_S16C_A0_26WW12P1_ES2_BM\Release V2.0.0">
+    <flex_bom hri="NVLS16CDYN06" boms="674AAA2V_A,674AAA3V_A,674AAA5V_A" bg_name="CLASS_NVL_S16C">
+		<enabled olb_bin ="1"/>
+		<enabled olb_bin ="2"/>
+		<enabled olb_bin ="3"/>
+		<enabled olb_bin ="4"/>
+		<enabled olb_bin ="5"/>
+		<enabled olb_bin ="6"/>
+		<enabled olb_bin ="7"/>
+		<enabled olb_bin ="8"/>
+		<enabled olb_bin ="9"/>
+	</flex_bom>
+	<flex_bom hri="NVLS16CDYN07" boms="674AAA4V_A" bg_name="CLASS_NVL_S16C">
+		<enabled olb_bin ="7"/>
+		<enabled olb_bin ="9"/>
+	</flex_bom>
+	<flex_bom hri="NVLS16CSTA04" boms="674AAA2V_A,674AAA3V_A,674AAA4V_A,674AAA5V_A" bg_name="CLASS_NVL_S16C">
+		<enabled olb_bin ="10"/>
+	</flex_bom>
+	<flex_bom hri="NVLS16CES201" boms="674AAA2V_A,674AAA3V_A,674AAA5V_A" bg_name="CLASS_NVL_S16C">
+		<enabled olb_bin ="11"/>
+		<enabled olb_bin ="12"/>
+	</flex_bom>
+	<flex_bom hri="NVLS16CES202" boms="674AAA4V_A" bg_name="CLASS_NVL_S16C">
+		<enabled olb_bin ="12"/>
+	</flex_bom>
+  </bucket_matrix>
+</flexboms>
+<!--Created by nmoktar on 1/7/2026 10:19:52 PM-->

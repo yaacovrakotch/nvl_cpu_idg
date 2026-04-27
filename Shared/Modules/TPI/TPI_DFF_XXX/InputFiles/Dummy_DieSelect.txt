@@ -1,0 +1,23 @@
+START_SCREEN:DIESELECTDIE
+#RunOn ;  TestName  	; Data Type	; Param Type ; Param1   		                               ; Operation   ; Param Type	;	Param2  	             ; TmpStore  ;  OnTrue	   ; OnFalse
+EXEC   ; TEST0			; STRING    ; GLOBAL     ; __shared__::DieletIndicator.DIELET_INDICATOR    ; ==          ; LITERAL      ;    "GCD,HUB,PCD,CPU"       ; -         ; TEST1        ; 1
+EXEC   ; TEST1			; STRING    ; GLOBAL     ; __shared__::SCVars.SC_DIESLCT                   ; ==          ; LITERAL      ;    "NA"                    ; -         ; USRV9        ; TEST2
+EXEC   ; TEST2			; STRING    ; GLOBAL     ; __shared__::SCVars.SC_DIESLCT                   ; ==          ; LITERAL      ;    ""                      ; -         ; USRV9        ; TEST3
+EXEC   ; TEST3			; STRING    ; GLOBAL     ; __shared__::SCVars.SC_DIESLCT                   ; ==          ; LITERAL      ;    "SP"                    ; -         ; USRV4        ; TEST4
+EXEC   ; TEST4			; STRING    ; GLOBAL     ; __shared__::SCVars.SC_DIESLCT                   ; ==          ; LITERAL      ;    "EP"                    ; -         ; USRV8        ; TEST5
+EXEC   ; TEST5			; STRING    ; GLOBAL     ; __shared__::SCVars.SC_DIESLCT                   ; ==          ; LITERAL      ;    "SC"                    ; -         ; USRV1        ; TEST6
+EXEC   ; TEST6			; STRING    ; GLOBAL     ; __shared__::SCVars.SC_DIESLCT                   ; ==          ; LITERAL      ;    "SG"                    ; -         ; USRV2        ; TEST7
+EXEC   ; TEST7			; STRING    ; GLOBAL     ; __shared__::SCVars.SC_DIESLCT                   ; ==          ; LITERAL      ;    "SH"                    ; -         ; USRV3        ; TEST8
+EXEC   ; TEST8			; STRING    ; GLOBAL     ; __shared__::SCVars.SC_DIESLCT                   ; ==          ; LITERAL      ;    "EC"                    ; -         ; USRV5        ; TEST9
+EXEC   ; TEST9			; STRING    ; GLOBAL     ; __shared__::SCVars.SC_DIESLCT                   ; ==          ; LITERAL      ;    "EG"                    ; -         ; USRV6        ; TEST10
+EXEC   ; TEST10			; STRING    ; GLOBAL     ; __shared__::SCVars.SC_DIESLCT                   ; ==          ; LITERAL      ;    "EH"                    ; -         ; USRV7        ; 1
+EXEC   ; USRV1          ; STRING    ; GLOBAL     ; __shared__::DieletIndicator.DIELET_INDICATOR    ; SET         ; LITERAL      ;   "CPU"                    ; -         ; 1            ; 2
+EXEC   ; USRV2          ; STRING    ; GLOBAL     ; __shared__::DieletIndicator.DIELET_INDICATOR    ; SET         ; LITERAL      ;   "GCD"                    ; -         ; 1            ; 2
+EXEC   ; USRV3          ; STRING    ; GLOBAL     ; __shared__::DieletIndicator.DIELET_INDICATOR    ; SET         ; LITERAL      ;   "HUB"                    ; -         ; 1            ; 2
+EXEC   ; USRV4          ; STRING    ; GLOBAL     ; __shared__::DieletIndicator.DIELET_INDICATOR    ; SET         ; LITERAL      ;   "PCD"                    ; -         ; 1            ; 2
+EXEC   ; USRV5          ; STRING    ; GLOBAL     ; __shared__::DieletIndicator.DIELET_INDICATOR    ; SET         ; LITERAL      ;   "GCD,HUB,PCD"            ; -         ; 1            ; 2
+EXEC   ; USRV6          ; STRING    ; GLOBAL     ; __shared__::DieletIndicator.DIELET_INDICATOR    ; SET         ; LITERAL      ;   "CPU,HUB,PCD"            ; -         ; 1            ; 2
+EXEC   ; USRV7          ; STRING    ; GLOBAL     ; __shared__::DieletIndicator.DIELET_INDICATOR    ; SET         ; LITERAL      ;   "CPU,GCD,PCD"            ; -         ; 1            ; 2
+EXEC   ; USRV8          ; STRING    ; GLOBAL     ; __shared__::DieletIndicator.DIELET_INDICATOR    ; SET         ; LITERAL      ;   "CPU,GCD,HUB"            ; -         ; 1            ; 2
+EXEC   ; USRV9          ; STRING    ; GLOBAL     ; __shared__::DieletIndicator.DIELET_INDICATOR    ; SET         ; LITERAL      ;   "GCD,HUB,PCD,CPU"        ; -         ; 1            ; 2
+END_SCREEN

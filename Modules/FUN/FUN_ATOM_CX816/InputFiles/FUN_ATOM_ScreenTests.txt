@@ -1,0 +1,4 @@
+START_SCREEN:FUN_ATOM_SCREEN_SingleFlow
+#RunOn	: TestName  		: DataType  : ParamType 	: Param1												       	 	: Oper.		: ParamType 	: Param2		: TmpStore		: OnTrue    		: OnFalse
+EXEC    : GetATOMSTATUS       : STRING   : EXPRESSION : ExecCallback('CopyTracker', '--tracker=ACRM3,ACRM2,ACRM1,ACRM0 --gsds=G.U.S.ATOMSTATUS')	: 	- 		: - 			: - 			: - 		: CheckFull 	: CheckFull
+EXEC    : CheckFull           : STRING   : SHAREDSTORAGE : G.U.S.ATOMSTATUS													: 	== 		: LITERAL 		: "0000" 		: - 		    : 1	        : 0

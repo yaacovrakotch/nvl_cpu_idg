@@ -1,0 +1,36 @@
+Version 1.0;
+
+UserVars FUN_CCF_CXPKGS9_SPECS
+{
+	Const String MLC_Pin_Map = "CORE3,CORE2,CORE1,CORE0";
+	Const String MLC_C68_Pin_Map = "CORE_3,CORE_2,CORE_1,CORE_0";
+	Const String MLC_Recovery_Options = "0000,0001,0010,0100,1000";
+	Const String MLC_Recovery_Tracking = "CR";
+	Const String SLC_Pin_Map = "CORE3,CORE2,CORE1,CORE0";
+	Const String SLC_C68_Pin_Map = "CORE_3,CORE_2,CORE_1,CORE_0";
+	Const String SLC_Recovery_Options = "0000,0001,0010,0100,1000";
+	Const String SLC_Recovery_Tracking = "CR";
+	Const String FC_Recovery_Tracking = "SLC0_B,SLC0";
+	Const String FC_Recovery_Options = "CLASS_NVL_S52C_12C";
+	Const String FC_Pin_Map = "FUN_CCF_2CDIE";
+    Const Integer Fail_Capture_Count = 20;
+	Const String PatNameIndex = "9,10,11,12,13,14,15";
+	Const String corefreq = "corefreq";
+	Const String ringfreq = "ringfreq_0";
+	Integer BYPASS_DCM0123 = 0;
+	Integer BYPASS_DCM0 = 1;
+	Integer BYPASS_DCM1 = 1;
+	Integer BYPASS_DCM2 = 1;
+	Integer BYPASS_DCM3 = 1;
+	Const String MCfunCCF_FMIN_DRVMASK = "MCfunCCF:FUNCCF_DRVpatmod:FUNCCF_MASK";
+	Const String MCfunCCF_FMIN_DRVUNMASK = "MCfunCCF:FUNCCF_DRVpatmod:FUNCCF_UNMASK";
+	Const String VoltageTarget1Cdie = "CCF";
+	Const String VoltageTarget2Cdie = "CCF1,CCF";
+	Const String ApexTC_1CDIE_Targets = "CCF_FUNCCF";
+	Const String ApexTC_2CDIE_Targets = "CCF1_FUNCCF,CCF_FUNCCF";
+	Const String ApexTC_1CDIE_ExportTokens = "FXCCF";
+	Const String ApexTC_2CDIE_ExportTokens = "FXCCF1,FXCCF";
+
+	# Var use to setup FC config before test
+	String UncoreConfigPreinstance = "EvaluateExpression(--expression 'MOV 0,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),ExecutePatConfigSetPoint(MCfunCCF:uncore_config:8C_DCM0123_UC_SETUP)";
+}

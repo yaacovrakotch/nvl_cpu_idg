@@ -1,0 +1,629 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan SCN_UNCORE_CKPKGS9;
+
+Import "SCN_UNCORE_CKPKGS9.usrv";
+Import "SCN_UNCORE_CKPKGS9_Levels.tcg";
+
+# Test Counter Definition
+
+Counters
+{
+    n41412980_fail_CTRL_X_PATMOD_K_INIT_X_X_X_X_GLOBAL_INIT_0,
+    n42192980_fail_STUCKAT_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_5,
+    n42412980_fail_STUCKAT_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X_0,
+    n42412981_fail_STUCKAT_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X_2,
+    n42422980_fail_ATSPEED_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X_0,
+    n42422981_fail_ATSPEED_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X_2,
+    n42432980_fail_CHAIN_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X_0,
+    n42432981_fail_CHAIN_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X_2,
+    n42442980_fail_STUCKAT_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_0,
+    n42442981_fail_STUCKAT_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_2,
+    n42452980_fail_ATSPEED_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_2,
+    n47192980_fail_ATSPEED_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_5,
+    n47412980_fail_ATSPEED_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_0,
+    n97422980_fail_STUCKAT_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_4,
+    n97472980_fail_ATSPEED_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_4
+} # End of Test Counter Definition
+
+CSharpTest PrimePatConfigTestMethod CTRL_X_PATMOD_K_INIT_X_X_X_X_GLOBAL_INIT
+{
+    BypassPort = -1;
+    ConfigurationFile = "./inputfiles/SCN_UNCORE_INIT.setpoints.json";
+    SetPoint = "scanuncorepatmod";
+    SetPointsPreInstance = "";
+}
+
+CSharpTest DDGShmooTC STUCKAT_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X
+{
+    Patlist = "IPC::scn_cdie_begin_atpg_edt_classhvm_list";
+    LevelsTc = "SCN_UNCORE_CKPKGS9::cpu_all_bf_x_x_pkg_lvl_CPU_BFUNC_SCNUNCORE_OVERRIDE_max";
+    TimingsTc = SCN_UNCORE_CKPKGS9_Specs.timingRules;
+    BypassPort = 1;
+    LogLevel = "Enabled";
+    PrintFormat = "ShmooHub";
+    SetPointsPlistMode = "Local";
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPreInstance = "MCdrv:ringfreq_0:"+__shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz";
+    VoltageConverter = "";
+    XAxisParam = "p_all_mts";
+    XAxisParamType = "UserDefined";
+    XAxisRange = "600e6:100e6:5";
+    XAxisType = "SpecSetVariable";
+    YAxisParam = "p_vnnaon_spec";
+    YAxisParamType = "UserDefined";
+    YAxisRange = "1.2:-0.1:10";
+    YAxisType = "SpecSetVariable";
+}
+
+CSharpTest DDGShmooTC ATSPEED_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X
+{
+    Patlist = "IPC::scn_cdie_begin_trans_edt_classhvm_list";
+    LevelsTc = "SCN_UNCORE_CKPKGS9::cpu_all_bf_x_x_pkg_lvl_CPU_BFUNC_SCNUNCORE_OVERRIDE_max";
+    TimingsTc = SCN_UNCORE_CKPKGS9_Specs.timingRules;
+    BypassPort = 1;
+    LogLevel = "Enabled";
+    PrintFormat = "ShmooHub";
+    SetPointsPlistMode = "Local";
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPreInstance = "MCdrv:ringfreq_0:"+__shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz";
+    VoltageConverter = "";
+    XAxisParam = "p_all_mts";
+    XAxisParamType = "UserDefined";
+    XAxisRange = "600e6:100e6:5";
+    XAxisType = "SpecSetVariable";
+    YAxisParam = "p_vnnaon_spec";
+    YAxisParamType = "UserDefined";
+    YAxisRange = "1.2:-0.1:10";
+    YAxisType = "SpecSetVariable";
+}
+
+CSharpTest DDGShmooTC CHAIN_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X
+{
+    Patlist = "IPC::scn_cdie_begin_chain_edt_classhvm_list";
+    LevelsTc = "SCN_UNCORE_CKPKGS9::cpu_all_bf_x_x_pkg_lvl_CPU_BFUNC_SCNUNCORE_OVERRIDE_max";
+    TimingsTc = SCN_UNCORE_CKPKGS9_Specs.timingRules;
+    BypassPort = 1;
+    LogLevel = "Enabled";
+    PrintFormat = "ShmooHub";
+    SetPointsPlistMode = "Local";
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPreInstance = "MCdrv:ringfreq_0:"+__shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz";
+    VoltageConverter = "";
+    XAxisParam = "p_all_mts";
+    XAxisParamType = "UserDefined";
+    XAxisRange = "600e6:100e6:5";
+    XAxisType = "SpecSetVariable";
+    YAxisParam = "p_vnnaon_spec";
+    YAxisParamType = "UserDefined";
+    YAxisRange = "1.2:-0.1:10";
+    YAxisType = "SpecSetVariable";
+}
+
+CSharpTest VminTC STUCKAT_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL
+{
+    Patlist = "IPC::scn_cdie_begin_atpg_edt_classhvm_all_list";
+    LevelsTc = "SCN_UNCORE_CKPKGS9::cpu_all_bf_x_x_pkg_lvl_CPU_BFUNC_SCNUNCORE_OVERRIDE_max";
+    TimingsTc = SCN_UNCORE_CKPKGS9_Specs.timingRules;
+    BaseNumbers = "13666";
+    BypassPort = -1;
+    EndVoltageLimits = "0.9";
+    ExecutionMode = "SearchWithScoreboard";
+    FailCaptureCount = 999;
+    FeatureSwitchSettings = "fivr_mode_on,disable_masked_targets,print_per_target_increments,print_scoreboard_counters";
+    FivrCondition = "NOM_CCF";
+    ForwardingMode = "None";
+    LogLevel = "Disabled";
+    MaxFailsNum = toInteger(__shared__:: Specs.VMX_MAX_FAILS);
+    PatternNameCounterIndexes = "1,2,3,4,5,6,7";
+    PinMap = "";
+    PostInstance = "";
+    PreInstance = "";
+    RecoveryMode = "Default";
+    RecoveryOptions = "";
+    RecoveryTrackingIncoming = "";
+    RecoveryTrackingOutgoing = "";
+    ScoreboardEdgeTicks = toInteger(__shared__:: Specs.VMX_EDGE_TICK);
+    SetPointsPlistMode = "Local";
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPostInstance = "";
+    SetPointsPreInstance = "MCdrv:ringfreq_0:"+__shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz";
+    StartVoltages = "0.9";
+    StepSize = 0.01;
+    TestMode = "Scoreboard";
+    VoltageTargets = "CCF1,CCF";
+}
+
+CSharpTest VminTC ATSPEED_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL
+{
+    Patlist = "IPC::scn_cdie_begin_trans_edt_classhvm_list";
+    LevelsTc = "SCN_UNCORE_CKPKGS9::cpu_all_bf_x_x_pkg_lvl_CPU_BFUNC_SCNUNCORE_OVERRIDE_max";
+    TimingsTc = SCN_UNCORE_CKPKGS9_Specs.timingRules;
+    BaseNumbers = "13667";
+    BypassPort = -1;
+    EndVoltageLimits = "0.9";
+    ExecutionMode = "SearchWithScoreboard";
+    FailCaptureCount = 999;
+    FeatureSwitchSettings = "fivr_mode_on,disable_masked_targets,print_per_target_increments,print_scoreboard_counters";
+    FivrCondition = "NOM_CCF";
+    ForwardingMode = "None";
+    LogLevel = "Disabled";
+    MaxFailsNum = toInteger(__shared__:: Specs.VMX_MAX_FAILS);
+    PatternNameCounterIndexes = "1,2,3,4,5,6,7";
+    PinMap = "";
+    PostInstance = "";
+    PreInstance = "";
+    RecoveryMode = "Default";
+    RecoveryOptions = "";
+    RecoveryTrackingIncoming = "";
+    RecoveryTrackingOutgoing = "";
+    ScoreboardEdgeTicks = toInteger(__shared__:: Specs.VMX_EDGE_TICK);
+    SetPointsPlistMode = "Local";
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPostInstance = "";
+    SetPointsPreInstance = "MCdrv:ringfreq_0:"+__shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz";
+    StartVoltages = "0.9";
+    StepSize = 0.01;
+    TestMode = "Scoreboard";
+    VoltageTargets = "CCF1,CCF";
+}
+
+CSharpTest VminTC CHAIN_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL
+{
+    Patlist = "IPC::scn_cdie_begin_chain_edt_classhvm_all_list";
+    LevelsTc = "SCN_UNCORE_CKPKGS9::cpu_all_bf_x_x_pkg_lvl_CPU_BFUNC_SCNUNCORE_OVERRIDE_max";
+    TimingsTc = SCN_UNCORE_CKPKGS9_Specs.timingRules;
+    BaseNumbers = "13668";
+    BypassPort = -1;
+    EndVoltageLimits = "0.9";
+    ExecutionMode = "SearchWithScoreboard";
+    FailCaptureCount = 999;
+    FeatureSwitchSettings = "fivr_mode_on,disable_masked_targets,print_per_target_increments,print_scoreboard_counters";
+    FivrCondition = "NOM_CCF";
+    ForwardingMode = "None";
+    LogLevel = "Disabled";
+    MaxFailsNum = toInteger(__shared__:: Specs.VMX_MAX_FAILS);
+    PatternNameCounterIndexes = "1,2,3,4,5,6,7";
+    PinMap = "";
+    PostInstance = "";
+    PreInstance = "";
+    RecoveryMode = "Default";
+    RecoveryOptions = "";
+    RecoveryTrackingIncoming = "";
+    RecoveryTrackingOutgoing = "";
+    ScoreboardEdgeTicks = toInteger(__shared__:: Specs.VMX_EDGE_TICK);
+    SetPointsPlistMode = "Local";
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPostInstance = "";
+    SetPointsPreInstance = "MCdrv:ringfreq_0:"+__shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz";
+    StartVoltages = "0.9";
+    StepSize = 0.01;
+    TestMode = "Scoreboard";
+    VoltageTargets = "CCF1,CCF";
+}
+
+CSharpTest ScreenTC CTRL_X_SCREEN_K_BEGINCPUPKG_X_X_X_X_RESET_GSDS
+{
+    BypassPort = 1;
+    ScreenTestSet = "";
+    ScreenTestsFile = "";
+}
+
+CSharpTest PrimePatConfigTestMethod CTRL_X_PATMOD_K_BEGINCPUPKG_X_X_X_X_RESET_FREQUENCY_1
+{
+    BypassPort = 1;
+    ConfigurationFile = "";
+    SetPoint = "";
+    SetPointsPlistMode = "Global";
+    SetPointsPreInstance = "";
+}
+
+Flow SCN_UNCORE_CKPKGS9_INIT
+{
+    FlowItem CTRL_X_PATMOD_K_INIT_X_X_X_X_GLOBAL_INIT CTRL_X_PATMOD_K_INIT_X_X_X_X_GLOBAL_INIT @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99412980_fail_SCN_UNCORE_CKPKGS9_CTRL_X_PATMOD_K_INIT_X_X_X_X_GLOBAL_INIT_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98412980_fail_SCN_UNCORE_CKPKGS9_CTRL_X_PATMOD_K_INIT_X_X_X_X_GLOBAL_INIT_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b41412980_fail_SCN_UNCORE_CKPKGS9_CTRL_X_PATMOD_K_INIT_X_X_X_X_GLOBAL_INIT_0;
+            IncrementCounters SCN_UNCORE_CKPKGS9::n41412980_fail_CTRL_X_PATMOD_K_INIT_X_X_X_X_GLOBAL_INIT_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow BEGINCPUPKG_SHMOO
+{
+    FlowItem STUCKAT_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X STUCKAT_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99422980_fail_SCN_UNCORE_CKPKGS9_STUCKAT_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98422980_fail_SCN_UNCORE_CKPKGS9_STUCKAT_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b42412980_fail_SCN_UNCORE_CKPKGS9_STUCKAT_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X_0;
+            IncrementCounters SCN_UNCORE_CKPKGS9::n42412980_fail_STUCKAT_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X_0;
+            GoTo ATSPEED_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b42412981_fail_SCN_UNCORE_CKPKGS9_STUCKAT_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X_2;
+            IncrementCounters SCN_UNCORE_CKPKGS9::n42412981_fail_STUCKAT_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X_2;
+            GoTo ATSPEED_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X;
+        }
+    }
+    
+    FlowItem ATSPEED_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X ATSPEED_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99422981_fail_SCN_UNCORE_CKPKGS9_ATSPEED_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98422981_fail_SCN_UNCORE_CKPKGS9_ATSPEED_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b42422980_fail_SCN_UNCORE_CKPKGS9_ATSPEED_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X_0;
+            IncrementCounters SCN_UNCORE_CKPKGS9::n42422980_fail_ATSPEED_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X_0;
+            GoTo CHAIN_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b42422981_fail_SCN_UNCORE_CKPKGS9_ATSPEED_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X_2;
+            IncrementCounters SCN_UNCORE_CKPKGS9::n42422981_fail_ATSPEED_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X_2;
+            GoTo CHAIN_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X;
+        }
+    }
+    
+    FlowItem CHAIN_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X CHAIN_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99422982_fail_SCN_UNCORE_CKPKGS9_CHAIN_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98422982_fail_SCN_UNCORE_CKPKGS9_CHAIN_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b42432980_fail_SCN_UNCORE_CKPKGS9_CHAIN_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X_0;
+            IncrementCounters SCN_UNCORE_CKPKGS9::n42432980_fail_CHAIN_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X_0;
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b42432981_fail_SCN_UNCORE_CKPKGS9_CHAIN_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X_2;
+            IncrementCounters SCN_UNCORE_CKPKGS9::n42432981_fail_CHAIN_UNCORE_SHMOO_E_BEGINCPUPKG_X_X_NOM_X_2;
+            Return 1;
+        }
+    }
+    
+}
+
+Flow BEGINCPUPKG_SCN_UNCORE
+{
+    FlowItem STUCKAT_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL STUCKAT_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99422983_fail_SCN_UNCORE_CKPKGS9_STUCKAT_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98422983_fail_SCN_UNCORE_CKPKGS9_STUCKAT_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b42442980_fail_SCN_UNCORE_CKPKGS9_STUCKAT_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_0;
+            IncrementCounters SCN_UNCORE_CKPKGS9::n42442980_fail_STUCKAT_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_0;
+            GoTo CHAIN_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo ATSPEED_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b42442981_fail_SCN_UNCORE_CKPKGS9_STUCKAT_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_2;
+            IncrementCounters SCN_UNCORE_CKPKGS9::n42442981_fail_STUCKAT_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_2;
+            GoTo CHAIN_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            GoTo ATSPEED_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97422980_fail_SCN_UNCORE_CKPKGS9_STUCKAT_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_4;
+            IncrementCounters SCN_UNCORE_CKPKGS9::n97422980_fail_STUCKAT_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_4;
+            GoTo CHAIN_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b42192980_fail_SCN_UNCORE_CKPKGS9_STUCKAT_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_5;
+            IncrementCounters SCN_UNCORE_CKPKGS9::n42192980_fail_STUCKAT_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_5;
+            GoTo CHAIN_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL;
+        }
+    }
+    
+    FlowItem ATSPEED_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL ATSPEED_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99472980_fail_SCN_UNCORE_CKPKGS9_ATSPEED_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98472980_fail_SCN_UNCORE_CKPKGS9_ATSPEED_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b47412980_fail_SCN_UNCORE_CKPKGS9_ATSPEED_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_0;
+            IncrementCounters SCN_UNCORE_CKPKGS9::n47412980_fail_ATSPEED_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_0;
+            GoTo CHAIN_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b42452980_fail_SCN_UNCORE_CKPKGS9_ATSPEED_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_2;
+            IncrementCounters SCN_UNCORE_CKPKGS9::n42452980_fail_ATSPEED_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_2;
+            GoTo CHAIN_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97472980_fail_SCN_UNCORE_CKPKGS9_ATSPEED_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_4;
+            IncrementCounters SCN_UNCORE_CKPKGS9::n97472980_fail_ATSPEED_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_4;
+            GoTo CHAIN_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b47192980_fail_SCN_UNCORE_CKPKGS9_ATSPEED_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_5;
+            IncrementCounters SCN_UNCORE_CKPKGS9::n47192980_fail_ATSPEED_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_5;
+            GoTo CHAIN_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL;
+        }
+    }
+    
+    FlowItem CHAIN_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL CHAIN_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99412981_fail_SCN_UNCORE_CKPKGS9_CHAIN_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98412981_fail_SCN_UNCORE_CKPKGS9_CHAIN_UNCORE_SB_K_BEGINCPUPKG_X_X_MAX_X_ALL_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 0;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+    }
+    
+}
+
+Flow SCN_UNCORE_CKPKGS9_BEGINCPUPKG
+{
+    FlowItem BEGINCPUPKG_SCN_UNCORE BEGINCPUPKG_SCN_UNCORE
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_SCREEN_K_BEGINCPUPKG_X_X_X_X_RESET_GSDS;
+        }
+    }
+    
+    FlowItem CTRL_X_SCREEN_K_BEGINCPUPKG_X_X_X_X_RESET_GSDS CTRL_X_SCREEN_K_BEGINCPUPKG_X_X_X_X_RESET_GSDS @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99412982_fail_SCN_UNCORE_CKPKGS9_CTRL_X_SCREEN_K_BEGINCPUPKG_X_X_X_X_RESET_GSDS_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98412982_fail_SCN_UNCORE_CKPKGS9_CTRL_X_SCREEN_K_BEGINCPUPKG_X_X_X_X_RESET_GSDS_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+    }
+    
+    FlowItem CTRL_X_PATMOD_K_BEGINCPUPKG_X_X_X_X_RESET_FREQUENCY_1 CTRL_X_PATMOD_K_BEGINCPUPKG_X_X_X_X_RESET_FREQUENCY_1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99412983_fail_SCN_UNCORE_CKPKGS9_CTRL_X_PATMOD_K_BEGINCPUPKG_X_X_X_X_RESET_FREQUENCY_1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98412983_fail_SCN_UNCORE_CKPKGS9_CTRL_X_PATMOD_K_BEGINCPUPKG_X_X_X_X_RESET_FREQUENCY_1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+    FlowItem BEGINCPUPKG_SHMOO BEGINCPUPKG_SHMOO
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}

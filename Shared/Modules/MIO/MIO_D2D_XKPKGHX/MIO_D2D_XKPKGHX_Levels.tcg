@@ -1,0 +1,18 @@
+Version 1.0;
+
+SpecificationSet d2d_bf_x_x_pkg_lvl_BFUNC_710VNNAON (max,min,nom) Inherits __main__::d2d_bf_x_x_pkg_lvl_BFUNC
+{
+	Voltage p_vnnaon_spec  = 0.825V, 0.715V, 0.710V;
+}
+
+TestConditionGroup d2d_bf_x_x_pkg_lvl_TCG_710VNNAON
+{
+	SpecificationSet = d2d_bf_x_x_pkg_lvl_BFUNC_710VNNAON;
+	Level = __main__::d2d_bf_x_x_pkg_lvl;
+}
+
+TestCondition d2d_bf_x_x_pkg_lvl_nom_710VNNAON
+{
+	TestConditionGroup = d2d_bf_x_x_pkg_lvl_TCG_710VNNAON;
+	Selector = nom;
+}

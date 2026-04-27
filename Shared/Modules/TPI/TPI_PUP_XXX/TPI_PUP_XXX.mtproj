@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <CustomProjectExtensionsPath Condition=" '$(CustomProjectExtensionsPath)' == '' ">$(TorchCustomProjectPath)\</CustomProjectExtensionsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildProjectDirectory)\..\..\..\BomGroups.props" />
+  <Import Project="$(CustomProjectExtensionsPath)Torch.ProjectSystem.Module.props" />
+  <ItemGroup>
+    <EnvFile Remove="InputFiles\**" />
+    <FlwFile Remove="InputFiles\**" />
+    <GeneratedEnvFile Remove="InputFiles\**" />
+    <JsonFile Remove="InputFiles\**" />
+    <LvlFile Remove="InputFiles\**" />
+    <MConfigFile Remove="InputFiles\**" />
+    <MtplFile Remove="InputFiles\**" />
+    <None Remove="InputFiles\**" />
+    <PgmRulesFile Remove="InputFiles\**" />
+    <PtmFile Remove="InputFiles\**" />
+    <RulesFile Remove="InputFiles\**" />
+    <SubBdefsFile Remove="InputFiles\**" />
+    <TcgFile Remove="InputFiles\**" />
+    <ThcFile Remove="InputFiles\**" />
+    <ThmFile Remove="InputFiles\**" />
+    <TimFile Remove="InputFiles\**" />
+    <UsrVarsFile Remove="InputFiles\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <FlwFile Remove="TPI_MIXDETECT_XXX_arlu.flw" />
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="PymtplInputFiles\" />
+  </ItemGroup>
+  <Import Project="$(CustomProjectExtensionsPath)Torch.ProjectSystem.Module.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\BaseInputs\Common\Common_$(Configuration)\Common_$(Configuration).ctproj" />
+  </ItemGroup>
+</Project>

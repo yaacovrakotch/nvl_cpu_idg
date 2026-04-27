@@ -1,0 +1,136 @@
+name: FAILMODID
+
+on:
+  workflow_dispatch: 
+    inputs:
+
+      name:
+        description: 'MV_json_file or FULL - rev1'
+        # Default value if no value is explicitly provided
+        default: 'FULL'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      targetbom:
+        description: 'Option: Class_NVL_S28C | ALL | If running multi boms, using comma delimiter'
+        # Default value if no value is explicitly provided
+        default: 'Class_NVL_S28C'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      special_socket:
+        description: 'Enter special socket LOCN_STEP_ENGID Ex: 6248_CSM_AF| 6248_CSM | 7822'
+        # Default value if no value is explicitly provided
+        default: 'NONE'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      destination:
+        description: 'I:/ path to copy TP. Leave alone to not copy.'
+        # Default value if no value is explicitly provided
+        default: 'I:/'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      tester:
+        description: 'Enter tester name if you want to request a specific tester.'
+        # Default value if no value is explicitly provided
+        default: 'any'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      DieletBranches:
+        description: 'Branchname|tag|sha|none e.g.CPU;GCD;PCD;HUB'
+        # Default value if no value is explicitly provided
+        default: 'main;main;main;main'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      acpy:
+        description: 'Auto Content pymtpl I:\ path:'
+        default: 'None'
+        required: false
+
+      email:
+        description: 'Email address'
+        # Default value if no value is explicitly provided
+        default: ''
+        # Input has to be provided for the workflow to run
+        required: true
+
+
+jobs:
+  FAILMODID:
+    runs-on: [self-hosted, checkers]
+    timeout-minutes: 180
+
+    steps:
+    - name: Log Inputs
+      shell: powershell
+      run: |
+        $inputs = @'
+        ${{ toJSON(github.event.inputs) }}
+        '@
+        Write-Host "Inputs: $inputs"
+
+    - name: Parse Dielet Branches
+      id: parse_branches
+      shell: powershell
+      run: |
+        $inputBranches = "${{ github.event.inputs.DieletBranches }}"
+        Write-Host "Raw DieletBranches input: '$inputBranches'"
+        
+        # Handle both semicolon and line break separators
+        $branches = $inputBranches -split '[;\r\n]+' | Where-Object { $_.Trim() -ne '' }
+        Write-Host "Split branches: $($branches -join ', ')"
+        
+        $CPU_Branch = if ($branches[0]) { $branches[0].Trim() } else { "main" }
+        $GCD_Branch = if ($branches[1]) { $branches[1].Trim() } else { "main" }
+        $PCD_Branch = if ($branches[2]) { $branches[2].Trim() } else { "main" }
+        $HUB_Branch = if ($branches[3]) { $branches[3].Trim() } else { "main" }
+        
+        echo "CPU_Branch=$CPU_Branch" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+        echo "GCD_Branch=$GCD_Branch" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+        echo "PCD_Branch=$PCD_Branch" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+        echo "HUB_Branch=$HUB_Branch" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+        Write-Host "Parsed branches: CPU=$CPU_Branch, GCD=$GCD_Branch, PCD=$PCD_Branch, HUB=$HUB_Branch"
+
+    - name: repo_init_check
+      continue-on-error: true
+      shell: powershell
+      run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/tprobot.py REPO_INIT main
+
+    - uses: actions/checkout@v6
+      with: 
+        fetch-depth: 0
+        clean: true              # remove untracked files before checkout
+        ref: ${{ github.event.pull_request.head.ref }}
+
+    - name: Checkout submodules
+      shell: powershell
+      run: |
+        git submodule sync --recursive
+        git submodule update --init --recursive --force
+
+    - name: clone dielets
+      shell: powershell
+      run: python I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/nvl_buildtp.py ${{ github.event.inputs.targetbom }} -clone
+      env:
+         CPU_Branch: ${{ steps.parse_branches.outputs.CPU_Branch }}
+         GCD_Branch: ${{ steps.parse_branches.outputs.GCD_Branch }}
+         PCD_Branch: ${{ steps.parse_branches.outputs.PCD_Branch }}
+         HUB_Branch: ${{ steps.parse_branches.outputs.HUB_Branch }}
+
+    - name: Bot run
+      shell: powershell
+      run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/runner_botos.py nvl2_tpbot._ALL_.nvl_common
+      env:
+          DEST: ${{ github.event.inputs.destination }}
+          EMAIL: ${{ github.event.inputs.email }}
+          IN1: ${{ github.event.inputs.name }}
+          TESTER: ${{ github.event.inputs.tester }}
+          SPECIAL_SOCKET: ${{ github.event.inputs.special_socket }}
+          TARGETBOM: ${{ github.event.inputs.targetbom }}
+          CLEANTP: False
+          ACPY: ${{ github.event.inputs.acpy }}
+          FAILMODID: true

@@ -1,0 +1,26 @@
+{
+	"Screen_Config":
+	[
+		{
+			"TestName": "CXX_VLD_PERDUTINIT",
+			"TestConfig": [
+				[ "Set_TRIM_OV", "String", "SharedStorage", "DUT.CXX_OVERVOLTVALUE_NORESENSE", "SET", "Literal", "0111", "Set_TRIM_BW_OV", "2" ],
+				[ "Set_TRIM_BW_OV", "String", "SharedStorage", "DUT.CXX_OVERVOLTVALUE_BW", "SET", "Literal", "10", "Set_TRIM_UV", "2" ],
+				[ "Set_TRIM_UV", "String", "SharedStorage", "DUT.CXX_UNDERVOLTVALUE_NORESENSE", "SET", "Literal", "0001", "Set_TRIM_BW_UV", "2" ],
+				[ "Set_TRIM_BW_UV", "String", "SharedStorage", "DUT.CXX_UNDERVOLTVALUE_BW", "SET", "Literal", "10", "Set_VNNAON_NOM", "2" ],
+				[ "Set_VNNAON_NOM", "Double", "SharedStorage", "DUT.CXX_FUSE_VOLTAGE_VNNAON_OVERVOLT", "SET", "Literal", "0.77", "Set_VNNAON_OV", "2" ],
+				[ "Set_VNNAON_OV", "Double", "SharedStorage", "DUT.CXX_FUSE_VOLTAGE_VNNAON_OVERVOLT", "SET", "Literal", "0.900", "Set_VNNAON_UV", "2" ],
+				[ "Set_VNNAON_UV", "Double", "SharedStorage", "DUT.CXX_FUSE_VOLTAGE_VNNAON_UNDERVOLT", "SET", "Literal", "0.625", "1", "2" ]
+			]
+		},
+		{
+			"TestName": "CXX_VLD_SET_DEFAULT",
+			"TestConfig": [
+				[ "Test1", "String", "UserVar", "DFFVars.READ_OPTYPE", "==", "Literal", "SORT", "Test2", "2" ],
+				[ "Test2", "String", "UserVar", "DFFVars.WRITE_OPTYPE", "==", "Literal", "PBIC_DAB", "Test3", "2" ],
+				[ "Test3", "String", "SharedStorage", "DUT.CXX_OVERVOLTVALUE_BW", "SET", "Literal", "01", "Test4", "0" ],
+				[ "Test4", "String", "SharedStorage", "DUT.CXX_UNDERVOLTVALUE_BW", "SET", "Literal", "01", "1", "0" ]
+			]
+		}
+	]		
+}

@@ -1,0 +1,459 @@
+{
+	"tokens": {
+		"DONE": {
+			"bits": "0",
+			"datatype": "integer",
+			"append": "TRIM"
+		},
+		"ERROR": {
+			"bits": "0",
+			"datatype": "integer",
+			"append": "TRIM"
+		},
+		"MED_DONE": {
+			"bits": "0",
+			"datatype": "integer",
+			"append": "MED"
+		},
+		"dummy_unused": {
+			"bits": "12-0",
+			"datatype": "integer"
+		},
+		"TRIM_CODE": {
+			"bits": "7-0",
+			"datatype": "integer",
+			"highlimit": "999",
+			"lowlimit": "0",
+			"append": "TRIM",
+			"sharedstorage": "[GSDS_ID]_BGTRIMCODE_H_[CODE]"
+		},
+		"MED_TRIM_CODE": {
+			"bits": "7-0",
+			"datatype": "integer",
+			"highlimit": "999",
+			"lowlimit": "0",
+			"append": "MED"
+		},
+		"print_trim_array_to_ituff": {
+			"equation": "[TRIM]",
+            "datatype": "String",
+			"ituff": "[TNAME_TYPE]_[CODE]_[TRIM_COUNT_ID]"
+		},
+		"print_med_array_to_ituff": {
+			"equation": "[MED]",
+            "datatype": "String",
+			"ituff": "[TNAME_TYPE]_MED_[TRIM_COUNT_ID]"
+		},
+		"clear_trim_array": {
+			"clear": ["TRIM"]
+		},
+		"clear_med_array": {
+			"clear": ["MED"]
+		}
+	},
+	"groups": {
+		"TRIM_LIST_GROUP": {
+			"size": 32,
+			"fields": [
+			{
+				"type": "TRIM_CODE",
+				"offset": 0
+			},
+			{
+				"type": "DONE",
+				"offset": 8
+			},
+			{
+				"type": "ERROR",
+				"offset": 9
+			},
+			{
+				"type": "MED_TRIM_CODE",
+				"offset": 10
+			},
+			{
+				"type": "MED_DONE",
+				"offset": 18
+			},
+			{
+				"type": "dummy_unused",
+				"offset": 19
+			},
+			{
+				"type": "print_trim_array_to_ituff",
+				"offset": 32
+			},
+			{
+				"type": "clear_trim_array",
+				"offset": 32
+			},
+			{
+				"type": "clear_med_array",
+				"offset": 32
+			}
+			]
+		},
+		"TRIM_LIST_GROUP_W_MED": {
+			"size": 32,
+			"fields": [
+			{
+				"type": "TRIM_CODE",
+				"offset": 0
+			},
+			{
+				"type": "DONE",
+				"offset": 8
+			},
+			{
+				"type": "ERROR",
+				"offset": 9
+			},
+			{
+				"type": "MED_TRIM_CODE",
+				"offset": 10
+			},
+			{
+				"type": "MED_DONE",
+				"offset": 18
+			},
+			{
+				"type": "dummy_unused",
+				"offset": 19
+			},
+			{
+				"type": "print_trim_array_to_ituff",
+				"offset": 32
+			},
+			{
+				"type": "print_med_array_to_ituff",
+				"offset": 32
+			},
+			{
+				"type": "clear_trim_array",
+				"offset": 32
+			},
+			{
+				"type": "clear_med_array",
+				"offset": 32
+			}
+			]
+		},
+		"TRIM_CODE_GROUP": {
+			"size": 160,
+			"fields": [
+			{
+				"type": "TRIM_LIST_GROUP",
+				"offset": 0,
+				"input": "CODE^0"
+			},
+			{
+				"type": "TRIM_LIST_GROUP",
+				"offset": 32,
+				"input": "CODE^1"
+			},
+			{
+				"type": "TRIM_LIST_GROUP",
+				"offset": 64,
+				"input": "CODE^2"
+			},
+			{
+				"type": "TRIM_LIST_GROUP",
+				"offset": 96,
+				"input": "CODE^3"
+			},
+			{
+				"type": "TRIM_LIST_GROUP_W_MED",
+				"offset": 128,
+				"input": "CODE^4"
+			}
+			]
+		},
+		"EXECUTE_LOOP": {
+			"size": 160,
+			"fields": [
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^10",
+				"offset": 0
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^11",
+				"offset": 160
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^12",
+				"offset": 320
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^13",
+				"offset": 480
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^14",
+				"offset": 640
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^15",
+				"offset": 800
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^16",
+				"offset": 960
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^17",
+				"offset": 1120
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^18",
+				"offset": 1280
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^19",
+				"offset": 1440
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^20",
+				"offset": 1600
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^21",
+				"offset": 1760
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^22",
+				"offset": 1920
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^23",
+				"offset": 2080
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^24",
+				"offset": 2240
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^25",
+				"offset": 2400
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^26",
+				"offset": 2560
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^27",
+				"offset": 2720
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^28",
+				"offset": 2880
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^29",
+				"offset": 3040
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^30",
+				"offset": 3200
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^31",
+				"offset": 3360
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^32",
+				"offset": 3520
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^33",
+				"offset": 3680
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^34",
+				"offset": 3840
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^35",
+				"offset": 4000
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^36",
+				"offset": 4160
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^37",
+				"offset": 4320
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^38",
+				"offset": 4480
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^39",
+				"offset": 4640
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^40",
+				"offset": 4800
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^41",
+				"offset": 4960
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^42",
+				"offset": 5120
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^43",
+				"offset": 5280
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^44",
+				"offset": 5440
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^45",
+				"offset": 5600
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^46",
+				"offset": 5760
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^47",
+				"offset": 5920
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^48",
+				"offset": 6080
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^49",
+				"offset": 6240
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^50",
+				"offset": 6400
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^51",
+				"offset": 6560
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^52",
+				"offset": 6720
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^53",
+				"offset": 6880
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^54",
+				"offset": 7040
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^55",
+				"offset": 7200
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^56",
+				"offset": 7360
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^57",
+				"offset": 7520
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^58",
+				"offset": 7680
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^59",
+				"offset": 7840
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^60",
+				"offset": 8000
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^61",
+				"offset": 8160
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^62",
+				"offset": 8320
+			},
+			{
+				"type": "TRIM_CODE_GROUP",
+				"input": "TRIM_COUNT_ID^63",
+				"offset": 8480
+			}
+			]
+		}
+	},
+	"sets": {
+		"BGTEMPCOSWEEP": {
+			"size": 8640,
+			"fields": [
+			{
+				"type": "EXECUTE_LOOP",
+				"offset": 0,
+				"input": "GSDS_ID^BGDEFTEMPCO,TNAME_TYPE^TCDEF"
+			}
+			]
+		}
+	}
+}

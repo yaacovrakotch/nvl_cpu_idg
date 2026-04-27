@@ -1,0 +1,47 @@
+Version 1.0;
+
+UserVars MIO_D2D_H16C_UserVar
+{
+	#Add Uservars here
+	Integer CapturePerPatValue = 250;
+	Integer CaptureTotalValue = 250;
+	Integer FailsPerPatToItuffValue = 250;
+	Integer FailsToItuffValue = 250;
+}
+
+UserVars MIO_D2D_XKPKGH_VARS
+{
+	Integer MIO_D2D_LblPrntItuffEnb = 1; ## 0 is Disable, 1 is Enable for assignment in Functional <PatternNameCounterIndexes>
+	Integer MIO_D2D_LblPrntItuffSelector = 17; # 0; ## Selector value (10-18) to choose appropriate Label Print String; values 0-9 or >18 result in empty string
+	String MIO_D2D_LblPrintStr_Empty = "" ; ## String of Empty value for Label Print String for "", assignment in Functional <PatternNameCounterIndexes>
+	String MIO_D2D_LblPrintStr_0_9 = "0,1,2,3,4,5,6,7,8,9" ; ## String of 10 comma separated values for Label Print String for 0-9, assignment in Functional <PatternNameCounterIndexes>
+	String MIO_D2D_LblPrntStr_0_10 = "0,1,2,3,4,5,6,7,8,9,10" ; ## String of 11 comma separated values for Label Print String for 0-10, assignment in Functional <PatternNameCounterIndexes>
+	String MIO_D2D_LblPrntStr_0_11 = "0,1,2,3,4,5,6,7,8,9,10,11" ; ## String of 12 comma separated values for Label Print String for 0-11, assignment in Functional <PatternNameCounterIndexes>
+	String MIO_D2D_LblPrntStr_0_12 = "0,1,2,3,4,5,6,7,8,9,10,11,12" ; ## String of 13 comma separated values for Label Print String for 0-12, assignment in Functional <PatternNameCounterIndexes>
+	String MIO_D2D_LblPrntStr_0_13 = "0,1,2,3,4,5,6,7,8,9,10,11,12,13" ; ## String of 14 comma separated values for Label Print String for 0-13, assignment in Functional <PatternNameCounterIndexes>
+	String MIO_D2D_LblPrntStr_0_14 = "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14" ; ## String of 15 comma separated values for Label Print String for 0-14, assignment in Functional <PatternNameCounterIndexes>
+	String MIO_D2D_LblPrntStr_0_15 = "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15" ; ## String of 16 comma separated values for Label Print String for 0-15, assignment in Functional <PatternNameCounterIndexes>
+	String MIO_D2D_LblPrntStr_0_16 = "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16" ; ## String of 17 comma separated values for Label Print String for 0-16, assignment in Functional <PatternNameCounterIndexes>
+	String MIO_D2D_LblPrntStr_0_17 = "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17" ; ## String of 18 comma separated values for Label Print String for 0-17, assignment in Functional <PatternNameCounterIndexes>
+
+	#String MIO_D2D_LblPrintStr_Current = (MIO_D2D_LblPrntItuffEnb == 1) ? ((MIO_D2D_LblPrntItuffSelector == 10) ? MIO_D2D_LblPrintStr_0_9 : (MIO_D2D_LblPrntItuffSelector == 11) ? MIO_D2D_LblPrntStr_0_10 : (MIO_D2D_LblPrntItuffSelector == 12) ? MIO_D2D_LblPrntStr_0_11 : (MIO_D2D_LblPrntItuffSelector == 13) ? MIO_D2D_LblPrntStr_0_12 : (MIO_D2D_LblPrntItuffSelector == 14) ? MIO_D2D_LblPrntStr_0_13 : (MIO_D2D_LblPrntItuffSelector == 15) ? MIO_D2D_LblPrntStr_0_14 : (MIO_D2D_LblPrntItuffSelector == 16) ? MIO_D2D_LblPrntStr_0_15 : (MIO_D2D_LblPrntItuffSelector == 17) ? MIO_D2D_LblPrntStr_0_16 : (MIO_D2D_LblPrntItuffSelector == 18) ? MIO_D2D_LblPrntStr_0_17 : MIO_D2D_LblPrintStr_Empty) : MIO_D2D_LblPrintStr_Empty;
+}
+
+SelectorRuleCollection MIO_D2D_XKPKGH_Rules
+{
+	#MIO_D2D_XKPKGH_Rules.LabelPrintStringByCount(MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrintStr_0_9, MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrntStr_0_10, MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrntStr_0_11, MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrntStr_0_12, MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrntStr_0_13, MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrntStr_0_14, MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrntStr_0_15, MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrntStr_0_16, MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrntStr_0_17, MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrintStr_Empty)
+	SelectorRule LabelPrintStringByCount(STR_0_9, STR_0_10, STR_0_11, STR_0_12, STR_0_13, STR_0_14, STR_0_15, STR_0_16, STR_0_17, STR_EMPTY)
+	{
+		STR_0_9 => (MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrntItuffEnb == 1) && (MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrntItuffSelector == 10);
+		STR_0_10 => (MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrntItuffEnb == 1) && (MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrntItuffSelector == 11);
+		STR_0_11 => (MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrntItuffEnb == 1) && (MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrntItuffSelector == 12);
+		STR_0_12 => (MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrntItuffEnb == 1) && (MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrntItuffSelector == 13);
+		STR_0_13 => (MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrntItuffEnb == 1) && (MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrntItuffSelector == 14);
+		STR_0_14 => (MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrntItuffEnb == 1) && (MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrntItuffSelector == 15);
+		STR_0_15 => (MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrntItuffEnb == 1) && (MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrntItuffSelector == 16);
+		STR_0_16 => (MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrntItuffEnb == 1) && (MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrntItuffSelector == 17);
+		STR_0_17 => (MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrntItuffEnb == 1) && (MIO_D2D_XKPKGH_VARS.MIO_D2D_LblPrntItuffSelector == 18);
+		STR_EMPTY;  ## Default: if disabled or selector is out of range (0-9 or >18)
+	}
+
+}

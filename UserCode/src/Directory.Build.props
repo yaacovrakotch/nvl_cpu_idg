@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PackageProjectUrl>https://github.com/intel-restricted/class_arlh68</PackageProjectUrl>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <TargetFrameworks>net6.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <TargetName>$(MSBuildProjectName)</TargetName>
+    <UserCodePath>$(SolutionDir)UserCode\</UserCodePath>    
+    <OutputPath Condition="$(TargetName.EndsWith('.UnitTest'))">$(UserCodePath)unit_test\$(Configuration)\</OutputPath>
+    <OutputPath Condition="!$(TargetName.EndsWith('.UnitTest'))">$(UserCodePath)lib\$(Configuration)\</OutputPath>
+    <PreHeaderLocation>$(MSBuildThisFileDirectory)..\preheaders\</PreHeaderLocation>
+    <BuildScriptLocation>$(MSBuildThisFileDirectory)build\</BuildScriptLocation>
+    <SrcLocation>$(MSBuildThisFileDirectory)</SrcLocation>
+    <DocumentationFile>$(OutputPath)$(TargetFramework)\$(TargetName).doc.xml</DocumentationFile>
+    <IntermediateOutputPath>$(MSBuildThisFileDirectory)..\bin\$(Configuration)\$(TargetFramework)\$(TargetName)\</IntermediateOutputPath>
+    <PreheaderStagingPath>$(MSBuildThisFileDirectory)..\bin\preheaders_staging\$(TargetName)\</PreheaderStagingPath>
+    <PackageOutputPath>$(MSBuildThisFileDirectory)..\lib\NuGets\</PackageOutputPath>
+    <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+    <Version>$(PrimeVersion)</Version>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>NU1901,NU1902,NU1903,NU1904,CS0618,NU1605,NU5104,SA1200,SA1137,SA1636,SA1507,SA1027,SA1208,SA1210,SA1028</NoWarn>
+    <Copyright>Copyright ©  2024</Copyright>
+    <PrimeDeployImportMode>Release</PrimeDeployImportMode>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- supercedes -->
+    <!-- main references -->
+    <PackageReference Include="Prime" />
+  </ItemGroup>
+  <!-- Standard package includes and configuration for Unit test and TestTemplates. -->
+  <ItemGroup Condition="!$(TargetName.EndsWith('.UnitTest'))">
+    <PackageReference Include="Microsoft.Automata.SRM"/>
+    <PackageReference Include="Newtonsoft.Json" />
+    <PackageReference Include="CommandLineParser" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
+    <PackageReference Include="System.IO.Abstractions" />
+    <PackageReference Include="System.IO.Abstractions.TestingHelpers" />
+    <PackageReference Include="System.Text.RegularExpressions" />
+    <PackageReference Include="System.Management" />
+    <PackageReference Include="ncalc" Condition="$(TargetFramework) == 'net462'" />
+    <PackageReference Include="CoreCLR-NCalc" Condition="$(TargetFramework) != 'net462'" />
+    <PackageReference Include="System.ValueTuple" Condition="$(TargetFramework) == 'net462'" />
+    <PackageReference Include="System.Collections.Immutable" Condition="$(TargetFramework) == 'net462'" />
+    <PackageReference Include="MPE.MIT.ATE_TM.PrimePHGenerator" Condition="'$(MSBuildProjectName)' != '_PrimeSelector'" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetName.EndsWith('.UnitTest'))">
+    <PackageReference Include="Moq" />
+    <PackageReference Include="Moq.AutoMock" />
+    <PackageReference Include="MSTest.TestAdapter" />
+    <PackageReference Include="MSTest.TestFramework" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="coverlet.collector" />
+  </ItemGroup>
+  <!-- Standard Debug and Release Configs. -->
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <DefineConstants>DEBUG</DefineConstants>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <DefineConstants>
+    </DefineConstants>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(MSBuildProjectName)' != '_PrimeSelector'">
+    <PackageReference Include="StyleCop.Analyzers">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <Reference Include="Microsoft.CSharp" Condition="'$(TargetFramework)'=='net462'"/>
+    <Reference Include="System.Data.DataSetExtensions" Condition="'$(TargetFramework)'=='net462'"/>
+    <Reference Include="System.Net.Http"  Condition="'$(TargetFramework)'=='net462'"/>
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)StyleCop.json">
+      <Link>StyleCop.json</Link>
+    </AdditionalFiles>
+  </ItemGroup>
+</Project>

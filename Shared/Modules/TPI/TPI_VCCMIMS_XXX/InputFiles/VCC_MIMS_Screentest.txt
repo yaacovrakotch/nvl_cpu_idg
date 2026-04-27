@@ -1,0 +1,158 @@
+#Port 1 is Skip MIM test
+#Port 2 is MIM test
+START_SCREEN:CLASS_VCC_MIMS_FORK
+#RunOn	:	TestName  	:	Data Type	:	Param Type	:	Param1   						:	Operation 	:	Param Type	:	Param2  		:	TmpStore 	:	OnTrue		:	OnFalse
+EXEC    :   Test1 		:	STRING    	:	GLOBAL		:	SCVars.SC_LOCN					:   ==    		: 	LITERAL     : 	"6248"  		: 	-			: 	Test4  		: 	Test2
+EXEC    :   Test2 		:	STRING    	:	GLOBAL		:	SCVars.SC_LOCN					:   ==    		: 	LITERAL     : 	"7820"  		: 	-			: 	Test4  		: 	Test3
+EXEC	:	Test3		:	STRING		:	GLOBAL		:	SCVars.SC_LOCN					:	==			:	LITERAL		:	"7827"			:	-			:	Test4		:	1
+EXEC	:	Test4   	: 	STRING    	: 	GLOBAL		: 	SCVars.SC_CURRENT_PROCESS_STEP  :   ==			: 	LITERAL    	:	"CLASSHOT" 	    :   -			: 	2           :	1 
+END_SCREEN
+
+START_SCREEN:MIMSHORT_SCREEN_VCCIA
+#RunOn	:	TestName  	:	Data Type	:	Param Type	:	Param1   				:	Operation 	:	Param Type	:	Param2  															                                                                                        :	TmpStore 	:	OnTrue	:	OnFalse
+EXEC	:	Test1		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VCCIA_FAIL	:	SET			:	EXPRESSION	:	"(-1*[G.U.D.VCCIA_START^IPC::VCCIA]-0.0167+4.77*[G.U.D.VCCIA_LTTC^IPC::VCCIA])"	:	-			:	Test2	:	2
+EXEC	:	Test2		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VCCIA_FAIL	:	>			:	LITERAL		:	1																	                                                                                        :	-			:	2		:	1
+END_SCREEN
+### Updated VCCIA Param 2 value from 0 to 1 to pass offline TOS validation. The simulated quicksim value was causing a failure. 
+START_SCREEN:MIMSHORT_SCREEN_VCCIO
+#RunOn	:	TestName  	:	Data Type	:	Param Type	:	Param1   				:	Operation 	:	Param Type	:	Param2  															                                                                                        :	TmpStore 	:	OnTrue	:	OnFalse
+EXEC	:	Test1		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VCCIO_FAIL	:	SET			:	EXPRESSION	:	"(-1*[G.U.D.VCCIO_START^VCCIO]-0.0167+4.77*[G.U.D.VCCIO_LTTC^VCCIO])"	:	-			:	Test2	:	2
+EXEC	:	Test2		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VCCIO_FAIL	:	>			:	LITERAL		:	0.0																	                                                                                        :	-			:	2		:	1
+END_SCREEN
+
+START_SCREEN:MIMSHORT_SCREEN_VCCIO_FLTR
+#RunOn	:	TestName  	:	Data Type	:	Param Type	:	Param1   				:	Operation 	:	Param Type	:	Param2  															                                                                                        :	TmpStore 	:	OnTrue	:	OnFalse
+EXEC	:	Test1		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VCCIO_FLTR_FAIL	:	SET			:	EXPRESSION	:	"(-1*[G.U.D.VCCIO_FLTR_START^VCCIO_FLTR]-0.0167+4.77*[G.U.D.VCCIO_FLTR_LTTC^VCCIO_FLTR])"	:	-			:	Test2	:	2
+EXEC	:	Test2		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VCCIO_FLTR_FAIL	:	>			:	LITERAL		:	0.0																	                                                                                        :	-			:	2		:	1
+END_SCREEN
+
+START_SCREEN:MIMSHORT_SCREEN_VCCSA
+#RunOn	:	TestName  	:	Data Type	:	Param Type	:	Param1   				:	Operation 	:	Param Type	:	Param2  															                                                                                        :	TmpStore 	:	OnTrue	:	OnFalse
+EXEC	:	Test1		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VCCSA_FAIL	:	SET			:	EXPRESSION	:	"(-1*[G.U.D.VCCSA_START^IPH::VCCSA]-0.0167+4.77*[G.U.D.VCCSA_LTTC^IPH::VCCSA])"	:	-			:	Test2	:	2
+EXEC	:	Test2		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VCCSA_FAIL	:	>			:	LITERAL		:	1																	                                                                                        :	-			:	2		:	1
+END_SCREEN
+### Updated VCCSA Param 2 value from 0 to 1 to pass offline TOS validation. The simulated quicksim value was causing a failure. 
+START_SCREEN:MIMSHORT_SCREEN_VNNAON
+#RunOn	:	TestName  	:	Data Type	:	Param Type	:	Param1   				:	Operation 	:	Param Type	:	Param2  															                                                                                        :	TmpStore 	:	OnTrue	:	OnFalse
+EXEC	:	Test1		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VNNAON_FAIL	:	SET			:	EXPRESSION	:	"(-1*[G.U.D.VNNAON_START^VNNAON]-0.0167+4.77*[G.U.D.VNNAON_LTTC^VNNAON])"	:	-			:	Test2	:	2
+EXEC	:	Test2		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VNNAON_FAIL	:	>			:	LITERAL		:	1																	                                                                                        :	-			:	2		:	1
+END_SCREEN
+### Updated VNNAON Param 2 value from 0 to 1 to pass offline TOS validation. The simulated quicksim value was causing a failure. 
+START_SCREEN:MIMSHORT_SCREEN_VNNAON_FLTR
+#RunOn	:	TestName  	:	Data Type	:	Param Type	:	Param1   				:	Operation 	:	Param Type	:	Param2  															                                                                                        :	TmpStore 	:	OnTrue	:	OnFalse
+EXEC	:	Test1		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VNNAON_FLTR_FAIL	:	SET			:	EXPRESSION	:	"(-1*[G.U.D.VNNAON_FLTR_START^VNNAON_FLTR]-0.0167+4.77*[G.U.D.VNNAON_FLTR_LTTC^VNNAON_FLTR])"	:	-			:	Test2	:	2
+EXEC	:	Test2		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VNNAON_FLTR_FAIL	:	>			:	LITERAL		:	1																	                                                                                        :	-			:	2		:	1
+END_SCREEN
+### Updated VNNAON_FLTR Param 2 value from 0 to 1 to pass offline TOS validation. The simulated quicksim value was causing a failure. 
+START_SCREEN:MIMSHORT_SCREEN_VDD2
+#RunOn	:	TestName  	:	Data Type	:	Param Type	:	Param1   				:	Operation 	:	Param Type	:	Param2  															                                                                                        :	TmpStore 	:	OnTrue	:	OnFalse
+EXEC	:	Test1		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VDD2_FAIL	:	SET			:	EXPRESSION	:	"(-1*[G.U.D.VDD2_START^IPH::VDD2]-0.0167+4.77*[G.U.D.VDD2_LTTC^IPH::VDD2])"	:	-			:	Test2	:	2
+EXEC	:	Test2		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VDD2_FAIL	:	>			:	LITERAL		:	0.0																	                                                                                        :	-			:	2		:	1
+END_SCREEN
+
+START_SCREEN:MIMSHORT_SCREEN_VCCGT
+#RunOn	:	TestName  	:	Data Type	:	Param Type	:	Param1   				:	Operation 	:	Param Type	:	Param2  															                                                                                        :	TmpStore 	:	OnTrue	:	OnFalse
+EXEC	:	Test1		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VCCGT_FAIL	:	SET			:	EXPRESSION	:	"(-1*[G.U.D.VCCGT_START^IPG::VCCGT]-0.0167-4.77*[G.U.D.VCCGT_LTTC^IPG::VCCGT])"	:	-			:	Test2	:	2
+EXEC	:	Test2		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VCCGT_FAIL	:	>			:	LITERAL		:	0.0																	                                                                                        :	-			:	2		:	1
+END_SCREEN
+
+START_SCREEN:MIMSHORT_SCREEN_CPU0_EXT_BGREF_TRIM_ANA
+#RunOn	:	TestName  	:	Data Type	:	Param Type	:	Param1   				:	Operation 	:	Param Type	:	Param2  															                                                                                        :	TmpStore 	:	OnTrue	:	OnFalse
+EXEC	:	Test1		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_CPU0_EXT_BGREF_TRIM_ANA_FAIL	:	SET			:	EXPRESSION	:	"(-1*[G.U.D.CPU0_EXT_BGREF_TRIM_ANA_START^IPC::CPU0_EXT_BGREF_TRIM_ANA]-0.0167+4.77*[G.U.D.CPU0_EXT_BGREF_TRIM_ANA_LTTC^IPC::CPU0_EXT_BGREF_TRIM_ANA])"	:	-			:	Test2	:	2
+EXEC	:	Test2		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_CPU0_EXT_BGREF_TRIM_ANA_FAIL	:	>			:	LITERAL		:	0.0																	                                                                                        :	-			:	2		:	1
+END_SCREEN
+
+START_SCREEN:MIMSHORT_SCREEN_CPU1_EXT_BGREF_TRIM_ANA
+#RunOn	:	TestName  	:	Data Type	:	Param Type	:	Param1   				:	Operation 	:	Param Type	:	Param2  															                                                                                        :	TmpStore 	:	OnTrue	:	OnFalse
+EXEC	:	Test1		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_CPU1_EXT_BGREF_TRIM_ANA_FAIL	:	SET			:	EXPRESSION	:	"(-1*[G.U.D.CPU1_EXT_BGREF_TRIM_ANA_START^IPC::CPU1_EXT_BGREF_TRIM_ANA]-0.0167+4.77*[G.U.D.CPU1_EXT_BGREF_TRIM_ANA_LTTC^IPC::CPU1_EXT_BGREF_TRIM_ANA])"	:	-			:	Test2	:	2
+EXEC	:	Test2		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_CPU1_EXT_BGREF_TRIM_ANA_FAIL	:	>			:	LITERAL		:	0.0																	                                                                                        :	-			:	2		:	1
+END_SCREEN
+
+START_SCREEN:MIMSHORT_SCREEN_V1P8
+#RunOn	:	TestName  	:	Data Type	:	Param Type	:	Param1   				:	Operation 	:	Param Type	:	Param2  															                                                                                        :	TmpStore 	:	OnTrue	:	OnFalse
+EXEC	:	Test1		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_V1P8_FAIL	:	SET			:	EXPRESSION	:	"(-1*[G.U.D.V1P8_START^V1P8]-0.0167+4.77*[G.U.D.V1P8_LTTC^V1P8])"	:	-			:	Test2	:	2
+EXEC	:	Test2		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_V1P8_FAIL	:	>			:	LITERAL		:	0.0																	                                                                                        :	-			:	2		:	1
+END_SCREEN
+
+START_SCREEN:MIMSHORT_SCREEN_V1P8_CPU
+#RunOn	:	TestName  	:	Data Type	:	Param Type	:	Param1   				:	Operation 	:	Param Type	:	Param2  															                                                                                        :	TmpStore 	:	OnTrue	:	OnFalse
+EXEC	:	Test1		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_V1P8_CPU_FAIL	:	SET			:	EXPRESSION	:	"(-1*[G.U.D.V1P8_CPU_START^V1P8_CPU]-0.0167+4.77*[G.U.D.V1P8_CPU_LTTC^V1P8_CPU])"	:	-			:	Test2	:	2
+EXEC	:	Test2		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_V1P8_CPU_FAIL	:	>			:	LITERAL		:	0.0																	                                                                                        :	-			:	2		:	1
+END_SCREEN
+
+START_SCREEN:MIMSHORT_SCREEN_V1P8_FLTR
+#RunOn	:	TestName  	:	Data Type	:	Param Type	:	Param1   				:	Operation 	:	Param Type	:	Param2  															                                                                                        :	TmpStore 	:	OnTrue	:	OnFalse
+EXEC	:	Test1		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_V1P8_FLTR_FAIL	:	SET			:	EXPRESSION	:	"(-1*[G.U.D.V1P8_FLTR_START^V1P8_FLTR]-0.0167+4.77*[G.U.D.V1P8_FLTR_LTTC^V1P8_FLTR])"	:	-			:	Test2	:	2
+EXEC	:	Test2		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_V1P8_FLTR_FAIL	:	>			:	LITERAL		:	0.0																	                                                                                        :	-			:	2		:	1
+END_SCREEN
+
+START_SCREEN:MIMSHORT_SCREEN_VCCIO_OUT_SVID
+#RunOn	:	TestName  	:	Data Type	:	Param Type	:	Param1   				:	Operation 	:	Param Type	:	Param2  															                                                                                        :	TmpStore 	:	OnTrue	:	OnFalse
+EXEC	:	Test1		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VCCIO_OUT_SVID_FAIL	:	SET			:	EXPRESSION	:	"(-1*[G.U.D.VCCIO_OUT_SVID_START^VCCIO_OUT_SVID]-0.0167+4.77*[G.U.D.VCCIO_OUT_SVID_LTTC^VCCIO_OUT_SVID])"	:	-			:	Test2	:	2
+EXEC	:	Test2		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VCCIO_OUT_SVID_FAIL	:	>			:	LITERAL		:	0.0																	                                                                                        :	-			:	2		:	1
+END_SCREEN
+
+START_SCREEN:MIMSHORT_SCREEN_VCCDFT_PCD
+#RunOn	:	TestName  	:	Data Type	:	Param Type	:	Param1   				:	Operation 	:	Param Type	:	Param2  															                                                                                        :	TmpStore 	:	OnTrue	:	OnFalse
+EXEC	:	Test1		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VCCDFT_PCD_FAIL	:	SET			:	EXPRESSION	:	"(-1*[G.U.D.VCCDFT_PCD_START^IPP::VCCDFT_PCD]-0.0167+4.77*[G.U.D.VCCDFT_PCD_LTTC^IPP::VCCDFT_PCD])"	:	-			:	Test2	:	2
+EXEC	:	Test2		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VCCDFT_PCD_FAIL	:	>			:	LITERAL		:	0.0																	                                                                                        :	-			:	2		:	1
+END_SCREEN
+  
+START_SCREEN:MIMSHORT_SCREEN_V1P8_FLTRA
+#RunOn	:	TestName  	:	Data Type	:	Param Type	:	Param1   				:	Operation 	:	Param Type	:	Param2  															                                                                                        :	TmpStore 	:	OnTrue	:	OnFalse
+EXEC	:	Test1		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_V1P8_FLTRA_FAIL	:	SET			:	EXPRESSION	:	"(-1*[G.U.D.V1P8_FLTRA_START^V1P8_FLTRA]-0.0167+4.77*[G.U.D.V1P8_FLTRA_LTTC^V1P8_FLTRA])"	:	-			:	Test2	:	2
+EXEC	:	Test2		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_V1P8_FLTRA_FAIL	:	>			:	LITERAL		:	0.0																	                                                                                        :	-			:	2		:	1
+END_SCREEN
+
+START_SCREEN:MIMSHORT_SCREEN_V1P8_FLTRB
+#RunOn	:	TestName  	:	Data Type	:	Param Type	:	Param1   				:	Operation 	:	Param Type	:	Param2  															                                                                                        :	TmpStore 	:	OnTrue	:	OnFalse
+EXEC	:	Test1		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_V1P8_FLTRB_FAIL	:	SET			:	EXPRESSION	:	"(-1*[G.U.D.V1P8_FLTRB_START^V1P8_FLTRB]-0.0167+4.77*[G.U.D.V1P8_FLTRB_LTTC^V1P8_FLTRB])"	:	-			:	Test2	:	2
+EXEC	:	Test2		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_V1P8_FLTRB_FAIL	:	>			:	LITERAL		:	0.0																	                                                                                        :	-			:	2		:	1
+END_SCREEN
+
+START_SCREEN:MIMSHORT_SCREEN_VCCIO_FLTR_H
+#RunOn	:	TestName  	:	Data Type	:	Param Type	:	Param1   				:	Operation 	:	Param Type	:	Param2  															                                                                                        :	TmpStore 	:	OnTrue	:	OnFalse
+EXEC	:	Test1		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VCCIO_FLTR_H_FAIL	:	SET			:	EXPRESSION	:	"(-1*[G.U.D.VCCIO_FLTR_H_START^VCCIO_FLTR_H]-0.0167-4.77*[G.U.D.VCCIO_FLTR_H_LTTC^VCCIO_FLTR_H])"	:	-			:	Test2	:	2
+EXEC	:	Test2		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VCCIO_FLTR_H_FAIL	:	>			:	LITERAL		:	0.0																	                                                                                        :	-			:	2		:	1
+END_SCREEN
+
+START_SCREEN:MIMSHORT_SCREEN_VNNAON_FLTR_H
+#RunOn	:	TestName  	:	Data Type	:	Param Type	:	Param1   				:	Operation 	:	Param Type	:	Param2  															                                                                                        :	TmpStore 	:	OnTrue	:	OnFalse
+EXEC	:	Test1		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VNNAON_FLTR_H_FAIL	:	SET			:	EXPRESSION	:	"(-1*[G.U.D.VNNAON_FLTR_H_START^VNNAON_FLTR_H]-0.0167+4.77*[G.U.D.VNNAON_FLTR_H_LTTC^VNNAON_FLTR_H])"	:	-			:	Test2	:	2
+EXEC	:	Test2		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VNNAON_FLTR_H_FAIL	:	>			:	LITERAL		:	0.0																	                                                                                        :	-			:	2		:	1
+END_SCREEN
+
+START_SCREEN:MIMSHORT_SCREEN_HUB_GCD_EXT_BGREF_TRIM_ANA
+#RunOn	:	TestName  	:	Data Type	:	Param Type	:	Param1   				:	Operation 	:	Param Type	:	Param2  															                                                                                        :	TmpStore 	:	OnTrue	:	OnFalse
+EXEC	:	Test1		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_HUB_GCD_EXT_BGREF_TRIM_ANA_FAIL	:	SET			:	EXPRESSION	:	"(-1*[G.U.D.HUB_GCD_EXT_BGREF_TRIM_ANA_START^HUB_GCD_EXT_BGREF_TRIM_ANA]-0.0167+4.77*[G.U.D.HUB_GCD_EXT_BGREF_TRIM_ANA_LTTC^HUB_GCD_EXT_BGREF_TRIM_ANA])"	:	-			:	Test2	:	2
+EXEC	:	Test2		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_HUB_GCD_EXT_BGREF_TRIM_ANA_FAIL	:	>			:	LITERAL		:	0.0																	                                                                                        :	-			:	2		:	1
+END_SCREEN
+
+START_SCREEN:MIMSHORT_SCREEN_VDDQ
+#RunOn	:	TestName  	:	Data Type	:	Param Type	:	Param1   				:	Operation 	:	Param Type	:	Param2  															                                                                                        :	TmpStore 	:	OnTrue	:	OnFalse
+EXEC	:	Test1		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VDDQ_FAIL	:	SET			:	EXPRESSION	:	"(-1*[G.U.D.VDDQ_START^IPH::VDDQ]-0.0167+4.77*[G.U.D.VDDQ_LTTC^IPH::VDDQ])"	:	-			:	Test2	:	2
+EXEC	:	Test2		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VDDQ_FAIL	:	>			:	LITERAL		:	0.0																	                                                                                        :	-			:	2		:	1
+END_SCREEN
+
+START_SCREEN:MIMSHORT_SCREEN_VCCLPECORE
+#RunOn	:	TestName  	:	Data Type	:	Param Type	:	Param1   				:	Operation 	:	Param Type	:	Param2  															                                                                                        :	TmpStore 	:	OnTrue	:	OnFalse
+EXEC	:	Test1		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VCCLPECORE_FAIL	:	SET			:	EXPRESSION	:	"(-1*[G.U.D.VCCLPECORE_START^IPH::VCCLPECORE]-0.0167+4.77*[G.U.D.VCCLPECORE_LTTC^IPH::VCCLPECORE])"	:	-			:	Test2	:	2
+EXEC	:	Test2		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_VCCLPECORE_FAIL	:	>			:	LITERAL		:	0.0																	                                                                                        :	-			:	2		:	1
+END_SCREEN
+
+START_SCREEN:MIMSHORT_SCREEN_HUB_EXT_BGREF_TRIM_ANA
+#RunOn	:	TestName  	:	Data Type	:	Param Type	:	Param1   				:	Operation 	:	Param Type	:	Param2  															                                                                                        :	TmpStore 	:	OnTrue	:	OnFalse
+EXEC	:	Test1		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_HUB_EXT_BGREF_TRIM_ANA_FAIL	:	SET			:	EXPRESSION	:	"(-1*[G.U.D.HUB_EXT_BGREF_TRIM_ANA_START^IPH::HUB_EXT_BGREF_TRIM_ANA]-0.0167+4.77*[G.U.D.HUB_EXT_BGREF_TRIM_ANA_LTTC^IPH::HUB_EXT_BGREF_TRIM_ANA])"	:	-			:	Test2	:	2
+EXEC	:	Test2		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_HUB_EXT_BGREF_TRIM_ANA_FAIL	:	>			:	LITERAL		:	0.0																	                                                                                        :	-			:	2		:	1
+END_SCREEN
+
+START_SCREEN:MIMSHORT_SCREEN_GCD_BGR_TRIM_REF
+#RunOn	:	TestName  	:	Data Type	:	Param Type	:	Param1   				:	Operation 	:	Param Type	:	Param2  															                                                                                        :	TmpStore 	:	OnTrue	:	OnFalse
+EXEC	:	Test1		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_GCD_BGR_TRIM_REF_FAIL	:	SET			:	EXPRESSION	:	"(-1*[G.U.D.GCD_BGR_TRIM_REF_START^IPG::GCD_BGR_TRIM_REF]-0.0167+4.77*[G.U.D.GCD_BGR_TRIM_REF_LTTC^IPG::GCD_BGR_TRIM_REF])"	:	-			:	Test2	:	2
+EXEC	:	Test2		:	DOUBLE		:	GSDS		:	G.U.D.MIMS_GCD_BGR_TRIM_REF_FAIL	:	>			:	LITERAL		:	0.0																	                                                                                        :	-			:	2		:	1
+END_SCREEN
+
+         
+
+
+          

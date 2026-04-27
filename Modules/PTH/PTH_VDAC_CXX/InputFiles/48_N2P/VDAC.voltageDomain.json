@@ -1,0 +1,251 @@
+{
+  "Domains": [
+    {
+      "name": "CCF",
+      "pattern_modify": {
+        "initial_voltage": {
+          "multiplier": 400,
+          "configuration": "CCF_TARGET_VOLTAGE",
+          "number_of_targets": 1
+        }
+      },
+      "default_value": 0.9
+    },
+    {
+      "name": "ATOM0",
+      "pattern_modify": {
+        "initial_voltage": {
+          "multiplier": 400,
+          "configuration": "ATOM0_TARGET_VOLTAGE",
+          "number_of_targets": 2
+        }
+      },
+      "default_value": 0.9
+    },
+    {
+      "name": "ATOM1",
+      "pattern_modify": {
+        "initial_voltage": {
+          "multiplier": 400,
+          "configuration": "ATOM1_TARGET_VOLTAGE",
+          "number_of_targets": 2
+        }
+      },
+      "default_value": 0.9
+    },
+    {
+      "name": "CORE0",
+      "pattern_modify": {
+        "initial_voltage": {
+          "multiplier": 400,
+          "configuration": "CORE0_TARGET_VOLTAGE",
+          "number_of_targets": 1
+        }
+      },
+      "default_value": 0.9
+    },
+    {
+      "name": "CORE1",
+      "pattern_modify": {
+        "initial_voltage": {
+          "multiplier": 400,
+          "configuration": "CORE1_TARGET_VOLTAGE",
+          "number_of_targets": 1
+        }
+      },
+      "default_value": 0.9
+    }
+  ],
+  "DomainGroups": [
+    {
+      "name": "ATOMS",
+      "domains": [
+        "ATOM0",
+        "ATOM1"
+      ]
+    },
+    {
+      "name": "CORES",
+      "domains": [
+        "CORE0",
+        "CORE1"
+      ]
+    }
+  ],
+  "PatternModify": [
+    {
+      "pattern_modify_name": "CDIE_ATOM_POWERMUX",
+      "module": "MCdrv",
+      "group": "pwrmux_sel_atom_l2_0",
+      "selector": "0.715 > max(ATOM0, ATOM1)",
+      "set_point_for_true": "vnnaon",
+      "set_point_for_false": "vcclogic"
+    },
+
+    {
+      "pattern_modify_name": "CDIE_ATOM_POWERMUXM0",
+      "module": "MCdrv",
+      "group": "pwrmux_sel_atom0_l2_0",
+      "selector": "0.715 > max(ATOM0)",
+      "set_point_for_true": "vnnaon",
+      "set_point_for_false": "vcclogic"
+    },
+
+    {
+      "pattern_modify_name": "CDIE_ATOM_POWERMUXM1",
+      "module": "MCdrv",
+      "group": "pwrmux_sel_atom1_l2_0",
+      "selector": "0.715 > max(ATOM1)",
+      "set_point_for_true": "vnnaon",
+      "set_point_for_false": "vcclogic"
+    },
+
+    {
+      "pattern_modify_name": "CDIE_ATOM_POWERMUX_C6SRAM",
+      "module": "MCdrv",
+      "group": "pwrmux_sel_atom_c6sram_0",
+      "selector": "0.715 > max(ATOM0, ATOM1)",
+      "set_point_for_true": "vnnaon",
+      "set_point_for_false": "vcclogic"
+    },
+    {
+      "pattern_modify_name": "CDIE_CCF_POWERMUX",
+      "module": "MCdrv",
+      "group": "pwrmux_sel_ccf_0",
+      "selector": "0.715 > CCF",
+      "set_point_for_true": "vnnaon",
+      "set_point_for_false": "vcclogic"
+    },
+    {
+      "pattern_modify_name": "CDIE_L2_NBLCTRL0",
+      "module": "CDIE_ATOM",
+      "group": "nblctrl_cdie_atom_l2",
+      "selector": "1.0 < max(ATOM0)",
+      "set_point_for_true": "nbloff",
+      "set_point_for_false": "nblon"
+    },
+    {
+      "pattern_modify_name": "CDIE_L2_NBLCTRL1",
+      "module": "CDIE_ATOM",
+      "group": "nblctrl_cdie_atom_l2",
+      "selector": "1.0 < max(ATOM1)",
+      "set_point_for_true": "nbloff",
+      "set_point_for_false": "nblon"
+    },
+    {
+      "pattern_modify_name": "CDIE_CCF_NBLCTRL",
+      "module": "CCF",
+      "group": "nblctrl_ccf",
+      "selector": "1.0 < CCF",
+      "set_point_for_true": "ccfnbloff",
+      "set_point_for_false": "ccfnblon"
+    },
+    {
+      "pattern_modify_name": "CDIE_CORE_NBLCTRL0",
+      "module": "CORE",
+      "group": "nblctrl_core_l2",
+      "selector": "1.0 < max(CORE0)",
+      "set_point_for_true": "nbloff",
+      "set_point_for_false": "nblon"
+    },
+    {
+      "pattern_modify_name": "CDIE_CORE_NBLCTRL1",
+      "module": "CORE",
+      "group": "nblctrl_core_l2",
+      "selector": "1.0 < max(CORE1)",
+      "set_point_for_true": "nbloff",
+      "set_point_for_false": "nblon"
+    }
+  ],
+  "DlvrPins": [
+    {
+      "pin_name": "VCCIA",
+      "voltage_expression": [
+        {
+          "expression_name": "ALL",
+          "expression_value": "max(CCF,CORE0,CORE1,ATOM0,ATOM1)+0.125"
+        },
+        {
+          "expression_name": "CCF",
+          "expression_value": "max(CCF)+0.1"
+        },
+        {
+          "expression_name": "CCF_CORE",
+          "expression_value": "max(CCF,CORE0,CORE1)+0.125"
+        },
+        {
+          "expression_name": "CCF_ATOM",
+          "expression_value": "max(CCF,ATOM0,ATOM1)+0.125"
+        },
+        {
+          "expression_name": "CCF_PS0",
+          "expression_value": "max(CCF)+0.125"
+        },
+        {
+          "expression_name": "CCF_PS1",
+          "expression_value": "max(CCF)+0.075"
+        },
+        {
+          "expression_name": "CCF_PS2",
+          "expression_value": "max(CCF)+0.040"
+        },
+        {
+          "expression_name": "CCF_PS3",
+          "expression_value": "max(CCF)+0.028"
+        },
+        {
+          "expression_name": "CORE",
+          "expression_value": "max(CORE0,CORE1)+0.125"
+        },
+        {
+          "expression_name": "CORE_PS0",
+          "expression_value": "max(CORE0,CORE1)+0.125"
+        },
+        {
+          "expression_name": "CORE_PS1",
+          "expression_value": "max(CORE0,CORE1)+0.1"
+        },
+        {
+          "expression_name": "CORE_PS2",
+          "expression_value": "max(CORE0,CORE1)+0.075"
+        },
+        {
+          "expression_name": "CORE_PS3",
+          "expression_value": "max(CORE0,CORE1)+0.075"
+        },
+        {
+          "expression_name": "ATOM",
+          "expression_value": "max(ATOM0,ATOM1)+0.125"
+        },
+        {
+          "expression_name": "ATOM_PS0",
+          "expression_value": "max(ATOM0,ATOM1)+0.125"
+        },
+        {
+          "expression_name": "ATOM_PS1",
+          "expression_value": "max(ATOM0,ATOM1)+0.1"
+        },
+        {
+          "expression_name": "ATOM_PS2",
+          "expression_value": "max(ATOM0,ATOM1)+0.075"
+        },
+        {
+          "expression_name": "ATOM_PS3",
+          "expression_value": "max(ATOM0,ATOM1)+0.065"
+        },
+        {
+          "expression_name": "F6",
+          "expression_value": "max(CCF,CORE0,CORE1,ATOM0,ATOM1,1.2)+0.125"
+        },
+        {
+          "expression_name": "VCCIA_1P5",
+          "expression_value": "1.5"
+        }
+      ],
+      "min": 0.7,
+      "max": 1.6,
+      "step_size": 0.01
+    }
+  ]
+
+}

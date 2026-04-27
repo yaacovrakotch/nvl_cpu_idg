@@ -1,0 +1,30 @@
+Version 1.0;
+
+UserVars ARR_COMMON_Specs
+{
+	String VCCIA = "1";
+	String VCCSA = "1";
+	Integer HCS_SIZE = 10048;
+	Integer FDS_SIZE = 32928;
+	Const String BISRStress = "MCarr:bisr_modify_BP176_BP179_BP182_BP185_BP200_BP203_BP206_BP209_BP224_BP227_BP230_BP233:bisrrepair:Global,MCarr:bisr_modify_BP177_BP180_BP183_BP186_BP201_BP204_BP207_BP210_BP225_BP228_BP231_BP234:bisrrepair:Global,MCarr:bisr_modify_BP178_BP181_BP184_BP187_BP202_BP205_BP208_BP211_BP226_BP229_BP232_BP235:bisrrepair:Global,MCarr:bisr_modify_BP189_BP190_BP195_BP196_BP213_BP214_BP219_BP220:bisrrepair:Global,MCarr:bisr_modify_BP191_BP197_BP215_BP221:bisrrepair:Global,MCarr:bisr_modify_BP192_BP193_BP198_BP199_BP216_BP217_BP222_BP223:bisrrepair:Global";
+	Const String HRY_LIST = GetEnvironmentVariable("MCARR_PATMODIFY_PATH") + "\\NVLCPU_A\\HRY\\MBIST\\MIT_MBIST_HRY_list.json";
+
+}
+
+SelectorRuleCollection  ARR_COMMON_Rules
+{
+	SelectorRule QA_HOT_Default (QA,HOT, Default)
+	{
+		QA => contains("[5M],[5S],[4M],[4S],[QQ],[QE],[QP],[QC],[QZ],[Q8]","[" + __shared__::SCVars.SC_ENGID + "]") && contains(__shared__::LocationSets.QA_S1,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		HOT => contains(__shared__::LocationSets.CH_CHVM + "," + __shared__::LocationSets.CH_CRV + "," + __shared__::LocationSets.CHM_ENG,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.RCHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Default;
+	}
+	SelectorRule RC_S1 (RC, Default)
+	{
+		RC => contains(__shared__::LocationSets.RC_S1,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Default;
+	}
+}
+
+
+

@@ -1,0 +1,754 @@
+Version 1.0;
+
+
+Levels cpu_all_bf_x_x_ipc_lvl
+{
+	cpu_all_ec_pins
+	{
+		IClampHi = 0.04;
+		IClampLo = -0.04;
+		IRange = "IR40mA";
+		OPMode = "VSIM";
+		PinModeSel = "PMU";
+		VForce = 0V;
+	}
+	SequenceBreak 0mS;
+	cpu_all_hpc_pins
+	{
+		IClampHi = 0.04;
+		IClampLo = -0.04;
+		IRange = "IR40mA";
+		OPMode = "VSIM";
+		PinModeSel = "PMU";
+		VForce = 0V;
+	}
+	SequenceBreak 0mS;
+	cpu_all_hpcdif_pins
+	{
+		IClampHi = 0.04;
+		IClampLo = -0.04;
+		IRange = "IR40mA";
+		OPMode = "VSIM";
+		PinModeSel = "PMU";
+		VForce = 0V;
+	}
+	SequenceBreak 0mS;
+	cpu_all_dpin_pins
+	{
+		IClampHi = 0.04;
+		IClampLo = -0.04;
+		IRange = "IR40mA";
+		OPMode = "VSIM";
+		PinModeSel = "PMU";
+		VForce = 0V;
+	}
+	SequenceBreak 0mS;
+	VNNAON
+	{
+		FreeDriveTime = 5mS;
+		IClampHi = c_cpu_all_vnnaon_clamp_hi;
+		IClampLo = -10A;
+		IRange = "IR24A";
+		OPModeCheck = "VSIM";
+		VForce = c_vnnaon_prog;
+		VSlewStepRatio = 120;
+	}
+	VNNAON_FLTR
+	{
+		FreeDriveTime = 5mS;
+		IClampHi = c_cpu_all_vnnaon_fltr_clamp_hi;
+		IClampLo = -5A;
+		IRange = "IR24A";
+		OPModeCheck = "VSIM";
+		VForce = c_vnnaon_prog;
+		VSlewStepRatio = 120;
+	}
+	VNNAON_FLTR_H
+	{
+		FreeDriveTime  = 5mS;
+		IClampHi       = c_cpu_all_vnnaon_fltr_h_clamp_hi;
+		IClampLo       = -600mA;
+		IRange         = "IR1_2A";
+		OPModeCheck    = "VSIM";
+		VForce         = c_vnnaon_fltr_h_prog;
+	}
+	VCCIO
+	{
+		FreeDriveTime = 5mS;
+		IClampHi = c_cpu_all_vccio_clamp_hi;
+		IClampLo = -5A;
+		IRange = "IR24A";
+		OPModeCheck = "VSIM";
+		VForce = c_vccio_prog;
+		VSlewStepRatio = 120;
+	}
+	VCCIO_FLTR
+	{
+		FreeDriveTime = 5mS;
+		IClampHi = c_cpu_all_vccio_fltr_clamp_hi;
+		IClampLo = -5A;
+		IRange = "IR24A";
+		OPModeCheck = "VSIM";
+		VForce = c_vccio_prog;
+		VSlewStepRatio = 120;
+	}
+	VCCIO_FLTR_H
+	{
+		FreeDriveTime  = 5mS;
+		IClampHi       = c_cpu_all_vccio_fltr_h_clamp_hi;
+		IClampLo       = -600mA;
+		IRange         = "IR1_2A";
+		OPModeCheck    = "VSIM";
+		VForce         = c_vccio_fltr_h_prog;
+
+	}
+	VCCIO_OUT_SVID
+	{
+		#FreeDriveTime = 5mS;
+		#IClampHi = c_cpu_all_vccio_out_svid_clamp_hi;
+		#IClampLo = -0.6A;
+		#IRange = "IR1_2A";
+		#OPModeCheck = "VSIM";
+		#VForce = c_vccio_prog;		
+		OPMode = "VM";
+	}
+	V1P8
+	{
+		FreeDriveTime = 5mS;
+		IClampHi = c_cpu_all_v1p8_clamp_hi;
+		IClampLo = -0.6A;
+		IRange = "IR1_2A";
+		OPModeCheck = "VSIM";
+		VForce = c_v1p8_prog;
+	}
+	V1P8_FLTR
+	{
+		FreeDriveTime = 5mS;
+		IClampHi = c_cpu_all_v1p8_fltr_clamp_hi;
+		IClampLo = -0.6A;
+		IRange = "IR1_2A";
+		OPModeCheck = "VSIM";
+		VForce = c_v1p8_prog;
+	}
+	V1P8_FLTRA
+	{
+		FreeDriveTime = 5mS;
+		IClampHi = 1.2A;
+		IClampLo = -0.6A;
+		IRange = "IR1_2A";
+		OPModeCheck = "VSIM";
+		VForce = c_v1p8_prog;
+	}
+	V1P8_FLTRB
+	{
+		FreeDriveTime = 5mS;
+		IClampHi = 1.2A;
+		IClampLo = -0.6A;
+		IRange = "IR1_2A";
+		OPModeCheck = "VSIM";
+		VForce = c_v1p8_prog;
+	}
+	V1P8_CPU
+	{
+		FreeDriveTime = 5mS;
+		IClampHi = c_cpu_all_v1p8_cpu_clamp_hi;
+		IClampLo = -0.6A;
+		IRange = "IR1_2A";
+		OPModeCheck = "VSIM";
+		VForce = c_v1p8_prog;
+	}
+	VCCIA
+	{
+		FreeDriveTime = 5mS;
+		IClampHi = c_cpu_all_vccia_clamp_hi;
+		IClampLo = -45A;
+		IRange = "IR24A";
+		OPModeCheck = "VSIM";
+		VForce = c_vccia_prog;
+		VSlewStepRatio = 120;
+	}
+	VCCFPGM_CPU0_0
+	{
+		FreeDriveTime = 5mS;
+        FreeDriveCurrentHi=256mA; 
+        FreeDriveCurrentLo=-256mA; 
+		IClampHi = 256mA;
+		IClampLo = -256mA;
+		IRange = "IR256mA";
+		OPModeCheck = "VSIM";
+		VForce = p_vccfpgm_cpu0_0_prog;
+	}
+	VCCFPGM_CPU0_1
+	{
+		FreeDriveTime = 5mS;
+        FreeDriveCurrentHi=256mA; 
+        FreeDriveCurrentLo=-256mA; 
+		IClampHi = 256mA;
+		IClampLo = -256mA;
+		IRange = "IR256mA";
+		OPModeCheck = "VSIM";
+		VForce = p_vccfpgm_cpu0_1_prog;
+	}
+	VCCFPGM_CPU1_0
+	{
+		FreeDriveTime = 5mS;
+        FreeDriveCurrentHi=256mA; 
+        FreeDriveCurrentLo=-256mA; 
+		IClampHi = 256mA;
+		IClampLo = -256mA;
+		IRange = "IR256mA";
+		OPModeCheck = "VSIM";
+		VForce = p_vccfpgm_cpu1_0_prog;
+	}
+	VCCFPGM_CPU1_1
+	{
+		FreeDriveTime = 5mS;
+        FreeDriveCurrentHi=256mA; 
+        FreeDriveCurrentLo=-256mA; 
+		IClampHi = 256mA;
+		IClampLo = -256mA;
+		IRange = "IR256mA";
+		OPModeCheck = "VSIM";
+		VForce = p_vccfpgm_cpu1_1_prog;
+	}
+
+	CPU0_EXT_BGREF_TRIM_ANA
+	{
+		FreeDriveTime = 5mS;
+		IClampHi      = 1.2A;
+		IClampLo      = -0.6A;
+		IRange        = "IR1_2A";
+		OPModeCheck   = "VSIM";
+		VForce        = p_cpu0_ext_bgref_trim_ana;
+	}
+	CPU1_EXT_BGREF_TRIM_ANA
+	{
+		FreeDriveTime = 5mS;
+		IClampHi      = 1.2A;
+		IClampLo      = -0.6A;
+		IRange        = "IR1_2A";
+		OPModeCheck   = "VSIM";
+		VForce        = p_cpu1_ext_bgref_trim_ana;
+	}
+
+
+	CPU_VLOADMUXCBIT0     { DefaultState = "OutputHi"; Direction    = "Output"; LogicalValue = c_cpu_vloadmux_bit0_logical_value; }
+	CPU_VLOADMUXCBIT1     { DefaultState = "OutputHi"; Direction    = "Output"; LogicalValue = c_cpu_vloadmux_bit1_logical_value; }
+	CPU_VLOADMUXCBIT2     { DefaultState = "OutputHi"; Direction    = "Output"; LogicalValue = c_cpu_vloadmux_bit2_logical_value; }
+	CPU_VLOADMUXCBIT3     { DefaultState = "OutputHi"; Direction    = "Output"; LogicalValue = c_cpu_vloadmux_bit3_logical_value; }
+	CPU_VLOADMUXCBIT4     { DefaultState = "OutputHi"; Direction    = "Output"; LogicalValue = c_cpu_vloadmux_bit4_logical_value; }
+	
+	VLOAD1
+	{
+		OPMode = "VM";
+	}
+	VLOAD2
+	{
+		OPMode = "VM";
+	}
+	VLOAD3
+	{
+		OPMode = "VM";
+	}
+	VLOAD4
+	{
+		OPMode = "VM";
+	}
+
+    CPU_ATOM0_DLVROUT { IClampHi = 0.04; IClampLo = -0.04;IRange = "IR40mA";OPMode = "VM";PinModeSel = "PMU";}
+    CPU_ATOM1_DLVROUT { IClampHi = 0.04; IClampLo = -0.04;IRange = "IR40mA";OPMode = "VM";PinModeSel = "PMU";}
+    CPU_ATOM2_DLVROUT { IClampHi = 0.04; IClampLo = -0.04;IRange = "IR40mA";OPMode = "VM";PinModeSel = "PMU";}
+    CPU_ATOM3_DLVROUT { IClampHi = 0.04; IClampLo = -0.04;IRange = "IR40mA";OPMode = "VM";PinModeSel = "PMU";}
+    CPU_CORE0_DLVROUT { IClampHi = 0.04; IClampLo = -0.04;IRange = "IR40mA";OPMode = "VM";PinModeSel = "PMU";}
+    CPU_CORE1_DLVROUT { IClampHi = 0.04; IClampLo = -0.04;IRange = "IR40mA";OPMode = "VM";PinModeSel = "PMU";}
+    CPU_CORE2_DLVROUT { IClampHi = 0.04; IClampLo = -0.04;IRange = "IR40mA";OPMode = "VM";PinModeSel = "PMU";}
+    CPU_CORE3_DLVROUT { IClampHi = 0.04; IClampLo = -0.04;IRange = "IR40mA";OPMode = "VM";PinModeSel = "PMU";}
+    CPU_CCF_DLVROUT   { IClampHi = 0.04; IClampLo = -0.04;IRange = "IR40mA";OPMode = "VM";PinModeSel = "PMU";}
+    CPU1_ATOM0_DLVROUT{ IClampHi = 0.04; IClampLo = -0.04;IRange = "IR40mA";OPMode = "VM";PinModeSel = "PMU";}
+    CPU1_ATOM1_DLVROUT{ IClampHi = 0.04; IClampLo = -0.04;IRange = "IR40mA";OPMode = "VM";PinModeSel = "PMU";}
+    CPU1_ATOM2_DLVROUT{ IClampHi = 0.04; IClampLo = -0.04;IRange = "IR40mA";OPMode = "VM";PinModeSel = "PMU";}
+    CPU1_ATOM3_DLVROUT{ IClampHi = 0.04; IClampLo = -0.04;IRange = "IR40mA";OPMode = "VM";PinModeSel = "PMU";}
+    CPU1_CORE0_DLVROUT{ IClampHi = 0.04; IClampLo = -0.04;IRange = "IR40mA";OPMode = "VM";PinModeSel = "PMU";}
+    CPU1_CORE1_DLVROUT{ IClampHi = 0.04; IClampLo = -0.04;IRange = "IR40mA";OPMode = "VM";PinModeSel = "PMU";}
+    CPU1_CORE2_DLVROUT{ IClampHi = 0.04; IClampLo = -0.04;IRange = "IR40mA";OPMode = "VM";PinModeSel = "PMU";}
+    CPU1_CORE3_DLVROUT{ IClampHi = 0.04; IClampLo = -0.04;IRange = "IR40mA";OPMode = "VM";PinModeSel = "PMU";}
+    CPU1_CCF_DLVROUT  { IClampHi = 0.04; IClampLo = -0.04;IRange = "IR40mA";OPMode = "VM";PinModeSel = "PMU";}
+
+	HVM_TESTMODE
+	{
+		FreeDriveTime = 0mS;
+		IClampHi      = 256mA;
+		IClampLo      = -256mA;
+		IRange        = "IR256mA";
+		OPModeCheck   = "VSIM";
+		VForce        = c_hvmtestmode_prog;
+	}
+
+	
+	#this is only for PKG
+#	TIU_CLKCHIP_HUBHVMCLK_VIH   {FreeDriveTime = 0mS;IClampHi = 256mA;IClampLo = -256mA;IRange = "IR256mA";OPModeCheck = "VSIM";VForce = c_vnnaon_prog;}
+#	TIU_CLKCHIP_OUTPUT_VIH      {FreeDriveTime = 0mS;IClampHi = 256mA;IClampLo = -256mA;IRange = "IR256mA";OPModeCheck = "VSIM";VForce = c_v1p8_prog;}
+#	TIU_CLKCHIP_RTCCLKIN_VIH    {FreeDriveTime = 0mS;IClampHi = 256mA;IClampLo = -256mA;IRange = "IR256mA";OPModeCheck = "VSIM";VForce = c_v1p8_prog;}
+#	SequenceBreak 0mS;
+#	TIU_CLKCHIP_OUTPUT_ENABLE   {FreeDriveTime = 0mS;IClampHi = 256mA;IClampLo = -256mA;IRange = "IR256mA";OPModeCheck = "VSIM";VForce = 0V;}
+#	IO_RLY_08_CLKCHIP_OUTPUT_EN {LogicalValue  = 0; }
+
+
+	SequenceBreak 0mS;
+	cpu_all_ec_pins
+	{
+		FixedDriveState = "Off";
+		PinModeSel = "Digital";
+		VIH= c_cpu_all_vnnaon_vih;
+		VIL= c_cpu_all_vnnaon_vil;
+		VOX= c_cpu_all_vnnaon_vox;
+	}
+	cpu_all_hpc_pins
+	{
+		FixedDriveState = "Off";
+		PinModeSel = "Digital";
+		TermMode = "Off";
+		VIH= c_cpu_all_vnnaon_vih;
+		VIL= c_cpu_all_vnnaon_vil;
+		VOX= c_cpu_all_vnnaon_vox;
+	}
+	cpu_all_hpcdif_pins
+	{
+		FixedDriveState = "Off";
+		PinModeSel = "Digital";
+		TermMode = "Off";
+		VIH= c_cpu_all_vnnaon_vih;
+		VIL= c_cpu_all_vnnaon_vil;
+		VOX= c_cpu_all_vnnaon_vox;
+	}
+	cpu_all_dpin_pins_vnnaon
+	{
+		FixedDriveState = "Off";
+		PinModeSel = "Digital";
+		TermMode = "Off";
+		VIH= c_cpu_all_vnnaon_vih;
+		VIL= c_cpu_all_vnnaon_vil;
+		VOX= c_cpu_all_vnnaon_vox;
+	}
+	cpu_all_dpin_pins_vccio
+	{
+		FixedDriveState = "Off";
+		PinModeSel = "Digital";
+		TermMode = "Off";
+		VIH= c_cpu_all_vccio_vih;
+		VIL= c_cpu_all_vccio_vil;
+		VOX= c_cpu_all_vccio_vox;
+	}
+	cpu_all_1_ec_pins
+	{
+		FixedDriveState = "Off";
+		PinModeSel = "Digital";
+		VIH= c_cpu_all_1_vnnaon_vih;
+		VIL= c_cpu_all_1_vnnaon_vil;
+		VOX= c_cpu_all_1_vnnaon_vox;
+	}
+	cpu_all_1_hpc_pins
+	{
+		FixedDriveState = "Off";
+		PinModeSel = "Digital";
+		TermMode = "Off";
+		VIH= c_cpu_all_1_vnnaon_vih;
+		VIL= c_cpu_all_1_vnnaon_vil;
+		VOX= c_cpu_all_1_vnnaon_vox;
+	}
+	cpu_all_1_hpcdif_pins
+	{
+		FixedDriveState = "Off";
+		PinModeSel = "Digital";
+		TermMode = "Off";
+		VIH= c_cpu_all_1_vnnaon_vih;
+		VIL= c_cpu_all_1_vnnaon_vil;
+		VOX= c_cpu_all_1_vnnaon_vox;
+	}
+	cpu_all_1_dpin_pins_vnnaon
+	{
+		FixedDriveState = "Off";
+		PinModeSel = "Digital";
+		TermMode = "Off";
+		VIH= c_cpu_all_1_vnnaon_vih;
+		VIL= c_cpu_all_1_vnnaon_vil;
+		VOX= c_cpu_all_1_vnnaon_vox;
+	}
+	cpu_all_1_dpin_pins_vccio
+	{
+		FixedDriveState = "Off";
+		PinModeSel = "Digital";
+		TermMode = "Off";
+		VIH= c_cpu_all_1_vccio_vih;
+		VIL= c_cpu_all_1_vccio_vil;
+		VOX= c_cpu_all_1_vccio_vox;
+	}
+	SequenceBreak 0mS;
+	CPU1_TSTPRT_I_CK_EC
+	{
+		FixedDriveState = "Off";
+		PinModeSel = "Digital";
+		VIH = c_cpu_all_1_tstprt_i_ck_ec_vih;
+		VIL = c_cpu_all_1_tstprt_i_ck_ec_vil;
+		VOX = c_cpu_all_1_tstprt_i_ck_ec_vox;
+	}
+	CPU1_TSTPRT_O_CK_EC
+	{
+		FixedDriveState = "Off";
+		PinModeSel = "Digital";
+		VIH = c_cpu_all_1_tstprt_o_ck_ec_vih;
+		VIL = c_cpu_all_1_tstprt_i_ck_ec_vil;
+		VOX = c_cpu_all_1_tstprt_o_ck_ec_vox;
+	}
+	CPU1_TSTPRT_I_CK
+	{
+		FixedDriveState = "Off";
+		PinModeSel = "Digital";
+		TermMode = "Off";
+		VIH = c_cpu_all_1_tstprt_o_ck_vih;
+		VIL = c_cpu_all_1_tstprt_i_ck_vil;
+		VOX = c_cpu_all_1_tstprt_o_ck_vox;
+	}
+	CPU1_TSTPRT_O_CK
+	{
+		FixedDriveState = "Off";
+		PinModeSel = "Digital";
+		TermMode = "Off";
+		VIH = c_cpu_all_1_tstprt_o_ck_vih;
+		VIL = c_cpu_all_1_tstprt_i_ck_vil;
+		VOX = c_cpu_all_1_tstprt_o_ck_vox;
+	}
+	cpu_all_1_tstprt_i_data
+	{
+		FixedDriveState = "Off";
+		IOH = p_cpu_all_1_tstprt_ioh; 
+		IOL = p_cpu_all_1_tstprt_iol;
+		PinModeSel = "Digital";
+		TermMode = c_cpu_all_1_tstprt_i_data_term_mode;
+		TermVRef = c_cpu_all_1_tstprt_i_data_term_vref;       
+		VIH = c_cpu_all_1_tstprt_i_data_vih;
+		VIL = c_cpu_all_1_tstprt_i_data_vil;
+		VOX = c_cpu_all_1_tstprt_i_data_vox;
+	}
+	cpu_all_1_tstprt_o_data
+	{
+		FixedDriveState = "Off";
+		IOH = p_cpu_all_1_tstprt_ioh; 
+		IOL = p_cpu_all_1_tstprt_iol;
+		PinModeSel = "Digital";
+		TermMode = c_cpu_all_1_tstprt_o_data_term_mode;
+		TermVRef = c_cpu_all_1_tstprt_o_data_term_vref;    
+		VIH = c_cpu_all_1_tstprt_o_data_vih;
+		VIL = c_cpu_all_1_tstprt_o_data_vil;
+		VOX = c_cpu_all_1_tstprt_o_data_vox;
+	}
+	CPU1_TRST
+	{
+		FixedDriveState = "Off";
+		PinModeSel = "Digital";
+		TermMode = "Off";
+		VIH = c_cpu_all_1_tap_trst_vih;
+		VIL = c_cpu_all_1_tap_trst_vil;
+		VOX = c_cpu_all_1_tap_trst_vox;
+	}
+	CPU1_TCK
+	{
+		FixedDriveState = "Off";
+		PinModeSel = "Digital";
+		VIH = c_cpu_all_1_tap_tck_vih;
+		VIL = c_cpu_all_1_tap_tck_vil;
+		VOX = c_cpu_all_1_tap_tck_vox;
+	}
+	CPU1_TMS
+	{
+		FixedDriveState = "Off";
+		PinModeSel = "Digital";
+		TermMode = "Off";
+		VIH = c_cpu_all_1_tap_tms_vih;
+		VIL = c_cpu_all_1_tap_tms_vil;
+		VOX = c_cpu_all_1_tap_tms_vox;
+	}
+	CPU1_TDI
+	{
+		FixedDriveState = "Off";
+		PinModeSel = "Digital";
+		TermMode = "Off";
+		VIH = c_cpu_all_1_tap_tdi_vih;
+		VIL = c_cpu_all_1_tap_tdi_vil;
+		VOX = c_cpu_all_1_tap_tdi_vox;
+	}
+	CPU1_TDO
+	{
+		FixedDriveState = "Off";
+		PinModeSel      = "Digital";
+		TermMode        = c_cpu_all_1_tap_tdo_termmode;
+		VIH             = c_cpu_all_1_tap_tdo_vih;
+		VIL             = c_cpu_all_1_tap_tdo_vil;
+		VOX             = c_cpu_all_1_tap_tdo_vox;
+		VRef            = c_cpu_all_1_tap_tdo_vref;
+		IOH             = c_cpu_all_1_tap_tdo_ioh;
+		IOL             = c_cpu_all_1_tap_tdo_iol;
+	}
+	CPU_TSTPRT_I_CK_EC
+	{
+		FixedDriveState = "Off";
+		PinModeSel = "Digital";
+		VIH = c_cpu_all_tstprt_i_ck_ec_vih;
+		VIL = c_cpu_all_tstprt_i_ck_ec_vil;
+		VOX = c_cpu_all_tstprt_i_ck_ec_vox;
+	}
+	CPU_TSTPRT_O_CK_EC
+	{
+		FixedDriveState = "Off";
+		PinModeSel = "Digital";
+		VIH = c_cpu_all_tstprt_o_ck_ec_vih;
+		VIL = c_cpu_all_tstprt_o_ck_ec_vil;
+		VOX = c_cpu_all_tstprt_o_ck_ec_vox;
+	}
+	CPU_TSTPRT_I_CK
+	{
+		FixedDriveState = "Off";
+		PinModeSel = "Digital";
+		TermMode = "Off";
+		VIH = c_cpu_all_tstprt_i_ck_vih;
+		VIL = c_cpu_all_tstprt_i_ck_vil;
+		VOX = c_cpu_all_tstprt_i_ck_vox;
+	}
+	CPU_TSTPRT_O_CK
+	{
+		FixedDriveState = "Off";
+		PinModeSel = "Digital";
+		TermMode = "Off";
+		VIH = c_cpu_all_tstprt_o_ck_vih;
+		VIL = c_cpu_all_tstprt_o_ck_vil;
+		VOX = c_cpu_all_tstprt_o_ck_vox;
+	}
+	cpu_all_tstprt_i_data
+	{
+		FixedDriveState = "Off";
+		IOH = p_cpu_all_tstprt_ioh; 
+		IOL = p_cpu_all_tstprt_iol;
+		PinModeSel = "Digital";
+		TermMode = c_cpu_all_tstprt_i_data_term_mode;
+		TermVRef = c_cpu_all_tstprt_i_data_term_vref;   
+		VIH = c_cpu_all_tstprt_i_data_vih;
+		VIL = c_cpu_all_tstprt_i_data_vil;
+		VOX = c_cpu_all_tstprt_i_data_vox;
+	}
+	cpu_all_tstprt_o_data
+	{
+		FixedDriveState = "Off";
+		IOH = p_cpu_all_tstprt_ioh; 
+		IOL = p_cpu_all_tstprt_iol;
+		PinModeSel = "Digital";
+		TermMode = c_cpu_all_tstprt_o_data_term_mode;
+		TermVRef = c_cpu_all_tstprt_o_data_term_vref;  
+		VIH = c_cpu_all_tstprt_o_data_vih;
+		VIL = c_cpu_all_tstprt_o_data_vil;
+		VOX = c_cpu_all_tstprt_o_data_vox;
+	}
+	CPU_TRST
+	{
+		FixedDriveState = "Off";
+		PinModeSel = "Digital";
+		TermMode = "Off";
+		VIH = c_cpu_all_tap_trst_vih;
+		VIL = c_cpu_all_tap_trst_vil;
+		VOX = c_cpu_all_tap_trst_vox;
+	}
+	CPU_TCK
+	{
+		FixedDriveState = "Off";
+		PinModeSel = "Digital";
+		VIH = c_cpu_all_tap_tck_vih;
+		VIL = c_cpu_all_tap_tck_vil;
+		VOX = c_cpu_all_tap_tck_vox;
+	}
+	CPU_TMS
+	{
+		FixedDriveState = "Off";
+		PinModeSel = "Digital";
+		TermMode = "Off";
+		VIH = c_cpu_all_tap_tms_vih;
+		VIL = c_cpu_all_tap_tms_vil;
+		VOX = c_cpu_all_tap_tms_vox;
+	}
+	CPU_TDI
+	{
+		FixedDriveState = "Off";
+		PinModeSel = "Digital";
+		TermMode = "Off";
+		VIH = c_cpu_all_tap_tdi_vih;
+		VIL = c_cpu_all_tap_tdi_vil;
+		VOX = c_cpu_all_tap_tdi_vox;
+	}
+	CPU_TDO
+	{
+		FixedDriveState = "Off";
+		PinModeSel      = "Digital";
+		TermMode        = c_cpu_all_tap_tdo_termmode;
+		VIH             = c_cpu_all_tap_tdo_vih;
+		VIL             = c_cpu_all_tap_tdo_vil;
+		VOX             = c_cpu_all_tap_tdo_vox;
+		VRef            = c_cpu_all_tap_tdo_vref;
+		IOH             = c_cpu_all_tap_tdo_ioh;
+		IOL             = c_cpu_all_tap_tdo_iol;
+	}
+	
+	
+	SequenceBreak 0mS;
+	CPU_RST_00 #xx_cpu_hvm_epd_on
+	{
+		FixedDriveState = p_cpu_all_epd_on_FixedDriveState;
+		PinModeSel = "Digital";
+		TermMode = "Off";
+	}
+	CPU_RST_01 #xx_cpu_hvm_cold_boot_trigger
+	{
+		FixedDriveState = p_cpu_all_cbt_FixedDriveState;
+		PinModeSel = "Digital";
+		TermMode = "Off";
+	}
+	CPU1_RST_00 #xx_cpu_hvm_epd_on
+	{
+		FixedDriveState = p_cpu_all_1_epd_on_FixedDriveState;
+		PinModeSel = "Digital";
+		TermMode = "Off";
+	}
+	CPU1_RST_01 #xx_cpu_hvm_cold_boot_trigger
+	{
+		FixedDriveState = p_cpu_all_1_cbt_FixedDriveState;
+		PinModeSel = "Digital";
+		TermMode = "Off";
+	}
+	
+	CPU_HVM_TESTMODE  {TermMode = "Off";PinModeSel = "Digital";FixedDriveState="VIH";}
+	CPU1_HVM_TESTMODE {TermMode = "Off";PinModeSel = "Digital";FixedDriveState="VIH";}
+	
+	CPU_PROBE_TRIG0
+    {
+		FixedDriveState = "Off";
+		PinModeSel      = "Digital";
+		TermMode        = "Off";
+		VIH             = 1.8;
+		VIL             = 0;
+		VOX             = 0.9;
+	}
+    CPU_PROBE_TRIG1
+    {
+        FixedDriveState = "Off";
+		PinModeSel      = "Digital";
+		TermMode        = "Off";
+		VIH             = 1.8;
+		VIL             = 0;
+		VOX             = 0.9;
+	}
+	
+	CPU1_PROBE_TRIG0
+    {
+		FixedDriveState = "Off";
+		PinModeSel      = "Digital";
+		TermMode        = "Off";
+		VIH             = 1.8;
+		VIL             = 0;
+		VOX             = 0.9;
+	}
+    CPU1_PROBE_TRIG1
+    {
+        FixedDriveState = "Off";
+		PinModeSel      = "Digital";
+		TermMode        = "Off";
+		VIH             = 1.8;
+		VIL             = 0;
+		VOX             = 0.9;
+	}
+	
+	
+	
+}
+Levels Power_dwn_IPC
+{
+	cpu_all_ec_pins
+	{
+		IClampHi = 0.04;
+		IClampLo = -0.04;
+		IRange = "IR40mA";
+		OPMode = "VSIM";
+		PinModeSel = "PMU";
+		VForce = 0V;
+	}
+	SequenceBreak 0mS;
+	cpu_all_hpc_pins
+	{
+		IClampHi = 0.04;
+		IClampLo = -0.04;
+		IRange = "IR40mA";
+		OPMode = "VSIM";
+		PinModeSel = "PMU";
+		VForce = 0V;
+	}
+	SequenceBreak 0mS;
+	cpu_all_hpcdif_pins
+	{
+		IClampHi = 0.04;
+		IClampLo = -0.04;
+		IRange = "IR40mA";
+		OPMode = "VSIM";
+		PinModeSel = "PMU";
+		VForce = 0V;
+	}
+	SequenceBreak 0mS;
+	cpu_all_dpin_pins
+	{
+		IClampHi = 0.04;
+		IClampLo = -0.04;
+		IRange = "IR40mA";
+		OPMode = "VSIM";
+		PinModeSel = "PMU";
+		VForce = 0V;
+	}
+	SequenceBreak 0mS;
+}
+Levels Power_Up_TC_IPC
+{
+	cpu_all_ec_pins
+	{
+		IClampHi = 0.04;
+		IClampLo = -0.04;
+		IRange = "IR40mA";
+		OPMode = "VSIM";
+		PinModeSel = "PMU";
+		VForce = 0V;
+	}
+	SequenceBreak 0mS;
+	cpu_all_hpc_pins
+	{
+		IClampHi = 0.04;
+		IClampLo = -0.04;
+		IRange = "IR40mA";
+		OPMode = "VSIM";
+		PinModeSel = "PMU";
+		VForce = 0V;
+	}
+	SequenceBreak 0mS;
+	cpu_all_hpcdif_pins
+	{
+		IClampHi = 0.04;
+		IClampLo = -0.04;
+		IRange = "IR40mA";
+		OPMode = "VSIM";
+		PinModeSel = "PMU";
+		VForce = 0V;
+	}
+	SequenceBreak 0mS;
+	cpu_all_dpin_pins
+	{
+		IClampHi = 0.04;
+		IClampLo = -0.04;
+		IRange = "IR40mA";
+		OPMode = "VSIM";
+		PinModeSel = "PMU";
+		VForce = 0V;
+	}
+	SequenceBreak 0mS;
+}

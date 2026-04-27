@@ -1,0 +1,30 @@
+START_SCREEN: RCS1
+#RunOn  ;   TestName    ;   DataType    ;   ParamType   ;   Param1                                          ;   Operation   ;   ParamType   ;   Param2                  ;   TmpStore    ;   OnTrue  ;   OnFalse
+EXEC    ;   Test0       ;   STRING      ;   GLOBAL      ;   __shared__::_UserVars.PRIMARY_OPTYPE            ;   ==          ;   LITERAL     ;   RC_S1                   ;   -           ;   Test1   ;   1
+EXEC    ;   Test1       ;   STRING      ;   GLOBAL      ;   __shared__::SCVars.SC_CURRENT_PROCESS_STEP      ;   ==          ;   LITERAL     ;   CLASSHOT                ;   -           ;   Test2   ;   Test10
+EXEC    ;   Test2       ;   STRING      ;   GLOBAL      ;   __shared__::SCVars.SC_LOCN                      ;   ==          ;   LITERAL     ;   6163                    ;   -           ;   Test6   ;   Test3
+EXEC    ;   Test3       ;   STRING      ;   GLOBAL      ;   __shared__::SCVars.SC_LOCN                      ;   ==          ;   LITERAL     ;   6167                    ;   -           ;   Test7   ;   Test3a
+EXEC    ;   Test3a      ;   STRING      ;   GLOBAL      ;   __shared__::SCVars.SC_LOCN                      ;   ==          ;   LITERAL     ;   6168                    ;   -           ;   Test7a  ;   Test4
+EXEC    ;   Test4       ;   STRING      ;   GLOBAL      ;   __shared__::SCVars.SC_LOCN                      ;   ==          ;   LITERAL     ;   5163                    ;   -           ;   Test8   ;   Test5
+EXEC    ;   Test5       ;   STRING      ;   GLOBAL      ;   __shared__::SCVars.SC_LOCN                      ;   ==          ;   LITERAL     ;   5167                    ;   -           ;   Test9   ;   Test5a
+EXEC    ;   Test5a      ;   STRING      ;   GLOBAL      ;   __shared__::SCVars.SC_LOCN                      ;   ==          ;   LITERAL     ;   5168                    ;   -           ;   Test9a  ;   1
+EXEC    ;   Test6       ;   STRING      ;   GLOBAL      ;   __shared__::UserVars.PrimarySocketLocn          ;   SET         ;   LITERAL     ;   "6163:CLASSHOT"         ;   -           ;   1       ;   2
+EXEC    ;   Test7       ;   STRING      ;   GLOBAL      ;   __shared__::UserVars.PrimarySocketLocn          ;   SET         ;   LITERAL     ;   "6167:CLASSHOT"         ;   -           ;   1       ;   2
+EXEC    ;   Test7a      ;   STRING      ;   GLOBAL      ;   __shared__::UserVars.PrimarySocketLocn          ;   SET         ;   LITERAL     ;   "6168:CLASSHOT"         ;   -           ;   1       ;   2
+EXEC    ;   Test8       ;   STRING      ;   GLOBAL      ;   __shared__::UserVars.PrimarySocketLocn          ;   SET         ;   LITERAL     ;   "5163:CLASSHOT"         ;   -           ;   1       ;   2
+EXEC    ;   Test9       ;   STRING      ;   GLOBAL      ;   __shared__::UserVars.PrimarySocketLocn          ;   SET         ;   LITERAL     ;   "5167:CLASSHOT"         ;   -           ;   1       ;   2
+EXEC    ;   Test9a      ;   STRING      ;   GLOBAL      ;   __shared__::UserVars.PrimarySocketLocn          ;   SET         ;   LITERAL     ;   "5168:CLASSHOT"         ;   -           ;   1       ;   2
+EXEC    ;   Test10      ;   STRING      ;   GLOBAL      ;   __shared__::SCVars.SC_CURRENT_PROCESS_STEP      ;   ==          ;   LITERAL     ;   CSM                     ;   -           ;   Test11  ;   1
+EXEC    ;   Test11      ;   STRING      ;   GLOBAL      ;   __shared__::SCVars.SC_LOCN                      ;   ==          ;   LITERAL     ;   6163                    ;   -           ;   Test15  ;   Test12
+EXEC    ;   Test12      ;   STRING      ;   GLOBAL      ;   __shared__::SCVars.SC_LOCN                      ;   ==          ;   LITERAL     ;   6167                    ;   -           ;   Test16  ;   Test12a
+EXEC    ;   Test12a     ;   STRING      ;   GLOBAL      ;   __shared__::SCVars.SC_LOCN                      ;   ==          ;   LITERAL     ;   6168                    ;   -           ;   Test16a ;   Test13
+EXEC    ;   Test13      ;   STRING      ;   GLOBAL      ;   __shared__::SCVars.SC_LOCN                      ;   ==          ;   LITERAL     ;   5163                    ;   -           ;   Test17  ;   Test14
+EXEC    ;   Test14      ;   STRING      ;   GLOBAL      ;   __shared__::SCVars.SC_LOCN                      ;   ==          ;   LITERAL     ;   5167                    ;   -           ;   Test18  ;   Test14a
+EXEC    ;   Test14a     ;   STRING      ;   GLOBAL      ;   __shared__::SCVars.SC_LOCN                      ;   ==          ;   LITERAL     ;   5168                    ;   -           ;   Test18a ;   1
+EXEC    ;   Test15      ;   STRING      ;   GLOBAL      ;   __shared__::UserVars.PrimarySocketLocn          ;   SET         ;   LITERAL     ;   "6163:CSM"              ;   -           ;   1       ;   2
+EXEC    ;   Test16      ;   STRING      ;   GLOBAL      ;   __shared__::UserVars.PrimarySocketLocn          ;   SET         ;   LITERAL     ;   "6167:CSM"              ;   -           ;   1       ;   2
+EXEC    ;   Test16a     ;   STRING      ;   GLOBAL      ;   __shared__::UserVars.PrimarySocketLocn          ;   SET         ;   LITERAL     ;   "6168:CSM"              ;   -           ;   1       ;   2
+EXEC    ;   Test17      ;   STRING      ;   GLOBAL      ;   __shared__::UserVars.PrimarySocketLocn          ;   SET         ;   LITERAL     ;   "5163:CSM"              ;   -           ;   1       ;   2
+EXEC    ;   Test18      ;   STRING      ;   GLOBAL      ;   __shared__::UserVars.PrimarySocketLocn          ;   SET         ;   LITERAL     ;   "5167:CSM"              ;   -           ;   1       ;   2
+EXEC    ;   Test18a     ;   STRING      ;   GLOBAL      ;   __shared__::UserVars.PrimarySocketLocn          ;   SET         ;   LITERAL     ;   "5168:CSM"              ;   -           ;   1       ;   2
+END_SCREEN

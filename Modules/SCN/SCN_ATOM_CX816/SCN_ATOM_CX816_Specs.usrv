@@ -1,0 +1,122 @@
+Version 1.0;
+
+UserVars SCN_ATOM_CX816_Specs
+{
+	Const String ATPG_EndVoltage = "0.9";
+	Const String ATPG_StartVoltage = "0.9";
+	Const String ATPG_EndVoltageOCC = "0.9,0.9,0.9,0.9";
+	Const String ATPG_StartVoltageOCC = "0.9,0.9,0.9,0.9";
+	Const String TATPG_EndVoltage = "0.9";
+	Const String TATPG_StartVoltage = "0.9,0.9,0.9,0.9";
+	Const String TATPG_EndVoltageOCC = "0.9,0.9,0.9,0.9";
+	Const String TATPG_StartVoltageOCC = "0.9";
+	Const String VMINTC_VoltageTargetsOCC = "HC01_02_0P85_VCCATOM3,HC02_02_0P85_VCCATOM2,HC03_02_0P85_VCCATOM1,HC04_02_0P85_VCCATOM0";
+	Const Integer Fail_Capture_Count = 50;
+
+
+	String S28_PreInst_F1_chain = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F1_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_chain:R4C";
+	String S52_PreInst_F1_chain = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F1_FREQ+"GHz";
+	String HX28_PreInst_F1_chain = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F1_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_chain:R4C";
+	
+	String S28_PreInst_F1 = PSPRE.AT_F1+","+"MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F1_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R4_OCC,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+	String S52_PreInst_F1 = PSPRE.AT_F1+","+"MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F1_FREQ+"GHz,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+	String HX28_PreInst_F1 = PSPRE.AT_F1+","+"MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F1_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R4_OCC,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+
+	String S28_PreInst_F2 = PSPRE.AT_F2+","+"MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F2_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R8_OCC,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+	String S52_PreInst_F2 = PSPRE.AT_F2+","+"MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F2_FREQ+"GHz,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+	String HX28_PreInst_F2 = PSPRE.AT_F2+","+"MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F2_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R8_OCC,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+	
+	String S28_PreInst_F3 = PSPRE.AT_F3+","+"MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F3_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R8_OCC,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+	String S52_PreInst_F3 = PSPRE.AT_F3+","+"MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F3_FREQ+"GHz,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+	String HX28_PreInst_F3 = PSPRE.AT_F3+","+"MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F3_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R8_OCC,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+	
+	String S28_PreInst_F4 = PSPRE.AT_F4+","+"MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F4_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R8_OCC,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+	String S52_PreInst_F4 = PSPRE.AT_F4+","+"MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F4_FREQ+"GHz,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+	String HX28_PreInst_F4 = PSPRE.AT_F4+","+"MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F4_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R8_OCC,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+	
+	String S28_PreInst_F5_APEX = PSPRE.AT_F5+","+"MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F5_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R8_OCC,CDIE_ATOM:nblctrl_cdie_atom_l2:nbloff,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+	String S52_PreInst_F5_APEX = PSPRE.AT_F5+","+"MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F5_FREQ+"GHz,CDIE_ATOM:nblctrl_cdie_atom_l2:nbloff,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+	String HX28_PreInst_F5_APEX = PSPRE.AT_F5+","+"MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F5_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R8_OCC,CDIE_ATOM:nblctrl_cdie_atom_l2:nbloff,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+	
+	Array<String> S28_PreInst_F5 = PSPRE.AT_F5+","+"MCdrv:atomfreq_0:"+__shared__::FreqValues.AT_C5+"GHz,MCdrv:ringfreq_0:2.8GHz,MCAscn:ratio_modify_OCC:R8_OCC,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+	Array<String> S52_PreInst_F5 = PSPRE.AT_F5+","+"MCdrv:atomfreq_0:"+__shared__::FreqValues.AT_C5+"GHz,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+	Array<String> HX28_PreInst_F5 = PSPRE.AT_F5+","+"MCdrv:atomfreq_0:"+__shared__::FreqValues.AT_C5+"GHz,MCdrv:ringfreq_0:2.8GHz,MCAscn:ratio_modify_OCC:R8_OCC,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+	
+	String S28_PreInst_F1_VMAX = PSPRE.AT_F1+","+"MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F1_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R4_OCC,CDIE_ATOM:nblctrl_cdie_atom_l2:nbloff,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+	String S52_PreInst_F1_VMAX = PSPRE.AT_F1+","+"MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F1_FREQ+"GHz,CDIE_ATOM:nblctrl_cdie_atom_l2:nbloff,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+	String HX28_PreInst_F1_VMAX = PSPRE.AT_F1+","+"MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F1_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R4_OCC,CDIE_ATOM:nblctrl_cdie_atom_l2:nbloff,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+
+	Array<String> S28_PreInst_F5_VMAX = PSPRE.AT_F5+","+"MCdrv:atomfreq_0:"+__shared__::FreqValues.AT_C5+"GHz,MCdrv:ringfreq_0:2.8GHz,MCAscn:ratio_modify_OCC:R8_OCC,CDIE_ATOM:nblctrl_cdie_atom_l2:nbloff,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+	Array<String> S52_PreInst_F5_VMAX = PSPRE.AT_F5+","+"MCdrv:atomfreq_0:"+__shared__::FreqValues.AT_C5+"GHz,CDIE_ATOM:nblctrl_cdie_atom_l2:nbloff,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+	Array<String> HX28_PreInst_F5_VMAX = PSPRE.AT_F5+","+"MCdrv:atomfreq_0:"+__shared__::FreqValues.AT_C5+"GHz,MCdrv:ringfreq_0:2.8GHz,MCAscn:ratio_modify_OCC:R8_OCC,CDIE_ATOM:nblctrl_cdie_atom_l2:nbloff,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+
+	String S28_PreInst_FMIN = PSPRE.AT_FMIN+","+"MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_FMIN+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R4_OCC,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+	String S52_PreInst_FMIN = PSPRE.AT_FMIN+","+"MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_FMIN+"GHz,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+	String HX28_PreInst_FMIN = PSPRE.AT_FMIN+","+"MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_FMIN+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R4_OCC,SCNATOM:AtomM0:enabled,SCNATOM:AtomM1:enabled,SCNATOM:AtomM2:enabled,SCNATOM:AtomM3:enabled";
+
+	String S28_ShmooPreInst_chain = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F1_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_chain:R4C";
+	String S52_ShmooPreInst_chain = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F1_FREQ+"GHz";
+	String HX28_ShmooPreInst_chain = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F1_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_chain:R4C";
+
+	String S28_ShmooPreInst_F1 = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F1_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R4_OCC";
+	String S52_ShmooPreInst_F1 = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F1_FREQ+"GHz";
+	String HX28_ShmooPreInst_F1 = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F1_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R4_OCC";
+	
+	String S28_ShmooPreInst_Fmin = PSPRE.AT_FMIN+","+"MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_FMIN+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R4_OCC";
+	String S52_ShmooPreInst_Fmin = PSPRE.AT_FMIN+","+"MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_FMIN+"GHz";
+	String HX28_ShmooPreInst_Fmin = PSPRE.AT_FMIN+","+"MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_FMIN+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R4_OCC";
+	
+	String S28_ShmooPreInst_F2 = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F2_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R8_OCC";
+	String S52_ShmooPreInst_F2 = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F2_FREQ+"GHz";
+	String HX28_ShmooPreInst_F2 = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F2_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R8_OCC";
+
+	String S28_ShmooPreInst_F3 = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F3_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R8_OCC";
+	String S52_ShmooPreInst_F3 = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F3_FREQ+"GHz";
+	String HX28_ShmooPreInst_F3 = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F3_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R8_OCC";
+
+	String S28_ShmooPreInst_F4 = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F4_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R8_OCC";
+	String S52_ShmooPreInst_F4 = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F4_FREQ+"GHz";
+	String HX28_ShmooPreInst_F4 = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F4_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R8_OCC";
+
+	String S28_ShmooPreInst_F5 = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F5_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R8_OCC";
+	String S52_ShmooPreInst_F5 = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F5_FREQ+"GHz";
+	String HX28_ShmooPreInst_F5 = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F5_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R8_OCC";
+
+	String S28_ShmooPreInst_F6 = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F6_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R8_OCC";
+	String S52_ShmooPreInst_F6 = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F6_FREQ+"GHz";
+	String HX28_ShmooPreInst_F6 = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F6_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R8_OCC";
+
+	String S28_ShmooPreInst_F7 = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F7_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R8_OCC";
+	String S52_ShmooPreInst_F7 = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F7_FREQ+"GHz";
+	String HX28_ShmooPreInst_F7 = "MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F7_FREQ+"GHz,MCdrv:ringfreq_0:2.4GHz,MCAscn:ratio_modify_OCC:R8_OCC";
+	
+
+
+	#Const String VMINTC_StepSize_20mV = "0.02";
+	#Integer ATOM0_EXECUTE = -1;
+	#Integer ATOM1_EXECUTE = -1;
+	#Integer ATOML_EXECUTE = -1;
+	#Integer HRYPerPatFailCapture = 100;
+	#Integer HRYTotalFailCaptureCount = 25000;
+	#Integer SPOFIPerPatternFailCaptureCount = 1000;
+	#Integer SPOFITotalFailCaptureCount = 1000;
+	#Integer ShmooBypassGlobal = 1;
+	#String AtspeedStartVoltagePREPST_AtomHP = "0.53";
+	#String AtspeedEndVoltagePREPST_AtomHP = "0.85";
+	#String AtspeedStartVoltagePREPST_AtomLP = "0.51";
+	#String AtspeedEndVoltagePREPST_AtomLP = "0.85";
+	#String Atspeed_XFM_TFM_EndVoltage = "1.2";
+	#Const String scn_atpg_spofi_max_fail_num = "1000";
+	#Const String scn_chain_spofi_max_fail_num = "1000";
+	#Const String scn_dport_spofi_max_fail_num = "1000";
+	#Const String scn_hry_prime_TotalFailCaptureCount = "1000";
+	#Const String VMINTC_PatternNameMap = "1,2,3,4,5,6,7";
+}
+
+UserVars SCN_ATOM_CX816_corneridentifier
+{
+	Array<String> AT_C5_M0 = ["AT0@F7","AT0@F6","AT0@F5"];
+	Array<String> AT_C5_M1 = ["AT1@F7","AT1@F6","AT1@F5"];
+	Array<String> AT_C5_M2 = ["AT2@F7","AT2@F6","AT2@F5"];
+	Array<String> AT_C5_M3 = ["AT3@F7","AT3@F6","AT3@F5"];
+}

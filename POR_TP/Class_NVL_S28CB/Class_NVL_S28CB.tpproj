@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{B37224B3-71CF-4949-84BE-8D0AA0EF5C98}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Label="Globals">
+    <CustomProjectExtensionsPath Condition="'$(CustomProjectExtensionsPath)' == ''">$(TorchCustomProjectPath)\</CustomProjectExtensionsPath>
+    <ProjectGuid>be9e6c37-0b47-4456-8d40-007f55859fd2</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(MSBuildProjectDirectory)\..\..\BomGroups.props" />
+  <Import Project="$(CustomProjectExtensionsPath)Torch.ProjectSystem.TestProgram.props" />
+  <ItemGroup>
+    <IpPlistFile Remove="PLIST_ALL_CLASS_P68G2_IP_CPU.plist.ipxml" />
+    <IpPlistFile Remove="PLIST_ALL_CLASS_P68G2_IP_PCH.plist.ipxml" />
+  </ItemGroup>
+  <Import Project="$(CustomProjectExtensionsPath)Torch.ProjectSystem.TestProgram.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\BaseInputs\CPU\CPU_Files\CPU_Files.ipctproj" />
+    <ProjectReference Include="..\..\BaseInputs\CPU\CPU_Class_NVL_S28CB\CPU_Class_NVL_S28CB.ipctproj" />
+    <ProjectReference Include="..\..\Modules\ARR\ARR_ATOM_CXX\ARR_ATOM_CXX.mtproj" />
+    <ProjectReference Include="..\..\Modules\ARR\ARR_CCF_CXX\ARR_CCF_CXX.mtproj" />
+    <ProjectReference Include="..\..\Modules\ARR\ARR_COMMON_CKX\ARR_COMMON_CKX.mtproj" />
+    <ProjectReference Include="..\..\Modules\ARR\ARR_CORE_CKX\ARR_CORE_CKX.mtproj" />
+    <ProjectReference Include="..\..\Modules\ARR\ARR_CORE_CXX\ARR_CORE_CXX.mtproj" />
+    <ProjectReference Include="..\..\Modules\ARR\ARR_UNCORE_CKX\ARR_UNCORE_CKX.mtproj" />
+    <ProjectReference Include="..\..\Modules\ARR\ARR_UNCORE_CXX\ARR_UNCORE_CXX.mtproj" />
+    <ProjectReference Include="..\..\Modules\DRV\DRV_RESET_CKX\DRV_RESET_CKX.mtproj" />
+    <ProjectReference Include="..\..\Modules\DRV\DRV_RESET_CXX\DRV_RESET_CXX.mtproj" />
+    <ProjectReference Include="..\..\Modules\FUN\FUN_CCF_CX816\FUN_CCF_CX816.mtproj" />
+    <ProjectReference Include="..\..\Modules\FUN\FUN_CORE_CX816\FUN_CORE_CX816.mtproj" />
+    <ProjectReference Include="..\..\Modules\FUN\FUN_ATOM_CX816\FUN_ATOM_CX816.mtproj" />
+    <ProjectReference Include="..\..\Modules\FUS\FUS_FSG_CXX\FUS_FSG_CXX.mtproj" />
+    <ProjectReference Include="..\..\Modules\FUS\FUS_FUSEBURN_CXX\FUS_FUSEBURN_CXX.mtproj" />
+    <ProjectReference Include="..\..\Modules\FUS\FUS_FUSECFG_CKX\FUS_FUSECFG_CKX.mtproj" />
+    <ProjectReference Include="..\..\Modules\FUS\FUS_FUSECFG_CXX\FUS_FUSECFG_CXX.mtproj" />
+    <ProjectReference Include="..\..\Modules\FUS\FUS_FUSEREAD_CXX\FUS_FUSEREAD_CXX.mtproj" />
+    <ProjectReference Include="..\..\Modules\FUS\FUS_FUSEVLD_CKX\FUS_FUSEVLD_CKX.mtproj" />
+    <ProjectReference Include="..\..\Modules\FUS\FUS_UNITINFO_CKX\FUS_UNITINFO_CKX.mtproj" />
+    <ProjectReference Include="..\..\Modules\FUS\FUS_UNITINFO_CXX\FUS_UNITINFO_CXX.mtproj" />
+    <ProjectReference Include="..\..\Modules\MIO\MIO_HPTP_CXPKGS7\MIO_HPTP_CXPKGS7.mtproj" />
+    <ProjectReference Include="..\..\Modules\PTH\PTH_DLVR_CKPKGS7\PTH_DLVR_CKPKGS7.mtproj" />
+    <ProjectReference Include="..\..\Modules\PTH\PTH_DLVR_CXPKGS7\PTH_DLVR_CXPKGS7.mtproj" />
+    <ProjectReference Include="..\..\Modules\PTH\PTH_POWER_CXPKGS7\PTH_POWER_CXPKGS7.mtproj" />
+    <ProjectReference Include="..\..\Modules\PTH\PTH_VDAC_CXX\PTH_VDAC_CXX.mtproj" />
+    <ProjectReference Include="..\..\Modules\PTH\PTH_XIUCHK_CKX\PTH_XIUCHK_CKX.mtproj" />
+    <ProjectReference Include="..\..\Modules\PTH_BGR\PTH_BGR_CXPKGS7\PTH_BGR_CXPKGS7.mtproj" />
+    <ProjectReference Include="..\..\Modules\QNR\QNR_CARV_CKX\QNR_CARV_CKX.mtproj" />
+    <ProjectReference Include="..\..\Modules\QNR\QNR_CARV_CXX\QNR_CARV_CXX.mtproj" />
+    <ProjectReference Include="..\..\Modules\SCN\SCN_CORE_CX816\SCN_CORE_CX816.mtproj" />
+    <ProjectReference Include="..\..\Modules\SCN\SCN_ATOM_CX816\SCN_ATOM_CX816.mtproj" />
+    <ProjectReference Include="..\..\Modules\SCN\SCN_UNCORE_CK816\SCN_UNCORE_CK816.mtproj" />
+    <ProjectReference Include="..\..\Modules\SCN\SCN_UNCORE_CX816\SCN_UNCORE_CX816.mtproj" />
+    <ProjectReference Include="..\..\Modules\TPI\TPI_DAS_CXX\TPI_DAS_CXX.mtproj" />
+    <ProjectReference Include="..\..\Modules\TPI\TPI_DIERCVRY_CXX\TPI_DIERCVRY_CXX.mtproj" />
+    <ProjectReference Include="..\..\Modules\TPI\TPI_FLWFLGS_CXX\TPI_FLWFLGS_CXX.mtproj" />
+    <ProjectReference Include="..\..\Modules\TPI\TPI_PWRCTRL_CXX\TPI_PWRCTRL_CXX.mtproj" />
+    <ProjectReference Include="..\..\Modules\TPI\TPI_SKUCTRL_CXX\TPI_SKUCTRL_CXX.mtproj" />
+    <ProjectReference Include="..\..\Modules\TPI\TPI_TIMETRK_CXX\TPI_TIMETRK_CXX.mtproj" />
+    <ProjectReference Include="..\..\Shared\BaseInputs\Common\Common_Files\Common_Files.ctproj" />
+    <ProjectReference Include="..\..\Shared\BaseInputs\Common\Common_Class_NVL_S28CB\Common_Class_NVL_S28CB.ctproj" />
+    <ProjectReference Include="..\..\Shared\Modules\FUS\FUS_FACT_XXX\FUS_FACT_XXX.mtproj" />
+    <ProjectReference Include="..\..\Shared\Modules\FUS\FUS_FLE_XXX\FUS_FLE_XXX.mtproj" />
+    <ProjectReference Include="..\..\Shared\Modules\PTH\PTH_DIODE_XXX\PTH_DIODE_XXX.mtproj" />
+    <ProjectReference Include="..\..\Shared\Modules\PTH\PTH_THRSOAK_XXX\PTH_THRSOAK_XXX.mtproj" />
+    <ProjectReference Include="..\..\Shared\Modules\TPI\TPI_BASE_XXX\TPI_BASE_XXX.mtproj" />
+    <ProjectReference Include="..\..\Shared\Modules\TPI\TPI_DEDC_XXX\TPI_DEDC_XXX.mtproj" />
+    <ProjectReference Include="..\..\Shared\Modules\TPI\TPI_DFF_XXX\TPI_DFF_XXX.mtproj" />
+    <ProjectReference Include="..\..\Shared\Modules\TPI\TPI_EDM_XXX\TPI_EDM_XXX.mtproj" />
+    <ProjectReference Include="..\..\Shared\Modules\TPI\TPI_END_XXX\TPI_END_XXX.mtproj" />
+    <ProjectReference Include="..\..\Shared\Modules\TPI\TPI_FLWFLGS_XXX\TPI_FLWFLGS_XXX.mtproj" />
+    <ProjectReference Include="..\..\Shared\Modules\TPI\TPI_LTTC_XXX\TPI_LTTC_XXX.mtproj" />
+    <ProjectReference Include="..\..\Shared\Modules\TPI\TPI_MIXDETCT_XXX\TPI_MIXDETCT_XXX.mtproj" />
+    <ProjectReference Include="..\..\Shared\Modules\TPI\TPI_PUP_XXX\TPI_PUP_XXX.mtproj" />
+    <ProjectReference Include="..\..\Shared\Modules\TPI\TPI_PWRCTRL_XXX\TPI_PWRCTRL_XXX.mtproj" />
+    <ProjectReference Include="..\..\Shared\Modules\TPI\TPI_SHOPS_XKPKGDT\TPI_SHOPS_XKPKGDT.mtproj" />
+    <ProjectReference Include="..\..\Shared\Modules\TPI\TPI_SKUCTRL_XXX\TPI_SKUCTRL_XXX.mtproj" />
+    <ProjectReference Include="..\..\Shared\Modules\TPI\TPI_TIMETRK_XXX\TPI_TIMETRK_XXX.mtproj" />
+    <ProjectReference Include="..\..\Shared\Modules\TPI\TPI_VCCMIMS_XXX\TPI_VCCMIMS_XXX.mtproj" />
+    <ProjectReference Include="..\..\Shared\Modules\TPI\TPI_VCC_XXX\TPI_VCC_XXX.mtproj" />
+    <ProjectReference Include="..\..\Shared\Modules\TPI\TPI_XIU_XXX\TPI_XIU_XXX.mtproj" />
+    <ProjectReference Include="..\..\Shared\Modules\YBS\YBS_UPSS_XXX\YBS_UPSS_XXX.mtproj" />
+  </ItemGroup>
+</Project>

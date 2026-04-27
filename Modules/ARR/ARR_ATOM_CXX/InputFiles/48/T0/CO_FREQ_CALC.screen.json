@@ -1,0 +1,38 @@
+{
+	"Screen_Config": [
+		{
+			"TestName": "CDIE_ATOM_XOVER_FREQ",
+			"TestConfig": [
+                [ "Set3p0atom0IP", "String", "GSDS", "I.S.ATOM_PMUX_CDIE_FREQ_0", "SET", "GSDS", "U.S.ATOM_PMUX_CDIE_FREQ_0", "CheckUpperLimitFreq0", "2" ],
+                [ "CheckUpperLimitFreq0", "DOUBLE", "GSDS", "I.S.ATOM_PMUX_CDIE_FREQ_0", ">", "LITERAL", "5.0", "SetUpperLimitFreq0", "Set3p0atom1IP" ],
+                [ "SetUpperLimitFreq0", "STRING", "GSDS", "I.S.ATOM_PMUX_CDIE_FREQ_0", "SET", "LITERAL", "5.0", "Set3p0atom1IP", "2" ],
+
+                [ "Set3p0atom1IP", "String", "GSDS", "I.S.ATOM_PMUX_CDIE_FREQ_1", "SET", "GSDS", "U.S.ATOM_PMUX_CDIE_FREQ_1", "CheckUpperLimitFreq1", "2" ],
+                [ "CheckUpperLimitFreq1", "DOUBLE", "GSDS", "I.S.ATOM_PMUX_CDIE_FREQ_1", ">", "LITERAL", "5.0", "SetUpperLimitFreq1", "Test1" ],
+                [ "SetUpperLimitFreq1", "STRING", "GSDS", "I.S.ATOM_PMUX_CDIE_FREQ_1", "SET", "LITERAL", "5.0", "Test1", "2" ],	
+				
+				[ "Test1", "String", "GSDS", "I.S.CPUATOMPMUX"  , "SET", "LITERAL", "MCdrv:pwrmux_sel_atom0_l2_0:vcclogic,MCdrv:pwrmux_sel_atom1_l2_0:vcclogic,CDIE_ATOM:nblctrl_cdie_atom_l2:nblon,MCdrv:ringfreq_0:1.2GHz,MCAarr:ratio_modify:1.2GHz", "Test2", "2" ],
+                [ "Test2", "String", "GSDS", "I.S.CPUATOMPMUX"  ,  "APPEND", "Literal"   , ",MCdrv:atomfreq1_0:"                                                                                        , "Check3atom0", "2"],
+				[ "Check3atom0", "String", "GSDS", "I.S.ATOM_PMUX_CDIE_FREQ_0", "==", "Literal", "3", "Set3p0atom0", "Check2atom0" ],
+				[ "Check2atom0", "String", "GSDS", "I.S.ATOM_PMUX_CDIE_FREQ_0", "==", "Literal", "2", "Set2p0atom0", "Check1atom0" ],
+				[ "Check1atom0", "String", "GSDS", "I.S.ATOM_PMUX_CDIE_FREQ_0", "==", "Literal", "1", "Set1p0atom0", "Test3" ],
+				[ "Set3p0atom0", "String", "GSDS", "I.S.ATOM_PMUX_CDIE_FREQ_0", "SET", "Literal", "3.0", "Test3", "2" ],
+				[ "Set2p0atom0", "String", "GSDS", "I.S.ATOM_PMUX_CDIE_FREQ_0", "SET", "Literal", "2.0", "Test3", "2" ],
+				[ "Set1p0atom0", "String", "GSDS", "I.S.ATOM_PMUX_CDIE_FREQ_0", "SET", "Literal", "1.0", "Test3", "2" ],
+				[ "Test3", "String", "GSDS", "I.S.CPUATOMPMUX"  ,  "APPEND", "GSDS"      , "I.S.ATOM_PMUX_CDIE_FREQ_0"                                                                                     , "Test4", "2"],
+                [ "Test4", "String", "GSDS", "I.S.CPUATOMPMUX"  ,  "APPEND", "Literal"   , "GHz,MCdrv:atomfreq0_0:"                                                                                        , "Check3atom1", "2"],
+                [ "Check3atom1", "String", "GSDS", "I.S.ATOM_PMUX_CDIE_FREQ_1" , "==" , "Literal", "3"  , "Set3p0atom1" , "Check2atom1" ],
+				[ "Check2atom1", "String", "GSDS", "I.S.ATOM_PMUX_CDIE_FREQ_1" , "==" , "Literal", "2" , "Set2p0atom1" , "Check1atom1" ],
+				[ "Check1atom1", "String", "GSDS", "I.S.ATOM_PMUX_CDIE_FREQ_1" , "==" , "Literal", "1" , "Set1p0atom1" , "Test5" ],
+				[ "Set3p0atom1", "String", "GSDS", "I.S.ATOM_PMUX_CDIE_FREQ_1" , "SET" , "Literal", "3.0" , "Test5", "2" ],
+				[ "Set2p0atom1", "String", "GSDS", "I.S.ATOM_PMUX_CDIE_FREQ_1" , "SET" , "Literal", "2.0" , "Test5", "2" ],
+				[ "Set1p0atom1", "String", "GSDS", "I.S.ATOM_PMUX_CDIE_FREQ_1" , "SET" , "Literal", "1.0" , "Test5", "2" ],
+                [ "Test5", "String", "GSDS", "I.S.CPUATOMPMUX"  ,  "APPEND", "GSDS"      , "I.S.ATOM_PMUX_CDIE_FREQ_1"                                                                                     , "Test6", "2"], 
+                [ "Test6", "String", "GSDS", "I.S.CPUATOMPMUX"  ,  "APPEND", "Literal"   , "GHz"                                                                                        , "1", "2"]				
+			]
+		}
+	]
+}
+
+
+

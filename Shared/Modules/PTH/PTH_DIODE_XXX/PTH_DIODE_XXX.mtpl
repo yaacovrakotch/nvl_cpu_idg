@@ -1,0 +1,2396 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan PTH_DIODE_XXX;
+
+Import "PTH_DIODE_XXX.usrv";
+
+# Test Counter Definition
+
+Counters
+{
+    n97510000_fail_TD_X_TDAU_K_START_X_X_X_X_SOT_0,
+    n97520000_fail_TD_X_TDAU_K_START_X_X_X_X_SOT_2,
+    n97520001_fail_TD_X_PARDATA_E_INIT_X_X_X_X_INTEC_0,
+    n97520002_fail_TD_X_PARDATA_E_INIT_X_X_X_X_INTEC_2,
+    n97520003_fail_TD_X_PARDATA_E_START_X_X_X_X_INTEC_0,
+    n97530003_fail_TD_X_TDAU_K_START_X_X_X_X_SOT_3,
+    n97540000_fail_TD_X_TDAU_K_START_X_X_X_X_SOT_4,
+    n97550000_fail_TD_X_TDAU_K_START_X_X_X_X_SOT_5
+} # End of Test Counter Definition
+
+CSharpTest PrimeThermalSingleMeasurementTestMethod TD_X_TDAU_E_LTTCPREPRL0_X_X_X_X_LTTCDTS_BT
+{
+    BypassPort = PTH_DIODE_XXX.bypass_benchtop_inv;
+    IntegrityHighLimit = 200;
+    IntegrityLowLimit = 130;
+    LowerTolerance = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("15,15,10,15","15,15,15,10,15","15,15,15,15","15,15,15,15","15,15,15,15","15,15,10,15","15,15,10,15","30, 30, 30");
+    MeasurementType = "TJ";
+    PinNames = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPC::CPU1_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPH::HUB_TDAU0");
+    UpperTolerance = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("15,15,10,15","15,15,15,10,15","15,15,15,15","15,15,15,15","15,15,15,15","15,15,10,15","15,15,10,15","30, 30, 30");
+    UserVarStoreNames = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas4, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas2");
+}
+
+CSharpTest PrimeThermalSingleMeasurementTestMethod TD_X_TDAU_K_LTTCPREPRL0_X_X_X_X_LTTCDTS
+{
+    BypassPort = __shared__::SCVars.SC_BENCHTOP;
+    ContinuousRead = "Enabled";
+    IntegrityHighLimit = 200;
+    IntegrityLowLimit = 130;
+    LowerTolerance = PTH_DIODE_XXX_Rules.If_FUSE(__shared__::TpRule.If_CLASS_NVL_S52C("30,30,30,30,30","30,30,30,30"),__shared__::TpRule.If_S28_S52_HX28_P16C_H16C_S16C_DS28C("15,15,10,15","15,15,15,10,15","15,15,15,15","15,15,15,15","15,15,15,15","15,15,10,15","15,15,10,15","15,15,10,15"));
+    MeasurementType = "TJ";
+    PinNames = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPC::CPU1_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPH::HUB_TDAU0");
+    UpperTolerance = PTH_DIODE_XXX_Rules.If_FUSE(__shared__::TpRule.If_CLASS_NVL_S52C("30,30,30,30,30","30,30,30,30"),__shared__::TpRule.If_S28_S52_HX28_P16C_H16C_S16C_DS28C("15,15,10,15","15,15,15,10,15","15,15,15,15","15,15,15,15","15,15,15,15","15,15,10,15","15,15,10,15","15,15,10,15"));
+    UserVarStoreNames = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas4, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.LTTCTempMeas2");
+}
+
+CSharpTest ScreenTC TD_X_SCREEN_E_LTTCPREPRL0_X_X_X_X_SOT_SET_GLOBAL_USVR
+{
+    ScreenTestSet = "NVL_SET_GLOBAL_USERVAR_LTTC";
+    ScreenTestsFile = "./InputFiles/NVL_SET_GLOBAL_USERVAR.txt";
+}
+
+CSharpTest PrimeThermalControlSetTestMethod TD_X_CS_E_BEGIN_X_X_X_X_TEST
+{
+    BypassPort = -1;
+    ControlSet = "TEST";
+    UeiPinName = "IPC::UEISLAVE_IPC";
+}
+
+CSharpTest PrimeApplyTestConditionTestMethod TD_X_CS_E_BEGIN_X_X_X_X_TEST_CPU
+{
+    BypassPort = 1;
+    TestConditionCategory = "THERMAL";
+    TestConditionName = PTH_DIODE_XXX_Rules.PTHControlSetRule("TEST_CC_TC","TEST_TC","TEST_RM_TC","TEST_RM_TC");
+}
+
+CSharpTest PrimeApplyTestConditionTestMethod TD_X_CS_E_BEGIN_X_X_X_X_TEST_PCH
+{
+    BypassPort = 1;
+    TestConditionCategory = "THERMAL";
+    TestConditionName = PTH_DIODE_XXX_Rules.PTHControlSetRule("IP_PCH::IP_PCH_BASE::TEST_PCH_CC_TC","IP_PCH::IP_PCH_BASE::TEST_PCH_TC","IP_PCH::IP_PCH_BASE::TEST_PCH_RM_TC","IP_PCH::IP_PCH_BASE::TEST_PCH_RM_TC");
+}
+
+CSharpTest AuxiliaryTC TD_X_AUX_E_FINAL_X_X_X_X_LTTC_FORK
+{
+    DataType = "String";
+    Expression = "[__shared__::PTHVars.bypass_lttc]";
+    PreInstance = __shared__::FlwSkpCollect.if_ahmt("","TimeTrackerReport");
+    ResultPort = "[R]=='-1'?1:2";
+    Storage = "UserVar";
+}
+
+CSharpTest PrimeThermalSingleMeasurementTestMethod TD_X_TDAU_E_FINAL_X_X_X_X
+{
+    IntegrityHighLimit = 200;
+    IntegrityLowLimit = 130;
+    LowerTolerance = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("15,15,10,15","15,15,15,10,15","15,15,15,15","15,15,15,15","15,15,15,15","15,15,10,15","15,15,10,15","30, 30, 30");
+    PinNames = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPC::CPU1_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPH::HUB_TDAU0");
+    UpperTolerance = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("15,15,10,15","15,15,15,10,15","15,15,15,15","15,15,15,15","15,15,15,15","15,15,10,15","15,15,10,15","30, 30, 30");
+    UserVarStoreNames = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas4, PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.eotTempMeas2");
+}
+
+CSharpTest AuxiliaryTC TD_X_AUX_E_FINAL_X_X_X_X_DISABLE_EOT
+{
+    DataType = "Integer";
+    Datalog = "Enabled";
+    Expression = "1";
+    ResultToken = "__shared__::PTHVars.bypass_eot";
+    Storage = "UserVar";
+}
+
+CSharpTest PrimeThermalEndOfTestTestMethod TD_X_TDAU_E_FINAL_X_X_X_X_EOT_BT
+{
+    BypassPort = PTH_DIODE_XXX.bypass_benchtop_inv;
+    LowerTolerance = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("15,15,10,15","15,15,15,10,15","15,15,15,15","15,15,15,15","15,15,15,15","15,15,10,15","15,15,10,15","30, 30, 30");
+    PcsDatalogSelector = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("0,1,2,3","0,1,2,3,4","0,1,2,3","0,1,2,3","0,1,2,3","0,1,2,3","0,1,2,3","0,1,2");
+    PinNames = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPC::CPU1_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPH::HUB_TDAU0");
+    PostInstance = "DtsEndOfDevice()";
+    PreInstance = "WriteSharedStorage(--token G.U.D.PCS_SOT_THERMAL_HEAD_TEMPERATURE_READ --value -6666666 )";
+    UpperTolerance = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("15,15,10,15","15,15,15,10,15","15,15,15,15","15,15,15,15","15,15,15,15","15,15,10,15","15,15,10,15","30, 30, 30");
+}
+
+CSharpTest PrimeThermalEndOfTestTestMethod TD_X_TDAU_E_FINAL_X_X_X_X_EOT
+{
+    BypassPort = __shared__::SCVars.SC_BENCHTOP;
+    LowerTolerance = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("15,15,10,15","15,15,15,10,15","15,15,15,15","15,15,15,15","15,15,15,15","15,15,10,15","15,15,10,15","30, 30, 30");
+    PcsDatalogSelector = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("0,1,2,3","0,1,2,3,4","0,1,2,3","0,1,2,3","0,1,2,3","0,1,2,3","0,1,2,3","0,1,2");
+    PinNames = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPC::CPU1_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPH::HUB_TDAU0");
+    PostInstance = "DtsEndOfDevice()";
+    PreInstance = "WriteSharedStorage(--token G.U.D.PCS_SOT_THERMAL_HEAD_TEMPERATURE_READ --value -6666666 )";
+    UpperTolerance = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("15,15,10,15","15,15,15,10,15","15,15,15,15","15,15,15,15","15,15,15,15","15,15,10,15","15,15,10,15","30, 30, 30");
+}
+
+CSharpTest PrimeThermalControlSetInitTestMethod TD_X_CS_E_INIT_X_X_X_X_TCISETUP
+{
+    TemperatureSetName = PTH_DIODE_XXX_Rules.PTHControlSetRule("MTL_CC_TCC","MTL_CH_TCC","MTL_FUSE_TCC","MTL_ROOM_TCC");
+}
+
+CSharpTest PrimeApplyTestConditionTestMethod TD_X_APPLYTC_E_INIT_X_X_X_X_TDSETUP
+{
+    TestConditionCategory = "THERMAL";
+    TestConditionName = PTH_DIODE_XXX_Rules.Select_by_BOM_and_LocationSets("TDAU_CAL_TC_S28CH","TDAU_CAL_TC_S52CH","TDAU_CAL_TC_S28CC","TDAU_CAL_TC_S52CC","TDAU_CAL_TC_ROOM_S28CPP","TDAU_CAL_TC_ROOM_S52CPP","TDAU_CAL_TC_HX28CH","TDAU_CAL_TC_HX28CC","TDAU_CAL_TC_ROOM_HX28CPP","TDAU_CAL_TC_HX28CH","TDAU_CAL_TC_HX28CC","TDAU_CAL_TC_ROOM_HX28CPP","TDAU_CAL_TC_H16CH","TDAU_CAL_TC_H16CC","TDAU_CAL_TC_ROOM_H16CPP","TDAU_CAL_TC_S16CH","TDAU_CAL_TC_S16CC","TDAU_CAL_TC_ROOM_S16CPP","TDAU_CAL_TC_DNLS28CH","TDAU_CAL_TC_DNLS28CC","TDAU_CAL_TC_ROOM_DNLS28CPP","TDAU_CAL_TC_S28CH");
+}
+
+CSharpTest ScreenTC TD_X_SCREEN_E_INIT_X_X_X_X_BTCHECK
+{
+    ScreenTestSet = "MTL_CLASS_BT_CHECK";
+    ScreenTestsFile = "./InputFiles/MTL_CLASS_BT_CHECK.txt";
+}
+
+CSharpTest IntecTC TD_X_PARDATA_E_INIT_X_X_X_X_INTEC
+{
+    BypassPort = __shared__::SCVars.SC_INTEC_PF_ENABLED;
+    Channels = "0";
+    Delay = 1;
+    Feedback = "PowerFollowing";
+    FollowingOffset = 0;
+    FollowingSlope = __shared__::SCVars.SC_PF_SLOPE;
+    IntecJson = "./InputFiles/intec.json";
+    Operation = "Both";
+    PolarisApp = "../../../../UserCode/lib/Release/net462/SetTemperature.exe";
+    PolarisTimeOut = 60000;
+    SetPoint = "SC_TEMPERATURE";
+    Tolerance = 1;
+}
+
+CSharpTest DTSBase DTS_X_DTSBASE_K_INIT_X_X_X_X
+{
+    ConfigurationFile = "./InputFiles/NVL_DTSBase_Config.json";
+}
+
+CSharpTest PrimeThermalUeiStreamTestMethod TD_X_UEISTREAM_E_LOTENDFLOW_X_X_X_X_STOP
+{
+    ActionType = "Stop";
+    BypassPort = __shared__::SCVars.SC_BENCHTOP;
+    CollectPins = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0,IPC::CPU1_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPH::HUB_TDAU0");
+    UeiSlaveType = "TCC";
+}
+
+CSharpTest PrimeThermalUeiStreamTestMethod TD_X_UEISTREAM_E_LOTSTARTFLOW_X_X_X_X_START
+{
+    ActionType = "Start";
+    BypassPort = __shared__::SCVars.SC_BENCHTOP;
+    CollectPins = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0,IPC::CPU1_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPH::HUB_TDAU0");
+    PowerPins = "IPC::TDYN_9_IPC";
+    UeiSlaveType = "TCC";
+}
+
+CSharpTest AuxiliaryTC TD_X_AUX_E_START_X_X_X_X_DISABLE_SOT
+{
+    DataType = "Integer";
+    Datalog = "Enabled";
+    Expression = "1";
+    ResultToken = "__shared__::PTHVars.bypass_sot";
+    Storage = "UserVar";
+}
+
+CSharpTest AuxiliaryTC TD_X_AUX_E_START_X_X_X_X_ENABLE_EOT
+{
+    DataType = "Integer";
+    Datalog = "Enabled";
+    Expression = "-1";
+    ResultToken = "__shared__::PTHVars.bypass_eot";
+    Storage = "UserVar";
+}
+
+CSharpTest PrimeThermalSingleMeasurementTestMethod TD_X_TDAU_E_START_X_X_X_X_SOT_BT
+{
+    BypassPort = PTH_DIODE_XXX.bypass_benchtop_inv;
+    IntegrityHighLimit = 200;
+    IntegrityLowLimit = 130;
+    LowerTolerance = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("15,15,10,15","15,15,15,10,15","15,15,15,15","15,15,15,15","15,15,15,15","15,15,10,15","15,15,10,15","30, 30, 30");
+    MeasurementType = "SOT";
+    PinNames = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPC::CPU1_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPH::HUB_TDAU0");
+    PostInstance = "DtsStartOfDevice()";
+    UpperTolerance = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("15,15,10,15","15,15,15,10,15","15,15,15,15","15,15,15,15","15,15,15,15","15,15,10,15","15,15,10,15","30, 30, 30");
+    UserVarStoreNames = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas4, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas2");
+}
+
+CSharpTest PrimeThermalSingleMeasurementTestMethod TD_X_TDAU_K_START_X_X_X_X_SOT
+{
+    BypassPort = __shared__::SCVars.SC_BENCHTOP;
+    ContinuousRead = "Enabled";
+    IntegrityHighLimit = 200;
+    IntegrityLowLimit = 130;
+    LowerTolerance = PTH_DIODE_XXX_Rules.If_FUSE(__shared__::TpRule.If_CLASS_NVL_S52C("30,30,30,30,30","30,30,30,30"),__shared__::TpRule.If_S28_S52_HX28_P16C_H16C_S16C_DS28C("15,15,10,15","15,15,15,10,15","15,15,15,15","15,15,15,15","15,15,15,15","15,15,10,15","15,15,10,15","15,15,10,15"));
+    MeasurementType = "SOT";
+    PinNames = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPC::CPU1_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPH::HUB_TDAU0");
+    PostInstance = "DtsStartOfDevice()";
+    UpperTolerance = PTH_DIODE_XXX_Rules.If_FUSE(__shared__::TpRule.If_CLASS_NVL_S52C("30,30,30,30,30","30,30,30,30"),__shared__::TpRule.If_S28_S52_HX28_P16C_H16C_S16C_DS28C("15,15,10,15","15,15,15,10,15","15,15,15,15","15,15,15,15","15,15,15,15","15,15,10,15","15,15,10,15","15,15,10,15"));
+    UserVarStoreNames = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas4, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas2");
+}
+
+CSharpTest ScreenTC TD_X_SCREEN_E_START_X_X_X_X_SOT_SET_GLOBAL_USVR
+{
+    ScreenTestSet = "NVL_SET_GLOBAL_USERVAR";
+    ScreenTestsFile = "./InputFiles/NVL_SET_GLOBAL_USERVAR.txt";
+}
+
+CSharpTest IntecTC TD_X_PARDATA_E_START_X_X_X_X_INTEC
+{
+    BypassPort = __shared__::SCVars.SC_INTEC_PF_ENABLED;
+    Channels = "0";
+    Delay = 1;
+    Feedback = "PowerFollowing";
+    FollowingOffset = 0;
+    FollowingSlope = __shared__::SCVars.SC_PF_SLOPE;
+    IntecJson = "./InputFiles/intec.json";
+    Operation = "SetTemperature";
+    PolarisApp = "../../../../UserCode/lib/Release/net462/SetTemperature.exe";
+    PolarisTimeOut = 60000;
+    SetPoint = "SC_TEMPERATURE";
+    Tolerance = 1;
+}
+
+CSharpTest PrimeApplyTestConditionTestMethod TD_X_APPLYTC_E_TESTPLANENDFLOW_X_X_X_X_STOPCNV
+{
+    BypassPort = __shared__::PTHVars.bypass_sot;
+    TestConditionCategory = "THERMAL";
+    TestConditionName = PTH_DIODE_XXX_Rules.Select_by_BOM_and_LocationSets("TDAU_EOT_TC_S28CH","TDAU_EOT_TC_S52CH","TDAU_EOT_TC_S28CC","TDAU_EOT_TC_S52CC","TDAU_EOT_TC_ROOM_S28CPP","TDAU_EOT_TC_ROOM_S52CPP","TDAU_EOT_TC_HX28CH","TDAU_EOT_TC_HX28CC","TDAU_EOT_TC_ROOM_HX28CPP","TDAU_EOT_TC_HX28CH","TDAU_EOT_TC_HX28CC","TDAU_EOT_TC_ROOM_HX28CPP","TDAU_EOT_TC_H16CH","TDAU_EOT_TC_H16CC","TDAU_EOT_TC_ROOM_H16CPP","TDAU_EOT_TC_S16CH","TDAU_EOT_TC_S16CC","TDAU_EOT_TC_ROOM_S16CPP","TDAU_EOT_TC_DNLS28CH","TDAU_EOT_TC_DNLS28CC","TDAU_EOT_TC_ROOM_DNLS28CPP","TDAU_EOT_TC_S28CH");
+}
+
+CSharpTest AuxiliaryTC TD_X_AUX_E_TESTPLANENDFLOW_X_X_X_X_LTTC_FORK
+{
+    DataType = "String";
+    Expression = "[__shared__::PTHVars.bypass_lttc]";
+    ResultPort = "[R]=='-1'?1:2";
+    Storage = "UserVar";
+}
+
+CSharpTest PrimeThermalSingleMeasurementTestMethod TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_LTTC
+{
+    BypassPort = __shared__::PTHVars.bypass_eot;
+    IntegrityHighLimit = 200;
+    IntegrityLowLimit = 130;
+    LowerTolerance = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("15,15,10,15","15,15,15,10,15","30,30,30,30","30,30,30,30","30,30,30,30","15,15,10,15","15,15,10,15","30, 30, 30");
+    PinNames = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPC::CPU1_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPH::HUB_TDAU0");
+    UpperTolerance = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("15,15,10,15","15,15,15,10,15","30,30,30,30","30,30,30,30","30,30,30,30","15,15,10,15","15,15,10,15","30, 30, 30");
+}
+
+CSharpTest PrimeThermalEndOfTestTestMethod TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_EOT_TPEF_LTTC
+{
+    BypassPort = __shared__::PTHVars.bypass_eot;
+    LowerTolerance = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("15,15,10,15","15,15,15,10,15","30,30,30,30","30,30,30,30","30,30,30,30","15,15,10,15","15,15,10,15","30, 30, 30");
+    PcsDatalogSelector = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("4,5,6,7","4,5,6,7,8","4,5,6,7","4,5,6,7","4,5,6,7","4,5,6,7","4,5,6,7","4,5,7");
+    PinNames = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPC::CPU1_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPH::HUB_TDAU0");
+    PreInstance = "WriteSharedStorage(--token G.U.D.PCS_SOT_THERMAL_HEAD_TEMPERATURE_READ --value -6666666 )";
+    UpperTolerance = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("15,15,10,15","15,15,15,10,15","30,30,30,30","30,30,30,30","30,30,30,30","15,15,10,15","15,15,10,15","30, 30, 30");
+}
+
+CSharpTest PrimeThermalSingleMeasurementTestMethod TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X
+{
+    BypassPort = __shared__::PTHVars.bypass_eot;
+    IntegrityHighLimit = 200;
+    IntegrityLowLimit = 130;
+    LowerTolerance = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("15,15,10,15","15,15,15,10,15","30,30,30,30","30,30,30,30","30,30,30,30","15,15,10,15","15,15,10,15","30, 30, 30");
+    PinNames = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPC::CPU1_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPH::HUB_TDAU0");
+    UpperTolerance = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("15,15,10,15","15,15,15,10,15","30,30,30,30","30,30,30,30","30,30,30,30","15,15,10,15","15,15,10,15","30, 30, 30");
+}
+
+CSharpTest PrimeThermalEndOfTestTestMethod TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_EOT_TPEF
+{
+    BypassPort = __shared__::PTHVars.bypass_eot;
+    LowerTolerance = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("15,15,10,15","15,15,15,10,15","30,30,30,30","30,30,30,30","30,30,30,30","15,15,10,15","15,15,10,15","30, 30, 30");
+    PcsDatalogSelector = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("0,1,2,3","0,1,2,3,4","0,1,2,3","0,1,2,3","0,1,2,3","0,1,2,3","0,1,2,3","0,1,2");
+    PinNames = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPC::CPU1_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPH::HUB_TDAU0");
+    PostInstance = "DtsEndOfDevice()";
+    PreInstance = "WriteSharedStorage(--token G.U.D.PCS_SOT_THERMAL_HEAD_TEMPERATURE_READ --value -6666666 )";
+    UpperTolerance = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("15,15,10,15","15,15,15,10,15","30,30,30,30","30,30,30,30","30,30,30,30","15,15,10,15","15,15,10,15","30, 30, 30");
+}
+
+CSharpTest AuxiliaryTC TD_X_AUX_E_TESTPLANENDFLOW_X_X_X_X_DISABLE_EOT
+{
+    DataType = "Integer";
+    Datalog = "Enabled";
+    Expression = "1";
+    ResultToken = "__shared__::PTHVars.bypass_eot";
+    Storage = "UserVar";
+}
+
+CSharpTest PrimeLogPcsTokensTestMethod PTH_DIODE_MEASURE_E_TESTPLANENDFLOW_X_X_X_X_LOGPCSTOKENS
+{
+    BypassPort = -1;
+}
+
+CSharpTest PrimeThermalControlSetTestMethod TD_X_CS_E_TESTPLANENDFLOW_X_X_X_X_DESOAK
+{
+    BypassPort = -1;
+    ControlSet = "DESOAK";
+    UeiPinName = "IPC::UEISLAVE_IPC";
+}
+
+CSharpTest PrimeApplyTestConditionTestMethod TD_X_APPLYTC_E_TESTPLANENDFLOW_X_X_X_X_PSMSTOP_CPU
+{
+    TestConditionCategory = "THERMAL";
+    TestConditionName = "PowerSummingStop_TC_CPU";
+}
+
+CSharpTest PrimeApplyTestConditionTestMethod TD_X_APPLYTC_E_TESTPLANENDFLOW_X_X_X_X_PSMSTOP_PCH
+{
+    BypassPort = 1;
+    TestConditionCategory = "THERMAL";
+    TestConditionName = "PowerSummingStop_TC_PCH";
+}
+
+CSharpTest PrimeApplyTestConditionTestMethod TD_X_CS_E_TESTPLANENDFLOW_X_X_X_X_DESOAK_CPU
+{
+    BypassPort = 1;
+    TestConditionCategory = "THERMAL";
+    TestConditionName = PTH_DIODE_XXX_Rules.PTHControlSetRule("SOAK_CC_TC","SOAK_TC","SOAK_RM_TC","SOAK_RM_TC");
+}
+
+CSharpTest PrimeApplyTestConditionTestMethod TD_X_CS_E_TESTPLANENDFLOW_X_X_X_X_DESOAK_PCH
+{
+    BypassPort = 1;
+    TestConditionCategory = "THERMAL";
+    TestConditionName = PTH_DIODE_XXX_Rules.PTHControlSetRule("IP_PCH::IP_PCH_BASE::SOAK_PCH_CC_TC","IP_PCH::IP_PCH_BASE::SOAK_PCH_TC","IP_PCH::IP_PCH_BASE::SOAK_PCH_RM_TC","IP_PCH::IP_PCH_BASE::SOAK_PCH_RM_TC");
+}
+
+CSharpTest PrimeThermalSingleMeasurementTestMethod TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_SOT
+{
+    BypassPort = PTH_DIODE_XXX.bypass_sot;
+    DffTokens = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("SOTC0, SOTC1, SOTC2, SOTC3","SOTC0, SOTC1, SOTC2, SOTC3, SOTC4","SOTC0, SOTC1, SOTC2, SOTC3","SOTC0, SOTC1, SOTC2, SOTC3","SOTC0, SOTC1, SOTC2, SOTC3","SOTC0, SOTC1, SOTC2, SOTC3","SOTC0, SOTC1, SOTC2, SOTC3","SOTC0, SOTC1, SOTC2");
+    IntegrityHighLimit = 200;
+    IntegrityLowLimit = 130;
+    LowerTolerance = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("15,15,10,15","15,15,15,10,15","30,30,30,30","30,30,30,30","30,30,30,30","15,15,10,15","15,15,10,15","30, 30, 30");
+    MeasurementType = "SOT";
+    PinNames = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPC::CPU1_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPH::HUB_TDAU0");
+    UpperTolerance = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("15,15,10,15","15,15,15,10,15","30,30,30,30","30,30,30,30","30,30,30,30","15,15,10,15","15,15,10,15","30, 30, 30");
+    UserVarStoreNames = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas4, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas2, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas3","PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas0, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas1, PTH_DIODE_XXX::PTH_DIODE_XXX.sotTempMeas2");
+}
+
+CSharpTest ULTLoggerTC SOT_X_ULTLOGGER_K_TESTPLANSTARTFLOW_X_X_X_X_DFFIDEALITY
+{
+    BypassPort = __shared__::SCVars.SC_BENCHTOP;
+    DieId = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("U1.U2,U1.U4","U1.U2,U1.U4,U1.U5,U1.U6","U1.U2,U1.U4,U1.U5","U1.U2,U1.U4,U1.U5","U1.U2,U1.U4,U1.U5","U1.U2,U1.U4","U1.U2,U1.U4","U1.U2,U1.U4,U1.U5");
+    IsInlineDff = "ENABLED";
+    LogLevel = "Disabled";
+    PrintUlt = "ENABLED";
+    SetUltDataPerDieId = "ENABLED";
+    ValueExpression = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("MDPOSITION=U1.U2,MDPOSITION=U1.U4","MDPOSITION=U1.U2,MDPOSITION=U1.U4,MDPOSITION=U1.U5,MDPOSITION=U1.U6","MDPOSITION=U1.U2,MDPOSITION=U1.U4,MDPOSITION=U1.U5","MDPOSITION=U1.U2,MDPOSITION=U1.U4,MDPOSITION=U1.U5","MDPOSITION=U1.U2,MDPOSITION=U1.U4,MDPOSITION=U1.U5","MDPOSITION=U1.U2,MDPOSITION=U1.U4","MDPOSITION=U1.U2,MDPOSITION=U1.U4","MDPOSITION=U1.U2,MDPOSITION=U1.U4,MDPOSITION=U1.U5");
+}
+
+CSharpTest PrimeDffReadTestMethod SOT_X_DFFREAD_K_TESTPLANSTARTFLOW_X_X_X_X_DFFREAD
+{
+    BypassPort = __shared__::SCVars.SC_BENCHTOP;
+    EnabledModules = "NOKILL";
+    LogIndividualTokens = "DISABLED";
+    LogLevel = "Disabled";
+}
+
+CSharpTest PTHGetSetGsdsDffTC SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYHUB
+{
+    BypassPort = __shared__::SCVars.SC_BENCHTOP;
+    ConfigurationFile = "./InputFiles/DFF_HUB.json";
+    OPType = "DFF2GSDS";
+    PreInstance = "SetCurrentDieId("+__shared__::DFFVars.DIEID_HUB+")";
+}
+
+CSharpTest PTHGetSetGsdsDffTC SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYGCD
+{
+    BypassPort = __shared__::SCVars.SC_BENCHTOP;
+    ConfigurationFile = "./InputFiles/DFF_GCD.json";
+    OPType = "DFF2GSDS";
+    PreInstance = "SetCurrentDieId("+__shared__::DFFVars.DIEID_GPU+")";
+}
+
+CSharpTest PTHGetSetGsdsDffTC SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYCPU
+{
+    BypassPort = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise(1,__shared__::SCVars.SC_BENCHTOP,1,__shared__::SCVars.SC_BENCHTOP,__shared__::SCVars.SC_BENCHTOP,1,1,__shared__::SCVars.SC_BENCHTOP);
+    ConfigurationFile = "./InputFiles/DFF_CPU.json";
+    OPType = "DFF2GSDS";
+    PreInstance = "SetCurrentDieId("+__shared__::DFFVars.DIEID_CPU+")";
+}
+
+CSharpTest PTHGetSetGsdsDffTC SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYCPU1
+{
+    BypassPort = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise(1,__shared__::SCVars.SC_BENCHTOP,1,1,1,1,1,1);
+    ConfigurationFile = "./InputFiles/DFF_CPU1.json";
+    OPType = "DFF2GSDS";
+    PreInstance = "SetCurrentDieId("+__shared__::DFFVars.DIEID_CPU1+")";
+}
+
+CSharpTest ScreenTC SOT_X_SCREEN_E_TESTPLANSTARTFLOW_X_X_X_X_IDEALITY
+{
+    BypassPort = __shared__::SCVars.SC_BENCHTOP;
+    ScreenTestSet = PTH_DIODE_XXX_Rules.Select_S28_S52_Otherwise("IDEALITY_N2P","IDEALITY_S52C","IDEALITY_N2P","IDEALITY_N2P","IDEALITY_N2P","IDEALITY_N2P","IDEALITY_N2P","IDEALITY_18A");
+    ScreenTestsFile = "./InputFiles/NVL_PER_PART_IDEALITY.txt";
+}
+
+CSharpTest PrimePauseTestMethod TD_X_PAUSE_E_TESTPLANSTARTFLOW_X_X_X_X_PUC
+{
+    BypassPort = 1;
+    SleepTime = 1000;
+}
+
+CSharpTest PrimeApplyTestConditionTestMethod TD_X_APPLYTC_E_TESTPLANSTARTFLOW_X_X_X_X_TDSETUP
+{
+    BypassPort = __shared__::SCVars.SC_BENCHTOP;
+    TestConditionCategory = "THERMAL";
+    TestConditionName = PTH_DIODE_XXX_Rules.Select_by_BOM_and_LocationSets("TDAU_CAL_TC_S28CH","TDAU_CAL_TC_S52CH","TDAU_CAL_TC_S28CC","TDAU_CAL_TC_S52CC","TDAU_CAL_TC_ROOM_S28CPP","TDAU_CAL_TC_ROOM_S52CPP","TDAU_CAL_TC_HX28CH","TDAU_CAL_TC_HX28CC","TDAU_CAL_TC_ROOM_HX28CPP","TDAU_CAL_TC_HX28CH","TDAU_CAL_TC_HX28CC","TDAU_CAL_TC_ROOM_HX28CPP","TDAU_CAL_TC_H16CH","TDAU_CAL_TC_H16CC","TDAU_CAL_TC_ROOM_H16CPP","TDAU_CAL_TC_S16CH","TDAU_CAL_TC_S16CC","TDAU_CAL_TC_ROOM_S16CPP","TDAU_CAL_TC_DNLS28CH","TDAU_CAL_TC_DNLS28CC","TDAU_CAL_TC_ROOM_DNLS28CPP","TDAU_CAL_TC_S28CH");
+}
+
+CSharpTest PrimeApplyTestConditionTestMethod TD_X_APPLYTC_E_TESTPLANSTARTFLOW_X_X_X_X_SCOCAL
+{
+    TestConditionCategory = "THERMAL";
+    TestConditionName = PTH_DIODE_XXX_Rules.Select_by_BOM_and_LocationSets("TDAU_SCOC_TC_S28CH","TDAU_SCOC_TC_S52CH","TDAU_SCOC_TC_S28CC","TDAU_SCOC_TC_S52CC","TDAU_SCOC_TC_ROOM_S28CPP","TDAU_SCOC_TC_ROOM_S52CPP","TDAU_SCOC_TC_HX28CH","TDAU_SCOC_TC_HX28CC","TDAU_SCOC_TC_ROOM_HX28CPP","TDAU_SCOC_TC_HX28CH","TDAU_SCOC_TC_HX28CC","TDAU_SCOC_TC_ROOM_HX28CPP","TDAU_SCOC_TC_H16CH","TDAU_SCOC_TC_H16CC","TDAU_SCOC_TC_ROOM_H16CPP","TDAU_SCOC_TC_S16CH","TDAU_SCOC_TC_S16CC","TDAU_SCOC_TC_ROOM_S16CPP","TDAU_SCOC_TC_DNLS28CH","TDAU_SCOC_TC_DNLS28CC","TDAU_SCOC_TC_ROOM_DNLS28CPP","TDAU_SCOC_TC_S28CH");
+}
+
+CSharpTest AuxiliaryTC TD_X_AUX_E_TESTPLANSTARTFLOW_X_X_X_X_DISABLE_EOT
+{
+    DataType = "Integer";
+    Datalog = "Enabled";
+    Expression = "1";
+    ResultToken = "__shared__::PTHVars.bypass_eot";
+    Storage = "UserVar";
+}
+
+CSharpTest AuxiliaryTC TD_X_AUX_E_TESTPLANSTARTFLOW_X_X_X_X_DISABLE_FACT
+{
+    DataType = "Integer";
+    Datalog = "Enabled";
+    Expression = "1";
+    ResultToken = "__shared__::PTHVars.bypass_lttc";
+    Storage = "UserVar";
+}
+
+CSharpTest AuxiliaryTC TD_X_AUX_E_TESTPLANSTARTFLOW_X_X_X_X_ENABLE_SOT
+{
+    DataType = "Integer";
+    Datalog = "Enabled";
+    Expression = "-1";
+    ResultToken = "__shared__::PTHVars.bypass_sot";
+    Storage = "UserVar";
+}
+
+CSharpTest ScreenTC TD_X_SCREEN_E_TESTPLANSTARTFLOW_X_X_X_X_BTCHECK_1
+{
+    ScreenTestSet = "MTL_CLASS_BT_CHECK";
+    ScreenTestsFile = "./InputFiles/MTL_CLASS_BT_CHECK.txt";
+}
+
+Flow PTH_DIODE_XXX_LTTCPREPRL0
+{
+    FlowItem TD_X_TDAU_E_LTTCPREPRL0_X_X_X_X_LTTCDTS_BT TD_X_TDAU_E_LTTCPREPRL0_X_X_X_X_LTTCDTS_BT @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970059_fail_PTH_DIODE_XXX_TD_X_TDAU_E_LTTCPREPRL0_X_X_X_X_LTTCDTS_BT_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970059_fail_PTH_DIODE_XXX_TD_X_TDAU_E_LTTCPREPRL0_X_X_X_X_LTTCDTS_BT_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_K_LTTCPREPRL0_X_X_X_X_LTTCDTS;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_TDAU_K_LTTCPREPRL0_X_X_X_X_LTTCDTS;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_K_LTTCPREPRL0_X_X_X_X_LTTCDTS;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_K_LTTCPREPRL0_X_X_X_X_LTTCDTS;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_K_LTTCPREPRL0_X_X_X_X_LTTCDTS;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_K_LTTCPREPRL0_X_X_X_X_LTTCDTS;
+        }
+    }
+    
+    FlowItem TD_X_TDAU_K_LTTCPREPRL0_X_X_X_X_LTTCDTS TD_X_TDAU_K_LTTCPREPRL0_X_X_X_X_LTTCDTS @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970066_fail_PTH_DIODE_XXX_TD_X_TDAU_K_LTTCPREPRL0_X_X_X_X_LTTCDTS_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970066_fail_PTH_DIODE_XXX_TD_X_TDAU_K_LTTCPREPRL0_X_X_X_X_LTTCDTS_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_SCREEN_E_LTTCPREPRL0_X_X_X_X_SOT_SET_GLOBAL_USVR;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_SCREEN_E_LTTCPREPRL0_X_X_X_X_SOT_SET_GLOBAL_USVR;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_SCREEN_E_LTTCPREPRL0_X_X_X_X_SOT_SET_GLOBAL_USVR;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_SCREEN_E_LTTCPREPRL0_X_X_X_X_SOT_SET_GLOBAL_USVR;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_SCREEN_E_LTTCPREPRL0_X_X_X_X_SOT_SET_GLOBAL_USVR;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_SCREEN_E_LTTCPREPRL0_X_X_X_X_SOT_SET_GLOBAL_USVR;
+        }
+    }
+    
+    FlowItem TD_X_SCREEN_E_LTTCPREPRL0_X_X_X_X_SOT_SET_GLOBAL_USVR TD_X_SCREEN_E_LTTCPREPRL0_X_X_X_X_SOT_SET_GLOBAL_USVR @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970049_fail_PTH_DIODE_XXX_TD_X_SCREEN_E_LTTCPREPRL0_X_X_X_X_SOT_SET_GLOBAL_USVR_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970049_fail_PTH_DIODE_XXX_TD_X_SCREEN_E_LTTCPREPRL0_X_X_X_X_SOT_SET_GLOBAL_USVR_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow PTH_DIODE_XXX_BEGIN
+{
+    FlowItem TD_X_CS_E_BEGIN_X_X_X_X_TEST TD_X_CS_E_BEGIN_X_X_X_X_TEST @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970029_fail_PTH_DIODE_XXX_TD_X_CS_E_BEGIN_X_X_X_X_TEST_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970029_fail_PTH_DIODE_XXX_TD_X_CS_E_BEGIN_X_X_X_X_TEST_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+    FlowItem TD_X_CS_E_BEGIN_X_X_X_X_TEST_CPU TD_X_CS_E_BEGIN_X_X_X_X_TEST_CPU @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970030_fail_PTH_DIODE_XXX_TD_X_CS_E_BEGIN_X_X_X_X_TEST_CPU_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970030_fail_PTH_DIODE_XXX_TD_X_CS_E_BEGIN_X_X_X_X_TEST_CPU_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_CS_E_BEGIN_X_X_X_X_TEST_PCH;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_CS_E_BEGIN_X_X_X_X_TEST_PCH;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_CS_E_BEGIN_X_X_X_X_TEST_PCH;
+        }
+    }
+    
+    FlowItem TD_X_CS_E_BEGIN_X_X_X_X_TEST_PCH TD_X_CS_E_BEGIN_X_X_X_X_TEST_PCH @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970031_fail_PTH_DIODE_XXX_TD_X_CS_E_BEGIN_X_X_X_X_TEST_PCH_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970031_fail_PTH_DIODE_XXX_TD_X_CS_E_BEGIN_X_X_X_X_TEST_PCH_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow PTH_DIODE_XXX_FINAL
+{
+    FlowItem TD_X_AUX_E_FINAL_X_X_X_X_LTTC_FORK TD_X_AUX_E_FINAL_X_X_X_X_LTTC_FORK @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970021_fail_PTH_DIODE_XXX_TD_X_AUX_E_FINAL_X_X_X_X_LTTC_FORK_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970021_fail_PTH_DIODE_XXX_TD_X_AUX_E_FINAL_X_X_X_X_LTTC_FORK_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_E_FINAL_X_X_X_X;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_TDAU_E_FINAL_X_X_X_X;
+        }
+    }
+    
+    FlowItem TD_X_TDAU_E_FINAL_X_X_X_X TD_X_TDAU_E_FINAL_X_X_X_X @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970056_fail_PTH_DIODE_XXX_TD_X_TDAU_E_FINAL_X_X_X_X_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970056_fail_PTH_DIODE_XXX_TD_X_TDAU_E_FINAL_X_X_X_X_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_AUX_E_FINAL_X_X_X_X_DISABLE_EOT;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_AUX_E_FINAL_X_X_X_X_DISABLE_EOT;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_AUX_E_FINAL_X_X_X_X_DISABLE_EOT;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_AUX_E_FINAL_X_X_X_X_DISABLE_EOT;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_AUX_E_FINAL_X_X_X_X_DISABLE_EOT;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_AUX_E_FINAL_X_X_X_X_DISABLE_EOT;
+        }
+    }
+    
+    FlowItem TD_X_AUX_E_FINAL_X_X_X_X_DISABLE_EOT TD_X_AUX_E_FINAL_X_X_X_X_DISABLE_EOT @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970020_fail_PTH_DIODE_XXX_TD_X_AUX_E_FINAL_X_X_X_X_DISABLE_EOT_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970020_fail_PTH_DIODE_XXX_TD_X_AUX_E_FINAL_X_X_X_X_DISABLE_EOT_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_E_FINAL_X_X_X_X_EOT_BT;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_TDAU_E_FINAL_X_X_X_X_EOT_BT;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_TDAU_E_FINAL_X_X_X_X_EOT_BT;
+        }
+    }
+    
+    FlowItem TD_X_TDAU_E_FINAL_X_X_X_X_EOT_BT TD_X_TDAU_E_FINAL_X_X_X_X_EOT_BT @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970058_fail_PTH_DIODE_XXX_TD_X_TDAU_E_FINAL_X_X_X_X_EOT_BT_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970058_fail_PTH_DIODE_XXX_TD_X_TDAU_E_FINAL_X_X_X_X_EOT_BT_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_E_FINAL_X_X_X_X_EOT;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_TDAU_E_FINAL_X_X_X_X_EOT;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_E_FINAL_X_X_X_X_EOT;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_E_FINAL_X_X_X_X_EOT;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_E_FINAL_X_X_X_X_EOT;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_E_FINAL_X_X_X_X_EOT;
+        }
+    }
+    
+    FlowItem TD_X_TDAU_E_FINAL_X_X_X_X_EOT TD_X_TDAU_E_FINAL_X_X_X_X_EOT @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970057_fail_PTH_DIODE_XXX_TD_X_TDAU_E_FINAL_X_X_X_X_EOT_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970057_fail_PTH_DIODE_XXX_TD_X_TDAU_E_FINAL_X_X_X_X_EOT_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+    }
+
+}
+ 
+Flow PTH_DIODE_XXX_INIT
+{
+    FlowItem TD_X_CS_E_INIT_X_X_X_X_TCISETUP TD_X_CS_E_INIT_X_X_X_X_TCISETUP @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970032_fail_PTH_DIODE_XXX_TD_X_CS_E_INIT_X_X_X_X_TCISETUP_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970032_fail_PTH_DIODE_XXX_TD_X_CS_E_INIT_X_X_X_X_TCISETUP_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_APPLYTC_E_INIT_X_X_X_X_TDSETUP;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_APPLYTC_E_INIT_X_X_X_X_TDSETUP;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_APPLYTC_E_INIT_X_X_X_X_TDSETUP;
+        }
+    }
+    
+    FlowItem TD_X_APPLYTC_E_INIT_X_X_X_X_TDSETUP TD_X_APPLYTC_E_INIT_X_X_X_X_TDSETUP @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970009_fail_PTH_DIODE_XXX_TD_X_APPLYTC_E_INIT_X_X_X_X_TDSETUP_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970009_fail_PTH_DIODE_XXX_TD_X_APPLYTC_E_INIT_X_X_X_X_TDSETUP_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_SCREEN_E_INIT_X_X_X_X_BTCHECK;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_SCREEN_E_INIT_X_X_X_X_BTCHECK;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_SCREEN_E_INIT_X_X_X_X_BTCHECK;
+        }
+    }
+    
+    FlowItem TD_X_SCREEN_E_INIT_X_X_X_X_BTCHECK TD_X_SCREEN_E_INIT_X_X_X_X_BTCHECK @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970048_fail_PTH_DIODE_XXX_TD_X_SCREEN_E_INIT_X_X_X_X_BTCHECK_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970048_fail_PTH_DIODE_XXX_TD_X_SCREEN_E_INIT_X_X_X_X_BTCHECK_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_PARDATA_E_INIT_X_X_X_X_INTEC;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+    }
+    
+    FlowItem TD_X_PARDATA_E_INIT_X_X_X_X_INTEC TD_X_PARDATA_E_INIT_X_X_X_X_INTEC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970041_fail_PTH_DIODE_XXX_TD_X_PARDATA_E_INIT_X_X_X_X_INTEC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970041_fail_PTH_DIODE_XXX_TD_X_PARDATA_E_INIT_X_X_X_X_INTEC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b97520001_fail_PTH_DIODE_XXX_TD_X_PARDATA_E_INIT_X_X_X_X_INTEC_0;
+            IncrementCounters PTH_DIODE_XXX::n97520001_fail_TD_X_PARDATA_E_INIT_X_X_X_X_INTEC_0;
+            GoTo DTS_X_DTSBASE_K_INIT_X_X_X_X;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DTS_X_DTSBASE_K_INIT_X_X_X_X;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b97520002_fail_PTH_DIODE_XXX_TD_X_PARDATA_E_INIT_X_X_X_X_INTEC_2;
+            IncrementCounters PTH_DIODE_XXX::n97520002_fail_TD_X_PARDATA_E_INIT_X_X_X_X_INTEC_2;
+            GoTo DTS_X_DTSBASE_K_INIT_X_X_X_X;
+        }
+    }
+    
+    FlowItem DTS_X_DTSBASE_K_INIT_X_X_X_X DTS_X_DTSBASE_K_INIT_X_X_X_X @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970000_fail_PTH_DIODE_XXX_DTS_X_DTSBASE_K_INIT_X_X_X_X_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970000_fail_PTH_DIODE_XXX_DTS_X_DTSBASE_K_INIT_X_X_X_X_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+
+}
+
+Flow PTH_DIODE_XXX_LOTENDFLOW
+{
+    FlowItem TD_X_UEISTREAM_E_LOTENDFLOW_X_X_X_X_STOP TD_X_UEISTREAM_E_LOTENDFLOW_X_X_X_X_STOP @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970069_fail_PTH_DIODE_XXX_TD_X_UEISTREAM_E_LOTENDFLOW_X_X_X_X_STOP_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970069_fail_PTH_DIODE_XXX_TD_X_UEISTREAM_E_LOTENDFLOW_X_X_X_X_STOP_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+    }
+
+}
+
+Flow PTH_DIODE_XXX_LOTSTARTFLOW
+{
+    FlowItem TD_X_UEISTREAM_E_LOTSTARTFLOW_X_X_X_X_START TD_X_UEISTREAM_E_LOTSTARTFLOW_X_X_X_X_START @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970070_fail_PTH_DIODE_XXX_TD_X_UEISTREAM_E_LOTSTARTFLOW_X_X_X_X_START_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970070_fail_PTH_DIODE_XXX_TD_X_UEISTREAM_E_LOTSTARTFLOW_X_X_X_X_START_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+    }
+
+}
+
+Flow PTH_DIODE_XXX_START
+{
+    FlowItem TD_X_AUX_E_START_X_X_X_X_DISABLE_SOT TD_X_AUX_E_START_X_X_X_X_DISABLE_SOT @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970022_fail_PTH_DIODE_XXX_TD_X_AUX_E_START_X_X_X_X_DISABLE_SOT_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970022_fail_PTH_DIODE_XXX_TD_X_AUX_E_START_X_X_X_X_DISABLE_SOT_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_AUX_E_START_X_X_X_X_ENABLE_EOT;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_AUX_E_START_X_X_X_X_ENABLE_EOT;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_AUX_E_START_X_X_X_X_ENABLE_EOT;
+        }
+    }
+    
+    FlowItem TD_X_AUX_E_START_X_X_X_X_ENABLE_EOT TD_X_AUX_E_START_X_X_X_X_ENABLE_EOT @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970023_fail_PTH_DIODE_XXX_TD_X_AUX_E_START_X_X_X_X_ENABLE_EOT_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970023_fail_PTH_DIODE_XXX_TD_X_AUX_E_START_X_X_X_X_ENABLE_EOT_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_E_START_X_X_X_X_SOT_BT;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_TDAU_E_START_X_X_X_X_SOT_BT;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_TDAU_E_START_X_X_X_X_SOT_BT;
+        }
+    }
+    
+    FlowItem TD_X_TDAU_E_START_X_X_X_X_SOT_BT TD_X_TDAU_E_START_X_X_X_X_SOT_BT @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970060_fail_PTH_DIODE_XXX_TD_X_TDAU_E_START_X_X_X_X_SOT_BT_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970060_fail_PTH_DIODE_XXX_TD_X_TDAU_E_START_X_X_X_X_SOT_BT_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_K_START_X_X_X_X_SOT;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_TDAU_K_START_X_X_X_X_SOT;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_K_START_X_X_X_X_SOT;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_K_START_X_X_X_X_SOT;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_K_START_X_X_X_X_SOT;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_K_START_X_X_X_X_SOT;
+        }
+    }
+    
+    FlowItem TD_X_TDAU_K_START_X_X_X_X_SOT TD_X_TDAU_K_START_X_X_X_X_SOT
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970068_fail_PTH_DIODE_XXX_TD_X_TDAU_K_START_X_X_X_X_SOT_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970068_fail_PTH_DIODE_XXX_TD_X_TDAU_K_START_X_X_X_X_SOT_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b97510000_fail_PTH_DIODE_XXX_TD_X_TDAU_K_START_X_X_X_X_SOT_0;
+            IncrementCounters PTH_DIODE_XXX::n97510000_fail_TD_X_TDAU_K_START_X_X_X_X_SOT_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_SCREEN_E_START_X_X_X_X_SOT_SET_GLOBAL_USVR;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b97520000_fail_PTH_DIODE_XXX_TD_X_TDAU_K_START_X_X_X_X_SOT_2;
+            IncrementCounters PTH_DIODE_XXX::n97520000_fail_TD_X_TDAU_K_START_X_X_X_X_SOT_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b97530003_fail_PTH_DIODE_XXX_TD_X_TDAU_K_START_X_X_X_X_SOT_3;
+            IncrementCounters PTH_DIODE_XXX::n97530003_fail_TD_X_TDAU_K_START_X_X_X_X_SOT_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97540000_fail_PTH_DIODE_XXX_TD_X_TDAU_K_START_X_X_X_X_SOT_4;
+            IncrementCounters PTH_DIODE_XXX::n97540000_fail_TD_X_TDAU_K_START_X_X_X_X_SOT_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b97550000_fail_PTH_DIODE_XXX_TD_X_TDAU_K_START_X_X_X_X_SOT_5;
+            IncrementCounters PTH_DIODE_XXX::n97550000_fail_TD_X_TDAU_K_START_X_X_X_X_SOT_5;
+            Return 0;
+        }
+    }
+    
+    FlowItem TD_X_SCREEN_E_START_X_X_X_X_SOT_SET_GLOBAL_USVR TD_X_SCREEN_E_START_X_X_X_X_SOT_SET_GLOBAL_USVR @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970051_fail_PTH_DIODE_XXX_TD_X_SCREEN_E_START_X_X_X_X_SOT_SET_GLOBAL_USVR_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970051_fail_PTH_DIODE_XXX_TD_X_SCREEN_E_START_X_X_X_X_SOT_SET_GLOBAL_USVR_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_PARDATA_E_START_X_X_X_X_INTEC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_PARDATA_E_START_X_X_X_X_INTEC;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_PARDATA_E_START_X_X_X_X_INTEC;
+        }
+    }
+    
+    FlowItem TD_X_PARDATA_E_START_X_X_X_X_INTEC TD_X_PARDATA_E_START_X_X_X_X_INTEC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970046_fail_PTH_DIODE_XXX_TD_X_PARDATA_E_START_X_X_X_X_INTEC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970046_fail_PTH_DIODE_XXX_TD_X_PARDATA_E_START_X_X_X_X_INTEC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b97520003_fail_PTH_DIODE_XXX_TD_X_PARDATA_E_START_X_X_X_X_INTEC_0;
+            IncrementCounters PTH_DIODE_XXX::n97520003_fail_TD_X_PARDATA_E_START_X_X_X_X_INTEC_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+
+}
+
+Flow PTH_DIODE_XXX_TESTPLANENDFLOW
+{
+    FlowItem TD_X_APPLYTC_E_TESTPLANENDFLOW_X_X_X_X_STOPCNV TD_X_APPLYTC_E_TESTPLANENDFLOW_X_X_X_X_STOPCNV @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970017_fail_PTH_DIODE_XXX_TD_X_APPLYTC_E_TESTPLANENDFLOW_X_X_X_X_STOPCNV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970017_fail_PTH_DIODE_XXX_TD_X_APPLYTC_E_TESTPLANENDFLOW_X_X_X_X_STOPCNV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_AUX_E_TESTPLANENDFLOW_X_X_X_X_LTTC_FORK;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_AUX_E_TESTPLANENDFLOW_X_X_X_X_LTTC_FORK;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_AUX_E_TESTPLANENDFLOW_X_X_X_X_LTTC_FORK;
+        }
+    }
+    
+    FlowItem TD_X_AUX_E_TESTPLANENDFLOW_X_X_X_X_LTTC_FORK TD_X_AUX_E_TESTPLANENDFLOW_X_X_X_X_LTTC_FORK @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970025_fail_PTH_DIODE_XXX_TD_X_AUX_E_TESTPLANENDFLOW_X_X_X_X_LTTC_FORK_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970025_fail_PTH_DIODE_XXX_TD_X_AUX_E_TESTPLANENDFLOW_X_X_X_X_LTTC_FORK_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_LTTC;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X;
+        }
+    }
+    
+    FlowItem TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_LTTC TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_LTTC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970064_fail_PTH_DIODE_XXX_TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_LTTC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970064_fail_PTH_DIODE_XXX_TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_LTTC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_EOT_TPEF_LTTC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_EOT_TPEF_LTTC;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_EOT_TPEF_LTTC;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_EOT_TPEF_LTTC;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_EOT_TPEF_LTTC;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_EOT_TPEF_LTTC;
+        }
+    }
+    
+    FlowItem TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_EOT_TPEF_LTTC TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_EOT_TPEF_LTTC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970063_fail_PTH_DIODE_XXX_TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_EOT_TPEF_LTTC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970063_fail_PTH_DIODE_XXX_TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_EOT_TPEF_LTTC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_AUX_E_TESTPLANENDFLOW_X_X_X_X_DISABLE_EOT;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_AUX_E_TESTPLANENDFLOW_X_X_X_X_DISABLE_EOT;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_AUX_E_TESTPLANENDFLOW_X_X_X_X_DISABLE_EOT;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_AUX_E_TESTPLANENDFLOW_X_X_X_X_DISABLE_EOT;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_AUX_E_TESTPLANENDFLOW_X_X_X_X_DISABLE_EOT;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_AUX_E_TESTPLANENDFLOW_X_X_X_X_DISABLE_EOT;
+        }
+    }
+    
+    FlowItem TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970061_fail_PTH_DIODE_XXX_TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970061_fail_PTH_DIODE_XXX_TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_EOT_TPEF;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_EOT_TPEF;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_EOT_TPEF;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_EOT_TPEF;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_EOT_TPEF;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_EOT_TPEF;
+        }
+    }
+    
+    FlowItem TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_EOT_TPEF TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_EOT_TPEF @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970062_fail_PTH_DIODE_XXX_TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_EOT_TPEF_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970062_fail_PTH_DIODE_XXX_TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_EOT_TPEF_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_AUX_E_TESTPLANENDFLOW_X_X_X_X_DISABLE_EOT;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_AUX_E_TESTPLANENDFLOW_X_X_X_X_DISABLE_EOT;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_AUX_E_TESTPLANENDFLOW_X_X_X_X_DISABLE_EOT;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_AUX_E_TESTPLANENDFLOW_X_X_X_X_DISABLE_EOT;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_AUX_E_TESTPLANENDFLOW_X_X_X_X_DISABLE_EOT;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_AUX_E_TESTPLANENDFLOW_X_X_X_X_DISABLE_EOT;
+        }
+    }
+    
+    FlowItem TD_X_AUX_E_TESTPLANENDFLOW_X_X_X_X_DISABLE_EOT TD_X_AUX_E_TESTPLANENDFLOW_X_X_X_X_DISABLE_EOT @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970024_fail_PTH_DIODE_XXX_TD_X_AUX_E_TESTPLANENDFLOW_X_X_X_X_DISABLE_EOT_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970024_fail_PTH_DIODE_XXX_TD_X_AUX_E_TESTPLANENDFLOW_X_X_X_X_DISABLE_EOT_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo PTH_DIODE_MEASURE_E_TESTPLANENDFLOW_X_X_X_X_LOGPCSTOKENS;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo PTH_DIODE_MEASURE_E_TESTPLANENDFLOW_X_X_X_X_LOGPCSTOKENS;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo PTH_DIODE_MEASURE_E_TESTPLANENDFLOW_X_X_X_X_LOGPCSTOKENS;
+        }
+    }
+    
+    FlowItem PTH_DIODE_MEASURE_E_TESTPLANENDFLOW_X_X_X_X_LOGPCSTOKENS PTH_DIODE_MEASURE_E_TESTPLANENDFLOW_X_X_X_X_LOGPCSTOKENS @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970001_fail_PTH_DIODE_XXX_PTH_DIODE_MEASURE_E_TESTPLANENDFLOW_X_X_X_X_LOGPCSTOKENS_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970001_fail_PTH_DIODE_XXX_PTH_DIODE_MEASURE_E_TESTPLANENDFLOW_X_X_X_X_LOGPCSTOKENS_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_CS_E_TESTPLANENDFLOW_X_X_X_X_DESOAK;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_CS_E_TESTPLANENDFLOW_X_X_X_X_DESOAK;
+        }
+    }
+    
+    FlowItem TD_X_CS_E_TESTPLANENDFLOW_X_X_X_X_DESOAK TD_X_CS_E_TESTPLANENDFLOW_X_X_X_X_DESOAK @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970038_fail_PTH_DIODE_XXX_TD_X_CS_E_TESTPLANENDFLOW_X_X_X_X_DESOAK_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970038_fail_PTH_DIODE_XXX_TD_X_CS_E_TESTPLANENDFLOW_X_X_X_X_DESOAK_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_APPLYTC_E_TESTPLANENDFLOW_X_X_X_X_PSMSTOP_CPU;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_APPLYTC_E_TESTPLANENDFLOW_X_X_X_X_PSMSTOP_CPU;
+        }
+    }
+    
+    FlowItem TD_X_APPLYTC_E_TESTPLANENDFLOW_X_X_X_X_PSMSTOP_CPU TD_X_APPLYTC_E_TESTPLANENDFLOW_X_X_X_X_PSMSTOP_CPU @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970015_fail_PTH_DIODE_XXX_TD_X_APPLYTC_E_TESTPLANENDFLOW_X_X_X_X_PSMSTOP_CPU_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970015_fail_PTH_DIODE_XXX_TD_X_APPLYTC_E_TESTPLANENDFLOW_X_X_X_X_PSMSTOP_CPU_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_APPLYTC_E_TESTPLANENDFLOW_X_X_X_X_PSMSTOP_PCH;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_APPLYTC_E_TESTPLANENDFLOW_X_X_X_X_PSMSTOP_PCH;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_APPLYTC_E_TESTPLANENDFLOW_X_X_X_X_PSMSTOP_PCH;
+        }
+    }
+    
+    FlowItem TD_X_APPLYTC_E_TESTPLANENDFLOW_X_X_X_X_PSMSTOP_PCH TD_X_APPLYTC_E_TESTPLANENDFLOW_X_X_X_X_PSMSTOP_PCH @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970016_fail_PTH_DIODE_XXX_TD_X_APPLYTC_E_TESTPLANENDFLOW_X_X_X_X_PSMSTOP_PCH_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970016_fail_PTH_DIODE_XXX_TD_X_APPLYTC_E_TESTPLANENDFLOW_X_X_X_X_PSMSTOP_PCH_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+    }
+    
+    FlowItem TD_X_CS_E_TESTPLANENDFLOW_X_X_X_X_DESOAK_CPU TD_X_CS_E_TESTPLANENDFLOW_X_X_X_X_DESOAK_CPU @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970039_fail_PTH_DIODE_XXX_TD_X_CS_E_TESTPLANENDFLOW_X_X_X_X_DESOAK_CPU_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970039_fail_PTH_DIODE_XXX_TD_X_CS_E_TESTPLANENDFLOW_X_X_X_X_DESOAK_CPU_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_CS_E_TESTPLANENDFLOW_X_X_X_X_DESOAK_PCH;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_CS_E_TESTPLANENDFLOW_X_X_X_X_DESOAK_PCH;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_CS_E_TESTPLANENDFLOW_X_X_X_X_DESOAK_PCH;
+        }
+    }
+    
+    FlowItem TD_X_CS_E_TESTPLANENDFLOW_X_X_X_X_DESOAK_PCH TD_X_CS_E_TESTPLANENDFLOW_X_X_X_X_DESOAK_PCH @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970040_fail_PTH_DIODE_XXX_TD_X_CS_E_TESTPLANENDFLOW_X_X_X_X_DESOAK_PCH_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970040_fail_PTH_DIODE_XXX_TD_X_CS_E_TESTPLANENDFLOW_X_X_X_X_DESOAK_PCH_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+    }
+    
+    FlowItem TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_SOT TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_SOT @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970065_fail_PTH_DIODE_XXX_TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_SOT_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970065_fail_PTH_DIODE_XXX_TD_X_TDAU_E_TESTPLANENDFLOW_X_X_X_X_SOT_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+    }
+
+}
+
+Flow PTH_DIODE_XXX_TESTPLANSTARTFLOW
+{
+    FlowItem SOT_X_ULTLOGGER_K_TESTPLANSTARTFLOW_X_X_X_X_DFFIDEALITY SOT_X_ULTLOGGER_K_TESTPLANSTARTFLOW_X_X_X_X_DFFIDEALITY @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970008_fail_PTH_DIODE_XXX_SOT_X_ULTLOGGER_K_TESTPLANSTARTFLOW_X_X_X_X_DFFIDEALITY_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970008_fail_PTH_DIODE_XXX_SOT_X_ULTLOGGER_K_TESTPLANSTARTFLOW_X_X_X_X_DFFIDEALITY_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo SOT_X_DFFREAD_K_TESTPLANSTARTFLOW_X_X_X_X_DFFREAD;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_DFFREAD_K_TESTPLANSTARTFLOW_X_X_X_X_DFFREAD;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_DFFREAD_K_TESTPLANSTARTFLOW_X_X_X_X_DFFREAD;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_DFFREAD_K_TESTPLANSTARTFLOW_X_X_X_X_DFFREAD;
+        }
+        Result 4
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_DFFREAD_K_TESTPLANSTARTFLOW_X_X_X_X_DFFREAD;
+        }
+        Result 5
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_DFFREAD_K_TESTPLANSTARTFLOW_X_X_X_X_DFFREAD;
+        }
+    }
+    
+    FlowItem SOT_X_DFFREAD_K_TESTPLANSTARTFLOW_X_X_X_X_DFFREAD SOT_X_DFFREAD_K_TESTPLANSTARTFLOW_X_X_X_X_DFFREAD @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970002_fail_PTH_DIODE_XXX_SOT_X_DFFREAD_K_TESTPLANSTARTFLOW_X_X_X_X_DFFREAD_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970002_fail_PTH_DIODE_XXX_SOT_X_DFFREAD_K_TESTPLANSTARTFLOW_X_X_X_X_DFFREAD_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYHUB;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYHUB;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYHUB;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYHUB;
+        }
+        Result 4
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYHUB;
+        }
+        Result 5
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYHUB;
+        }
+    }
+    
+    FlowItem SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYHUB SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYHUB @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970006_fail_PTH_DIODE_XXX_SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYHUB_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970006_fail_PTH_DIODE_XXX_SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYHUB_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYGCD;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYGCD;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYGCD;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYGCD;
+        }
+        Result 4
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYGCD;
+        }
+        Result 5
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYGCD;
+        }
+    }
+    
+    FlowItem SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYGCD SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYGCD @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970005_fail_PTH_DIODE_XXX_SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYGCD_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970005_fail_PTH_DIODE_XXX_SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYGCD_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYCPU;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYCPU;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYCPU;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYCPU;
+        }
+        Result 4
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYCPU;
+        }
+        Result 5
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYCPU;
+        }
+    }
+    
+    FlowItem SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYCPU SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYCPU @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970003_fail_PTH_DIODE_XXX_SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYCPU_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970003_fail_PTH_DIODE_XXX_SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYCPU_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYCPU1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYCPU1;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYCPU1;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYCPU1;
+        }
+        Result 4
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYCPU1;
+        }
+        Result 5
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYCPU1;
+        }
+    }
+    
+    FlowItem SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYCPU1 SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYCPU1 @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970004_fail_PTH_DIODE_XXX_SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYCPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970004_fail_PTH_DIODE_XXX_SOT_X_DFF_K_TESTPLANSTARTFLOW_X_X_X_X_IDEALITYCPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo SOT_X_SCREEN_E_TESTPLANSTARTFLOW_X_X_X_X_IDEALITY;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_SCREEN_E_TESTPLANSTARTFLOW_X_X_X_X_IDEALITY;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_SCREEN_E_TESTPLANSTARTFLOW_X_X_X_X_IDEALITY;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_SCREEN_E_TESTPLANSTARTFLOW_X_X_X_X_IDEALITY;
+        }
+        Result 4
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_SCREEN_E_TESTPLANSTARTFLOW_X_X_X_X_IDEALITY;
+        }
+        Result 5
+        {
+            Property PassFail = "Pass";
+            GoTo SOT_X_SCREEN_E_TESTPLANSTARTFLOW_X_X_X_X_IDEALITY;
+        }
+    }
+    
+    FlowItem SOT_X_SCREEN_E_TESTPLANSTARTFLOW_X_X_X_X_IDEALITY SOT_X_SCREEN_E_TESTPLANSTARTFLOW_X_X_X_X_IDEALITY @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970007_fail_PTH_DIODE_XXX_SOT_X_SCREEN_E_TESTPLANSTARTFLOW_X_X_X_X_IDEALITY_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970007_fail_PTH_DIODE_XXX_SOT_X_SCREEN_E_TESTPLANSTARTFLOW_X_X_X_X_IDEALITY_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_PAUSE_E_TESTPLANSTARTFLOW_X_X_X_X_PUC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_PAUSE_E_TESTPLANSTARTFLOW_X_X_X_X_PUC;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_PAUSE_E_TESTPLANSTARTFLOW_X_X_X_X_PUC;
+        }
+    }
+    
+    FlowItem TD_X_PAUSE_E_TESTPLANSTARTFLOW_X_X_X_X_PUC TD_X_PAUSE_E_TESTPLANSTARTFLOW_X_X_X_X_PUC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970047_fail_PTH_DIODE_XXX_TD_X_PAUSE_E_TESTPLANSTARTFLOW_X_X_X_X_PUC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970047_fail_PTH_DIODE_XXX_TD_X_PAUSE_E_TESTPLANSTARTFLOW_X_X_X_X_PUC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_APPLYTC_E_TESTPLANSTARTFLOW_X_X_X_X_TDSETUP;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_APPLYTC_E_TESTPLANSTARTFLOW_X_X_X_X_TDSETUP;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_APPLYTC_E_TESTPLANSTARTFLOW_X_X_X_X_TDSETUP;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_APPLYTC_E_TESTPLANSTARTFLOW_X_X_X_X_TDSETUP;
+        }
+        Result 4
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_APPLYTC_E_TESTPLANSTARTFLOW_X_X_X_X_TDSETUP;
+        }
+        Result 5
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_APPLYTC_E_TESTPLANSTARTFLOW_X_X_X_X_TDSETUP;
+        }
+    }
+    
+    FlowItem TD_X_APPLYTC_E_TESTPLANSTARTFLOW_X_X_X_X_TDSETUP TD_X_APPLYTC_E_TESTPLANSTARTFLOW_X_X_X_X_TDSETUP @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970019_fail_PTH_DIODE_XXX_TD_X_APPLYTC_E_TESTPLANSTARTFLOW_X_X_X_X_TDSETUP_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970019_fail_PTH_DIODE_XXX_TD_X_APPLYTC_E_TESTPLANSTARTFLOW_X_X_X_X_TDSETUP_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_APPLYTC_E_TESTPLANSTARTFLOW_X_X_X_X_SCOCAL;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_APPLYTC_E_TESTPLANSTARTFLOW_X_X_X_X_SCOCAL;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_APPLYTC_E_TESTPLANSTARTFLOW_X_X_X_X_SCOCAL;
+        }
+    }
+    
+    FlowItem TD_X_APPLYTC_E_TESTPLANSTARTFLOW_X_X_X_X_SCOCAL TD_X_APPLYTC_E_TESTPLANSTARTFLOW_X_X_X_X_SCOCAL @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970018_fail_PTH_DIODE_XXX_TD_X_APPLYTC_E_TESTPLANSTARTFLOW_X_X_X_X_SCOCAL_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970018_fail_PTH_DIODE_XXX_TD_X_APPLYTC_E_TESTPLANSTARTFLOW_X_X_X_X_SCOCAL_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_AUX_E_TESTPLANSTARTFLOW_X_X_X_X_DISABLE_EOT;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_AUX_E_TESTPLANSTARTFLOW_X_X_X_X_DISABLE_EOT;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_AUX_E_TESTPLANSTARTFLOW_X_X_X_X_DISABLE_EOT;
+        }
+    }
+    
+    FlowItem TD_X_AUX_E_TESTPLANSTARTFLOW_X_X_X_X_DISABLE_EOT TD_X_AUX_E_TESTPLANSTARTFLOW_X_X_X_X_DISABLE_EOT @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970026_fail_PTH_DIODE_XXX_TD_X_AUX_E_TESTPLANSTARTFLOW_X_X_X_X_DISABLE_EOT_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970026_fail_PTH_DIODE_XXX_TD_X_AUX_E_TESTPLANSTARTFLOW_X_X_X_X_DISABLE_EOT_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_AUX_E_TESTPLANSTARTFLOW_X_X_X_X_DISABLE_FACT;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_AUX_E_TESTPLANSTARTFLOW_X_X_X_X_DISABLE_FACT;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_AUX_E_TESTPLANSTARTFLOW_X_X_X_X_DISABLE_FACT;
+        }
+    }
+    
+    FlowItem TD_X_AUX_E_TESTPLANSTARTFLOW_X_X_X_X_DISABLE_FACT TD_X_AUX_E_TESTPLANSTARTFLOW_X_X_X_X_DISABLE_FACT @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970027_fail_PTH_DIODE_XXX_TD_X_AUX_E_TESTPLANSTARTFLOW_X_X_X_X_DISABLE_FACT_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970027_fail_PTH_DIODE_XXX_TD_X_AUX_E_TESTPLANSTARTFLOW_X_X_X_X_DISABLE_FACT_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_AUX_E_TESTPLANSTARTFLOW_X_X_X_X_ENABLE_SOT;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_AUX_E_TESTPLANSTARTFLOW_X_X_X_X_ENABLE_SOT;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_AUX_E_TESTPLANSTARTFLOW_X_X_X_X_ENABLE_SOT;
+        }
+    }
+    
+    FlowItem TD_X_AUX_E_TESTPLANSTARTFLOW_X_X_X_X_ENABLE_SOT TD_X_AUX_E_TESTPLANSTARTFLOW_X_X_X_X_ENABLE_SOT @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970028_fail_PTH_DIODE_XXX_TD_X_AUX_E_TESTPLANSTARTFLOW_X_X_X_X_ENABLE_SOT_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970028_fail_PTH_DIODE_XXX_TD_X_AUX_E_TESTPLANSTARTFLOW_X_X_X_X_ENABLE_SOT_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_SCREEN_E_TESTPLANSTARTFLOW_X_X_X_X_BTCHECK_1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_SCREEN_E_TESTPLANSTARTFLOW_X_X_X_X_BTCHECK_1;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_SCREEN_E_TESTPLANSTARTFLOW_X_X_X_X_BTCHECK_1;
+        }
+    }
+    
+    FlowItem TD_X_SCREEN_E_TESTPLANSTARTFLOW_X_X_X_X_BTCHECK_1 TD_X_SCREEN_E_TESTPLANSTARTFLOW_X_X_X_X_BTCHECK_1 @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970052_fail_PTH_DIODE_XXX_TD_X_SCREEN_E_TESTPLANSTARTFLOW_X_X_X_X_BTCHECK_1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970052_fail_PTH_DIODE_XXX_TD_X_SCREEN_E_TESTPLANSTARTFLOW_X_X_X_X_BTCHECK_1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+    }
+
+}

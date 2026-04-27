@@ -1,0 +1,656 @@
+Version 1.0;
+ThermalMeasure VirtualScs_AllPins_ThermalMeasure
+{
+	DTS_VirtualSCS_SCGM_INTRADUT
+  {
+        FilterMin = -10000.0;
+        FilterMax = 10000.0;
+        ConstantCoefficient = -64.0;
+        LinearCoefficient = 0.5;
+    }
+}
+ThermalMeasure ThermalBlock_TDAU_Channel_P_S28C
+{
+      IPC::CPU_TDAU0
+  {
+        MeasurementMode     = MeasurementMode_CPU;
+        SCOCalMethod      	= SCOCAL_Method_CPU;   
+        IdealityFactor      = Ideality_CPU;       
+        ForceCurrentFirst   = IC1_CPU;
+        ForceCurrentSecond  = IC3_CPU;
+        ForceCurrentThird  = IC2_CPU;
+        BaseLeakageCompensation = BaseLeakage_CPU;
+        Slope           = D_Slope_CPU;
+        TemperatureOffset   = Offset_CPU;
+  }
+      IPG::GCD_TDAU0
+  {
+        MeasurementMode     = MeasurementMode_GCD;
+        SCOCalMethod      	= SCOCAL_Method_GCD;   
+        IdealityFactor      = Ideality_GCD;       
+        ForceCurrentFirst   = IC1_GCD;
+        ForceCurrentSecond  = IC3_GCD;
+        ForceCurrentThird  = IC2_GCD;
+        BaseLeakageCompensation = BaseLeakage_GCD;
+        Slope           = D_Slope_GCD;
+        TemperatureOffset   = Offset_GCD;
+  }
+      IPP::PCD_TDAU0
+  {
+        MeasurementMode     = MeasurementMode_PCD;
+        SCOCalMethod      	= SCOCAL_Method_PCD;   
+        IdealityFactor      = Ideality_PCD;       
+        ForceCurrentFirst   = IC1_PCD;
+        ForceCurrentSecond  = IC3_PCD;
+        ForceCurrentThird  = IC2_PCD;
+        BaseLeakageCompensation = BaseLeakage_PCD;
+        Slope           = D_Slope_PCD;
+        TemperatureOffset   = Offset_PCD;
+  }
+      IPH::HUB_TDAU0
+  {
+        MeasurementMode     = MeasurementMode_HUB;
+        SCOCalMethod      	= SCOCAL_Method_HUB;   
+        IdealityFactor      = Ideality_HUB;       
+        ForceCurrentFirst   = IC1_HUB;
+        ForceCurrentSecond  = IC3_HUB;
+        ForceCurrentThird  = IC2_HUB;
+        BaseLeakageCompensation = BaseLeakage_HUB;
+        Slope           = D_Slope_HUB;
+        TemperatureOffset   = Offset_HUB;
+  }
+
+}
+
+ThermalMeasure ThermalBlock_TDAU_Channel_SOT_P_S28C
+{
+      IPC::CPU_TDAU0
+  {
+        RunScoCal			= True;
+  }
+      IPG::GCD_TDAU0
+  {
+        RunScoCal			= True;
+  }
+      IPP::PCD_TDAU0
+  {
+        RunScoCal			= True;
+  }
+      IPH::HUB_TDAU0
+  {
+        RunScoCal			= True;
+  }
+}
+ThermalMeasure ThermalBlock_TDAU_Channel_EOT_P_S28C
+{
+      IPC::CPU_TDAU0
+  {
+        StopConversion			= True;
+  }
+      IPG::GCD_TDAU0
+  {
+        StopConversion			= True;
+  }
+      IPP::PCD_TDAU0
+  {
+        StopConversion			= True;
+  }
+      IPH::HUB_TDAU0
+  {
+        StopConversion			= True;
+  }
+}
+ThermalMeasure ThermalBlock_TDAU_Channel_P_S52C
+{
+      IPC::CPU_TDAU0
+  {
+        MeasurementMode     = MeasurementMode_CPU;
+        SCOCalMethod      	= SCOCAL_Method_CPU;   
+        IdealityFactor      = Ideality_CPU;       
+        ForceCurrentFirst   = IC1_CPU;
+        ForceCurrentSecond  = IC3_CPU;
+        ForceCurrentThird  = IC2_CPU;
+        BaseLeakageCompensation = BaseLeakage_CPU;
+        Slope           = D_Slope_CPU;
+        TemperatureOffset   = Offset_CPU;
+  }
+	  IPC::CPU1_TDAU0
+  {
+        MeasurementMode     = MeasurementMode_CPU;
+        SCOCalMethod      	= SCOCAL_Method_CPU;   
+        IdealityFactor      = Ideality_CPU1;       
+        ForceCurrentFirst   = IC1_CPU;
+        ForceCurrentSecond  = IC3_CPU;
+        ForceCurrentThird  = IC2_CPU;
+        BaseLeakageCompensation = BaseLeakage_CPU;
+        Slope           = D_Slope_CPU;
+        TemperatureOffset   = Offset_CPU;
+  }
+      IPG::GCD_TDAU0
+  {
+        MeasurementMode     = MeasurementMode_GCD;
+        SCOCalMethod      	= SCOCAL_Method_GCD;   
+        IdealityFactor      = Ideality_GCD;       
+        ForceCurrentFirst   = IC1_GCD;
+        ForceCurrentSecond  = IC3_GCD;
+        ForceCurrentThird  = IC2_GCD;
+        BaseLeakageCompensation = BaseLeakage_GCD;
+        Slope           = D_Slope_GCD;
+        TemperatureOffset   = Offset_GCD;
+  }
+      IPP::PCD_TDAU0
+  {
+        MeasurementMode     = MeasurementMode_PCD;
+        SCOCalMethod      	= SCOCAL_Method_PCD;   
+        IdealityFactor      = Ideality_PCD;       
+        ForceCurrentFirst   = IC1_PCD;
+        ForceCurrentSecond  = IC3_PCD;
+        ForceCurrentThird  = IC2_PCD;
+        BaseLeakageCompensation = BaseLeakage_PCD;
+        Slope           = D_Slope_PCD;
+        TemperatureOffset   = Offset_PCD;
+  }
+      IPH::HUB_TDAU0
+  {
+        MeasurementMode     = MeasurementMode_HUB;
+        SCOCalMethod      	= SCOCAL_Method_HUB;   
+        IdealityFactor      = Ideality_HUB;       
+        ForceCurrentFirst   = IC1_HUB;
+        ForceCurrentSecond  = IC3_HUB;
+        ForceCurrentThird  = IC2_HUB;
+        BaseLeakageCompensation = BaseLeakage_HUB;
+        Slope           = D_Slope_HUB;
+        TemperatureOffset   = Offset_HUB;
+  }
+
+}
+
+ThermalMeasure ThermalBlock_TDAU_Channel_SOT_P_S52C
+{
+      IPC::CPU_TDAU0
+  {
+        RunScoCal			= True;
+  }
+      IPC::CPU1_TDAU0
+  {
+        RunScoCal			= True;
+  }
+      IPG::GCD_TDAU0
+  {
+        RunScoCal			= True;
+  }
+      IPP::PCD_TDAU0
+  {
+        RunScoCal			= True;
+  }
+      IPH::HUB_TDAU0
+  {
+        RunScoCal			= True;
+  }
+}
+ThermalMeasure ThermalBlock_TDAU_Channel_EOT_P_S52C
+{
+      IPC::CPU_TDAU0
+  {
+        StopConversion			= True;
+  }
+      IPC::CPU1_TDAU0
+  {
+        StopConversion			= True;
+  }
+      IPG::GCD_TDAU0
+  {
+        StopConversion			= True;
+  }
+      IPP::PCD_TDAU0
+  {
+        StopConversion			= True;
+  }
+      IPH::HUB_TDAU0
+  {
+        StopConversion			= True;
+  }
+}
+
+ThermalMeasure ThermalBlock_TDAU_Channel_P_HX28C
+{
+      IPC::CPU_TDAU0
+  {
+        MeasurementMode     = MeasurementMode_CPU;
+        SCOCalMethod      	= SCOCAL_Method_CPU;   
+        IdealityFactor      = Ideality_CPU;       
+        ForceCurrentFirst   = IC1_CPU;
+        ForceCurrentSecond  = IC3_CPU;
+        ForceCurrentThird  = IC2_CPU;
+        BaseLeakageCompensation = BaseLeakage_CPU;
+        Slope           = D_Slope_CPU;
+        TemperatureOffset   = Offset_CPU;
+  }
+      IPG::GCD_TDAU0
+  {
+        MeasurementMode     = MeasurementMode_GCD;
+        SCOCalMethod      	= SCOCAL_Method_GCD;   
+        IdealityFactor      = Ideality_GCD;       
+        ForceCurrentFirst   = IC1_GCD;
+        ForceCurrentSecond  = IC3_GCD;
+        ForceCurrentThird  = IC2_GCD;
+        BaseLeakageCompensation = BaseLeakage_GCD;
+        Slope           = D_Slope_GCD;
+        TemperatureOffset   = Offset_GCD;
+  }
+      IPP::PCD_TDAU0
+  {
+        MeasurementMode     = MeasurementMode_PCD;
+        SCOCalMethod      	= SCOCAL_Method_PCD;   
+        IdealityFactor      = Ideality_PCD;       
+        ForceCurrentFirst   = IC1_PCD;
+        ForceCurrentSecond  = IC3_PCD;
+        ForceCurrentThird  = IC2_PCD;
+        BaseLeakageCompensation = BaseLeakage_PCD;
+        Slope           = D_Slope_PCD;
+        TemperatureOffset   = Offset_PCD;
+  }
+      IPH::HUB_TDAU0
+  {
+        MeasurementMode     = MeasurementMode_HUB;
+        SCOCalMethod      	= SCOCAL_Method_HUB;   
+        IdealityFactor      = Ideality_HUB;       
+        ForceCurrentFirst   = IC1_HUB;
+        ForceCurrentSecond  = IC3_HUB;
+        ForceCurrentThird  = IC2_HUB;
+        BaseLeakageCompensation = BaseLeakage_HUB;
+        Slope           = D_Slope_HUB;
+        TemperatureOffset   = Offset_HUB;
+  }
+
+}
+
+ThermalMeasure ThermalBlock_TDAU_Channel_SOT_P_HX28C
+{
+      IPC::CPU_TDAU0
+  {
+        RunScoCal			= True;
+  }
+      IPG::GCD_TDAU0
+  {
+        RunScoCal			= True;
+  }
+      IPP::PCD_TDAU0
+  {
+        RunScoCal			= True;
+  }
+      IPH::HUB_TDAU0
+  {
+        RunScoCal			= True;
+  }
+}
+ThermalMeasure ThermalBlock_TDAU_Channel_EOT_P_HX28C
+{
+      IPC::CPU_TDAU0
+  {
+        StopConversion			= True;
+  }
+      IPG::GCD_TDAU0
+  {
+        StopConversion			= True;
+  }
+      IPP::PCD_TDAU0
+  {
+        StopConversion			= True;
+  }
+      IPH::HUB_TDAU0
+  {
+        StopConversion			= True;
+  }
+}
+ThermalMeasure ThermalBlock_TDAU_Channel_P_S16C
+{
+      IPC::CPU_TDAU0
+  {
+        MeasurementMode     = MeasurementMode_CPU;
+        SCOCalMethod      	= SCOCAL_Method_CPU;   
+        IdealityFactor      = Ideality_CPU;       
+        ForceCurrentFirst   = IC1_CPU;
+        ForceCurrentSecond  = IC3_CPU;
+        ForceCurrentThird  = IC2_CPU;
+        BaseLeakageCompensation = BaseLeakage_CPU;
+        Slope           = D_Slope_CPU;
+        TemperatureOffset   = Offset_CPU;
+  }
+      IPG::GCD_TDAU0
+  {
+        MeasurementMode     = MeasurementMode_GCD;
+        SCOCalMethod      	= SCOCAL_Method_GCD;   
+        IdealityFactor      = Ideality_GCD;       
+        ForceCurrentFirst   = IC1_GCD;
+        ForceCurrentSecond  = IC3_GCD;
+        ForceCurrentThird  = IC2_GCD;
+        BaseLeakageCompensation = BaseLeakage_GCD;
+        Slope           = D_Slope_GCD;
+        TemperatureOffset   = Offset_GCD;
+  }
+      IPP::PCD_TDAU0
+  {
+        MeasurementMode     = MeasurementMode_PCD;
+        SCOCalMethod      	= SCOCAL_Method_PCD;   
+        IdealityFactor      = Ideality_PCD;       
+        ForceCurrentFirst   = IC1_PCD;
+        ForceCurrentSecond  = IC3_PCD;
+        ForceCurrentThird  = IC2_PCD;
+        BaseLeakageCompensation = BaseLeakage_PCD;
+        Slope           = D_Slope_PCD;
+        TemperatureOffset   = Offset_PCD;
+  }
+      IPH::HUB_TDAU0
+  {
+        MeasurementMode     = MeasurementMode_HUB;
+        SCOCalMethod      	= SCOCAL_Method_HUB;   
+        IdealityFactor      = Ideality_HUB;       
+        ForceCurrentFirst   = IC1_HUB;
+        ForceCurrentSecond  = IC3_HUB;
+        ForceCurrentThird  = IC2_HUB;
+        BaseLeakageCompensation = BaseLeakage_HUB;
+        Slope           = D_Slope_HUB;
+        TemperatureOffset   = Offset_HUB;
+  }
+}
+
+ThermalMeasure ThermalBlock_TDAU_Channel_SOT_P_S16C
+{
+      IPC::CPU_TDAU0
+  {
+        RunScoCal			= True;
+  }
+      IPG::GCD_TDAU0
+  {
+        RunScoCal			= True;
+  }
+      IPP::PCD_TDAU0
+  {
+        RunScoCal			= True;
+  }
+      IPH::HUB_TDAU0
+  {
+        RunScoCal			= True;
+  }
+}
+ThermalMeasure ThermalBlock_TDAU_Channel_EOT_P_S16C
+{
+      IPC::CPU_TDAU0
+  {
+        StopConversion			= True;
+  }
+      IPG::GCD_TDAU0
+  {
+        StopConversion			= True;
+  }
+      IPP::PCD_TDAU0
+  {
+        StopConversion			= True;
+  }
+      IPH::HUB_TDAU0
+  {
+        StopConversion			= True;
+  }
+}
+ThermalMeasure ThermalBlock_TDAU_Channel_P_DNLS28C
+{
+      IPC::CPU_TDAU0
+  {
+        MeasurementMode     = MeasurementMode_CPU;
+        SCOCalMethod      	= SCOCAL_Method_CPU;   
+        IdealityFactor      = Ideality_CPU;       
+        ForceCurrentFirst   = IC1_CPU;
+        ForceCurrentSecond  = IC3_CPU;
+        ForceCurrentThird  = IC2_CPU;
+        BaseLeakageCompensation = BaseLeakage_CPU;
+        Slope           = D_Slope_CPU;
+        TemperatureOffset   = Offset_CPU;
+  }
+      IPG::GCD_TDAU0
+  {
+        MeasurementMode     = MeasurementMode_GCD;
+        SCOCalMethod      	= SCOCAL_Method_GCD;   
+        IdealityFactor      = Ideality_GCD;       
+        ForceCurrentFirst   = IC1_GCD;
+        ForceCurrentSecond  = IC3_GCD;
+        ForceCurrentThird  = IC2_GCD;
+        BaseLeakageCompensation = BaseLeakage_GCD;
+        Slope           = D_Slope_GCD;
+        TemperatureOffset   = Offset_GCD;
+  }
+      IPP::PCD_TDAU0
+  {
+        MeasurementMode     = MeasurementMode_PCD;
+        SCOCalMethod      	= SCOCAL_Method_PCD;   
+        IdealityFactor      = Ideality_PCD;       
+        ForceCurrentFirst   = IC1_PCD;
+        ForceCurrentSecond  = IC3_PCD;
+        ForceCurrentThird  = IC2_PCD;
+        BaseLeakageCompensation = BaseLeakage_PCD;
+        Slope           = D_Slope_PCD;
+        TemperatureOffset   = Offset_PCD;
+  }
+      IPH::HUB_TDAU0
+  {
+        MeasurementMode     = MeasurementMode_HUB;
+        SCOCalMethod      	= SCOCAL_Method_HUB;   
+        IdealityFactor      = Ideality_HUB;       
+        ForceCurrentFirst   = IC1_HUB;
+        ForceCurrentSecond  = IC3_HUB;
+        ForceCurrentThird  = IC2_HUB;
+        BaseLeakageCompensation = BaseLeakage_HUB;
+        Slope           = D_Slope_HUB;
+        TemperatureOffset   = Offset_HUB;
+  }
+
+}
+
+ThermalMeasure ThermalBlock_TDAU_Channel_SOT_P_DNLS28C
+{
+      IPC::CPU_TDAU0
+  {
+        RunScoCal			= True;
+  }
+      IPG::GCD_TDAU0
+  {
+        RunScoCal			= True;
+  }
+      IPP::PCD_TDAU0
+  {
+        RunScoCal			= True;
+  }
+      IPH::HUB_TDAU0
+  {
+        RunScoCal			= True;
+  }
+}
+ThermalMeasure ThermalBlock_TDAU_Channel_EOT_P_DNLS28C
+{
+      IPC::CPU_TDAU0
+  {
+        StopConversion			= True;
+  }
+      IPG::GCD_TDAU0
+  {
+        StopConversion			= True;
+  }
+      IPP::PCD_TDAU0
+  {
+        StopConversion			= True;
+  }
+      IPH::HUB_TDAU0
+  {
+        StopConversion			= True;
+  }
+}
+
+ThermalMeasure ThermalBlock_TDAU_Channel_P_H16C
+{
+      IPC::CPU_TDAU0
+  {
+        MeasurementMode     = MeasurementMode_CPU;
+        SCOCalMethod      	= SCOCAL_Method_CPU;   
+        IdealityFactor      = Ideality_CPU;       
+        ForceCurrentFirst   = IC1_CPU;
+        ForceCurrentSecond  = IC3_CPU;
+        ForceCurrentThird  = IC2_CPU;
+        BaseLeakageCompensation = BaseLeakage_CPU;
+        Slope           = D_Slope_CPU;
+        TemperatureOffset   = Offset_CPU;
+  }
+      IPG::GCD_TDAU0
+  {
+        MeasurementMode     = MeasurementMode_GCD;
+        SCOCalMethod      	= SCOCAL_Method_GCD;   
+        IdealityFactor      = Ideality_GCD;       
+        ForceCurrentFirst   = IC1_GCD;
+        ForceCurrentSecond  = IC3_GCD;
+        ForceCurrentThird  = IC2_GCD;
+        BaseLeakageCompensation = BaseLeakage_GCD;
+        Slope           = D_Slope_GCD;
+        TemperatureOffset   = Offset_GCD;
+  }
+      IPP::PCD_TDAU0
+  {
+        MeasurementMode     = MeasurementMode_PCD;
+        SCOCalMethod      	= SCOCAL_Method_PCD;   
+        IdealityFactor      = Ideality_PCD;       
+        ForceCurrentFirst   = IC1_PCD;
+        ForceCurrentSecond  = IC3_PCD;
+        ForceCurrentThird  = IC2_PCD;
+        BaseLeakageCompensation = BaseLeakage_PCD;
+        Slope           = D_Slope_PCD;
+        TemperatureOffset   = Offset_PCD;
+  }
+      IPH::HUB_TDAU0
+  {
+        MeasurementMode     = MeasurementMode_HUB;
+        SCOCalMethod      	= SCOCAL_Method_HUB;   
+        IdealityFactor      = Ideality_HUB;       
+        ForceCurrentFirst   = IC1_HUB;
+        ForceCurrentSecond  = IC3_HUB;
+        ForceCurrentThird  = IC2_HUB;
+        BaseLeakageCompensation = BaseLeakage_HUB;
+        Slope           = D_Slope_HUB;
+        TemperatureOffset   = Offset_HUB;
+  }
+
+}
+
+ThermalMeasure ThermalBlock_TDAU_Channel_SOT_P_H16C
+{
+      IPC::CPU_TDAU0
+  {
+        RunScoCal			= True;
+  }
+      IPG::GCD_TDAU0
+  {
+        RunScoCal			= True;
+  }
+      IPP::PCD_TDAU0
+  {
+        RunScoCal			= True;
+  }
+      IPH::HUB_TDAU0
+  {
+        RunScoCal			= True;
+  }
+}
+ThermalMeasure ThermalBlock_TDAU_Channel_EOT_P_H16C
+{
+      IPC::CPU_TDAU0
+  {
+        StopConversion			= True;
+  }
+      IPG::GCD_TDAU0
+  {
+        StopConversion			= True;
+  }
+      IPP::PCD_TDAU0
+  {
+        StopConversion			= True;
+  }
+      IPH::HUB_TDAU0
+  {
+        StopConversion			= True;
+  }
+}
+
+ThermalControl ThermalControl_TDYN_9_CPU
+{
+	ThermalDomainTable
+	{
+		ThermalDomain = NVL_PWR;
+	}
+    IPG::VCCGT
+    {
+    PowerScale=factor;
+    }
+    IPC::VCCIA
+    {
+        PowerScale=factor;
+    }
+    VNNAON
+    {
+        PowerScale=factor;
+    }
+    IPH::VCCSA	
+    {
+        PowerScale=factor;
+    }
+	IPH::VCCLPECORE	
+    {
+        PowerScale=factor;
+    }
+    VCCIO
+    {
+        PowerScale=factor;
+    }
+    IPC::TDYN_9_IPC
+    {
+       SumScale = factor;
+    }
+}
+#ThermalControl ThermalControl_TDYN_9_PCH
+#{
+#	ThermalDomainTable
+#	{
+#		ThermalDomain = PCH_PWR;
+#	}
+#    IP_PCH::VCCGT_HC
+#    {
+#        PowerScale=factor;
+#    }
+#    VNNAON_HC
+#    {
+#        PowerScale=factor;
+#    }
+#    VCCSA_HC
+#    {
+#        PowerScale=factor;
+#    }
+#    VCCIO_HC
+#    {
+#        PowerScale=factor;
+#    }
+#    IP_PCH::TDYN_9_PCH
+#    {
+#       SumScale = factor;
+#  }
+#}
+
+ThermalControl ActiveControlSet
+{
+    IPC::UEISLAVE_IPC
+    {
+        ActiveClientControlSetIndex = controlset_index_value;
+        ClientControlSetActivationDelayMs = controlset_delay;
+    }
+    
+#    IP_PCH::UEISLAVE_PCH
+#    {
+#        ActiveClientControlSetIndex = controlset_index_value;
+#        ClientControlSetActivationDelayMs = controlset_delay;
+#    }
+}

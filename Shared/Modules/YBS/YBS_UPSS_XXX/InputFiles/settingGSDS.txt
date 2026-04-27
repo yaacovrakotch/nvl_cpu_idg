@@ -1,0 +1,85 @@
+########################
+# Set Initial GSDS to 0
+########################
+START_SCREEN: INITGSDS
+#RunOn 	: TestName : DataType 	: ParamType 	: Param1				: Operation 	: ParamType 	: Param2   			: TmpStore 		: OnTrue 		: OnFalse
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+EXEC 	: SET0     : STRING 	: GSDS 			: U.S.SAAGGITD			: SET			:   LITERAL 	: '0' 	            :   -    	    : 1   			: 2
+
+END_SCREEN	
+
+########################
+# Set GSDS to 1
+########################
+START_SCREEN:AFTERGSDS
+#RunOn 	: TestName : DataType 	: ParamType 	: Param1				: Operation 	: ParamType 	: Param2   			: TmpStore 		: OnTrue 		: OnFalse
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+EXEC 	: SET1     : STRING 	: GSDS 			: U.S.SAAGGITD          : SET 			:   LITERAL 	: '1' 				:   -    	    : 1      		: 2
+
+END_SCREEN
+
+
+########################
+# Detect If this is FCT flow
+########################
+START_SCREEN: CHECK_FCT
+#RunOn 	: TestName : DataType 	: ParamType 	: Param1				: Operation 	: ParamType 	: Param2   			: TmpStore 		: OnTrue 		: OnFalse
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+EXEC 	: SET0     : STRING 	: EXPRESSION    : [E.BOMGROUP]  	: ==		:   LITERAL 	: "CLASS_NVL_S28C" 	    :   -    	    : SET1		: 2
+EXEC 	; SET1     ; INTEGER 	; EXPRESSION    ; [T.IPC::CPU_TRIALS::FlowDomain.CORE_TOP]  	; ==		;   LITERAL 	; 0 	    ;   -    	    ; 1		; 2
+
+END_SCREEN
+
+########################
+# Print TrialVar to Ituff #
+########################
+#START_SCREEN:PrintTrialVar
+#RunOn 	: TestName : DataType 	: ParamType 	: Param1				: Operation 	: ParamType 	: Param2   			: TmpStore 		: OnTrue 		: OnFalse
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#EXEC 	: P1	   : STRING 	: EXPRESSION	: ExecCallback('PrintToItuff', '--body_type mrslt --precision 0 --body_data [T.FlowDomain.CORE_TOP] --tname_suf CORE_FLOW') : - : - : - : - : P2 : P2   						
+#EXEC 	: P2	   : STRING 	: EXPRESSION	: ExecCallback('PrintToItuff', '--body_type mrslt --precision 0 --body_data [T.FlowDomain.ATOM_TOP] --tname_suf ATOM_FLOW') : - : - : - : - : P3 : P3   						
+#EXEC 	: P3	   : STRING 	: EXPRESSION	: ExecCallback('PrintToItuff', '--body_type mrslt --precision 0 --body_data [T.FlowDomain.RING_TOP] --tname_suf RING_FLOW') : - : - : - : - : P4 : P4
+#EXEC 	: P4	   : STRING 	: EXPRESSION	: ExecCallback('PrintToItuff', "--body_type mrslt --precision 0 --body_data T.IPH::HUB_TRIALS::FlowDomain.HUB_TOP --tname_suf GT_FLOW") : - : - : - : - : P5 : P5
+#EXEC 	: P5	   : STRING 	: EXPRESSION	: ExecCallback('PrintToItuff', "--body_type mrslt --precision 0 --body_data [T.IPH::HUB_TRIALS::FlowDomain.HUB_TOP] --tname_suf HUB_FLOW") : - : - : - : - : 1 : 1 
+
+
+END_SCREEN
+
+########################
+# Examples #
+########################
+#START_SCREEN:SET_ATOM_VMINREPAIR_VMIN
+#EXEC:   SETVMINL2		 	: DOUBLE      : GSDS	   : U.D.VMIN_ATOM_CACHE_L2_VMINREP	    																								:  SET	      : LITERAL	      : '0.590'				:    -	    		: SETVMINRF			: SETVMINRF
+#EXEC:   SETVMINRF		 	: DOUBLE      : GSDS	   : U.D.VMIN_ATOM_CACHE_RF_VMINREP	    																								:  SET	      : LITERAL  	  : '0.600'				:    -	    		: SETVMAX	        : SETVMAX
+#EXEC:   SETVMAX		 	    : DOUBLE      : GSDS	   : U.D.VMAX_VOLTAGE	    																											:  SET	      : LITERAL	      : '1.1'				:    -	    		: PrintL2VMINREP	: PrintL2VMINREP
+#EXEC:	PrintL2VMINREP		: STRING	  : EXPRESSION : ExecCallback('PrintToItuff', '--tname_suf ARRATOM_L2_VMINREP --body_type mrslt --body_data G.U.D.VMIN_ATOM_CACHE_L2_VMINREP')      : -   		  : -     		  : -       	  		: -					: PrintRFVMINREP    : PrintRFVMINREP       
+#EXEC:	PrintRFVMINREP		: STRING	  : EXPRESSION : ExecCallback('PrintToItuff', '--tname_suf ARRATOM_RF_VMINREP --body_type mrslt --body_data G.U.D.VMIN_ATOM_CACHE_RF_VMINREP')      : -   		  : -     		  : -       	  		: -					: PrintVMAXREP      : PrintVMAXREP       
+#EXEC:	PrintVMAXREP		: STRING	  : EXPRESSION : ExecCallback('PrintToItuff', '--tname_suf ARRATOM_VMAXREP --body_type mrslt --body_data G.U.D.VMAX_VOLTAGE')      : -   		  : -     		  : -       	  : -					: 1                 : 2       
+#END_SCREEN
+
+
+########################
+# Detect MBL or DT and sets the GSDS accordingly
+########################
+START_SCREEN: SETMOBILEGSDS
+#RunOn 	: TestName : DataType 	: ParamType 	: Param1				: Operation 	: ParamType 	: Param2   			: TmpStore 		: OnTrue 		: OnFalse
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+EXEC 	: SET0     : STRING 	: GSDS 			: U.S.UPS_PKG_TYPE		: SET			:   LITERAL 	: 'MBL' 	         :   -    	    : 1   			: 2
+
+END_SCREEN
+
+
+########################
+# Detect MBL or DT and sets the GSDS accordingly
+########################
+START_SCREEN: SETDESKTOPGSDS
+#RunOn 	: TestName : DataType 	: ParamType 	: Param1				: Operation 	: ParamType 	: Param2   			: TmpStore 		: OnTrue 		: OnFalse
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+EXEC 	: SET0     : STRING 	: GSDS 			: U.S.UPS_PKG_TYPE		: SET			:   LITERAL 	: 'DT' 	            :   -    	    : 1   			: 2
+
+END_SCREEN	

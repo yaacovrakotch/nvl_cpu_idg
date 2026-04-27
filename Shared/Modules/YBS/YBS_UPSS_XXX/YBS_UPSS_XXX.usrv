@@ -1,0 +1,26 @@
+Version 1.0;
+
+SelectorRuleCollection  YBS_UPSS_XXX_Rules
+{
+		SelectorRule QA_S1_bypass (QA_S1_bypass, DEFAULT)
+	{
+		QA_S1_bypass => contains( __shared__::LocationSets.QA_S1,"[" +  __shared__::SCVars.SC_LOCN + ":" +  __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		DEFAULT;
+	}
+		SelectorRule Bypass6233 (Bypass6233, DEFAULT)
+	{
+		Bypass6233 => __shared__::SCVars.SC_LOCN == "6233";
+		DEFAULT;
+	}
+		SelectorRule UPSS_bypass (PBIC_DAB_or_RCHOT, DEFAULT)
+	{
+		PBIC_DAB_or_RCHOT => contains( __shared__::LocationSets.PBIC_DAB,"[" +  __shared__::SCVars.SC_LOCN + ":" +  __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains( __shared__::LocationSets.RCHOT,"[" +  __shared__::SCVars.SC_LOCN + ":" +  __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		DEFAULT;
+	}
+
+	SelectorRule IfPackage (all_die, default) 
+	{
+		all_die => contains(__shared__::DieletIndicator.DIELET_INDICATOR, "CPU") && contains(__shared__::DieletIndicator.DIELET_INDICATOR, "HUB") && contains(__shared__::DieletIndicator.DIELET_INDICATOR, "GCD") && contains(__shared__::DieletIndicator.DIELET_INDICATOR, "PCD");
+		default;
+	}
+}

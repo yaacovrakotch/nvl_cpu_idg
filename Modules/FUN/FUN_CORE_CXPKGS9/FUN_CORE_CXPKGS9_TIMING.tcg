@@ -1,0 +1,65 @@
+Version 1.0;
+
+# HPTP400 modular timing with i_drv_mul = 1
+
+SpecificationSet cpu_fun_timing_CPU_PARAMS_FUN_CORE (mts100_tstprtclk50_tck100,mts1000_tstprtclk500_tck62p5,mts1400_tstprtclk700_tck87p5,mts1500_tstprtclk750_tck93p75,mts1600_tstprtclk800_tck100,mts200_tstprtclk100_tck12p5,mts200_tstprtclk100_tck25,mts400_tstprtclk200_tck25,mts400_tstprtclk200_tck50,mts500_tstprtclk250_tck31p25,mts500_tstprtclk250_tck62p5,mts800_tstprtclk400_tck100,mts800_tstprtclk400_tck50,mts96_tstprtclk48_tck96_hvmclk96) Inherits CPU_IP_BASE::cpu_fun_timing_CPU_PARAMS
+{
+	Double p_cpu_tstprt_i_drv_mul = 1;
+	Double p_cpu_tstprt_o_stb_mul = 0.4;
+}
+
+TestConditionGroup cpu_fun_timing_TCG_FUN_CORE
+{
+	SpecificationSet = cpu_fun_timing_CPU_PARAMS_FUN_CORE;
+	Timing = CPU_IP_BASE::cpu_fun_timing;
+}
+
+TestCondition cpu_fun_timing_mts400_tstprtclk200_tck50_fun_core 
+{
+	TestConditionGroup = cpu_fun_timing_TCG_FUN_CORE;
+	Selector = mts400_tstprtclk200_tck50;
+}
+
+# HPTP800 modular timing with i_drv_mul = (3.75e-9*p_all_mts)-2.4
+
+SpecificationSet cpu_fun_timing_CPU_PARAMS_FUN_CORE_mts800 (mts100_tstprtclk50_tck100,mts1000_tstprtclk500_tck62p5,mts1400_tstprtclk700_tck87p5,mts1500_tstprtclk750_tck93p75,mts1600_tstprtclk800_tck100,mts200_tstprtclk100_tck12p5,mts200_tstprtclk100_tck25,mts400_tstprtclk200_tck25,mts400_tstprtclk200_tck50,mts500_tstprtclk250_tck31p25,mts500_tstprtclk250_tck62p5,mts800_tstprtclk400_tck100,mts800_tstprtclk400_tck50,mts96_tstprtclk48_tck96_hvmclk96) Inherits CPU_IP_BASE::cpu_fun_timing_CPU_PARAMS
+{
+	Double p_cpu_tstprt_i_drv_mul = (3.75e-9 * p_all_mts) - 2.4;
+	Double c_cpu_tap_clk_common_offset = 5e-9;
+	Double p_cpu1_tstprt_i_drv_mul = (3.75e-9 * p_all_mts) - 2.4;
+	Double c_cpu1_tap_clk_common_offset = 5e-9;
+}
+
+TestConditionGroup cpu_fun_timing_TCG_FUN_CORE_mts800
+{
+	SpecificationSet = cpu_fun_timing_CPU_PARAMS_FUN_CORE_mts800;
+	Timing = CPU_IP_BASE::cpu_fun_timing;
+}
+
+TestCondition cpu_fun_timing_mts800_tstprtclk400_tck100_fun_core 
+{
+	TestConditionGroup = cpu_fun_timing_TCG_FUN_CORE_mts800;
+	Selector = mts800_tstprtclk400_tck100;
+}
+
+# HPTP400 modular timing with i_drv_mul = (3.125e-9 * p_all_mts) - 1.141e-15
+
+SpecificationSet cpu_fun_timing_p_core_tstprt_i_drv_mul_FUN_CORE (mts100_tstprtclk50_tck100,mts1000_tstprtclk500_tck62p5,mts1400_tstprtclk700_tck87p5,mts1500_tstprtclk750_tck93p75,mts1600_tstprtclk800_tck100,mts200_tstprtclk100_tck12p5,mts200_tstprtclk100_tck25,mts400_tstprtclk200_tck25,mts400_tstprtclk200_tck50,mts500_tstprtclk250_tck31p25,mts500_tstprtclk250_tck62p5,mts800_tstprtclk400_tck100,mts800_tstprtclk400_tck50,mts96_tstprtclk48_tck96_hvmclk96) Inherits CPU_IP_BASE::cpu_fun_timing_CPU_PARAMS
+{
+	Double p_cpu_tstprt_i_drv_mul = 0;
+	Double c_cpu_tap_clk_mul = 0.5;
+	Double p_cpu1_tstprt_i_drv_mul = 0;
+	Double c_cpu1_tap_clk_mul = 0.5;
+}
+
+TestConditionGroup cpu_fun_mts400_tstprtclk200_tck50_tstprt_i_drv_mul_FUN_CORE
+{
+    SpecificationSet = cpu_fun_timing_p_core_tstprt_i_drv_mul_FUN_CORE;
+    Timing = CPU_IP_BASE::cpu_fun_timing;
+}
+
+TestCondition cpu_fun_timing_mts400_tstprtclk200_tck50_i_drv_mul_fun_CORE
+{
+    TestConditionGroup = cpu_fun_mts400_tstprtclk200_tck50_tstprt_i_drv_mul_FUN_CORE;
+    Selector = mts400_tstprtclk200_tck50;
+}

@@ -1,0 +1,57 @@
+Version 1.0;
+
+SelectorRuleCollection  PTH_DLVR_CKPKGS7_Rules
+{
+	
+	SelectorRule If_CLASS_NVL_HX28C(yes, no)
+	{
+		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C";
+		no;
+	}	
+	SelectorRule DLVR_RUNCLASSHOT_ONLY (Run, Skip)
+	{
+		Run => contains(__shared__::LocationSets.CHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Run => contains(__shared__::LocationSets.RCHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Skip;
+	}	
+	SelectorRule Select_HOT_COLD_Otherwise (Outcome1, Outcome2, Outcome3)
+	{
+		Outcome1 => contains(__shared__::LocationSets.HOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome2 => contains(__shared__::LocationSets.COLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome3;
+	}
+	SelectorRule Select_RCHOT (Outcome1, Outcome2)
+	{
+		Outcome1 => contains(__shared__::LocationSets.RCHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome2;
+	}
+	SelectorRule Select_RCCOLD (Outcome1, Outcome2)
+	{
+		Outcome1 => contains(__shared__::LocationSets.RCCOLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome2;
+	}
+	  SelectorRule DLVR_SETDFF_RULES (Outcome1, Outcome2, Outcome3, Outcome4, Outcome5, Outcome6, Outcome7, Outcome8, Outcome9, Outcome10, Outcome11, Outcome12, Outcome13, Outcome14, Outcome15, Outcome16)
+	  {
+	  	Outcome1 => __shared__::SCVars.SC_ENGID == "QE" && contains(__shared__::LocationSets.CH_QUAL,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");	
+	  	Outcome2 => __shared__::SCVars.SC_ENGID == "QE" && contains(__shared__::LocationSets.CH_QUAL_RV,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");	
+	  	Outcome3 => __shared__::SCVars.SC_ENGID == "QE" && contains(__shared__::LocationSets.CC_QUAL,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");	
+	  	Outcome4 => __shared__::SCVars.SC_ENGID == "QE" && contains(__shared__::LocationSets.CC_QUAL_RV,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");	
+	  	Outcome5 => __shared__::SCVars.SC_ENGID == "QQ" && contains(__shared__::LocationSets.CH_QUAL,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");	
+	  	Outcome6 => __shared__::SCVars.SC_ENGID == "QQ" && contains(__shared__::LocationSets.CH_QUAL_RV,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");	
+	  	Outcome7 => __shared__::SCVars.SC_ENGID == "QQ" && contains(__shared__::LocationSets.CC_QUAL,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");	
+	  	Outcome8 => __shared__::SCVars.SC_ENGID == "QQ" && contains(__shared__::LocationSets.CC_QUAL_RV,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");	
+	  	Outcome9 => __shared__::SCVars.SC_ENGID == "QZ" && contains(__shared__::LocationSets.CH_QUAL,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");	
+	  	Outcome10 => __shared__::SCVars.SC_ENGID == "QZ" && contains(__shared__::LocationSets.CH_QUAL_RV,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+	  	Outcome11 => __shared__::SCVars.SC_ENGID == "QZ" && contains(__shared__::LocationSets.CC_QUAL,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");	
+	  	Outcome12 => __shared__::SCVars.SC_ENGID == "QZ" && contains(__shared__::LocationSets.CC_QUAL_RV,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+	  	Outcome13 => contains(__shared__::LocationSets.FH_ENG,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+	  	Outcome14 => contains(__shared__::LocationSets.CHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+	  	Outcome15 => contains(__shared__::LocationSets.RCHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+	  	Outcome16;
+	  }
+}
+
+UserVars PTH_DLVR_CKPKGS7
+{
+	 Current  clamp_hi = PTH_DLVR_CKPKGS7_Rules.If_CLASS_NVL_HX28C(130A,162A);
+}

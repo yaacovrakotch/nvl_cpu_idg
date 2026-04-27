@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ModuleConfiguration>
+	<Patterns>
+		<!--The PORRoot section is used to declare production plists used by the module.
+				PORRoot can be declared per BomGroup or decorated with the IP name if, in Itradut TP,  IP plists are used by package module.
+				<PORRoot IP="" BomGroup="" Path="" Rev="" Patch="">-->
+		
+		<PORRoot BomGroup="CLASS_NVL_S28C" Path="I:\hdmxpats\nvl_cpu\MCmio\" Rev="RevTCN8GR0.0" Patch="p0">
+			<PlistFiles>
+				<PlistFile>cdie_class_hptp_allplist.plist</PlistFile>
+			</PlistFiles>
+		</PORRoot>
+		<PORRoot BomGroup="CLASS_NVL_S28CB" Path="I:\hdmxpats\nvl_cpu\MCmio\" Rev="RevTCN8GR0.0" Patch="p0">
+			<PlistFiles>
+				<PlistFile>cdie_class_hptp_allplist.plist</PlistFile>
+			</PlistFiles>
+		</PORRoot>
+
+		<PORRoot BomGroup="CLASS_DNL_S28C" Path="I:\hdmxpats\nvl_cpu\MCmio\" Rev="RevTCN8GP0.0" Patch="p1">
+			<PlistFiles>
+				<PlistFile>cdie_class_hptp_allplist.plist</PlistFile>
+			</PlistFiles>
+		</PORRoot>
+
+		<PORRoot BomGroup="CLASS_NVL_S16C" Path="I:\hdmxpats\nvl_cpu\MCmio\" Rev="RevTCN48T0.0" Patch="p5">
+			<PlistFiles>
+				<PlistFile>cdie_class_hptp_allplist.plist</PlistFile>
+			</PlistFiles>
+		</PORRoot>
+
+		<!--The ENGRoot section is used to declare engineering plists used by the module.
+			  IP attribute can be used for ENGRoot: <ENGRoot IP="" Path="">-->
+		<!--<ENGRoot Path="" >
+			<PlistFiles>
+			  <PlistFile> </PlistFile>
+			  <PlistFile BomGroup=""> </PlistFile>
+			</PlistFiles>
+		  </ENGRoot>-->
+
+	</Patterns>
+
+	<!--The AlephFiles section is used to declare Aleph json files which are used by the module. 
+		  Alpeh files must reside inside the repository. -->
+	<AlephFiles>
+			<AlephFile  BomGroup="CLASS_NVL_S16C">InputFiles/HPTP_s16c.patmod.json</AlephFile>
+			<AlephFile  BomGroup="CLASS_NVL_S28C">InputFiles/HPTP.patmod.json</AlephFile>
+			<AlephFile  BomGroup="CLASS_DNL_S28C">InputFiles/HPTP.patmod.json</AlephFile>
+			<!--AlephFile BomGroup="Class_NVL_S28C"> </AlephFile>-->
+	</AlephFiles>
+
+	<!--The IPName is used for modules in IntraDut test program to declare the IP it belongs to.
+		  For package level modules do not add the <IPName> element at all-->
+	<IPName>IPC</IPName>
+
+
+</ModuleConfiguration>

@@ -1,0 +1,891 @@
+Version 1.0;
+
+Import "ThermalCont.thc";
+
+## TDAU calibration
+SpecificationSet Basic_Thermal_SpecSet		(S28CH, S52CH, S28CC, S52CC, ROOM_DEF, ROOM_PP,S28CH_PER, S52CH_PER, HX28CH, HX28CC, HX28CH_PER)
+{
+	String SCOCAL_Method_CPU = "TwoCurrentIdealityNoCollector";
+    String MeasurementMode_CPU = "SingleCurrentSCOCalMode";
+    Double Ideality_CPU = __shared__::PTHVars.CPU0_TDAU0_IDEALITY_DYNAMIC,__shared__::PTHVars.CPU0_TDAU0_IDEALITY_DYNAMIC, __shared__::PTHVars.CPU0_TDAU0_IDEALITY_DYNAMIC_Cold, __shared__::PTHVars.CPU0_TDAU0_IDEALITY_DYNAMIC_Cold, __shared__::PTHVars.CPU0_TDAU0_IDEALITY_DYNAMIC_Cold, __shared__::PTHVars.CPU0_TDAU0_IDEALITY_DYNAMIC_Cold,__shared__::PTHVars.CPU_TDAU0_IDEALITY,__shared__::PTHVars.CPU_TDAU0_IDEALITY,__shared__::PTHVars.CPU0_TDAU0_IDEALITY_DYNAMIC,__shared__::PTHVars.CPU0_TDAU0_IDEALITY_DYNAMIC_Cold,__shared__::PTHVars.CPU_TDAU0_IDEALITY;
+	Double Ideality_CPU1 = __shared__::PTHVars.CPU1_TDAU0_IDEALITY_DYNAMIC,__shared__::PTHVars.CPU1_TDAU0_IDEALITY_DYNAMIC, __shared__::PTHVars.CPU1_TDAU0_IDEALITY_DYNAMIC_Cold, __shared__::PTHVars.CPU1_TDAU0_IDEALITY_DYNAMIC_Cold, __shared__::PTHVars.CPU1_TDAU0_IDEALITY_DYNAMIC_Cold, __shared__::PTHVars.CPU1_TDAU0_IDEALITY_DYNAMIC_Cold,__shared__::PTHVars.CPU_TDAU0_IDEALITY,__shared__::PTHVars.CPU_TDAU0_IDEALITY,__shared__::PTHVars.CPU1_TDAU0_IDEALITY_DYNAMIC,__shared__::PTHVars.CPU1_TDAU0_IDEALITY_DYNAMIC_Cold,__shared__::PTHVars.CPU_TDAU0_IDEALITY;
+    Double D_Slope_CPU = -775, -775, -775, -775, -775, -775,-775, -775, -775, -775, -775;
+    Current IC1_CPU = 0.000170;
+    Current IC2_CPU = 0.000150;
+    Current IC3_CPU = 0.000120;
+    Boolean BaseLeakage_CPU = True;
+    Double Offset_CPU = 0;
+	String SCOCAL_Method_GCD = "TwoCurrentIdealityNoCollector";
+    String MeasurementMode_GCD = "SingleCurrentSCOCalMode";
+     Double Ideality_GCD = __shared__::PTHVars.GCD_TDAU0_IDEALITY_DYNAMIC,__shared__::PTHVars.GCD_TDAU0_IDEALITY_DYNAMIC, __shared__::PTHVars.GCD_TDAU0_IDEALITY_DYNAMIC_Cold, __shared__::PTHVars.GCD_TDAU0_IDEALITY_DYNAMIC_Cold, __shared__::PTHVars.GCD_TDAU0_IDEALITY_DYNAMIC_Cold, __shared__::PTHVars.GCD_TDAU0_IDEALITY_DYNAMIC_Cold,__shared__::PTHVars.GCD_TDAU0_IDEALITY,__shared__::PTHVars.GCD_TDAU0_IDEALITY,__shared__::PTHVars.GCD_TDAU0_IDEALITY_DYNAMIC,__shared__::PTHVars.GCD_TDAU0_IDEALITY_DYNAMIC_Cold,__shared__::PTHVars.GCD_TDAU0_IDEALITY;
+    Double D_Slope_GCD = -775, -775, -775, -775, -775, -775,-775, -775, -775, -775, -775;
+    Current IC1_GCD = 0.000170;
+    Current IC2_GCD = 0.000150;
+    Current IC3_GCD = 0.000120;
+    Boolean BaseLeakage_GCD = True;
+    Double Offset_GCD = 0;
+	String SCOCAL_Method_HUB = "TwoCurrentIdealityNoCollector";
+    String MeasurementMode_HUB = "SingleCurrentSCOCalMode";
+    Double Ideality_HUB = __shared__::PTHVars.HUB_TDAU0_IDEALITY_DYNAMIC,__shared__::PTHVars.HUB_TDAU0_IDEALITY_DYNAMIC, __shared__::PTHVars.HUB_TDAU0_IDEALITY_DYNAMIC_Cold, __shared__::PTHVars.HUB_TDAU0_IDEALITY_DYNAMIC_Cold, __shared__::PTHVars.HUB_TDAU0_IDEALITY_DYNAMIC_Cold, __shared__::PTHVars.HUB_TDAU0_IDEALITY_DYNAMIC_Cold,__shared__::PTHVars.HUB_TDAU0_IDEALITY,__shared__::PTHVars.HUB_TDAU0_IDEALITY,__shared__::PTHVars.HUB_TDAU0_IDEALITY_DYNAMIC,__shared__::PTHVars.HUB_TDAU0_IDEALITY_DYNAMIC_Cold,__shared__::PTHVars.HUB_TDAU0_IDEALITY;
+    Double D_Slope_HUB = -775, -775, -775, -775, -775, -775,-775, -775, -775, -775, -775;
+    Current IC1_HUB = 0.000170;
+    Current IC2_HUB = 0.000150;
+    Current IC3_HUB = 0.000120;
+    Boolean BaseLeakage_HUB = True;
+    Double Offset_HUB = 0;
+	String SCOCAL_Method_PCD	=	"ThreeCurrentIdealityWithLeakage";
+	String MeasurementMode_PCD = "SingleCurrentSCOCalMode";
+	Double Ideality_PCD =	1.011, 1.011, 1.0074, 1.0074, 1.0071, 1.0071,1.011, 1.011, 1.011, 1.0074, 1.011;
+	Double D_Slope_PCD =	-569.04, -569.04, -569.04, -569.04, -569.04, -569.04,-569.04, -569.04, -569.04, -569.04, -569.04;
+	Current IC1_PCD =	0.000170, 0.000170, 0.000170, 0.000170, 0.000160, 0.000160,0.000170, 0.000170, 0.000170, 0.000170, 0.000170;
+	Current IC2_PCD =	0.000090, 0.000100, 0.000090, 0.000100, 0.000110, 0.000110,0.000090, 0.000100, 0.000090, 0.000090, 0.000090;
+	Current IC3_PCD =	0.000030, 0.000030, 0.000030, 0.000030, 0.000030, 0.000030,0.000030, 0.000030, 0.000030, 0.000030, 0.000030;
+	Boolean BaseLeakage_PCD =	True, True, False, False, False, False, True, True, True, False, True;
+	Temperature Offset_PCD =	0;
+
+}
+SpecificationSet Basic_Thermal_Control_SpecSet (min, typ, max, stop)
+{
+	Integer factor = 1, 2, 3, 0;
+}
+
+########## ADDED BY DAVID #############
+SpecificationSet SerialCapture_Thermal_SpecSet (core, io, graphics, outofrange)
+{    
+}
+TestConditionGroup VirtualScs_AllPins_ThermalTCG
+{
+    SpecificationSet = SerialCapture_Thermal_SpecSet;
+    ThermalMeasure = VirtualScs_AllPins_ThermalMeasure;
+}
+TestCondition VirtualScs_AllPins_ThermalTC
+{
+    TestConditionGroup = VirtualScs_AllPins_ThermalTCG;
+    Selector = core;
+}
+########## ADDED BY DAVID #############
+
+TestConditionGroup PowerSumming_TCG_CPU
+{
+	SpecificationSet = Basic_Thermal_Control_SpecSet;
+	ThermalControl = __main__::ThermalControl_TDYN_9_CPU;
+}
+#TestConditionGroup PowerSumming_TCG_PCH
+#{
+#	SpecificationSet = Basic_Thermal_Control_SpecSet;
+#	ThermalControl = __main__::ThermalControl_TDYN_9_PCH;
+#}
+TestCondition PowerSumming_TC_CPU
+{
+	TestConditionGroup = PowerSumming_TCG_CPU;
+	Selector = min;
+}
+#TestCondition PowerSumming_TC_PCH
+#{
+#	TestConditionGroup = PowerSumming_TCG_PCH;
+#	Selector = min;
+#}
+TestCondition PowerSummingStop_TC_CPU
+{
+	TestConditionGroup = PowerSumming_TCG_CPU;
+	Selector = stop;
+}
+#TestCondition PowerSummingStop_TC_PCH
+#{
+#	TestConditionGroup = PowerSumming_TCG_PCH;
+#	Selector = stop;
+#}
+
+
+TestConditionGroup TDAU_SCOC_TC_TCG_P_S28C
+{
+	SpecificationSet = Basic_Thermal_SpecSet;
+	ThermalMeasure = __main__::ThermalBlock_TDAU_Channel_SOT_P_S28C;
+}
+TestConditionGroup TDAU_CAL_TC_TCG_P_S28C
+{
+	SpecificationSet = Basic_Thermal_SpecSet;
+	ThermalMeasure = __main__::ThermalBlock_TDAU_Channel_P_S28C;
+}
+TestConditionGroup TDAU_EOT_TC_TCG_P_S28C
+{
+	SpecificationSet = Basic_Thermal_SpecSet;
+	ThermalMeasure = __main__::ThermalBlock_TDAU_Channel_EOT_P_S28C;
+}
+TestConditionGroup TDAU_SCOC_TC_TCG_P_S52C
+{
+	SpecificationSet = Basic_Thermal_SpecSet;
+	ThermalMeasure = __main__::ThermalBlock_TDAU_Channel_SOT_P_S52C;
+}
+TestConditionGroup TDAU_CAL_TC_TCG_P_S52C
+{
+	SpecificationSet = Basic_Thermal_SpecSet;
+	ThermalMeasure = __main__::ThermalBlock_TDAU_Channel_P_S52C;
+}
+TestConditionGroup TDAU_EOT_TC_TCG_P_S52C
+{
+	SpecificationSet = Basic_Thermal_SpecSet;
+	ThermalMeasure = __main__::ThermalBlock_TDAU_Channel_EOT_P_S52C;
+}
+TestConditionGroup TDAU_SCOC_TC_TCG_P_HX28C
+{
+	SpecificationSet = Basic_Thermal_SpecSet;
+	ThermalMeasure = __main__::ThermalBlock_TDAU_Channel_SOT_P_HX28C;
+}
+TestConditionGroup TDAU_CAL_TC_TCG_P_HX28C
+{
+	SpecificationSet = Basic_Thermal_SpecSet;
+	ThermalMeasure = __main__::ThermalBlock_TDAU_Channel_P_HX28C;
+}
+TestConditionGroup TDAU_EOT_TC_TCG_P_HX28C
+{
+	SpecificationSet = Basic_Thermal_SpecSet;
+	ThermalMeasure = __main__::ThermalBlock_TDAU_Channel_EOT_P_HX28C;
+}
+TestCondition TDAU_SCOC_TC_S28CH
+{
+	TestConditionGroup = TDAU_SCOC_TC_TCG_P_S28C;
+	Selector = S28CH;
+}
+TestCondition TDAU_SCOC_TC_S28CH_PER
+{
+	TestConditionGroup = TDAU_SCOC_TC_TCG_P_S28C;
+	Selector = S28CH_PER;
+}
+TestCondition TDAU_CAL_TC_S28CH
+{
+	TestConditionGroup = TDAU_CAL_TC_TCG_P_S28C;
+	Selector = S28CH;
+}
+TestCondition TDAU_CAL_TC_S28CH_PER
+{
+	TestConditionGroup = TDAU_CAL_TC_TCG_P_S28C;
+	Selector = S28CH_PER;
+}
+TestCondition TDAU_EOT_TC_S28CH
+{
+	TestConditionGroup = TDAU_EOT_TC_TCG_P_S28C;
+	Selector = S28CH_PER;
+}
+TestCondition TDAU_SCOC_TC_S52CH
+{
+	TestConditionGroup = TDAU_SCOC_TC_TCG_P_S52C;
+	Selector = S52CH;
+}
+TestCondition TDAU_SCOC_TC_S52CH_PER
+{
+	TestConditionGroup = TDAU_SCOC_TC_TCG_P_S52C;
+	Selector = S52CH_PER;
+}
+TestCondition TDAU_CAL_TC_S52CH
+{
+	TestConditionGroup = TDAU_CAL_TC_TCG_P_S52C;
+	Selector = S52CH;
+}
+TestCondition TDAU_CAL_TC_S52CH_PER
+{
+	TestConditionGroup = TDAU_CAL_TC_TCG_P_S52C;
+	Selector = S52CH_PER;
+}
+TestCondition TDAU_EOT_TC_S52CH
+{
+	TestConditionGroup = TDAU_EOT_TC_TCG_P_S52C;
+	Selector = S52CH_PER;
+}
+TestCondition TDAU_SCOC_TC_HX28CH
+{
+	TestConditionGroup = TDAU_SCOC_TC_TCG_P_HX28C;
+	Selector = HX28CH;
+}
+TestCondition TDAU_SCOC_TC_HX28CH_PER
+{
+	TestConditionGroup = TDAU_SCOC_TC_TCG_P_HX28C;
+	Selector = HX28CH_PER;
+}
+TestCondition TDAU_CAL_TC_HX28CH
+{
+	TestConditionGroup = TDAU_CAL_TC_TCG_P_HX28C;
+	Selector = HX28CH;
+}
+TestCondition TDAU_CAL_TC_HX28CH_PER
+{
+	TestConditionGroup = TDAU_CAL_TC_TCG_P_HX28C;
+	Selector = HX28CH_PER;
+}
+TestCondition TDAU_EOT_TC_HX28CH
+{
+	TestConditionGroup = TDAU_EOT_TC_TCG_P_HX28C;
+	Selector = HX28CH;
+}
+TestCondition TDAU_EOT_TC_HX28CH_PER
+{
+	TestConditionGroup = TDAU_EOT_TC_TCG_P_HX28C;
+	Selector = HX28CH_PER;
+}
+TestCondition TDAU_SCOC_TC_S28CC
+{
+	TestConditionGroup = TDAU_SCOC_TC_TCG_P_S28C;
+	Selector = S28CC;
+}
+TestCondition TDAU_CAL_TC_S28CC
+{
+	TestConditionGroup = TDAU_CAL_TC_TCG_P_S28C;
+	Selector = S28CC;
+}
+TestCondition TDAU_EOT_TC_S28CC
+{
+	TestConditionGroup = TDAU_EOT_TC_TCG_P_S28C;
+	Selector = S28CC;
+}
+TestCondition TDAU_SCOC_TC_S52CC
+{
+	TestConditionGroup = TDAU_SCOC_TC_TCG_P_S52C;
+	Selector = S52CC;
+}
+TestCondition TDAU_CAL_TC_S52CC
+{
+	TestConditionGroup = TDAU_CAL_TC_TCG_P_S52C;
+	Selector = S52CC;
+}
+TestCondition TDAU_EOT_TC_S52CC
+{
+	TestConditionGroup = TDAU_EOT_TC_TCG_P_S52C;
+	Selector = S52CC;
+}
+TestCondition TDAU_SCOC_TC_HX28CC
+{
+	TestConditionGroup = TDAU_SCOC_TC_TCG_P_HX28C;
+	Selector = HX28CC;
+}
+TestCondition TDAU_CAL_TC_HX28CC
+{
+	TestConditionGroup = TDAU_CAL_TC_TCG_P_HX28C;
+	Selector = HX28CC;
+}
+TestCondition TDAU_EOT_TC_HX28CC
+{
+	TestConditionGroup = TDAU_EOT_TC_TCG_P_HX28C;
+	Selector = HX28CC;
+}
+TestCondition TDAU_SCOC_TC_ROOM_DEF
+{
+	TestConditionGroup = TDAU_SCOC_TC_TCG_P_S28C;
+	Selector = ROOM_DEF;
+}
+TestCondition TDAU_CAL_TC_ROOM_DEF
+{
+	TestConditionGroup = TDAU_CAL_TC_TCG_P_S28C;
+	Selector = ROOM_DEF;
+}
+TestCondition TDAU_EOT_TC_ROOM_DEF
+{
+	TestConditionGroup = TDAU_EOT_TC_TCG_P_S28C;
+	Selector = ROOM_DEF;
+}
+TestCondition TDAU_SCOC_TC_ROOM_S28CPP
+{
+	TestConditionGroup = TDAU_SCOC_TC_TCG_P_S28C;
+	Selector = ROOM_PP;
+}
+TestCondition TDAU_CAL_TC_ROOM_S28CPP
+{
+	TestConditionGroup = TDAU_CAL_TC_TCG_P_S28C;
+	Selector = ROOM_PP;
+}
+TestCondition TDAU_EOT_TC_ROOM_S28CPP
+{
+	TestConditionGroup = TDAU_EOT_TC_TCG_P_S28C;
+	Selector = ROOM_PP;
+}
+TestCondition TDAU_SCOC_TC_ROOM_S52CPP
+{
+	TestConditionGroup = TDAU_SCOC_TC_TCG_P_S52C;
+	Selector = ROOM_PP;
+}
+TestCondition TDAU_CAL_TC_ROOM_S52CPP
+{
+	TestConditionGroup = TDAU_CAL_TC_TCG_P_S52C;
+	Selector = ROOM_PP;
+}
+TestCondition TDAU_EOT_TC_ROOM_S52CPP
+{
+	TestConditionGroup = TDAU_EOT_TC_TCG_P_S52C;
+	Selector = ROOM_PP;
+}
+TestCondition TDAU_SCOC_TC_ROOM_HX28CPP
+{
+	TestConditionGroup = TDAU_SCOC_TC_TCG_P_HX28C;
+	Selector = ROOM_PP;
+}
+TestCondition TDAU_CAL_TC_ROOM_HX28CPP
+{
+	TestConditionGroup = TDAU_CAL_TC_TCG_P_HX28C;
+	Selector = ROOM_PP;
+}
+TestCondition TDAU_EOT_TC_ROOM_HX28CPP
+{
+	TestConditionGroup = TDAU_EOT_TC_TCG_P_HX28C;
+	Selector = ROOM_PP;
+}
+
+#####PLACEHOLDER FOR CS Using TestCondition - NVL SZN will use ControlSet template############
+######### CLASS HOT ControlSet setup - 105C #############
+SpecificationSet SingleZone_Thermal_SpecSet (SOAK,DIODESOT,TEST,DESOAK,IDLE,DISPENSE,TESTRJH,FACT,DUTYCYCLECHECK,HEATERRAMPDOWN,DIODESOTC,TESTC,TESTRJHC,LTTC20,LTTC20PF,LTTC01,TESTPRGT,TESTRJHPRGT,TESTPRC,TESTRJHPRC,DIODESOTPRC,DIODESOTPRGT,PPR,DIODESOTC25,DIODESOTC50,DIODESOTC70,DIODESOTC90,DIODESOTC95,DIODESOTC100,DIODESOTC105,TESTRJHC25,TESTRJHC50,TESTRJHC70,TESTRJHC90,TESTRJHC95,TESTRJHC100,TESTRJHC105,BSS)
+{
+ Integer controlset_index_value = 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38;
+ Integer controlset_delay = 1;
+}
+TestConditionGroup ActiveControlSet_TCG
+{
+ SpecificationSet = SingleZone_Thermal_SpecSet;
+ ThermalControl = ActiveControlSet;
+}
+TestCondition SOAK_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = SOAK;
+}
+TestCondition DIODESOT_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = DIODESOT;
+}
+TestCondition TEST_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = TEST;
+}
+TestCondition DESOAK_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = DESOAK;
+}
+TestCondition IDLE_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = IDLE;
+}
+TestCondition DISPENSE_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = DISPENSE;
+}
+TestCondition TESTRJH_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = TESTRJH;
+}
+TestCondition FACT_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = FACT;
+}
+TestCondition DUTYCYCLECHECK_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = DUTYCYCLECHECK;
+}
+TestCondition HEATERRAMPDOWN_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = HEATERRAMPDOWN;
+}
+TestCondition DIODESOTC_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = DIODESOTC;
+}
+TestCondition TESTC_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = TESTC;
+}
+TestCondition TESTRJHC_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = TESTRJHC;
+}
+TestCondition LTTC20_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = LTTC20;
+}
+TestCondition LTTC20PF_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = LTTC20PF;
+}
+TestCondition LTTC01_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = LTTC01;
+}
+TestCondition TESTPRGT_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = TESTPRGT;
+}
+TestCondition TESTRJHPRGT_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = TESTRJHPRGT;
+}
+TestCondition TESTPRC_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = TESTPRC;
+}
+TestCondition TESTRJHPRC_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = TESTRJHPRC;
+}
+TestCondition DIODESOTPRC_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = DIODESOTPRC;
+}
+TestCondition DIODESOTPRGT_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = DIODESOTPRGT;
+}
+TestCondition PPR_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = PPR;
+}
+TestCondition DIODESOTC25_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = DIODESOTC25;
+}
+TestCondition DIODESOTC50_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = DIODESOTC50;
+}
+TestCondition DIODESOTC70_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = DIODESOTC70;
+}
+TestCondition DIODESOTC90_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = DIODESOTC90;
+}
+TestCondition DIODESOTC95_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = DIODESOTC95;
+}
+TestCondition DIODESOTC100_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = DIODESOTC100;
+}
+TestCondition DIODESOTC105_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = DIODESOTC105;
+}
+TestCondition TESTRJHC25_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = TESTRJHC25;
+}
+TestCondition TESTRJHC50_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = TESTRJHC50;
+}
+TestCondition TESTRJHC70_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = TESTRJHC70;
+}
+TestCondition TESTRJHC90_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = TESTRJHC90;
+}
+TestCondition TESTRJHC95_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = TESTRJHC95;
+}
+TestCondition TESTRJHC100_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = TESTRJHC100;
+}
+TestCondition TESTRJHC105_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = TESTRJHC105;
+}
+TestCondition BSS_TC
+{
+ TestConditionGroup = ActiveControlSet_TCG;
+ Selector = BSS;
+}
+
+########### CLASS HOT ControlSet setup - 25C #############
+#SpecificationSet SingleZone_Thermal_SpecSet (SOAK,DIODESOT,TEST,DESOAK,IDLE,DISPENSE,TESTRJH,DUTYCYCLECHECK,HEATERRAMPDOWN,TESTPRGT,TESTRJHPRGT,TESTPRC,TESTRJHPRC,DIODESOTDLVR,TESTDLVR,DIODESOTC,TESTC,BSS)
+#{
+# Integer controlset_index_value = 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18;
+# Integer controlset_delay = 1;
+#}
+#
+#TestConditionGroup ActiveControlSet_TCG
+#{
+# SpecificationSet = SingleZone_Thermal_SpecSet;
+# ThermalControl = ActiveControlSet;
+#}
+#
+#TestCondition SOAK_TC
+#{
+# TestConditionGroup = ActiveControlSet_TCG;
+# Selector = SOAK;
+#}
+#
+#TestCondition DIODESOT_TC
+#{
+# TestConditionGroup = ActiveControlSet_TCG;
+# Selector = DIODESOT;
+#}
+#
+#TestCondition TEST_TC
+#{
+# TestConditionGroup = ActiveControlSet_TCG;
+# Selector = TEST;
+#}
+#
+#TestCondition DESOAK_TC
+#{
+# TestConditionGroup = ActiveControlSet_TCG;
+# Selector = DESOAK;
+#}
+#
+#TestCondition IDLE_TC
+#{
+# TestConditionGroup = ActiveControlSet_TCG;
+# Selector = IDLE;
+#}
+#
+#TestCondition DISPENSE_TC
+#{
+# TestConditionGroup = ActiveControlSet_TCG;
+# Selector = DISPENSE;
+#}
+#
+#TestCondition TESTRJH_TC
+#{
+# TestConditionGroup = ActiveControlSet_TCG;
+# Selector = TESTRJH;
+#}
+#
+#TestCondition DUTYCYCLECHECK_TC
+#{
+# TestConditionGroup = ActiveControlSet_TCG;
+# Selector = DUTYCYCLECHECK;
+#}
+#
+#TestCondition HEATERRAMPDOWN_TC
+#{
+# TestConditionGroup = ActiveControlSet_TCG;
+# Selector = HEATERRAMPDOWN;
+#}
+#
+#TestCondition TESTPRGT_TC
+#{
+# TestConditionGroup = ActiveControlSet_TCG;
+# Selector = TESTPRGT;
+#}
+#TestCondition TESTRJHPRGT_TC
+#{
+# TestConditionGroup = ActiveControlSet_TCG;
+# Selector = TESTRJHPRGT;
+#}
+#TestCondition TESTPRC_TC
+#{
+# TestConditionGroup = ActiveControlSet_TCG;
+# Selector = TESTPRC;
+#}
+#
+#TestCondition TESTRJHPRC_TC
+#{
+# TestConditionGroup = ActiveControlSet_TCG;
+# Selector = TESTRJHPRC;
+#}
+#
+#TestCondition TESTRJHC_TC
+#{
+# TestConditionGroup = ActiveControlSet_TCG;
+# Selector = TESTRJHPRC;
+#}
+#TestCondition DIODESOTDLVR_TC
+#{
+# TestConditionGroup = ActiveControlSet_TCG;
+# Selector = DIODESOTDLVR;
+#}
+#TestCondition TESTDLVR_TC
+#{
+# TestConditionGroup = ActiveControlSet_TCG;
+# Selector = TESTDLVR;
+#}
+#TestCondition DIODESOTC_TC
+#{
+# TestConditionGroup = ActiveControlSet_TCG;
+# Selector = DIODESOTC;
+#}
+#TestCondition TESTC_TC
+#{
+# TestConditionGroup = ActiveControlSet_TCG;
+# Selector = TESTC;
+#}
+#
+#TestCondition BSS_TC
+#{
+# TestConditionGroup = ActiveControlSet_TCG;
+# Selector = BSS;
+#}
+
+## CLASS COLD ControlSet setup
+SpecificationSet SingleZone_CC_Thermal_SpecSet (SOAK,DIODESOT,TEST,DESOAK,IDLE,DISPENSE,TESTRJH,DUTYCYCLECHECK,HEATERRAMPDOWN,TESTPRGT,TESTRJHPRGT,TESTPRC,TESTRJHPRC,DIODESOTDLVR,TESTDLVR,DIODESOTC,TESTC,BSS)
+{
+ Integer controlset_index_value = 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18;
+ Integer controlset_delay = 1;
+}
+
+TestConditionGroup ActiveControlSet_CC_TCG
+{
+ SpecificationSet = SingleZone_CC_Thermal_SpecSet;
+ ThermalControl = ActiveControlSet;
+}
+
+TestCondition SOAK_CC_TC
+{
+ TestConditionGroup = ActiveControlSet_CC_TCG;
+ Selector = SOAK;
+}
+
+TestCondition DIODESOT_CC_TC
+{
+ TestConditionGroup = ActiveControlSet_CC_TCG;
+ Selector = DIODESOT;
+}
+
+TestCondition TEST_CC_TC
+{
+ TestConditionGroup = ActiveControlSet_CC_TCG;
+ Selector = TEST;
+}
+
+TestCondition DESOAK_CC_TC
+{
+ TestConditionGroup = ActiveControlSet_CC_TCG;
+ Selector = DESOAK;
+}
+
+TestCondition IDLE_CC_TC
+{
+ TestConditionGroup = ActiveControlSet_CC_TCG;
+ Selector = IDLE;
+}
+
+TestCondition DISPENSE_CC_TC
+{
+ TestConditionGroup = ActiveControlSet_CC_TCG;
+ Selector = DISPENSE;
+}
+
+TestCondition TESTRJH_CC_TC
+{
+ TestConditionGroup = ActiveControlSet_CC_TCG;
+ Selector = TESTRJH;
+}
+
+TestCondition DUTYCYCLECHECK_CC_TC
+{
+ TestConditionGroup = ActiveControlSet_CC_TCG;
+ Selector = DUTYCYCLECHECK;
+}
+
+TestCondition HEATERRAMPDOWN_CC_TC
+{
+ TestConditionGroup = ActiveControlSet_CC_TCG;
+ Selector = HEATERRAMPDOWN;
+}
+
+TestCondition TESTPRGT_CC_TC
+{
+ TestConditionGroup = ActiveControlSet_CC_TCG;
+ Selector = TESTPRGT;
+}
+
+TestCondition TESTRJHPRGT_CC_TC
+{
+ TestConditionGroup = ActiveControlSet_CC_TCG;
+ Selector = TESTRJHPRGT;
+}
+
+TestCondition TESTPRC_CC_TC
+{
+ TestConditionGroup = ActiveControlSet_CC_TCG;
+ Selector = TESTPRC;
+}
+
+TestCondition TESTRJHPRC_CC_TC
+{
+ TestConditionGroup = ActiveControlSet_CC_TCG;
+ Selector = TESTRJHPRC;
+}
+
+TestCondition DIODESOTDLVR_CC_TC
+{
+ TestConditionGroup = ActiveControlSet_CC_TCG;
+ Selector = DIODESOTDLVR;
+}
+
+TestCondition TESTDLVR_CC_TC
+{
+ TestConditionGroup = ActiveControlSet_CC_TCG;
+ Selector = TESTDLVR;
+}
+
+TestCondition DIODESOTC_CC_TC
+{
+ TestConditionGroup = ActiveControlSet_CC_TCG;
+ Selector = DIODESOTC;
+}
+
+TestCondition TESTC_CC_TC
+{
+ TestConditionGroup = ActiveControlSet_CC_TCG;
+ Selector = TESTC;
+}
+
+TestCondition BSS_CC_TC
+{
+ TestConditionGroup = ActiveControlSet_CC_TCG;
+ Selector = BSS;
+}
+
+## ROOM/FUSE ControlSet setup
+
+SpecificationSet SingleZone_RM_Thermal_SpecSet (SOAK,DIODESOT,TEST,DESOAK,IDLE,DISPENSE,TESTRJH,DUTYCYCLECHECK,HEATERRAMPDOWN,TESTPRGT,TESTRJHPRGT,TESTPRC,TESTRJHPRC,DIODESOTDLVR,TESTDLVR,DIODESOTC,TESTC,BSS)
+{
+ Integer controlset_index_value = 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18;
+ Integer controlset_delay = 1;
+}
+
+TestConditionGroup ActiveControlSet_RM_TCG
+{
+ SpecificationSet = SingleZone_RM_Thermal_SpecSet;
+ ThermalControl = ActiveControlSet;
+}
+
+TestCondition SOAK_RM_TC
+{
+ TestConditionGroup = ActiveControlSet_RM_TCG;
+ Selector = SOAK;
+}
+
+TestCondition DIODESOT_RM_TC
+{
+ TestConditionGroup = ActiveControlSet_RM_TCG;
+ Selector = DIODESOT;
+}
+
+TestCondition TEST_RM_TC
+{
+ TestConditionGroup = ActiveControlSet_RM_TCG;
+ Selector = TEST;
+}
+
+TestCondition DESOAK_RM_TC
+{
+ TestConditionGroup = ActiveControlSet_RM_TCG;
+ Selector = DESOAK;
+}
+
+TestCondition IDLE_RM_TC
+{
+ TestConditionGroup = ActiveControlSet_RM_TCG;
+ Selector = IDLE;
+}
+
+TestCondition DISPENSE_RM_TC
+{
+ TestConditionGroup = ActiveControlSet_RM_TCG;
+ Selector = DISPENSE;
+}
+
+TestCondition TESTRJH_RM_TC
+{
+ TestConditionGroup = ActiveControlSet_RM_TCG;
+ Selector = TESTRJH;
+}
+
+TestCondition DUTYCYCLECHECK_RM_TC
+{
+ TestConditionGroup = ActiveControlSet_RM_TCG;
+ Selector = DUTYCYCLECHECK;
+}
+
+TestCondition HEATERRAMPDOWN_RM_TC
+{
+ TestConditionGroup = ActiveControlSet_RM_TCG;
+ Selector = HEATERRAMPDOWN;
+}
+
+TestCondition TESTPRGT_RM_TC
+{
+ TestConditionGroup = ActiveControlSet_RM_TCG;
+ Selector = TESTPRGT;
+}
+TestCondition TESTRJHPRGT_RM_TC
+{
+ TestConditionGroup = ActiveControlSet_RM_TCG;
+ Selector = TESTRJHPRGT;
+}
+TestCondition TESTPRC_RM_TC
+{
+ TestConditionGroup = ActiveControlSet_RM_TCG;
+ Selector = TESTPRC;
+}
+
+TestCondition TESTRJHPRC_RM_TC
+{
+ TestConditionGroup = ActiveControlSet_RM_TCG;
+ Selector = TESTRJHPRC;
+}
+
+TestCondition DIODESOTDLVR_RM_TC
+{
+ TestConditionGroup = ActiveControlSet_RM_TCG;
+ Selector = DIODESOTDLVR;
+}
+TestCondition TESTDLVR_RM_TC
+{
+ TestConditionGroup = ActiveControlSet_RM_TCG;
+ Selector = TESTDLVR;
+}
+TestCondition DIODESOTC_RM_TC
+{
+ TestConditionGroup = ActiveControlSet_RM_TCG;
+ Selector = DIODESOTC;
+}
+TestCondition TESTC_RM_TC
+{
+ TestConditionGroup = ActiveControlSet_RM_TCG;
+ Selector = TESTC;
+}
+
+TestCondition BSS_RM_TC
+{
+ TestConditionGroup = ActiveControlSet_RM_TCG;
+ Selector = BSS;
+}

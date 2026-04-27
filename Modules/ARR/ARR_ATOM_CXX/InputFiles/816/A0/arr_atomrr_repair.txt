@@ -1,0 +1,433 @@
+
+
+##################
+# Set Local VFDM #
+##################
+
+START_SCREEN:INIT_GSDS_REPAIR_GROUPS
+EXEC:   SetL2DC				: STRING      : GSDS	   : I.S.L2DCCPU0	    		:  SET	      : LITERAL	      : ''							:    -	    : SetL2DR					: 2
+EXEC:   SetL2DR				: STRING      : GSDS	   : I.S.L2DRCPU0	    		:  SET	      : LITERAL	      : ''							:    -	    : SetL2TC					: 2
+EXEC:   SetL2TC				: STRING      : GSDS	   : I.S.L2TCCPU0	    		:  SET	      : LITERAL	      : ''							:    -	    : SetL2TR0					: 2
+EXEC:   SetL2TR0			: STRING      : GSDS	   : I.S.L2TRM0CPU0	    		:  SET	      : LITERAL	      : ''							:    -	    : SetL2TR1					: 2
+EXEC:   SetL2TR1			: STRING      : GSDS	   : I.S.L2TRM1CPU0	    		:  SET	      : LITERAL	      : ''							:    -	    : SetL2TR2					: 2
+EXEC:   SetL2TR2			: STRING      : GSDS	   : I.S.L2TRM2CPU0	    		:  SET	      : LITERAL	      : ''							:    -	    : SetL2TRL					: 2
+EXEC:   SetL2TRL			: STRING      : GSDS	   : I.S.L2TRLCPU0	    		:  SET	      : LITERAL	      : ''							:    -	    : SetL2CC					: 2
+EXEC:   SetL2CC				: STRING      : GSDS	   : I.S.L2CCCPU0	    		:  SET	      : LITERAL	      : ''							:    -	    : SetL2SR					: 2
+EXEC:   SetL2SR				: STRING      : GSDS	   : I.S.L2SRCPU0	    		:  SET	      : LITERAL	      : ''							:    -	    : SetL2SWZ					: 2
+EXEC:   SetL2SWZ			: STRING      : GSDS	   : I.S.L2SWZCPU0	    		:  SET	      : LITERAL	      : ''							:    -	    : SetL2SWNZ					: 2
+EXEC:   SetL2SWNZ			: STRING      : GSDS	   : I.S.L2SWNZCPU0	    		:  SET	      : LITERAL	      : ''							:    -	    : SetL2LRUR					: 2
+EXEC:   SetL2LRUR			: STRING      : GSDS	   : I.S.L2LRURCPU0	    		:  SET	      : LITERAL	      : ''							:    -	    : SetFECR					: 2
+EXEC:   SetFECR				: STRING      : GSDS	   : I.S.FECRCPU0	    		:  SET	      : LITERAL	      : ''							:    -	    : SetNFECR					: 2
+EXEC:   SetNFECR			: STRING      : GSDS	   : I.S.NFECRCPU0	    		:  SET	      : LITERAL	      : ''							:    -	    : 1							: 2
+END_SCREEN
+
+START_SCREEN:SET_LOCALVMINL2Repair
+EXEC:   ATOM_L2DC     	: STRING      : GSDS	   : I.S.LOCAL_L2DC  	    :  SET	      : GSDS    	  : G.I.S.L2DCCPU0	        		:    -	    : ATOM_L2DR	    	: 2
+EXEC:   ATOM_L2DR      	: STRING      : GSDS	   : I.S.LOCAL_L2DR  	    :  SET	      : GSDS    	  : G.I.S.L2DRCPU0	        		:    -	    : ATOM_L2TC	    : 2
+EXEC:   ATOM_L2TC		: STRING      : GSDS	   : I.S.LOCAL_L2TC			:  SET	      : GSDS    	  : G.I.S.L2TCCPU0		    		:    -	    : ATOM_L2TR0		: 2
+EXEC:   ATOM_L2TR0		: STRING      : GSDS	   : I.S.LOCAL_L2TR0		:  SET	      : GSDS    	  : G.I.S.L2TRM0CPU0	    			:    -	    : ATOM_L2TR1		: 2
+EXEC:   ATOM_L2TR1		: STRING      : GSDS	   : I.S.LOCAL_L2TR1		:  SET	      : GSDS    	  : G.I.S.L2TRM1CPU0		    		:    -	    : ATOM_L2TR2		: 2
+EXEC:   ATOM_L2TR2		: STRING      : GSDS	   : I.S.LOCAL_L2TR2		:  SET	      : GSDS    	  : G.I.S.L2TRM2CPU0		    		:    -	    : ATOM_L2TRL		: 2
+EXEC:   ATOM_L2TRL		: STRING      : GSDS	   : I.S.LOCAL_L2TRL		:  SET	      : GSDS    	  : G.I.S.L2TRLCPU0		    		:    -	    : ATOM_L2CC			: 2
+EXEC:   ATOM_L2CC		: STRING      : GSDS	   : I.S.LOCAL_L2CC			:  SET	      : GSDS    	  : G.I.S.L2CCCPU0		    		:    -	    : ATOM_L2SR			: 2
+EXEC:   ATOM_L2SR		: STRING      : GSDS	   : I.S.LOCAL_L2SR			:  SET	      : GSDS    	  : G.I.S.L2SRCPU0		    		:    -	    : ATOM_L2LRUR		: 2
+#EXEC:   ATOM_L2SWZ		: STRING      : GSDS	   : I.S.LOCAL_L2SWZ		:  SET	      : GSDS    	  : G.I.S.L2SWZCPU0		    		:    -	    : ATOM_L2SWNZ		: 2
+#EXEC:   ATOM_L2SWNZ		: STRING      : GSDS	   : I.S.LOCAL_L2SWNZ		:  SET	      : GSDS    	  : G.I.S.L2SWNZCPU0		    	:    -	    : ATOM_L2LRUR		: 2
+EXEC:   ATOM_L2LRUR		: STRING      : GSDS	   : I.S.LOCAL_L2LRUR		:  SET	      : GSDS    	  : G.I.S.L2LRURCPU0	    		:    -	    : ResetUF			: 2
+EXEC:   ResetUF		 	: STRING      : GSDS	   : I.S.VMINREP_UF	        :  SET	      : LITERAL	      : '0'							:    -	    : 1					: 2
+END_SCREEN
+
+START_SCREEN:SET_LOCALVMINL2DATARepair
+EXEC:   ATOM_L2DC     	: STRING      : GSDS	   : I.S.LOCAL_L2DC  	    :  SET	      : GSDS    	  : G.I.S.L2DCCPU0	        		:    -	    : ATOM_L2DR0	    : 2
+EXEC:   ATOM_L2DR0      : STRING      : GSDS	   : I.S.LOCAL_L2DR0  	    :  SET	      : GSDS    	  : G.I.S.L2DR0CPU0	        		:    -	    : ATOM_L2DR1	    : 2
+EXEC:   ATOM_L2DR1		: STRING      : GSDS	   : I.S.LOCAL_L2DR1		:  SET	      : GSDS    	  : G.I.S.L2DR1CPU0					:    -	    : ATOM_L2DR2	    : 2
+EXEC:   ATOM_L2DR2		: STRING      : GSDS	   : I.S.LOCAL_L2DR2		:  SET	      : GSDS    	  : G.I.S.L2DR2CPU0		    		:    -	    : ResetUF			: 2
+EXEC:   ResetUF		 	: STRING      : GSDS	   : I.S.VMINREP_UF	        :  SET	      : LITERAL	      : '0'							:    -	    : 1					: 2
+END_SCREEN
+
+START_SCREEN:SET_LOCALVMINL2TSPRepair
+EXEC:   ATOM_L2TC		: STRING      : GSDS	   : I.S.LOCAL_L2TC			:  SET	      : GSDS    	  : G.I.S.L2TCCPU0		    		:    -	    : ATOM_L2TR0		: 2
+EXEC:   ATOM_L2TR0		: STRING      : GSDS	   : I.S.LOCAL_L2TR0		:  SET	      : GSDS    	  : G.I.S.L2TRM0CPU0	    			:    -	    : ATOM_L2TR1		: 2
+EXEC:   ATOM_L2TR1		: STRING      : GSDS	   : I.S.LOCAL_L2TR1		:  SET	      : GSDS    	  : G.I.S.L2TRM1CPU0		    		:    -	    : ATOM_L2TR2		: 2
+EXEC:   ATOM_L2TR2		: STRING      : GSDS	   : I.S.LOCAL_L2TR2		:  SET	      : GSDS    	  : G.I.S.L2TRM2CPU0		    		:    -	    : ATOM_L2TR3		: 2
+EXEC:   ATOM_L2TR3		: STRING      : GSDS	   : I.S.LOCAL_L2TR3		:  SET	      : GSDS    	  : G.I.S.L2TRM3CPU0		    		:    -	    : ResetUF			: 2
+EXEC:   ResetUF		 	: STRING      : GSDS	   : I.S.VMINREP_UF	        :  SET	      : LITERAL	      : '0'							:    -	    : 1					: 2
+END_SCREEN
+
+START_SCREEN:SET_LOCALVMAXL2Repair
+EXEC:   ATOM_L2DC     	: STRING      : GSDS	   : I.S.LOCAL_L2DC  	    :  SET	      : GSDS    	  : G.I.S.L2DCCPU0	        		:    -	    : ATOM_L2DR	    	: 2
+EXEC:   ATOM_L2DR      	: STRING      : GSDS	   : I.S.LOCAL_L2DR  	    :  SET	      : GSDS    	  : G.I.S.L2DRCPU0	        		:    -	    : ATOM_L2TC	    : 2
+EXEC:   ATOM_L2TC		: STRING      : GSDS	   : I.S.LOCAL_L2TC			:  SET	      : GSDS    	  : G.I.S.L2TCCPU0		    		:    -	    : ATOM_L2TR0		: 2
+EXEC:   ATOM_L2TR0		: STRING      : GSDS	   : I.S.LOCAL_L2TR0		:  SET	      : GSDS    	  : G.I.S.L2TRM0CPU0	    			:    -	    : ATOM_L2TR1		: 2
+EXEC:   ATOM_L2TR1		: STRING      : GSDS	   : I.S.LOCAL_L2TR1		:  SET	      : GSDS    	  : G.I.S.L2TRM1CPU0		    		:    -	    : ATOM_L2TR2		: 2
+EXEC:   ATOM_L2TR2		: STRING      : GSDS	   : I.S.LOCAL_L2TR2		:  SET	      : GSDS    	  : G.I.S.L2TRM2CPU0		    		:    -	    : ATOM_L2TRL		: 2
+EXEC:   ATOM_L2TRL		: STRING      : GSDS	   : I.S.LOCAL_L2TRL		:  SET	      : GSDS    	  : G.I.S.L2TRLCPU0		    		:    -	    : ATOM_L2CC			: 2
+EXEC:   ATOM_L2CC		: STRING      : GSDS	   : I.S.LOCAL_L2CC			:  SET	      : GSDS    	  : G.I.S.L2CCCPU0		    		:    -	    : ATOM_L2SR			: 2
+EXEC:   ATOM_L2SR		: STRING      : GSDS	   : I.S.LOCAL_L2SR			:  SET	      : GSDS    	  : G.I.S.L2SRCPU0		    		:    -	    : ATOM_L2LRUR		: 2
+#EXEC:   ATOM_L2SWZ		: STRING      : GSDS	   : I.S.LOCAL_L2SWZ		:  SET	      : GSDS    	  : G.I.S.L2SWZCPU0		    		:    -	    : ATOM_L2SWNZ		: 2
+#EXEC:   ATOM_L2SWNZ		: STRING      : GSDS	   : I.S.LOCAL_L2SWNZ		:  SET	      : GSDS    	  : G.I.S.L2SWNZCPU0		    	:    -	    : ATOM_L2LRUR		: 2
+EXEC:   ATOM_L2LRUR		: STRING      : GSDS	   : I.S.LOCAL_L2LRUR		:  SET	      : GSDS    	  : G.I.S.L2LRURCPU0	    		:    -	    : ResetUF			: 2
+EXEC:   ResetUF		 	: STRING      : GSDS	   : I.S.VMAXREP_UF	        :  SET	      : LITERAL	      : '0'								:    -	    : 1					: 2
+END_SCREEN
+
+START_SCREEN:SET_LOCALVMAXL2DATARepair
+EXEC:   ATOM_L2DC     	: STRING      : GSDS	   : I.S.LOCAL_L2DC  	    :  SET	      : GSDS    	  : G.I.S.L2DCCPU0	        		:    -	    : ATOM_L2DR0	    : 2
+EXEC:   ATOM_L2DR0      : STRING      : GSDS	   : I.S.LOCAL_L2DR0  	    :  SET	      : GSDS    	  : G.I.S.L2DR0CPU0	        		:    -	    : ATOM_L2DR1	    : 2
+EXEC:   ATOM_L2DR1		: STRING      : GSDS	   : I.S.LOCAL_L2DR1		:  SET	      : GSDS    	  : G.I.S.L2DR1CPU0					:    -	    : ATOM_L2DR2	    : 2
+EXEC:   ATOM_L2DR2		: STRING      : GSDS	   : I.S.LOCAL_L2DR2		:  SET	      : GSDS    	  : G.I.S.L2DR2CPU0		    		:    -	    : ResetUF			: 2
+EXEC:   ResetUF		 	: STRING      : GSDS	   : I.S.VMINREP_UF	        :  SET	      : LITERAL	      : '0'							:    -	    : 1					: 2
+END_SCREEN
+
+START_SCREEN:SET_LOCALVMAXL2TSPRepair
+EXEC:   ATOM_L2TC		: STRING      : GSDS	   : I.S.LOCAL_L2TC			:  SET	      : GSDS    	  : G.I.S.L2TCCPU0		    		:    -	    : ATOM_L2TR0		: 2
+EXEC:   ATOM_L2TR0		: STRING      : GSDS	   : I.S.LOCAL_L2TR0		:  SET	      : GSDS    	  : G.I.S.L2TRM0CPU0	    			:    -	    : ATOM_L2TR1		: 2
+EXEC:   ATOM_L2TR1		: STRING      : GSDS	   : I.S.LOCAL_L2TR1		:  SET	      : GSDS    	  : G.I.S.L2TRM1CPU0		    		:    -	    : ATOM_L2TR2		: 2
+EXEC:   ATOM_L2TR2		: STRING      : GSDS	   : I.S.LOCAL_L2TR2		:  SET	      : GSDS    	  : G.I.S.L2TRM2CPU0		    		:    -	    : ATOM_L2TR3		: 2
+EXEC:   ATOM_L2TR3		: STRING      : GSDS	   : I.S.LOCAL_L2TR3		:  SET	      : GSDS    	  : G.I.S.L2TRM3CPU0		    		:    -	    : ResetUF			: 2
+EXEC:   ResetUF		 	: STRING      : GSDS	   : I.S.VMINREP_UF	        :  SET	      : LITERAL	      : '0'							:    -	    : 1					: 2
+END_SCREEN
+
+########################
+# Revert to Local VFDM #
+########################
+START_SCREEN:REVERT_VMINL2DATARepair
+EXEC:   ATOM_L2DC     	: STRING      : GSDS	   : I.S.L2DCCPU0  	    	:  SET	      : GSDS    	  : G.I.S.LOCAL_L2DC	        		:    -	    : ATOM_L2DR0	    : 2
+EXEC:   ATOM_L2DR0      : STRING      : GSDS	   : I.S.L2DR0CPU0  	    :  SET	      : GSDS    	  : G.I.S.LOCAL_L2DR0	        		:    -	    : ATOM_L2DR1	    : 2
+EXEC:   ATOM_L2DR1		: STRING      : GSDS	   : I.S.L2DR1CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2DR1					:    -	    : ATOM_L2DR2	    : 2
+EXEC:   ATOM_L2DR2		: STRING      : GSDS	   : I.S.L2DR2CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2DR2		    		:    -	    : SetUF			: 2
+EXEC:   SetUF		 	: STRING      : GSDS	   : I.S.VMINREP_UF	    :  SET	      : LITERAL	      : '1'								:    -	    : 1					: 2
+END_SCREEN
+
+START_SCREEN:REVERT_VMINL2TSPRepair
+EXEC:   ATOM_L2TC		: STRING      : GSDS	   : I.S.L2TCCPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TC		    		:    -	    : ATOM_L2TR0		: 2
+EXEC:   ATOM_L2TR0		: STRING      : GSDS	   : I.S.L2TRM0CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR0	    			:    -	    : ATOM_L2TR1		: 2
+EXEC:   ATOM_L2TR1		: STRING      : GSDS	   : I.S.L2TRM1CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR1		    		:    -	    : ATOM_L2TR2		: 2
+EXEC:   ATOM_L2TR2		: STRING      : GSDS	   : I.S.L2TRM2CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR2		    		:    -	    : ATOM_L2TR3		: 2
+EXEC:   ATOM_L2TR3		: STRING      : GSDS	   : I.S.L2TRM3CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR3		    		:    -	    : SetUF			: 2
+EXEC:   SetUF		 	: STRING      : GSDS	   : I.S.VMINREP_UF	    :  SET	      : LITERAL	      : '1'								:    -	    : 1					: 2
+END_SCREEN
+
+START_SCREEN:REVERT_VMINL2Repair
+EXEC:   ATOM_L2DC     	: STRING      : GSDS	   : I.S.L2DCCPU0  	    	:  SET	      : GSDS    	  : G.I.S.LOCAL_L2DC	        		:    -	    : ATOM_L2DR0	    : 2
+EXEC:   ATOM_L2DR0      : STRING      : GSDS	   : I.S.L2DR0CPU0  	    :  SET	      : GSDS    	  : G.I.S.LOCAL_L2DR0	        		:    -	    : ATOM_L2DR1	    : 2
+EXEC:   ATOM_L2DR1		: STRING      : GSDS	   : I.S.L2DR1CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2DR1					:    -	    : ATOM_L2DR2	    : 2
+EXEC:   ATOM_L2DR2		: STRING      : GSDS	   : I.S.L2DR2CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2DR2		    		:    -	    : ATOM_L2TC			: 2
+EXEC:   ATOM_L2TC		: STRING      : GSDS	   : I.S.L2TCCPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TC		    		:    -	    : ATOM_L2TR0		: 2
+EXEC:   ATOM_L2TR0		: STRING      : GSDS	   : I.S.L2TRM0CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR0	    			:    -	    : ATOM_L2TR1		: 2
+EXEC:   ATOM_L2TR1		: STRING      : GSDS	   : I.S.L2TRM1CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR1		    		:    -	    : ATOM_L2TR2		: 2
+EXEC:   ATOM_L2TR2		: STRING      : GSDS	   : I.S.L2TRM2CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR2		    		:    -	    : ATOM_L2TR3		: 2
+EXEC:   ATOM_L2TR3		: STRING      : GSDS	   : I.S.L2TRM3CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR3		    		:    -	    : ATOM_L2CC			: 2
+EXEC:   ATOM_L2CC		: STRING      : GSDS	   : I.S.L2CCCPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2CC		    		:    -	    : ATOM_L2CR			: 2
+EXEC:   ATOM_L2CR		: STRING      : GSDS	   : I.S.L2CRCPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2CR		    		:    -	    : ATOM_L2LRUR		: 2
+EXEC:   ATOM_L2LRUR		: STRING      : GSDS	   : I.S.L2LRURCPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2LRUR	    			:    -	    : SetUF			: 2
+EXEC:   SetUF		 	: STRING      : GSDS	   : I.S.VMINREP_UF	    :  SET	      : LITERAL	      : '1'								:    -	    : 1					: 2
+END_SCREEN
+
+START_SCREEN:REVERT_VMAXL2DATARepair
+EXEC:   ATOM_L2DC     	: STRING      : GSDS	   : I.S.L2DCCPU0 	    	:  SET	      : GSDS    	  : G.I.S.LOCAL_L2DC	        		:    -	    : ATOM_L2DR0	    : 2
+EXEC:   ATOM_L2DR0      : STRING      : GSDS	   : I.S.L2DR0CPU0  	    :  SET	      : GSDS    	  : G.I.S.LOCAL_L2DR0	        		:    -	    : ATOM_L2DR1	    : 2
+EXEC:   ATOM_L2DR1		: STRING      : GSDS	   : I.S.L2DR1CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2DR1					:    -	    : ATOM_L2DR2	    : 2
+EXEC:   ATOM_L2DR2		: STRING      : GSDS	   : I.S.L2DR2CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2DR2		    		:    -	    : SetUF			: 2
+EXEC:   SetUF		 	: STRING      : GSDS	   : I.S.VMINREP_UF	    :  SET	      : LITERAL	      : '1'								:    -	    : 1					: 2
+END_SCREEN
+
+START_SCREEN:REVERT_VMAXL2TSPRepair
+EXEC:   ATOM_L2TC		: STRING      : GSDS	   : I.S.L2TCCPU0		:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TC		    		:    -	    : ATOM_L2TR0		: 2
+EXEC:   ATOM_L2TR0		: STRING      : GSDS	   : I.S.L2TRM0CPU0		:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR0	    			:    -	    : ATOM_L2TR1		: 2
+EXEC:   ATOM_L2TR1		: STRING      : GSDS	   : I.S.L2TRM1CPU0		:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR1		    		:    -	    : ATOM_L2TR2		: 2
+EXEC:   ATOM_L2TR2		: STRING      : GSDS	   : I.S.L2TRM2CPU0		:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR2		    		:    -	    : ATOM_L2TR3		: 2
+EXEC:   ATOM_L2TR3		: STRING      : GSDS	   : I.S.L2TRM3CPU0		:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR3		    		:    -	    : SetUF			: 2
+EXEC:   SetUF		 	: STRING      : GSDS	   : I.S.VMINREP_UF	    :  SET	      : LITERAL	      : '1'								:    -	    : 1					: 2
+END_SCREEN
+
+START_SCREEN:REVERT_VMAXL2Repair
+EXEC:   ATOM_L2DC     	: STRING      : GSDS	   : I.S.L2DCCPU0 	    	:  SET	      : GSDS    	  : G.I.S.LOCAL_L2DC	        		:    -	    : ATOM_L2DR0	    : 2
+EXEC:   ATOM_L2DR0      : STRING      : GSDS	   : I.S.L2DR0CPU0  	    :  SET	      : GSDS    	  : G.I.S.LOCAL_L2DR0	        		:    -	    : ATOM_L2DR1	    : 2
+EXEC:   ATOM_L2DR1		: STRING      : GSDS	   : I.S.L2DR1CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2DR1					:    -	    : ATOM_L2DR2	    : 2
+EXEC:   ATOM_L2DR2		: STRING      : GSDS	   : I.S.L2DR2CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2DR2		    		:    -	    : ATOM_L2TC			: 2
+EXEC:   ATOM_L2TC		: STRING      : GSDS	   : I.S.L2TCCPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TC		    		:    -	    : ATOM_L2TR0		: 2
+EXEC:   ATOM_L2TR0		: STRING      : GSDS	   : I.S.L2TRM0CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR0	    			:    -	    : ATOM_L2TR1		: 2
+EXEC:   ATOM_L2TR1		: STRING      : GSDS	   : I.S.L2TRM1CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR1		    		:    -	    : ATOM_L2TR2		: 2
+EXEC:   ATOM_L2TR2		: STRING      : GSDS	   : I.S.L2TRM2CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR2		    		:    -	    : ATOM_L2TR3		: 2
+EXEC:   ATOM_L2TR3		: STRING      : GSDS	   : I.S.L2TRM3CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR3		    		:    -	    : ATOM_L2CC			: 2
+EXEC:   ATOM_L2CC		: STRING      : GSDS	   : I.S.L2CCCPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2CC		    		:    -	    : ATOM_L2CR			: 2
+EXEC:   ATOM_L2CR		: STRING      : GSDS	   : I.S.L2CRCPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2CR		    		:    -	    : ATOM_L2LRUR		: 2
+EXEC:   ATOM_L2LRUR		: STRING      : GSDS	   : I.S.L2LRURCPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2LRUR	    			:    -	    : SetUF			: 2
+EXEC:   SetUF		 	: STRING      : GSDS	   : I.S.VMINREP_UF	    :  SET	      : LITERAL	      : '1'								:    -	    : 1					: 2
+END_SCREEN
+
+START_SCREEN:REVERT_RASRepair
+EXEC:   ATOM_L2DC     	: STRING      : GSDS	   : I.S.L2DCCPU0  	    	:  SET	      : GSDS    	  : G.I.S.LOCAL_L2DC	        		:    -	    : ATOM_L2DR0	    : 2
+EXEC:   ATOM_L2DR0      : STRING      : GSDS	   : I.S.L2DR0CPU0  	    :  SET	      : GSDS    	  : G.I.S.LOCAL_L2DR0	        		:    -	    : ATOM_L2DR1	    : 2
+EXEC:   ATOM_L2DR1		: STRING      : GSDS	   : I.S.L2DR1CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2DR1					:    -	    : ATOM_L2DR2	    : 2
+EXEC:   ATOM_L2DR2		: STRING      : GSDS	   : I.S.L2DR2CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2DR2		    		:    -	    : ATOM_L2TC			: 2
+EXEC:   ATOM_L2TC		: STRING      : GSDS	   : I.S.L2TCCPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TC		    		:    -	    : ATOM_L2TR0		: 2
+EXEC:   ATOM_L2TR0		: STRING      : GSDS	   : I.S.L2TRM0CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR0	    			:    -	    : ATOM_L2TR1		: 2
+EXEC:   ATOM_L2TR1		: STRING      : GSDS	   : I.S.L2TRM1CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR1		    		:    -	    : ATOM_L2TR2		: 2
+EXEC:   ATOM_L2TR2		: STRING      : GSDS	   : I.S.L2TRM2CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR2		    		:    -	    : ATOM_L2TR3		: 2
+EXEC:   ATOM_L2TR3		: STRING      : GSDS	   : I.S.L2TRM3CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR3		    		:    -	    : SetUF			: 2
+EXEC:   SetUF		 	: STRING      : GSDS	   : I.S.VMINREP_UF	    :  SET	      : LITERAL	      : '1'								:    -	    : 1					: 2
+END_SCREEN
+
+START_SCREEN:REVERT_VMINRFRepair
+EXEC:   ATOM_FECR     	: STRING      : GSDS	   : I.S.FECRCPU0  	    	:  SET	      : GSDS    	  : G.I.S.LOCAL_FECR	        		:    -	    : ATOM_NFECR	    : 2
+EXEC:   ATOM_NFECR      : STRING      : GSDS	   : I.S.NFECRCPU0  	    :  SET	      : GSDS    	  : G.I.S.LOCAL_NFECR	        		:    -	    : SetUF				: 2
+EXEC:   SetUF		 	: STRING      : GSDS	   : I.S.VMINREP_UF	    :  SET	      : LITERAL	      : '1'									:    -	    : 1					: 2
+END_SCREEN
+
+
+START_SCREEN:REVERT_VMAXRFRepair
+EXEC:   ATOM_FECR     	: STRING      : GSDS	   : I.S.FECRCPU0  	    	:  SET	      : GSDS    	  : G.I.S.LOCAL_FECR	        		:    -	    : ATOM_NFECR	    : 2
+EXEC:   ATOM_NFECR      : STRING      : GSDS	   : I.S.NFECRCPU0  	    :  SET	      : GSDS    	  : G.I.S.LOCAL_NFECR	        		:    -	    : SetUF				: 2
+EXEC:   SetUF		 	: STRING      : GSDS	   : I.S.VMINREP_UF	    :  SET	      : LITERAL	      : '1'									:    -	    : 1					: 2
+END_SCREEN
+
+##################
+# Set Local VFDM #
+##################
+START_SCREEN:SET_LOCALNOMRepair
+EXEC:   ATOM_L2DC     	: STRING      : GSDS	   : I.S.LOCAL_L2DC  	    :  SET	      : GSDS    	  : G.I.S.L2DCCPU0	        		:    -	    : ATOM_L2DR0	    : 2
+EXEC:   ATOM_L2DR0      : STRING      : GSDS	   : I.S.LOCAL_L2DR0  	    :  SET	      : GSDS    	  : G.I.S.L2DR0CPU0	        		:    -	    : ATOM_L2DR1	    : 2
+EXEC:   ATOM_L2DR1		: STRING      : GSDS	   : I.S.LOCAL_L2DR1		:  SET	      : GSDS    	  : G.I.S.L2DR1CPU0					:    -	    : ATOM_L2DR2	    : 2
+EXEC:   ATOM_L2DR2		: STRING      : GSDS	   : I.S.LOCAL_L2DR2		:  SET	      : GSDS    	  : G.I.S.L2DR2CPU0		    		:    -	    : ATOM_L2TC			: 2
+EXEC:   ATOM_L2TC		: STRING      : GSDS	   : I.S.LOCAL_L2TC			:  SET	      : GSDS    	  : G.I.S.L2TCCPU0		    		:    -	    : ATOM_L2TR0		: 2
+EXEC:   ATOM_L2TR0		: STRING      : GSDS	   : I.S.LOCAL_L2TR0		:  SET	      : GSDS    	  : G.I.S.L2TMR0CPU0	    			:    -	    : ATOM_L2TR1		: 2
+EXEC:   ATOM_L2TR1		: STRING      : GSDS	   : I.S.LOCAL_L2TR1		:  SET	      : GSDS    	  : G.I.S.L2TMR1CPU0		    		:    -	    : ATOM_L2TR2		: 2
+EXEC:   ATOM_L2TR2		: STRING      : GSDS	   : I.S.LOCAL_L2TR2		:  SET	      : GSDS    	  : G.I.S.L2TMR2CPU0		    		:    -	    : ATOM_L2TR3		: 2
+EXEC:   ATOM_L2TR3		: STRING      : GSDS	   : I.S.LOCAL_L2TR3		:  SET	      : GSDS    	  : G.I.S.L2TMR3CPU0		    		:    -	    : ATOM_L2CC			: 2
+EXEC:   ATOM_L2CC		: STRING      : GSDS	   : I.S.LOCAL_L2CC			:  SET	      : GSDS    	  : G.I.S.L2CCCPU0		    		:    -	    : ATOM_L2CR			: 2
+EXEC:   ATOM_L2CR		: STRING      : GSDS	   : I.S.LOCAL_L2CR			:  SET	      : GSDS    	  : G.I.S.L2CRCPU0		    		:    -	    : ATOM_L2LRUR		: 2
+EXEC:   ATOM_L2LRUR		: STRING      : GSDS	   : I.S.LOCAL_L2LRUR		:  SET	      : GSDS    	  : G.I.S.L2LRURCPU0	    		:    -	    : ResetUF			: 2
+EXEC:   ResetUF		 	: STRING      : GSDS	   : I.S.NOMREP_UF	        :  SET	      : LITERAL	      : '0'								:    -	    : 1					: 2
+END_SCREEN
+
+########################
+# Revert to Local VFDM #
+########################
+START_SCREEN:REVERT_NOMRepair
+EXEC:   ATOM_L2DC     	: STRING      : GSDS	   : I.S.L2DCCPU0  	    	:  SET	      : GSDS    	  : G.I.S.LOCAL_L2DC	        		:    -	    : ATOM_L2DR0	    : 2
+EXEC:   ATOM_L2DR0      : STRING      : GSDS	   : I.S.L2DR0CPU0  	    :  SET	      : GSDS    	  : G.I.S.LOCAL_L2DR0	        		:    -	    : ATOM_L2DR1	    : 2
+EXEC:   ATOM_L2DR1		: STRING      : GSDS	   : I.S.L2DR1CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2DR1					:    -	    : ATOM_L2DR2	    : 2
+EXEC:   ATOM_L2DR2		: STRING      : GSDS	   : I.S.L2DR2CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2DR2		    		:    -	    : ATOM_L2TC			: 2
+EXEC:   ATOM_L2TC		: STRING      : GSDS	   : I.S.L2TCCPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TC		    		:    -	    : ATOM_L2TR0		: 2
+EXEC:   ATOM_L2TR0		: STRING      : GSDS	   : I.S.L2TMR0CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR0	    			:    -	    : ATOM_L2TR1		: 2
+EXEC:   ATOM_L2TR1		: STRING      : GSDS	   : I.S.L2TMR1CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR1		    		:    -	    : ATOM_L2TR2		: 2
+EXEC:   ATOM_L2TR2		: STRING      : GSDS	   : I.S.L2TMR2CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR2		    		:    -	    : ATOM_L2TR3		: 2
+EXEC:   ATOM_L2TR3		: STRING      : GSDS	   : I.S.L2TMR3CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR3		    		:    -	    : ATOM_L2CC			: 2
+EXEC:   ATOM_L2CC		: STRING      : GSDS	   : I.S.L2CCCPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2CC		    		:    -	    : ATOM_L2CR			: 2
+EXEC:   ATOM_L2CR		: STRING      : GSDS	   : I.S.L2CRCPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2CR		    		:    -	    : ATOM_L2LRUR		: 2
+EXEC:   ATOM_L2LRUR		: STRING      : GSDS	   : I.S.L2LRURCPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2LRUR	    			:    -	    : SetUF			: 2
+EXEC:   SetUF		 	: STRING      : GSDS	   : I.S.NOMREP_UF	    :  SET	      : LITERAL	      : '1'									:    -	    : 1					: 2
+END_SCREEN
+
+##################
+# Set Local VFDM #
+##################
+START_SCREEN:SET_LOCALVMAXRepair
+EXEC:   ATOM_L2DC     	: STRING      : GSDS	   : I.S.LOCAL_L2DC  	    :  SET	      : GSDS    	  : G.I.S.L2DCCPU0	        		:    -	    : ATOM_L2DR0	    : 2
+EXEC:   ATOM_L2DR0      : STRING      : GSDS	   : I.S.LOCAL_L2DR0  	    :  SET	      : GSDS    	  : G.I.S.L2DR0CPU0	        		:    -	    : ATOM_L2DR1	    : 2
+EXEC:   ATOM_L2DR1		: STRING      : GSDS	   : I.S.LOCAL_L2DR1		:  SET	      : GSDS    	  : G.I.S.L2DR1CPU0					:    -	    : ATOM_L2DR2	    : 2
+EXEC:   ATOM_L2DR2		: STRING      : GSDS	   : I.S.LOCAL_L2DR2		:  SET	      : GSDS    	  : G.I.S.L2DR2CPU0		    		:    -	    : ATOM_L2TC			: 2
+EXEC:   ATOM_L2TC		: STRING      : GSDS	   : I.S.LOCAL_L2TC			:  SET	      : GSDS    	  : G.I.S.L2TCCPU0		    		:    -	    : ATOM_L2TR0			: 2
+EXEC:   ATOM_L2TR0		: STRING      : GSDS	   : I.S.LOCAL_L2TR0		:  SET	      : GSDS    	  : G.I.S.L2TMR0CPU0	    			:    -	    : ATOM_L2TR1		: 2
+EXEC:   ATOM_L2TR1		: STRING      : GSDS	   : I.S.LOCAL_L2TR1		:  SET	      : GSDS    	  : G.I.S.L2TMR1CPU0		    		:    -	    : ATOM_L2TR2		: 2
+EXEC:   ATOM_L2TR2		: STRING      : GSDS	   : I.S.LOCAL_L2TR2		:  SET	      : GSDS    	  : G.I.S.L2TMR2CPU0		    		:    -	    : ATOM_L2TR3		: 2
+EXEC:   ATOM_L2TR3		: STRING      : GSDS	   : I.S.LOCAL_L2TR3		:  SET	      : GSDS    	  : G.I.S.L2TMR3CPU0		    		:    -	    : ATOM_L2CC			: 2
+EXEC:   ATOM_L2CC		: STRING      : GSDS	   : I.S.LOCAL_L2CC			:  SET	      : GSDS    	  : G.I.S.L2CCCPU0		    		:    -	    : ATOM_L2CR			: 2
+EXEC:   ATOM_L2CR		: STRING      : GSDS	   : I.S.LOCAL_L2CR			:  SET	      : GSDS    	  : G.I.S.L2CRCPU0		    		:    -	    : ATOM_L2LRUR		: 2
+EXEC:   ATOM_L2LRUR		: STRING      : GSDS	   : I.S.LOCAL_L2LRUR		:  SET	      : GSDS    	  : G.I.S.L2LRURCPU0	    		:    -	    : ResetUF			: 2
+EXEC:   ResetUF		 	: STRING      : GSDS	   : I.S.VMAXREP_UF	        :  SET	      : LITERAL	      : '0'								:    -	    : 1					: 2
+END_SCREEN
+
+START_SCREEN:SET_LOCALVMAXL2DATARepair
+EXEC:   ATOM_L2DC     	: STRING      : GSDS	   : I.S.LOCAL_L2DC  	    :  SET	      : GSDS    	  : G.I.S.L2DCCPU0	        		:    -	    : ATOM_L2DR0	    : 2
+EXEC:   ATOM_L2DR0      : STRING      : GSDS	   : I.S.LOCAL_L2DR0  	    :  SET	      : GSDS    	  : G.I.S.L2DR0CPU0	        		:    -	    : ATOM_L2DR1	    : 2
+EXEC:   ATOM_L2DR1		: STRING      : GSDS	   : I.S.LOCAL_L2DR1		:  SET	      : GSDS    	  : G.I.S.L2DR1CPU0					:    -	    : ATOM_L2DR2	    : 2
+EXEC:   ATOM_L2DR2		: STRING      : GSDS	   : I.S.LOCAL_L2DR2		:  SET	      : GSDS    	  : G.I.S.L2DR2CPU0		    		:    -	    : ResetUF			: 2
+EXEC:   ResetUF		 	: STRING      : GSDS	   : I.S.VMAXREP_UF	        :  SET	      : LITERAL	      : '0'								:    -	    : 1					: 2
+END_SCREEN
+
+START_SCREEN:SET_LOCALVMAXL2TSPRepair
+EXEC:   ATOM_L2TC		: STRING      : GSDS	   : I.S.LOCAL_L2TC			:  SET	      : GSDS    	  : G.I.S.L2TCCPU0		    		:    -	    : ATOM_L2TR0			: 2
+EXEC:   ATOM_L2TR0		: STRING      : GSDS	   : I.S.LOCAL_L2TR0		:  SET	      : GSDS    	  : G.I.S.L2TMR0CPU0	    			:    -	    : ATOM_L2TR1		: 2
+EXEC:   ATOM_L2TR1		: STRING      : GSDS	   : I.S.LOCAL_L2TR1		:  SET	      : GSDS    	  : G.I.S.L2TMR1CPU0		    		:    -	    : ATOM_L2TR2		: 2
+EXEC:   ATOM_L2TR2		: STRING      : GSDS	   : I.S.LOCAL_L2TR2		:  SET	      : GSDS    	  : G.I.S.L2TMR2CPU0		    		:    -	    : ATOM_L2TR3		: 2
+EXEC:   ATOM_L2TR3		: STRING      : GSDS	   : I.S.LOCAL_L2TR3		:  SET	      : GSDS    	  : G.I.S.L2TMR3CPU0		    		:    -	    : ResetUF			: 2
+EXEC:   ResetUF		 	: STRING      : GSDS	   : I.S.VMAXREP_UF	        :  SET	      : LITERAL	      : '0'								:    -	    : 1					: 2
+END_SCREEN
+
+########################
+# Revert to Local VFDM #
+########################
+START_SCREEN:REVERT_VMAXRepair
+EXEC:   ATOM_L2DC     	: STRING      : GSDS	   : I.S.L2DCCPU0  	    	:  SET	      : GSDS    	  : G.I.S.LOCAL_L2DC	        		:    -	    : ATOM_L2DR0	    : 2
+EXEC:   ATOM_L2DR0      : STRING      : GSDS	   : I.S.L2DR0CPU0  	    :  SET	      : GSDS    	  : G.I.S.LOCAL_L2DR0	        		:    -	    : ATOM_L2DR1	    : 2
+EXEC:   ATOM_L2DR1		: STRING      : GSDS	   : I.S.L2DR1CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2DR1					:    -	    : ATOM_L2DR2	    : 2
+EXEC:   ATOM_L2DR2		: STRING      : GSDS	   : I.S.L2DR2CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2DR2		    		:    -	    : ATOM_L2TC			: 2
+EXEC:   ATOM_L2TC		: STRING      : GSDS	   : I.S.L2TCCPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TC		    		:    -	    : ATOM_L2TR0		: 2
+EXEC:   ATOM_L2TR0		: STRING      : GSDS	   : I.S.L2TMR0CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR0	    			:    -	    : ATOM_L2TR1		: 2
+EXEC:   ATOM_L2TR1		: STRING      : GSDS	   : I.S.L2TMR1CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR1		    		:    -	    : ATOM_L2TR2		: 2
+EXEC:   ATOM_L2TR2		: STRING      : GSDS	   : I.S.L2TMR2CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR2		    		:    -	    : ATOM_L2TR3		: 2
+EXEC:   ATOM_L2TR3		: STRING      : GSDS	   : I.S.L2TMR3CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR3		    		:    -	    : ATOM_L2CC			: 2
+EXEC:   ATOM_L2CC		: STRING      : GSDS	   : I.S.L2CCCPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2CC		    		:    -	    : ATOM_L2CR			: 2
+EXEC:   ATOM_L2CR		: STRING      : GSDS	   : I.S.L2CRCPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2CR		    		:    -	    : ATOM_L2LRUR		: 2
+EXEC:   ATOM_L2LRUR		: STRING      : GSDS	   : I.S.L2LRURCPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2LRUR	    			:    -	    : SetUF			: 2
+EXEC:   SetUF		 	: STRING      : GSDS	   : I.S.VMAXREP_UF	    :  SET	      : LITERAL	      : '1'								    :    -	    : 1					: 2
+END_SCREEN
+
+START_SCREEN:REVERT_VMAXL2DATARepair
+EXEC:   ATOM_L2DC     	: STRING      : GSDS	   : I.S.L2DCCPU0  	    	:  SET	      : GSDS    	  : G.I.S.LOCAL_L2DC	        		:    -	    : ATOM_L2DR0	    : 2
+EXEC:   ATOM_L2DR0      : STRING      : GSDS	   : I.S.L2DR0CPU0  	    :  SET	      : GSDS    	  : G.I.S.LOCAL_L2DR0	        		:    -	    : ATOM_L2DR1	    : 2
+EXEC:   ATOM_L2DR1		: STRING      : GSDS	   : I.S.L2DR1CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2DR1					:    -	    : ATOM_L2DR2	    : 2
+EXEC:   ATOM_L2DR2		: STRING      : GSDS	   : I.S.L2DR2CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2DR2		    		:    -	    : SetUF			: 2
+EXEC:   SetUF		 	: STRING      : GSDS	   : I.S.VMAXREP_UF	    :  SET	      : LITERAL	      : '1'								    :    -	    : 1					: 2
+END_SCREEN
+
+START_SCREEN:REVERT_VMAXL2TSPRepair
+EXEC:   ATOM_L2TC		: STRING      : GSDS	   : I.S.L2TCCPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TC		    		:    -	    : ATOM_L2TR0		: 2
+EXEC:   ATOM_L2TR0		: STRING      : GSDS	   : I.S.L2TMR0CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR0	    			:    -	    : ATOM_L2TR1		: 2
+EXEC:   ATOM_L2TR1		: STRING      : GSDS	   : I.S.L2TMR1CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR1		    		:    -	    : ATOM_L2TR2		: 2
+EXEC:   ATOM_L2TR2		: STRING      : GSDS	   : I.S.L2TMR2CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR2		    		:    -	    : ATOM_L2TR3		: 2
+EXEC:   ATOM_L2TR3		: STRING      : GSDS	   : I.S.L2TMR3CPU0			:  SET	      : GSDS    	  : G.I.S.LOCAL_L2TR3		    		:    -	    : SetUF			: 2
+EXEC:   SetUF		 	: STRING      : GSDS	   : I.S.VMAXREP_UF	    :  SET	      : LITERAL	      : '1'								    :    -	    : 1					: 2
+END_SCREEN
+
+##################
+# Set Local RF VFDM #
+##################
+START_SCREEN:SET_LOCALRFVMINRepair
+EXEC:   ATOM_LSARF     	: STRING      : GSDS	   : I.S.LOCAL_CRFROW 	    	:  SET	      : GSDS    	  : G.I.S.CRFROWCPU0        			:    -	    : ResetUF	    : 2
+EXEC:   ResetUF		 	: STRING      : GSDS	   : I.S.VMINREP_UF	        	:  SET	      : LITERAL	      : '0'								:    -	    : 1					: 2
+END_SCREEN
+
+########################
+# Revert to Local RF VFDM #
+########################
+START_SCREEN:REVERT_RFVMINRepair
+EXEC:   ATOM_FECR     	: STRING      : GSDS	   : I.S.FECRCPU0  	    	:  SET	      : GSDS    	  : G.I.S.LOCAL_FECR	        		:    -	    : ATOM_NFECR	    : 2
+EXEC:   ATOM_NFECR      : STRING      : GSDS	   : I.S.NFECRCPU0  	    :  SET	      : GSDS    	  : G.I.S.LOCAL_NFECR	        		:    -	    : SetUF				: 2
+EXEC:   SetUF		 	: STRING      : GSDS	   : I.S.VMINREP_UF	    :  SET	      : LITERAL	      : '1'									:    -	    : 1					: 2
+END_SCREEN
+
+
+##################
+# Set Local RF VFDM #
+##################
+START_SCREEN:SET_LOCALRFNOMRepair
+EXEC:   ATOM_FECR     	: STRING      : GSDS	   : I.S.FECRCPU0  	    	:  SET	      : GSDS    	  : G.I.S.LOCAL_FECR	        		:    -	    : ATOM_NFECR	    : 2
+EXEC:   ATOM_NFECR      : STRING      : GSDS	   : I.S.NFECRCPU0  	    :  SET	      : GSDS    	  : G.I.S.LOCAL_NFECR	        		:    -	    : SetUF				: 2
+EXEC:   ResetUF		 	: STRING      : GSDS	   : I.S.NOMREP_UF	        	:  SET	      : LITERAL	      : '0'								:    -	    : 1					: 2
+END_SCREEN
+
+########################
+# Revert to Local RF VFDM #
+########################
+START_SCREEN:REVERT_RFNOMRepair
+EXEC:   ATOM_FECR     	: STRING      : GSDS	   : I.S.FECRCPU0  	    	:  SET	      : GSDS    	  : G.I.S.LOCAL_FECR	        		:    -	    : ATOM_NFECR	    : 2
+EXEC:   ATOM_NFECR      : STRING      : GSDS	   : I.S.NFECRCPU0  	    :  SET	      : GSDS    	  : G.I.S.LOCAL_NFECR	        		:    -	    : SetUF				: 2
+EXEC:   SetUF		 		: STRING      : GSDS	   : I.S.NOMREP_UF	    	:  SET	      : LITERAL	      : '1'								:    -	    : 1					: 2
+END_SCREEN
+
+##################
+# Set Local RF VFDM #
+##################
+START_SCREEN:SET_LOCALRFVMAXRepair
+EXEC:   ATOM_FECR     	: STRING      : GSDS	   : I.S.FECRCPU0  	    	:  SET	      : GSDS    	  : G.I.S.LOCAL_FECR	        		:    -	    : ATOM_NFECR	    : 2
+EXEC:   ATOM_NFECR      : STRING      : GSDS	   : I.S.NFECRCPU0  	    :  SET	      : GSDS    	  : G.I.S.LOCAL_NFECR	        		:    -	    : SetUF				: 2
+EXEC:   ResetUF		 	: STRING      : GSDS	   : I.S.VMAXREP_UF	        	:  SET	      : LITERAL	      : '0'								:    -	    : 1					: 2
+END_SCREEN
+
+########################
+# Revert to Local RF VFDM #
+########################
+START_SCREEN:REVERT_RFVMAXRepair
+EXEC:   ATOM_FECR     	: STRING      : GSDS	   : I.S.FECRCPU0  	    	:  SET	      : GSDS    	  : G.I.S.LOCAL_FECR	        		:    -	    : ATOM_NFECR	    : 2
+EXEC:   ATOM_NFECR      : STRING      : GSDS	   : I.S.NFECRCPU0  	    :  SET	      : GSDS    	  : G.I.S.LOCAL_NFECR	        		:    -	    : SetUF				: 2
+EXEC:   SetUF		 		: STRING      : GSDS	   : I.S.VMAXREP_UF	    	:  SET	      : LITERAL	      : '1'								:    -	    : 1					: 2
+END_SCREEN
+
+########################
+# Set Repair GSDS to DFF #
+########################
+START_SCREEN:SetGSDS2DFFSDSPERTYPEATOMREPAIR
+#RunOn 	: TestName : DataType 	: ParamType 	: Param1				: Operation 	: ParamType 	: Param2   			: TmpStore 		: OnTrue 		: OnFalse
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+EXEC 	: CHECKL2DC   				: STRING 	: GSDS 			: I.S.L2DCCPU0   						: == 			:   LITERAL 	: '' 			:   -    	 : SETL2DC0   					 		 : SETL2DC
+EXEC 	: SETL2DC0   				: STRING 	: DFF 			: WFR.SORT.SL2DC   			: SET 			:   LITERAL 	: '0' 			:   -    	 : CHECKL2DR   					 	 : 2
+EXEC 	: SETL2DC   				: STRING 	: DFF 			: WFR.SORT.SL2DC   			: SET 			:   GSDS 		: I.S.L2DCCPU0 		:   -    	 : CHECKL2DR   					 	 : 2
+
+EXEC 	: CHECKL2DR   				: STRING 	: GSDS 			: I.S.L2DR  						: == 			:   LITERAL 	: '' 			:   -    	 : SETL2DR0   					 		 : SETL2DR
+EXEC 	: SETL2DR0  				: STRING 	: DFF 			: WFR.SORT.SL2DR   			: SET 			:   LITERAL 	: '0' 			:   -    	 : CHECKL2TC   					 	 : 2
+EXEC 	: SETL2DR  					: STRING 	: DFF 			: WFR.SORT.SL2DR   			: SET 			:   GSDS 		: I.S.L2DR 		:   -    	 : CHECKL2TC   					 	 : 2
+
+EXEC 	: CHECKL2TC   				: STRING 	: GSDS 			: I.S.L2TCCPU0   						: == 			:   LITERAL 	: '' 			:   -    	 : SETL2TC0   					 		 : SETL2TC
+EXEC 	: SETL2TC0  				: STRING 	: DFF 			: WFR.SORT.SL2TC   			: SET 			:   LITERAL 	: '0' 			:   -    	 : CHECKL2TR0   					 	 : 2
+EXEC 	: SETL2TC  					: STRING 	: DFF 			: WFR.SORT.SL2TC   			: SET 			:   GSDS 		: I.S.L2TCCPU0 		:   -    	 : CHECKL2TR0   					 	 : 2
+
+EXEC 	: CHECKL2TR0   				: STRING 	: GSDS 			: I.S.L2TMR0CPU0   						: == 			:   LITERAL 	: '' 			:   -    	 : SETL2TR00   					 		 : SETL2TR0
+EXEC 	: SETL2TR00  				: STRING 	: DFF 			: WFR.SORT.SL2TR0   			: SET 			:   LITERAL 	: '0' 			:   -    	 : CHECKL2TR1   					 	 : 2
+EXEC 	: SETL2TR0  				: STRING 	: DFF 			: WFR.SORT.SL2TR0   			: SET 			:   GSDS 		: I.S.L2TMR0CPU0 	:   -    	 : CHECKL2TR1   					 	 : 2
+
+EXEC 	: CHECKL2TR1   				: STRING 	: GSDS 			: I.S.L2TMR1CPU0   						: == 			:   LITERAL 	: '' 			:   -    	 : SETL2TR10   					 		 : SETL2TR1
+EXEC 	: SETL2TR10  				: STRING 	: DFF 			: WFR.SORT.SL2TR1   			: SET 			:   LITERAL 	: '0' 			:   -    	 : CHECKL2TR2   					 	 : 2
+EXEC 	: SETL2TR1  				: STRING 	: DFF 			: WFR.SORT.SL2TR1   			: SET 			:   GSDS 		: I.S.L2TMR1CPU0 	:   -    	 : CHECKL2TR2   					 	 : 2
+
+EXEC 	: CHECKL2TR2   				: STRING 	: GSDS 			: I.S.L2TMR2CPU0   						: == 			:   LITERAL 	: '' 			:   -    	 : SETL2TR20   					 		 : SETL2TR2
+EXEC 	: SETL2TR20  				: STRING 	: DFF 			: WFR.SORT.SL2TR2   			: SET 			:   LITERAL 	: '0' 			:   -    	 : CHECKL2TRL   					 	 : 2
+EXEC 	: SETL2TR2  				: STRING 	: DFF 			: WFR.SORT.SL2TR2   			: SET 			:   GSDS 		: I.S.L2TMR2CPU0 	:   -    	 : CHECKL2TRL   					 	 : 2
+
+EXEC 	: CHECKL2TRL   				: STRING 	: GSDS 			: I.S.L2TRL   						: == 			:   LITERAL 	: '' 			:   -    	 : SETL2TRL0   					 		 : SETL2TRL
+EXEC 	: SETL2TRL0  				: STRING 	: DFF 			: WFR.SORT.SL2TRL   			: SET 			:   LITERAL 	: '0'			:   -    	 : CHECKL2CC   					 		 : 2
+EXEC 	: SETL2TRL  				: STRING 	: DFF 			: WFR.SORT.SL2TRL   			: SET 			:   GSDS 		: I.S.L2TRL 	:   -    	 : CHECKL2CC   					 		 : 2
+
+EXEC 	: CHECKL2CC   				: STRING 	: GSDS 			: I.S.L2CCCPU0   						: == 			:   LITERAL 	: '' 			:   -    	 : SETL2CC0   					 		 : SETL2CC
+EXEC 	: SETL2CC0 					: STRING 	: DFF 			: WFR.SORT.SL2CC   			: SET 			:   LITERAL 	: '0'			:   -    	 : CHECKL2SWZ   					 		 : 2
+EXEC 	: SETL2CC 					: STRING 	: DFF 			: WFR.SORT.SL2CC   			: SET 			:   GSDS 		: I.S.L2CCCPU0 		:   -    	 : CHECKL2SWZ   					 		 : 2
+
+#EXEC 	: CHECKL2SR   				: STRING 	: GSDS 			: I.S.L2SR   						: == 			:   LITERAL 	: '' 			:   -    	 : SETL2SR0   					 		 : SETL2SR
+#EXEC 	: SETL2SR0  				: STRING 	: DFF 			: WFR.SORT.SL2SR   			: SET 			:   LITERAL 	: '0'			:   -    	 : CHECKL2SWZ   					 	 : 2
+#EXEC 	: SETL2SR  					: STRING 	: DFF 			: WFR.SORT.SL2SR   			: SET 			:   GSDS 		: I.S.L2SR 		:   -    	 : CHECKL2SWZ   					 	 : 2
+
+EXEC 	: CHECKL2SWZ   				: STRING 	: GSDS 			: I.S.L2SWZ  						: == 			:   LITERAL 	: '' 			:   -    	 : SETL2SWZ0   					 		 : SETL2SWZ
+EXEC 	: SETL2SWZ0  				: STRING 	: DFF 			: WFR.SORT.SL2SWZ   			: SET 			:   LITERAL 	: '0'			:   -    	 : CHECKL2SWNZ   					 	 : 2
+EXEC 	: SETL2SWZ  				: STRING 	: DFF 			: WFR.SORT.SL2SWZ   			: SET 			:   GSDS 		: I.S.L2SWZ 	:   -    	 : CHECKL2SWNZ   					 	 : 2
+
+EXEC 	: CHECKL2SWNZ   			: STRING 	: GSDS 			: I.S.L2SWNZ   						: == 			:   LITERAL 	: '' 			:   -    	 : SETL2SWNZ0   					 	 : SETL2SWNZ
+EXEC 	: SETL2SWNZ0  				: STRING 	: DFF 			: WFR.SORT.SL2SWNZ   		: SET 			:   LITERAL 	: '0'			:   -    	 : CHECKL2LRUR   					 	 : 2
+EXEC 	: SETL2SWNZ  				: STRING 	: DFF 			: WFR.SORT.SL2SWNZ  			: SET 			:   GSDS 		: I.S.L2SWNZ 	:   -    	 : CHECKL2LRUR   					 	 : 2
+
+EXEC 	: CHECKL2LRUR   			: STRING 	: GSDS 			: I.S.L2LRURCPU0   						: == 			:   LITERAL 	: '' 			:   -    	 : SETL2LRUR0   					 	 : SETL2LRUR
+EXEC 	: SETL2LRUR0  				: STRING 	: DFF 			: WFR.SORT.SL2LRUR   		: SET 			:   LITERAL 	: '0'			:   -    	 : CHECKFECR   					 	 	 : 2
+EXEC 	: SETL2LRUR  				: STRING 	: DFF 			: WFR.SORT.SL2LRUR  			: SET 			:   GSDS 		: I.S.L2LRURCPU0 	:   -    	 : CHECKFECR   					 	 	 : 2
+
+EXEC 	: CHECKFECR   				: STRING 	: GSDS 			: I.S.FECRCPU0   						: == 			:   LITERAL 	: '' 			:   -    	 : SETFECR0   					 	 	 : SETFECR
+EXEC 	: SETFECR0  				: STRING 	: DFF 			: WFR.SORT.SFECR   			: SET 			:   LITERAL 	: '0'			:   -    	 : CHECKNFECR   					 	 : 2
+EXEC 	: SETFECR  					: STRING 	: DFF 			: WFR.SORT.SFECR   			: SET 			:   GSDS 		: I.S.FECRCPU0 		:   -    	 : CHECKNFECR   					 	 : 2
+
+EXEC 	: CHECKNFECR   				: STRING 	: GSDS 			: I.S.NFECRCPU0   						: == 			:   LITERAL 	: '' 			:   -    	 : SETNFECR0   					 	 	 : SETNFECR
+EXEC 	: SETNFECR0  				: STRING 	: DFF 			: WFR.SORT.SNFECR   			: SET 			:   LITERAL 	: '0'			:   -    	 : 1   					 		 		 : 2
+EXEC 	: SETNFECR  				: STRING 	: DFF 			: WFR.SORT.SNFECR   			: SET 			:   GSDS 		: I.S.NFECRCPU0 	:   -    	 : 1   					 		 		 : 2
+
+
+END_SCREEN
+
+########################
+# Set VMIN #
+########################
+START_SCREEN:SET_ATOM_VMINREPAIR_VMIN
+EXEC:   SETVMINL2		 	: DOUBLE      : GSDS	   : U.D.VMIN_ATOM_CACHE_L2_VMINREP	    																								:  SET	      : LITERAL	      : '0.650'															:    -	    		: SETVMINRF			: SETVMINRF
+EXEC:   SETVMINRF		 	: DOUBLE      : GSDS	   : U.D.VMIN_ATOM_CACHE_RF_VMINREP	    																								:  SET	      : EXPRESSION	  : Round([G.U.D.FMAX_UPM_NESTED]*-0.00002411156 + 0.766546624,3)	:    -	    		: PrintL2VMINREP	: PrintL2VMINREP
+EXEC:	PrintL2VMINREP		: STRING	  : EXPRESSION : ExecCallback('PrintToItuff', '--tname_suf ARRATOM_L2_VMINREP --body_type mrslt --body_data G.U.D.VMIN_ATOM_CACHE_L2_VMINREP')      : -   		  : -     		  : -       	  													: -					: PrintRFVMINREP    : PrintRFVMINREP       
+EXEC:	PrintRFVMINREP		: STRING	  : EXPRESSION : ExecCallback('PrintToItuff', '--tname_suf ARRATOM_RF_VMINREP --body_type mrslt --body_data G.U.D.VMIN_ATOM_CACHE_RF_VMINREP')      : -   		  : -     		  : -       	  													: -					: 1                 : 2       
+END_SCREEN
+
+########################
+# Set VMIN #
+########################
+START_SCREEN:SET_ATOM_VMINREPAIR_VMINSTATIC
+EXEC:   SETVMINL2		 	: DOUBLE      : GSDS	   : U.D.VMIN_ATOM_CACHE_L2_VMINREP	    																								:  SET	      : LITERAL	      : '0.630'															:    -	    		: SETVMINRF			: SETVMINRF
+EXEC:   SETVMINRF		 	: DOUBLE      : GSDS	   : U.D.VMIN_ATOM_CACHE_RF_VMINREP	    																								:  SET	      : EXPRESSION	  : '0.630'										:    -	    		: PrintL2VMINREP	: PrintL2VMINREP
+EXEC:	PrintL2VMINREP		: STRING	  : EXPRESSION : ExecCallback('PrintToItuff', '--tname_suf ARRATOM_L2_VMINREP --body_type mrslt --body_data G.U.D.VMIN_ATOM_CACHE_L2_VMINREP')      : -   		  : -     		  : -       	  													: -					: PrintRFVMINREP    : PrintRFVMINREP       
+EXEC:	PrintRFVMINREP		: STRING	  : EXPRESSION : ExecCallback('PrintToItuff', '--tname_suf ARRATOM_RF_VMINREP --body_type mrslt --body_data G.U.D.VMIN_ATOM_CACHE_RF_VMINREP')      : -   		  : -     		  : -       	  													: -					: 1                 : 2       
+END_SCREEN

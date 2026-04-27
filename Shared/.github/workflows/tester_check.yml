@@ -1,0 +1,122 @@
+name: TESTER_CHECK
+
+on:
+  workflow_dispatch: 
+    inputs:
+
+      name:
+        description: 'MV_json_file or FULL - rev1'
+        # Default value if no value is explicitly provided
+        default: 'FULL'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      targetbom:
+        description: 'Option: Class_NVL_S28C | ALL | If running multi boms, using comma delimiter'
+        # Default value if no value is explicitly provided
+        default: 'Class_NVL_S28C'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      destination:
+        description: 'I:/ path to copy TP. Leave alone to not copy.'
+        # Default value if no value is explicitly provided
+        default: 'I:/'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      tester:
+        description: 'Enter tester name if you want to request a specific tester.'
+        # Default value if no value is explicitly provided
+        default: 'any'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      CPUBranch:
+        description: 'CPUBranchname|tag|sha|none'
+        # Default value if no value is explicitly provided
+        default: 'main'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      GCDBranch:
+        description: 'GCDBranchname|tag|sha|none'
+        # Default value if no value is explicitly provided
+        default: 'main'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      HUBBranch:
+        description: 'HUBBranchname|tag|sha|none'
+        # Default value if no value is explicitly provided
+        default: 'main'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      PCDBranch:
+        description: 'PCDBranchname|tag|sha|none'
+        # Default value if no value is explicitly provided
+        default: 'main'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      acpy:
+        description: 'Auto Content pymtpl I:\ path:'
+        default: 'None'
+        required: false
+
+      email:
+        description: 'Email address'
+        # Default value if no value is explicitly provided
+        default: ''
+        # Input has to be provided for the workflow to run
+        required: true
+
+
+jobs:
+  TESTER_CHECK:
+    runs-on: [self-hosted, checkers]
+    timeout-minutes: 180
+
+    steps:
+    - name: Log Inputs
+      shell: powershell
+      run: echo "${{ toJSON(github.event.inputs) }}"
+
+    - name: repo_init_check
+      continue-on-error: true
+      shell: powershell
+      run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/tprobot.py REPO_INIT main
+
+    - uses: actions/checkout@v6
+      with: 
+        fetch-depth: 0
+        clean: true              # remove untracked files before checkout
+        ref: ${{ github.event.pull_request.head.ref }}
+
+    - name: Checkout submodules
+      shell: powershell
+      run: |
+        git submodule sync --recursive
+        git submodule update --init --recursive --force
+
+    - name: clone dielets
+      shell: powershell
+      run: python I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/nvl_buildtp.py ${{ github.event.inputs.targetbom }} -clone
+      env:
+         CPU_Branch: ${{ github.event.inputs.CPUBranch }}
+         GCD_Branch: ${{ github.event.inputs.GCDBranch }}
+         PCD_Branch: ${{ github.event.inputs.PCDBranch }}
+         HUB_Branch: ${{ github.event.inputs.HUBBranch }}
+
+    - name: Bot run
+      shell: powershell
+      run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/runner_botos.py nvl2_tpbot._ALL_.nvl_common
+      env:
+          DEST: ${{ github.event.inputs.destination }}
+          EMAIL: ${{ github.event.inputs.email }}
+          IN1: ${{ github.event.inputs.name }}
+          TARGETBOM: ${{ github.event.inputs.targetbom }}
+          CLEANTP: False
+          ACPY: ${{ github.event.inputs.acpy }}
+          TESTER: ${{ github.event.inputs.tester }}

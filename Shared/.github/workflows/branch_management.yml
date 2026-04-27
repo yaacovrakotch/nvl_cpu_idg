@@ -1,0 +1,18 @@
+name: Branch Management
+
+on:
+  create:
+
+jobs:
+  seed_atomic_json:
+    if: startsWith(github.ref, 'refs/heads/main_')
+    runs-on: [self-hosted, checkers_JF]
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Seed atomic branch JSON
+      run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/atomic_rev_check.py SEED_ATOMIC_JSON ${{ github.ref_name }}
+      env:
+        BASE_REF: main

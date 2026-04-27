@@ -1,0 +1,90 @@
+Version 1.0;
+
+Levels cpu_pth_bgr_x_viewana_cal_ch0_pkg_lvl
+{
+	IPC::CPU_OBS_03
+	{
+		FixedDriveState = "Off";
+		IClampHi = 0.04A;
+		IClampLo = -0.04A;
+		IRange = "IR40mA";
+		OPMode = "VSIM";
+		PinModeSel = "PMU";
+		VForce = p_viewana_vbump_val;
+	}
+	SequenceBreak 0.2mS;
+	IPC::CPU_OBS_02
+	{
+		IRange = "IR40mA";
+		OPMode = "VM";
+		PinModeSel = "PMU";
+		PreMeasurementDelay = 0.0001;
+		SamplingCount = 10;
+		SamplingMode = "Trace";
+		SamplingRatio = 1;
+		StartMeasurement = TRUE;
+	}
+}
+Levels cpu_pth_bgr_x_viewana_cal_ch1_pkg_lvl
+{
+	IPC::CPU_OBS_02
+	{
+		FixedDriveState = "Off";
+		IClampHi = 0.04A;
+		IClampLo = -0.04A;
+		IRange = "IR40mA";
+		OPMode = "VSIM";
+		PinModeSel = "PMU";
+		VForce = p_viewana_vbump_val;
+	}
+	SequenceBreak 0.2mS;
+	IPC::CPU_OBS_03
+	{
+		IRange = "IR40mA";
+		OPMode = "VM";
+		PinModeSel = "PMU";
+		PreMeasurementDelay = 0.0001;
+		SamplingCount = 10;
+		SamplingMode = "Trace";
+		SamplingRatio = 1;
+		StartMeasurement = TRUE;
+	}
+}
+Levels cpu_pth_bgr_x_viewana_pkg_lvl
+{
+	IPC::CPU_OBS_02
+	{
+		IRange = "IR40mA";
+		OPMode = "VM";
+		PinModeSel = "PMU";
+		PreMeasurementDelay = 0.0001;
+		SamplingCount = 10;
+		SamplingMode = "Trace";
+		SamplingRatio = 1;
+		StartMeasurement = TRUE;
+	}
+	IPC::CPU_OBS_03
+	{
+		IRange = "IR40mA";
+		OPMode = "VM";
+		PinModeSel = "PMU";
+		PreMeasurementDelay = 0.0001;
+		SamplingCount = 10;
+		SamplingMode = "Trace";
+		SamplingRatio = 1;
+		StartMeasurement = TRUE;
+	}
+}
+
+Levels dummy
+{
+	cpu_all_dpin_pins
+	{
+		IClampHi = 0.04;
+		IClampLo = -0.04;
+		IRange = "IR40mA";
+		OPMode = "VSIM";
+		PinModeSel = "PMU";
+		VForce = 0V;
+	}
+}

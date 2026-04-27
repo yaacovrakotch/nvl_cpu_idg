@@ -1,0 +1,41 @@
+ECHO off
+SET SSCEXEPATH=%HDMTTOS%\Runtime\Release
+REM Make it work on the Cart/HDE
+
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "TPI_DFF_XXX::DFFX_X_PRIMEULT_K_STARTPREPRL1_X_X_X_X_DUMMYULT" "BypassPort" 1
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "TPI_MIXDETCT_XXX::CTRL_X_MIXDET_K_STARTPREPRL1_X_X_X_X_DLCPMIXDET" "BypassPort" 1
+
+REM DFF NONKILL
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "TPI_DFF_XXX::DFFX_X_DFFREAD_K_STARTPREPRL1_X_X_X_X_DFFREAD" "EnabledModules" "NONKILL"
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "TPI_DFF_XXX::DFFX_X_DFFENDFLOW_K_FINAL_X_X_X_X_DFFVAL" "BypassPort" 1
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "PTH_CEP_HKPKGS7::CEP_X_SCREEN_E_BEGINHUBPKG_X_X_X_X_CEP_EVENT0_CALC" "BypassPort" 1
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "IPH::PTH_DTS_HXPKGS7::DTS_X_SCREEN_K_LTTCHUB_X_X_X_X_DTSCALC" "BypassPort" 1
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "IPH::PTH_DTS_HXPKGS7::DTS_X_GSDS2DFF_E_LTTCHUB_X_X_X_X_SDTCLASS" "BypassPort" 1
+
+REM Bypass SCN_PCD_PXH items that are failing across multiple units
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "IPP::SCN_PCD_PXH::ATSPEED_PCD_SCBD_K_PCDMIN0_HIHO_VNNAON_MIN_X_POR" "BypassPort" 1
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "IPP::SCN_PCD_PXH::ATSPEED_PCDTOP_SCBD_K_PCDMIN0_HIHO_VNNAON_MIN_X_POR" "BypassPort" 1
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "IPP::SCN_PCD_PXH::STUCKAT_PCD_SCBD_K_PCDNOM0_HIHO_VNNAON_NOM_X_POR" "BypassPort" 1
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "IPP::SCN_PCD_PXH::STUCKAT_PCD_SCBD_K_PCDMAX0_HIHO_VNNAON_MAX_X_POR" "BypassPort" 1
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "IPP::SCN_PCD_PXH::ATSPEED_PCD_SCBD_K_PCDMAX0_HIHO_VNNAON_MAX_X_SS" "BypassPort" 1
+
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "IPP::SCN_PCD_PXH::ATSPEED_PCDTOP_SCBD_K_PCDMAX0_HIHO_VNNAON_MAX_X_POR" "BypassPort" 1
+
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "IPP::SCN_PCD_PXH::ATSPEED_CNVI_SCBD_K_PCDMIN0_HIHO_VNNAON_MIN_X_SS" "BypassPort" 1
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "IPP::SCN_PCD_PXH::ATSPEED_CNVI_SCBD_K_PCDMAX0_HIHO_VNNAON_MAX_X_SS" "BypassPort" 1
+
+REM Setup dtscalc gold
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "IPH::PTH_DTS_HXNVL::DTS_X_SCREEN_K_STARTANA0HUB_X_X_X_X_DTSCALC" "ScreenTestsFile" "./InputFiles/NVL_HUB_CLASS_dtscalc_gold.txt"
+
+REM Bin1640 B1668
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "IPH::MIO_DDR5AC_HXXX::MTG_DDR5_CTVDEC_K_ENDHUB_X_X_MIN_6400_G2_BBS" "BypassPort" 1
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "IPH::MIO_DDR5AC_HXXX::MTG_DDR5_CTVDEC_K_ENDHUB_X_X_MIN_7200_G2_BBS" "BypassPort" 1
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "IPH::MIO_DDR5AC_HXXX::MTG_DDR5_CTVDEC_K_ENDHUB_X_X_MIN_8800_G4_BBS" "BypassPort" 1
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "IPH::MIO_DDR5AC_HXXX::MTG_DDR5_CTVDEC_K_ENDHUB_X_X_MIN_8000_G4_BBS" "BypassPort" 1
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "IPH::MIO_DDR5AC_HXXX::MTG_DDR5_CTVDEC_K_ENDHUB_X_X_MIN_5600_G4_BBS" "BypassPort" 1
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "IPH::MIO_DDR5AC_HXXX::MTG_DDR5_CTVDEC_K_ENDHUBMAX_X_X_MAX_8000_G4_BBS" "BypassPort" 1
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "IPH::MIO_DDR5AC_HXXX::MTG_DDR5_CTVDEC_K_ENDHUBMAX_X_X_MAX_8800_G4_BBS" "BypassPort" 1
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "IPH::MIO_DDR5AC_HXXX::MTG_DDR5_CTVDEC_K_ENDHUBMAX_X_X_MAX_6400_G2_BBS" "BypassPort" 1
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "IPH::MIO_DDR5AC_HXXX::MTG_DDR5_CTVDEC_K_ENDHUBMAX_X_X_MAX_7200_G2_BBS" "BypassPort" 1
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "IPH::MIO_DDR5AC_HXXX::MTG_DDR5_CTVDEC_K_ENDHUBMAX_X_X_MAX_5600_G4_BBS" "BypassPort" 1
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "IPH::SCN_ATOM_HXPKGMB::STUCKAT_LPATOM_SB_K_BEGINHUBNOM_X_SAAT_F1_1200_IO" "BypassPort" 1

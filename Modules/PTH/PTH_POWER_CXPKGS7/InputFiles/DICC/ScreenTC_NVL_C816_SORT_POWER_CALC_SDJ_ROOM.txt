@@ -1,0 +1,310 @@
+START_SCREEN :SORT_POWER_CALC
+
+#[2]:FAIL_PRINT
+#[3]:FAIL_CALC
+#[4]:FAIL_DFF
+#[5]:FAIL_LIMIT 
+
+##################################################################################################################################################################################################################################################################
+#																						PRINT_AVERAGE_TEMPERATURE_RAW_DATA_FROM_AUXILARY_TEST                                                                                                                    #
+##################################################################################################################################################################################################################################################################
+
+EXEC  : PRINT_AVG_TEMP_002		   : DOUBLE  : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _PP_DICC_CPU_TEMP	--body_type mrslt --body_data G.U.D.CPU_DICC_TEMP')		: - : - : -	: -		: PRINT_DICC_2K_ATOM_001 : 2
+
+##########################################################################################################################################################################################################################################################
+#																				                                           PRINT_DICC_ATOM_RAW_DATA_FROM_ANAMEAS_TEST                                                                        			 #
+##########################################################################################################################################################################################################################################################
+	
+EXEC : PRINT_DICC_2K_ATOM_001 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _2K_F1_V1_PP_DICC_ATOM0  		--body_type mrslt --body_data G.U.D.GSDS_0P70_DICC_2K_LO_VCCATOM0_HC_0') 		:-:-:-:-	: PRINT_DICC_2K_ATOM_002 : 2
+EXEC : PRINT_DICC_2K_ATOM_002 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _2K_F2_V1_PP_DICC_ATOM0  		--body_type mrslt --body_data G.U.D.GSDS_0P70_DICC_2K_MD_VCCATOM0_HC_0') 		:-:-:-:-	: PRINT_DICC_2K_ATOM_003 : 2
+EXEC : PRINT_DICC_2K_ATOM_003 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _2K_F3_V1_PP_DICC_ATOM0  		--body_type mrslt --body_data G.U.D.GSDS_0P70_DICC_2K_HI_VCCATOM0_HC_0') 		:-:-:-:-	: PRINT_DICC_2K_ATOM_004 : 2
+EXEC : PRINT_DICC_2K_ATOM_004 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _2K_F1_V2_PP_DICC_ATOM0  		--body_type mrslt --body_data G.U.D.GSDS_0P95_DICC_2K_LO_VCCATOM0_HC_0') 		:-:-:-:-	: PRINT_DICC_2K_ATOM_005 : 2
+EXEC : PRINT_DICC_2K_ATOM_005 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _2K_F2_V2_PP_DICC_ATOM0  		--body_type mrslt --body_data G.U.D.GSDS_0P95_DICC_2K_MD_VCCATOM0_HC_0') 		:-:-:-:-	: PRINT_DICC_2K_ATOM_006 : 2
+EXEC : PRINT_DICC_2K_ATOM_006 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _2K_F3_V2_PP_DICC_ATOM0  		--body_type mrslt --body_data G.U.D.GSDS_0P95_DICC_2K_HI_VCCATOM0_HC_0') 		:-:-:-:-	: PRINT_DICC_2K_ATOM_007 : 2
+EXEC : PRINT_DICC_2K_ATOM_007 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _2K_F1_V1_PP_DICC_ATOM1  		--body_type mrslt --body_data G.U.D.GSDS_0P70_DICC_2K_LO_VCCATOM1_HC_0') 		:-:-:-:-	: PRINT_DICC_2K_ATOM_008 : 2
+EXEC : PRINT_DICC_2K_ATOM_008 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _2K_F2_V1_PP_DICC_ATOM1  		--body_type mrslt --body_data G.U.D.GSDS_0P70_DICC_2K_MD_VCCATOM1_HC_0') 		:-:-:-:-	: PRINT_DICC_2K_ATOM_009 : 2
+EXEC : PRINT_DICC_2K_ATOM_009 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _2K_F3_V1_PP_DICC_ATOM1  		--body_type mrslt --body_data G.U.D.GSDS_0P70_DICC_2K_HI_VCCATOM1_HC_0') 		:-:-:-:-	: PRINT_DICC_2K_ATOM_010 : 2
+EXEC : PRINT_DICC_2K_ATOM_010 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _2K_F1_V2_PP_DICC_ATOM1  		--body_type mrslt --body_data G.U.D.GSDS_0P95_DICC_2K_LO_VCCATOM1_HC_0') 		:-:-:-:-	: PRINT_DICC_2K_ATOM_011 : 2
+EXEC : PRINT_DICC_2K_ATOM_011 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _2K_F2_V2_PP_DICC_ATOM1  		--body_type mrslt --body_data G.U.D.GSDS_0P95_DICC_2K_MD_VCCATOM1_HC_0') 		:-:-:-:-	: PRINT_DICC_2K_ATOM_012 : 2
+EXEC : PRINT_DICC_2K_ATOM_012 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _2K_F3_V2_PP_DICC_ATOM1  		--body_type mrslt --body_data G.U.D.GSDS_0P95_DICC_2K_HI_VCCATOM1_HC_0') 		:-:-:-:-	: PRINT_DICC_5K_ATOM_001 : 2
+
+EXEC : PRINT_DICC_5K_ATOM_001 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _5K_F1_V1_PP_DICC_ATOM0  		--body_type mrslt --body_data G.U.D.GSDS_0P70_DICC_5K_LO_VCCATOM0_HC_0') 		:-:-:-:-	: PRINT_DICC_5K_ATOM_002 : 2
+EXEC : PRINT_DICC_5K_ATOM_002 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _5K_F2_V1_PP_DICC_ATOM0  		--body_type mrslt --body_data G.U.D.GSDS_0P70_DICC_5K_MD_VCCATOM0_HC_0') 		:-:-:-:-	: PRINT_DICC_5K_ATOM_003 : 2
+EXEC : PRINT_DICC_5K_ATOM_003 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _5K_F3_V1_PP_DICC_ATOM0  		--body_type mrslt --body_data G.U.D.GSDS_0P70_DICC_5K_HI_VCCATOM0_HC_0') 		:-:-:-:-	: PRINT_DICC_5K_ATOM_004 : 2
+EXEC : PRINT_DICC_5K_ATOM_004 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _5K_F1_V2_PP_DICC_ATOM0  		--body_type mrslt --body_data G.U.D.GSDS_0P95_DICC_5K_LO_VCCATOM0_HC_0') 		:-:-:-:-	: PRINT_DICC_5K_ATOM_005 : 2
+EXEC : PRINT_DICC_5K_ATOM_005 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _5K_F2_V2_PP_DICC_ATOM0  		--body_type mrslt --body_data G.U.D.GSDS_0P95_DICC_5K_MD_VCCATOM0_HC_0') 		:-:-:-:-	: PRINT_DICC_5K_ATOM_006 : 2
+EXEC : PRINT_DICC_5K_ATOM_006 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _5K_F3_V2_PP_DICC_ATOM0  		--body_type mrslt --body_data G.U.D.GSDS_0P95_DICC_5K_HI_VCCATOM0_HC_0') 		:-:-:-:-	: PRINT_DICC_5K_ATOM_007 : 2
+EXEC : PRINT_DICC_5K_ATOM_007 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _5K_F1_V1_PP_DICC_ATOM1  		--body_type mrslt --body_data G.U.D.GSDS_0P70_DICC_5K_LO_VCCATOM1_HC_0') 		:-:-:-:-	: PRINT_DICC_5K_ATOM_008 : 2
+EXEC : PRINT_DICC_5K_ATOM_008 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _5K_F2_V1_PP_DICC_ATOM1  		--body_type mrslt --body_data G.U.D.GSDS_0P70_DICC_5K_MD_VCCATOM1_HC_0') 		:-:-:-:-	: PRINT_DICC_5K_ATOM_009 : 2
+EXEC : PRINT_DICC_5K_ATOM_009 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _5K_F3_V1_PP_DICC_ATOM1  		--body_type mrslt --body_data G.U.D.GSDS_0P70_DICC_5K_HI_VCCATOM1_HC_0') 		:-:-:-:-	: PRINT_DICC_5K_ATOM_010 : 2
+EXEC : PRINT_DICC_5K_ATOM_010 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _5K_F1_V2_PP_DICC_ATOM1  		--body_type mrslt --body_data G.U.D.GSDS_0P95_DICC_5K_LO_VCCATOM1_HC_0') 		:-:-:-:-	: PRINT_DICC_5K_ATOM_011 : 2
+EXEC : PRINT_DICC_5K_ATOM_011 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _5K_F2_V2_PP_DICC_ATOM1  		--body_type mrslt --body_data G.U.D.GSDS_0P95_DICC_5K_MD_VCCATOM1_HC_0') 		:-:-:-:-	: PRINT_DICC_5K_ATOM_012 : 2
+EXEC : PRINT_DICC_5K_ATOM_012 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _5K_F3_V2_PP_DICC_ATOM1  		--body_type mrslt --body_data G.U.D.GSDS_0P95_DICC_5K_HI_VCCATOM1_HC_0') 		:-:-:-:-	: SET_STRING_DICC_2K_ATOM_001 : 2
+
+###################################################################################################################################################################################################################################################################################################
+#																				                                   SET_STRING_DICC_ATOM_FOR_CDYN_CALCULATION                                                                        				 											  #
+###################################################################################################################################################################################################################################################################################################
+
+EXEC : SET_STRING_DICC_2K_ATOM_001 : STRING : GSDS : G.U.S.GSDS_0P70_PP_DICC_2K_ATOM0  : SET : EXPRESSION : "ToString([G.U.D.GSDS_0P70_DICC_2K_LO_VCCATOM0_HC_0])+ '|' + [G.U.D.GSDS_0P70_DICC_2K_MD_VCCATOM0_HC_0]+ '|' +[G.U.D.GSDS_0P70_DICC_2K_HI_VCCATOM0_HC_0]" : - : SET_STRING_DICC_2K_ATOM_002   : 3                        
+EXEC : SET_STRING_DICC_2K_ATOM_002 : STRING : GSDS : G.U.S.GSDS_0P70_PP_DICC_2K_ATOM1  : SET : EXPRESSION : "ToString([G.U.D.GSDS_0P70_DICC_2K_LO_VCCATOM1_HC_0])+ '|' + [G.U.D.GSDS_0P70_DICC_2K_MD_VCCATOM1_HC_0]+ '|' +[G.U.D.GSDS_0P70_DICC_2K_HI_VCCATOM1_HC_0]" : - : SET_STRING_DICC_2K_ATOM_005   : 3                        
+EXEC : SET_STRING_DICC_2K_ATOM_005 : STRING : GSDS : G.U.S.GSDS_0P95_PP_DICC_2K_ATOM0  : SET : EXPRESSION : "ToString([G.U.D.GSDS_0P95_DICC_2K_LO_VCCATOM0_HC_0])+ '|' + [G.U.D.GSDS_0P95_DICC_2K_MD_VCCATOM0_HC_0]+ '|' +[G.U.D.GSDS_0P95_DICC_2K_HI_VCCATOM0_HC_0]" : - : SET_STRING_DICC_2K_ATOM_006   : 3                        
+EXEC : SET_STRING_DICC_2K_ATOM_006 : STRING : GSDS : G.U.S.GSDS_0P95_PP_DICC_2K_ATOM1  : SET : EXPRESSION : "ToString([G.U.D.GSDS_0P95_DICC_2K_LO_VCCATOM1_HC_0])+ '|' + [G.U.D.GSDS_0P95_DICC_2K_MD_VCCATOM1_HC_0]+ '|' +[G.U.D.GSDS_0P95_DICC_2K_HI_VCCATOM1_HC_0]" : - : PRINT_STRING_DICC_2K_ATOM_001   : 3                        
+
+EXEC : PRINT_STRING_DICC_2K_ATOM_001 : STRING : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _2K_V1_PP_DICC_ATOM0  --body_type strgval --body_data G.U.S.GSDS_0P70_PP_DICC_2K_ATOM0') 		:-:-:-:-	: PRINT_STRING_DICC_2K_ATOM_002 : 2
+EXEC : PRINT_STRING_DICC_2K_ATOM_002 : STRING : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _2K_V1_PP_DICC_ATOM1  --body_type strgval --body_data G.U.S.GSDS_0P70_PP_DICC_2K_ATOM1') 		:-:-:-:-	: PRINT_STRING_DICC_2K_ATOM_005 : 2
+EXEC : PRINT_STRING_DICC_2K_ATOM_005 : STRING : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _2K_V2_PP_DICC_ATOM0  --body_type strgval --body_data G.U.S.GSDS_0P95_PP_DICC_2K_ATOM0') 		:-:-:-:-	: PRINT_STRING_DICC_2K_ATOM_006 : 2
+EXEC : PRINT_STRING_DICC_2K_ATOM_006 : STRING : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _2K_V2_PP_DICC_ATOM1  --body_type strgval --body_data G.U.S.GSDS_0P95_PP_DICC_2K_ATOM1') 		:-:-:-:-	: SET_STRING_DICC_5K_ATOM_001 : 2
+
+EXEC : SET_STRING_DICC_5K_ATOM_001 : STRING : GSDS : G.U.S.GSDS_0P70_PP_DICC_5K_ATOM0  : SET : EXPRESSION : "ToString([G.U.D.GSDS_0P70_DICC_5K_LO_VCCATOM0_HC_0])+ '|' + [G.U.D.GSDS_0P70_DICC_5K_MD_VCCATOM0_HC_0]+ '|' +[G.U.D.GSDS_0P70_DICC_5K_HI_VCCATOM0_HC_0]" : - : SET_STRING_DICC_5K_ATOM_002   : 3                        
+EXEC : SET_STRING_DICC_5K_ATOM_002 : STRING : GSDS : G.U.S.GSDS_0P70_PP_DICC_5K_ATOM1  : SET : EXPRESSION : "ToString([G.U.D.GSDS_0P70_DICC_5K_LO_VCCATOM1_HC_0])+ '|' + [G.U.D.GSDS_0P70_DICC_5K_MD_VCCATOM1_HC_0]+ '|' +[G.U.D.GSDS_0P70_DICC_5K_HI_VCCATOM1_HC_0]" : - : SET_STRING_DICC_5K_ATOM_005   : 3                        
+EXEC : SET_STRING_DICC_5K_ATOM_005 : STRING : GSDS : G.U.S.GSDS_0P95_PP_DICC_5K_ATOM0  : SET : EXPRESSION : "ToString([G.U.D.GSDS_0P95_DICC_5K_LO_VCCATOM0_HC_0])+ '|' + [G.U.D.GSDS_0P95_DICC_5K_MD_VCCATOM0_HC_0]+ '|' +[G.U.D.GSDS_0P95_DICC_5K_HI_VCCATOM0_HC_0]" : - : SET_STRING_DICC_5K_ATOM_006   : 3                        
+EXEC : SET_STRING_DICC_5K_ATOM_006 : STRING : GSDS : G.U.S.GSDS_0P95_PP_DICC_5K_ATOM1  : SET : EXPRESSION : "ToString([G.U.D.GSDS_0P95_DICC_5K_LO_VCCATOM1_HC_0])+ '|' + [G.U.D.GSDS_0P95_DICC_5K_MD_VCCATOM1_HC_0]+ '|' +[G.U.D.GSDS_0P95_DICC_5K_HI_VCCATOM1_HC_0]" : - : PRINT_STRING_DICC_5K_ATOM_001   : 3                        
+
+EXEC : PRINT_STRING_DICC_5K_ATOM_001 : STRING : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _5K_V1_PP_DICC_ATOM0  --body_type strgval --body_data G.U.S.GSDS_0P70_PP_DICC_5K_ATOM0') 		:-:-:-:-	: PRINT_STRING_DICC_5K_ATOM_002 : 2
+EXEC : PRINT_STRING_DICC_5K_ATOM_002 : STRING : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _5K_V1_PP_DICC_ATOM1  --body_type strgval --body_data G.U.S.GSDS_0P70_PP_DICC_5K_ATOM1') 		:-:-:-:-	: PRINT_STRING_DICC_5K_ATOM_005 : 2
+EXEC : PRINT_STRING_DICC_5K_ATOM_005 : STRING : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _5K_V2_PP_DICC_ATOM0  --body_type strgval --body_data G.U.S.GSDS_0P95_PP_DICC_5K_ATOM0') 		:-:-:-:-	: PRINT_STRING_DICC_5K_ATOM_006 : 2
+EXEC : PRINT_STRING_DICC_5K_ATOM_006 : STRING : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _5K_V2_PP_DICC_ATOM1  --body_type strgval --body_data G.U.S.GSDS_0P95_PP_DICC_5K_ATOM1') 		:-:-:-:-	: X_ATOM_CDYN : 2
+
+##########################################################################################################################################################################################################################################################
+#																				                                   CALCULATE_ATOM_SLOPE_CDYN (OG)                                                                        				 			     #
+##########################################################################################################################################################################################################################################################
+
+#----------------------------------------------------------
+#Pending update frequency according to NVL BaseSpecs.usrv
+#----------------------------------------------------------
+
+EXEC   : X_ATOM_CDYN         : STRING : SHAREDSTORAGE : G.U.S.X_ATOM_CDYN               : SET : EXPRESSION : "'800'+ '|' + '900'+ '|' +'1000'"               		   : - : CDYN_2K_ATOM_TMP_001 : 3                        
+
+EXEC   : CDYN_2K_ATOM_TMP_001  : STRING : GSDS       : G.U.S.GSDS_0P70_CDYN_2K_ATOM0_TMP   : SET : EXPRESSION : "GetDelimitedData(LinearFit([G.U.S.X_ATOM_CDYN],[G.U.S.GSDS_0P70_PP_DICC_2K_ATOM0],'|'),'|',1)"  : - : CDYN_2K_ATOM_TMP_002 : 3                    
+EXEC   : CDYN_2K_ATOM_TMP_002  : STRING : GSDS       : G.U.S.GSDS_0P70_CDYN_2K_ATOM1_TMP   : SET : EXPRESSION : "GetDelimitedData(LinearFit([G.U.S.X_ATOM_CDYN],[G.U.S.GSDS_0P70_PP_DICC_2K_ATOM1],'|'),'|',1)"  : - : CDYN_2K_ATOM_TMP_005 : 3                    
+EXEC   : CDYN_2K_ATOM_TMP_005  : STRING : GSDS       : G.U.S.GSDS_0P95_CDYN_2K_ATOM0_TMP   : SET : EXPRESSION : "GetDelimitedData(LinearFit([G.U.S.X_ATOM_CDYN],[G.U.S.GSDS_0P95_PP_DICC_2K_ATOM0],'|'),'|',1)"  : - : CDYN_2K_ATOM_TMP_006 : 3                    
+EXEC   : CDYN_2K_ATOM_TMP_006  : STRING : GSDS       : G.U.S.GSDS_0P95_CDYN_2K_ATOM1_TMP   : SET : EXPRESSION : "GetDelimitedData(LinearFit([G.U.S.X_ATOM_CDYN],[G.U.S.GSDS_0P95_PP_DICC_2K_ATOM1],'|'),'|',1)"  : - : CDYN_2K_ATOM_CAL_001 : 3                    
+
+EXEC   : CDYN_2K_ATOM_CAL_001   : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_2K_ATOM0 : SET : EXPRESSION : (1000*ToDouble([G.U.S.GSDS_0P70_CDYN_2K_ATOM0_TMP])/0.7)+0.00000001  : - : CDYN_2K_ATOM_CAL_002  : 3                        
+EXEC   : CDYN_2K_ATOM_CAL_002   : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_2K_ATOM1 : SET : EXPRESSION : (1000*ToDouble([G.U.S.GSDS_0P70_CDYN_2K_ATOM1_TMP])/0.7)+0.00000001  : - : CDYN_2K_ATOM_CAL_005  : 3                        
+EXEC   : CDYN_2K_ATOM_CAL_005   : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_2K_ATOM0 : SET : EXPRESSION : (1000*ToDouble([G.U.S.GSDS_0P95_CDYN_2K_ATOM0_TMP])/0.95)+0.00000001 : - : CDYN_2K_ATOM_CAL_006  : 3                        
+EXEC   : CDYN_2K_ATOM_CAL_006   : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_2K_ATOM1 : SET : EXPRESSION : (1000*ToDouble([G.U.S.GSDS_0P95_CDYN_2K_ATOM1_TMP])/0.95)+0.00000001 : - : PRINT_CDYN_2K_OG_ATOM_001  : 3                        
+
+EXEC   : PRINT_CDYN_2K_OG_ATOM_001 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _OG_2K_V1_PP_CDYN_ATOM0  --body_type mrslt --body_data G.U.D.GSDS_0P70_CDYN_2K_ATOM0') 		:-:-:-:-	: PRINT_CDYN_2K_OG_ATOM_002 : 2
+EXEC   : PRINT_CDYN_2K_OG_ATOM_002 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _OG_2K_V1_PP_CDYN_ATOM1  --body_type mrslt --body_data G.U.D.GSDS_0P70_CDYN_2K_ATOM1') 		:-:-:-:-	: PRINT_CDYN_2K_OG_ATOM_005 : 2
+EXEC   : PRINT_CDYN_2K_OG_ATOM_005 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _OG_2K_V2_PP_CDYN_ATOM0  --body_type mrslt --body_data G.U.D.GSDS_0P95_CDYN_2K_ATOM0') 		:-:-:-:-	: PRINT_CDYN_2K_OG_ATOM_006 : 2
+EXEC   : PRINT_CDYN_2K_OG_ATOM_006 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _OG_2K_V2_PP_CDYN_ATOM1  --body_type mrslt --body_data G.U.D.GSDS_0P95_CDYN_2K_ATOM1') 		:-:-:-:-	: CDYN_5K_ATOM_TMP_001 : 2
+
+EXEC   : CDYN_5K_ATOM_TMP_001  : STRING : GSDS       : G.U.S.GSDS_0P70_CDYN_5K_ATOM0_TMP   : SET : EXPRESSION : "GetDelimitedData(LinearFit([G.U.S.X_ATOM_CDYN],[G.U.S.GSDS_0P70_PP_DICC_5K_ATOM0],'|'),'|',1)"  : - : CDYN_5K_ATOM_TMP_002 : 3                    
+EXEC   : CDYN_5K_ATOM_TMP_002  : STRING : GSDS       : G.U.S.GSDS_0P70_CDYN_5K_ATOM1_TMP   : SET : EXPRESSION : "GetDelimitedData(LinearFit([G.U.S.X_ATOM_CDYN],[G.U.S.GSDS_0P70_PP_DICC_5K_ATOM1],'|'),'|',1)"  : - : CDYN_5K_ATOM_TMP_005 : 3                    
+EXEC   : CDYN_5K_ATOM_TMP_005  : STRING : GSDS       : G.U.S.GSDS_0P95_CDYN_5K_ATOM0_TMP   : SET : EXPRESSION : "GetDelimitedData(LinearFit([G.U.S.X_ATOM_CDYN],[G.U.S.GSDS_0P95_PP_DICC_5K_ATOM0],'|'),'|',1)"  : - : CDYN_5K_ATOM_TMP_006 : 3                    
+EXEC   : CDYN_5K_ATOM_TMP_006  : STRING : GSDS       : G.U.S.GSDS_0P95_CDYN_5K_ATOM1_TMP   : SET : EXPRESSION : "GetDelimitedData(LinearFit([G.U.S.X_ATOM_CDYN],[G.U.S.GSDS_0P95_PP_DICC_5K_ATOM1],'|'),'|',1)"  : - : CDYN_5K_ATOM_CAL_001 : 3                    
+
+EXEC   : CDYN_5K_ATOM_CAL_001   : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_5K_ATOM0 : SET : EXPRESSION : (1000*ToDouble([G.U.S.GSDS_0P70_CDYN_5K_ATOM0_TMP])/0.7)+0.00000001  : - : CDYN_5K_ATOM_CAL_002  : 3                        
+EXEC   : CDYN_5K_ATOM_CAL_002   : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_5K_ATOM1 : SET : EXPRESSION : (1000*ToDouble([G.U.S.GSDS_0P70_CDYN_5K_ATOM1_TMP])/0.7)+0.00000001  : - : CDYN_5K_ATOM_CAL_005  : 3                        
+EXEC   : CDYN_5K_ATOM_CAL_005   : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_5K_ATOM0 : SET : EXPRESSION : (1000*ToDouble([G.U.S.GSDS_0P95_CDYN_5K_ATOM0_TMP])/0.95)+0.00000001 : - : CDYN_5K_ATOM_CAL_006  : 3                        
+EXEC   : CDYN_5K_ATOM_CAL_006   : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_5K_ATOM1 : SET : EXPRESSION : (1000*ToDouble([G.U.S.GSDS_0P95_CDYN_5K_ATOM1_TMP])/0.95)+0.00000001 : - : PRINT_CDYN_5K_OG_ATOM_001  : 3                        
+
+EXEC   : PRINT_CDYN_5K_OG_ATOM_001 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _OG_5K_V1_PP_CDYN_ATOM0  --body_type mrslt --body_data G.U.D.GSDS_0P70_CDYN_5K_ATOM0') 		:-:-:-:-	: PRINT_CDYN_5K_OG_ATOM_002 : 2
+EXEC   : PRINT_CDYN_5K_OG_ATOM_002 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _OG_5K_V1_PP_CDYN_ATOM1  --body_type mrslt --body_data G.U.D.GSDS_0P70_CDYN_5K_ATOM1') 		:-:-:-:-	: PRINT_CDYN_5K_OG_ATOM_005 : 2
+EXEC   : PRINT_CDYN_5K_OG_ATOM_005 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _OG_5K_V2_PP_CDYN_ATOM0  --body_type mrslt --body_data G.U.D.GSDS_0P95_CDYN_5K_ATOM0') 		:-:-:-:-	: PRINT_CDYN_5K_OG_ATOM_006 : 2
+EXEC   : PRINT_CDYN_5K_OG_ATOM_006 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _OG_5K_V2_PP_CDYN_ATOM1  --body_type mrslt --body_data G.U.D.GSDS_0P95_CDYN_5K_ATOM1') 		:-:-:-:-	: MIN_CHECK_2K_ATOM0_V1 : 2
+
+###############################################################################################################################################################################################################################################
+#															                   LIMIT_CHECK_HIGH_LOW_FOR_CDYN_ATOM_ENABLED_SAFE_VALUE (LC)                                                                                                     #
+###############################################################################################################################################################################################################################################
+
+EXEC   : MIN_CHECK_2K_ATOM0_V1            : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_2K_ATOM0  : <   : EXPRESSION : '1.0'      : - : FIX_2K_ATOM0_V1                  : MAX_CHECK_2K_ATOM0_V1      
+EXEC   : MAX_CHECK_2K_ATOM0_V1            : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_2K_ATOM0  : >=  : EXPRESSION : '90.0'     : - : FIX_2K_ATOM0_V1                  : MIN_CHECK_2K_ATOM0_V2            
+EXEC   : FIX_2K_ATOM0_V1                  : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_2K_ATOM0  : SET : EXPRESSION : '5.07000'  : - : MIN_CHECK_2K_ATOM0_V2            : 5                        
+
+EXEC   : MIN_CHECK_2K_ATOM0_V2            : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_2K_ATOM0  : <   : EXPRESSION : '1.0'      : - : FIX_2K_ATOM0_V2                  : MAX_CHECK_2K_ATOM0_V2      
+EXEC   : MAX_CHECK_2K_ATOM0_V2            : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_2K_ATOM0  : >=  : EXPRESSION : '90.0'     : - : FIX_2K_ATOM0_V2                  : MIN_CHECK_2K_ATOM1_V1            
+EXEC   : FIX_2K_ATOM0_V2                  : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_2K_ATOM0  : SET : EXPRESSION : '5.40'     : - : MIN_CHECK_2K_ATOM1_V1            : 5                        
+
+EXEC   : MIN_CHECK_2K_ATOM1_V1            : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_2K_ATOM1  : <   : EXPRESSION : '1.0'      : - : FIX_2K_ATOM1_V1                  : MAX_CHECK_2K_ATOM1_V1      
+EXEC   : MAX_CHECK_2K_ATOM1_V1            : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_2K_ATOM1  : >=  : EXPRESSION : '90.0'     : - : FIX_2K_ATOM1_V1                  : MIN_CHECK_2K_ATOM1_V2            
+EXEC   : FIX_2K_ATOM1_V1                  : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_2K_ATOM1  : SET : EXPRESSION : '5.07000'  : - : MIN_CHECK_2K_ATOM1_V2            : 5                        
+
+EXEC   : MIN_CHECK_2K_ATOM1_V2            : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_2K_ATOM1  : <   : EXPRESSION : '1.0'      : - : FIX_2K_ATOM1_V2                  : MAX_CHECK_2K_ATOM1_V2      
+EXEC   : MAX_CHECK_2K_ATOM1_V2            : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_2K_ATOM1  : >=  : EXPRESSION : '90.0'     : - : FIX_2K_ATOM1_V2                  : PRINT_CDYN_LC_2K_ATOM_001            
+EXEC   : FIX_2K_ATOM1_V2                  : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_2K_ATOM1  : SET : EXPRESSION : '5.40'     : - : PRINT_CDYN_LC_2K_ATOM_001        : 5                        
+
+EXEC : PRINT_CDYN_LC_2K_ATOM_001 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _LC_2K_V1_PP_CDYN_ATOM0  --body_type mrslt --body_data G.U.D.GSDS_0P70_CDYN_2K_ATOM0') 		:-:-:-:-	: PRINT_CDYN_LC_2K_ATOM_002 : 2
+EXEC : PRINT_CDYN_LC_2K_ATOM_002 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _LC_2K_V1_PP_CDYN_ATOM1  --body_type mrslt --body_data G.U.D.GSDS_0P70_CDYN_2K_ATOM1') 		:-:-:-:-	: PRINT_CDYN_LC_2K_ATOM_005 : 2
+EXEC : PRINT_CDYN_LC_2K_ATOM_005 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _LC_2K_V2_PP_CDYN_ATOM0  --body_type mrslt --body_data G.U.D.GSDS_0P95_CDYN_2K_ATOM0') 		:-:-:-:-	: PRINT_CDYN_LC_2K_ATOM_006 : 2
+EXEC : PRINT_CDYN_LC_2K_ATOM_006 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _LC_2K_V2_PP_CDYN_ATOM1  --body_type mrslt --body_data G.U.D.GSDS_0P95_CDYN_2K_ATOM1') 		:-:-:-:-	: MIN_CHECK_5K_ATOM0_V1 : 2
+
+EXEC   : MIN_CHECK_5K_ATOM0_V1            : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_5K_ATOM0  : <   : EXPRESSION : '1.0'      : - : FIX_5K_ATOM0_V1                  : MAX_CHECK_5K_ATOM0_V1      
+EXEC   : MAX_CHECK_5K_ATOM0_V1            : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_5K_ATOM0  : >=  : EXPRESSION : '90.0'     : - : FIX_5K_ATOM0_V1                  : MIN_CHECK_5K_ATOM0_V2            
+EXEC   : FIX_5K_ATOM0_V1                  : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_5K_ATOM0  : SET : EXPRESSION : '5.07000'  : - : MIN_CHECK_5K_ATOM0_V2            : 5                        
+
+EXEC   : MIN_CHECK_5K_ATOM0_V2            : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_5K_ATOM0  : <   : EXPRESSION : '1.0'      : - : FIX_5K_ATOM0_V2                  : MAX_CHECK_5K_ATOM0_V2      
+EXEC   : MAX_CHECK_5K_ATOM0_V2            : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_5K_ATOM0  : >=  : EXPRESSION : '90.0'     : - : FIX_5K_ATOM0_V2                  : MIN_CHECK_5K_ATOM1_V1            
+EXEC   : FIX_5K_ATOM0_V2                  : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_5K_ATOM0  : SET : EXPRESSION : '5.40'     : - : MIN_CHECK_5K_ATOM1_V1            : 5                        
+
+EXEC   : MIN_CHECK_5K_ATOM1_V1            : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_5K_ATOM1  : <   : EXPRESSION : '1.0'      : - : FIX_5K_ATOM1_V1                  : MAX_CHECK_5K_ATOM1_V1      
+EXEC   : MAX_CHECK_5K_ATOM1_V1            : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_5K_ATOM1  : >=  : EXPRESSION : '90.0'     : - : FIX_5K_ATOM1_V1                  : MIN_CHECK_5K_ATOM1_V2            
+EXEC   : FIX_5K_ATOM1_V1                  : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_5K_ATOM1  : SET : EXPRESSION : '5.07000'  : - : MIN_CHECK_5K_ATOM1_V2            : 5                        
+
+EXEC   : MIN_CHECK_5K_ATOM1_V2            : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_5K_ATOM1  : <   : EXPRESSION : '1.0'      : - : FIX_5K_ATOM1_V2                  : MAX_CHECK_5K_ATOM1_V2      
+EXEC   : MAX_CHECK_5K_ATOM1_V2            : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_5K_ATOM1  : >=  : EXPRESSION : '90.0'     : - : FIX_5K_ATOM1_V2                  : PRINT_CDYN_LC_5K_ATOM_001            
+EXEC   : FIX_5K_ATOM1_V2                  : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_5K_ATOM1  : SET : EXPRESSION : '5.40'     : - : PRINT_CDYN_LC_5K_ATOM_001        : 5                        
+
+EXEC : PRINT_CDYN_LC_5K_ATOM_001 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _LC_5K_V1_PP_CDYN_ATOM0  --body_type mrslt --body_data G.U.D.GSDS_0P70_CDYN_5K_ATOM0') 		:-:-:-:-	: PRINT_CDYN_LC_5K_ATOM_002 : 2
+EXEC : PRINT_CDYN_LC_5K_ATOM_002 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _LC_5K_V1_PP_CDYN_ATOM1  --body_type mrslt --body_data G.U.D.GSDS_0P70_CDYN_5K_ATOM1') 		:-:-:-:-	: PRINT_CDYN_LC_5K_ATOM_005 : 2
+EXEC : PRINT_CDYN_LC_5K_ATOM_005 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _LC_5K_V2_PP_CDYN_ATOM0  --body_type mrslt --body_data G.U.D.GSDS_0P95_CDYN_5K_ATOM0') 		:-:-:-:-	: PRINT_CDYN_LC_5K_ATOM_006 : 2
+EXEC : PRINT_CDYN_LC_5K_ATOM_006 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _LC_5K_V2_PP_CDYN_ATOM1  --body_type mrslt --body_data G.U.D.GSDS_0P95_CDYN_5K_ATOM1') 		:-:-:-:-	: PRINT_DICC_PPV_CORE_001 : 2
+
+#########################################################################################################################################################################################################################################################################
+#																				                                           PRINT_DICC_CORE_RAW_DATA_FROM_ANAMEAS_TEST                                                                        			                #
+#########################################################################################################################################################################################################################################################################
+
+
+EXEC : PRINT_DICC_PPV_CORE_001 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _PPV_F1_V1_PP_DICC_CORE0  --body_type mrslt --body_data G.U.D.GSDS_0P70_DICC_PPV_LO_VCCCORE0_HC_0 ') 		:-:-:-:-	: PRINT_DICC_PPV_CORE_002  : 2
+EXEC : PRINT_DICC_PPV_CORE_002 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _PPV_F2_V1_PP_DICC_CORE0  --body_type mrslt --body_data G.U.D.GSDS_0P70_DICC_PPV_MD_VCCCORE0_HC_0 ') 		:-:-:-:-	: PRINT_DICC_PPV_CORE_003  : 2
+EXEC : PRINT_DICC_PPV_CORE_003 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _PPV_F3_V1_PP_DICC_CORE0  --body_type mrslt --body_data G.U.D.GSDS_0P70_DICC_PPV_HI_VCCCORE0_HC_0 ') 		:-:-:-:-	: PRINT_DICC_PPV_CORE_004  : 2
+EXEC : PRINT_DICC_PPV_CORE_004 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _PPV_F1_V2_PP_DICC_CORE0  --body_type mrslt --body_data G.U.D.GSDS_0P95_DICC_PPV_LO_VCCCORE0_HC_0 ') 		:-:-:-:-	: PRINT_DICC_PPV_CORE_005  : 2
+EXEC : PRINT_DICC_PPV_CORE_005 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _PPV_F2_V2_PP_DICC_CORE0  --body_type mrslt --body_data G.U.D.GSDS_0P95_DICC_PPV_MD_VCCCORE0_HC_0 ') 		:-:-:-:-	: PRINT_DICC_PPV_CORE_006  : 2
+EXEC : PRINT_DICC_PPV_CORE_006 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _PPV_F3_V2_PP_DICC_CORE0  --body_type mrslt --body_data G.U.D.GSDS_0P95_DICC_PPV_HI_VCCCORE0_HC_0 ') 		:-:-:-:-	: PRINT_DICC_PPV_CORE_007  : 2
+EXEC : PRINT_DICC_PPV_CORE_007 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _PPV_F1_V1_PP_DICC_CORE1  --body_type mrslt --body_data G.U.D.GSDS_0P70_DICC_PPV_LO_VCCCORE1_HC_0 ') 		:-:-:-:-	: PRINT_DICC_PPV_CORE_008  : 2
+EXEC : PRINT_DICC_PPV_CORE_008 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _PPV_F2_V1_PP_DICC_CORE1  --body_type mrslt --body_data G.U.D.GSDS_0P70_DICC_PPV_MD_VCCCORE1_HC_0 ') 		:-:-:-:-	: PRINT_DICC_PPV_CORE_009  : 2
+EXEC : PRINT_DICC_PPV_CORE_009 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _PPV_F3_V1_PP_DICC_CORE1  --body_type mrslt --body_data G.U.D.GSDS_0P70_DICC_PPV_HI_VCCCORE1_HC_0 ') 		:-:-:-:-	: PRINT_DICC_PPV_CORE_010  : 2
+EXEC : PRINT_DICC_PPV_CORE_010 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _PPV_F1_V2_PP_DICC_CORE1  --body_type mrslt --body_data G.U.D.GSDS_0P95_DICC_PPV_LO_VCCCORE1_HC_0 ') 		:-:-:-:-	: PRINT_DICC_PPV_CORE_011  : 2
+EXEC : PRINT_DICC_PPV_CORE_011 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _PPV_F2_V2_PP_DICC_CORE1  --body_type mrslt --body_data G.U.D.GSDS_0P95_DICC_PPV_MD_VCCCORE1_HC_0 ') 		:-:-:-:-	: PRINT_DICC_PPV_CORE_012  : 2
+EXEC : PRINT_DICC_PPV_CORE_012 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _PPV_F3_V2_PP_DICC_CORE1  --body_type mrslt --body_data G.U.D.GSDS_0P95_DICC_PPV_HI_VCCCORE1_HC_0 ') 		:-:-:-:-	: PRINT_DICC_RPV_CORE_001  : 2
+
+EXEC : PRINT_DICC_RPV_CORE_001 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _RPV_F1_V1_PP_DICC_CORE0  --body_type mrslt --body_data G.U.D.GSDS_0P70_DICC_RPV_LO_VCCCORE0_HC_0 ') 		:-:-:-:-	: PRINT_DICC_RPV_CORE_002  : 2
+EXEC : PRINT_DICC_RPV_CORE_002 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _RPV_F2_V1_PP_DICC_CORE0  --body_type mrslt --body_data G.U.D.GSDS_0P70_DICC_RPV_MD_VCCCORE0_HC_0 ') 		:-:-:-:-	: PRINT_DICC_RPV_CORE_003  : 2
+EXEC : PRINT_DICC_RPV_CORE_003 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _RPV_F3_V1_PP_DICC_CORE0  --body_type mrslt --body_data G.U.D.GSDS_0P70_DICC_RPV_HI_VCCCORE0_HC_0 ') 		:-:-:-:-	: PRINT_DICC_RPV_CORE_004  : 2
+EXEC : PRINT_DICC_RPV_CORE_004 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _RPV_F1_V2_PP_DICC_CORE0  --body_type mrslt --body_data G.U.D.GSDS_0P95_DICC_RPV_LO_VCCCORE0_HC_0 ') 		:-:-:-:-	: PRINT_DICC_RPV_CORE_005  : 2
+EXEC : PRINT_DICC_RPV_CORE_005 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _RPV_F2_V2_PP_DICC_CORE0  --body_type mrslt --body_data G.U.D.GSDS_0P95_DICC_RPV_MD_VCCCORE0_HC_0 ') 		:-:-:-:-	: PRINT_DICC_RPV_CORE_006  : 2
+EXEC : PRINT_DICC_RPV_CORE_006 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _RPV_F3_V2_PP_DICC_CORE0  --body_type mrslt --body_data G.U.D.GSDS_0P95_DICC_RPV_HI_VCCCORE0_HC_0 ') 		:-:-:-:-	: PRINT_DICC_RPV_CORE_007  : 2
+EXEC : PRINT_DICC_RPV_CORE_007 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _RPV_F1_V1_PP_DICC_CORE1  --body_type mrslt --body_data G.U.D.GSDS_0P70_DICC_RPV_LO_VCCCORE1_HC_0 ') 		:-:-:-:-	: PRINT_DICC_RPV_CORE_008  : 2
+EXEC : PRINT_DICC_RPV_CORE_008 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _RPV_F2_V1_PP_DICC_CORE1  --body_type mrslt --body_data G.U.D.GSDS_0P70_DICC_RPV_MD_VCCCORE1_HC_0 ') 		:-:-:-:-	: PRINT_DICC_RPV_CORE_009  : 2
+EXEC : PRINT_DICC_RPV_CORE_009 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _RPV_F3_V1_PP_DICC_CORE1  --body_type mrslt --body_data G.U.D.GSDS_0P70_DICC_RPV_HI_VCCCORE1_HC_0 ') 		:-:-:-:-	: PRINT_DICC_RPV_CORE_010  : 2
+EXEC : PRINT_DICC_RPV_CORE_010 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _RPV_F1_V2_PP_DICC_CORE1  --body_type mrslt --body_data G.U.D.GSDS_0P95_DICC_RPV_LO_VCCCORE1_HC_0 ') 		:-:-:-:-	: PRINT_DICC_RPV_CORE_011  : 2
+EXEC : PRINT_DICC_RPV_CORE_011 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _RPV_F2_V2_PP_DICC_CORE1  --body_type mrslt --body_data G.U.D.GSDS_0P95_DICC_RPV_MD_VCCCORE1_HC_0 ') 		:-:-:-:-	: PRINT_DICC_RPV_CORE_012  : 2
+EXEC : PRINT_DICC_RPV_CORE_012 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _RPV_F3_V2_PP_DICC_CORE1  --body_type mrslt --body_data G.U.D.GSDS_0P95_DICC_RPV_HI_VCCCORE1_HC_0 ') 		:-:-:-:-	: SET_STRING_DICC_RPV_001  : 2
+
+###################################################################################################################################################################################################################################################################################################
+#																				                                   SET_STRING_DICC_CORE_FOR_CDYN_CALCULATION                                                                        				 											  #
+###################################################################################################################################################################################################################################################################################################
+
+EXEC   : SET_STRING_DICC_RPV_001  : STRING : GSDS  : G.U.S.GSDS_0P70_PP_DICC_RPV_CORE0  : SET : EXPRESSION : "ToString([G.U.D.GSDS_0P70_DICC_RPV_LO_VCCCORE0_HC_0])+ '|' + [G.U.D.GSDS_0P70_DICC_RPV_MD_VCCCORE0_HC_0]+ '|' +[G.U.D.GSDS_0P70_DICC_RPV_HI_VCCCORE0_HC_0]" : - : SET_STRING_DICC_RPV_002   : 3                        
+EXEC   : SET_STRING_DICC_RPV_002  : STRING : GSDS  : G.U.S.GSDS_0P70_PP_DICC_RPV_CORE1  : SET : EXPRESSION : "ToString([G.U.D.GSDS_0P70_DICC_RPV_LO_VCCCORE1_HC_0])+ '|' + [G.U.D.GSDS_0P70_DICC_RPV_MD_VCCCORE1_HC_0]+ '|' +[G.U.D.GSDS_0P70_DICC_RPV_HI_VCCCORE1_HC_0]" : - : SET_STRING_DICC_RPV_009   : 3                        
+EXEC   : SET_STRING_DICC_RPV_009  : STRING : GSDS  : G.U.S.GSDS_0P95_PP_DICC_RPV_CORE0  : SET : EXPRESSION : "ToString([G.U.D.GSDS_0P95_DICC_RPV_LO_VCCCORE0_HC_0])+ '|' + [G.U.D.GSDS_0P95_DICC_RPV_MD_VCCCORE0_HC_0]+ '|' +[G.U.D.GSDS_0P95_DICC_RPV_HI_VCCCORE0_HC_0]" : - : SET_STRING_DICC_RPV_010   : 3                        
+EXEC   : SET_STRING_DICC_RPV_010  : STRING : GSDS  : G.U.S.GSDS_0P95_PP_DICC_RPV_CORE1  : SET : EXPRESSION : "ToString([G.U.D.GSDS_0P95_DICC_RPV_LO_VCCCORE1_HC_0])+ '|' + [G.U.D.GSDS_0P95_DICC_RPV_MD_VCCCORE1_HC_0]+ '|' +[G.U.D.GSDS_0P95_DICC_RPV_HI_VCCCORE1_HC_0]" : - : SET_STRING_DICC_PPV_001   : 3                        
+
+EXEC   : SET_STRING_DICC_PPV_001  : STRING : GSDS  : G.U.S.GSDS_0P70_PP_DICC_PPV_CORE0  : SET : EXPRESSION : "ToString([G.U.D.GSDS_0P70_DICC_PPV_LO_VCCCORE0_HC_0])+ '|' + [G.U.D.GSDS_0P70_DICC_PPV_MD_VCCCORE0_HC_0]+ '|' +[G.U.D.GSDS_0P70_DICC_PPV_HI_VCCCORE0_HC_0]" : - : SET_STRING_DICC_PPV_002   : 3                        
+EXEC   : SET_STRING_DICC_PPV_002  : STRING : GSDS  : G.U.S.GSDS_0P70_PP_DICC_PPV_CORE1  : SET : EXPRESSION : "ToString([G.U.D.GSDS_0P70_DICC_PPV_LO_VCCCORE1_HC_0])+ '|' + [G.U.D.GSDS_0P70_DICC_PPV_MD_VCCCORE1_HC_0]+ '|' +[G.U.D.GSDS_0P70_DICC_PPV_HI_VCCCORE1_HC_0]" : - : SET_STRING_DICC_PPV_009   : 3                        
+EXEC   : SET_STRING_DICC_PPV_009  : STRING : GSDS  : G.U.S.GSDS_0P95_PP_DICC_PPV_CORE0  : SET : EXPRESSION : "ToString([G.U.D.GSDS_0P95_DICC_PPV_LO_VCCCORE0_HC_0])+ '|' + [G.U.D.GSDS_0P95_DICC_PPV_MD_VCCCORE0_HC_0]+ '|' +[G.U.D.GSDS_0P95_DICC_PPV_HI_VCCCORE0_HC_0]" : - : SET_STRING_DICC_PPV_010   : 3                        
+EXEC   : SET_STRING_DICC_PPV_010  : STRING : GSDS  : G.U.S.GSDS_0P95_PP_DICC_PPV_CORE1  : SET : EXPRESSION : "ToString([G.U.D.GSDS_0P95_DICC_PPV_LO_VCCCORE1_HC_0])+ '|' + [G.U.D.GSDS_0P95_DICC_PPV_MD_VCCCORE1_HC_0]+ '|' +[G.U.D.GSDS_0P95_DICC_PPV_HI_VCCCORE1_HC_0]" : - : PRINT_STRING_DICC_PPV_001   : 3                        
+
+EXEC : PRINT_STRING_DICC_PPV_001 : STRING : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _PPV_V1_PP_DICC_CORE0  --body_type strgval --body_data G.U.S.GSDS_0P70_PP_DICC_PPV_CORE0') 		:-:-:-:-	: PRINT_STRING_DICC_PPV_002 : 2
+EXEC : PRINT_STRING_DICC_PPV_002 : STRING : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _PPV_V1_PP_DICC_CORE1  --body_type strgval --body_data G.U.S.GSDS_0P70_PP_DICC_PPV_CORE1') 		:-:-:-:-	: PRINT_STRING_DICC_PPV_009 : 2
+EXEC : PRINT_STRING_DICC_PPV_009 : STRING : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _PPV_V2_PP_DICC_CORE0  --body_type strgval --body_data G.U.S.GSDS_0P95_PP_DICC_PPV_CORE0') 		:-:-:-:-	: PRINT_STRING_DICC_PPV_010 : 2
+EXEC : PRINT_STRING_DICC_PPV_010 : STRING : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _PPV_V2_PP_DICC_CORE1  --body_type strgval --body_data G.U.S.GSDS_0P95_PP_DICC_PPV_CORE1') 		:-:-:-:-	: PRINT_STRING_DICC_RPV_001 : 2
+
+EXEC : PRINT_STRING_DICC_RPV_001 : STRING : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _RPV_V1_PP_DICC_CORE0  --body_type strgval --body_data G.U.S.GSDS_0P70_PP_DICC_RPV_CORE0') 		:-:-:-:-	: PRINT_STRING_DICC_RPV_002 : 2
+EXEC : PRINT_STRING_DICC_RPV_002 : STRING : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _RPV_V1_PP_DICC_CORE1  --body_type strgval --body_data G.U.S.GSDS_0P70_PP_DICC_RPV_CORE1') 		:-:-:-:-	: PRINT_STRING_DICC_RPV_009 : 2
+EXEC : PRINT_STRING_DICC_RPV_009 : STRING : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _RPV_V2_PP_DICC_CORE0  --body_type strgval --body_data G.U.S.GSDS_0P95_PP_DICC_RPV_CORE0') 		:-:-:-:-	: PRINT_STRING_DICC_RPV_010 : 2
+EXEC : PRINT_STRING_DICC_RPV_010 : STRING : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _RPV_V2_PP_DICC_CORE1  --body_type strgval --body_data G.U.S.GSDS_0P95_PP_DICC_RPV_CORE1') 		:-:-:-:-	: X_CORE_CDYN : 2
+
+
+##########################################################################################################################################################################################################################################################
+#																				                                   CALCULATE_CORE_SLOPE_CDYN (OG)                                                                        				 			     #
+##########################################################################################################################################################################################################################################################
+
+#----------------------------------------------------------
+#Pending update frequency according to NVL BaseSpecs.usrv
+#----------------------------------------------------------
+
+EXEC   : X_CORE_CDYN              : STRING : SHAREDSTORAGE : G.U.S.X_CORE_CDYN                     : SET : EXPRESSION : "'800'+ '|' + '1200'+ '|' +'1800'"                : - : CDYN_RPV_CORE_TMP_001 : 3                        
+
+EXEC   : CDYN_RPV_CORE_TMP_001  : STRING : GSDS       : G.U.S.GSDS_0P70_CDYN_RPV_CORE0_TMP   : SET : EXPRESSION : "GetDelimitedData(LinearFit([G.U.S.X_CORE_CDYN],[G.U.S.GSDS_0P70_PP_DICC_RPV_CORE0],'|'),'|',1)"  : - : CDYN_RPV_CORE_TMP_002 : 3                    
+EXEC   : CDYN_RPV_CORE_TMP_002  : STRING : GSDS       : G.U.S.GSDS_0P70_CDYN_RPV_CORE1_TMP   : SET : EXPRESSION : "GetDelimitedData(LinearFit([G.U.S.X_CORE_CDYN],[G.U.S.GSDS_0P70_PP_DICC_RPV_CORE1],'|'),'|',1)"  : - : CDYN_RPV_CORE_TMP_009 : 3                    
+
+EXEC   : CDYN_RPV_CORE_TMP_009  : STRING : GSDS       : G.U.S.GSDS_0P95_CDYN_RPV_CORE0_TMP   : SET : EXPRESSION : "GetDelimitedData(LinearFit([G.U.S.X_CORE_CDYN],[G.U.S.GSDS_0P95_PP_DICC_RPV_CORE0],'|'),'|',1)"  : - : CDYN_RPV_CORE_TMP_010 : 3                    
+EXEC   : CDYN_RPV_CORE_TMP_010  : STRING : GSDS       : G.U.S.GSDS_0P95_CDYN_RPV_CORE1_TMP   : SET : EXPRESSION : "GetDelimitedData(LinearFit([G.U.S.X_CORE_CDYN],[G.U.S.GSDS_0P95_PP_DICC_RPV_CORE1],'|'),'|',1)"  : - : CDYN_PPV_CORE_TMP_001 : 3                    
+
+EXEC   : CDYN_PPV_CORE_TMP_001  : STRING : GSDS       : G.U.S.GSDS_0P70_CDYN_PPV_CORE0_TMP   : SET : EXPRESSION : "GetDelimitedData(LinearFit([G.U.S.X_CORE_CDYN],[G.U.S.GSDS_0P70_PP_DICC_PPV_CORE0],'|'),'|',1)"  : - : CDYN_PPV_CORE_TMP_002 : 3                    
+EXEC   : CDYN_PPV_CORE_TMP_002  : STRING : GSDS       : G.U.S.GSDS_0P70_CDYN_PPV_CORE1_TMP   : SET : EXPRESSION : "GetDelimitedData(LinearFit([G.U.S.X_CORE_CDYN],[G.U.S.GSDS_0P70_PP_DICC_PPV_CORE1],'|'),'|',1)"  : - : CDYN_PPV_CORE_TMP_009 : 3                    
+
+EXEC   : CDYN_PPV_CORE_TMP_009  : STRING : GSDS       : G.U.S.GSDS_0P95_CDYN_PPV_CORE0_TMP   : SET : EXPRESSION : "GetDelimitedData(LinearFit([G.U.S.X_CORE_CDYN],[G.U.S.GSDS_0P95_PP_DICC_PPV_CORE0],'|'),'|',1)"  : - : CDYN_PPV_CORE_TMP_010 : 3                    
+EXEC   : CDYN_PPV_CORE_TMP_010  : STRING : GSDS       : G.U.S.GSDS_0P95_CDYN_PPV_CORE1_TMP   : SET : EXPRESSION : "GetDelimitedData(LinearFit([G.U.S.X_CORE_CDYN],[G.U.S.GSDS_0P95_PP_DICC_PPV_CORE1],'|'),'|',1)"  : - : CDYN_RPV_CORE_CAL_001 : 3                    
+
+
+EXEC   : CDYN_RPV_CORE_CAL_001  : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_RPV_CORE0 : SET : EXPRESSION : (1000*ToDouble([G.U.S.GSDS_0P70_CDYN_RPV_CORE0_TMP])/0.7)+0.00000001  : - : CDYN_RPV_CORE_CAL_002 : 3                        
+EXEC   : CDYN_RPV_CORE_CAL_002  : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_RPV_CORE1 : SET : EXPRESSION : (1000*ToDouble([G.U.S.GSDS_0P70_CDYN_RPV_CORE1_TMP])/0.7)+0.00000001  : - : CDYN_RPV_CORE_CAL_009 : 3                        
+
+EXEC   : CDYN_RPV_CORE_CAL_009  : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_RPV_CORE0 : SET : EXPRESSION : (1000*ToDouble([G.U.S.GSDS_0P95_CDYN_RPV_CORE0_TMP])/0.95)+0.00000001 : - : CDYN_RPV_CORE_CAL_010 : 3                        
+EXEC   : CDYN_RPV_CORE_CAL_010  : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_RPV_CORE1 : SET : EXPRESSION : (1000*ToDouble([G.U.S.GSDS_0P95_CDYN_RPV_CORE1_TMP])/0.95)+0.00000001 : - : CDYN_PPV_CORE_CAL_001 : 3                        
+
+EXEC   : CDYN_PPV_CORE_CAL_001  : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_PPV_CORE0 : SET : EXPRESSION : (1000*ToDouble([G.U.S.GSDS_0P70_CDYN_PPV_CORE0_TMP])/0.7)+0.00000001  : - : CDYN_PPV_CORE_CAL_002 : 3                        
+EXEC   : CDYN_PPV_CORE_CAL_002  : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_PPV_CORE1 : SET : EXPRESSION : (1000*ToDouble([G.U.S.GSDS_0P70_CDYN_PPV_CORE1_TMP])/0.7)+0.00000001  : - : CDYN_PPV_CORE_CAL_009 : 3                        
+
+EXEC   : CDYN_PPV_CORE_CAL_009  : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_PPV_CORE0 : SET : EXPRESSION : (1000*ToDouble([G.U.S.GSDS_0P95_CDYN_PPV_CORE0_TMP])/0.95)+0.00000001 : - : CDYN_PPV_CORE_CAL_010 : 3                        
+EXEC   : CDYN_PPV_CORE_CAL_010  : DOUBLE : SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_PPV_CORE1 : SET : EXPRESSION : (1000*ToDouble([G.U.S.GSDS_0P95_CDYN_PPV_CORE1_TMP])/0.95)+0.00000001 : - : PRINT_CDYN_OG_PPV_CORE_001 : 3                        
+
+EXEC : PRINT_CDYN_OG_PPV_CORE_001 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _PPV_OG_V1_PP_CDYN_CORE0  --body_type mrslt --body_data G.U.D.GSDS_0P70_CDYN_PPV_CORE0') 		:-:-:-:-	: PRINT_CDYN_OG_PPV_CORE_002 : 2
+EXEC : PRINT_CDYN_OG_PPV_CORE_002 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _PPV_OG_V1_PP_CDYN_CORE1  --body_type mrslt --body_data G.U.D.GSDS_0P70_CDYN_PPV_CORE1') 		:-:-:-:-	: PRINT_CDYN_OG_PPV_CORE_009 : 2
+
+EXEC : PRINT_CDYN_OG_PPV_CORE_009 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _PPV_OG_V2_PP_CDYN_CORE0  --body_type mrslt --body_data G.U.D.GSDS_0P95_CDYN_PPV_CORE0') 		:-:-:-:-	: PRINT_CDYN_OG_PPV_CORE_010 : 2
+EXEC : PRINT_CDYN_OG_PPV_CORE_010 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _PPV_OG_V2_PP_CDYN_CORE1  --body_type mrslt --body_data G.U.D.GSDS_0P95_CDYN_PPV_CORE1') 		:-:-:-:-	: PRINT_CDYN_OG_RPV_CORE_001 : 2
+
+EXEC : PRINT_CDYN_OG_RPV_CORE_001 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _RPV_OG_V1_PP_CDYN_CORE0  --body_type mrslt --body_data G.U.D.GSDS_0P70_CDYN_RPV_CORE0') 		:-:-:-:-	: PRINT_CDYN_OG_RPV_CORE_002 : 2
+EXEC : PRINT_CDYN_OG_RPV_CORE_002 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _RPV_OG_V1_PP_CDYN_CORE1  --body_type mrslt --body_data G.U.D.GSDS_0P70_CDYN_RPV_CORE1') 		:-:-:-:-	: PRINT_CDYN_OG_RPV_CORE_009 : 2
+
+EXEC : PRINT_CDYN_OG_RPV_CORE_009 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _RPV_OG_V2_PP_CDYN_CORE0  --body_type mrslt --body_data G.U.D.GSDS_0P95_CDYN_RPV_CORE0') 		:-:-:-:-	: PRINT_CDYN_OG_RPV_CORE_010 : 2
+EXEC : PRINT_CDYN_OG_RPV_CORE_010 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _RPV_OG_V2_PP_CDYN_CORE1  --body_type mrslt --body_data G.U.D.GSDS_0P95_CDYN_RPV_CORE1') 		:-:-:-:-	: MIN_CHECK_RPV_CORE0_V1 : 2
+
+
+##########################################################################################################################################################################################################################################################################################
+#															                   LIMIT_CHECK_HIGH_LOW_FOR_CDYN_CORE_ENABLED_SAFE_VALUE (LC)                                                                                                                                                #
+##########################################################################################################################################################################################################################################################################################
+
+EXEC   : MIN_CHECK_RPV_CORE0_V1   : DOUBLE :SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_RPV_CORE0     : <   : EXPRESSION : '1.0'       : - : FIX_RPV_CORE0_V1             : MAX_CHECK_RPV_CORE0_V1 
+EXEC   : MAX_CHECK_RPV_CORE0_V1   : DOUBLE :SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_RPV_CORE0     : >=  : EXPRESSION : '90.0'      : - : FIX_RPV_CORE0_V1             : MIN_CHECK_RPV_CORE0_V2       
+EXEC   : FIX_RPV_CORE0_V1         : DOUBLE :SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_RPV_CORE0     : SET : EXPRESSION : '2.8200'    : - : MIN_CHECK_RPV_CORE0_V2       : 5                        
+
+EXEC   : MIN_CHECK_RPV_CORE0_V2   : DOUBLE :SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_RPV_CORE0     : <   : EXPRESSION : '1.0'       : - : FIX_RPV_CORE0_V2             : MAX_CHECK_RPV_CORE0_V2 
+EXEC   : MAX_CHECK_RPV_CORE0_V2   : DOUBLE :SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_RPV_CORE0     : >=  : EXPRESSION : '90.0'      : - : FIX_RPV_CORE0_V2             : MIN_CHECK_RPV_CORE1_V1       
+EXEC   : FIX_RPV_CORE0_V2         : DOUBLE :SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_RPV_CORE0     : SET : EXPRESSION : '3.00'      : - : MIN_CHECK_RPV_CORE1_V1       : 5                        
+
+EXEC   : MIN_CHECK_RPV_CORE1_V1   : DOUBLE :SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_RPV_CORE1     : <   : EXPRESSION : '1.0'       : - : FIX_RPV_CORE1_V1             : MAX_CHECK_RPV_CORE1_V1 
+EXEC   : MAX_CHECK_RPV_CORE1_V1   : DOUBLE :SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_RPV_CORE1     : >=  : EXPRESSION : '90.0'      : - : FIX_RPV_CORE1_V1             : MIN_CHECK_RPV_CORE1_V2       
+EXEC   : FIX_RPV_CORE1_V1         : DOUBLE :SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_RPV_CORE1     : SET : EXPRESSION : '2.8200'    : - : MIN_CHECK_RPV_CORE1_V2       : 5                        
+
+EXEC   : MIN_CHECK_RPV_CORE1_V2   : DOUBLE :SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_RPV_CORE1     : <   : EXPRESSION : '1.0'       : - : FIX_RPV_CORE1_V2             : MAX_CHECK_RPV_CORE1_V2 
+EXEC   : MAX_CHECK_RPV_CORE1_V2   : DOUBLE :SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_RPV_CORE1     : >=  : EXPRESSION : '90.0'      : - : FIX_RPV_CORE1_V2             : MIN_CHECK_PPV_CORE0_V1       
+EXEC   : FIX_RPV_CORE1_V2         : DOUBLE :SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_RPV_CORE1     : SET : EXPRESSION : '3.00'      : - : MIN_CHECK_PPV_CORE0_V1       : 5                        
+
+EXEC   : MIN_CHECK_PPV_CORE0_V1   : DOUBLE :SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_PPV_CORE0     : <   : EXPRESSION : '1.0'       : - : FIX_PPV_CORE0_V1             : MAX_CHECK_PPV_CORE0_V1 
+EXEC   : MAX_CHECK_PPV_CORE0_V1   : DOUBLE :SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_PPV_CORE0     : >=  : EXPRESSION : '90.0'      : - : FIX_PPV_CORE0_V1             : MIN_CHECK_PPV_CORE0_V2       
+EXEC   : FIX_PPV_CORE0_V1         : DOUBLE :SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_PPV_CORE0     : SET : EXPRESSION : '2.8200'    : - : MIN_CHECK_PPV_CORE0_V2       : 5                        
+
+EXEC   : MIN_CHECK_PPV_CORE0_V2   : DOUBLE :SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_PPV_CORE0     : <   : EXPRESSION : '1.0'       : - : FIX_PPV_CORE0_V2             : MAX_CHECK_PPV_CORE0_V2 
+EXEC   : MAX_CHECK_PPV_CORE0_V2   : DOUBLE :SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_PPV_CORE0     : >=  : EXPRESSION : '90.0'      : - : FIX_PPV_CORE0_V2             : MIN_CHECK_PPV_CORE1_V1       
+EXEC   : FIX_PPV_CORE0_V2         : DOUBLE :SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_PPV_CORE0     : SET : EXPRESSION : '3.00'      : - : MIN_CHECK_PPV_CORE1_V1       : 5                        
+
+EXEC   : MIN_CHECK_PPV_CORE1_V1   : DOUBLE :SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_PPV_CORE1     : <   : EXPRESSION : '1.0'       : - : FIX_PPV_CORE1_V1             : MAX_CHECK_PPV_CORE1_V1 
+EXEC   : MAX_CHECK_PPV_CORE1_V1   : DOUBLE :SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_PPV_CORE1     : >=  : EXPRESSION : '90.0'      : - : FIX_PPV_CORE1_V1             : MIN_CHECK_PPV_CORE1_V2       
+EXEC   : FIX_PPV_CORE1_V1         : DOUBLE :SHAREDSTORAGE : G.U.D.GSDS_0P70_CDYN_PPV_CORE1     : SET : EXPRESSION : '2.8200'    : - : MIN_CHECK_PPV_CORE1_V2       : 5                        
+
+EXEC   : MIN_CHECK_PPV_CORE1_V2   : DOUBLE :SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_PPV_CORE1     : <   : EXPRESSION : '1.0'       : - : FIX_PPV_CORE1_V2             : MAX_CHECK_PPV_CORE1_V2 
+EXEC   : MAX_CHECK_PPV_CORE1_V2   : DOUBLE :SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_PPV_CORE1     : >=  : EXPRESSION : '90.0'      : - : FIX_PPV_CORE1_V2             : PRINT_CDYN_LC_PPV_CORE_001       
+EXEC   : FIX_PPV_CORE1_V2         : DOUBLE :SHAREDSTORAGE : G.U.D.GSDS_0P95_CDYN_PPV_CORE1     : SET : EXPRESSION : '3.00'      : - : PRINT_CDYN_LC_PPV_CORE_001   : 5                        
+
+EXEC : PRINT_CDYN_LC_PPV_CORE_001 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _PPV_LC_V1_PP_CDYN_CORE0  --body_type mrslt --body_data G.U.D.GSDS_0P70_CDYN_PPV_CORE0') 		:-:-:-:-	: PRINT_CDYN_LC_PPV_CORE_002 : 2
+EXEC : PRINT_CDYN_LC_PPV_CORE_002 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _PPV_LC_V1_PP_CDYN_CORE1  --body_type mrslt --body_data G.U.D.GSDS_0P70_CDYN_PPV_CORE1') 		:-:-:-:-	: PRINT_CDYN_LC_PPV_CORE_009 : 2
+EXEC : PRINT_CDYN_LC_PPV_CORE_009 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _PPV_LC_V2_PP_CDYN_CORE0  --body_type mrslt --body_data G.U.D.GSDS_0P95_CDYN_PPV_CORE0') 		:-:-:-:-	: PRINT_CDYN_LC_PPV_CORE_010 : 2
+EXEC : PRINT_CDYN_LC_PPV_CORE_010 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _PPV_LC_V2_PP_CDYN_CORE1  --body_type mrslt --body_data G.U.D.GSDS_0P95_CDYN_PPV_CORE1') 		:-:-:-:-	: PRINT_CDYN_LC_RPV_CORE_001 : 2
+
+EXEC : PRINT_CDYN_LC_RPV_CORE_001 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _RPV_LC_V1_PP_CDYN_CORE0  --body_type mrslt --body_data G.U.D.GSDS_0P70_CDYN_RPV_CORE0') 		:-:-:-:-	: PRINT_CDYN_LC_RPV_CORE_002 : 2
+EXEC : PRINT_CDYN_LC_RPV_CORE_002 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _RPV_LC_V1_PP_CDYN_CORE1  --body_type mrslt --body_data G.U.D.GSDS_0P70_CDYN_RPV_CORE1') 		:-:-:-:-	: PRINT_CDYN_LC_RPV_CORE_009 : 2
+EXEC : PRINT_CDYN_LC_RPV_CORE_009 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _RPV_LC_V2_PP_CDYN_CORE0  --body_type mrslt --body_data G.U.D.GSDS_0P95_CDYN_RPV_CORE0') 		:-:-:-:-	: PRINT_CDYN_LC_RPV_CORE_010 : 2
+EXEC : PRINT_CDYN_LC_RPV_CORE_010 : DOUBLE : EXPRESSION  : ExecCallback('PrintToItuff', '--tname_suf _RPV_LC_V2_PP_CDYN_CORE1  --body_type mrslt --body_data G.U.D.GSDS_0P95_CDYN_RPV_CORE1') 		:-:-:-:-	: 1 : 2
+
+###################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+# 																													POWER_GUILD_REQUEST 																																											 																																																																																																																																																																																																																																						  #
+###################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################
+
+END_SCREEN
+
+

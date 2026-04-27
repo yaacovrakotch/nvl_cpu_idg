@@ -1,0 +1,591 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan FUS_FUSECFG_CKX;
+
+Import "FUS_FUSECFG_CKX.usrv";
+
+# Test Counter Definition
+
+Counters
+{
+    n31462020_fail_FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS_0,
+    n31462021_fail_FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS_2,
+    n31462022_fail_FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS_3,
+    n31462023_fail_FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS_CPU1_0,
+    n31462024_fail_FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS_CPU1_2,
+    n31462025_fail_FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS_CPU1_3,
+    n31472020_fail_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_RESET_X1_0,
+    n31472021_fail_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_VFDM_0,
+    n31472022_fail_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_VFDM_CPU1_0,
+    n31472024_fail_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_RESET_X1_CPU1_0
+} # End of Test Counter Definition
+
+CSharpTest ScreenTC FUSE_X_SCREENTC_K_INIT_X_X_X_X_PKGSETPOINT_SETUP
+{
+    BypassPort = -1;
+    ScreenTestSet = "PKG_SetPoint_Setup";
+    ScreenTestsFile = "./InputFiles/FUSECFG_CKX.screen.json";
+}
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_DIRECT_ALL_EXE_X1
+{
+    BypassPort = -1;
+    ConfigurationFile = __shared__::TpRule.If_MICP("./InputFiles/FUS_FUSECFG_C2X.SetPoints.json","./InputFiles/FUS_FUSECFG_C1X.SetPoints.json");
+    RegEx = "[gdx].......C........_.._......._(N...HC|....AF|....AH)......._...C................*";
+    SetPoint = FUS_FUSECFG_CKX::FUS_FUSECFG_CKX.PKG_DF_SETPOINT;
+}
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_DIRECT_ALL_EXE_X1_CPU1
+{
+    BypassPort = __shared__::TpRule.If_MICP(-1,1);
+    ConfigurationFile = __shared__::TpRule.If_MICP("./InputFiles/FUS_FUSECFG_C2X.SetPoints.json","./InputFiles/FUS_FUSECFG_C1X.SetPoints.json");
+    RegEx = "[gdx].......C........_.._......._(N...HB|....AF|....AH)......._...C................*";
+    SetPoint = __shared__::TpRule.If_S52_S52CB_DNL52CB("DIRECT_FUSES_CONFIG_RATIO1_S52C_CPU1","DIRECT_FUSES_CONFIG_RATIO1_S52CB_CPU1","DIRECT_FUSES_CONFIG_RATIO1_DNL_S52CB_CPU1","DIRECT_FUSES_CONFIG_RATIO1_S52C_CPU");
+}
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_VIRTUAL_ALL_EXE_X1
+{
+    BypassPort = -1;
+    ConfigurationFile = __shared__::TpRule.If_MICP("./InputFiles/FUS_FUSECFG_C2X.SetPoints.json","./InputFiles/FUS_FUSECFG_C1X.SetPoints.json");
+    RegEx = "[gdx].......C........_.._......._(N...HC|....AF|....AH)......._...C................*";
+    SetPoint = FUS_FUSECFG_CKX::FUS_FUSECFG_CKX.PKG_VF_SETPOINT;
+}
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_VIRTUAL_ALL_EXE_X1_CPU1
+{
+    BypassPort = __shared__::TpRule.If_MICP(-1,1);
+    ConfigurationFile = __shared__::TpRule.If_MICP("./InputFiles/FUS_FUSECFG_C2X.SetPoints.json","./InputFiles/FUS_FUSECFG_C1X.SetPoints.json");
+    RegEx = "[gdx].......C........_.._......._(N...HB|....AF|....AH)......._...C................*";
+    SetPoint = __shared__::TpRule.If_S52_S52CB_DNL52CB("VIRTUAL_FUSES_CONFIG_RATIO1_S52C_CPU1","VIRTUAL_FUSES_CONFIG_RATIO1_S52CB_CPU1","VIRTUAL_FUSES_CONFIG_RATIO1_DNL_S52CB_CPU1","VIRTUAL_FUSES_CONFIG_RATIO1_S52C_CPU1");
+}
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_RESET_ALL_EXE_X1
+{
+    BypassPort = -1;
+    ConfigurationFile = __shared__::TpRule.If_MICP("./InputFiles/FUS_FUSECFG_C2X.SetPoints.json","./InputFiles/FUS_FUSECFG_C1X.SetPoints.json");
+    RegEx = "[gdx].......C........_.._......._(N...HC|.....AF|....AH)......._...C................*";
+    SetPoint = FUS_FUSECFG_CKX::FUS_FUSECFG_CKX.PKG_RF_SETPOINT;
+}
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_RESET_ALL_EXE_X1_CPU1
+{
+    BypassPort = __shared__::TpRule.If_MICP(-1,1);
+    ConfigurationFile = __shared__::TpRule.If_MICP("./InputFiles/FUS_FUSECFG_C2X.SetPoints.json","./InputFiles/FUS_FUSECFG_C1X.SetPoints.json");
+    RegEx = "[gdx].......C........_.._......._(N...HB|.....AF|....AH)......._...C................*";
+    SetPoint = __shared__::TpRule.If_S52_S52CB_DNL52CB("RESET_FUSES_CONFIG_RATIO1_S52C_CPU1","RESET_FUSES_CONFIG_RATIO1_S52CB_CPU1","RESET_FUSES_CONFIG_RATIO1_DNL_S52CB_CPU1","RESET_FUSES_CONFIG_RATIO1_S52C_CPU1");
+}
+
+CSharpTest PrimeVirtualFuseExportToSharedStorageTestMethod FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS
+{
+    BypassPort = -1;
+    FdsSharedStorageKey = "CPU0_FUSE_EMB_VFDM_FDS_BINARY";
+    FuseDataGap = "CPU0.VF_Heap_Data_Gap.VF_Heap_Data_Gap";
+    FuseDescriptorGap = "CPU0.VF_Heap_Descriptor_Gap.VF_Heap_Descriptor_Gap";
+    HcsSharedStorageKey = "CPU0_FUSE_EMB_VFDM_HCS_BINARY";
+    Namespace = "CPU0";
+    Tags = "";
+}
+
+CSharpTest PrimeVirtualFuseExportToSharedStorageTestMethod FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS_CPU1
+{
+    BypassPort = __shared__::TpRule.If_MICP(-1,1);
+    FdsSharedStorageKey = "CPU1_FUSE_EMB_VFDM_FDS_BINARY";
+    FuseDataGap = "CPU1.VF_Heap_Data_Gap.VF_Heap_Data_Gap";
+    FuseDescriptorGap = "CPU1.VF_Heap_Descriptor_Gap.VF_Heap_Descriptor_Gap";
+    HcsSharedStorageKey = "CPU1_FUSE_EMB_VFDM_HCS_BINARY";
+    Namespace = "CPU1";
+    Tags = "";
+}
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_RESET_X1
+{
+    BypassPort = -1;
+    ConfigurationFile = __shared__::TpRule.If_MICP("./InputFiles/FUS_FUSECFG_C2X.SetPoints.json","./InputFiles/FUS_FUSECFG_C1X.SetPoints.json");
+    RegEx = "[gdx].......C........_.._......._(N...HC|....AF|....AH)......._...C................*";
+    SetPoint = FUS_FUSECFG_CKX::FUS_FUSECFG_CKX.PKG_RF_SETPOINT;
+}
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_RESET_X1_CPU1
+{
+    BypassPort = __shared__::TpRule.If_MICP(-1,1);
+    ConfigurationFile = __shared__::TpRule.If_MICP("./InputFiles/FUS_FUSECFG_C2X.SetPoints.json","./InputFiles/FUS_FUSECFG_C1X.SetPoints.json");
+    RegEx = "[gdx].......C........_.._......._(N...HB|....AF|....AH)......._...C................*";
+    SetPoint = __shared__::TpRule.If_S52_S52CB_DNL52CB("RESET_FUSES_CONFIG_RATIO1_S52C_CPU1","RESET_FUSES_CONFIG_RATIO1_S52CB_CPU1","RESET_FUSES_CONFIG_RATIO1_DNL_S52CB_CPU1","RESET_FUSES_CONFIG_RATIO1_S52C_CPU1");
+}
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_VFDM
+{
+    BypassPort = -1;
+    ConfigurationFile = GetEnvironmentVariable("FUSE_ROOT_DIR_CPU")+"./CSP/array_repair_perunit.PatConfigSetpoints.json";
+    RegEx = "[gdx].......C........_.._......._(N...HC|....AF|....AH)......._...C................*";
+    SetPoint = "CPU0_APPLY_VFDM";
+}
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_VFDM_CPU1
+{
+    BypassPort = __shared__::TpRule.If_MICP(-1,1);
+    ConfigurationFile = GetEnvironmentVariable("FUSE_ROOT_DIR_CPU")+"./CSP/array_repair_perunit.PatConfigSetpoints.json";
+    RegEx = "[gdx].......C........_.._......._(N...HB|....AF|....AH)......._...C................*";
+    SetPoint = "CPU1_APPLY_VFDM";
+}
+
+Flow FUS_FUSECFG_CKX_INIT
+{
+    FlowItem FUSE_X_SCREENTC_K_INIT_X_X_X_X_PKGSETPOINT_SETUP FUSE_X_SCREENTC_K_INIT_X_X_X_X_PKGSETPOINT_SETUP
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312300_fail_FUS_FUSECFG_CKX_FUSE_X_SCREENTC_K_INIT_X_X_X_X_PKGSETPOINT_SETUP_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312300_fail_FUS_FUSECFG_CKX_FUSE_X_SCREENTC_K_INIT_X_X_X_X_PKGSETPOINT_SETUP_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_DIRECT_ALL_EXE_X1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 6
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 7
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 8
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 9
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 10
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_DIRECT_ALL_EXE_X1 FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_DIRECT_ALL_EXE_X1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312116_fail_FUS_FUSECFG_CKX_FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_DIRECT_ALL_EXE_X1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312116_fail_FUS_FUSECFG_CKX_FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_DIRECT_ALL_EXE_X1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_DIRECT_ALL_EXE_X1_CPU1;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_DIRECT_ALL_EXE_X1_CPU1 FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_DIRECT_ALL_EXE_X1_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312118_fail_FUS_FUSECFG_CKX_FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_DIRECT_ALL_EXE_X1_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312118_fail_FUS_FUSECFG_CKX_FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_DIRECT_ALL_EXE_X1_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_VIRTUAL_ALL_EXE_X1;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_VIRTUAL_ALL_EXE_X1 FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_VIRTUAL_ALL_EXE_X1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312122_fail_FUS_FUSECFG_CKX_FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_VIRTUAL_ALL_EXE_X1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312122_fail_FUS_FUSECFG_CKX_FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_VIRTUAL_ALL_EXE_X1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_VIRTUAL_ALL_EXE_X1_CPU1;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_VIRTUAL_ALL_EXE_X1_CPU1 FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_VIRTUAL_ALL_EXE_X1_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312124_fail_FUS_FUSECFG_CKX_FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_VIRTUAL_ALL_EXE_X1_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312124_fail_FUS_FUSECFG_CKX_FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_VIRTUAL_ALL_EXE_X1_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_RESET_ALL_EXE_X1;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_RESET_ALL_EXE_X1 FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_RESET_ALL_EXE_X1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312119_fail_FUS_FUSECFG_CKX_FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_RESET_ALL_EXE_X1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312119_fail_FUS_FUSECFG_CKX_FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_RESET_ALL_EXE_X1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_RESET_ALL_EXE_X1_CPU1;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_RESET_ALL_EXE_X1_CPU1 FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_RESET_ALL_EXE_X1_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312121_fail_FUS_FUSECFG_CKX_FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_RESET_ALL_EXE_X1_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312121_fail_FUS_FUSECFG_CKX_FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_RESET_ALL_EXE_X1_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow VFDM
+{
+    FlowItem FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312223_fail_FUS_FUSECFG_CKX_FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312223_fail_FUS_FUSECFG_CKX_FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31462020_fail_FUS_FUSECFG_CKX_FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS_0;
+            IncrementCounters FUS_FUSECFG_CKX::n31462020_fail_FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS_CPU1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31462021_fail_FUS_FUSECFG_CKX_FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS_2;
+            IncrementCounters FUS_FUSECFG_CKX::n31462021_fail_FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b31462022_fail_FUS_FUSECFG_CKX_FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS_3;
+            IncrementCounters FUS_FUSECFG_CKX::n31462022_fail_FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS_3;
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS_CPU1 FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312224_fail_FUS_FUSECFG_CKX_FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312224_fail_FUS_FUSECFG_CKX_FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31462023_fail_FUS_FUSECFG_CKX_FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS_CPU1_0;
+            IncrementCounters FUS_FUSECFG_CKX::n31462023_fail_FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS_CPU1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31462024_fail_FUS_FUSECFG_CKX_FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS_CPU1_2;
+            IncrementCounters FUS_FUSECFG_CKX::n31462024_fail_FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS_CPU1_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b31462025_fail_FUS_FUSECFG_CKX_FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS_CPU1_3;
+            IncrementCounters FUS_FUSECFG_CKX::n31462025_fail_FUSE_X_UF_K_STARTCPUPATMODSPKG_X_X_X_X_SET_HCS_FDS_CPU1_3;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow FUS_FUSECFG_CKX_STARTCPUPATMODSPKG
+{
+    FlowItem VFDM VFDM
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_RESET_X1;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_RESET_X1 FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_RESET_X1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312132_fail_FUS_FUSECFG_CKX_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_RESET_X1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312132_fail_FUS_FUSECFG_CKX_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_RESET_X1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31472020_fail_FUS_FUSECFG_CKX_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_RESET_X1_0;
+            IncrementCounters FUS_FUSECFG_CKX::n31472020_fail_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_RESET_X1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_RESET_X1_CPU1;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_RESET_X1_CPU1 FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_RESET_X1_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312133_fail_FUS_FUSECFG_CKX_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_RESET_X1_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312133_fail_FUS_FUSECFG_CKX_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_RESET_X1_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31472024_fail_FUS_FUSECFG_CKX_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_RESET_X1_CPU1_0;
+            IncrementCounters FUS_FUSECFG_CKX::n31472024_fail_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_RESET_X1_CPU1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_VFDM;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_VFDM FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_VFDM
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312134_fail_FUS_FUSECFG_CKX_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_VFDM_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312134_fail_FUS_FUSECFG_CKX_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_VFDM_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31472021_fail_FUS_FUSECFG_CKX_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_VFDM_0;
+            IncrementCounters FUS_FUSECFG_CKX::n31472021_fail_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_VFDM_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_VFDM_CPU1;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_VFDM_CPU1 FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_VFDM_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312135_fail_FUS_FUSECFG_CKX_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_VFDM_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312135_fail_FUS_FUSECFG_CKX_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_VFDM_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31472022_fail_FUS_FUSECFG_CKX_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_VFDM_CPU1_0;
+            IncrementCounters FUS_FUSECFG_CKX::n31472022_fail_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_CLEAR_PERUNIT_VFDM_CPU1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}

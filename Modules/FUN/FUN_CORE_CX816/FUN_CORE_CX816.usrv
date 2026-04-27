@@ -1,0 +1,120 @@
+Version 1.0;
+
+SelectorRuleCollection FUN_CORE_CX816_Rules
+{
+	SelectorRule If_PHMHOT(yes, no) ####By Testing Condition + Temperature####
+	{
+	yes => (contains(__shared__::LocationSets.PHMHOT, "[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.FH_ENG,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]"));
+	no;
+	}
+
+}
+
+##LocationSets
+##Const String FH_ENG = "[6233:CLASSHOT]";
+
+UserVars FUN_CORE_CX816_Specs
+{
+	Const Integer FailCaptureCount = 1;
+	Const Integer FailCaptureCount_DRG_IS = 12;
+	Const Integer FailCaptureCount_Stagger = 12;
+	Const Double StepSize = 0.01;
+	Const String PatNameIndex = "9,10,11,12,13,14,15";
+	Const String corefreq = "corefreq:0.8GHz,MCfun:funcore_corefreq";
+	Const String ringfreq = "ringfreq_0";
+	Const String dtsconfig = "ALL";
+	Const String dtsconfig_hx28c = "ALL_CDIE_S28C_N2P";
+	Const String dtsconfig_s28cn2p = "ALL_CDIE_S28C_N2P";
+	Const String dtsconfig_s52c = "ALL_CDIE_S52C";
+	Const String dtsconfig_ctv = "ALL_CDIE_S28C";
+	Const String dtsconfig_noctv = "ALL_CDIE_S28C";
+	Const String PinMap_FREQ_NONMISR = "FUNCORE_NONMISR_FREQ_PM";
+	Const String PinMap_FREQ_MISR = "FUNCORE_MISR_FREQ_PM";
+	Array<String> Apex_Multipass = ["1100","0011"];
+	Const String VoltageConverter_NBLRail = "--dlvrpins VCCIA --railconfigurations CDIE_CORE_NBLCTRL0 CDIE_CORE_NBLCTRL1 CDIE_CORE_NBLCTRL2 CDIE_CORE_NBLCTRL3 --expressions ";
+	Const String VoltageConverter_NBLRail_NoExp = "--dlvrpins VCCIA --railconfigurations CDIE_CORE_NBLCTRL0 CDIE_CORE_NBLCTRL1 CDIE_CORE_NBLCTRL2 CDIE_CORE_NBLCTRL3";
+	Const String VoltageConverter_NBLRailCCF = " --dlvrpins VCCIA --railconfigurations CDIE_CCF_POWERMUX CDIE_CORE_NBLCTRL0 CDIE_CORE_NBLCTRL1 CDIE_CORE_NBLCTRL2 CDIE_CORE_NBLCTRL3 --expressions ";
+	Const String CORE_RecoveryMode_MTT = "Default";
+	Const String CORE_RecoveryMode_NoRec = "NoRecovery";
+	Const String MultiPass = "1100,0011";
+	Const String MultiPass_2CDIE = "11001100,00110011";
+	Const String MCfun_FMIN_MASK_CR = "MCfun:FUNCORE_DRV:FUNCORE_MASK";
+	Const String MCfun_FMIN_UNMASK_CR = "MCfun:FUNCORE_DRV:FUNCORE_UNMASK";
+	Const String InitialMaskEnM0M1 = "0000";
+	Const String InitialMaskEnM2M3 = "0011";
+	Const String FMIN_FF_VMINRESULTS = "SBFT_MLC_CR3_FMIN_FF_SEARCH,SBFT_MLC_CR2_FMIN_FF_SEARCH,SBFT_MLC_CR1_FMIN_FF_SEARCH,SBFT_MLC_CR0_FMIN_FF_SEARCH";
+	Const String VoltageTarget1C = "CORE3,CORE2,CORE1,CORE0";
+	Const String VoltageTarget2C = "CORE3_1,CORE2_1,CORE1_1,CORE0_1,CORE3,CORE2,CORE1,CORE0";
+	Const String CDIE0_Recovery_Tracking = "CR";
+	Const String CDIE1_CDIE0_Recovery_Tracking = "CR_B,CR";
+	Const String FeatureSwitchSettings = "disable_masked_targets,print_per_target_increments,print_scoreboard_counters,fivr_mode_on";
+	Const String FeatureSwitchSettings_DRG_IS = "disable_masked_targets,print_per_target_increments,print_scoreboard_counters,fivr_mode_on";
+	#Const String FeatureSwitchSettings_DRG_IS = "disable_masked_targets,print_per_target_increments,print_scoreboard_counters,fivr_mode_on,start_on_first_fail_off";##
+	Const String FeatureSwitchSettings_CTV = "disable_masked_targets,print_per_target_increments,print_scoreboard_counters,fivr_mode_on,CapturedBitsPerPattern";
+	Const Double LTTC_LimitGB = 0.031;
+	String MLC_FMAX = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String MLC_LS_FMAX = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String MLC_DRG_FMAX = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String MLC_DRG_IMPACTSTUDY_FMAX = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String SLC_FMAX = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String SLC_DRG_FMAX = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String MLC_F7 = "RAGN_135,MCfun:StaggerMMSkip:Disable";
+	String MLC_LS_F7 = "RAGN_135,MCfun:StaggerMMSkip:Disable";
+	String MLC_DRG_F7 = "RAGN_705,MCfun:StaggerMMSkip:Disable";
+	String MLC_DRG_IMPACTSTUDY_F7 = "RAGN_705,MCfun:StaggerMMSkip:Disable";
+	String SLC_F7 = "RAGN_135,MCfun:StaggerMMSkip:Disable";
+	String SLC_DRG_F7 = "RAGN_705,MCfun:StaggerMMSkip:Disable";
+	String MLC_F6 = "RAGN_135,MCfun:StaggerMMSkip:Disable";
+	String MLC_LS_F6 = "RAGN_135,MCfun:StaggerMMSkip:Disable";
+	String MLC_DRG_F6 = "RAGN_835,MCfun:StaggerMMSkip:Disable";
+	String MLC_DRG_IMPACTSTUDY_F6 = "RAGN_835,MCfun:StaggerMMSkip:Disable";
+	String SLC_F6 = "RAGN_135,MCfun:StaggerMMSkip:Disable";
+	String SLC_DRG_F6 = "RAGN_835,MCfun:StaggerMMSkip:Disable";
+	String MLC_F5 = "RAGN_135,MCfun:StaggerMMSkip:Disable";
+	String MLC_LS_F5 = "RAGN_135,MCfun:StaggerMMSkip:Disable";
+	String MLC_DRG_F5 = "RAGN_1035,MCfun:StaggerMMSkip:Disable";
+	String MLC_DRG_IMPACTSTUDY_F5 = "RAGN_1035,MCfun:StaggerMMSkip:Disable";
+	String SLC_F5 = "RAGN_135,MCfun:StaggerMMSkip:Disable";
+	String SLC_DRG_F5 = "RAGN_1035,MCfun:StaggerMMSkip:Disable";
+	String MLC_F4 = "RAGN_135,MCfun:StaggerMMSkip:Disable";
+	String MLC_LS_F4 = "RAGN_135,MCfun:StaggerMMSkip:Disable";
+	String MLC_DRG_F4 = "RAGN_1035,MCfun:StaggerMMSkip:Disable";
+	String MLC_DRG_IMPACTSTUDY_F4 = "RAGN_1035,MCfun:StaggerMMSkip:Disable";
+	String SLC_F4 = "RAGN_135,MCfun:StaggerMMSkip:Disable";
+	String SLC_DRG_F4 = "RAGN_1035,MCfun:StaggerMMSkip:Disable";
+	String MLC_F3 = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String MLC_LS_F3 = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String MLC_LS_MISR_F3 = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String MLC_DRG_F3 = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String MLC_DRG_IMPACTSTUDY_F3 = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String SLC_F3 = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String SLC_DRG_F3 = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String MLC_F2 = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String MLC_LS_F2 = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String MLC_DRG_F2 = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String MLC_DRG_IMPACTSTUDY_F2 = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String SLC_F2 = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String SLC_DRG_F2 = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String MLC_F1 = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String MLC_LS_F1 = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String MLC_LS_MISR_F1 = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String MLC_DRG_F1 = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String MLC_DRG_IMPACTSTUDY_F1 = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String SLC_F1 = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String SLC_DRG_F1 = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String MLC_FMIN = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String MLC_LS_FMIN = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String MLC_DRG_FMIN = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String MLC_DRG_IMPACTSTUDY_FMIN = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String SLC_FMIN = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String SLC_DRG_FMIN = "RAGN_1,MCfun:StaggerMMSkip:Enable";
+	String DEDC_F1 = "RAGN_705,MCfun:StaggerMMSkip:Disable";
+
+	Array<String> MLC_C5 =		["RAGN_135,MCfun:StaggerMMSkip:Disable","RAGN_135,MCfun:StaggerMMSkip:Disable","RAGN_135,MCfun:StaggerMMSkip:Disable"];
+	Array<String> MLC_LS_C5 =	["RAGN_135,MCfun:StaggerMMSkip:Disable","RAGN_135,MCfun:StaggerMMSkip:Disable","RAGN_135,MCfun:StaggerMMSkip:Disable"];
+	Array<String> MLC_DRG_C5 =	["RAGN_705,MCfun:StaggerMMSkip:Disable","RAGN_835,MCfun:StaggerMMSkip:Disable","RAGN_1035,MCfun:StaggerMMSkip:Disable"];
+	Array<String> MLC_DRG_IMPACTSTUDY_C5 =	["RAGN_705,MCfun:StaggerMMSkip:Disable","RAGN_705,MCfun:StaggerMMSkip:Disable","RAGN_705,MCfun:StaggerMMSkip:Disable"];
+	Array<String> SLC_C5 =		["RAGN_135,MCfun:StaggerMMSkip:Disable","RAGN_135,MCfun:StaggerMMSkip:Disable","RAGN_135,MCfun:StaggerMMSkip:Disable"];
+	Array<String> SLC_DRG_C5 =	["RAGN_705,MCfun:StaggerMMSkip:Disable","RAGN_835,MCfun:StaggerMMSkip:Disable","RAGN_1035,MCfun:StaggerMMSkip:Disable"];
+}
+

@@ -1,0 +1,734 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan DRV_RESET_XXX;
+
+Counters
+{
+    n19970000_fail_RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2G_0,
+    n19980000_fail_RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2C_0,
+    n19980001_fail_RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2C1_0,
+    n19990000_fail_RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2P_0,
+    n19900000_fail_RESET_X_PATMOD_X_BEGIN_X_X_X_X_D2DPATMODS_0,
+    n19900001_fail_RESET_X_PATMOD_X_LTTCCOMMON_X_X_X_X_D2DPATMODS_0,
+    n19900002_fail_FBIST_X_SCREEN_E_BEGIN_X_X_X_X_DIESLCT_0,
+    n19900003_fail_FBIST_X_SCREEN_E_PKGFF_X_X_X_X_DIESLCT_0,
+	n19900004_fail_RESET_X_SCREEN_E_BEGIN_X_X_X_X_D2DPATMODS_0,
+	n19900005_fail_RESET_X_SCREEN_E_LTTCCOMMON_X_X_X_X_D2DPATMODS_0,
+	n19590001_fail_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2G_H_0,
+	n19590004_fail_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2P_H_0,
+	n19590002_fail_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C_H_0,
+	n19590003_fail_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C1_H_0,
+	n19790001_fail_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2P_P_0,
+	n19390001_fail_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2G_G_0,
+	n19190001_fail_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C_C_0,
+	n19190002_fail_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C1_C1_0
+} 
+
+CSharpTest DDGFunctionalTC RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2G
+{
+    Patlist = "resetplb_fbist_h2g_hvm_list";
+    LevelsTc = "BASE::d2d_bf_x_x_pkg_lvl_nom";
+    TimingsTc = "BASE::d2d_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+    FailuresToCapturePerPattern = 10;
+    FailuresToCaptureTotal = 10;
+    MaxFailuresPerPatternToItuff = 10;
+    MaxFailuresToItuff = 10;
+} 
+
+CSharpTest DDGFunctionalTC RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2C
+{
+    Patlist = "resetplb_fbist_h2c_hvm_list";
+    LevelsTc = "BASE::d2d_bf_x_x_pkg_lvl_nom";
+    TimingsTc = "BASE::d2d_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+    FailuresToCapturePerPattern = 10;
+    FailuresToCaptureTotal = 10;
+    MaxFailuresPerPatternToItuff = 10;
+    MaxFailuresToItuff = 10;
+} 
+
+CSharpTest DDGFunctionalTC RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2P
+{
+    Patlist = "resetplb_fbist_h2p_hvm_list";
+    LevelsTc = __shared__::TpRule.If_M_PKGs("BASE::d2d_H_bf_x_x_pkg_lvl_nom","BASE::d2d_bf_x_x_pkg_lvl_nom");
+    TimingsTc = "BASE::d2d_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+    FailuresToCapturePerPattern = 10;
+    FailuresToCaptureTotal = 10;
+    MaxFailuresPerPatternToItuff = 10;
+    MaxFailuresToItuff = 10;
+} 
+
+CSharpTest DDGFunctionalTC RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2G_H
+{
+    Patlist = "resetplb_fbist_h2g_nvlhub_hvm_list";
+    LevelsTc = "BASE::d2d_bf_x_x_pkg_lvl_nom";
+    TimingsTc = "BASE::d2d_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+    FailuresToCapturePerPattern = 10;
+    FailuresToCaptureTotal = 10;
+    MaxFailuresPerPatternToItuff = 10;
+    MaxFailuresToItuff = 10;
+} 
+
+CSharpTest DDGFunctionalTC RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C_H
+{
+    Patlist = "resetplb_fbist_h2c_nvlhub_hvm_list";
+    LevelsTc = "BASE::d2d_bf_x_x_pkg_lvl_nom";
+    TimingsTc = "BASE::d2d_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+    FailuresToCapturePerPattern = 10;
+    FailuresToCaptureTotal = 10;
+    MaxFailuresPerPatternToItuff = 10;
+    MaxFailuresToItuff = 10;
+} 
+
+CSharpTest DDGFunctionalTC RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2P_H
+{
+    Patlist = "resetplb_fbist_h2p_nvlhub_hvm_list";
+    LevelsTc = "BASE::d2d_bf_x_x_pkg_lvl_nom";
+    TimingsTc = "BASE::d2d_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+    FailuresToCapturePerPattern = 10;
+    FailuresToCaptureTotal = 10;
+    MaxFailuresPerPatternToItuff = 10;
+    MaxFailuresToItuff = 10;
+} 
+
+CSharpTest DDGFunctionalTC RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2C1
+{
+    Patlist = "resetplb_fbist_h2c1_hvm_list";
+    LevelsTc = "BASE::d2d_bf_x_x_pkg_lvl_nom";
+    TimingsTc = "BASE::d2d_dual_timing_mts100_tstprtclk50_tck100";
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(-1,1);
+    FailuresToCapturePerPattern = 10;
+    FailuresToCaptureTotal = 10;
+    MaxFailuresPerPatternToItuff = 10;
+    MaxFailuresToItuff = 10;
+} 
+
+CSharpTest DDGFunctionalTC RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C1_H
+{
+    Patlist = "resetplb_fbist_h2c1_nvlhub_hvm_list";
+    LevelsTc = "BASE::d2d_bf_x_x_pkg_lvl_nom";
+    TimingsTc = "BASE::d2d_dual_timing_mts100_tstprtclk50_tck100";
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(-1,1);
+    FailuresToCapturePerPattern = 10;
+    FailuresToCaptureTotal = 10;
+    MaxFailuresPerPatternToItuff = 10;
+    MaxFailuresToItuff = 10;
+}
+
+CSharpTest ScreenTC FBIST_X_SCREEN_E_BEGIN_X_X_X_X_DIESLCT #screen test to bypass DRV FBIST module when DIE_SLCT != "NA"
+{
+	BypassPort = -1;
+	ScreenTestSet = "SC_DIESLCT";
+	ScreenTestsFile = "./InputFiles/D2D_DIESLCT.txt";
+}
+
+CSharpTest ScreenTC FBIST_X_SCREEN_E_PKGFF_X_X_X_X_DIESLCT #screen test to bypass DRV FBIST module when DIE_SLCT != "NA"
+{
+	BypassPort = -1;
+	ScreenTestSet = "SC_DIESLCT";
+	ScreenTestsFile = "./InputFiles/D2D_DIESLCT.txt";
+}
+
+CSharpTest PatConfigTC RESET_X_PATMOD_X_BEGIN_X_X_X_X_D2DPATMODS
+{
+    BypassPort = __shared__::TpRule.If_S28_S52_HX28_P16C_H16C_S16C_DS28C(__shared__::FlwSkpCollect.if_ahmt(1,-1),1,__shared__::FlwSkpCollect.if_ahmt(1,-1),1,1,1,__shared__::FlwSkpCollect.if_ahmt(1,-1),1);
+    InputFile = "./InputFiles/d2d_patconfigs.json";
+    Tags = "'CPU','GCD'";
+}
+
+CSharpTest PatConfigTC RESET_X_PATMOD_X_LTTCCOMMON_X_X_X_X_D2DPATMODS
+{
+    BypassPort = __shared__::TpRule.If_S28_S52_HX28_P16C_H16C_S16C_DS28C(__shared__::FlwSkpCollect.if_ahmt(1,-1),1,__shared__::FlwSkpCollect.if_ahmt(1,-1),1,1,1,__shared__::FlwSkpCollect.if_ahmt(1,-1),1);
+    InputFile = "./InputFiles/d2d_patconfigs.json";
+    Tags = "'CPU','GCD'";
+}
+
+CSharpTest ScreenTC RESET_X_SCREEN_E_BEGIN_X_X_X_X_D2DPATMODS #screen test to bypass DRV FBIST module when DIE_SLCT != "NA"
+{
+	BypassPort = -1;
+	ScreenTestSet = "SC_DIESLCT";
+	ScreenTestsFile = "./InputFiles/D2D_DIESLCT.txt";
+}
+
+CSharpTest ScreenTC RESET_X_SCREEN_E_LTTCCOMMON_X_X_X_X_D2DPATMODS #screen test to bypass DRV FBIST module when DIE_SLCT != "NA"
+{
+	BypassPort = -1;
+	ScreenTestSet = "SC_DIESLCT";
+	ScreenTestsFile = "./InputFiles/D2D_DIESLCT.txt";
+} 
+
+CSharpTest DDGFunctionalTC RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2P_P
+{
+    Patlist = "resetplb_fbist_h2p_nvlpch_hvm_static_list";
+    LevelsTc = __shared__::TpRule.If_M_PKGs("BASE::d2d_H_bf_x_x_pkg_lvl_nom","BASE::d2d_bf_x_x_pkg_lvl_nom");
+    TimingsTc = "BASE::d2d_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+    FailuresToCapturePerPattern = 10;
+    FailuresToCaptureTotal = 10;
+    MaxFailuresPerPatternToItuff = 10;
+    MaxFailuresToItuff = 10;
+} 
+
+CSharpTest DDGFunctionalTC RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2G_G
+{
+    Patlist = "resetplb_fbist_h2g_nvlgcd_hvm_list";
+    LevelsTc = "BASE::d2d_bf_x_x_pkg_lvl_nom";
+    TimingsTc = "BASE::d2d_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+    FailuresToCapturePerPattern = 10;
+    FailuresToCaptureTotal = 10;
+    MaxFailuresPerPatternToItuff = 10;
+    MaxFailuresToItuff = 10;
+} 
+
+CSharpTest DDGFunctionalTC RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C_C
+{
+    Patlist = "resetplb_fbist_h2c_nvlcpu_hvm_list";
+    LevelsTc = "BASE::d2d_bf_x_x_pkg_lvl_nom";
+    TimingsTc = "BASE::d2d_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+    FailuresToCapturePerPattern = 10;
+    FailuresToCaptureTotal = 10;
+    MaxFailuresPerPatternToItuff = 10;
+    MaxFailuresToItuff = 10;
+} 
+
+CSharpTest DDGFunctionalTC RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C1_C1
+{
+    Patlist = "resetplb_fbist_h2c1_nvlcpu_hvm_list";
+    LevelsTc = "BASE::d2d_bf_x_x_pkg_lvl_nom";
+    TimingsTc = "BASE::d2d_dual_timing_mts100_tstprtclk50_tck100";
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(-1,1);
+    FailuresToCapturePerPattern = 10;
+    FailuresToCaptureTotal = 10;
+    MaxFailuresPerPatternToItuff = 10;
+    MaxFailuresToItuff = 10;
+}
+
+
+Flow DRV_RESET_XXX_BEGIN
+{
+    FlowItem FBIST_X_SCREEN_E_BEGIN_X_X_X_X_DIESLCT FBIST_X_SCREEN_E_BEGIN_X_X_X_X_DIESLCT @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99190011_fail_DRV_RESET_XXX_FBIST_X_SCREEN_E_BEGIN_X_X_X_X_DIESLCT_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98190010_fail_DRV_RESET_XXX_FBIST_X_SCREEN_E_BEGIN_X_X_X_X_DIESLCT_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters DRV_RESET_XXX::n19900002_fail_FBIST_X_SCREEN_E_BEGIN_X_X_X_X_DIESLCT_0;
+			GoTo RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2G;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Pass";
+			GoTo RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2G;
+		}
+	}
+    FlowItem RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2G RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2G
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99190002_fail_DRV_RESET_XXX_RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2G_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98190002_fail_DRV_RESET_XXX_RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2G_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b19970000_fail_DRV_RESET_XXX_RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2G_0;
+            IncrementCounters DRV_RESET_XXX::n19970000_fail_RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2G_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2C;
+        }
+    }
+    FlowItem RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2C RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2C
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99190000_fail_DRV_RESET_XXX_RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2C_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98190000_fail_DRV_RESET_XXX_RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2C_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b19980000_fail_DRV_RESET_XXX_RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2C_0;
+            IncrementCounters DRV_RESET_XXX::n19980000_fail_RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2C_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2C1;
+        }
+    }
+    FlowItem RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2P RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2P
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99190003_fail_DRV_RESET_XXX_RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2P_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98190003_fail_DRV_RESET_XXX_RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2P_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b19990000_fail_DRV_RESET_XXX_RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2P_0;
+            IncrementCounters DRV_RESET_XXX::n19990000_fail_RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2P_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    FlowItem RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2C1 RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2C1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99190001_fail_DRV_RESET_XXX_RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2C1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98190001_fail_DRV_RESET_XXX_RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2C1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b19980001_fail_DRV_RESET_XXX_RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2C1_0;
+            IncrementCounters DRV_RESET_XXX::n19980001_fail_RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2C1_0;
+			Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo RESET_X_FUNC_K_BEGIN_X_X_X_X_FBIST_H2P;
+        }
+    }
+
+}
+
+Flow DRV_RESET_XXX_D2DPATMODS_BEGIN
+{
+    FlowItem RESET_X_SCREEN_E_BEGIN_X_X_X_X_D2DPATMODS RESET_X_SCREEN_E_BEGIN_X_X_X_X_D2DPATMODS @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99190014_fail_DRV_RESET_XXX_RESET_X_SCREEN_E_BEGIN_X_X_X_X_D2DPATMODS_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98190015_fail_DRV_RESET_XXX_RESET_X_SCREEN_E_BEGIN_X_X_X_X_D2DPATMODS_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters DRV_RESET_XXX::n19900004_fail_RESET_X_SCREEN_E_BEGIN_X_X_X_X_D2DPATMODS_0;
+			GoTo RESET_X_PATMOD_X_BEGIN_X_X_X_X_D2DPATMODS;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Pass";
+			GoTo RESET_X_PATMOD_X_BEGIN_X_X_X_X_D2DPATMODS;
+		}
+	}
+    FlowItem RESET_X_PATMOD_X_BEGIN_X_X_X_X_D2DPATMODS RESET_X_PATMOD_X_BEGIN_X_X_X_X_D2DPATMODS
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99190008_fail_DRV_RESET_XXX_RESET_X_PATMOD_X_BEGIN_X_X_X_X_D2DPATMODS_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98190008_fail_DRV_RESET_XXX_RESET_X_PATMOD_X_BEGIN_X_X_X_X_D2DPATMODS_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b19900000_fail_DRV_RESET_XXX_RESET_X_PATMOD_X_BEGIN_X_X_X_X_D2DPATMODS_0;
+            IncrementCounters DRV_RESET_XXX::n19900000_fail_RESET_X_PATMOD_X_BEGIN_X_X_X_X_D2DPATMODS_0;
+			Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+}
+
+Flow DRV_RESET_XXX_LTTCCOMMON
+{
+    FlowItem RESET_X_SCREEN_E_LTTCCOMMON_X_X_X_X_D2DPATMODS RESET_X_SCREEN_E_LTTCCOMMON_X_X_X_X_D2DPATMODS @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99190016_fail_DRV_RESET_XXX_RESET_X_SCREEN_E_LTTCCOMMON_X_X_X_X_D2DPATMODS_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98190017_fail_DRV_RESET_XXX_RESET_X_SCREEN_E_LTTCCOMMON_X_X_X_X_D2DPATMODS_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters DRV_RESET_XXX::n19900005_fail_RESET_X_SCREEN_E_LTTCCOMMON_X_X_X_X_D2DPATMODS_0;
+			GoTo RESET_X_PATMOD_X_LTTCCOMMON_X_X_X_X_D2DPATMODS;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Pass";
+			GoTo RESET_X_PATMOD_X_LTTCCOMMON_X_X_X_X_D2DPATMODS;
+		}
+	}
+    FlowItem RESET_X_PATMOD_X_LTTCCOMMON_X_X_X_X_D2DPATMODS RESET_X_PATMOD_X_LTTCCOMMON_X_X_X_X_D2DPATMODS
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99190009_fail_DRV_RESET_XXX_RESET_X_PATMOD_X_LTTCCOMMON_X_X_X_X_D2DPATMODS_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98190009_fail_DRV_RESET_XXX_RESET_X_PATMOD_X_LTTCCOMMON_X_X_X_X_D2DPATMODS_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b19900001_fail_DRV_RESET_XXX_RESET_X_PATMOD_X_LTTCCOMMON_X_X_X_X_D2DPATMODS_0;
+            IncrementCounters DRV_RESET_XXX::n19900001_fail_RESET_X_PATMOD_X_LTTCCOMMON_X_X_X_X_D2DPATMODS_0;
+			Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+}
+
+Flow DRV_RESET_XXX_PKGFF
+{
+    FlowItem FBIST_X_SCREEN_E_PKGFF_X_X_X_X_DIESLCT FBIST_X_SCREEN_E_PKGFF_X_X_X_X_DIESLCT @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99190013_fail_DRV_RESET_XXX_FBIST_X_SCREEN_E_PKGFF_X_X_X_X_DIESLCT_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98190012_fail_DRV_RESET_XXX_FBIST_X_SCREEN_E_PKGFF_X_X_X_X_DIESLCT_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters DRV_RESET_XXX::n19900003_fail_FBIST_X_SCREEN_E_PKGFF_X_X_X_X_DIESLCT_0;
+			GoTo RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2G_H;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Pass";
+			GoTo RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2G_H;
+		}
+	}
+    FlowItem RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2G_H RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2G_H
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99190006_fail_DRV_RESET_XXX_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2G_H_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98190006_fail_DRV_RESET_XXX_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2G_H_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b19590001_fail_DRV_RESET_XXX_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2G_H_0;
+            IncrementCounters DRV_RESET_XXX::n19590001_fail_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2G_H_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C_H;
+        }
+    }
+    FlowItem RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2P_H RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2P_H
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99190007_fail_DRV_RESET_XXX_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2P_H_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98190007_fail_DRV_RESET_XXX_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2P_H_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b19590004_fail_DRV_RESET_XXX_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2P_H_0;
+            IncrementCounters DRV_RESET_XXX::n19590004_fail_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2P_H_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2P_P;
+        }
+    }
+    FlowItem RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C_H RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C_H
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99190004_fail_DRV_RESET_XXX_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C_H_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98190004_fail_DRV_RESET_XXX_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C_H_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b19590002_fail_DRV_RESET_XXX_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C_H_0;
+            IncrementCounters DRV_RESET_XXX::n19590002_fail_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C_H_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C1_H;
+        }
+    }
+    FlowItem RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C1_H RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C1_H
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99190005_fail_DRV_RESET_XXX_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C1_H_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98190005_fail_DRV_RESET_XXX_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C1_H_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b19590003_fail_DRV_RESET_XXX_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C1_H_0;
+            IncrementCounters DRV_RESET_XXX::n19590003_fail_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C1_H_0;
+			Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2P_H;
+        }
+    }
+    FlowItem RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2P_P RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2P_P
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99190018_fail_DRV_RESET_XXX_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2P_P_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98190018_fail_DRV_RESET_XXX_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2P_P_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b19790001_fail_DRV_RESET_XXX_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2P_P_0;
+            IncrementCounters DRV_RESET_XXX::n19790001_fail_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2P_P_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2G_G;
+        }
+    }
+    FlowItem RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2G_G RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2G_G
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99190019_fail_DRV_RESET_XXX_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2G_G_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98190019_fail_DRV_RESET_XXX_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2G_G_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b19390001_fail_DRV_RESET_XXX_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2G_G_0;
+            IncrementCounters DRV_RESET_XXX::n19390001_fail_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2G_G_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C_C;
+        }
+    }
+    FlowItem RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C_C RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C_C
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99190020_fail_DRV_RESET_XXX_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C_C_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98190020_fail_DRV_RESET_XXX_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C_C_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b19190001_fail_DRV_RESET_XXX_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C_C_0;
+            IncrementCounters DRV_RESET_XXX::n19190001_fail_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C_C_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C1_C1;
+        }
+    }
+    FlowItem RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C1_C1 RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C1_C1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99190021_fail_DRV_RESET_XXX_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C1_C1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98190021_fail_DRV_RESET_XXX_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C1_C1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b19190002_fail_DRV_RESET_XXX_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C1_C1_0;
+            IncrementCounters DRV_RESET_XXX::n19190002_fail_RESET_X_FUNC_K_PKGFF_X_X_X_X_FBIST_H2C1_C1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+
+}

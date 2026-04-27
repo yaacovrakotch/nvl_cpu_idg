@@ -1,0 +1,414 @@
+name: AutoDailyRelease
+
+env:
+  CustomPath: "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe"
+  
+on:
+  workflow_dispatch: 
+    inputs:
+      sites:
+        description: 'Target Site or SKIP (Ex: JF or SKIP,JF)'
+        # Default value if no value is explicitly provided
+        default: 'JF'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      BOMGroups:
+        description: 'Target BOMGroups to build out'
+        type: choice
+        options: ['Class_NVL_S28C', 'Class_NVL_S52C', 'Class_NVL_HX28C', 'Class_NVL_P16C', 'Class_DNL_S28C', 'Class_NVL_H16C', 'Class_NVL_S16C', 'Class_NVL_UL6C', 'Class_NVL_U8C', 'Class_NVL_AX28C', 'Class_NVL_AX16C']
+        # Default value if no value is explicitly provided
+        default: 'Class_NVL_S28C'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      name:
+        description: 'MV_json_file or FULL (Dielet TP)'
+        # Default value if no value is explicitly provided
+        default: 'FULL'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      DieletBranches:
+        description: 'Branchname|tag|sha|none e.g.CPU;GCD;PCD;HUB'
+        # Default value if no value is explicitly provided
+        default: 'main;main;main;main'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      destination:
+        description: 'I:\ drive destination'
+        # Default value if no value is explicitly provided
+        default: 'I:\'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      acpy:
+        description: 'TPSwitch or ACPY:'
+        default: 'None'
+        required: false
+
+      previousTP:
+        description: 'For TPI: Enter previous TP to generate report. eg: 21F0A'
+        # Default value if no value is explicitly provided
+        default: 'None'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      cleantp:
+         description: 'check the box for cleantp. Default is true.'
+         type: boolean
+         default: true
+         required: false
+
+      bot_submission:
+        description: 'Check the box if you want to submit a job to BOT'
+        type: boolean
+        default: false
+        # Input has to be provided for the workflow to run
+        required: false
+
+      ExcelFilePath:
+        description: 'Please enter the path to the Excel file to submit VPO.'
+        default: 'None'
+        required: false
+
+      releaseNotes:
+        description: 'Enter release note file path to send a release note. Optional: Add email list path after semicolon (e.g., path/to/release.txt;path/to/emails.txt)'
+        default: 'None;None'  # Default: no release notes, no custom email list
+        required: false
+
+      submitter_email:
+        description: 'Enter ONE submitter email for releaseNotes email'
+        default: 'None'
+        required: false
+
+      tptorrent_input_file:
+        description: 'Tptorrent input file for tptorrent rulecheck or transfer.'
+        default: 'None'
+        required: false
+
+jobs:
+  # Determine which sites to run based on user input
+  DetermineSites:
+    runs-on: [self-hosted]
+    outputs:
+      skip_tpbuild: ${{ steps.parse_sites.outputs.skip_tpbuild }}
+      build_site: ${{ steps.parse_sites.outputs.build_site }}
+    steps:
+    - name: Parse Sites Input
+      id: parse_sites
+      shell: powershell
+      run: |
+        # Get the sites input
+        $sitesInput = "${{ github.event.inputs.sites }}"
+        Write-Host "Raw sites input: '$sitesInput'"
+        
+        # Initialize variables
+        $skipTPBuild = "false"
+        $build_site = "JF"
+        
+        # Split by comma and process each site
+        $siteArray = $sitesInput -split ',' | ForEach-Object { $_.Trim().ToUpper() }
+        
+        # Check if SKIP is present
+        $isSkipMode = $siteArray -contains "SKIP"
+        
+        if ($isSkipMode) {
+            $skipTPBuild = "true"
+            Write-Host "SKIP mode detected - TPBuild will be skipped for ALL sites"
+            
+            # Remove SKIP from array to process remaining sites
+            $siteArray = $siteArray | Where-Object { $_ -ne "SKIP" }
+            
+            # If no sites specified after SKIP, default to JF site for other workflows
+            if ($siteArray.Count -eq 0) {
+                $build_site = "JF"  # Default primary site
+                Write-Host "No sites specified after SKIP - default to JF site."
+            }
+            elseif ($siteArray.Count -eq 1) {
+                # Enable specified site for other workflows
+                $build_site = $siteArray
+                Write-Host "SKIP mode with site specified: $build_site"
+            }
+            else {
+                # Multiple sites specified with SKIP - this is an invalid configuration
+                Write-Host "Invalid configuration: Multiple sites specified with SKIP. Defaulting to the first site."
+                $build_site = $siteArray[0]
+            }
+        }
+        else {
+            # Normal mode - no SKIP
+            $skipTPBuild = "false"
+            
+            # Handle ALL case
+            if ($siteArray.Count -eq 1) {
+                $build_site = $siteArray
+                Write-Host "Site selected: $build_site"
+            }
+            else {
+                # More than one site is selected
+                Write-Host "Multiple sites selected - defaulting to the first site: $($siteArray[0])"
+                $build_site = $siteArray[0]
+            }
+        }
+        
+        # Output results to GitHub Actions
+        echo "skip_tpbuild=$skipTPBuild" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+        echo "build_site=$build_site" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+        
+        # Log final results
+        Write-Host "Skip TPBuild: $skipTPBuild"
+        Write-Host "Build Site: $build_site"
+
+  # JF Site Jobs
+  TP_BUILD:
+    needs: DetermineSites
+    if: ${{ needs.DetermineSites.outputs.skip_tpbuild == 'false' }}
+    runs-on:
+    - self-hosted
+    - checkers_${{ needs.DetermineSites.outputs.build_site }}
+
+    steps:
+    - name: Log Inputs
+      shell: powershell
+      run: |
+        Write-Host "Site: ${{ needs.DetermineSites.outputs.build_site }}"
+        Write-Host "Build Site: ${{ needs.DetermineSites.outputs.build_site }}"
+        $inputs = @'
+        ${{ toJSON(github.event.inputs) }}
+        '@
+        Write-Host "Inputs: $inputs"
+
+    - name: Parse Dielet Branches
+      id: parse_branches
+      shell: powershell
+      run: |
+        $inputBranches = "${{ github.event.inputs.DieletBranches }}"
+        Write-Host "Raw DieletBranches input: '$inputBranches'"
+        
+        # Handle both semicolon and line break separators
+        $branches = $inputBranches -split '[;\r\n]+' | Where-Object { $_.Trim() -ne '' }
+        Write-Host "Split branches: $($branches -join ', ')"
+        
+        $CPU_Branch = if ($branches[0]) { $branches[0].Trim() } else { "main" }
+        $GCD_Branch = if ($branches[1]) { $branches[1].Trim() } else { "main" }
+        $PCD_Branch = if ($branches[2]) { $branches[2].Trim() } else { "main" }
+        $HUB_Branch = if ($branches[3]) { $branches[3].Trim() } else { "main" }
+        
+        echo "CPU_Branch=$CPU_Branch" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+        echo "GCD_Branch=$GCD_Branch" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+        echo "PCD_Branch=$PCD_Branch" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+        echo "HUB_Branch=$HUB_Branch" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+        
+        Write-Host "Parsed branches: CPU=$CPU_Branch, GCD=$GCD_Branch, PCD=$PCD_Branch, HUB=$HUB_Branch"
+
+    - name: repo_init_check
+      continue-on-error: true
+      shell: powershell
+      run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/tprobot.py REPO_INIT main
+
+    - uses: actions/checkout@v6
+      with: 
+        fetch-depth: 0
+        clean: true              # remove untracked files before checkout
+        ref: ${{ github.event.pull_request.head.ref }}
+       
+    - name: Checkout submodules
+      shell: powershell
+      run: |
+        git submodule sync --recursive
+        git submodule update --init --recursive --force
+
+    - name: clone dielets
+      shell: powershell
+      run: python I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/nvl_buildtp.py ${{ github.event.inputs.BOMGroups }} -clone
+      env:
+         CPU_Branch: ${{ steps.parse_branches.outputs.CPU_Branch }}
+         GCD_Branch: ${{ steps.parse_branches.outputs.GCD_Branch }}
+         PCD_Branch: ${{ steps.parse_branches.outputs.PCD_Branch }}
+         HUB_Branch: ${{ steps.parse_branches.outputs.HUB_Branch }}
+
+    - name: TP Build
+      shell: powershell
+      run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/nvl_buildtp.py ${{ github.event.inputs.BOMGroups }} -flow -common -output ${{ github.event.inputs.destination }}
+      env:
+          PREVIOUSTP: ${{ github.event.inputs.previousTP }}
+          IN1: ${{ github.event.inputs.name }}
+          CLEANTP: ${{ github.event.inputs.cleantp }}
+          ACPY: ${{ github.event.inputs.acpy }}
+          CPU_Branch: ${{ steps.parse_branches.outputs.CPU_Branch }}
+          GCD_Branch: ${{ steps.parse_branches.outputs.GCD_Branch }}
+          PCD_Branch: ${{ steps.parse_branches.outputs.PCD_Branch }}
+          HUB_Branch: ${{ steps.parse_branches.outputs.HUB_Branch }}
+          IS_PR_COMMON: True
+          CURRENT_BRANCH: ${{ github.ref_name }}
+          DEST: ${{ github.event.inputs.destination }}
+
+    - name: Atomic_rev Check
+      shell: powershell
+      run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/atomic_rev_check.py ${{ github.event.inputs.BOMGroups }}
+      env:
+          BASE_REF: ${{ github.ref_name }}
+          GH_TOKEN: ${{ secrets.PAT_GH_CROSS_REPO }}
+          CPU_Branch: ${{ steps.parse_branches.outputs.CPU_Branch }}
+          GCD_Branch: ${{ steps.parse_branches.outputs.GCD_Branch }}
+          PCD_Branch: ${{ steps.parse_branches.outputs.PCD_Branch }}
+          HUB_Branch: ${{ steps.parse_branches.outputs.HUB_Branch }}
+          TP_OUTPUT_PATH: ${{ github.event.inputs.destination }}
+
+  # BotSubmission Jobs (separate jobs for each site, only primary runs)
+  BotSubmission:
+    needs: [DetermineSites, TP_BUILD]
+    if: |
+      always() && 
+      github.event.inputs.bot_submission == 'true' && 
+      (
+        (needs.DetermineSites.outputs.skip_tpbuild == 'false' && needs.TP_BUILD.result == 'success') ||
+        needs.DetermineSites.outputs.skip_tpbuild == 'true'
+      )
+    runs-on:
+    - self-hosted
+    - checkers_${{ needs.DetermineSites.outputs.build_site }}
+    steps:
+    - name: Log inputs
+      shell: powershell
+      run: |
+        Write-Host "Primary Site: ${{ needs.DetermineSites.outputs.build_site }}"
+        Write-Host "Bot Submission: ${{ github.event.inputs.bot_submission }}"
+        Write-Host "DirectoryPath: ${{ github.event.inputs.destination }}"
+        Write-Host "Skip TPBuild: ${{ needs.DetermineSites.outputs.skip_tpbuild }}"
+
+    - name: Bot run
+      shell: powershell
+      run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/runner_botos.py nvl2_mbot._ALL_.nvl_dielet
+      env:
+          DEST: ${{ github.event.inputs.destination }}
+          IN1: ASIS
+          TARGETBOM: ${{ github.event.inputs.BOMGroups }}
+
+  # SparkAutoSubmission Jobs (separate jobs for each site, only primary runs)
+  SparkAutoSubmission:
+    needs: [DetermineSites, TP_BUILD]
+    if: |
+      always() && 
+      github.event.inputs.ExcelFilePath != 'None' && 
+      (
+        (needs.DetermineSites.outputs.skip_tpbuild == 'false' && needs.TP_BUILD.result == 'success') ||
+        needs.DetermineSites.outputs.skip_tpbuild == 'true'
+      )
+    runs-on:
+    - self-hosted
+    - checkers_${{ needs.DetermineSites.outputs.build_site }}
+    steps:
+    - name: Log Inputs
+      shell: powershell
+      run: |
+        Write-Host "Primary Site: ${{ needs.DetermineSites.outputs.build_site }}"
+        Write-Host "ExcelFilePath: ${{ github.event.inputs.ExcelFilePath }}"
+        Write-Host "DirectoryPath: ${{ github.event.inputs.destination }}"
+        Write-Host "Skip TPBuild: ${{ needs.DetermineSites.outputs.skip_tpbuild }}"
+
+    - name: Run Spark Submission Script
+      shell: powershell
+      run: |
+        # Declare base path
+        $basepath = 'I:/tpvalidation/engtools/tptools/mtl/infra/torch/SparkAuto/PerProduct'
+
+        $scriptpath="I:/tpvalidation/engtools/tptools/mtl/beta/gen1/mod"
+        $bomGroupsClean = "${{ github.event.inputs.BOMGroups }}" -replace "^Class_", ""
+        $currentpath="$basepath/$bomGroupsClean/SPARK_SUBMISSION"
+
+        # Execute the Python script with the specified arguments
+        python -u "$scriptpath/sparkapi_autogen_submission.py" "${{ github.event.inputs.ExcelFilePath }}" "$currentpath" "$scriptpath" "${{ github.event.inputs.destination }}"
+      env:
+          AUTO_RELEASE_NOTE: ${{ github.event.inputs.releaseNotes }}
+          # SPARK_AUTO_USERNAME: ${{ secrets[format('{0}_SPARK_AUTO_USERNAME', needs.DetermineSites.outputs.build_site)] }}
+          # SPARK_AUTO_PASSWORD: ${{ secrets[format('{0}_SPARK_AUTO_PASSWORD', needs.DetermineSites.outputs.build_site)] }}
+          SPARK_AUTO_USERNAME: ${{ secrets.JF_SPARK_AUTO_USERNAME }}
+          SPARK_AUTO_PASSWORD: ${{ secrets.JF_SPARK_AUTO_PASSWORD }}
+          DIELET: FULL
+
+  ReleaseNotes:
+    needs: [DetermineSites, SparkAutoSubmission, TP_BUILD]
+    if: |
+      always() && 
+        (needs.SparkAutoSubmission.result == 'success' || needs.SparkAutoSubmission.result == 'skipped') &&
+      github.event.inputs.releaseNotes != 'None' && github.event.inputs.releaseNotes != 'None;None' &&
+      (
+        (needs.DetermineSites.outputs.skip_tpbuild == 'false' && needs.TP_BUILD.result == 'success') ||
+        needs.DetermineSites.outputs.skip_tpbuild == 'true'
+      )
+    runs-on:
+    - self-hosted
+    - checkers_${{ needs.DetermineSites.outputs.build_site }}
+    steps:
+    - name: Parse Release Notes and Email List
+      shell: powershell
+      run: |
+        $releaseNotesInput = "${{ github.event.inputs.releaseNotes }}"
+        Write-Host "Original releaseNotes input: $releaseNotesInput"
+        
+        if ($releaseNotesInput -and $releaseNotesInput -ne 'None' -and $releaseNotesInput -ne 'None;None' -and $releaseNotesInput.Contains(';')) {
+          $parts = $releaseNotesInput -split ';', 2
+          $releasePath = $parts[0].Trim()
+          $emailListPath = $parts[1].Trim()
+          
+          # Handle None values
+          if ($releasePath -eq 'None') { $releasePath = '' }
+          if ($emailListPath -eq 'None') { $emailListPath = '' }
+          
+          Write-Host "Parsed - Release path: $releasePath"
+          Write-Host "Parsed - Email list path: $emailListPath"
+          
+          echo "RELEASE_PATH=$releasePath" | Out-File -FilePath $env:GITHUB_ENV -Append
+          echo "EMAIL_LIST_PATH=$emailListPath" | Out-File -FilePath $env:GITHUB_ENV -Append
+        } else {
+          Write-Host "Using single release path: $releaseNotesInput"
+          $releasePath = if ($releaseNotesInput -eq 'None') { '' } else { $releaseNotesInput }
+          echo "RELEASE_PATH=$releasePath" | Out-File -FilePath $env:GITHUB_ENV -Append
+          echo "EMAIL_LIST_PATH=" | Out-File -FilePath $env:GITHUB_ENV -Append
+        }
+
+    - name: Run TP Release Notes
+      shell: powershell
+      run: |
+        Write-Host "Running release notes from primary site: JF"
+        Write-Host "Skip TPBuild: ${{ needs.DetermineSites.outputs.skip_tpbuild }}"
+        Write-Host "Release Path: ${{ env.RELEASE_PATH }}"
+        Write-Host "Email List Path: ${{ env.EMAIL_LIST_PATH }}"
+        python I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/nvl_testprogram_release.py -path "${{ env.RELEASE_PATH }}"
+      env:
+          AUTO_RELEASE_NOTE: ${{ env.RELEASE_PATH }}
+          DEST: ${{ github.event.inputs.destination }}
+          TARGETBOM: ${{ github.event.inputs.BOMGroups }}
+          CUSTOM_EMAIL_LIST_PATH: ${{ env.EMAIL_LIST_PATH }}
+          SUBMITTER_EMAIL: ${{ github.event.inputs.submitter_email }}
+  
+  TPTorrent:
+    needs: [DetermineSites, TP_BUILD]
+    if: |
+      always() && 
+      github.event.inputs.tptorrent_input_file != 'None' && 
+      (
+        (needs.DetermineSites.outputs.skip_tpbuild == 'false' && needs.TP_BUILD.result == 'success') ||
+        needs.DetermineSites.outputs.skip_tpbuild == 'true'
+      )
+    runs-on:
+    - self-hosted
+    - checkers_${{ needs.DetermineSites.outputs.build_site }}
+    steps:
+    - name: Log Inputs
+      shell: powershell
+      run: |
+        Write-Host "Primary Site: ${{ needs.DetermineSites.outputs.build_site }}"
+        Write-Host "TPTorrent Input File: ${{ github.event.inputs.tptorrent_input_file }}"
+        Write-Host "DirectoryPath: ${{ github.event.inputs.destination }}"
+        Write-Host "Skip TPBuild: ${{ needs.DetermineSites.outputs.skip_tpbuild }}"
+    - name: Tptorrent
+      shell: powershell
+      run: |
+        Write-Host "Running tptorrent rulecheck/transfer with input file: ${{ github.event.inputs.tptorrent_input_file }}"
+        python I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/tptorrent.py "${{ github.event.inputs.tptorrent_input_file }}"
+      env:
+          DEST: ${{ github.event.inputs.destination }}

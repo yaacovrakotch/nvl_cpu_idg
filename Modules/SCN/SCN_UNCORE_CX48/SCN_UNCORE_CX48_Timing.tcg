@@ -1,0 +1,38 @@
+Version 1.0;
+
+SpecificationSet cpu_hvm_timing_CPU_PARAMS_OVERRIDE (mts100_tstprtclk50_tck100,mts1000_tstprtclk500_tck62p5,mts1500_tstprtclk750_tck93p75,mts1500_tstprtclk750_tck93p75_dyn,mts1600_tstprtclk800_tck100,mts200_tstprtclk100_tck25,mts400_tstprtclk200_tck25,mts400_tstprtclk200_tck50,mts500_tstprtclk250_tck31p25,mts800_tstprtclk400_tck100,mts800_tstprtclk400_tck50,mts96_tstprtclk48_tck96_hvmclk96) Inherits CPU_IP_BASE::cpu_hvm_timing_CPU_PARAMS_2
+{													 
+	Double cpu_tstprt_o_stb_mul = 1.2;
+	Double cpu_tstprt_i_drv_mul = 1.1;
+	Double cpu_tstprt_i_clk_mul = 0.5;
+}
+
+SpecificationSet cpu_hvm_timing_CPU_PARAMS_OVERRIDEDS (mts100_tstprtclk50_tck100,mts1000_tstprtclk500_tck62p5,mts1500_tstprtclk750_tck93p75,mts1500_tstprtclk750_tck93p75_dyn,mts1600_tstprtclk800_tck100,mts200_tstprtclk100_tck25,mts400_tstprtclk200_tck25,mts400_tstprtclk200_tck50,mts500_tstprtclk250_tck31p25,mts800_tstprtclk400_tck100,mts800_tstprtclk400_tck50,mts96_tstprtclk48_tck96_hvmclk96) Inherits CPU_IP_BASE::cpu_hvm_timing_CPU_PARAMS_2
+{													 
+	Double cpu_tstprt_o_stb_mul = 1.4;
+	Double cpu_tstprt_i_drv_mul = 1.8;
+}
+
+TestConditionGroup cpu_hvm_timing_OVERRIDE_TCG
+{
+	SpecificationSet = cpu_hvm_timing_CPU_PARAMS_OVERRIDE;
+	Timing = CPU_IP_BASE::cpu_hvm_timing;
+}
+
+TestConditionGroup cpu_hvm_timing_OVERRIDEDS_TCG
+{
+	SpecificationSet = cpu_hvm_timing_CPU_PARAMS_OVERRIDEDS;
+	Timing = CPU_IP_BASE::cpu_hvm_timing;
+}
+
+TestCondition cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE
+{
+	TestConditionGroup = cpu_hvm_timing_OVERRIDE_TCG;
+	Selector = mts1500_tstprtclk750_tck93p75;
+}
+
+TestCondition cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDEDS
+{
+	TestConditionGroup = cpu_hvm_timing_OVERRIDEDS_TCG;
+	Selector = mts1500_tstprtclk750_tck93p75;
+}

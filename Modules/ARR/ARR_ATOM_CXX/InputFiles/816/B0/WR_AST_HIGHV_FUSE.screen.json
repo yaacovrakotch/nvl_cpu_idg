@@ -1,0 +1,27 @@
+{
+	"Screen_Config": [
+		{
+			"TestName": "TPREV_CHECK_WR_AST_HIGHV_FUSE_FOR_VMAX",
+			"TestConfig": [
+				[ "PMUX_FREQ_INIT_0", "String", "GSDS", "U.S.ATOM_PMUX_CDIE_FREQ_0" , "SET" , "Literal", "1.2" , "PMUX_FREQ_INIT_1", "PMUX_FREQ_INIT_1" ],
+				[ "PMUX_FREQ_INIT_1", "String", "GSDS", "U.S.ATOM_PMUX_CDIE_FREQ_1" , "SET" , "Literal", "1.2" , "PMUX_FREQ_INIT_2", "PMUX_FREQ_INIT_2" ],
+				[ "PMUX_FREQ_INIT_2", "String", "GSDS", "U.S.ATOM_PMUX_CDIE_FREQ_2" , "SET" , "Literal", "1.2" , "PMUX_FREQ_INIT_3", "PMUX_FREQ_INIT_3" ],
+				[ "PMUX_FREQ_INIT_3", "String", "GSDS", "U.S.ATOM_PMUX_CDIE_FREQ_3" , "SET" , "Literal", "1.2" , "Test1", "Test1" ],
+				[ "Test1", "String", "DFF", "CURRENT.SORT.TPREV", "==", "Literal", "NCXSDJXA0H24A002523", "SetHIGHVFUSE_L2D", "Test2" ],
+				[ "Test2", "String", "DFF", "CURRENT.SORT.TPREV", "==", "Literal", "NCXSDJXA0H24B002524", "SetHIGHVFUSE_L2D", "Test3" ],
+				[ "Test3", "String", "DFF", "CURRENT.SORT.TPREV", "==", "Literal", "NCXSDJXA0H24C002525", "SetHIGHVFUSE_L2D", "Test4" ],
+				[ "Test4", "String", "DFF", "CURRENT.SORT.TPREV", "==", "Literal", "NCXSDJXA0H24C012525", "SetHIGHVFUSE_L2D", "Test5" ],
+				[ "Test5", "String", "DFF", "CURRENT.SORT.TPREV", "==", "Literal", "NCXSDJXA0H24D002527", "SetHIGHVFUSE_L2D", "Test6" ],
+				[ "Test6", "String", "DFF", "CURRENT.SORT.TPREV", "==", "Literal", "NCXSDJXA0H24E002528", "SetHIGHVFUSE_L2D", "Test7" ],
+				[ "Test7", "String", "DFF", "CURRENT.SORT.TPREV", "==", "Literal", "NCXSDJXA0H24F002530", "SetHIGHVFUSE_L2D", "Test8" ],
+				[ "Test8", "String", "DFF", "CURRENT.SORT.TPREV", "==", "Literal", "NCXSDJXA0H24F00FMAX", "SetHIGHVFUSE_L2D", "Test9" ],
+				[ "Test9", "String", "DFF", "CURRENT.SORT.TPREV", "==", "Literal", "NCXSDJXA0H24G102531", "SetHIGHVFUSE_L2D", "SetHIGHVFUSE_FROM_DFF_L2D" ],
+				[ "SetHIGHVFUSE_L2D", "String", "SharedStorage", "DUT.HIGHV_FUSE_L2D_CPU0", "SET", "Literal", "001", "SetHIGHVFUSE_L2T", "2" ],
+				[ "SetHIGHVFUSE_L2T", "String", "SharedStorage", "DUT.HIGHV_FUSE_L2T_CPU0", "SET", "Literal", "001", "1", "2" ],
+				[ "SetHIGHVFUSE_FROM_DFF_L2D", "String", "SharedStorage", "DUT.HIGHV_FUSE_L2D_CPU0", "SET", "DFF", "CURRENT.SORT.SL2DWAHV", "SetHIGHVFUSE_FROM_DFF_L2T", "2" ],
+				[ "SetHIGHVFUSE_FROM_DFF_L2T", "String", "SharedStorage", "DUT.HIGHV_FUSE_L2T_CPU0", "SET", "DFF", "CURRENT.SORT.SL2TWAHV", "1", "2" ]
+			]
+		}
+	]
+}
+

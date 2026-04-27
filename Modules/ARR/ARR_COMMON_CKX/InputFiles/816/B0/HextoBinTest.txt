@@ -1,0 +1,112 @@
+#START_SCREEN:WriteDFF
+#RunOn 	: TestName 		: DataType 	: ParamType 	: Param1				: Operation : ParamType : Param2   	: TmpStore 	 : OnTrue 		 : OnFalse
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+##EXEC	: CSVHCS	: STRING	: DFF			: CURRENT.CURRENT.CSVHCS			: SET		: DFF			: CURRENT.SORT.SVHCS  							: -			 : CSVFCS		 : 2
+#EXEC	: CSVFCS	: STRING	: DFF			: CURRENT.CURRENT.CSVFDS			: SET		: EXPRESSION	: CURRENT.SORT.SVFDS1+CURRENT.SORT.SVFDS2		: -			 : fd_temp		 : 2
+#EXEC	: fd_temp	: STRING	: GSDS			: U.S.FDS_TEMP						: SET		: DFF	        : CURRENT.CURRENT.CSVFDS						: - 		 : hc_temp		 : 2
+#EXEC	: hc_temp	: STRING	: GSDS			: U.S.HCS_TEMP						: SET		: DFF	        : CURRENT.CURRENT.CSVHCS						: - 		 : fds			 : 2
+#EXEC	: fds		: STRING	: GSDS			: U.S.CPU0_FUSE_EMB_VFDM_FDS_BINARY	: SET		: EXPRESSION	: [G.U.S.FDS_TEMP],[G.U.I.CPU_FDS_SIZE]			: - 		 : hcs		     : 2
+#EXEC	: hcs		: STRING	: GSDS			: U.S.CPU0_FUSE_EMB_VFDM_HCS_BINARY	: SET		: EXPRESSION	: [G.U.S.HCS_TEMP],[G.U.I.CPU_HCS_SIZE]			: - 		 : 1			 : 2
+#END_SCREEN
+
+#EXEC	: fd_temp	: STRING	: GSDS			: U.S.FDS_TEMP						: SET		: DFF	        : CURRENT.CURRENT.CSVFDS							: - 		 : hc_temp		 : 2
+#EXEC	: hc_temp	: STRING	: GSDS			: U.S.HCS_TEMP						: SET		: DFF	        : CURRENT.CURRENT.CSVHCS							: - 		 : fds			 : 2
+#EXEC	: fds		: STRING	: GSDS			: U.S.CPU0_FUSE_EMB_VFDM_FDS_BINARY	: SET		: EXPRESSION	: Hex2Bin([G.U.S.FDS_TEMP],[G.U.I.CPU_FDS_SIZE])	: - 		 : hcs		     : 2
+#EXEC	: hcs		: STRING	: GSDS			: U.S.CPU0_FUSE_EMB_VFDM_HCS_BINARY	: SET		: EXPRESSION	: Hex2Bin([G.U.S.HCS_TEMP],[G.U.I.CPU_HCS_SIZE])	: - 		 : 1			 : 2
+#END_SCREEN
+
+#START_SCREEN:PBIC_DAB
+#RunOn 	: TestName 		: DataType 	: ParamType 	: Param1				: Operation : ParamType : Param2   	: TmpStore 	 : OnTrue 		 : OnFalse
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#EXEC	: fd_temp	: STRING	: GSDS			: U.S.FDS_TEMP						: SET		: DFF	        : CURRENT.PBIC_DAB.CSVFDS							: - 		 : hc_temp		 : 2
+#EXEC	: hc_temp	: STRING	: GSDS			: U.S.HCS_TEMP						: SET		: DFF	        : CURRENT.PBIC_DAB.CSVHCS							: - 		 : fds			 : 2
+#EXEC	: fds		: STRING	: GSDS			: U.S.CPU0_FUSE_EMB_VFDM_FDS_BINARY	: SET		: EXPRESSION	: Hex2Bin([G.U.S.FDS_TEMP],[G.U.I.CPU_FDS_SIZE])	: - 		 : hcs		     : 2
+#EXEC	: hcs		: STRING	: GSDS			: U.S.CPU0_FUSE_EMB_VFDM_HCS_BINARY	: SET		: EXPRESSION	: Hex2Bin([G.U.S.HCS_TEMP],[G.U.I.CPU_HCS_SIZE])	: - 		 : 1			 : 2
+#END_SCREEN
+
+#START_SCREEN:RC_S1
+#RunOn 	: TestName 		: DataType 	: ParamType 	: Param1				: Operation : ParamType : Param2   	: TmpStore 	 : OnTrue 		 : OnFalse
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#EXEC	: fd_temp	: STRING	: GSDS			: U.S.FDS_TEMP						: SET		: DFF	        : CURRENT.RC_S1.CSVFDS							: - 		 : hc_temp		 : 2
+#EXEC	: hc_temp	: STRING	: GSDS			: U.S.HCS_TEMP						: SET		: DFF	        : CURRENT.RC_S1.CSVHCS							: - 		 : fds			 : 2
+#EXEC	: fds		: STRING	: GSDS			: U.S.CPU0_FUSE_EMB_VFDM_FDS_BINARY	: SET		: EXPRESSION	: Hex2Bin([G.U.S.FDS_TEMP],[G.U.I.CPU_FDS_SIZE])	: - 		 : hcs		     : 2
+#EXEC	: hcs		: STRING	: GSDS			: U.S.CPU0_FUSE_EMB_VFDM_HCS_BINARY	: SET		: EXPRESSION	: Hex2Bin([G.U.S.HCS_TEMP],[G.U.I.CPU_HCS_SIZE])	: - 		 : 1			 : 2
+#END_SCREEN
+
+START_SCREEN:DFF2GSDSRepairTokenAtomOld
+#RunOn 	: TestName 		: DataType 	: ParamType 	: Param1				: Operation : ParamType : Param2   	: TmpStore 	 : OnTrue 		 : OnFalse
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EXEC	: SETL2DC 	: STRING	: GSDS 			: U.S.L2DCCPU0			: SET		: DFF			: CURRENT.SORT.SL2DC							: -			 : SETL2DR		 : 2
+EXEC 	: SETL2DR 	: STRING	: GSDS 			: U.S.L2DRCPU0			: SET		: DFF			: CURRENT.SORT.SL2DR							: -			 : SETL2TC		 : 2
+EXEC 	: SETL2TC 	: STRING	: GSDS 			: U.S.L2TCCPU0			: SET		: DFF			: CURRENT.SORT.SL2TC							: -			 : SETL2TR0		 : 2
+EXEC 	: SETL2TR0	: STRING	: GSDS 			: U.S.L2TR0CPU0			: SET		: DFF			: CURRENT.SORT.SL2TR0							: -			 : SETL2TR1		 : 2
+EXEC 	: SETL2TR1	: STRING	: GSDS 			: U.S.L2TR1CPU0			: SET		: DFF			: CURRENT.SORT.SL2TR1							: -			 : SETL2TR2		 : 2
+EXEC 	: SETL2TR2	: STRING	: GSDS 			: U.S.L2TR2CPU0			: SET		: DFF			: CURRENT.SORT.SL2TR2							: -			 : SETL2TRL		 : 2
+EXEC 	: SETL2TRL	: STRING	: GSDS 			: U.S.L2TRLCPU0			: SET		: DFF			: CURRENT.SORT.SL2TRL							: -			 : SETL2CC		 : 2  
+EXEC 	: SETL2CC 	: STRING	: GSDS 			: U.S.L2CCCPU0			: SET		: DFF			: CURRENT.SORT.SL2CC							: -			 : SETL2SWZ		 : 2
+EXEC 	: SETL2SWZ	: STRING	: GSDS 			: U.S.L2SWZCPU0			: SET		: DFF			: CURRENT.SORT.SL2SWZ							: -			 : SETL2SWNZ		 : 2
+EXEC 	: SETL2SWNZ	: STRING	: GSDS 			: U.S.L2SWNZCPU0		: SET		: DFF			: CURRENT.SORT.SL2SWNZ							: -			 : SETL2LRUR		 : 2
+EXEC 	: SETL2LRUR	: STRING	: GSDS 			: U.S.L2LRURCPU0		: SET		: DFF			: CURRENT.SORT.SL2LRUR							: -			 : SETFECR		 : 2 
+EXEC 	: SETFECR 	: STRING	: GSDS 			: U.S.FECRCPU0			: SET		: DFF			: CURRENT.SORT.SFECR							: -			 : SETNFECR		 : 2 
+EXEC 	: SETNFECR 	: STRING	: GSDS 			: U.S.NFECRCPU0			: SET		: DFF			: CURRENT.SORT.SNFECR							: -			 : 1		 : 2 
+END_SCREEN
+
+START_SCREEN:DFF2GSDSRepairTokenAtom
+#RunOn 	: TestName 		: DataType 	: ParamType 	: Param1				: Operation : ParamType : Param2   	: TmpStore 	 : OnTrue 		 : OnFalse
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+EXEC 	: CHECKL2DC   				: STRING 	: DFF 			: CURRENT.SORT.SL2DC  		: == 			:   LITERAL 	: '0' 			        :   -    	 : SETL2DC0   		 : SETL2DC
+EXEC 	: SETL2DC0   				: STRING 	: GSDS 			: U.S.L2DCCPU0  			    : SET 			:   LITERAL 	: '' 			        :   -    	 : CHECKL2DR   		 : 2
+EXEC	: SETL2DC 	                : STRING	: GSDS 			: U.S.L2DCCPU0			        : SET		    : DFF			: CURRENT.SORT.SL2DC	: -			 : CHECKL2DR		 : 2
+
+EXEC 	: CHECKL2DR   				: STRING 	: DFF 			: CURRENT.SORT.SL2DR  		: == 			:   LITERAL 	: '0' 			        :   -    	 : SETL2DR0   		 : SETL2DR
+EXEC 	: SETL2DR0   				: STRING 	: GSDS 			: U.S.L2DRCPU0  			    : SET 			:   LITERAL 	: '' 			        :   -    	 : CHECKL2TC   		 : 2
+EXEC	: SETL2DR 	                : STRING	: GSDS 			: U.S.L2DRCPU0			        : SET		    : DFF			: CURRENT.SORT.SL2DR	: -			 : CHECKL2TC		 : 2
+
+EXEC 	: CHECKL2TC   				: STRING 	: DFF 			: CURRENT.SORT.SL2TC  		: == 			:   LITERAL 	: '0' 			        :   -    	 : SETL2TC0   		 : SETL2TC
+EXEC 	: SETL2TC0   				: STRING 	: GSDS 			: U.S.L2TCCPU0  			    : SET 			:   LITERAL 	: '' 			        :   -    	 : CHECKL2TRL   		 : 2
+EXEC	: SETL2TC 	                : STRING	: GSDS 			: U.S.L2TCCPU0			        : SET		    : DFF			: CURRENT.SORT.SL2TC	: -			 : CHECKL2TRL		 : 2
+
+EXEC 	: CHECKL2TRL   				: STRING 	: DFF 			: CURRENT.SORT.SL2TRL  		: == 			:   LITERAL 	: '0' 			        :   -    	 : SETL2TRL00   		 : SETL2TRL0
+EXEC 	: SETL2TRL00   				: STRING 	: GSDS 			: U.S.L2TRLCPU0  			    : SET 			:   LITERAL 	: '' 			        :   -    	 : CHECKL2TR0   		 : 2
+EXEC	: SETL2TRL0 	                : STRING	: GSDS 			: U.S.L2TRLCPU0			        : SET		    : DFF			: CURRENT.SORT.SL2TRL	: -			 : CHECKL2TR0		 : 2
+
+EXEC 	: CHECKL2TR0   				: STRING 	: DFF 			: CURRENT.SORT.SL2TR0  		: == 			:   LITERAL 	: '0' 			        :   -    	 : SETL2TR00   		 : SETL2TR0
+EXEC 	: SETL2TR00   				: STRING 	: GSDS 			: U.S.L2TRM0CPU0  			    : SET 			:   LITERAL 	: '' 			        :   -    	 : CHECKL2TR1   		 : 2
+EXEC	: SETL2TR0 	                : STRING	: GSDS 			: U.S.L2TRM0CPU0			        : SET		    : DFF			: CURRENT.SORT.SL2TR0	: -			 : CHECKL2TR1		 : 2
+
+EXEC 	: CHECKL2TR1   				: STRING 	: DFF 			: CURRENT.SORT.SL2TR1  		: == 			:   LITERAL 	: '0' 			        :   -    	 : SETL2TR10   		 : SETL2TR1
+EXEC 	: SETL2TR10   				: STRING 	: GSDS 			: U.S.L2TRM1CPU0  			    : SET 			:   LITERAL 	: '' 			        :   -    	 : CHECKL2TR2   		 : 2
+EXEC	: SETL2TR1 	                : STRING	: GSDS 			: U.S.L2TRM1CPU0			        : SET		    : DFF			: CURRENT.SORT.SL2TR1	: -			 : CHECKL2TR2		 : 2
+
+EXEC 	: CHECKL2TR2   				: STRING 	: DFF 			: CURRENT.SORT.SL2TR2  		: == 			:   LITERAL 	: '0' 			        :   -    	 : SETL2TR20   		 : SETL2TR2
+EXEC 	: SETL2TR20   				: STRING 	: GSDS 			: U.S.L2TRM2CPU0  			    : SET 			:   LITERAL 	: '' 			        :   -    	 : CHECKL2CC   		 : 2
+EXEC	: SETL2TR2 	                : STRING	: GSDS 			: U.S.L2TRM2CPU0			        : SET		    : DFF			: CURRENT.SORT.SL2TR2	: -			 : CHECKL2CC		 : 2
+
+EXEC 	: CHECKL2CC   				: STRING 	: DFF 			: CURRENT.SORT.SL2CC  		: == 			:   LITERAL 	: '0' 			        :   -    	 : SETL2CC0   		 : SETL2CC
+EXEC 	: SETL2CC0   				: STRING 	: GSDS 			: U.S.L2CCCPU0  			    : SET 			:   LITERAL 	: '' 			        :   -    	 : CHECKL2SWZ   		 : 2
+EXEC	: SETL2CC 	                : STRING	: GSDS 			: U.S.L2CCCPU0			        : SET		    : DFF			: CURRENT.SORT.SL2CC	: -			 : CHECKL2SWZ		 : 2
+
+EXEC 	: CHECKL2SWZ   				: STRING 	: DFF 			: CURRENT.SORT.SL2SWZ  		: == 			:   LITERAL 	: '0' 			        :   -    	 : SETL2SWZ0   		 : SETL2SWZ
+EXEC 	: SETL2SWZ0   				: STRING 	: GSDS 			: U.S.L2SRCPU0  			    : SET 			:   LITERAL 	: '' 			        :   -    	 : CHECKL2SWNZ   		 : 2
+EXEC	: SETL2SWZ 	                : STRING	: GSDS 			: U.S.L2SRCPU0			        : SET		    : DFF			: CURRENT.SORT.SL2SWZ	: -			 : CHECKL2SWNZ		 : 2
+
+EXEC 	: CHECKL2SWNZ   				: STRING 	: DFF 			: CURRENT.SORT.SL2SWNZ  		: == 			:   LITERAL 	: '0' 			        :   -    	 : SETL2SWNZ0   		 : SETL2SWNZ
+EXEC 	: SETL2SWNZ0   				: STRING 	: GSDS 			: U.S.L2SRCPU0  			    : SET 			:   LITERAL 	: '' 			        :   -    	 : CHECKL2LRUR   		 : 2
+EXEC	: SETL2SWNZ 	                : STRING	: GSDS 			: U.S.L2SRCPU0			        : SET		    : DFF			: CURRENT.SORT.SL2SWNZ	: -			 : CHECKL2LRUR		 : 2
+
+EXEC 	: CHECKL2LRUR   				: STRING 	: DFF 			: CURRENT.SORT.SL2LRUR 		: == 			:   LITERAL 	: '0' 			        :   -    	 : SETL2LRUR0   		 : SETL2LRUR
+EXEC 	: SETL2LRUR0   				: STRING 	: GSDS 			: U.S.L2LRURCPU0  			    : SET 			:   LITERAL 	: '' 			        :   -    	 : CHECKFECR   		 : 2
+EXEC	: SETL2LRUR 	                : STRING	: GSDS 			: U.S.L2LRURCPU0			        : SET		    : DFF			: CURRENT.SORT.SL2LRUR	: -			 : CHECKFECR		 : 2
+
+EXEC 	: CHECKFECR   				: STRING 	: DFF 			: CURRENT.SORT.SFECR  		: == 			:   LITERAL 	: '0' 			        :   -    	 : SETFECR0   		 : SETFECR
+EXEC 	: SETFECR0   				: STRING 	: GSDS 			: U.S.FECRCPU0  			    : SET 			:   LITERAL 	: '' 			        :   -    	 : CHECKNFECR   		 : 2
+EXEC	: SETFECR 	                : STRING	: GSDS 			: U.S.FECRCPU0			        : SET		    : DFF			: CURRENT.SORT.SFECR	: -			 : CHECKNFECR		 : 2
+
+EXEC 	: CHECKNFECR   				: STRING 	: DFF 			: CURRENT.SORT.SNFECR  		: == 			:   LITERAL 	: '0' 			        :   -    	 : SETNFECR0   		 : SETNFECR
+EXEC 	: SETNFECR0  				: STRING 	: GSDS 			: U.S.NFECRCPU0  			    : SET 			:   LITERAL 	: '' 			        :   -    	 : 1   		 : 2
+EXEC	: SETNFECR 	                : STRING	: GSDS 			: U.S.NFECRCPU0			        : SET		    : DFF			: CURRENT.SORT.SNFECR	: -			 : 1		 : 2
+END_SCREEN
+
+
+

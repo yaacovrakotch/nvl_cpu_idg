@@ -1,0 +1,2460 @@
+Version 1.0;
+
+SocketDef
+{
+	PinDescription "PinDefinitions.pin";
+	DUT 11
+	{
+		Resource DifferentialHighPurityClock
+		{
+			IPP::PCD_CLK_0_HPCDIF		02.048;	#xxxtal_inj_p  |  XTAL_INJ_P
+			IPP::PCD_CLK_1_HPCDIF	[U]	 0.000;	#-  |  -
+			IPP::PCD_CLK_2_HPCDIF	[U]	 0.000;	#-  |  -
+			IPP::PCD_CLK_3_HPCDIF	[U]	 0.000;	#-  |  -
+			IPH::HUB_CLK_0_HPCDIF	[U]	 0.000;	#-  |  -
+			IPH::HUB_CLK_1_HPCDIF	[U]	 0.000;	#-  |  -
+			IPH::HUB_CLK_2_HPCDIF	[U]	 0.000;	#-  |  -
+			IPH::HUB_CLK_3_HPCDIF	[U]	 0.000;	#-  |  -
+			IPG::GCD_CLK_0_HPCDIF	[U]	 0.000;	#-  |  -
+			IPG::GCD_CLK_1_HPCDIF	[U]	 0.000;	#-  |  -
+			IPG::GCD_CLK_2_HPCDIF	[U]	 0.000;	#-  |  -
+			IPG::GCD_CLK_3_HPCDIF	[U]	 0.000;	#-  |  -
+			IPC::CPU_CLK_0_HPCDIF	[U]	 0.000;	#-  |  -
+			IPC::CPU_CLK_1_HPCDIF	[U]	 0.000;	#-  |  -
+			IPC::CPU_CLK_2_HPCDIF	[U]	 0.000;	#-  |  -
+			IPC::CPU_CLK_3_HPCDIF	[U]	 0.000;	#-  |  -
+			IPC::CPU1_CLK_0_HPCDIF	[U]	 0.000;	#-  |  -
+			IPC::CPU1_CLK_1_HPCDIF	[U]	 0.000;	#-  |  -
+			IPC::CPU1_CLK_2_HPCDIF	[U]	 0.000;	#-  |  -
+			IPC::CPU1_CLK_3_HPCDIF	[U]	 0.000;	#-  |  -
+		}
+
+		Resource DPin
+		{
+			BASE_EDM		03.041;	#-  |  EDM_BASE
+			CPU_EDM		08.009;	#XX_CDIE_EDM_CORE  |  EDM_CPU
+			CPU_ID		03.047;	#-  |  CPU_ID
+			CPU_ID_2	[U]	 0.000;	#-  |  -
+			CPU_ID_3	[U]	 0.000;	#-  |  -
+			CPU1_EDM		10.079;	#XX_CDIE_EDM_CORE  |  EDM_CPU1
+			EKEY		03.001;	#-  |  EKEY
+			GCD_EDM		03.103;	#xx_gcd_edm  |  EDM_GCD
+			GND_EDM		08.011;	#-  |  EDM_GND
+			HUB_CNV_RCOMP	[U]	 0.000;	#-  |  -
+			HUB_EDM		09.051;	#XX_HUB_EDM  |  EDM_HUB
+			PCD_EDM	[U]	 0.000;	#-  |  -
+			SKTOCC_B		03.049;	#-  |  SKTOCC_B
+			IPP::PCD_CLK_0_DP_0		02.048;	#xxxtal_inj_p  |  XTAL_INJ_P
+			IPP::PCD_CLK_0_DP_1		02.049;	#xxxtal_inj_n  |  XTAL_INJ_N
+			IPP::PCD_CLK_1_DP_0		02.025;	#xxrtcclkin  |  RTCCLKIN
+			IPP::PCD_CLK_1_DP_1	[U]	 0.000;	#-  |  -
+			IPP::PCD_CLK_2_DP_0	[U]	 0.000;	#-  |  -
+			IPP::PCD_CLK_2_DP_1	[U]	 0.000;	#-  |  -
+			IPP::PCD_CLK_3_DP_0	[U]	 0.000;	#-  |  -
+			IPP::PCD_CLK_3_DP_1	[U]	 0.000;	#-  |  -
+			IPP::PCD_CLKOUT_DMI_N	[U]	 0.000;	#xxclkout_dmi_n  |  CLKOUT_SRC_DMI_N
+			IPP::PCD_CLKOUT_DMI_P	[U]	 0.000;	#xxclkout_dmi_p  |  CLKOUT_SRC_DMI_P
+			IPP::PCD_CLKOUT_SRC0_N	[U]	 0.000;	#xxclkout_src0_n  |  CLKOUT_SRC_0_N
+			IPP::PCD_CLKOUT_SRC0_P	[U]	 0.000;	#xxclkout_src0_p  |  CLKOUT_SRC_0_P
+			IPP::PCD_CLKOUT_SRC1_N	[U]	 0.000;	#xxclkout_src1_n  |  CLKOUT_SRC_1_N
+			IPP::PCD_CLKOUT_SRC1_P	[U]	 0.000;	#xxclkout_src1_p  |  CLKOUT_SRC_1_P
+			IPP::PCD_CLKOUT_SRC2_N	[U]	 0.000;	#xxclkout_src2_n  |  CLKOUT_SRC_2_N
+			IPP::PCD_CLKOUT_SRC2_P	[U]	 0.000;	#xxclkout_src2_p  |  CLKOUT_SRC_2_P
+			IPP::PCD_CLKOUT_SRC3_N	[U]	 0.000;	#xxclkout_src3_n  |  CLKOUT_SRC_3_N
+			IPP::PCD_CLKOUT_SRC3_P	[U]	 0.000;	#xxclkout_src3_p  |  CLKOUT_SRC_3_P
+			IPP::PCD_CLKOUT_SRC4_N	[U]	 0.000;	#xxclkout_src4_n  |  CLKOUT_SRC_4_N
+			IPP::PCD_CLKOUT_SRC4_P	[U]	 0.000;	#xxclkout_src4_p  |  CLKOUT_SRC_4_P
+			IPP::PCD_CLKOUT_SRC5_N	[U]	 0.000;	#xxclkout_src5_n  |  CLKOUT_SRC_5_N
+			IPP::PCD_CLKOUT_SRC5_P	[U]	 0.000;	#xxclkout_src5_p  |  CLKOUT_SRC_5_P
+			IPP::PCD_CLKOUT_SRC6_N	[U]	 0.000;	#-  |  -
+			IPP::PCD_CLKOUT_SRC6_P	[U]	 0.000;	#-  |  -
+			IPP::PCD_CLKOUT_SRC7_N	[U]	 0.000;	#-  |  -
+			IPP::PCD_CLKOUT_SRC7_P	[U]	 0.000;	#-  |  -
+			IPP::PCD_CLKOUT_SRC8_N	[U]	 0.000;	#-  |  -
+			IPP::PCD_CLKOUT_SRC8_P	[U]	 0.000;	#-  |  -
+			IPP::PCD_CNV_HSIF_RXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_CNV_HSIF_RXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_CNV_HSIF_TXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_CNV_HSIF_TXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_CNV_STEP_MON	[U]	 0.000;	#-  |  -
+			IPP::PCD_CNV_STEP_MON2	[U]	 0.000;	#-  |  -
+			IPP::PCD_CNV_STEP_REXT	[U]	 0.000;	#-  |  -
+			IPP::PCD_CSIA_CKN	[U]	 0.000;	#-  |  -
+			IPP::PCD_CSIA_CKP	[U]	 0.000;	#-  |  -
+			IPP::PCD_CSIA_D0N	[U]	 0.000;	#-  |  -
+			IPP::PCD_CSIA_D0P	[U]	 0.000;	#-  |  -
+			IPP::PCD_CSIA_D1N	[U]	 0.000;	#-  |  -
+			IPP::PCD_CSIA_D1P	[U]	 0.000;	#-  |  -
+			IPP::PCD_CSIB_CKN	[U]	 0.000;	#-  |  -
+			IPP::PCD_CSIB_CKP	[U]	 0.000;	#-  |  -
+			IPP::PCD_CSIB_D0N	[U]	 0.000;	#-  |  -
+			IPP::PCD_CSIB_D0P	[U]	 0.000;	#-  |  -
+			IPP::PCD_CSIB_D1N	[U]	 0.000;	#-  |  -
+			IPP::PCD_CSIB_D1P	[U]	 0.000;	#-  |  -
+			IPP::PCD_CSIC_CKN	[U]	 0.000;	#-  |  -
+			IPP::PCD_CSIC_CKP	[U]	 0.000;	#-  |  -
+			IPP::PCD_CSIC_D0N	[U]	 0.000;	#-  |  -
+			IPP::PCD_CSIC_D0P	[U]	 0.000;	#-  |  -
+			IPP::PCD_CSIC_D1N	[U]	 0.000;	#-  |  -
+			IPP::PCD_CSIC_D1P	[U]	 0.000;	#-  |  -
+			IPP::PCD_DDI_LDO	[U]	 0.000;	#xxddi_ldo  |  DDI_LDO
+			IPP::PCD_DDSP_HPDALV	[U]	 0.000;	#-  |  -
+			IPP::PCD_DMI_0_RXN	[U]	 0.000;	#xxdmi_0_rxn  |  DMI_0_RX_N
+			IPP::PCD_DMI_0_RXP	[U]	 0.000;	#xxdmi_0_rxp  |  DMI_0_RX_P
+			IPP::PCD_DMI_0_TXN	[U]	 0.000;	#xxdmi_0_txn  |  DMI_0_TX_N
+			IPP::PCD_DMI_0_TXP	[U]	 0.000;	#xxdmi_0_txp  |  DMI_0_TX_P
+			IPP::PCD_DMI_1_RXN	[U]	 0.000;	#xxdmi_1_rxn  |  DMI_1_RX_N
+			IPP::PCD_DMI_1_RXP	[U]	 0.000;	#xxdmi_1_rxp  |  DMI_1_RX_P
+			IPP::PCD_DMI_1_TXN	[U]	 0.000;	#xxdmi_1_txn  |  DMI_1_TX_N
+			IPP::PCD_DMI_1_TXP	[U]	 0.000;	#xxdmi_1_txp  |  DMI_1_TX_P
+			IPP::PCD_DMI_2_RXN	[U]	 0.000;	#xxdmi_2_rxn  |  DMI_2_RX_N
+			IPP::PCD_DMI_2_RXP	[U]	 0.000;	#xxdmi_2_rxp  |  DMI_2_RX_P
+			IPP::PCD_DMI_2_TXN	[U]	 0.000;	#xxdmi_2_txn  |  DMI_2_TX_N
+			IPP::PCD_DMI_2_TXP	[U]	 0.000;	#xxdmi_2_txp  |  DMI_2_TX_P
+			IPP::PCD_DMI_3_RXN	[U]	 0.000;	#xxdmi_3_rxn  |  DMI_3_RX_N
+			IPP::PCD_DMI_3_RXP	[U]	 0.000;	#xxdmi_3_rxp  |  DMI_3_RX_P
+			IPP::PCD_DMI_3_TXN		02.053;	#xxdmi_3_txn  |  DMI_3_TX_N
+			IPP::PCD_DMI_3_TXP		02.052;	#xxdmi_3_txp  |  DMI_3_TX_P
+			IPP::PCD_DMI_LDO	[U]	 0.000;	#xxdmi_ldo  |  DMI_LDO
+			IPP::PCD_EUSB2_01N	[U]	 0.000;	#-  |  -
+			IPP::PCD_EUSB2_01P	[U]	 0.000;	#-  |  -
+			IPP::PCD_EUSB2_02N	[U]	 0.000;	#-  |  -
+			IPP::PCD_EUSB2_02P	[U]	 0.000;	#-  |  -
+			IPP::PCD_EUSB2_03N	[U]	 0.000;	#-  |  -
+			IPP::PCD_EUSB2_03P	[U]	 0.000;	#-  |  -
+			IPP::PCD_EUSB2_04N	[U]	 0.000;	#-  |  -
+			IPP::PCD_EUSB2_04P	[U]	 0.000;	#-  |  -
+			IPP::PCD_EUSB2_05N	[U]	 0.000;	#-  |  -
+			IPP::PCD_EUSB2_05P	[U]	 0.000;	#-  |  -
+			IPP::PCD_EUSB2_06N	[U]	 0.000;	#-  |  -
+			IPP::PCD_EUSB2_06P	[U]	 0.000;	#-  |  -
+			IPP::PCD_EUSB2_07N	[U]	 0.000;	#-  |  -
+			IPP::PCD_EUSB2_07P	[U]	 0.000;	#-  |  -
+			IPP::PCD_EUSB2_08N	[U]	 0.000;	#-  |  -
+			IPP::PCD_EUSB2_08P	[U]	 0.000;	#-  |  -
+			IPP::PCD_EUSB2V2_N	[U]	 0.000;	#-  |  -
+			IPP::PCD_EUSB2V2_P	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_A_00	[U]	 0.000;	#xxgpp_sa_0_dir_espi_io_0  |  GPP_SA_0_DIR_ESPI_IO_0
+			IPP::PCD_GPP_A_01	[U]	 0.000;	#xxgpp_sa_1_dir_espi_io_1  |  GPP_SA_1_DIR_ESPI_IO_1
+			IPP::PCD_GPP_A_02	[U]	 0.000;	#xxgpp_sa_2_dir_espi_io_2  |  GPP_SA_2_DIR_ESPI_IO_2
+			IPP::PCD_GPP_A_03	[U]	 0.000;	#xxgpp_sa_3_dir_espi_io_3  |  GPP_SA_3_DIR_ESPI_IO_3
+			IPP::PCD_GPP_A_04	[U]	 0.000;	#xxgpp_sa_4_dir_espi_cs0_b  |  GPP_SA_4_DIR_ESPI_CS0_B
+			IPP::PCD_GPP_A_05	[U]	 0.000;	#xxgpp_sa_5_dir_espi_clk  |  GPP_SA_5_DIR_ESPI_CLK
+			IPP::PCD_GPP_A_06	[U]	 0.000;	#xxgpp_sa_6_dir_espi_rclk  |  GPP_SA_6_DIR_ESPI_RCLK
+			IPP::PCD_GPP_A_07		02.041;	#xxgpp_sa_7_dir_espi_reset_b  |  GPP_SA_7_DIR_ESPI_RESET_B
+			IPP::PCD_GPP_A_08	[U]	 0.000;	#xxgpp_sa_8_slp_s0_b  |  GPP_SA_8_SLP_S0_B
+			IPP::PCD_GPP_A_09	[U]	 0.000;	#xxgpp_sa_9_dmi_perstb  |  GPP_SA_9_DMI_PERST_B
+			IPP::PCD_GPP_A_10	[U]	 0.000;	#xxgpp_sa_10_caterr_b  |  GPP_SA_10_CATERR_B
+			IPP::PCD_GPP_A_11	[U]	 0.000;	#xxgpp_sa_11_thermtrip_b  |  GPP_SA_11_THERMTRIP_B
+			IPP::PCD_GPP_A_12	[U]	 0.000;	#xxgpp_sa_12_cpu_c10_gate_b  |  GPP_SA_12_CPU_C10_GATE_B
+			IPP::PCD_GPP_A_13	[U]	 0.000;	#xxgpp_sa_13_ps_onb  |  GPP_SA_13_PS_ON_B
+			IPP::PCD_GPP_A_14		02.007;	#xxgpp_sa_14_ddsp_hpd1_b_disp_misc1_time_sync_0  |  GPP_SA_14_DDSP_HPD1_DISP_MISC1_TIME_SYNC_0
+			IPP::PCD_GPP_A_15		02.055;	#xxgpp_sa_15_ddsp_hpd2_b_disp_misc2_time_sync_1  |  GPP_SA_15_DDSP_HPD2_DISP_MISC2_TIME_SYNC_1
+			IPP::PCD_GPP_A_16		02.037;	#xxgpp_sa_16_ddsp_hpd3_b_disp_misc3  |  GPP_SA_16_DDSP_HPD3_DISP_MISC3_NF5
+			IPP::PCD_GPP_A_17	[U]	 0.000;	#xxgpp_sa_17_osse_smt_dat  |  GPP_SA_17_OSSE_SMT_DAT
+			IPP::PCD_GPP_A_18	[U]	 0.000;	#xxgpp_sa_18_osse_smt_clk  |  GPP_SA_18_OSSE_SMT_CLK
+			IPP::PCD_GPP_A_19	[U]	 0.000;	#xxgpp_sa_19_osse_smt_alertb  |  GPP_SA_19_OSSE_SMT_ALERTB
+			IPP::PCD_GPP_A_20		09.059;	#xxgpp_sa_20_ddsp_hpd4_b_disp_misc4  |  GPP_SA_20_DDSP_HPD4_DISP_MISC4
+			IPP::PCD_GPP_A_21	[U]	 0.000;	#xxgpp_sa_21_pcie_lnk_down_l_vdden_srcclkreq1_b_ieh_fatal_err2_b_nf5  |  GPP_SA_21_PCIE_LNK_DOWN_L_VDDEN_SRCCLKREQ1_B_IEH_FATAL_ERR2_B_NF5
+			IPP::PCD_GPP_A_22	[U]	 0.000;	#xxgpp_sa_22_fusa_diagtest_en_l_bklten_srcclkreq2_b_dsi_genlock_2  |  GPP_SA_22_FUSA_DIAGTEST_EN_L_BKLTEN_SRCCLKREQ2_B_DSI_GENLOCK_2
+			IPP::PCD_GPP_A_23	[U]	 0.000;	#xxgpp_sa_23_fusa_diagtest_mode_l_bkltctl_srcclkreq3_b_dsi_genlock_3  |  GPP_SA_23_FUSA_DIAGTEST_MODE_L_BKLTCTL_SRCCLKREQ3_B_DSI_GENLOCK_3
+			IPP::PCD_GPP_A_24	[U]	 0.000;	#xxgpp_sa_24_sndw_clk_audclk  |  GPP_SA_24_SNDW_CLK_AUDCLK
+			IPP::PCD_GPP_A_25	[U]	 0.000;	#xxgpp_sa_25_sndw_data0_tx_audin  |  GPP_SA_25_SNDW_DATA0_TX_AUDIN
+			IPP::PCD_GPP_A_26	[U]	 0.000;	#xxgpp_sa_26_sndw_data0_rx_audout  |  GPP_SA_26_SNDW_DATA0_RX_AUDOUT
+			IPP::PCD_GPP_A_27	[U]	 0.000;	#xxgpp_sa_27_sndw_data1_tx  |  GPP_SA_27_SNDW_DATA1_TX
+			IPP::PCD_GPP_A_28	[U]	 0.000;	#xxgpp_sa_28_sndw_data1_rx  |  GPP_SA_28_SNDW_DATA1_RX
+			IPP::PCD_GPP_B_00	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_B_01	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_B_02	[U]	 0.000;	#xxgpp_sb_2_ddp3_ctrlclk_ieh_fatal_err2_b  |  GPP_SB_2_DDP3_CTRLCLK_IEH_FATAL_ERR2_B
+			IPP::PCD_GPP_B_03	[U]	 0.000;	#xxgpp_sb_3_ddp3_ctrldata_dsi_de_te_2_genlock_ref  |  GPP_SB_3_DDP3_CTRLDATA_DSI_DE_TE_2_GENLOCK_REF
+			IPP::PCD_GPP_B_04	[U]	 0.000;	#xxgpp_sb_4_ddp4_ctrlclk_ieh_corr_err0_b  |  GPP_SB_4_DDP4_CTRLCLK_IEH_CORR_ERR0_B
+			IPP::PCD_GPP_B_05	[U]	 0.000;	#xxgpp_sb_5_ddp4_ctrldata_ieh_nonfatal_err1_b  |  GPP_SB_5_DDP4_CTRLDATA_IEH_NONFATAL_ERR1_B
+			IPP::PCD_GPP_B_06	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_B_07	[U]	 0.000;	#xxgpp_sb_7_pcd_dmiclkreq_b  |  GPP_SB_7_PCD_DMICLKREQ_B
+			IPP::PCD_GPP_B_08	[U]	 0.000;	#xxgpp_sb_8_srcclkreq4_b  |  GPP_SB_8_SRCCLKREQ4_B
+			IPP::PCD_GPP_B_09	[U]	 0.000;	#xxgpp_sb_9_srcclkreq5_b  |  GPP_SB_9_SRCCLKREQ5_B
+			IPP::PCD_GPP_B_10	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_B_11	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_B_12	[U]	 0.000;	#xxgpp_sb_12_ddp1_ctrlclk_ieh_fatal_err2_b_tbt_lsx0_a  |  GPP_SB_12_DDP1_CTRLCLK_IEH_FATAL_ERR2_B_TBT_LSX0_A
+			IPP::PCD_GPP_B_13	[U]	 0.000;	#xxgpp_sb_13_ddp1_ctrldata_tbt_lsx0_b  |  GPP_SB_13_DDP1_CTRLDATA_TBT_LSX0_B
+			IPP::PCD_GPP_B_14	[U]	 0.000;	#xxgpp_sb_14_srcclkreq0_b  |  GPP_SB_14_SRCCLKREQ0_B
+			IPP::PCD_GPP_B_15	[U]	 0.000;	#xxgpp_sb_15_ddp2_ctrlclk_tbt_lsx1_a  |  GPP_SB_15_DDP2_CTRLCLK_TBT_LSX1_A
+			IPP::PCD_GPP_B_16	[U]	 0.000;	#xxgpp_sb_16_ddp2_ctrldata_tbt_lsx1_b  |  GPP_SB_16_DDP2_CTRLDATA_TBT_LSX1_B
+			IPP::PCD_GPP_B_17	[U]	 0.000;	#xxgpp_sb_17_forcepr_b  |  GPP_SB_17_FORCEPR_B
+			IPP::PCD_GPP_B_18	[U]	 0.000;	#xxgpp_sb_18_bpki3c_sda  |  GPP_SB_18_BPKI3C_SDA
+			IPP::PCD_GPP_B_19	[U]	 0.000;	#xxgpp_sb_19_bpki3c_scl  |  GPP_SB_19_BPKI3C_SCL
+			IPP::PCD_GPP_B_20	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_B_21	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_B_22	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_B_23	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_B_24	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_B_25	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_C_00	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_C_01	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_C_02	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_C_03	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_C_04	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_C_05	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_C_06	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_C_07	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_C_08	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_C_09	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_C_10	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_C_11	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_C_12	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_C_13	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_C_14	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_C_15	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_C_16	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_C_17	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_C_18	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_C_19	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_C_20	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_C_21	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_C_22	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_C_23	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_D_00		09.089;	#xxgpp_sd_0_time_sync_0  |  GPP_SD_0_TIME_SYNC_0
+			IPP::PCD_GPP_D_01		09.093;	#xxgpp_sd_1_time_sync_1  |  GPP_SD_1_TIME_SYNC_1
+			IPP::PCD_GPP_D_02		09.067;	#xxgpp_sd_2_dsi_de_te_2_genlock_ref  |  GPP_SD_2_DSI_DE_TE_2_GENLOCK_REF
+			IPP::PCD_GPP_D_03		09.097;	#xxgpp_sd_3_dsi_de_te_1_disp_utils  |  GPP_SD_3_DSI_DE_TE_1_DISP_UTILS
+			IPP::PCD_GPP_D_04		09.098;	#xxgpp_sd_4_dsi_genlock_2  |  GPP_SD_4_DSI_GENLOCK_2
+			IPP::PCD_GPP_D_05		09.111;	#xxgpp_sd_5_dsi_genlock_3  |  GPP_SD_5_DSI_GENLOCK_3
+			IPP::PCD_GPP_D_06		09.094;	#xxgpp_sd_6_srcclkreq1_b  |  GPP_SD_6_SRCCLKREQ1_B
+			IPP::PCD_GPP_D_07		09.073;	#xxgpp_sd_7_srcclkreq2_b  |  GPP_SD_7_SRCCLKREQ2_B
+			IPP::PCD_GPP_D_08		09.105;	#xxgpp_sd_8  |  GPP_SD_8
+			IPP::PCD_GPP_D_09	[U]	 0.000;	#xxgpp_sd_9_l_vdden  |  GPP_SD_9_L_VDDEN
+			IPP::PCD_GPP_D_10	[U]	 0.000;	#xxgpp_sd_10_l_bklten  |  GPP_SD_10_L_BKLTEN
+			IPP::PCD_GPP_D_11	[U]	 0.000;	#xxgpp_sd_11_l_bkltctl  |  GPP_SD_11_L_BKLTCTL
+			IPP::PCD_GPP_D_12		09.058;	#xxgpp_sd_12_srcclkreq3_b  |  GPP_SD_12_SRCCLKREQ3_B
+			IPP::PCD_GPP_D_13		09.099;	#xxgpp_sd_13_ddsp_hpd3_b_disp_misc3  |  GPP_SD_13_DDSP_HPD3_DISP_MISC3
+			IPP::PCD_GPP_D_14		09.092;	#xxgpp_sd_14_ddsp_hpd4_b_disp_misc4  |  GPP_SD_14_DDSP_HPD4_DISP_MISC4
+			IPP::PCD_GPP_D_15		09.100;	#xxgpp_sd_15_ddsp_hpd1_b_disp_misc1  |  GPP_SD_15_DDSP_HPD1_DISP_MISC1
+			IPP::PCD_GPP_D_16		09.074;	#xxgpp_sd_16_ddsp_hpd2_b_disp_misc2  |  GPP_SD_16_DDSP_HPD2_DISP_MISC2
+			IPP::PCD_GPP_D_17	[U]	 0.000;	#xxgpp_sd_17_pcie_lnk_down_srcclkreq3_b  |  GPP_SD_17_PCIE_LNK_DOWN_SRCCLKREQ3_B
+			IPP::PCD_GPP_D_18		09.057;	#xxgpp_sd_18_boothalt_b  |  GPP_SD_18_BOOTHALT_B
+			IPP::PCD_GPP_D_19	[U]	 0.000;	#xxgpp_sd_19_pmc_i2c_scl  |  GPP_SD_19_PMC_I2C_SCL
+			IPP::PCD_GPP_D_20	[U]	 0.000;	#xxgpp_sd_20_pmc_i2c_sda  |  GPP_SD_20_PMC_I2C_SDA
+			IPP::PCD_GPP_D_21	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_D_22	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_D_23	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_D_24	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_D_25	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_E_00	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_E_01	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_E_02	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_E_03	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_E_04	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_E_05	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_E_06	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_E_07	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_E_08	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_E_09	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_E_10	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_E_11	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_E_12	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_E_13	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_E_14	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_E_15	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_E_16	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_E_17	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_E_18	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_E_19	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_E_20	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_E_21	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_E_22	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_F_00	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_F_01	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_F_02	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_F_03	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_F_04	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_F_05	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_F_06	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_F_07	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_F_08	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_F_09	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_F_10	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_F_11	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_F_12	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_F_13	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_F_14	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_F_15	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_F_16	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_F_17	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_F_18	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_F_19	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_F_20	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_F_21	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_F_22	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_F_23	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_H_00	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_H_01	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_H_02	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_H_03	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_H_04	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_H_05	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_H_06	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_H_07	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_H_08	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_H_09	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_H_10	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_H_11	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_H_12	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_H_13	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_H_14	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_H_15	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_H_16	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_H_17	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_H_18	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_H_19	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_H_20	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_H_21	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_H_22	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_H_23	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_H_24	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_S_00	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_S_01	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_S_02	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_S_03	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_S_04	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_S_05	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_S_06	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_S_07	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_V_00	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_V_01	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_V_02	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_V_03	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_V_04	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_V_05	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_V_06	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_V_07	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_V_08	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_V_09	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_V_10	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_V_11	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_V_12	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_V_13	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_V_14	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_V_15	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_V_16	[U]	 0.000;	#-  |  -
+			IPP::PCD_GPP_V_17	[U]	 0.000;	#-  |  -
+			IPP::PCD_INJREF_00	[U]	 0.000;	#-  |  -
+			IPP::PCD_INJREF_01	[U]	 0.000;	#-  |  -
+			IPP::PCD_INJREF_02	[U]	 0.000;	#xxext_inj_bclk_n  |  EXT_INJ_BCLK_N
+			IPP::PCD_INJREF_03	[U]	 0.000;	#xxext_inj_bclk_p  |  EXT_INJ_BCLK_P
+			IPP::PCD_INJREF_04	[U]	 0.000;	#-  |  -
+			IPP::PCD_INJREF_05	[U]	 0.000;	#-  |  -
+			IPP::PCD_INJREF_06	[U]	 0.000;	#xxphyref_inj_n  |  PHYREF_INJ_N
+			IPP::PCD_INJREF_07	[U]	 0.000;	#xxphyref_inj_p  |  PHYREF_INJ_P
+			IPP::PCD_INJREF_08	[U]	 0.000;	#xxtc_1_ref_pad_clk_n  |  TC_1_REF_PAD_CLK_N
+			IPP::PCD_INJREF_09	[U]	 0.000;	#xxtc_1_ref_pad_clk_p  |  TC_1_REF_PAD_CLK_P
+			IPP::PCD_L_BKLCTL	[U]	 0.000;	#-  |  -
+			IPP::PCD_L_BKLTEN	[U]	 0.000;	#-  |  -
+			IPP::PCD_L_VDDEND	[U]	 0.000;	#-  |  -
+			IPP::PCD_MBP_IN_0	[U]	 0.000;	#xxjtag_mbpb0  |  PCD_JTAG_MBPB_0
+			IPP::PCD_MBP_IN_1	[U]	 0.000;	#xxjtag_mbpb1  |  PCD_JTAG_MBPB_1
+			IPP::PCD_MBP_IN_2	[U]	 0.000;	#-  |  -
+			IPP::PCD_MBP_INOUT_0	[U]	 0.000;	#-  |  -
+			IPP::PCD_MBP_INOUT_1	[U]	 0.000;	#-  |  -
+			IPP::PCD_MBP_INOUT_2	[U]	 0.000;	#-  |  -
+			IPP::PCD_MBP_OUT_0	[U]	 0.000;	#-  |  -
+			IPP::PCD_MBP_OUT_1	[U]	 0.000;	#-  |  -
+			IPP::PCD_MBP_OUT_2	[U]	 0.000;	#-  |  -
+			IPP::PCD_MLK_CLK	[U]	 0.000;	#-  |  -
+			IPP::PCD_MLK_DATA	[U]	 0.000;	#-  |  -
+			IPP::PCD_MLK_RST	[U]	 0.000;	#-  |  -
+			IPP::PCD_OBS_00	[U]	 0.000;	#-  |  -
+			IPP::PCD_OBS_01	[U]	 0.000;	#xxddi3_aprobe  |  -
+			IPP::PCD_OBS_02	[U]	 0.000;	#-  |  -
+			IPP::PCD_OBS_03		02.004;	#xxdmi_aprobe  |  PCD_DMI_APROBE
+			IPP::PCD_OBS_04		02.002;	#xxdmi_aprobe2  |  PCD_DMI_APROBE2
+			IPP::PCD_OBS_05	[U]	 0.000;	#xxpcd_obs0mon_isclk  |  PCD_OBS0MON_ISCLK
+			IPP::PCD_OBS_06	[U]	 0.000;	#xxpcd_obs1mon_isclk  |  PCD_OBS1MON_ISCLK
+			IPP::PCD_OBS_07	[U]	 0.000;	#xxpcie_a_aprobe  |  -
+			IPP::PCD_OBS_08	[U]	 0.000;	#xxpcie_a_aprobe2  |  -
+			IPP::PCD_OBS_09		02.036;	#xxpcie_b0_aprobe  |  PCD_PCIE_B0_APROBE
+			IPP::PCD_OBS_10	[U]	 0.000;	#xxpcie_b0_aprobe2  |  -
+			IPP::PCD_OBS_11	[U]	 0.000;	#xxpcie_b1_aprobe  |  -
+			IPP::PCD_OBS_12		02.047;	#xxpcie_b1_aprobe2  |  PCD_PCIE_B1_APROBE2
+			IPP::PCD_OBS_13	[U]	 0.000;	#xxtc_0_aprobe  |  -
+			IPP::PCD_OBS_14		09.062;	#xxtc_1_aprobe  |  PCD_TC_1_APROBE
+			IPP::PCD_OBS_15	[U]	 0.000;	#-  |  -
+			IPP::PCD_OBS_16	[U]	 0.000;	#-  |  -
+			IPP::PCD_OBS_17	[U]	 0.000;	#-  |  -
+			IPP::PCD_OBS_18	[U]	 0.000;	#-  |  -
+			IPP::PCD_OBS_19	[U]	 0.000;	#xxddi2_aprobe  |  -
+			IPP::PCD_PCIE_D_LDO	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE_E_LDO	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE_LDO	[U]	 0.000;	#xxpcie_ldo  |  PCIEG5_LDO
+			IPP::PCD_PCIE4_00_RXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_00_RXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_00_TXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_00_TXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_01_RXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_01_RXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_01_TXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_01_TXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_02_RXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_02_RXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_02_TXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_02_TXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_03_RXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_03_RXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_03_TXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_03_TXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_04_RXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_04_RXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_04_TXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_04_TXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_05_RXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_05_RXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_05_TXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_05_TXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_06_RXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_06_RXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_06_TXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_06_TXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_07_RXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_07_RXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_07_TXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE4_07_TXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_PCIE5_00_RXN	[U]	 0.000;	#xxpcie_a0_rxn  |  PCIE5_A0_RX_N
+			IPP::PCD_PCIE5_00_RXP	[U]	 0.000;	#xxpcie_a0_rxp  |  PCIE5_A0_RX_P
+			IPP::PCD_PCIE5_00_TXN	[U]	 0.000;	#xxpcie_a0_txn  |  PCIE5_A0_TX_N
+			IPP::PCD_PCIE5_00_TXP	[U]	 0.000;	#xxpcie_a0_txp  |  PCIE5_A0_TX_P
+			IPP::PCD_PCIE5_01_RXN	[U]	 0.000;	#xxpcie_a1_rxn  |  PCIE5_A1_RX_N
+			IPP::PCD_PCIE5_01_RXP	[U]	 0.000;	#xxpcie_a1_rxp  |  PCIE5_A1_RX_P
+			IPP::PCD_PCIE5_01_TXN	[U]	 0.000;	#xxpcie_a1_txn  |  PCIE5_A1_TX_N
+			IPP::PCD_PCIE5_01_TXP	[U]	 0.000;	#xxpcie_a1_txp  |  PCIE5_A1_TX_P
+			IPP::PCD_PCIE5_02_RXN	[U]	 0.000;	#xxpcie_a2_rxn  |  PCIE5_A2_RX_N
+			IPP::PCD_PCIE5_02_RXP	[U]	 0.000;	#xxpcie_a2_rxp  |  PCIE5_A2_RX_P
+			IPP::PCD_PCIE5_02_TXN	[U]	 0.000;	#xxpcie_a2_txn  |  PCIE5_A2_TX_N
+			IPP::PCD_PCIE5_02_TXP	[U]	 0.000;	#xxpcie_a2_txp  |  PCIE5_A2_TX_P
+			IPP::PCD_PCIE5_03_RXN	[U]	 0.000;	#xxpcie_a3_rxn  |  PCIE5_A3_RX_N
+			IPP::PCD_PCIE5_03_RXP	[U]	 0.000;	#xxpcie_a3_rxp  |  PCIE5_A3_RX_P
+			IPP::PCD_PCIE5_03_TXN	[U]	 0.000;	#xxpcie_a3_txn  |  PCIE5_A3_TX_N
+			IPP::PCD_PCIE5_03_TXP	[U]	 0.000;	#xxpcie_a3_txp  |  PCIE5_A3_TX_P
+			IPP::PCD_PCIE5_04_RXN	[U]	 0.000;	#xxpcie_a4_rxn  |  PCIE5_A4_RX_N
+			IPP::PCD_PCIE5_04_RXP	[U]	 0.000;	#xxpcie_a4_rxp  |  PCIE5_A4_RX_P
+			IPP::PCD_PCIE5_04_TXN	[U]	 0.000;	#xxpcie_a4_txn  |  PCIE5_A4_TX_N
+			IPP::PCD_PCIE5_04_TXP	[U]	 0.000;	#xxpcie_a4_txp  |  PCIE5_A4_TX_P
+			IPP::PCD_PCIE5_05_RXN	[U]	 0.000;	#xxpcie_a5_rxn  |  PCIE5_A5_RX_N
+			IPP::PCD_PCIE5_05_RXP	[U]	 0.000;	#xxpcie_a5_rxp  |  PCIE5_A5_RX_P
+			IPP::PCD_PCIE5_05_TXN	[U]	 0.000;	#xxpcie_a5_txn  |  PCIE5_A5_TX_N
+			IPP::PCD_PCIE5_05_TXP	[U]	 0.000;	#xxpcie_a5_txp  |  PCIE5_A5_TX_P
+			IPP::PCD_PCIE5_06_RXN	[U]	 0.000;	#xxpcie_a6_rxn  |  PCIE5_A6_RX_N
+			IPP::PCD_PCIE5_06_RXP	[U]	 0.000;	#xxpcie_a6_rxp  |  PCIE5_A6_RX_P
+			IPP::PCD_PCIE5_06_TXN	[U]	 0.000;	#xxpcie_a6_txn  |  PCIE5_A6_TX_N
+			IPP::PCD_PCIE5_06_TXP	[U]	 0.000;	#xxpcie_a6_txp  |  PCIE5_A6_TX_P
+			IPP::PCD_PCIE5_07_RXN	[U]	 0.000;	#xxpcie_a7_rxn  |  PCIE5_A7_RX_N
+			IPP::PCD_PCIE5_07_RXP	[U]	 0.000;	#xxpcie_a7_rxp  |  PCIE5_A7_RX_P
+			IPP::PCD_PCIE5_07_TXN	[U]	 0.000;	#xxpcie_a7_txn  |  PCIE5_A7_TX_N
+			IPP::PCD_PCIE5_07_TXP	[U]	 0.000;	#xxpcie_a7_txp  |  PCIE5_A7_TX_P
+			IPP::PCD_PCIE5_08_RXN	[U]	 0.000;	#xxpcie_b0_rxn  |  PCIE5_B0_RX_N
+			IPP::PCD_PCIE5_08_RXP	[U]	 0.000;	#xxpcie_b0_rxp  |  PCIE5_B0_RX_P
+			IPP::PCD_PCIE5_08_TXN	[U]	 0.000;	#xxpcie_b0_txn  |  PCIE5_B0_TX_N
+			IPP::PCD_PCIE5_08_TXP	[U]	 0.000;	#xxpcie_b0_txp  |  PCIE5_B0_TX_P
+			IPP::PCD_PCIE5_09_RXN	[U]	 0.000;	#xxpcie_b1_rxn  |  PCIE5_B1_RX_N
+			IPP::PCD_PCIE5_09_RXP	[U]	 0.000;	#xxpcie_b1_rxp  |  PCIE5_B1_RX_P
+			IPP::PCD_PCIE5_09_TXN	[U]	 0.000;	#xxpcie_b1_txn  |  PCIE5_B1_TX_N
+			IPP::PCD_PCIE5_09_TXP	[U]	 0.000;	#xxpcie_b1_txp  |  PCIE5_B1_TX_P
+			IPP::PCD_PCIE5_10_RXN	[U]	 0.000;	#xxpcie_b2_rxn  |  PCIE5_B2_RX_N
+			IPP::PCD_PCIE5_10_RXP	[U]	 0.000;	#xxpcie_b2_rxp  |  PCIE5_B2_RX_P
+			IPP::PCD_PCIE5_10_TXN	[U]	 0.000;	#xxpcie_b2_txn  |  PCIE5_B2_TX_N
+			IPP::PCD_PCIE5_10_TXP	[U]	 0.000;	#xxpcie_b2_txp  |  PCIE5_B2_TX_P
+			IPP::PCD_PCIE5_11_RXN	[U]	 0.000;	#xxpcie_b3_rxn  |  PCIE5_B3_RX_N
+			IPP::PCD_PCIE5_11_RXP	[U]	 0.000;	#xxpcie_b3_rxp  |  PCIE5_B3_RX_P
+			IPP::PCD_PCIE5_11_TXN	[U]	 0.000;	#xxpcie_b3_txn  |  PCIE5_B3_TX_N
+			IPP::PCD_PCIE5_11_TXP	[U]	 0.000;	#xxpcie_b3_txp  |  PCIE5_B3_TX_P
+			IPP::PCD_PCIE5_12_RXN	[U]	 0.000;	#xxpcie_b4_rxn  |  PCIE5_B4_RX_N
+			IPP::PCD_PCIE5_12_RXP	[U]	 0.000;	#xxpcie_b4_rxp  |  PCIE5_B4_RX_P
+			IPP::PCD_PCIE5_12_TXN	[U]	 0.000;	#xxpcie_b4_txn  |  PCIE5_B4_TX_N
+			IPP::PCD_PCIE5_12_TXP	[U]	 0.000;	#xxpcie_b4_txp  |  PCIE5_B4_TX_P
+			IPP::PCD_PCIE5_13_RXN	[U]	 0.000;	#xxpcie_b5_rxn  |  PCIE5_B5_RX_N
+			IPP::PCD_PCIE5_13_RXP	[U]	 0.000;	#xxpcie_b5_rxp  |  PCIE5_B5_RX_P
+			IPP::PCD_PCIE5_13_TXN	[U]	 0.000;	#xxpcie_b5_txn  |  PCIE5_B5_TX_N
+			IPP::PCD_PCIE5_13_TXP	[U]	 0.000;	#xxpcie_b5_txp  |  PCIE5_B5_TX_P
+			IPP::PCD_PCIE5_14_RXN	[U]	 0.000;	#xxpcie_b6_rxn  |  PCIE5_B6_RX_N
+			IPP::PCD_PCIE5_14_RXP	[U]	 0.000;	#xxpcie_b6_rxp  |  PCIE5_B6_RX_P
+			IPP::PCD_PCIE5_14_TXN	[U]	 0.000;	#xxpcie_b6_txn  |  PCIE5_B6_TX_N
+			IPP::PCD_PCIE5_14_TXP	[U]	 0.000;	#xxpcie_b6_txp  |  PCIE5_B6_TX_P
+			IPP::PCD_PCIE5_15_RXN	[U]	 0.000;	#xxpcie_b7_rxn  |  PCIE5_B7_RX_N
+			IPP::PCD_PCIE5_15_RXP	[U]	 0.000;	#xxpcie_b7_rxp  |  PCIE5_B7_RX_P
+			IPP::PCD_PCIE5_15_TXN	[U]	 0.000;	#xxpcie_b7_txn  |  PCIE5_B7_TX_N
+			IPP::PCD_PCIE5_15_TXP	[U]	 0.000;	#xxpcie_b7_txp  |  PCIE5_B7_TX_P
+			IPP::PCD_PCIE5_16_RXN	[U]	 0.000;	#xxpcie_b8_rxn  |  PCIE5_B8_RX_N
+			IPP::PCD_PCIE5_16_RXP	[U]	 0.000;	#xxpcie_b8_rxp  |  PCIE5_B8_RX_P
+			IPP::PCD_PCIE5_16_TXN	[U]	 0.000;	#xxpcie_b8_txn  |  PCIE5_B8_TX_N
+			IPP::PCD_PCIE5_16_TXP	[U]	 0.000;	#xxpcie_b8_txp  |  PCIE5_B8_TX_P
+			IPP::PCD_PCIE5_17_RXN	[U]	 0.000;	#xxpcie_b9_rxn  |  PCIE5_B9_RX_N
+			IPP::PCD_PCIE5_17_RXP	[U]	 0.000;	#xxpcie_b9_rxp  |  PCIE5_B9_RX_P
+			IPP::PCD_PCIE5_17_TXN	[U]	 0.000;	#xxpcie_b9_txn  |  PCIE5_B9_TX_N
+			IPP::PCD_PCIE5_17_TXP	[U]	 0.000;	#xxpcie_b9_txp  |  PCIE5_B9_TX_P
+			IPP::PCD_PCIE5_18_RXN	[U]	 0.000;	#xxpcie_b10_rxn  |  PCIE5_B10_RX_N
+			IPP::PCD_PCIE5_18_RXP	[U]	 0.000;	#xxpcie_b10_rxp  |  PCIE5_B10_RX_P
+			IPP::PCD_PCIE5_18_TXN	[U]	 0.000;	#xxpcie_b10_txn  |  PCIE5_B10_TX_N
+			IPP::PCD_PCIE5_18_TXP	[U]	 0.000;	#xxpcie_b10_txp  |  PCIE5_B10_TX_P
+			IPP::PCD_PCIE5_19_RXN	[U]	 0.000;	#xxpcie_b11_rxn  |  PCIE5_B11_RX_N
+			IPP::PCD_PCIE5_19_RXP	[U]	 0.000;	#xxpcie_b11_rxp  |  PCIE5_B11_RX_P
+			IPP::PCD_PCIE5_19_TXN	[U]	 0.000;	#xxpcie_b11_txn  |  PCIE5_B11_TX_N
+			IPP::PCD_PCIE5_19_TXP	[U]	 0.000;	#xxpcie_b11_txp  |  PCIE5_B11_TX_P
+			IPP::PCD_PCIE5_20_RXN	[U]	 0.000;	#xxpcie_b12_rxn  |  PCIE5_B12_RX_N
+			IPP::PCD_PCIE5_20_RXP	[U]	 0.000;	#xxpcie_b12_rxp  |  PCIE5_B12_RX_P
+			IPP::PCD_PCIE5_20_TXN	[U]	 0.000;	#xxpcie_b12_txn  |  PCIE5_B12_TX_N
+			IPP::PCD_PCIE5_20_TXP	[U]	 0.000;	#xxpcie_b12_txp  |  PCIE5_B12_TX_P
+			IPP::PCD_PCIE5_21_RXN	[U]	 0.000;	#xxpcie_b13_rxn  |  PCIE5_B13_RX_N
+			IPP::PCD_PCIE5_21_RXP	[U]	 0.000;	#xxpcie_b13_rxp  |  PCIE5_B13_RX_P
+			IPP::PCD_PCIE5_21_TXN	[U]	 0.000;	#xxpcie_b13_txn  |  PCIE5_B13_TX_N
+			IPP::PCD_PCIE5_21_TXP	[U]	 0.000;	#xxpcie_b13_txp  |  PCIE5_B13_TX_P
+			IPP::PCD_PCIE5_22_RXN	[U]	 0.000;	#xxpcie_b14_rxn  |  PCIE5_B14_RX_N
+			IPP::PCD_PCIE5_22_RXP	[U]	 0.000;	#xxpcie_b14_rxp  |  PCIE5_B14_RX_P
+			IPP::PCD_PCIE5_22_TXN	[U]	 0.000;	#xxpcie_b14_txn  |  PCIE5_B14_TX_N
+			IPP::PCD_PCIE5_22_TXP	[U]	 0.000;	#xxpcie_b14_txp  |  PCIE5_B14_TX_P
+			IPP::PCD_PCIE5_23_RXN		02.045;	#xxpcie_b15_rxn  |  PCIE5_B15_RX_N
+			IPP::PCD_PCIE5_23_RXP		02.044;	#xxpcie_b15_rxp  |  PCIE5_B15_RX_P
+			IPP::PCD_PCIE5_23_TXN		02.019;	#xxpcie_b15_txn  |  PCIE5_B15_TX_N
+			IPP::PCD_PCIE5_23_TXP		02.018;	#xxpcie_b15_txp  |  PCIE5_B15_TX_P
+			IPP::PCD_PROBE_TRIG0	[U]	 0.000;	#-  |  -
+			IPP::PCD_PROBE_TRIG1		2.009;	#-  |  -
+			IPP::PCD_RST_00	[U]	 0.000;	#xxvdd2_pwrgd  |  VDD2PWRGOOD_OUT
+			IPP::PCD_RST_01	[U]	 0.000;	#xxprdy_b  |  PRDY_B
+			IPP::PCD_RST_02	[U]	 0.000;	#xxpreq_b  |  PREQ_B
+			IPP::PCD_RST_03	[U]	 0.000;	#xxreset_sync_b  |  RESET_SYNC_B
+			IPP::PCD_RST_04		02.043;	#xxpch_pwrok  |  PCH_PWROK
+			IPP::PCD_RST_05		02.033;	#xxrsmrst_pcd_b  |  RSMRST_B
+			IPP::PCD_RST_06	[U]	 0.000;	#xxpcd_epd_on  |  EPD_ON_PCD_OUT
+			IPP::PCD_RST_07	[U]	 0.000;	#-  |  -
+			IPP::PCD_RST_08	[U]	 0.000;	#-  |  -
+			IPP::PCD_RST_09	[U]	 0.000;	#-  |  -
+			IPP::PCD_RST_10	[U]	 0.000;	#-  |  -
+			IPP::PCD_RST_11	[U]	 0.000;	#-  |  -
+			IPP::PCD_RST_12	[U]	 0.000;	#-  |  -
+			IPP::PCD_RST_13	[U]	 0.000;	#-  |  -
+			IPP::PCD_RST_14	[U]	 0.000;	#-  |  -
+			IPP::PCD_RST_15	[U]	 0.000;	#-  |  -
+			IPP::PCD_RST_16		09.075;	#xxpcd_bgr_isclk  |  PCD_BGR_ISCLK
+			IPP::PCD_RST_17	[U]	 0.000;	#-  |  -
+			IPP::PCD_RST_18	[U]	 0.000;	#-  |  -
+			IPP::PCD_RST_19	[U]	 0.000;	#-  |  -
+			IPP::PCD_SPI0_00	[U]	 0.000;	#-  |  -
+			IPP::PCD_SPI0_01	[U]	 0.000;	#-  |  -
+			IPP::PCD_SPI0_02	[U]	 0.000;	#-  |  -
+			IPP::PCD_SPI0_03	[U]	 0.000;	#-  |  -
+			IPP::PCD_SPI0_04	[U]	 0.000;	#-  |  -
+			IPP::PCD_SPI0_05	[U]	 0.000;	#-  |  -
+			IPP::PCD_SPI0_06	[U]	 0.000;	#-  |  -
+			IPP::PCD_SPI0_07	[U]	 0.000;	#-  |  -
+			IPP::PCD_TCP0_0_TXN	[U]	 0.000;	#xxtcp0_0_txn  |  TYPEC_0_TX0_N
+			IPP::PCD_TCP0_0_TXP	[U]	 0.000;	#xxtcp0_0_txp  |  TYPEC_0_TX0_P
+			IPP::PCD_TCP0_0_TXRXN	[U]	 0.000;	#xxtcp0_0_txrxn  |  TYPEC_0_TXRX0_N
+			IPP::PCD_TCP0_0_TXRXP	[U]	 0.000;	#xxtcp0_0_txrxp  |  TYPEC_0_TXRX0_P
+			IPP::PCD_TCP0_1_TXN		09.079;	#xxtcp0_1_txn  |  TYPEC_0_TX1_N
+			IPP::PCD_TCP0_1_TXP		09.078;	#xxtcp0_1_txp  |  TYPEC_0_TX1_P
+			IPP::PCD_TCP0_1_TXRXN		09.061;	#xxtcp0_1_txrxn  |  TYPEC_0_TXRX1_N
+			IPP::PCD_TCP0_1_TXRXP		09.060;	#xxtcp0_1_txrxp  |  TYPEC_0_TXRX1_P
+			IPP::PCD_TCP0_AUXN		09.077;	#xxtcp0_auxpad_n  |  TYPEC_0_AUXPAD_N
+			IPP::PCD_TCP0_AUXP		09.076;	#xxtcp0_auxpad_p  |  TYPEC_0_AUXPAD_P
+			IPP::PCD_TCP1_0_TXN	[U]	 0.000;	#xxtcp1_0_txn  |  TYPEC_1_TX0_N
+			IPP::PCD_TCP1_0_TXP	[U]	 0.000;	#xxtcp1_0_txp  |  TYPEC_1_TX0_P
+			IPP::PCD_TCP1_0_TXRXN	[U]	 0.000;	#xxtcp1_0_txrxn  |  TYPEC_1_TXRX0_N
+			IPP::PCD_TCP1_0_TXRXP	[U]	 0.000;	#xxtcp1_0_txrxp  |  TYPEC_1_TXRX0_P
+			IPP::PCD_TCP1_1_TXN	[U]	 0.000;	#xxtcp1_1_txn  |  TYPEC_1_TX1_N
+			IPP::PCD_TCP1_1_TXP	[U]	 0.000;	#xxtcp1_1_txp  |  TYPEC_1_TX1_P
+			IPP::PCD_TCP1_1_TXRXN	[U]	 0.000;	#xxtcp1_1_txrxn  |  TYPEC_1_TXRX1_N
+			IPP::PCD_TCP1_1_TXRXP	[U]	 0.000;	#xxtcp1_1_txrxp  |  TYPEC_1_TXRX1_P
+			IPP::PCD_TCP1_AUXN		09.087;	#xxtcp1_auxpad_n  |  TYPEC_1_AUXPAD_N
+			IPP::PCD_TCP1_AUXP		09.086;	#xxtcp1_auxpad_p  |  TYPEC_1_AUXPAD_P
+			IPP::PCD_TCP2_0_TXN	[U]	 0.000;	#xxddi2_dp0_hdmi2_txn  |  DDI_2_TX_0_N
+			IPP::PCD_TCP2_0_TXP	[U]	 0.000;	#xxddi2_dp0_hdmi2_txp  |  DDI_2_TX_0_P
+			IPP::PCD_TCP2_0_TXRXN	[U]	 0.000;	#xxddi2_dp1_hdmi1_txn  |  DDI_2_TX_1_N
+			IPP::PCD_TCP2_0_TXRXP	[U]	 0.000;	#xxddi2_dp1_hdmi1_txp  |  DDI_2_TX_1_P
+			IPP::PCD_TCP2_1_TXN	[U]	 0.000;	#xxddi2_dp2_hdmi0_txn  |  DDI_2_TX_2_N
+			IPP::PCD_TCP2_1_TXP	[U]	 0.000;	#xxddi2_dp2_hdmi0_txp  |  DDI_2_TX_2_P
+			IPP::PCD_TCP2_1_TXRXN	[U]	 0.000;	#xxddi2_dp3_hdmi3_txn  |  DDI_2_TX_3_N
+			IPP::PCD_TCP2_1_TXRXP	[U]	 0.000;	#xxddi2_dp3_hdmi3_txp  |  DDI_2_TX_3_P
+			IPP::PCD_TCP2_AUXN		09.071;	#xxddi2_auxpad_n  |  DDI_2_AUX_N
+			IPP::PCD_TCP2_AUXP		09.070;	#xxddi2_auxpad_p  |  DDI_2_AUX_P
+			IPP::PCD_TCP3_0_TXN	[U]	 0.000;	#xxddi3_dp0_hdmi2_txn  |  DDI_3_TX_0_N
+			IPP::PCD_TCP3_0_TXP	[U]	 0.000;	#xxddi3_dp0_hdmi2_txp  |  DDI_3_TX_0_P
+			IPP::PCD_TCP3_0_TXRXN	[U]	 0.000;	#xxddi3_dp1_hdmi1_txn  |  DDI_3_TX_1_N
+			IPP::PCD_TCP3_0_TXRXP	[U]	 0.000;	#xxddi3_dp1_hdmi1_txp  |  DDI_3_TX_1_P
+			IPP::PCD_TCP3_1_TXN	[U]	 0.000;	#xxddi3_dp2_hdmi0_txn  |  DDI_3_TX_2_N
+			IPP::PCD_TCP3_1_TXP	[U]	 0.000;	#xxddi3_dp2_hdmi0_txp  |  DDI_3_TX_2_P
+			IPP::PCD_TCP3_1_TXRXN	[U]	 0.000;	#xxddi3_dp3_hdmi3_txn  |  DDI_3_TX_3_N
+			IPP::PCD_TCP3_1_TXRXP	[U]	 0.000;	#xxddi3_dp3_hdmi3_txp  |  DDI_3_TX_3_P
+			IPP::PCD_TCP3_AUXN		09.109;	#xxddi3_auxpad_n  |  DDI_3_AUX_N
+			IPP::PCD_TCP3_AUXP		09.108;	#xxddi3_auxpad_p  |  DDI_3_AUX_P
+			IPP::PCD_TCP4_0_TXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_TCP4_0_TXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_TCP4_0_TXRXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_TCP4_0_TXRXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_TCP4_1_TXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_TCP4_1_TXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_TCP4_1_TXRXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_TCP4_1_TXRXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_TCP4_AUXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_TCP4_AUXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_TDI		09.104;	#xxjtag_tdi  |  PCD_JTAG_TDI
+			IPP::PCD_TDO		02.000;	#xxjtag_tdo  |  PCD_JTAG_TDO
+			IPP::PCD_TMS		02.016;	#xxjtag_tms  |  PCD_JTAG_TMS
+			IPP::PCD_TMUX_00		2.042;	#xxgpp_sb_2_ddp3_ctrlclk_ieh_fatal_err2_b;xxgpp_sa_0_dir_espi_io_0;xxgpp_sa_6_dir_espi_rclk;xxclkout_dmi_n;xxgpp_sd_19_pmc_i2c_scl;xxgpp_sa_4_dir_espi_cs0_b;xxgpp_sb_7_pcd_dmiclkreq_b;xxclkout_src0_n  |  -
+			IPP::PCD_TMUX_01		2.023;	#xxgpp_sb_3_ddp3_ctrldata_dsi_de_te_2_genlock_ref;xxgpp_sa_1_dir_espi_io_1;xxgpp_sa_9_dmi_perstb;xxclkout_dmi_p;xxjtag_mbpb0;xxgpp_sa_7_dir_espi_reset_b;xxgpp_sb_8_srcclkreq4_b;xxclkout_src0_p  |  -
+			IPP::PCD_TMUX_02		2.015;	#xxgpp_sb_4_ddp4_ctrlclk_ieh_corr_err0_b;xxgpp_sa_2_dir_espi_io_2;xxgpp_sa_16_ddsp_hpd3_b_disp_misc3;xxprdy_b;xxjtag_mbpb1;xxgpp_sa_8_slp_s0_b;xxgpp_sb_9_srcclkreq5_b;xxclkout_src1_n  |  -
+			IPP::PCD_TMUX_03		2.022;	#xxgpp_sb_5_ddp4_ctrldata_ieh_nonfatal_err1_b;xxgpp_sa_3_dir_espi_io_3;xxgpp_sa_17_osse_smt_dat;xxpreq_b;xxpcd_epd_on;xxgpp_sa_10_caterr_b;xxgpp_sb_14_srcclkreq0_b;xxclkout_src1_p  |  -
+			IPP::PCD_TMUX_04		2.013;	#xxgpp_sb_12_ddp1_ctrlclk_ieh_fatal_err2_b_tbt_lsx0_a;xxgpp_sa_5_dir_espi_clk;xxgpp_sa_18_osse_smt_clk;xxreset_sync_b;xxpcd_obs0mon_isclk;xxgpp_sa_11_thermtrip_b;xxgpp_sb_17_forcepr_b;xxclkout_src2_n  |  -
+			IPP::PCD_TMUX_05		2.006;	#xxgpp_sb_13_ddp1_ctrldata_tbt_lsx0_bxxgpp_sb_18_bpki3c_sda;xxgpp_sa_21_pcie_lnk_down_l_vdden_srcclkreq1_b_ieh_fatal_err2_b_nf5;xxvdd2_pwrgd;xxpcd_obs1mon_isclk;xxgpp_sa_12_cpu_c10_gate_b;xxphyref_inj_n;xxclkout_src2_p  |  -
+			IPP::PCD_TMUX_06		2.003;	#xxgpp_sb_15_ddp2_ctrlclk_tbt_lsx1_a;xxgpp_sd_19_pmc_i2c_scl;xxgpp_sa_22_fusa_diagtest_en_l_bklten_srcclkreq2_b_dsi_genlock_2;xxext_inj_bclk_n;xxpcie_b0_grcomp;xxgpp_sa_13_ps_onb;xxphyref_inj_p;xxclkout_src3_n  |  -
+			IPP::PCD_TMUX_07		2.005;	#xxgpp_sb_16_ddp2_ctrldata_tbt_lsx1_bxx_edm_pcd;xxgpp_sa_23_fusa_diagtest_mode_l_bkltctl_srcclkreq3_b_dsi_genlock_3;xxext_inj_bclk_p;xxpcie_b0_grcompv;xxgpp_sa_14_ddsp_hpd1_b_disp_misc1_time_sync_0;xxtc_1_ref_pad_clk_n;xxclkout_src3_p  |  -
+			IPP::PCD_TMUX_08		2.012;	#xxgpp_sd_9_l_vdden;xxgpp_sa_28_sndw_data1_rx;xxgpp_sa_24_sndw_clk_audclk;xxgpp_sa_15_ddsp_hpd2_b_disp_misc2_time_sync_1;xxtc_1_ref_pad_clk_p;xxclkout_src4_n  |  -
+			IPP::PCD_TMUX_09		2.046;	#xxgpp_sd_10_l_bklten;xxdmi_ldo;xxgpp_sa_25_sndw_data0_tx_audin;xxgpp_sa_19_osse_smt_alertb;xxclkout_src4_p  |  -
+			IPP::PCD_TMUX_10		2.054;	#xxgpp_sd_11_l_bkltctl;xxpcie_ldo;xxgpp_sa_26_sndw_data0_rx_audout;xxclkout_src5_n  |  -
+			IPP::PCD_TMUX_11		2.010;	#xxgpp_sd_17_pcie_lnk_down_srcclkreq3_b;xxddi_ldo;xxgpp_sa_27_sndw_data1_tx;xxclkout_src5_p  |  -
+			IPP::PCD_TMUX_12	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_13	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_14	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_15	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_16	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_17	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_18	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_19	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_20	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_21	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_22	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_23	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_24	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_25	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_26	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_27	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_28	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_29	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_30	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_31	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_32	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_33	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_34	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_35	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_36	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_37	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_38	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_39	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_40	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_41	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_42	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_43	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_44	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_45	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_46	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_47	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_48	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_49	[U]	 0.000;	#-  |  -
+			IPP::PCD_TMUX_50	[U]	 0.000;	#-  |  -
+			IPP::PCD_TRST		09.110;	#xxjtag_trst_b  |  PCD_JTAG_TRST_B
+			IPP::PCD_TSTPRT_I_00		09.072;	#xxhptp_rxlane0  |  PCD_HPTP_RX_0
+			IPP::PCD_TSTPRT_I_01		09.080;	#xxhptp_rxlane1  |  PCD_HPTP_RX_1
+			IPP::PCD_TSTPRT_I_02		09.056;	#xxhptp_rxlane2  |  PCD_HPTP_RX_2
+			IPP::PCD_TSTPRT_I_03		09.064;	#xxhptp_rxlane3  |  PCD_HPTP_RX_3
+			IPP::PCD_TSTPRT_I_04	[U]	 0.000;	#xxhptp_rxlane4  |  -
+			IPP::PCD_TSTPRT_I_05	[U]	 0.000;	#xxhptp_rxlane5  |  -
+			IPP::PCD_TSTPRT_I_06	[U]	 0.000;	#xxhptp_rxlane6  |  -
+			IPP::PCD_TSTPRT_I_07	[U]	 0.000;	#xxhptp_rxlane7  |  -
+			IPP::PCD_TSTPRT_I_08	[U]	 0.000;	#-  |  -
+			IPP::PCD_TSTPRT_I_09	[U]	 0.000;	#-  |  -
+			IPP::PCD_TSTPRT_I_10	[U]	 0.000;	#-  |  -
+			IPP::PCD_TSTPRT_I_11	[U]	 0.000;	#-  |  -
+			IPP::PCD_TSTPRT_I_12	[U]	 0.000;	#-  |  -
+			IPP::PCD_TSTPRT_I_13	[U]	 0.000;	#-  |  -
+			IPP::PCD_TSTPRT_I_14	[U]	 0.000;	#-  |  -
+			IPP::PCD_TSTPRT_I_15	[U]	 0.000;	#-  |  -
+			IPP::PCD_TSTPRT_I_CK		09.096;	#xxhptp_clk  |  PCD_HPTP_CLK
+			IPP::PCD_TSTPRT_O_00		02.024;	#xxhptp_txlane0  |  PCD_HPTP_TX_0
+			IPP::PCD_TSTPRT_O_01		02.032;	#xxhptp_txlane1  |  PCD_HPTP_TX_1
+			IPP::PCD_TSTPRT_O_02		02.008;	#xxhptp_txlane2  |  PCD_HPTP_TX_2
+			IPP::PCD_TSTPRT_O_03		02.040;	#xxhptp_txlane3  |  PCD_HPTP_TX_3
+			IPP::PCD_TSTPRT_O_04	[U]	 0.000;	#xxhptp_txlane4  |  -
+			IPP::PCD_TSTPRT_O_05	[U]	 0.000;	#xxhptp_txlane5  |  -
+			IPP::PCD_TSTPRT_O_06	[U]	 0.000;	#xxhptp_txlane6  |  -
+			IPP::PCD_TSTPRT_O_07	[U]	 0.000;	#xxhptp_txlane7  |  -
+			IPP::PCD_TSTPRT_O_08	[U]	 0.000;	#-  |  -
+			IPP::PCD_TSTPRT_O_09	[U]	 0.000;	#-  |  -
+			IPP::PCD_TSTPRT_O_10	[U]	 0.000;	#-  |  -
+			IPP::PCD_TSTPRT_O_11	[U]	 0.000;	#-  |  -
+			IPP::PCD_TSTPRT_O_12	[U]	 0.000;	#-  |  -
+			IPP::PCD_TSTPRT_O_13	[U]	 0.000;	#-  |  -
+			IPP::PCD_TSTPRT_O_14	[U]	 0.000;	#-  |  -
+			IPP::PCD_TSTPRT_O_15	[U]	 0.000;	#-  |  -
+			IPP::PCD_TSTPRT_O_CK	[U]	 0.000;	#-  |  -
+			IPP::PCD_UFS_00_RXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_UFS_00_RXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_UFS_00_TXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_UFS_00_TXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_UFS_01_RXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_UFS_01_RXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_UFS_01_TXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_UFS_01_TXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_USB3_01_RXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_USB3_01_RXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_USB3_01_TXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_USB3_01_TXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_USB3_02_RXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_USB3_02_RXP	[U]	 0.000;	#-  |  -
+			IPP::PCD_USB3_02_TXN	[U]	 0.000;	#-  |  -
+			IPP::PCD_USB3_02_TXP	[U]	 0.000;	#-  |  -
+			IPP::TIU_CLKCHIP_FREQ_TEST	[U]	 0.000;	#-  |  -
+			IPP::VCCRTC	[U]	 0.000;	#VCCRTC  |  VCCRTC
+			IPH::HUB_CLK_0_DP_0	[U]	 0.000;	#-  |  -
+			IPH::HUB_CLK_0_DP_1	[U]	 0.000;	#-  |  -
+			IPH::HUB_CLK_1_DP_0	[U]	 0.000;	#-  |  -
+			IPH::HUB_CLK_1_DP_1	[U]	 0.000;	#-  |  -
+			IPH::HUB_CLK_2_DP_0		09.041;	#xx_hub_hvm_clk  |  HUB_HVM_CLK
+			IPH::HUB_CLK_2_DP_1	[U]	 0.000;	#-  |  -
+			IPH::HUB_CLK_3_DP_0	[U]	 0.000;	#-  |  -
+			IPH::HUB_CLK_3_DP_1	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_00_CCC_00	[U]	 0.000;	#xxddr_0ca0_0ca3_0ca6_0ca0  |  DDR_0CA0
+			IPH::HUB_DDR_00_CCC_01	[U]	 0.000;	#xxddr_0ca1_0ca2_0ca5_0ca1  |  DDR_0CA1
+			IPH::HUB_DDR_00_CCC_02	[U]	 0.000;	#xxddr_0ca4_0ca8_0ca2_0ca2  |  DDR_0CA4
+			IPH::HUB_DDR_00_CCC_03	[U]	 0.000;	#xxddr_0ca11_0ca9_0cs0_0ca3  |  DDR_0CA11
+			IPH::HUB_DDR_00_CCC_04	[U]	 0.000;	#xxddr_0ca10_0ca10_0cs1_0ca4  |  DDR_0CA10
+			IPH::HUB_DDR_00_CCC_05	[U]	 0.000;	#xxddr_0ca7_0ca11_0ca1_0ca5  |  DDR_0CA7
+			IPH::HUB_DDR_00_CCC_06	[U]	 0.000;	#xxddr_0ca6_0ca12_0ca0_0ca6  |  DDR_0CA6
+			IPH::HUB_DDR_00_CCC_07	[U]	 0.000;	#xxddr_0cs1_0cs2_0ca3_0cs0  |  DDR_0CS1
+			IPH::HUB_DDR_00_CCC_08	[U]	 0.000;	#xxddr_0cs0_0cs0_0ca4_0cs1  |  DDR_0CS0
+			IPH::HUB_DDR_00_CLK_N	[U]	 0.000;	#xxddr_0clk0n_0clk0n_0clkn_0clkn  |  DDR_0CLK0_N
+			IPH::HUB_DDR_00_CLK_P	[U]	 0.000;	#xxddr_0clk0p_0clk0p_0clkp_0clkp  |  DDR_0CLK0_P
+			IPH::HUB_DDR_00_DBI_00	[U]	 0.000;	#xxddrdbi_nc_nc_lp00  |  -
+			IPH::HUB_DDR_00_DQS_N	[U]	 0.000;	#xxddrdqsn_il500_nil500_lp00  |  DDR_DQS_IL500_N
+			IPH::HUB_DDR_00_DQS_P	[U]	 0.000;	#xxddrdqsp_il500_nil500_lp00  |  DDR_DQS_IL500_P
+			IPH::HUB_DDR_00_WCK_N	[U]	 0.000;	#xxddr_0clk2n_0clk2n_0wck0n  |  DDR_0CLK2_N
+			IPH::HUB_DDR_00_WCK_P	[U]	 0.000;	#xxddr_0clk2p_0clk2p_0wck0p  |  DDR_0CLK2_P
+			IPH::HUB_DDR_00_xDQ_00	[U]	 0.000;	#xxddrdq_il500_nil500_lp00[0]  |  DDR_DQ_IL5000
+			IPH::HUB_DDR_00_xDQ_01	[U]	 0.000;	#xxddrdq_il500_nil500_lp00[1]  |  DDR_DQ_IL5001
+			IPH::HUB_DDR_00_xDQ_02	[U]	 0.000;	#xxddrdq_il500_nil500_lp00[2]  |  DDR_DQ_IL5002
+			IPH::HUB_DDR_00_xDQ_03	[U]	 0.000;	#xxddrdq_il500_nil500_lp00[3]  |  DDR_DQ_IL5003
+			IPH::HUB_DDR_00_xDQ_04	[U]	 0.000;	#xxddrdq_il500_nil500_lp00[4]  |  DDR_DQ_IL5004
+			IPH::HUB_DDR_00_xDQ_05	[U]	 0.000;	#xxddrdq_il500_nil500_lp00[5]  |  DDR_DQ_IL5005
+			IPH::HUB_DDR_00_xDQ_06	[U]	 0.000;	#xxddrdq_il500_nil500_lp00[6]  |  DDR_DQ_IL5006
+			IPH::HUB_DDR_00_xDQ_07	[U]	 0.000;	#xxddrdq_il500_nil500_lp00[7]  |  DDR_DQ_IL5007
+			IPH::HUB_DDR_01_CCC_00	[U]	 0.000;	#xxddr_0ca3_0ca1_1ca6_1ca0  |  DDR_0CA3
+			IPH::HUB_DDR_01_CCC_01	[U]	 0.000;	#xxddr_0ca2_0ca0_1ca5_1ca1  |  DDR_0CA2
+			IPH::HUB_DDR_01_CCC_02	[U]	 0.000;	#xxddr_0ca5_0ca5_1ca2_1ca2  |  DDR_0CA5
+			IPH::HUB_DDR_01_CCC_03	[U]	 0.000;	#xxddr_nc_nc_1cs0_1ca3  |  -
+			IPH::HUB_DDR_01_CCC_04	[U]	 0.000;	#xxddr_0ca12_0ca7_1cs1_1ca4  |  DDR_0CA12
+			IPH::HUB_DDR_01_CCC_05	[U]	 0.000;	#xxddr_0ca8_0ca6_1ca1_1ca5  |  DDR_0CA8
+			IPH::HUB_DDR_01_CCC_06	[U]	 0.000;	#xxddr_0ca9_0ca4_1ca0_1ca6  |  DDR_0CA9
+			IPH::HUB_DDR_01_CCC_07	[U]	 0.000;	#xxddr_0cs2_0cs3_1ca3_1cs0  |  DDR_0CS2
+			IPH::HUB_DDR_01_CCC_08	[U]	 0.000;	#xxddr_0cs3_0cs1_1ca4_1cs1  |  DDR_0CS3
+			IPH::HUB_DDR_01_CLK_N	[U]	 0.000;	#xxddr_0clk1n_0clk1n_1clkn_1clkn  |  DDR_0CLK1_N
+			IPH::HUB_DDR_01_CLK_P	[U]	 0.000;	#xxddr_0clk1p_0clk1p_1clkp_1clkp  |  DDR_0CLK1_P
+			IPH::HUB_DDR_01_DBI_00	[U]	 0.000;	#xxddrdbi_nc_nc_lp01  |  -
+			IPH::HUB_DDR_01_DQS_N	[U]	 0.000;	#xxddrdqsn_il501_nil501_lp01  |  DDR_DQS_IL501_N
+			IPH::HUB_DDR_01_DQS_P	[U]	 0.000;	#xxddrdqsp_il501_nil501_lp01  |  DDR_DQS_IL501_P
+			IPH::HUB_DDR_01_WCK_N	[U]	 0.000;	#xxddr_0clk3n_0clk3n_0wck1n  |  DDR_0CLK3_N
+			IPH::HUB_DDR_01_WCK_P	[U]	 0.000;	#xxddr_0clk3p_0clk3p_0wck1p  |  DDR_0CLK3_P
+			IPH::HUB_DDR_01_xDQ_00	[U]	 0.000;	#xxddrdq_il501_nil501_lp01[0]  |  DDR_DQ_IL5010
+			IPH::HUB_DDR_01_xDQ_01	[U]	 0.000;	#xxddrdq_il501_nil501_lp01[1]  |  DDR_DQ_IL5011
+			IPH::HUB_DDR_01_xDQ_02	[U]	 0.000;	#xxddrdq_il501_nil501_lp01[2]  |  DDR_DQ_IL5012
+			IPH::HUB_DDR_01_xDQ_03	[U]	 0.000;	#xxddrdq_il501_nil501_lp01[3]  |  DDR_DQ_IL5013
+			IPH::HUB_DDR_01_xDQ_04	[U]	 0.000;	#xxddrdq_il501_nil501_lp01[4]  |  DDR_DQ_IL5014
+			IPH::HUB_DDR_01_xDQ_05	[U]	 0.000;	#xxddrdq_il501_nil501_lp01[5]  |  DDR_DQ_IL5015
+			IPH::HUB_DDR_01_xDQ_06	[U]	 0.000;	#xxddrdq_il501_nil501_lp01[6]  |  DDR_DQ_IL5016
+			IPH::HUB_DDR_01_xDQ_07	[U]	 0.000;	#xxddrdq_il501_nil501_lp01[7]  |  DDR_DQ_IL5017
+			IPH::HUB_DDR_02_CCC_00	[U]	 0.000;	#xxddr_1ca1_1ca9_2ca6_2ca0  |  DDR_1CA1
+			IPH::HUB_DDR_02_CCC_01	[U]	 0.000;	#xxddr_1ca0_1ca7_2ca5_2ca1  |  DDR_1CA0
+			IPH::HUB_DDR_02_CCC_02	[U]	 0.000;	#xxddr_1ca4_1ca5_2ca2_2ca2  |  DDR_1CA4
+			IPH::HUB_DDR_02_CCC_03	[U]	 0.000;	#xxddr_1ca10_1cs1_2cs0_2ca3  |  DDR_1CA10
+			IPH::HUB_DDR_02_CCC_04	[U]	 0.000;	#xxddr_1ca11_1cs0_2cs1_2ca4  |  DDR_1CA11
+			IPH::HUB_DDR_02_CCC_05	[U]	 0.000;	#xxddr_1ca7_1ca0_2ca1_2ca5  |  DDR_1CA7
+			IPH::HUB_DDR_02_CCC_06	[U]	 0.000;	#xxddr_1ca6_1ca1_2ca0_2ca6  |  DDR_1CA6
+			IPH::HUB_DDR_02_CCC_07	[U]	 0.000;	#xxddr_1cs0_1ca6_2ca3_2cs0  |  DDR_1CS0
+			IPH::HUB_DDR_02_CCC_08	[U]	 0.000;	#xxddr_1cs1_1ca8_2ca4_2cs1  |  DDR_1CS1
+			IPH::HUB_DDR_02_CLK_N	[U]	 0.000;	#xxddr_1clk0n_1clk0n_2clkn_2clkn  |  DDR_1CLK0_N
+			IPH::HUB_DDR_02_CLK_P	[U]	 0.000;	#xxddr_1clk0p_1clk0p_2clkp_2clkp  |  DDR_1CLK0_P
+			IPH::HUB_DDR_02_DBI_00	[U]	 0.000;	#xxddrdbi_nc_nc_lp10  |  -
+			IPH::HUB_DDR_02_DQS_N	[U]	 0.000;	#xxddrdqsn_il510_nil502_lp10  |  DDR_DQS_IL510_N
+			IPH::HUB_DDR_02_DQS_P	[U]	 0.000;	#xxddrdqsp_il510_nil502_lp10  |  DDR_DQS_IL510_P
+			IPH::HUB_DDR_02_WCK_N	[U]	 0.000;	#xxddr_nc_nc_1wck0n  |  -
+			IPH::HUB_DDR_02_WCK_P	[U]	 0.000;	#xxddr_nc_nc_1wck0p  |  -
+			IPH::HUB_DDR_02_xDQ_00	[U]	 0.000;	#xxddrdq_il510_nil502_lp10[0]  |  DDR_DQ_IL5100
+			IPH::HUB_DDR_02_xDQ_01	[U]	 0.000;	#xxddrdq_il510_nil502_lp10[1]  |  DDR_DQ_IL5101
+			IPH::HUB_DDR_02_xDQ_02	[U]	 0.000;	#xxddrdq_il510_nil502_lp10[2]  |  DDR_DQ_IL5102
+			IPH::HUB_DDR_02_xDQ_03	[U]	 0.000;	#xxddrdq_il510_nil502_lp10[3]  |  DDR_DQ_IL5103
+			IPH::HUB_DDR_02_xDQ_04	[U]	 0.000;	#xxddrdq_il510_nil502_lp10[4]  |  DDR_DQ_IL5104
+			IPH::HUB_DDR_02_xDQ_05	[U]	 0.000;	#xxddrdq_il510_nil502_lp10[5]  |  DDR_DQ_IL5105
+			IPH::HUB_DDR_02_xDQ_06	[U]	 0.000;	#xxddrdq_il510_nil502_lp10[6]  |  DDR_DQ_IL5106
+			IPH::HUB_DDR_02_xDQ_07	[U]	 0.000;	#xxddrdq_il510_nil502_lp10[7]  |  DDR_DQ_IL5107
+			IPH::HUB_DDR_03_CCC_00	[U]	 0.000;	#xxddr_1ca2_1ca12_3ca6_3ca0  |  DDR_1CA2
+			IPH::HUB_DDR_03_CCC_01	[U]	 0.000;	#xxddr_1ca3_1ca10_3ca5_3ca1  |  DDR_1CA3
+			IPH::HUB_DDR_03_CCC_02	[U]	 0.000;	#xxddr_1ca5_1ca4_3ca2_3ca2  |  DDR_1CA5
+			IPH::HUB_DDR_03_CCC_03	[U]	 0.000;	#xxddr_nc_1cs2_3cs0_3ca3  |  -
+			IPH::HUB_DDR_03_CCC_04	[U]	 0.000;	#xxddr_1ca12_1cs3_3cs1_3ca4  |  DDR_1CA12
+			IPH::HUB_DDR_03_CCC_05	[U]	 0.000;	#xxddr_1ca9_1ca3_3ca1_3ca5  |  DDR_1CA9
+			IPH::HUB_DDR_03_CCC_06	[U]	 0.000;	#xxddr_1ca8_1ca2_3ca0_3ca6  |  DDR_1CA8
+			IPH::HUB_DDR_03_CCC_07	[U]	 0.000;	#xxddr_1cs3_nc_3ca3_3cs0  |  DDR_1CS3
+			IPH::HUB_DDR_03_CCC_08	[U]	 0.000;	#xxddr_1cs2_1ca11_3ca4_3cs1  |  DDR_1CS2
+			IPH::HUB_DDR_03_CLK_N	[U]	 0.000;	#xxddr_1clk1n_1clk1n_3clkn_3clkn  |  DDR_1CLK1_N
+			IPH::HUB_DDR_03_CLK_P	[U]	 0.000;	#xxddr_1clk1p_1clk1p_3clkp_3clkp  |  DDR_1CLK1_P
+			IPH::HUB_DDR_03_DBI_00	[U]	 0.000;	#xxddrdbi_nc_nc_lp11  |  -
+			IPH::HUB_DDR_03_DQS_N	[U]	 0.000;	#xxddrdqsn_il511_nil503_lp11  |  DDR_DQS_IL511_N
+			IPH::HUB_DDR_03_DQS_P	[U]	 0.000;	#xxddrdqsp_il511_nil503_lp11  |  DDR_DQS_IL511_P
+			IPH::HUB_DDR_03_WCK_N	[U]	 0.000;	#xxddr_nc_nc_1wck1n  |  -
+			IPH::HUB_DDR_03_WCK_P	[U]	 0.000;	#xxddr_nc_nc_1wck1p  |  -
+			IPH::HUB_DDR_03_xDQ_00	[U]	 0.000;	#xxddrdq_il511_nil503_lp11[0]  |  DDR_DQ_IL5110
+			IPH::HUB_DDR_03_xDQ_01	[U]	 0.000;	#xxddrdq_il511_nil503_lp11[1]  |  DDR_DQ_IL5111
+			IPH::HUB_DDR_03_xDQ_02	[U]	 0.000;	#xxddrdq_il511_nil503_lp11[2]  |  DDR_DQ_IL5112
+			IPH::HUB_DDR_03_xDQ_03	[U]	 0.000;	#xxddrdq_il511_nil503_lp11[3]  |  DDR_DQ_IL5113
+			IPH::HUB_DDR_03_xDQ_04	[U]	 0.000;	#xxddrdq_il511_nil503_lp11[4]  |  DDR_DQ_IL5114
+			IPH::HUB_DDR_03_xDQ_05	[U]	 0.000;	#xxddrdq_il511_nil503_lp11[5]  |  DDR_DQ_IL5115
+			IPH::HUB_DDR_03_xDQ_06	[U]	 0.000;	#xxddrdq_il511_nil503_lp11[6]  |  DDR_DQ_IL5116
+			IPH::HUB_DDR_03_xDQ_07	[U]	 0.000;	#xxddrdq_il511_nil503_lp11[7]  |  DDR_DQ_IL5117
+			IPH::HUB_DDR_04_CCC_00	[U]	 0.000;	#xxddr_2ca7_2ca3_4ca6_4ca0  |  DDR_2CA7
+			IPH::HUB_DDR_04_CCC_01	[U]	 0.000;	#xxddr_2ca6_2ca2_4ca5_4ca1  |  DDR_2CA6
+			IPH::HUB_DDR_04_CCC_02	[U]	 0.000;	#xxddr_2ca4_2ca8_4ca2_4ca2  |  DDR_2CA4
+			IPH::HUB_DDR_04_CCC_03	[U]	 0.000;	#xxddr_2cs1_2ca9_4cs0_4ca3  |  DDR_2CS1
+			IPH::HUB_DDR_04_CCC_04	[U]	 0.000;	#xxddr_2cs0_2ca10_4cs1_4ca4  |  DDR_2CS0
+			IPH::HUB_DDR_04_CCC_05	[U]	 0.000;	#xxddr_2ca1_2ca11_4ca1_4ca5  |  DDR_2CA1
+			IPH::HUB_DDR_04_CCC_06	[U]	 0.000;	#xxddr_2ca0_2ca12_4ca0_4ca6  |  DDR_2CA0
+			IPH::HUB_DDR_04_CCC_07	[U]	 0.000;	#xxddr_2ca10_2cs0_4ca3_4cs0  |  DDR_2CA10
+			IPH::HUB_DDR_04_CCC_08	[U]	 0.000;	#xxddr_2ca11_2cs2_4ca4_4cs1  |  DDR_2CA11
+			IPH::HUB_DDR_04_CLK_N	[U]	 0.000;	#xxddr_2clk0n_2clk0n_4clkn_4clkn  |  DDR_2CLK0_N
+			IPH::HUB_DDR_04_CLK_P	[U]	 0.000;	#xxddr_2clk0p_2clk0p_4clkp_4clkp  |  DDR_2CLK0_P
+			IPH::HUB_DDR_04_DBI_00	[U]	 0.000;	#xxddrdbi_nc_nc_lp20  |  -
+			IPH::HUB_DDR_04_DQS_N	[U]	 0.000;	#xxddrdqsn_il502_nil510_lp20  |  DDR_DQS_IL502_N
+			IPH::HUB_DDR_04_DQS_P	[U]	 0.000;	#xxddrdqsp_il502_nil510_lp20  |  DDR_DQS_IL502_P
+			IPH::HUB_DDR_04_WCK_N	[U]	 0.000;	#xxddr_1clk2n_1clk2n_2wck0n  |  DDR_1CLK2_N
+			IPH::HUB_DDR_04_WCK_P	[U]	 0.000;	#xxddr_1clk2p_1clk2p_2wck0p  |  DDR_1CLK2_P
+			IPH::HUB_DDR_04_xDQ_00	[U]	 0.000;	#xxddrdq_il502_nil510_lp20[0]  |  DDR_DQ_IL5020
+			IPH::HUB_DDR_04_xDQ_01	[U]	 0.000;	#xxddrdq_il502_nil510_lp20[1]  |  DDR_DQ_IL5021
+			IPH::HUB_DDR_04_xDQ_02	[U]	 0.000;	#xxddrdq_il502_nil510_lp20[2]  |  DDR_DQ_IL5022
+			IPH::HUB_DDR_04_xDQ_03	[U]	 0.000;	#xxddrdq_il502_nil510_lp20[3]  |  DDR_DQ_IL5023
+			IPH::HUB_DDR_04_xDQ_04	[U]	 0.000;	#xxddrdq_il502_nil510_lp20[4]  |  DDR_DQ_IL5024
+			IPH::HUB_DDR_04_xDQ_05	[U]	 0.000;	#xxddrdq_il502_nil510_lp20[5]  |  DDR_DQ_IL5025
+			IPH::HUB_DDR_04_xDQ_06	[U]	 0.000;	#xxddrdq_il502_nil510_lp20[6]  |  DDR_DQ_IL5026
+			IPH::HUB_DDR_04_xDQ_07	[U]	 0.000;	#xxddrdq_il502_nil510_lp20[7]  |  DDR_DQ_IL5027
+			IPH::HUB_DDR_05_CCC_00	[U]	 0.000;	#xxddr_2ca9_2ca1_5ca6_5ca0  |  DDR_2CA9
+			IPH::HUB_DDR_05_CCC_01	[U]	 0.000;	#xxddr_2ca8_2ca0_5ca5_5ca1  |  DDR_2CA8
+			IPH::HUB_DDR_05_CCC_02	[U]	 0.000;	#xxddr_2ca5_2ca5_5ca2_5ca2  |  DDR_2CA5
+			IPH::HUB_DDR_05_CCC_03	[U]	 0.000;	#xxddr_2cs3_nc_5cs0_5ca3  |  DDR_2CS3
+			IPH::HUB_DDR_05_CCC_04	[U]	 0.000;	#xxddr_2cs2_2ca7_5cs1_5ca4  |  DDR_2CS2
+			IPH::HUB_DDR_05_CCC_05	[U]	 0.000;	#xxddr_2ca2_2ca6_5ca1_5ca5  |  DDR_2CA2
+			IPH::HUB_DDR_05_CCC_06	[U]	 0.000;	#xxddr_2ca3_2ca4_5ca0_5ca6  |  DDR_2CA3
+			IPH::HUB_DDR_05_CCC_07	[U]	 0.000;	#xxddr_2ca12_2cs3_5ca3_5cs0  |  DDR_2CA12
+			IPH::HUB_DDR_05_CCC_08	[U]	 0.000;	#xxddr_nc_2cs1_5ca4_5cs1  |  -
+			IPH::HUB_DDR_05_CLK_N	[U]	 0.000;	#xxddr_2clk1n_2clk1n_5clkn_5clkn  |  DDR_2CLK1_N
+			IPH::HUB_DDR_05_CLK_P	[U]	 0.000;	#xxddr_2clk1p_2clk1p_5clkp_5clkp  |  DDR_2CLK1_P
+			IPH::HUB_DDR_05_DBI_00	[U]	 0.000;	#xxddrdbi_nc_nc_lp21  |  -
+			IPH::HUB_DDR_05_DQS_N	[U]	 0.000;	#xxddrdqsn_il503_nil511_lp21  |  DDR_DQS_IL503_N
+			IPH::HUB_DDR_05_DQS_P	[U]	 0.000;	#xxddrdqsp_il503_nil511_lp21  |  DDR_DQS_IL503_P
+			IPH::HUB_DDR_05_WCK_N	[U]	 0.000;	#xxddr_1clk3n_1clk3n_2wck1n  |  DDR_1CLK3_N
+			IPH::HUB_DDR_05_WCK_P	[U]	 0.000;	#xxddr_1clk3p_1clk3p_2wck1p  |  DDR_1CLK3_P
+			IPH::HUB_DDR_05_xDQ_00	[U]	 0.000;	#xxddrdq_il503_nil511_lp21[0]  |  DDR_DQ_IL5030
+			IPH::HUB_DDR_05_xDQ_01	[U]	 0.000;	#xxddrdq_il503_nil511_lp21[1]  |  DDR_DQ_IL5031
+			IPH::HUB_DDR_05_xDQ_02	[U]	 0.000;	#xxddrdq_il503_nil511_lp21[2]  |  DDR_DQ_IL5032
+			IPH::HUB_DDR_05_xDQ_03	[U]	 0.000;	#xxddrdq_il503_nil511_lp21[3]  |  DDR_DQ_IL5033
+			IPH::HUB_DDR_05_xDQ_04	[U]	 0.000;	#xxddrdq_il503_nil511_lp21[4]  |  DDR_DQ_IL5034
+			IPH::HUB_DDR_05_xDQ_05	[U]	 0.000;	#xxddrdq_il503_nil511_lp21[5]  |  DDR_DQ_IL5035
+			IPH::HUB_DDR_05_xDQ_06	[U]	 0.000;	#xxddrdq_il503_nil511_lp21[6]  |  DDR_DQ_IL5036
+			IPH::HUB_DDR_05_xDQ_07	[U]	 0.000;	#xxddrdq_il503_nil511_lp21[7]  |  DDR_DQ_IL5037
+			IPH::HUB_DDR_06_CCC_00	[U]	 0.000;	#xxddr_3ca7_3ca9_6ca6_6ca0  |  DDR_3CA7
+			IPH::HUB_DDR_06_CCC_01	[U]	 0.000;	#xxddr_3ca6_3ca7_6ca5_6ca1  |  DDR_3CA6
+			IPH::HUB_DDR_06_CCC_02	[U]	 0.000;	#xxddr_3ca4_3ca5_6ca2_6ca2  |  DDR_3CA4
+			IPH::HUB_DDR_06_CCC_03	[U]	 0.000;	#xxddr_3cs0_3cs1_6cs0_6ca3  |  DDR_3CS0
+			IPH::HUB_DDR_06_CCC_04	[U]	 0.000;	#xxddr_3cs1_3cs0_6cs1_6ca4  |  DDR_3CS1
+			IPH::HUB_DDR_06_CCC_05	[U]	 0.000;	#xxddr_3ca1_3ca0_6ca1_6ca5  |  DDR_3CA1
+			IPH::HUB_DDR_06_CCC_06	[U]	 0.000;	#xxddr_3ca0_3ca1_6ca0_6ca6  |  DDR_3CA0
+			IPH::HUB_DDR_06_CCC_07	[U]	 0.000;	#xxddr_3ca10_3ca6_6ca3_6cs0  |  DDR_3CA10
+			IPH::HUB_DDR_06_CCC_08	[U]	 0.000;	#xxddr_3ca11_3ca8_6ca4_6cs1  |  DDR_3CA11
+			IPH::HUB_DDR_06_CLK_N	[U]	 0.000;	#xxddr_3clk0n_3clk0n_6clkn_6clkn  |  DDR_3CLK0_N
+			IPH::HUB_DDR_06_CLK_P	[U]	 0.000;	#xxddr_3clk0p_3clk0p_6clkp_6clkp  |  DDR_3CLK0_P
+			IPH::HUB_DDR_06_DBI_00	[U]	 0.000;	#xxddrdbi_nc_nc_lp30  |  -
+			IPH::HUB_DDR_06_DQS_N	[U]	 0.000;	#xxddrdqsn_il512_nil512_lp30  |  DDR_DQS_IL512_N
+			IPH::HUB_DDR_06_DQS_P	[U]	 0.000;	#xxddrdqsp_il512_nil512_lp30  |  DDR_DQS_IL512_P
+			IPH::HUB_DDR_06_WCK_N	[U]	 0.000;	#xxddr_nc_nc_3wck0n  |  -
+			IPH::HUB_DDR_06_WCK_P	[U]	 0.000;	#xxddr_nc_nc_3wck0p  |  -
+			IPH::HUB_DDR_06_xDQ_00	[U]	 0.000;	#xxddrdq_il512_nil512_lp30[0]  |  DDR_DQ_IL5120
+			IPH::HUB_DDR_06_xDQ_01	[U]	 0.000;	#xxddrdq_il512_nil512_lp30[1]  |  DDR_DQ_IL5121
+			IPH::HUB_DDR_06_xDQ_02	[U]	 0.000;	#xxddrdq_il512_nil512_lp30[2]  |  DDR_DQ_IL5122
+			IPH::HUB_DDR_06_xDQ_03	[U]	 0.000;	#xxddrdq_il512_nil512_lp30[3]  |  DDR_DQ_IL5123
+			IPH::HUB_DDR_06_xDQ_04	[U]	 0.000;	#xxddrdq_il512_nil512_lp30[4]  |  DDR_DQ_IL5124
+			IPH::HUB_DDR_06_xDQ_05	[U]	 0.000;	#xxddrdq_il512_nil512_lp30[5]  |  DDR_DQ_IL5125
+			IPH::HUB_DDR_06_xDQ_06	[U]	 0.000;	#xxddrdq_il512_nil512_lp30[6]  |  DDR_DQ_IL5126
+			IPH::HUB_DDR_06_xDQ_07	[U]	 0.000;	#xxddrdq_il512_nil512_lp30[7]  |  DDR_DQ_IL5127
+			IPH::HUB_DDR_07_CCC_00	[U]	 0.000;	#xxddr_3ca9_3ca12_7ca6_7ca0  |  DDR_3CA9
+			IPH::HUB_DDR_07_CCC_01	[U]	 0.000;	#xxddr_3ca8_3ca10_7ca5_7ca1  |  DDR_3CA8
+			IPH::HUB_DDR_07_CCC_02	[U]	 0.000;	#xxddr_3ca5_3ca4_7ca2_7ca2  |  DDR_3CA5
+			IPH::HUB_DDR_07_CCC_03	[U]	 0.000;	#xxddr_3cs3_3cs2_7cs0_7ca3  |  DDR_3CS3
+			IPH::HUB_DDR_07_CCC_04	[U]	 0.000;	#xxddr_3cs2_3cs3_7cs1_7ca4  |  DDR_3CS2
+			IPH::HUB_DDR_07_CCC_05	[U]	 0.000;	#xxddr_3ca3_3ca3_7ca1_7ca5  |  DDR_3CA3
+			IPH::HUB_DDR_07_CCC_06	[U]	 0.000;	#xxddr_3ca2_3ca2_7ca0_7ca6  |  DDR_3CA2
+			IPH::HUB_DDR_07_CCC_07	[U]	 0.000;	#xxddr_nc_nc_7ca3_7cs0  |  -
+			IPH::HUB_DDR_07_CCC_08	[U]	 0.000;	#xxddr_3ca12_3ca11_7ca4_7cs1  |  DDR_3CA12
+			IPH::HUB_DDR_07_CLK_N	[U]	 0.000;	#xxddr_3clk1n_3clk1n_7clkn_7clkn  |  DDR_3CLK1_N
+			IPH::HUB_DDR_07_CLK_P	[U]	 0.000;	#xxddr_3clk1p_3clk1p_7clkp_7clkp  |  DDR_3CLK1_P
+			IPH::HUB_DDR_07_DBI_00	[U]	 0.000;	#xxddrdbi_nc_nc_lp31  |  -
+			IPH::HUB_DDR_07_DQS_N	[U]	 0.000;	#xxddrdqsn_il513_nil513_lp31  |  DDR_DQS_IL513_N
+			IPH::HUB_DDR_07_DQS_P	[U]	 0.000;	#xxddrdqsp_il513_nil513_lp31  |  DDR_DQS_IL513_P
+			IPH::HUB_DDR_07_WCK_N	[U]	 0.000;	#xxddr_nc_nc_3wck1n  |  -
+			IPH::HUB_DDR_07_WCK_P	[U]	 0.000;	#xxddr_nc_nc_3wck1p  |  -
+			IPH::HUB_DDR_07_xDQ_00	[U]	 0.000;	#xxddrdq_il513_nil513_lp31[0]  |  DDR_DQ_IL5130
+			IPH::HUB_DDR_07_xDQ_01	[U]	 0.000;	#xxddrdq_il513_nil513_lp31[1]  |  DDR_DQ_IL5131
+			IPH::HUB_DDR_07_xDQ_02	[U]	 0.000;	#xxddrdq_il513_nil513_lp31[2]  |  DDR_DQ_IL5132
+			IPH::HUB_DDR_07_xDQ_03	[U]	 0.000;	#xxddrdq_il513_nil513_lp31[3]  |  DDR_DQ_IL5133
+			IPH::HUB_DDR_07_xDQ_04	[U]	 0.000;	#xxddrdq_il513_nil513_lp31[4]  |  DDR_DQ_IL5134
+			IPH::HUB_DDR_07_xDQ_05	[U]	 0.000;	#xxddrdq_il513_nil513_lp31[5]  |  DDR_DQ_IL5135
+			IPH::HUB_DDR_07_xDQ_06	[U]	 0.000;	#xxddrdq_il513_nil513_lp31[6]  |  DDR_DQ_IL5136
+			IPH::HUB_DDR_07_xDQ_07	[U]	 0.000;	#xxddrdq_il513_nil513_lp31[7]  |  DDR_DQ_IL5137
+			IPH::HUB_DDR_08_CLK_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_08_CLK_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_08_DBI_00	[U]	 0.000;	#xxddrdbi_nc_nc_lp40  |  -
+			IPH::HUB_DDR_08_DQS_N	[U]	 0.000;	#xxddrdqsn_il520_nil520_lp40  |  DDR_DQS_IL520_N
+			IPH::HUB_DDR_08_DQS_P	[U]	 0.000;	#xxddrdqsp_il520_nil520_lp40  |  DDR_DQS_IL520_P
+			IPH::HUB_DDR_08_WCK_N	[U]	 0.000;	#xxddr_2clk2n_2clk2n_4wck0n  |  DDR_2CLK2_N
+			IPH::HUB_DDR_08_WCK_P	[U]	 0.000;	#xxddr_2clk2p_2clk2p_4wck0p  |  DDR_2CLK2_P
+			IPH::HUB_DDR_08_xDQ_00	[U]	 0.000;	#xxddrdq_il520_nil520_lp40[0]  |  DDR_DQ_IL5200
+			IPH::HUB_DDR_08_xDQ_01	[U]	 0.000;	#xxddrdq_il520_nil520_lp40[1]  |  DDR_DQ_IL5201
+			IPH::HUB_DDR_08_xDQ_02	[U]	 0.000;	#xxddrdq_il520_nil520_lp40[2]  |  DDR_DQ_IL5202
+			IPH::HUB_DDR_08_xDQ_03	[U]	 0.000;	#xxddrdq_il520_nil520_lp40[3]  |  DDR_DQ_IL5203
+			IPH::HUB_DDR_08_xDQ_04	[U]	 0.000;	#xxddrdq_il520_nil520_lp40[4]  |  DDR_DQ_IL5204
+			IPH::HUB_DDR_08_xDQ_05	[U]	 0.000;	#xxddrdq_il520_nil520_lp40[5]  |  DDR_DQ_IL5205
+			IPH::HUB_DDR_08_xDQ_06	[U]	 0.000;	#xxddrdq_il520_nil520_lp40[6]  |  DDR_DQ_IL5206
+			IPH::HUB_DDR_08_xDQ_07	[U]	 0.000;	#xxddrdq_il520_nil520_lp40[7]  |  DDR_DQ_IL5207
+			IPH::HUB_DDR_09_CLK_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_09_CLK_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_09_DBI_00	[U]	 0.000;	#xxddrdbi_nc_nc_lp41  |  -
+			IPH::HUB_DDR_09_DQS_N	[U]	 0.000;	#xxddrdqsn_il521_nil521_lp41  |  DDR_DQS_IL521_N
+			IPH::HUB_DDR_09_DQS_P	[U]	 0.000;	#xxddrdqsp_il521_nil521_lp41  |  DDR_DQS_IL521_P
+			IPH::HUB_DDR_09_WCK_N	[U]	 0.000;	#xxddr_2clk3n_2clk3n_4wck1n  |  DDR_2CLK3_N
+			IPH::HUB_DDR_09_WCK_P	[U]	 0.000;	#xxddr_2clk3p_2clk3p_4wck1p  |  DDR_2CLK3_P
+			IPH::HUB_DDR_09_xDQ_00	[U]	 0.000;	#xxddrdq_il521_nil521_lp41[0]  |  DDR_DQ_IL5210
+			IPH::HUB_DDR_09_xDQ_01	[U]	 0.000;	#xxddrdq_il521_nil521_lp41[1]  |  DDR_DQ_IL5211
+			IPH::HUB_DDR_09_xDQ_02	[U]	 0.000;	#xxddrdq_il521_nil521_lp41[2]  |  DDR_DQ_IL5212
+			IPH::HUB_DDR_09_xDQ_03	[U]	 0.000;	#xxddrdq_il521_nil521_lp41[3]  |  DDR_DQ_IL5213
+			IPH::HUB_DDR_09_xDQ_04	[U]	 0.000;	#xxddrdq_il521_nil521_lp41[4]  |  DDR_DQ_IL5214
+			IPH::HUB_DDR_09_xDQ_05	[U]	 0.000;	#xxddrdq_il521_nil521_lp41[5]  |  DDR_DQ_IL5215
+			IPH::HUB_DDR_09_xDQ_06	[U]	 0.000;	#xxddrdq_il521_nil521_lp41[6]  |  DDR_DQ_IL5216
+			IPH::HUB_DDR_09_xDQ_07	[U]	 0.000;	#xxddrdq_il521_nil521_lp41[7]  |  DDR_DQ_IL5217
+			IPH::HUB_DDR_10_CLK_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_10_CLK_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_10_DBI_00	[U]	 0.000;	#xxddrdbi_nc_nc_lp50  |  -
+			IPH::HUB_DDR_10_DQS_N	[U]	 0.000;	#xxddrdqsn_il530_nil522_lp50  |  DDR_DQS_IL530_N
+			IPH::HUB_DDR_10_DQS_P	[U]	 0.000;	#xxddrdqsp_il530_nil522_lp50  |  DDR_DQS_IL530_P
+			IPH::HUB_DDR_10_WCK_N	[U]	 0.000;	#xxddr_nc_nc_5wck0n  |  -
+			IPH::HUB_DDR_10_WCK_P	[U]	 0.000;	#xxddr_nc_nc_5wck0p  |  -
+			IPH::HUB_DDR_10_xDQ_00	[U]	 0.000;	#xxddrdq_il530_nil522_lp50[0]  |  DDR_DQ_IL5300
+			IPH::HUB_DDR_10_xDQ_01	[U]	 0.000;	#xxddrdq_il530_nil522_lp50[1]  |  DDR_DQ_IL5301
+			IPH::HUB_DDR_10_xDQ_02	[U]	 0.000;	#xxddrdq_il530_nil522_lp50[2]  |  DDR_DQ_IL5302
+			IPH::HUB_DDR_10_xDQ_03	[U]	 0.000;	#xxddrdq_il530_nil522_lp50[3]  |  DDR_DQ_IL5303
+			IPH::HUB_DDR_10_xDQ_04	[U]	 0.000;	#xxddrdq_il530_nil522_lp50[4]  |  DDR_DQ_IL5304
+			IPH::HUB_DDR_10_xDQ_05	[U]	 0.000;	#xxddrdq_il530_nil522_lp50[5]  |  DDR_DQ_IL5305
+			IPH::HUB_DDR_10_xDQ_06	[U]	 0.000;	#xxddrdq_il530_nil522_lp50[6]  |  DDR_DQ_IL5306
+			IPH::HUB_DDR_10_xDQ_07	[U]	 0.000;	#xxddrdq_il530_nil522_lp50[7]  |  DDR_DQ_IL5307
+			IPH::HUB_DDR_11_CLK_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_11_CLK_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_11_DBI_00	[U]	 0.000;	#xxddrdbi_nc_nc_lp51  |  -
+			IPH::HUB_DDR_11_DQS_N	[U]	 0.000;	#xxddrdqsn_il531_nil523_lp51  |  DDR_DQS_IL531_N
+			IPH::HUB_DDR_11_DQS_P	[U]	 0.000;	#xxddrdqsp_il531_nil523_lp51  |  DDR_DQS_IL531_P
+			IPH::HUB_DDR_11_WCK_N	[U]	 0.000;	#xxddr_nc_nc_5wck1n  |  -
+			IPH::HUB_DDR_11_WCK_P	[U]	 0.000;	#xxddr_nc_nc_5wck1p  |  -
+			IPH::HUB_DDR_11_xDQ_00	[U]	 0.000;	#xxddrdq_il531_nil523_lp51[0]  |  DDR_DQ_IL5310
+			IPH::HUB_DDR_11_xDQ_01	[U]	 0.000;	#xxddrdq_il531_nil523_lp51[1]  |  DDR_DQ_IL5311
+			IPH::HUB_DDR_11_xDQ_02	[U]	 0.000;	#xxddrdq_il531_nil523_lp51[2]  |  DDR_DQ_IL5312
+			IPH::HUB_DDR_11_xDQ_03	[U]	 0.000;	#xxddrdq_il531_nil523_lp51[3]  |  DDR_DQ_IL5313
+			IPH::HUB_DDR_11_xDQ_04	[U]	 0.000;	#xxddrdq_il531_nil523_lp51[4]  |  DDR_DQ_IL5314
+			IPH::HUB_DDR_11_xDQ_05	[U]	 0.000;	#xxddrdq_il531_nil523_lp51[5]  |  DDR_DQ_IL5315
+			IPH::HUB_DDR_11_xDQ_06	[U]	 0.000;	#xxddrdq_il531_nil523_lp51[6]  |  DDR_DQ_IL5316
+			IPH::HUB_DDR_11_xDQ_07	[U]	 0.000;	#xxddrdq_il531_nil523_lp51[7]  |  DDR_DQ_IL5317
+			IPH::HUB_DDR_12_CLK_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_12_CLK_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_12_DBI_00	[U]	 0.000;	#xxddrdbi_nc_nc_lp60  |  -
+			IPH::HUB_DDR_12_DQS_N	[U]	 0.000;	#xxddrdqsn_il522_nil530_lp60  |  DDR_DQS_IL522_N
+			IPH::HUB_DDR_12_DQS_P	[U]	 0.000;	#xxddrdqsp_il522_nil530_lp60  |  DDR_DQS_IL522_P
+			IPH::HUB_DDR_12_WCK_N	[U]	 0.000;	#xxddr_3clk2n_3clk2n_6wck0n  |  DDR_3CLK2_N
+			IPH::HUB_DDR_12_WCK_P	[U]	 0.000;	#xxddr_3clk2p_3clk2p_6wck0p  |  DDR_3CLK2_P
+			IPH::HUB_DDR_12_xDQ_00	[U]	 0.000;	#xxddrdq_il522_nil530_lp60[0]  |  DDR_DQ_IL5220
+			IPH::HUB_DDR_12_xDQ_01	[U]	 0.000;	#xxddrdq_il522_nil530_lp60[1]  |  DDR_DQ_IL5221
+			IPH::HUB_DDR_12_xDQ_02	[U]	 0.000;	#xxddrdq_il522_nil530_lp60[2]  |  DDR_DQ_IL5222
+			IPH::HUB_DDR_12_xDQ_03	[U]	 0.000;	#xxddrdq_il522_nil530_lp60[3]  |  DDR_DQ_IL5223
+			IPH::HUB_DDR_12_xDQ_04	[U]	 0.000;	#xxddrdq_il522_nil530_lp60[4]  |  DDR_DQ_IL5224
+			IPH::HUB_DDR_12_xDQ_05	[U]	 0.000;	#xxddrdq_il522_nil530_lp60[5]  |  DDR_DQ_IL5225
+			IPH::HUB_DDR_12_xDQ_06	[U]	 0.000;	#xxddrdq_il522_nil530_lp60[6]  |  DDR_DQ_IL5226
+			IPH::HUB_DDR_12_xDQ_07	[U]	 0.000;	#xxddrdq_il522_nil530_lp60[7]  |  DDR_DQ_IL5227
+			IPH::HUB_DDR_13_CLK_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_13_CLK_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_13_DBI_00	[U]	 0.000;	#xxddrdbi_nc_nc_lp61  |  -
+			IPH::HUB_DDR_13_DQS_N	[U]	 0.000;	#xxddrdqsn_il523_nil531_lp61  |  DDR_DQS_IL523_N
+			IPH::HUB_DDR_13_DQS_P	[U]	 0.000;	#xxddrdqsp_il523_nil531_lp61  |  DDR_DQS_IL523_P
+			IPH::HUB_DDR_13_WCK_N	[U]	 0.000;	#xxddr_3clk3n_3clk3n_6wck1n  |  DDR_3CLK3_N
+			IPH::HUB_DDR_13_WCK_P	[U]	 0.000;	#xxddr_3clk3p_3clk3p_6wck1p  |  DDR_3CLK3_P
+			IPH::HUB_DDR_13_xDQ_00	[U]	 0.000;	#xxddrdq_il523_nil531_lp61[0]  |  DDR_DQ_IL5230
+			IPH::HUB_DDR_13_xDQ_01	[U]	 0.000;	#xxddrdq_il523_nil531_lp61[1]  |  DDR_DQ_IL5231
+			IPH::HUB_DDR_13_xDQ_02	[U]	 0.000;	#xxddrdq_il523_nil531_lp61[2]  |  DDR_DQ_IL5232
+			IPH::HUB_DDR_13_xDQ_03	[U]	 0.000;	#xxddrdq_il523_nil531_lp61[3]  |  DDR_DQ_IL5233
+			IPH::HUB_DDR_13_xDQ_04	[U]	 0.000;	#xxddrdq_il523_nil531_lp61[4]  |  DDR_DQ_IL5234
+			IPH::HUB_DDR_13_xDQ_05	[U]	 0.000;	#xxddrdq_il523_nil531_lp61[5]  |  DDR_DQ_IL5235
+			IPH::HUB_DDR_13_xDQ_06	[U]	 0.000;	#xxddrdq_il523_nil531_lp61[6]  |  DDR_DQ_IL5236
+			IPH::HUB_DDR_13_xDQ_07	[U]	 0.000;	#xxddrdq_il523_nil531_lp61[7]  |  DDR_DQ_IL5237
+			IPH::HUB_DDR_14_CLK_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_14_CLK_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_14_DBI_00	[U]	 0.000;	#xxddrdbi_nc_nc_lp70  |  -
+			IPH::HUB_DDR_14_DQS_N	[U]	 0.000;	#xxddrdqsn_il532_nil532_lp70  |  DDR_DQS_IL532_N
+			IPH::HUB_DDR_14_DQS_P	[U]	 0.000;	#xxddrdqsp_il532_nil532_lp70  |  DDR_DQS_IL532_P
+			IPH::HUB_DDR_14_WCK_N	[U]	 0.000;	#xxddr_nc_nc_7wck0n  |  -
+			IPH::HUB_DDR_14_WCK_P	[U]	 0.000;	#xxddr_nc_nc_7wck0p  |  -
+			IPH::HUB_DDR_14_xDQ_00	[U]	 0.000;	#xxddrdq_il532_nil532_lp70[0]  |  DDR_DQ_IL5320
+			IPH::HUB_DDR_14_xDQ_01	[U]	 0.000;	#xxddrdq_il532_nil532_lp70[1]  |  DDR_DQ_IL5321
+			IPH::HUB_DDR_14_xDQ_02	[U]	 0.000;	#xxddrdq_il532_nil532_lp70[2]  |  DDR_DQ_IL5322
+			IPH::HUB_DDR_14_xDQ_03	[U]	 0.000;	#xxddrdq_il532_nil532_lp70[3]  |  DDR_DQ_IL5323
+			IPH::HUB_DDR_14_xDQ_04	[U]	 0.000;	#xxddrdq_il532_nil532_lp70[4]  |  DDR_DQ_IL5324
+			IPH::HUB_DDR_14_xDQ_05	[U]	 0.000;	#xxddrdq_il532_nil532_lp70[5]  |  DDR_DQ_IL5325
+			IPH::HUB_DDR_14_xDQ_06	[U]	 0.000;	#xxddrdq_il532_nil532_lp70[6]  |  DDR_DQ_IL5326
+			IPH::HUB_DDR_14_xDQ_07	[U]	 0.000;	#xxddrdq_il532_nil532_lp70[7]  |  DDR_DQ_IL5327
+			IPH::HUB_DDR_15_CLK_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_15_CLK_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_15_DBI_00	[U]	 0.000;	#xxddrdbi_nc_nc_lp71  |  -
+			IPH::HUB_DDR_15_DQS_N	[U]	 0.000;	#xxddrdqsn_il533_nil533_lp71  |  DDR_DQS_IL533_N
+			IPH::HUB_DDR_15_DQS_P	[U]	 0.000;	#xxddrdqsp_il533_nil533_lp71  |  DDR_DQS_IL533_P
+			IPH::HUB_DDR_15_WCK_N	[U]	 0.000;	#xxddr_nc_nc_7wck1n  |  -
+			IPH::HUB_DDR_15_WCK_P	[U]	 0.000;	#xxddr_nc_nc_7wck1p  |  -
+			IPH::HUB_DDR_15_xDQ_00	[U]	 0.000;	#xxddrdq_il533_nil533_lp71[0]  |  DDR_DQ_IL5330
+			IPH::HUB_DDR_15_xDQ_01	[U]	 0.000;	#xxddrdq_il533_nil533_lp71[1]  |  DDR_DQ_IL5331
+			IPH::HUB_DDR_15_xDQ_02	[U]	 0.000;	#xxddrdq_il533_nil533_lp71[2]  |  DDR_DQ_IL5332
+			IPH::HUB_DDR_15_xDQ_03	[U]	 0.000;	#xxddrdq_il533_nil533_lp71[3]  |  DDR_DQ_IL5333
+			IPH::HUB_DDR_15_xDQ_04	[U]	 0.000;	#xxddrdq_il533_nil533_lp71[4]  |  DDR_DQ_IL5334
+			IPH::HUB_DDR_15_xDQ_05	[U]	 0.000;	#xxddrdq_il533_nil533_lp71[5]  |  DDR_DQ_IL5335
+			IPH::HUB_DDR_15_xDQ_06	[U]	 0.000;	#xxddrdq_il533_nil533_lp71[6]  |  DDR_DQ_IL5336
+			IPH::HUB_DDR_15_xDQ_07	[U]	 0.000;	#xxddrdq_il533_nil533_lp71[7]  |  DDR_DQ_IL5337
+			IPH::HUB_DDR_16_DBI_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_16_DQS_N	[U]	 0.000;	#XXDDRDQSN_IL504_NIL5NC_LPNC  |  DDR_DQS_IL504_N
+			IPH::HUB_DDR_16_DQS_P	[U]	 0.000;	#XXDDRDQSP_IL504_NIL5NC_LPNC  |  DDR_DQS_IL504_P
+			IPH::HUB_DDR_16_WCK_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_16_WCK_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_16_xDQ_00	[U]	 0.000;	#xxddrdq_il504_nil5nc_lpnc[0]  |  DDR_DQ_IL5040
+			IPH::HUB_DDR_16_xDQ_01	[U]	 0.000;	#xxddrdq_il504_nil5nc_lpnc[1]  |  DDR_DQ_IL5041
+			IPH::HUB_DDR_16_xDQ_02	[U]	 0.000;	#xxddrdq_il504_nil5nc_lpnc[2]  |  DDR_DQ_IL5042
+			IPH::HUB_DDR_16_xDQ_03	[U]	 0.000;	#xxddrdq_il504_nil5nc_lpnc[3]  |  DDR_DQ_IL5043
+			IPH::HUB_DDR_16_xDQ_04	[U]	 0.000;	#xxddrdq_il504nc_nil5nc_lpnc[4]  |  -
+			IPH::HUB_DDR_16_xDQ_05	[U]	 0.000;	#xxddrdq_il504nc_nil5nc_lpnc[5]  |  -
+			IPH::HUB_DDR_16_xDQ_06	[U]	 0.000;	#xxddrdq_il504nc_nil5nc_lpnc[6]  |  -
+			IPH::HUB_DDR_16_xDQ_07	[U]	 0.000;	#xxddrdq_il504nc_nil5nc_lpnc[7]  |  -
+			IPH::HUB_DDR_17_DBI_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_17_DQS_N	[U]	 0.000;	#XXDDRDQSN_IL514_NIL5NC_LPNC  |  DDR_DQS_IL514_N
+			IPH::HUB_DDR_17_DQS_P	[U]	 0.000;	#XXDDRDQSP_IL514_NIL5NC_LPNC  |  DDR_DQS_IL514_P
+			IPH::HUB_DDR_17_WCK_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_17_WCK_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_17_xDQ_00	[U]	 0.000;	#xxddrdq_il514_nil5nc_lpnc[0]  |  DDR_DQ_IL5140
+			IPH::HUB_DDR_17_xDQ_01	[U]	 0.000;	#xxddrdq_il514_nil5nc_lpnc[1]  |  DDR_DQ_IL5141
+			IPH::HUB_DDR_17_xDQ_02	[U]	 0.000;	#xxddrdq_il514_nil5nc_lpnc[2]  |  DDR_DQ_IL5142
+			IPH::HUB_DDR_17_xDQ_03	[U]	 0.000;	#xxddrdq_il514_nil5nc_lpnc[3]  |  DDR_DQ_IL5143
+			IPH::HUB_DDR_17_xDQ_04	[U]	 0.000;	#xxddrdq_il514nc_nil5nc_lpnc[4]  |  -
+			IPH::HUB_DDR_17_xDQ_05	[U]	 0.000;	#xxddrdq_il514nc_nil5nc_lpnc[5]  |  -
+			IPH::HUB_DDR_17_xDQ_06	[U]	 0.000;	#xxddrdq_il514nc_nil5nc_lpnc[6]  |  -
+			IPH::HUB_DDR_17_xDQ_07	[U]	 0.000;	#xxddrdq_il514nc_nil5nc_lpnc[7]  |  -
+			IPH::HUB_DDR_18_DBI_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_18_DQS_N	[U]	 0.000;	#XXDDRDQSN_IL524_NIL5NC_LPNC  |  DDR_DQS_IL524_N
+			IPH::HUB_DDR_18_DQS_P	[U]	 0.000;	#XXDDRDQSP_IL524_NIL5NC_LPNC  |  DDR_DQS_IL524_P
+			IPH::HUB_DDR_18_WCK_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_18_WCK_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_18_xDQ_00	[U]	 0.000;	#xxddrdq_il524_nil5nc_lpnc[0]  |  DDR_DQ_IL5240
+			IPH::HUB_DDR_18_xDQ_01	[U]	 0.000;	#xxddrdq_il524_nil5nc_lpnc[1]  |  DDR_DQ_IL5241
+			IPH::HUB_DDR_18_xDQ_02	[U]	 0.000;	#xxddrdq_il524_nil5nc_lpnc[2]  |  DDR_DQ_IL5242
+			IPH::HUB_DDR_18_xDQ_03	[U]	 0.000;	#xxddrdq_il524_nil5nc_lpnc[3]  |  DDR_DQ_IL5243
+			IPH::HUB_DDR_18_xDQ_04	[U]	 0.000;	#xxddrdq_il524nc_nil5nc_lpnc[4]  |  -
+			IPH::HUB_DDR_18_xDQ_05	[U]	 0.000;	#xxddrdq_il524nc_nil5nc_lpnc[5]  |  -
+			IPH::HUB_DDR_18_xDQ_06	[U]	 0.000;	#xxddrdq_il524nc_nil5nc_lpnc[6]  |  -
+			IPH::HUB_DDR_18_xDQ_07	[U]	 0.000;	#xxddrdq_il524nc_nil5nc_lpnc[7]  |  -
+			IPH::HUB_DDR_19_DBI_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_19_DQS_N	[U]	 0.000;	#XXDDRDQSN_IL534_NIL5NC_LPNC  |  DDR_DQS_IL534_N
+			IPH::HUB_DDR_19_DQS_P	[U]	 0.000;	#XXDDRDQSP_IL534_NIL5NC_LPNC  |  DDR_DQS_IL534_P
+			IPH::HUB_DDR_19_WCK_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_19_WCK_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_19_xDQ_00	[U]	 0.000;	#xxddrdq_il534_nil5nc_lpnc[0]  |  DDR_DQ_IL5340
+			IPH::HUB_DDR_19_xDQ_01	[U]	 0.000;	#xxddrdq_il534_nil5nc_lpnc[1]  |  DDR_DQ_IL5341
+			IPH::HUB_DDR_19_xDQ_02	[U]	 0.000;	#xxddrdq_il534_nil5nc_lpnc[2]  |  DDR_DQ_IL5342
+			IPH::HUB_DDR_19_xDQ_03	[U]	 0.000;	#xxddrdq_il534_nil5nc_lpnc[3]  |  DDR_DQ_IL5343
+			IPH::HUB_DDR_19_xDQ_04	[U]	 0.000;	#xxddrdq_il534nc_nil5nc_lpnc[4]  |  -
+			IPH::HUB_DDR_19_xDQ_05	[U]	 0.000;	#xxddrdq_il534nc_nil5nc_lpnc[5]  |  -
+			IPH::HUB_DDR_19_xDQ_06	[U]	 0.000;	#xxddrdq_il534nc_nil5nc_lpnc[6]  |  -
+			IPH::HUB_DDR_19_xDQ_07	[U]	 0.000;	#xxddrdq_il534nc_nil5nc_lpnc[7]  |  -
+			IPH::HUB_DDR_20_DBI_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_20_DQS_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_20_DQS_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_20_WCK_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_20_WCK_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_20_xDQ_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_20_xDQ_01	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_20_xDQ_02	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_20_xDQ_03	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_20_xDQ_04	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_20_xDQ_05	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_20_xDQ_06	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_20_xDQ_07	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_21_DBI_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_21_DQS_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_21_DQS_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_21_WCK_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_21_WCK_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_21_xDQ_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_21_xDQ_01	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_21_xDQ_02	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_21_xDQ_03	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_21_xDQ_04	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_21_xDQ_05	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_21_xDQ_06	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_21_xDQ_07	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_22_DBI_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_22_DQS_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_22_DQS_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_22_WCK_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_22_WCK_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_22_xDQ_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_22_xDQ_01	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_22_xDQ_02	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_22_xDQ_03	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_22_xDQ_04	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_22_xDQ_05	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_22_xDQ_06	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_22_xDQ_07	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_23_DBI_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_23_DQS_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_23_DQS_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_23_WCK_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_23_WCK_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_23_xDQ_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_23_xDQ_01	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_23_xDQ_02	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_23_xDQ_03	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_23_xDQ_04	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_23_xDQ_05	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_23_xDQ_06	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_23_xDQ_07	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_24_DBI_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_24_DQS_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_24_DQS_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_24_WCK_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_24_WCK_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_24_xDQ_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_24_xDQ_01	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_24_xDQ_02	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_24_xDQ_03	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_24_xDQ_04	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_24_xDQ_05	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_24_xDQ_06	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_24_xDQ_07	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_25_DBI_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_25_DQS_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_25_DQS_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_25_WCK_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_25_WCK_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_25_xDQ_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_25_xDQ_01	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_25_xDQ_02	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_25_xDQ_03	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_25_xDQ_04	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_25_xDQ_05	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_25_xDQ_06	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_25_xDQ_07	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_26_DBI_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_26_DQS_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_26_DQS_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_26_WCK_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_26_WCK_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_26_xDQ_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_26_xDQ_01	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_26_xDQ_02	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_26_xDQ_03	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_26_xDQ_04	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_26_xDQ_05	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_26_xDQ_06	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_26_xDQ_07	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_27_DBI_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_27_DQS_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_27_DQS_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_27_WCK_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_27_WCK_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_27_xDQ_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_27_xDQ_01	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_27_xDQ_02	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_27_xDQ_03	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_27_xDQ_04	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_27_xDQ_05	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_27_xDQ_06	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_27_xDQ_07	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_28_DBI_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_28_DQS_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_28_DQS_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_28_WCK_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_28_WCK_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_28_xDQ_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_28_xDQ_01	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_28_xDQ_02	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_28_xDQ_03	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_28_xDQ_04	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_28_xDQ_05	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_28_xDQ_06	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_28_xDQ_07	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_29_DBI_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_29_DQS_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_29_DQS_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_29_WCK_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_29_WCK_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_29_xDQ_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_29_xDQ_01	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_29_xDQ_02	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_29_xDQ_03	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_29_xDQ_04	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_29_xDQ_05	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_29_xDQ_06	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_29_xDQ_07	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_30_DBI_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_30_DQS_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_30_DQS_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_30_WCK_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_30_WCK_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_30_xDQ_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_30_xDQ_01	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_30_xDQ_02	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_30_xDQ_03	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_30_xDQ_04	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_30_xDQ_05	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_30_xDQ_06	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_30_xDQ_07	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_31_DBI_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_31_DQS_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_31_DQS_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_31_WCK_N	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_31_WCK_P	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_31_xDQ_00	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_31_xDQ_01	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_31_xDQ_02	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_31_xDQ_03	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_31_xDQ_04	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_31_xDQ_05	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_31_xDQ_06	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_31_xDQ_07	[U]	 0.000;	#-  |  -
+			IPH::HUB_DDR_ALERT_0		08.102;	#xxddr_alert_n[0]  |  DDR_ALERT_0
+			IPH::HUB_DDR_ALERT_1		08.101;	#xxddr_alert_n[1]  |  DDR_ALERT_1
+			IPH::HUB_MBP_IN_0		09.017;	#xx_hub_hvm_mbp_in[0]  |  HUB_HVM_MBP_IN_0
+			IPH::HUB_MBP_IN_1		09.054;	#xx_hub_hvm_mbp_in[1]  |  HUB_HVM_MBP_IN_1
+			IPH::HUB_MBP_IN_2	[U]	 0.000;	#-  |  -
+			IPH::HUB_MBP_INOUT_0	[U]	 0.000;	#-  |  -
+			IPH::HUB_MBP_INOUT_1	[U]	 0.000;	#-  |  -
+			IPH::HUB_MBP_INOUT_2	[U]	 0.000;	#-  |  -
+			IPH::HUB_MBP_OUT_0		08.075;	#xx_hub_hvm_mbp_out  |  HUB_HVM_MBP_OUT
+			IPH::HUB_MBP_OUT_1	[U]	 0.000;	#-  |  -
+			IPH::HUB_MBP_OUT_2	[U]	 0.000;	#-  |  -
+			IPH::HUB_OBS_00		08.110;	#xx_hub_viewana[0]  |  HUB_VIEWANA_0
+			IPH::HUB_OBS_01		08.070;	#xx_hub_viewana[1]  |  HUB_VIEWANA_1
+			IPH::HUB_OBS_02		08.071;	#xx_hub_viewdig[0]  |  HUB_VIEWDIG_0
+			IPH::HUB_OBS_03		08.063;	#xx_hub_viewdig[1]  |  HUB_VIEWDIG_1
+			IPH::HUB_OBS_04		08.073;	#xx_hub_viewdig[2]  |  HUB_VIEWDIG_2
+			IPH::HUB_OBS_05		08.098;	#xxddr_view[0]  |  DDR_VIEW_0
+			IPH::HUB_OBS_06		08.094;	#xxddr_view[1]  |  DDR_VIEW_1
+			IPH::HUB_OBS_07	[U]	 0.000;	#-  |  -
+			IPH::HUB_OBS_08	[U]	 0.000;	#-  |  -
+			IPH::HUB_OBS_09	[U]	 0.000;	#-  |  -
+			IPH::HUB_OBS_10	[U]	 0.000;	#-  |  -
+			IPH::HUB_OBS_11	[U]	 0.000;	#-  |  -
+			IPH::HUB_OBS_12	[U]	 0.000;	#-  |  -
+			IPH::HUB_OBS_13	[U]	 0.000;	#-  |  -
+			IPH::HUB_OBS_14	[U]	 0.000;	#-  |  -
+			IPH::HUB_OBS_15	[U]	 0.000;	#-  |  -
+			IPH::HUB_OBS_16	[U]	 0.000;	#-  |  -
+			IPH::HUB_OBS_17	[U]	 0.000;	#-  |  -
+			IPH::HUB_OBS_18	[U]	 0.000;	#-  |  -
+			IPH::HUB_OBS_19	[U]	 0.000;	#-  |  -
+			IPH::HUB_PECI		08.108;	#xx_peci  |  PECI
+			IPH::HUB_PROBE_TRIG0	[U]	 0.000;	#-  |  -
+			IPH::HUB_PROBE_TRIG1	[U]	 0.000;	#-  |  -
+			IPH::HUB_RST_00		09.027;	#xx_hub_hvm_cold_boot_trigger  |  HUB_HVM_COLD_BOOT_TRIGGER
+			IPH::HUB_RST_01		08.062;	#xx_hub_hvm_epd_on  |  EPD_ON_HUB_IN
+			IPH::HUB_RST_02	[U]	 0.000;	#xx_vdd2pwrgood  |  VDD2PWRGOOD_IN
+			IPH::HUB_RST_03	[U]	 0.000;	#zz_hub_fuse_sort[0]  |  -
+			IPH::HUB_RST_04	[U]	 0.000;	#zz_hub_fuse_sort[1]  |  -
+			IPH::HUB_RST_05	[U]	 0.000;	#zz_hub_sorten_sort  |  -
+			IPH::HUB_RST_06		09.010;	#xx_lgcspare[0]  |  LGCSPARE0
+			IPH::HUB_RST_07		09.009;	#xx_lgcspare[1]  |  LGCSPARE1
+			IPH::HUB_RST_08		08.099;	#xx_vidalert_b  |  VID_ALERT_B
+			IPH::HUB_RST_09		08.109;	#xx_vidsck  |  VID_SCK
+			IPH::HUB_RST_10		08.100;	#xx_vidsout  |  VID_SOUT
+			IPH::HUB_RST_11		09.015;	#xxddr_dram_reset_n  |  DDR_RESET_B
+			IPH::HUB_RST_12	[U]	 0.000;	#-  |  -
+			IPH::HUB_RST_13	[U]	 0.000;	#-  |  -
+			IPH::HUB_RST_14	[U]	 0.000;	#-  |  -
+			IPH::HUB_RST_15	[U]	 0.000;	#-  |  -
+			IPH::HUB_RST_16	[U]	 0.000;	#-  |  -
+			IPH::HUB_RST_17	[U]	 0.000;	#-  |  -
+			IPH::HUB_RST_18	[U]	 0.000;	#-  |  -
+			IPH::HUB_RST_19	[U]	 0.000;	#-  |  -
+			IPH::HUB_TDI		09.012;	#xx_hub_hvm_tap_tdi  |  HUB_HVM_TAP_TDI
+			IPH::HUB_TDO		09.024;	#xx_hub_hvm_tap_tdo  |  HUB_HVM_TAP_TDO
+			IPH::HUB_TMS		09.011;	#xx_hub_hvm_tap_tms  |  HUB_HVM_TAP_TMS
+			IPH::HUB_TRST		09.014;	#xx_hub_hvm_tap_trstb  |  HUB_HVM_TAP_TRSTB
+			IPH::HUB_TSTPRT_I_00		08.072;	#xx_hub_hptp_rx[0]  |  HUB_HPTP_RX_0
+			IPH::HUB_TSTPRT_I_01		08.056;	#xx_hub_hptp_rx[1]  |  HUB_HPTP_RX_1
+			IPH::HUB_TSTPRT_I_02		08.080;	#xx_hub_hptp_rx[2]  |  HUB_HPTP_RX_2
+			IPH::HUB_TSTPRT_I_03		08.104;	#xx_hub_hptp_rx[3]  |  HUB_HPTP_RX_3
+			IPH::HUB_TSTPRT_I_04		08.096;	#xx_hub_hptp_rx[4]  |  HUB_HPTP_RX_4
+			IPH::HUB_TSTPRT_I_05		08.064;	#xx_hub_hptp_rx[5]  |  HUB_HPTP_RX_5
+			IPH::HUB_TSTPRT_I_06	[U]	 0.000;	#xx_hub_hptp_rx[6]  |  -
+			IPH::HUB_TSTPRT_I_07	[U]	 0.000;	#xx_hub_hptp_rx[7]  |  -
+			IPH::HUB_TSTPRT_I_08	[U]	 0.000;	#-  |  -
+			IPH::HUB_TSTPRT_I_09	[U]	 0.000;	#-  |  -
+			IPH::HUB_TSTPRT_I_10	[U]	 0.000;	#-  |  -
+			IPH::HUB_TSTPRT_I_11	[U]	 0.000;	#-  |  -
+			IPH::HUB_TSTPRT_I_12	[U]	 0.000;	#-  |  -
+			IPH::HUB_TSTPRT_I_13	[U]	 0.000;	#-  |  -
+			IPH::HUB_TSTPRT_I_14	[U]	 0.000;	#-  |  -
+			IPH::HUB_TSTPRT_I_15	[U]	 0.000;	#-  |  -
+			IPH::HUB_TSTPRT_I_CK	[U]	 0.000;	#-  |  -
+			IPH::HUB_TSTPRT_O_00		09.000;	#xx_hub_hptp_tx[0]  |  HUB_HPTP_TX_0
+			IPH::HUB_TSTPRT_O_01		09.032;	#xx_hub_hptp_tx[1]  |  HUB_HPTP_TX_1
+			IPH::HUB_TSTPRT_O_02		09.016;	#xx_hub_hptp_tx[2]  |  HUB_HPTP_TX_2
+			IPH::HUB_TSTPRT_O_03		09.048;	#xx_hub_hptp_tx[3]  |  HUB_HPTP_TX_3
+			IPH::HUB_TSTPRT_O_04		09.040;	#xx_hub_hptp_tx[4]  |  HUB_HPTP_TX_4
+			IPH::HUB_TSTPRT_O_05		09.008;	#xx_hub_hptp_tx[5]  |  HUB_HPTP_TX_5
+			IPH::HUB_TSTPRT_O_06	[U]	 0.000;	#xx_hub_hptp_tx[6]  |  -
+			IPH::HUB_TSTPRT_O_07	[U]	 0.000;	#xx_hub_hptp_tx[7]  |  -
+			IPH::HUB_TSTPRT_O_08	[U]	 0.000;	#-  |  -
+			IPH::HUB_TSTPRT_O_09	[U]	 0.000;	#-  |  -
+			IPH::HUB_TSTPRT_O_10	[U]	 0.000;	#-  |  -
+			IPH::HUB_TSTPRT_O_11	[U]	 0.000;	#-  |  -
+			IPH::HUB_TSTPRT_O_12	[U]	 0.000;	#-  |  -
+			IPH::HUB_TSTPRT_O_13	[U]	 0.000;	#-  |  -
+			IPH::HUB_TSTPRT_O_14	[U]	 0.000;	#-  |  -
+			IPH::HUB_TSTPRT_O_15	[U]	 0.000;	#-  |  -
+			IPH::HUB_TSTPRT_O_CK	[U]	 0.000;	#-  |  -
+			IPG::GCD_CLK_0_DP_0	[U]	 0.000;	#-  |  -
+			IPG::GCD_CLK_0_DP_1	[U]	 0.000;	#-  |  -
+			IPG::GCD_CLK_1_DP_0	[U]	 0.000;	#-  |  -
+			IPG::GCD_CLK_1_DP_1	[U]	 0.000;	#-  |  -
+			IPG::GCD_CLK_2_DP_0	[U]	 0.000;	#-  |  -
+			IPG::GCD_CLK_2_DP_1	[U]	 0.000;	#-  |  -
+			IPG::GCD_CLK_3_DP_0	[U]	 0.000;	#-  |  -
+			IPG::GCD_CLK_3_DP_1	[U]	 0.000;	#-  |  -
+			IPG::GCD_MBP_IN_0	[U]	 0.000;	#-  |  -
+			IPG::GCD_MBP_IN_1	[U]	 0.000;	#-  |  -
+			IPG::GCD_MBP_IN_2	[U]	 0.000;	#-  |  -
+			IPG::GCD_MBP_INOUT_0	[U]	 0.000;	#-  |  -
+			IPG::GCD_MBP_INOUT_1	[U]	 0.000;	#-  |  -
+			IPG::GCD_MBP_INOUT_2	[U]	 0.000;	#-  |  -
+			IPG::GCD_MBP_OUT_0	[U]	 0.000;	#-  |  -
+			IPG::GCD_MBP_OUT_1	[U]	 0.000;	#-  |  -
+			IPG::GCD_MBP_OUT_2	[U]	 0.000;	#-  |  -
+			IPG::GCD_OBS_00		03.100;	#xx_gcd_view_ana_out[0]  |  GCD_VIEW_ANA_OUT_0
+			IPG::GCD_OBS_01		03.109;	#xx_gcd_view_ana_out[1]  |  GCD_VIEW_ANA_OUT_1
+			IPG::GCD_OBS_02		03.102;	#xx_gcd_view_dig_out[0]  |  GCD_VIEW_DIG_OUT_0
+			IPG::GCD_OBS_03		03.108;	#xx_gcd_view_dig_out[1]  |  GCD_VIEW_DIG_OUT_1
+			IPG::GCD_OBS_04	[U]	 0.000;	#zz_gcd_lya[0]  |  -
+			IPG::GCD_OBS_05	[U]	 0.000;	#zz_gcd_lya[1]  |  -
+			IPG::GCD_OBS_06	[U]	 0.000;	#zz_gcd_view_dig_out[0]  |  -
+			IPG::GCD_OBS_07	[U]	 0.000;	#zz_gcd_view_dig_out[1]  |  -
+			IPG::GCD_OBS_08	[U]	 0.000;	#zz_gcd_view_dig_out[2]  |  -
+			IPG::GCD_OBS_09	[U]	 0.000;	#-  |  -
+			IPG::GCD_OBS_10	[U]	 0.000;	#-  |  -
+			IPG::GCD_OBS_11	[U]	 0.000;	#-  |  -
+			IPG::GCD_OBS_12	[U]	 0.000;	#-  |  -
+			IPG::GCD_OBS_13	[U]	 0.000;	#-  |  -
+			IPG::GCD_OBS_14	[U]	 0.000;	#-  |  -
+			IPG::GCD_OBS_15	[U]	 0.000;	#-  |  -
+			IPG::GCD_OBS_16	[U]	 0.000;	#-  |  -
+			IPG::GCD_OBS_17	[U]	 0.000;	#-  |  -
+			IPG::GCD_OBS_18	[U]	 0.000;	#-  |  -
+			IPG::GCD_OBS_19	[U]	 0.000;	#-  |  -
+			IPG::GCD_PROBE_TRIG0	[U]	 0.000;	#-  |  -
+			IPG::GCD_PROBE_TRIG1	[U]	 0.000;	#-  |  -
+			IPG::GCD_RST_00		03.053;	#xx_gcd_hvm_epd_on  |  EPD_ON_GCD_IN
+			IPG::GCD_RST_01	[U]	 0.000;	#xx_gcd_hvm_mode  |  GCD_HVM_MODE
+			IPG::GCD_RST_02	[U]	 0.000;	#zz_gcd_sort_mode  |  -
+			IPG::GCD_RST_03	[U]	 0.000;	#zz_gcd_fuse_sort_bumps[0]  |  -
+			IPG::GCD_RST_04	[U]	 0.000;	#zz_gcd_fuse_sort_bumps[1]  |  -
+			IPG::GCD_RST_05	[U]	 0.000;	#zz_gcd_fuse_sort_bumps[2]  |  -
+			IPG::GCD_RST_06	[U]	 0.000;	#zz_gcd_a0_debug_en  |  -
+			IPG::GCD_RST_07	[U]	 0.000;	#-  |  -
+			IPG::GCD_RST_08	[U]	 0.000;	#-  |  -
+			IPG::GCD_RST_09	[U]	 0.000;	#-  |  -
+			IPG::GCD_RST_10	[U]	 0.000;	#-  |  -
+			IPG::GCD_RST_11	[U]	 0.000;	#-  |  -
+			IPG::GCD_RST_12	[U]	 0.000;	#-  |  -
+			IPG::GCD_RST_13	[U]	 0.000;	#-  |  -
+			IPG::GCD_RST_14	[U]	 0.000;	#-  |  -
+			IPG::GCD_RST_15	[U]	 0.000;	#-  |  -
+			IPG::GCD_RST_16	[U]	 0.000;	#-  |  -
+			IPG::GCD_RST_17	[U]	 0.000;	#-  |  -
+			IPG::GCD_RST_18	[U]	 0.000;	#-  |  -
+			IPG::GCD_RST_19	[U]	 0.000;	#-  |  -
+			IPG::GCD_TDI		03.090;	#xx_gcd_tap_tdi  |  GCD_TAP_TDI
+			IPG::GCD_TDO		03.072;	#xx_gcd_tap_tdo  |  GCD_TAP_TDO
+			IPG::GCD_TMS		03.092;	#xx_gcd_tap_tms  |  GCD_TAP_TMS
+			IPG::GCD_TRST		03.091;	#xx_gcd_tap_trst_b  |  GCD_TAP_TRSTB
+			IPG::GCD_TSTPRT_I_00		03.064;	#xx_gcd_hptp_in[0]  |  GCD_HPTP_RX_0
+			IPG::GCD_TSTPRT_I_01		03.080;	#xx_gcd_hptp_in[1]  |  GCD_HPTP_RX_1
+			IPG::GCD_TSTPRT_I_02		03.096;	#xx_gcd_hptp_in[2]  |  GCD_HPTP_RX_2
+			IPG::GCD_TSTPRT_I_03		03.056;	#xx_gcd_hptp_in[3]  |  GCD_HPTP_RX_3
+			IPG::GCD_TSTPRT_I_04	[U]	 0.000;	#zz_gcd_hptp_in[0]  |  -
+			IPG::GCD_TSTPRT_I_05	[U]	 0.000;	#zz_gcd_hptp_in[1]  |  -
+			IPG::GCD_TSTPRT_I_06	[U]	 0.000;	#zz_gcd_hptp_in[2]  |  -
+			IPG::GCD_TSTPRT_I_07	[U]	 0.000;	#zz_gcd_hptp_in[3]  |  -
+			IPG::GCD_TSTPRT_I_08	[U]	 0.000;	#zz_gcd_hptp_in[4]  |  -
+			IPG::GCD_TSTPRT_I_09	[U]	 0.000;	#zz_gcd_hptp_in[5]  |  -
+			IPG::GCD_TSTPRT_I_10	[U]	 0.000;	#zz_gcd_hptp_in[6]  |  -
+			IPG::GCD_TSTPRT_I_11	[U]	 0.000;	#zz_gcd_hptp_in[7]  |  -
+			IPG::GCD_TSTPRT_I_12	[U]	 0.000;	#zz_gcd_hptp_in[8]  |  -
+			IPG::GCD_TSTPRT_I_13	[U]	 0.000;	#zz_gcd_hptp_in[9]  |  -
+			IPG::GCD_TSTPRT_I_14	[U]	 0.000;	#zz_gcd_hptp_in[10]  |  -
+			IPG::GCD_TSTPRT_I_15	[U]	 0.000;	#zz_gcd_hptp_in[11]  |  -
+			IPG::GCD_TSTPRT_I_CK	[U]	 0.000;	#xx_gcd_hptp_clk  |  GCD_HPTP_CLK
+			IPG::GCD_TSTPRT_O_00		03.000;	#xx_gcd_hptp_out[0]  |  GCD_HPTP_TX_0
+			IPG::GCD_TSTPRT_O_01		03.008;	#xx_gcd_hptp_out[1]  |  GCD_HPTP_TX_1
+			IPG::GCD_TSTPRT_O_02	[U]	 0.000;	#zz_gcd_hptp_out[0]  |  -
+			IPG::GCD_TSTPRT_O_03	[U]	 0.000;	#zz_gcd_hptp_out[1]  |  -
+			IPG::GCD_TSTPRT_O_04	[U]	 0.000;	#zz_gcd_hptp_out[2]  |  -
+			IPG::GCD_TSTPRT_O_05	[U]	 0.000;	#zz_gcd_hptp_out[3]  |  -
+			IPG::GCD_TSTPRT_O_06	[U]	 0.000;	#zz_gcd_hptp_out[4]  |  -
+			IPG::GCD_TSTPRT_O_07	[U]	 0.000;	#zz_gcd_hptp_out[5]  |  -
+			IPG::GCD_TSTPRT_O_08	[U]	 0.000;	#zz_gcd_hptp_out[6]  |  -
+			IPG::GCD_TSTPRT_O_09	[U]	 0.000;	#zz_gcd_hptp_out[7]  |  -
+			IPG::GCD_TSTPRT_O_10	[U]	 0.000;	#zz_gcd_hptp_out[8]  |  -
+			IPG::GCD_TSTPRT_O_11	[U]	 0.000;	#zz_gcd_hptp_out[9]  |  -
+			IPG::GCD_TSTPRT_O_12	[U]	 0.000;	#zz_gcd_hptp_out[10]  |  -
+			IPG::GCD_TSTPRT_O_13	[U]	 0.000;	#zz_gcd_hptp_out[11]  |  -
+			IPG::GCD_TSTPRT_O_14	[U]	 0.000;	#zz_gcd_hptp_out[12]  |  -
+			IPG::GCD_TSTPRT_O_15	[U]	 0.000;	#zz_gcd_hptp_out[13]  |  -
+			IPG::GCD_TSTPRT_O_CK	[U]	 0.000;	#-  |  -
+			IPC::CPU_ATOM0_DLVROUT		02.075;	#-  |  TP_VCC_ECORE_0_DLVR_OUT
+			IPC::CPU_ATOM1_DLVROUT		02.078;	#-  |  TP_VCC_ECORE_1_DLVR_OUT
+			IPC::CPU_ATOM2_DLVROUT		08.049;	#-  |  TP_VCC_ECORE_2_DLVR_OUT
+			IPC::CPU_ATOM3_DLVROUT		08.053;	#-  |  TP_VCC_ECORE_3_DLVR_OUT
+			IPC::CPU_CCF_DLVROUT		02.081;	#-  |  TP_VCC_CCF_0_DLVR_OUT
+			IPC::CPU_CLK_0_DP_0	[U]	 0.000;	#-  |  -
+			IPC::CPU_CLK_0_DP_1	[U]	 0.000;	#-  |  -
+			IPC::CPU_CLK_1_DP_0	[U]	 0.000;	#-  |  -
+			IPC::CPU_CLK_1_DP_1	[U]	 0.000;	#-  |  -
+			IPC::CPU_CLK_2_DP_0		08.048;	#xx_cpu_hvm_clk  |  CPU0_HVM_CLK
+			IPC::CPU_CLK_2_DP_1	[U]	 0.000;	#-  |  -
+			IPC::CPU_CLK_3_DP_0	[U]	 0.000;	#-  |  -
+			IPC::CPU_CLK_3_DP_1	[U]	 0.000;	#-  |  -
+			IPC::CPU_CORE0_DLVROUT		02.087;	#-  |  TP_VCC_PCORE_01_DLVR_OUT
+			IPC::CPU_CORE1_DLVROUT		02.079;	#-  |  TP_VCC_PCORE_23_DLVR_OUT
+			IPC::CPU_CORE2_DLVROUT		08.019;	#-  |  TP_VCC_PCORE_45_DLVR_OUT
+			IPC::CPU_CORE3_DLVROUT		08.001;	#-  |  TP_VCC_PCORE_67_DLVR_OUT
+			IPC::CPU_MBP_IN_0		02.099;	#xx_cpu_hvm_mbp_in[0]  |  CPU0_HVM_MBP_IN_0
+			IPC::CPU_MBP_IN_1		02.098;	#xx_cpu_hvm_mbp_in[1]  |  CPU0_HVM_MBP_IN_1
+			IPC::CPU_MBP_IN_2	[U]	 0.000;	#-  |  -
+			IPC::CPU_MBP_INOUT_0	[U]	 0.000;	#-  |  -
+			IPC::CPU_MBP_INOUT_1	[U]	 0.000;	#-  |  -
+			IPC::CPU_MBP_INOUT_2	[U]	 0.000;	#-  |  -
+			IPC::CPU_MBP_OUT_0		02.094;	#xx_cpu_hvm_mbp_out  |  CPU0_HVM_MBP_OUT
+			IPC::CPU_MBP_OUT_1	[U]	 0.000;	#-  |  -
+			IPC::CPU_MBP_OUT_2	[U]	 0.000;	#-  |  -
+			IPC::CPU_OBS_00		02.102;	#xx_core_lya[0]  |  CPU0_LYA_0
+			IPC::CPU_OBS_01		02.109;	#xx_core_lya[1]  |  CPU0_LYA_1
+			IPC::CPU_OBS_02		02.107;	#xx_core_viewana[0]  |  CPU0_CORE_VIEWANA_0
+			IPC::CPU_OBS_03		02.105;	#xx_core_viewana[1]  |  CPU0_CORE_VIEWANA_1
+			IPC::CPU_OBS_04		02.091;	#xx_core_viewdig[0]  |  CPU0_CORE_VIEWDIG_0
+			IPC::CPU_OBS_05		02.106;	#xx_core_viewdig[1]  |  CPU0_CORE_VIEWDIG_1
+			IPC::CPU_OBS_06		02.103;	#xx_core_viewdlvrdig[0]  |  CPU0_CORE_DLVR_VIEWDIG_0
+			IPC::CPU_OBS_07		02.061;	#xx_core_viewdlvrdig[1]  |  CPU0_CORE_DLVR_VIEWDIG_1
+			IPC::CPU_OBS_08	[U]	 0.000;	#-  |  -
+			IPC::CPU_OBS_09	[U]	 0.000;	#-  |  -
+			IPC::CPU_OBS_10	[U]	 0.000;	#-  |  -
+			IPC::CPU_OBS_11	[U]	 0.000;	#-  |  -
+			IPC::CPU_OBS_12	[U]	 0.000;	#-  |  -
+			IPC::CPU_OBS_13	[U]	 0.000;	#-  |  -
+			IPC::CPU_OBS_14	[U]	 0.000;	#-  |  -
+			IPC::CPU_OBS_15	[U]	 0.000;	#-  |  -
+			IPC::CPU_OBS_16	[U]	 0.000;	#-  |  -
+			IPC::CPU_OBS_17	[U]	 0.000;	#-  |  -
+			IPC::CPU_OBS_18	[U]	 0.000;	#-  |  -
+			IPC::CPU_OBS_19	[U]	 0.000;	#-  |  -
+			IPC::CPU_PROBE_TRIG0		08.055;	#-  |  -
+			IPC::CPU_PROBE_TRIG1	[U]	 0.000;	#-  |  -
+			IPC::CPU_RST_00		02.090;	#xx_cpu_hvm_epd_on  |  EPD_ON_CPU0_IN
+			IPC::CPU_RST_01		02.111;	#xx_cpu_hvm_cold_boot_trigger  |  CPU0_HVM_COLD_BOOT_TRIGGER
+			IPC::CPU_RST_02	[U]	 0.000;	#xx_hvm_testmode  |  CPU0_HVM_TESTMODE
+			IPC::CPU_RST_03	[U]	 0.000;	#zz_cdie_sorten_sort  |  -
+			IPC::CPU_RST_04	[U]	 0.000;	#zz_cdie_fuse_sort[0]  |  -
+			IPC::CPU_RST_05	[U]	 0.000;	#zz_cdie_fuse_sort[1]  |  -
+			IPC::CPU_RST_06	[U]	 0.000;	#zz_cdie_id_strap[2]  |  -
+			IPC::CPU_RST_07	[U]	 0.000;	#zz_cdie_id_strap[1]  |  -
+			IPC::CPU_RST_08	[U]	 0.000;	#zz_cdie_id_strap[0]  |  -
+			IPC::CPU_RST_09	[U]	 0.000;	#zz_cdie_fdi_select  |  -
+			IPC::CPU_RST_10	[U]	 0.000;	#-  |  -
+			IPC::CPU_RST_11	[U]	 0.000;	#-  |  -
+			IPC::CPU_RST_12	[U]	 0.000;	#-  |  -
+			IPC::CPU_RST_13	[U]	 0.000;	#-  |  -
+			IPC::CPU_RST_14	[U]	 0.000;	#-  |  -
+			IPC::CPU_RST_15	[U]	 0.000;	#-  |  -
+			IPC::CPU_RST_16	[U]	 0.000;	#-  |  -
+			IPC::CPU_RST_17	[U]	 0.000;	#-  |  -
+			IPC::CPU_RST_18	[U]	 0.000;	#-  |  -
+			IPC::CPU_RST_19	[U]	 0.000;	#-  |  -
+			IPC::CPU_TDI		02.095;	#xx_cpu_hvm_tap_tdi  |  CPU0_HVM_TAP_TDI
+			IPC::CPU_TDO		08.000;	#xx_cpu_hvm_tap_tdo  |  CPU0_HVM_TAP_TDO
+			IPC::CPU_TMS		02.089;	#xx_cpu_hvm_tap_tms  |  CPU0_HVM_TAP_TMS
+			IPC::CPU_TRST		02.101;	#xx_cpu_hvm_tap_trstb  |  CPU0_HVM_TAP_TRSTB
+			IPC::CPU_TSTPRT_I_00		02.092;	#xx_cpu_hptp_rx[0]  |  CPU0_HPTP_RX_0
+			IPC::CPU_TSTPRT_I_01		02.108;	#xx_cpu_hptp_rx[1]  |  CPU0_HPTP_RX_1
+			IPC::CPU_TSTPRT_I_02		02.100;	#xx_cpu_hptp_rx[2]  |  CPU0_HPTP_RX_2
+			IPC::CPU_TSTPRT_I_03		02.064;	#xx_cpu_hptp_rx[3]  |  CPU0_HPTP_RX_3
+			IPC::CPU_TSTPRT_I_04		02.060;	#xx_cpu_hptp_rx[4]  |  CPU0_HPTP_RX_4
+			IPC::CPU_TSTPRT_I_05		02.076;	#xx_cpu_hptp_rx[5]  |  CPU0_HPTP_RX_5
+			IPC::CPU_TSTPRT_I_06		02.084;	#xx_cpu_hptp_rx[6]  |  CPU0_HPTP_RX_6
+			IPC::CPU_TSTPRT_I_07		08.008;	#xx_cpu_hptp_rx[7]  |  CPU0_HPTP_RX_7
+			IPC::CPU_TSTPRT_I_08		02.104;	#xx_cpu_hptp_rx[8]  |  CPU0_HPTP_RX_8
+			IPC::CPU_TSTPRT_I_09		02.068;	#xx_cpu_hptp_rx[9]  |  CPU0_HPTP_RX_9
+			IPC::CPU_TSTPRT_I_10		02.088;	#xx_cpu_hptp_rx[10]  |  CPU0_HPTP_RX_10
+			IPC::CPU_TSTPRT_I_11		02.072;	#xx_cpu_hptp_rx[11]  |  CPU0_HPTP_RX_11
+			IPC::CPU_TSTPRT_I_12		02.080;	#xx_cpu_hptp_rx[12]  |  CPU0_HPTP_RX_12
+			IPC::CPU_TSTPRT_I_13		02.056;	#xx_cpu_hptp_rx[13]  |  CPU0_HPTP_RX_13
+			IPC::CPU_TSTPRT_I_14		02.096;	#xx_cpu_hptp_rx[14]  |  CPU0_HPTP_RX_14
+			IPC::CPU_TSTPRT_I_15		08.016;	#xx_cpu_hptp_rx[15]  |  CPU0_HPTP_RX_15
+			IPC::CPU_TSTPRT_I_CK	[U]	 0.000;	#-  |  -
+			IPC::CPU_TSTPRT_O_00		08.012;	#xx_cpu_hptp_tx[0]  |  CPU0_HPTP_TX_0
+			IPC::CPU_TSTPRT_O_01		08.036;	#xx_cpu_hptp_tx[1]  |  CPU0_HPTP_TX_1
+			IPC::CPU_TSTPRT_O_02		08.032;	#xx_cpu_hptp_tx[2]  |  CPU0_HPTP_TX_2
+			IPC::CPU_TSTPRT_O_03		08.040;	#xx_cpu_hptp_tx[3]  |  CPU0_HPTP_TX_3
+			IPC::CPU_TSTPRT_O_04		08.024;	#xx_cpu_hptp_tx[4]  |  CPU0_HPTP_TX_4
+			IPC::CPU_TSTPRT_O_05		08.020;	#xx_cpu_hptp_tx[5]  |  CPU0_HPTP_TX_5
+			IPC::CPU_TSTPRT_O_06		08.052;	#xx_cpu_hptp_tx[6]  |  CPU0_HPTP_TX_6
+			IPC::CPU_TSTPRT_O_07		08.004;	#xx_cpu_hptp_tx[7]  |  CPU0_HPTP_TX_7
+			IPC::CPU_TSTPRT_O_08	[U]	 0.000;	#xx_cpu_hptp_tx[8]  |  -
+			IPC::CPU_TSTPRT_O_09	[U]	 0.000;	#xx_cpu_hptp_tx[9]  |  -
+			IPC::CPU_TSTPRT_O_10	[U]	 0.000;	#xx_cpu_hptp_tx[10]  |  -
+			IPC::CPU_TSTPRT_O_11	[U]	 0.000;	#xx_cpu_hptp_tx[11]  |  -
+			IPC::CPU_TSTPRT_O_12	[U]	 0.000;	#xx_cpu_hptp_tx[12]  |  -
+			IPC::CPU_TSTPRT_O_13	[U]	 0.000;	#xx_cpu_hptp_tx[13]  |  -
+			IPC::CPU_TSTPRT_O_14	[U]	 0.000;	#xx_cpu_hptp_tx[14]  |  -
+			IPC::CPU_TSTPRT_O_15	[U]	 0.000;	#xx_cpu_hptp_tx[15]  |  -
+			IPC::CPU_TSTPRT_O_CK	[U]	 0.000;	#-  |  -
+			IPC::CPU1_ATOM0_DLVROUT	[U]	 0.000;	#-  |  TP_VCC_ECORE1_0_DLVR_OUT
+			IPC::CPU1_ATOM1_DLVROUT	[U]	 0.000;	#-  |  TP_VCC_ECORE1_1_DLVR_OUT
+			IPC::CPU1_ATOM2_DLVROUT	[U]	 0.000;	#-  |  TP_VCC_ECORE1_2_DLVR_OUT
+			IPC::CPU1_ATOM3_DLVROUT	[U]	 0.000;	#-  |  TP_VCC_ECORE1_3_DLVR_OUT
+			IPC::CPU1_CCF_DLVROUT	[U]	 0.000;	#-  |  TP_VCC_CCF_1_DLVR_OUT
+			IPC::CPU1_CLK_0_DP_0	[U]	 0.000;	#-  |  -
+			IPC::CPU1_CLK_0_DP_1	[U]	 0.000;	#-  |  -
+			IPC::CPU1_CLK_1_DP_0	[U]	 0.000;	#-  |  -
+			IPC::CPU1_CLK_1_DP_1	[U]	 0.000;	#-  |  -
+			IPC::CPU1_CLK_2_DP_0	[U]	 0.000;	#xx_cpu_hvm_clk  |  CPU1_HVM_CLK
+			IPC::CPU1_CLK_2_DP_1	[U]	 0.000;	#-  |  -
+			IPC::CPU1_CLK_3_DP_0	[U]	 0.000;	#-  |  -
+			IPC::CPU1_CLK_3_DP_1	[U]	 0.000;	#-  |  -
+			IPC::CPU1_CORE0_DLVROUT	[U]	 0.000;	#-  |  TP_VCC_PCORE1_01_DLVR_OUT
+			IPC::CPU1_CORE1_DLVROUT	[U]	 0.000;	#-  |  TP_VCC_PCORE1_23_DLVR_OUT
+			IPC::CPU1_CORE2_DLVROUT	[U]	 0.000;	#-  |  TP_VCC_PCORE1_45_DLVR_OUT
+			IPC::CPU1_CORE3_DLVROUT	[U]	 0.000;	#-  |  TP_VCC_PCORE1_67_DLVR_OUT
+			IPC::CPU1_MBP_IN_0	[U]	 0.000;	#xx_cpu_hvm_mbp_in[0]  |  CPU1_HVM_MBP_IN_0
+			IPC::CPU1_MBP_IN_1	[U]	 0.000;	#xx_cpu_hvm_mbp_in[1]  |  CPU1_HVM_MBP_IN_1
+			IPC::CPU1_MBP_IN_2	[U]	 0.000;	#-  |  -
+			IPC::CPU1_MBP_INOUT_0	[U]	 0.000;	#-  |  -
+			IPC::CPU1_MBP_INOUT_1	[U]	 0.000;	#-  |  -
+			IPC::CPU1_MBP_INOUT_2	[U]	 0.000;	#-  |  -
+			IPC::CPU1_MBP_OUT_0	[U]	 0.000;	#-  |  CPU1_HVM_MBP_OUT
+			IPC::CPU1_MBP_OUT_1	[U]	 0.000;	#-  |  -
+			IPC::CPU1_MBP_OUT_2	[U]	 0.000;	#-  |  -
+			IPC::CPU1_OBS_00	[U]	 0.000;	#xx_core_lya[0]  |  CPU1_LYA_0
+			IPC::CPU1_OBS_01	[U]	 0.000;	#xx_core_lya[1]  |  CPU1_LYA_1
+			IPC::CPU1_OBS_02	[U]	 0.000;	#xx_core_viewana[0]  |  CPU1_CORE_VIEWANA_0
+			IPC::CPU1_OBS_03	[U]	 0.000;	#xx_core_viewana[1]  |  CPU1_CORE_VIEWANA_1
+			IPC::CPU1_OBS_04	[U]	 0.000;	#xx_core_viewdig[0]  |  CPU1_CORE_VIEWDIG_0
+			IPC::CPU1_OBS_05	[U]	 0.000;	#xx_core_viewdig[1]  |  CPU1_CORE_VIEWDIG_1
+			IPC::CPU1_OBS_06	[U]	 0.000;	#xx_core_viewdlvrdig[0]  |  CPU1_CORE_DLVR_VIEWDIG_0
+			IPC::CPU1_OBS_07	[U]	 0.000;	#xx_core_viewdlvrdig[1]  |  CPU1_CORE_DLVR_VIEWDIG_1
+			IPC::CPU1_OBS_08	[U]	 0.000;	#-  |  -
+			IPC::CPU1_OBS_09	[U]	 0.000;	#-  |  -
+			IPC::CPU1_OBS_10	[U]	 0.000;	#-  |  -
+			IPC::CPU1_OBS_11	[U]	 0.000;	#-  |  -
+			IPC::CPU1_OBS_12	[U]	 0.000;	#-  |  -
+			IPC::CPU1_OBS_13	[U]	 0.000;	#-  |  -
+			IPC::CPU1_OBS_14	[U]	 0.000;	#-  |  -
+			IPC::CPU1_OBS_15	[U]	 0.000;	#-  |  -
+			IPC::CPU1_OBS_16	[U]	 0.000;	#-  |  -
+			IPC::CPU1_OBS_17	[U]	 0.000;	#-  |  -
+			IPC::CPU1_OBS_18	[U]	 0.000;	#-  |  -
+			IPC::CPU1_OBS_19	[U]	 0.000;	#-  |  -
+			IPC::CPU1_PROBE_TRIG0	[U]	 0.000;	#-  |  -
+			IPC::CPU1_PROBE_TRIG1	[U]	 0.000;	#-  |  -
+			IPC::CPU1_RST_00	[U]	 0.000;	#xx_cpu_hvm_epd_on  |  EPD_ON_CPU1_IN
+			IPC::CPU1_RST_01	[U]	 0.000;	#xx_cpu_hvm_cold_boot_trigger  |  CPU1_HVM_COLD_BOOT_TRIGGER
+			IPC::CPU1_RST_02	[U]	 0.000;	#xx_hvm_testmode  |  CPU1_HVM_TESTMODE
+			IPC::CPU1_RST_03	[U]	 0.000;	#zz_cdie_sorten_sort  |  -
+			IPC::CPU1_RST_04	[U]	 0.000;	#zz_cdie_fuse_sort[0]  |  -
+			IPC::CPU1_RST_05	[U]	 0.000;	#zz_cdie_fuse_sort[1]  |  -
+			IPC::CPU1_RST_06	[U]	 0.000;	#zz_cdie_id_strap[2]  |  -
+			IPC::CPU1_RST_07	[U]	 0.000;	#zz_cdie_id_strap[1]  |  -
+			IPC::CPU1_RST_08	[U]	 0.000;	#zz_cdie_id_strap[0]  |  -
+			IPC::CPU1_RST_09	[U]	 0.000;	#zz_cdie_fdi_select  |  -
+			IPC::CPU1_RST_10	[U]	 0.000;	#-  |  -
+			IPC::CPU1_RST_11	[U]	 0.000;	#-  |  -
+			IPC::CPU1_RST_12	[U]	 0.000;	#-  |  -
+			IPC::CPU1_RST_13	[U]	 0.000;	#-  |  -
+			IPC::CPU1_RST_14	[U]	 0.000;	#-  |  -
+			IPC::CPU1_RST_15	[U]	 0.000;	#-  |  -
+			IPC::CPU1_RST_16	[U]	 0.000;	#-  |  -
+			IPC::CPU1_RST_17	[U]	 0.000;	#-  |  -
+			IPC::CPU1_RST_18	[U]	 0.000;	#-  |  -
+			IPC::CPU1_RST_19	[U]	 0.000;	#-  |  -
+			IPC::CPU1_TDI	[U]	 0.000;	#xx_cpu_hvm_tap_tdi  |  CPU1_HVM_TAP_TDI
+			IPC::CPU1_TDO	[U]	 0.000;	#xx_cpu_hvm_tap_tdo  |  CPU1_HVM_TAP_TDO
+			IPC::CPU1_TMS	[U]	 0.000;	#xx_cpu_hvm_tap_tms  |  CPU1_HVM_TAP_TMS
+			IPC::CPU1_TRST	[U]	 0.000;	#xx_cpu_hvm_tap_trstb  |  CPU1_HVM_TAP_TRSTB
+			IPC::CPU1_TSTPRT_I_00	[U]	 0.000;	#xx_cpu_hptp_rx[0]  |  CPU1_HPTP_RX_0
+			IPC::CPU1_TSTPRT_I_01	[U]	 0.000;	#xx_cpu_hptp_rx[1]  |  CPU1_HPTP_RX_1
+			IPC::CPU1_TSTPRT_I_02	[U]	 0.000;	#xx_cpu_hptp_rx[2]  |  CPU1_HPTP_RX_2
+			IPC::CPU1_TSTPRT_I_03	[U]	 0.000;	#xx_cpu_hptp_rx[3]  |  CPU1_HPTP_RX_3
+			IPC::CPU1_TSTPRT_I_04	[U]	 0.000;	#xx_cpu_hptp_rx[4]  |  CPU1_HPTP_RX_4
+			IPC::CPU1_TSTPRT_I_05	[U]	 0.000;	#xx_cpu_hptp_rx[5]  |  CPU1_HPTP_RX_5
+			IPC::CPU1_TSTPRT_I_06	[U]	 0.000;	#xx_cpu_hptp_rx[6]  |  CPU1_HPTP_RX_6
+			IPC::CPU1_TSTPRT_I_07	[U]	 0.000;	#xx_cpu_hptp_rx[7]  |  CPU1_HPTP_RX_7
+			IPC::CPU1_TSTPRT_I_08	[U]	 0.000;	#xx_cpu_hptp_rx[8]  |  CPU1_HPTP_RX_8
+			IPC::CPU1_TSTPRT_I_09	[U]	 0.000;	#xx_cpu_hptp_rx[9]  |  CPU1_HPTP_RX_9
+			IPC::CPU1_TSTPRT_I_10	[U]	 0.000;	#xx_cpu_hptp_rx[10]  |  CPU1_HPTP_RX_10
+			IPC::CPU1_TSTPRT_I_11	[U]	 0.000;	#xx_cpu_hptp_rx[11]  |  CPU1_HPTP_RX_11
+			IPC::CPU1_TSTPRT_I_12	[U]	 0.000;	#xx_cpu_hptp_rx[12]  |  CPU1_HPTP_RX_12
+			IPC::CPU1_TSTPRT_I_13	[U]	 0.000;	#xx_cpu_hptp_rx[13]  |  CPU1_HPTP_RX_13
+			IPC::CPU1_TSTPRT_I_14	[U]	 0.000;	#xx_cpu_hptp_rx[14]  |  CPU1_HPTP_RX_14
+			IPC::CPU1_TSTPRT_I_15	[U]	 0.000;	#xx_cpu_hptp_rx[15]  |  CPU1_HPTP_RX_15
+			IPC::CPU1_TSTPRT_I_CK	[U]	 0.000;	#-  |  -
+			IPC::CPU1_TSTPRT_O_00	[U]	 0.000;	#xx_cpu_hptp_tx[0]  |  CPU1_HPTP_TX_0
+			IPC::CPU1_TSTPRT_O_01	[U]	 0.000;	#xx_cpu_hptp_tx[1]  |  CPU1_HPTP_TX_1
+			IPC::CPU1_TSTPRT_O_02	[U]	 0.000;	#xx_cpu_hptp_tx[2]  |  CPU1_HPTP_TX_2
+			IPC::CPU1_TSTPRT_O_03	[U]	 0.000;	#xx_cpu_hptp_tx[3]  |  CPU1_HPTP_TX_3
+			IPC::CPU1_TSTPRT_O_04	[U]	 0.000;	#xx_cpu_hptp_tx[4]  |  CPU1_HPTP_TX_4
+			IPC::CPU1_TSTPRT_O_05	[U]	 0.000;	#xx_cpu_hptp_tx[5]  |  CPU1_HPTP_TX_5
+			IPC::CPU1_TSTPRT_O_06	[U]	 0.000;	#xx_cpu_hptp_tx[6]  |  CPU1_HPTP_TX_6
+			IPC::CPU1_TSTPRT_O_07	[U]	 0.000;	#xx_cpu_hptp_tx[7]  |  CPU1_HPTP_TX_7
+			IPC::CPU1_TSTPRT_O_08	[U]	 0.000;	#xx_cpu_hptp_tx[8]  |  -
+			IPC::CPU1_TSTPRT_O_09	[U]	 0.000;	#xx_cpu_hptp_tx[9]  |  -
+			IPC::CPU1_TSTPRT_O_10	[U]	 0.000;	#xx_cpu_hptp_tx[10]  |  -
+			IPC::CPU1_TSTPRT_O_11	[U]	 0.000;	#xx_cpu_hptp_tx[11]  |  -
+			IPC::CPU1_TSTPRT_O_12	[U]	 0.000;	#xx_cpu_hptp_tx[12]  |  -
+			IPC::CPU1_TSTPRT_O_13	[U]	 0.000;	#xx_cpu_hptp_tx[13]  |  -
+			IPC::CPU1_TSTPRT_O_14	[U]	 0.000;	#xx_cpu_hptp_tx[14]  |  -
+			IPC::CPU1_TSTPRT_O_15	[U]	 0.000;	#xx_cpu_hptp_tx[15]  |  -
+			IPC::CPU1_TSTPRT_O_CK	[U]	 0.000;	#-  |  -
+		}
+
+		Resource EnabledClock
+		{
+			IPP::PCD_CLK_0_EC	[U]	 0.000;	#-  |  -
+			IPP::PCD_CLK_1_EC		02.025;	#xxrtcclkin  |  RTCCLKIN
+			IPP::PCD_CLK_2_EC	[U]	 0.000;	#-  |  -
+			IPP::PCD_CLK_3_EC	[U]	 0.000;	#-  |  -
+			IPP::PCD_TCK		09.088;	#xxjtag_tck  |  PCD_JTAG_TCK
+			IPP::PCD_TSTPRT_I_CK_EC	[U]	 0.000;	#-  |  -
+			IPP::PCD_TSTPRT_O_CK_EC	[U]	 0.000;	#-  |  -
+			IPH::HUB_CLK_0_EC	[U]	 0.000;	#-  |  -
+			IPH::HUB_CLK_1_EC	[U]	 0.000;	#-  |  -
+			IPH::HUB_CLK_2_EC		09.041;	#xx_hub_hvm_clk  |  HUB_HVM_CLK
+			IPH::HUB_CLK_3_EC	[U]	 0.000;	#-  |  -
+			IPH::HUB_TCK		09.049;	#xx_hub_hvm_tap_tck  |  HUB_HVM_TAP_TCK
+			IPH::HUB_TSTPRT_I_CK_EC		08.088;	#xx_hub_hptp_clk  |  HUB_HPTP_CLK
+			IPH::HUB_TSTPRT_O_CK_EC	[U]	 0.000;	#-  |  -
+			IPG::GCD_CLK_0_EC	[U]	 0.000;	#-  |  -
+			IPG::GCD_CLK_1_EC	[U]	 0.000;	#-  |  -
+			IPG::GCD_CLK_2_EC		03.048;	#xx_gcd_hvm_clk  |  GCD_HVM_CLK
+			IPG::GCD_CLK_3_EC	[U]	 0.000;	#-  |  -
+			IPG::GCD_TCK		03.107;	#xx_gcd_tap_tck  |  GCD_TAP_TCK
+			IPG::GCD_TSTPRT_I_CK_EC		 03.104;	#-  |  -
+			IPG::GCD_TSTPRT_O_CK_EC	[U]	 0.000;	#-  |  -
+			IPC::CPU_CLK_0_EC	[U]	 0.000;	#-  |  -
+			IPC::CPU_CLK_1_EC	[U]	 0.000;	#-  |  -
+			IPC::CPU_CLK_2_EC		08.048;	#xx_cpu_hvm_clk  |  CPU0_HVM_CLK
+			IPC::CPU_CLK_3_EC	[U]	 0.000;	#-  |  -
+			IPC::CPU_TCK		02.093;	#xx_cpu_hvm_tap_tck  |  CPU0_HVM_TAP_TCK
+			IPC::CPU_TSTPRT_I_CK_EC		08.028;	#xx_cpu_hptp_clk  |  CPU0_HPTP_CLK
+			IPC::CPU_TSTPRT_O_CK_EC	[U]	 0.000;	#-  |  -
+			IPC::CPU1_CLK_0_EC	[U]	 0.000;	#-  |  -
+			IPC::CPU1_CLK_1_EC	[U]	 0.000;	#-  |  -
+			IPC::CPU1_CLK_2_EC	[U]	 0.000;	#xx_cpu_hvm_clk  |  CPU1_HVM_CLK
+			IPC::CPU1_CLK_3_EC	[U]	 0.000;	#-  |  -
+			IPC::CPU1_TCK	[U]	 0.000;	#xx_cpu_hvm_tap_tck  |  CPU1_HVM_TAP_TCK
+			IPC::CPU1_TSTPRT_I_CK_EC	[U]	 0.000;	#xx_cpu_hptp_clk  |  CPU1_HPTP_CLK
+			IPC::CPU1_TSTPRT_O_CK_EC	[U]	 0.000;	#-  |  -
+		}
+
+		Resource GPIO
+		{
+			IO_RLY_08_CLKCHIP_OUTPUT_EN		1000.08;	#-  |  ClkChipENABLE_TC
+			IO_RLY_09	[U]	 0.000;	#-  |  -
+			IO_RLY_10	[U]	 0.000;	#-  |  -
+			IO_RLY_11	[U]	 0.000;	#-  |  -
+			IO_RLY_12	[U]	 0.000;	#-  |  -
+			IO_RLY_13	[U]	 0.000;	#-  |  -
+			IO_RLY_14	[U]	 0.000;	#-  |  -
+			IPP::IO_RLY_00_TMUXCBIT0		1000.00;	#-  |  TMUXCBIT0
+			IPP::IO_RLY_01_TMUXCBIT1		1000.01;	#-  |  TMUXCBIT1
+			IPP::IO_RLY_02_TMUXCBIT2		1000.02;	#-  |  TMUXCBIT2
+			IPP::IO_RLY_15	[U]	 0.000;	#-  |  XTAL RTCX
+			IPP::IO_RLY_16	[U]	 0.000;	#-  |  CNV RCOMP
+			IPP::IO_RLY_17	[U]	 0.000;	#-  |  CNV RCOMP
+			IPP::IO_RLY_18	[U]	 0.000;	#-  |  CDPHY
+			IPP::IO_RLY_19	[U]	 0.000;	#-  |  CDPHY
+			IPC::IO_RLY_03		1000.03;	#-  |  PwrRelay
+			IPC::IO_RLY_04		1000.04;	#-  |  PwrRelay
+			IPC::IO_RLY_05		1000.05;	#-  |  PwrRelay
+			IPC::IO_RLY_06		1000.06;	#-  |  PwrRelay
+			IPC::IO_RLY_07		1000.07;	#-  |  PwrRelay
+		}
+
+		Resource HC
+		{
+			VCCIO		11.33;	#VCCPRIM_IO  |  VCCPRIM_IO
+			VCCIO_FLTR		11.34;	#VCCPRIM_IO_FLTR  |  VCCPRIM_IO_FLTR
+			VNNAON		11.[31:32];	#VCCPRIM_VNNAON  |  VCCPRIM_VNNAON
+			VNNAON_FLTR		0.35;	#VCCPRIM_VNNAON_FLTR  |  VCCPRIM_VNNAON_FLTR
+			IPP::VCCIO	[U]	 0.000;	#VCCPRIM_IO  |  VCCPRIM_IO
+			IPP::VCCIO_FLTR	[U]	 0.000;	#VCCPRIM_IO_FLTR  |  VCCPRIM_IO_FLTR
+			IPP::VNNAON	[U]	 0.000;	#VCCPRIM_VNNAON  |  VCCPRIM_VNNAON
+			IPP::VNNAON_FLTR	[U]	 0.000;	#VCCPRIM_VNNAON_FLTR  |  VCCPRIM_VNNAON_FLTR
+			IPH::VCCIO	[U]	 0.000;	#VCCPRIM_IO  |  VCCPRIM_IO
+			IPH::VCCIO_FLTR	[U]	 0.000;	#VCCPRIM_IO_FLTR  |  VCCPRIM_IO_FLTR
+			IPH::VCCLPECORE	[U]	 0.000;	#VCC_LP_ECORE  |  VCC_LP_ECORE
+			IPH::VCCSA		11.[28:30];	#VCCSA  |  VCCSA
+			IPH::VDD2		11.35;	#VDD2  |  VDD2
+			IPH::VNNAON	[U]	 0.000;	#VCCPRIM_VNNAON  |  VCCPRIM_VNNAON
+			IPH::VNNAON_FLTR	[U]	 0.000;	#VCCPRIM_VNNAON_FLTR  |  VCCPRIM_VNNAON_FLTR
+			IPG::VCCGT		11.[26:27];	#VCCGT  |  VCCGT
+			IPG::VCCIO	[U]	 0.000;	#VCCPRIM_IO  |  VCCPRIM_IO
+			IPG::VCCIO_FLTR	[U]	 0.000;	#VCCPRIM_IO_FLTR  |  VCCPRIM_IO_FLTR
+			IPG::VNNAON	[U]	 0.000;	#VCCPRIM_VNNAON  |  VCCPRIM_VNNAON
+			IPG::VNNAON_FLTR	[U]	 0.000;	#VCCPRIM_VNNAON_FLTR  |  VCCPRIM_VNNAON_FLTR
+			IPC::VCCIA		0.[26:34];	#VCC_CORE  |  VCC_CORE
+			IPC::VCCIO	[U]	 0.000;	#VCCPRIM_IO  |  VCCPRIM_IO
+			IPC::VCCIO_FLTR	[U]	 0.000;	#VCCPRIM_IO_FLTR  |  VCCPRIM_IO_FLTR
+			IPC::VNNAON	[U]	 0.000;	#VCCPRIM_VNNAON  |  VCCPRIM_VNNAON
+			IPC::VNNAON_FLTR	[U]	 0.000;	#VCCPRIM_VNNAON_FLTR  |  VCCPRIM_VNNAON_FLTR
+		}
+
+		Resource HighPurityClock
+		{
+			IPP::PCD_CLK_0_HPC	[U]	 0.000;	#-  |  -
+			IPP::PCD_CLK_1_HPC	[U]	 0.000;	#-  |  -
+			IPP::PCD_CLK_2_HPC	[U]	 0.000;	#-  |  -
+			IPP::PCD_CLK_3_HPC	[U]	 0.000;	#-  |  -
+			IPH::HUB_CLK_0_HPC	[U]	 0.000;	#-  |  -
+			IPH::HUB_CLK_1_HPC	[U]	 0.000;	#-  |  -
+			IPH::HUB_CLK_2_HPC	[U]	 0.000;	#-  |  -
+			IPH::HUB_CLK_3_HPC	[U]	 0.000;	#-  |  -
+			IPG::GCD_CLK_0_HPC	[U]	 0.000;	#-  |  -
+			IPG::GCD_CLK_1_HPC	[U]	 0.000;	#-  |  -
+			IPG::GCD_CLK_2_HPC	[U]	 0.000;	#-  |  -
+			IPG::GCD_CLK_3_HPC	[U]	 0.000;	#-  |  -
+			IPC::CPU_CLK_0_HPC	[U]	 0.000;	#-  |  -
+			IPC::CPU_CLK_1_HPC	[U]	 0.000;	#-  |  -
+			IPC::CPU_CLK_2_HPC	[U]	 0.000;	#-  |  -
+			IPC::CPU_CLK_3_HPC	[U]	 0.000;	#-  |  -
+			IPC::CPU1_CLK_0_HPC	[U]	 0.000;	#-  |  -
+			IPC::CPU1_CLK_1_HPC	[U]	 0.000;	#-  |  -
+			IPC::CPU1_CLK_2_HPC	[U]	 0.000;	#-  |  -
+			IPC::CPU1_CLK_3_HPC	[U]	 0.000;	#-  |  -
+		}
+
+		Resource I2C
+		{
+			I2C_PORT		1000.106;	#-  |  ClkChipSCL(RLY12)ClkChipSDA(RLY13)
+		}
+
+		Resource LC
+		{
+			HUB_GCD_EXT_BGREF_TRIM_ANA		0.25;	#HUB_GCD_EXT_BGREF_TRIM_ANA  |  HUB_GCD_EXT_BGREF_TRIM_ANA
+			V1P8		0.[16:17];	#VCCPRIM_1P8  |  VCCPRIM_1P8
+			V1P8_CPU		0.[18:19];	#VCCPRIM_1P8_CPU  |  VCCPRIM_1P8_CPU
+			V1P8_FLTR		0.20;	#VCCPRIM_1P8_FLTR  |  VCCPRIM_1P8_FLTR
+			V1P8_FLTRA	[U]	 0.000;	#VCCPRIM_1P8_FLTRA  |  VCCPRIM_1P8_FLTRA
+			V1P8_FLTRB	[U]	 0.000;	#VCCPRIM_1P8_FLTRB  |  VCCPRIM_1P8_FLTRB
+			VCCIO_FLTR_H	[U]	 0.000;	#VCCPRIM_IO_FLTR  |  VCCPRIM_IO_FLTR
+			VCCIO_OUT_SVID		0.21;	#VCCPRIM_IO_OUT_SVID  |  VCCPRIM_IO_OUT_SVID
+			VNNAON_FLTR_H	[U]	 0.000;	#VCCPRIM_VNNAON_FLTR  |  VCCPRIM_VNNAON_FLTR
+			IPP::V1P8	[U]	 0.000;	#VCCPRIM_1P8  |  VCCPRIM_1P8
+			IPP::V1P8_CPU	[U]	 0.000;	#VCCPRIM_1P8_CPU  |  VCCPRIM_1P8_CPU
+			IPP::V1P8_FLTR	[U]	 0.000;	#VCCPRIM_1P8_FLTR  |  VCCPRIM_1P8_FLTR
+			IPP::V1P8_FLTRA	[U]	 0.000;	#VCCPRIM_1P8_FLTRA  |  VCCPRIM_1P8_FLTRA
+			IPP::V1P8_FLTRB	[U]	 0.000;	#VCCPRIM_1P8_FLTRB  |  VCCPRIM_1P8_FLTRB
+			IPP::VCCDFT_PCD		0.22;	#VCCDFT_PCD  |  VCCDFT_PCD
+			IPP::VCCIO_FLTR_H	[U]	 0.000;	#VCCPRIM_IO_FLTR  |  VCCPRIM_IO_FLTR
+			IPP::VCCIO_OUT_SVID	[U]	 0.000;	#VCCPRIM_IO_OUT_SVID  |  VCCPRIM_IO_OUT_SVID
+			IPP::VNNAON_FLTR_H	[U]	 0.000;	#VCCPRIM_VNNAON_FLTR  |  VCCPRIM_VNNAON_FLTR
+			IPH::DDR_TERM		11.[17:20];	#DDR_TERM  |  DDR_TERM
+			IPH::HUB_EXT_BGREF_TRIM_ANA	[U]	 0.000;	#HUB_EXT_BGREF_TRIM_ANA  |  HUB_EXT_BGREF_TRIM_ANA
+			IPH::V1P8	[U]	 0.000;	#VCCPRIM_1P8  |  VCCPRIM_1P8
+			IPH::V1P8_CPU	[U]	 0.000;	#VCCPRIM_1P8_CPU  |  VCCPRIM_1P8_CPU
+			IPH::V1P8_FLTR	[U]	 0.000;	#VCCPRIM_1P8_FLTR  |  VCCPRIM_1P8_FLTR
+			IPH::V1P8_FLTRA	[U]	 0.000;	#VCCPRIM_1P8_FLTRA  |  VCCPRIM_1P8_FLTRA
+			IPH::V1P8_FLTRB	[U]	 0.000;	#VCCPRIM_1P8_FLTRB  |  VCCPRIM_1P8_FLTRB
+			IPH::VCCIO_FLTR_H	[U]	 0.000;	#VCCPRIM_IO_FLTR  |  VCCPRIM_IO_FLTR
+			IPH::VCCIO_OUT_SVID	[U]	 0.000;	#VCCPRIM_IO_OUT_SVID  |  VCCPRIM_IO_OUT_SVID
+			IPH::VDDQ	[U]	 0.000;	#VDDQ  |  VDDQ
+			IPH::VNNAON_FLTR_H	[U]	 0.000;	#VCCPRIM_VNNAON_FLTR  |  VCCPRIM_VNNAON_FLTR
+			IPG::GCD_BGR_TRIM_REF	[U]	 0.000;	#GCD_BGR_TRIM_REF  |  GCD_BGR_TRIM_REF
+			IPG::V1P8	[U]	 0.000;	#VCCPRIM_1P8  |  VCCPRIM_1P8
+			IPG::V1P8_CPU	[U]	 0.000;	#VCCPRIM_1P8_CPU  |  VCCPRIM_1P8_CPU
+			IPG::V1P8_FLTR	[U]	 0.000;	#VCCPRIM_1P8_FLTR  |  VCCPRIM_1P8_FLTR
+			IPG::V1P8_FLTRA	[U]	 0.000;	#VCCPRIM_1P8_FLTRA  |  VCCPRIM_1P8_FLTRA
+			IPG::V1P8_FLTRB	[U]	 0.000;	#VCCPRIM_1P8_FLTRB  |  VCCPRIM_1P8_FLTRB
+			IPG::VCCIO_FLTR_H	[U]	 0.000;	#VCCPRIM_IO_FLTR  |  VCCPRIM_IO_FLTR
+			IPG::VCCIO_OUT_SVID	[U]	 0.000;	#VCCPRIM_IO_OUT_SVID  |  VCCPRIM_IO_OUT_SVID
+			IPG::VNNAON_FLTR_H	[U]	 0.000;	#VCCPRIM_VNNAON_FLTR  |  VCCPRIM_VNNAON_FLTR
+			IPC::CPU0_EXT_BGREF_TRIM_ANA		0.23;	#CPU0_EXT_BGREF_TRIM_ANA  |  CPU0_EXT_BGREF_TRIM_ANA
+			IPC::CPU1_EXT_BGREF_TRIM_ANA	[U]	 0.000;	#CPU1_EXT_BGREF_TRIM_ANA  |  CPU1_EXT_BGREF_TRIM_ANA
+			IPC::V1P8	[U]	 0.000;	#VCCPRIM_1P8  |  VCCPRIM_1P8
+			IPC::V1P8_CPU	[U]	 0.000;	#VCCPRIM_1P8_CPU  |  VCCPRIM_1P8_CPU
+			IPC::V1P8_FLTR	[U]	 0.000;	#VCCPRIM_1P8_FLTR  |  VCCPRIM_1P8_FLTR
+			IPC::V1P8_FLTRA	[U]	 0.000;	#VCCPRIM_1P8_FLTRA  |  VCCPRIM_1P8_FLTRA
+			IPC::V1P8_FLTRB	[U]	 0.000;	#VCCPRIM_1P8_FLTRB  |  VCCPRIM_1P8_FLTRB
+			IPC::VCCIO_FLTR_H	[U]	 0.000;	#VCCPRIM_IO_FLTR  |  VCCPRIM_IO_FLTR
+			IPC::VCCIO_OUT_SVID	[U]	 0.000;	#VCCPRIM_IO_OUT_SVID  |  VCCPRIM_IO_OUT_SVID
+			IPC::VLOAD1		11.21;	#VLOAD1,ECORE0_0,ECORE1_0,PCORE0_01,PCORE1_01,CCF_0  |  VLOAD1,ECORE0_0,ECORE1_0,PCORE0_01,PCORE1_01,CCF_0
+			IPC::VLOAD2		11.22;	#VLOAD2,ECORE0_1,ECORE1_1,PCORE0_23,PCORE1_23,CCF_1  |  VLOAD2,ECORE0_1,ECORE1_1,PCORE0_23,PCORE1_23,CCF_1
+			IPC::VLOAD3		11.23;	#VLOAD3,ECORE0_2,ECORE1_2,PCORE0_45,PCORE1_45  |  VLOAD3,ECORE0_2,ECORE1_2,PCORE0_45,PCORE1_45
+			IPC::VLOAD4		11.24;	#VLOAD4,ECORE0_3,ECORE1_3,PCORE0_67,PCORE1_67  |  VLOAD4,ECORE0_3,ECORE1_3,PCORE0_67,PCORE1_67
+			IPC::VNNAON_FLTR_H	[U]	 0.000;	#VCCPRIM_VNNAON_FLTR  |  VCCPRIM_VNNAON_FLTR
+		}
+
+		Resource PowerSumMultiZone
+		{
+			IPC::TDYN_9_IPC		1001.5000;	#-  |  -
+		}
+
+		Resource TDAU
+		{
+			IPP::PCD_TDAU0		1001.3;	#-  |  PCD_THERM_DA_DC
+			IPH::HUB_TDAU0		1001.6;	#-  |  HUB_THERM_DA_DC
+			IPG::GCD_TDAU0		1001.2;	#-  |  GCD_THERM_DA_DC
+			IPC::CPU_TDAU0		1001.1;	#-  |  CPU0_CORE_THERM_DA_DC
+			IPC::CPU1_TDAU0	[U]	 0.000;	#-  |  CPU1_CORE_THERM_DA_DC
+		}
+
+		Resource UeiClientPort0MultiZone
+		{
+			IPC::UEISLAVE_IPC	[U]	 0.000;	#-  |  -
+		}
+
+		Resource VirtualScs
+		{
+			IPP::PCDS0		1502.00000;	#-  |  -
+			IPP::PCDS1		1502.00001;	#-  |  -
+			IPP::PCDS2		1502.00002;	#-  |  -
+			IPP::PCDS3		1502.00003;	#-  |  -
+			IPP::PCDS4		1502.00004;	#-  |  -
+			IPP::PCDS5		1502.00005;	#-  |  -
+			IPP::PCDS6		1502.00006;	#-  |  -
+			IPP::PCDS7		1502.00007;	#-  |  -
+			IPH::DIS1S4		1509.15005;	#-  |  -
+			IPH::DIS1S5		1509.15006;	#-  |  -
+			IPH::DIS1S6		1509.15007;	#-  |  -
+			IPH::DIS1S7		1509.15008;	#-  |  -
+			IPH::HUBAON		1509.15000;	#-  |  -
+			IPH::HUBAS0		1509.15028;	#-  |  -
+			IPH::HUBAS1		1509.15029;	#-  |  -
+			IPH::HUBAS10		1509.15038;	#-  |  -
+			IPH::HUBAS11		1509.15039;	#-  |  -
+			IPH::HUBAS12		1509.15040;	#-  |  -
+			IPH::HUBAS13		1509.15041;	#-  |  -
+			IPH::HUBAS14		1509.15042;	#-  |  -
+			IPH::HUBAS16		1509.15043;	#-  |  -
+			IPH::HUBAS17		1509.15044;	#-  |  -
+			IPH::HUBAS18		1509.15045;	#-  |  -
+			IPH::HUBAS19		1509.15046;	#-  |  -
+			IPH::HUBAS2		1509.15030;	#-  |  -
+			IPH::HUBAS20		1509.15047;	#-  |  -
+			IPH::HUBAS21		1509.15048;	#-  |  -
+			IPH::HUBAS24		1509.15049;	#-  |  -
+			IPH::HUBAS25		1509.15050;	#-  |  -
+			IPH::HUBAS26		1509.15051;	#-  |  -
+			IPH::HUBAS27		1509.15052;	#-  |  -
+			IPH::HUBAS28		1509.15053;	#-  |  -
+			IPH::HUBAS29		1509.15054;	#-  |  -
+			IPH::HUBAS3		1509.15031;	#-  |  -
+			IPH::HUBAS4		1509.15032;	#-  |  -
+			IPH::HUBAS5		1509.15033;	#-  |  -
+			IPH::HUBAS6		1509.15034;	#-  |  -
+			IPH::HUBAS7		1509.15035;	#-  |  -
+			IPH::HUBAS8		1509.15036;	#-  |  -
+			IPH::HUBAS9		1509.15037;	#-  |  -
+			IPH::IPU3S5		1509.15024;	#-  |  -
+			IPH::IPU3S6		1509.15025;	#-  |  -
+			IPH::IPU3S7		1509.15026;	#-  |  -
+			IPH::MED3S0		1509.15019;	#-  |  -
+			IPH::MED3S1		1509.15020;	#-  |  -
+			IPH::MED3S2		1509.15021;	#-  |  -
+			IPH::MED3S3		1509.15022;	#-  |  -
+			IPH::MED3S4		1509.15023;	#-  |  -
+			IPH::MED3S8		1509.15027;	#-  |  -
+			IPH::MEM1S0		1509.15001;	#-  |  -
+			IPH::MEM1S1		1509.15002;	#-  |  -
+			IPH::MEM1S2		1509.15003;	#-  |  -
+			IPH::MEM1S3		1509.15004;	#-  |  -
+			IPH::MEM1S8		1509.15009;	#-  |  -
+			IPH::VPU2S0		1509.15010;	#-  |  -
+			IPH::VPU2S1		1509.15011;	#-  |  -
+			IPH::VPU2S2		1509.15012;	#-  |  -
+			IPH::VPU2S3		1509.15013;	#-  |  -
+			IPH::VPU2S4		1509.15014;	#-  |  -
+			IPH::VPU2S5		1509.15015;	#-  |  -
+			IPH::VPU2S6		1509.15016;	#-  |  -
+			IPH::VPU2S7		1509.15017;	#-  |  -
+			IPH::VPU2S8		1509.15018;	#-  |  -
+			IPG::GCD1S1		1503.30002;	#-  |  -
+			IPG::GCD1S2		1503.30003;	#-  |  -
+			IPG::GCD1S3		1503.30004;	#-  |  -
+			IPG::GCD1S4		1503.30005;	#-  |  -
+			IPG::GCD1S5		1503.30006;	#-  |  -
+			IPG::GCD1S6		1503.30007;	#-  |  -
+			IPG::UNG0S0		1503.30000;	#-  |  -
+			IPG::UNG1S0		1503.30001;	#-  |  -
+			IPC::A0S0		1508.00029;	#-  |  -
+			IPC::A0S0_1	[U]	 0.000;	#-  |  -
+			IPC::A0S1		1508.00030;	#-  |  -
+			IPC::A0S1_1	[U]	 0.000;	#-  |  -
+			IPC::A0S10		1508.00039;	#-  |  -
+			IPC::A0S10_1	[U]	 0.000;	#-  |  -
+			IPC::A0S11		1508.00040;	#-  |  -
+			IPC::A0S11_1	[U]	 0.000;	#-  |  -
+			IPC::A0S12		1508.00041;	#-  |  -
+			IPC::A0S12_1	[U]	 0.000;	#-  |  -
+			IPC::A0S13		1508.00042;	#-  |  -
+			IPC::A0S13_1	[U]	 0.000;	#-  |  -
+			IPC::A0S14		1508.00043;	#-  |  -
+			IPC::A0S14_1	[U]	 0.000;	#-  |  -
+			IPC::A0S16		1508.00044;	#-  |  -
+			IPC::A0S16_1	[U]	 0.000;	#-  |  -
+			IPC::A0S17		1508.00045;	#-  |  -
+			IPC::A0S17_1	[U]	 0.000;	#-  |  -
+			IPC::A0S18		1508.00046;	#-  |  -
+			IPC::A0S18_1	[U]	 0.000;	#-  |  -
+			IPC::A0S19		1508.00047;	#-  |  -
+			IPC::A0S19_1	[U]	 0.000;	#-  |  -
+			IPC::A0S2		1508.00031;	#-  |  -
+			IPC::A0S2_1	[U]	 0.000;	#-  |  -
+			IPC::A0S20		1508.00048;	#-  |  -
+			IPC::A0S20_1	[U]	 0.000;	#-  |  -
+			IPC::A0S21		1508.00049;	#-  |  -
+			IPC::A0S21_1	[U]	 0.000;	#-  |  -
+			IPC::A0S24		1508.00050;	#-  |  -
+			IPC::A0S24_1	[U]	 0.000;	#-  |  -
+			IPC::A0S25		1508.00051;	#-  |  -
+			IPC::A0S25_1	[U]	 0.000;	#-  |  -
+			IPC::A0S26		1508.00052;	#-  |  -
+			IPC::A0S26_1	[U]	 0.000;	#-  |  -
+			IPC::A0S27		1508.00053;	#-  |  -
+			IPC::A0S27_1	[U]	 0.000;	#-  |  -
+			IPC::A0S28		1508.00054;	#-  |  -
+			IPC::A0S28_1	[U]	 0.000;	#-  |  -
+			IPC::A0S29		1508.00055;	#-  |  -
+			IPC::A0S29_1	[U]	 0.000;	#-  |  -
+			IPC::A0S3		1508.00032;	#-  |  -
+			IPC::A0S3_1	[U]	 0.000;	#-  |  -
+			IPC::A0S4		1508.00033;	#-  |  -
+			IPC::A0S4_1	[U]	 0.000;	#-  |  -
+			IPC::A0S5		1508.00034;	#-  |  -
+			IPC::A0S5_1	[U]	 0.000;	#-  |  -
+			IPC::A0S6		1508.00035;	#-  |  -
+			IPC::A0S6_1	[U]	 0.000;	#-  |  -
+			IPC::A0S7		1508.00036;	#-  |  -
+			IPC::A0S7_1	[U]	 0.000;	#-  |  -
+			IPC::A0S8		1508.00037;	#-  |  -
+			IPC::A0S8_1	[U]	 0.000;	#-  |  -
+			IPC::A0S9		1508.00038;	#-  |  -
+			IPC::A0S9_1	[U]	 0.000;	#-  |  -
+			IPC::A1S0		1508.00056;	#-  |  -
+			IPC::A1S0_1	[U]	 0.000;	#-  |  -
+			IPC::A1S1		1508.00057;	#-  |  -
+			IPC::A1S1_1	[U]	 0.000;	#-  |  -
+			IPC::A1S10		1508.00066;	#-  |  -
+			IPC::A1S10_1	[U]	 0.000;	#-  |  -
+			IPC::A1S11		1508.00067;	#-  |  -
+			IPC::A1S11_1	[U]	 0.000;	#-  |  -
+			IPC::A1S12		1508.00068;	#-  |  -
+			IPC::A1S12_1	[U]	 0.000;	#-  |  -
+			IPC::A1S13		1508.00069;	#-  |  -
+			IPC::A1S13_1	[U]	 0.000;	#-  |  -
+			IPC::A1S14		1508.00070;	#-  |  -
+			IPC::A1S14_1	[U]	 0.000;	#-  |  -
+			IPC::A1S16		1508.00071;	#-  |  -
+			IPC::A1S16_1	[U]	 0.000;	#-  |  -
+			IPC::A1S17		1508.00072;	#-  |  -
+			IPC::A1S17_1	[U]	 0.000;	#-  |  -
+			IPC::A1S18		1508.00073;	#-  |  -
+			IPC::A1S18_1	[U]	 0.000;	#-  |  -
+			IPC::A1S19		1508.00074;	#-  |  -
+			IPC::A1S19_1	[U]	 0.000;	#-  |  -
+			IPC::A1S2		1508.00058;	#-  |  -
+			IPC::A1S2_1	[U]	 0.000;	#-  |  -
+			IPC::A1S20		1508.00075;	#-  |  -
+			IPC::A1S20_1	[U]	 0.000;	#-  |  -
+			IPC::A1S21		1508.00076;	#-  |  -
+			IPC::A1S21_1	[U]	 0.000;	#-  |  -
+			IPC::A1S24		1508.00077;	#-  |  -
+			IPC::A1S24_1	[U]	 0.000;	#-  |  -
+			IPC::A1S25		1508.00078;	#-  |  -
+			IPC::A1S25_1	[U]	 0.000;	#-  |  -
+			IPC::A1S26		1508.00079;	#-  |  -
+			IPC::A1S26_1	[U]	 0.000;	#-  |  -
+			IPC::A1S27		1508.00080;	#-  |  -
+			IPC::A1S27_1	[U]	 0.000;	#-  |  -
+			IPC::A1S28		1508.00081;	#-  |  -
+			IPC::A1S28_1	[U]	 0.000;	#-  |  -
+			IPC::A1S29		1508.00082;	#-  |  -
+			IPC::A1S29_1	[U]	 0.000;	#-  |  -
+			IPC::A1S3		1508.00059;	#-  |  -
+			IPC::A1S3_1	[U]	 0.000;	#-  |  -
+			IPC::A1S4		1508.00060;	#-  |  -
+			IPC::A1S4_1	[U]	 0.000;	#-  |  -
+			IPC::A1S5		1508.00061;	#-  |  -
+			IPC::A1S5_1	[U]	 0.000;	#-  |  -
+			IPC::A1S6		1508.00062;	#-  |  -
+			IPC::A1S6_1	[U]	 0.000;	#-  |  -
+			IPC::A1S7		1508.00063;	#-  |  -
+			IPC::A1S7_1	[U]	 0.000;	#-  |  -
+			IPC::A1S8		1508.00064;	#-  |  -
+			IPC::A1S8_1	[U]	 0.000;	#-  |  -
+			IPC::A1S9		1508.00065;	#-  |  -
+			IPC::A1S9_1	[U]	 0.000;	#-  |  -
+			IPC::A2S0		1508.00083;	#-  |  -
+			IPC::A2S0_1	[U]	 0.000;	#-  |  -
+			IPC::A2S1		1508.00084;	#-  |  -
+			IPC::A2S1_1	[U]	 0.000;	#-  |  -
+			IPC::A2S10		1508.00093;	#-  |  -
+			IPC::A2S10_1	[U]	 0.000;	#-  |  -
+			IPC::A2S11		1508.00094;	#-  |  -
+			IPC::A2S11_1	[U]	 0.000;	#-  |  -
+			IPC::A2S12		1508.00095;	#-  |  -
+			IPC::A2S12_1	[U]	 0.000;	#-  |  -
+			IPC::A2S13		1508.00096;	#-  |  -
+			IPC::A2S13_1	[U]	 0.000;	#-  |  -
+			IPC::A2S14		1508.00097;	#-  |  -
+			IPC::A2S14_1	[U]	 0.000;	#-  |  -
+			IPC::A2S16		1508.00098;	#-  |  -
+			IPC::A2S16_1	[U]	 0.000;	#-  |  -
+			IPC::A2S17		1508.00099;	#-  |  -
+			IPC::A2S17_1	[U]	 0.000;	#-  |  -
+			IPC::A2S18		1508.00100;	#-  |  -
+			IPC::A2S18_1	[U]	 0.000;	#-  |  -
+			IPC::A2S19		1508.00101;	#-  |  -
+			IPC::A2S19_1	[U]	 0.000;	#-  |  -
+			IPC::A2S2		1508.00085;	#-  |  -
+			IPC::A2S2_1	[U]	 0.000;	#-  |  -
+			IPC::A2S20		1508.00102;	#-  |  -
+			IPC::A2S20_1	[U]	 0.000;	#-  |  -
+			IPC::A2S21		1508.00103;	#-  |  -
+			IPC::A2S21_1	[U]	 0.000;	#-  |  -
+			IPC::A2S24		1508.00104;	#-  |  -
+			IPC::A2S24_1	[U]	 0.000;	#-  |  -
+			IPC::A2S25		1508.00105;	#-  |  -
+			IPC::A2S25_1	[U]	 0.000;	#-  |  -
+			IPC::A2S26		1508.00106;	#-  |  -
+			IPC::A2S26_1	[U]	 0.000;	#-  |  -
+			IPC::A2S27		1508.00107;	#-  |  -
+			IPC::A2S27_1	[U]	 0.000;	#-  |  -
+			IPC::A2S28		1508.00108;	#-  |  -
+			IPC::A2S28_1	[U]	 0.000;	#-  |  -
+			IPC::A2S29		1508.00109;	#-  |  -
+			IPC::A2S29_1	[U]	 0.000;	#-  |  -
+			IPC::A2S3		1508.00086;	#-  |  -
+			IPC::A2S3_1	[U]	 0.000;	#-  |  -
+			IPC::A2S4		1508.00087;	#-  |  -
+			IPC::A2S4_1	[U]	 0.000;	#-  |  -
+			IPC::A2S5		1508.00088;	#-  |  -
+			IPC::A2S5_1	[U]	 0.000;	#-  |  -
+			IPC::A2S6		1508.00089;	#-  |  -
+			IPC::A2S6_1	[U]	 0.000;	#-  |  -
+			IPC::A2S7		1508.00090;	#-  |  -
+			IPC::A2S7_1	[U]	 0.000;	#-  |  -
+			IPC::A2S8		1508.00091;	#-  |  -
+			IPC::A2S8_1	[U]	 0.000;	#-  |  -
+			IPC::A2S9		1508.00092;	#-  |  -
+			IPC::A2S9_1	[U]	 0.000;	#-  |  -
+			IPC::A3S0		1508.00110;	#-  |  -
+			IPC::A3S0_1	[U]	 0.000;	#-  |  -
+			IPC::A3S1		1508.00111;	#-  |  -
+			IPC::A3S1_1	[U]	 0.000;	#-  |  -
+			IPC::A3S10		1508.00120;	#-  |  -
+			IPC::A3S10_1	[U]	 0.000;	#-  |  -
+			IPC::A3S11		1508.00121;	#-  |  -
+			IPC::A3S11_1	[U]	 0.000;	#-  |  -
+			IPC::A3S12		1508.00122;	#-  |  -
+			IPC::A3S12_1	[U]	 0.000;	#-  |  -
+			IPC::A3S13		1508.00123;	#-  |  -
+			IPC::A3S13_1	[U]	 0.000;	#-  |  -
+			IPC::A3S14		1508.00124;	#-  |  -
+			IPC::A3S14_1	[U]	 0.000;	#-  |  -
+			IPC::A3S16		1508.00125;	#-  |  -
+			IPC::A3S16_1	[U]	 0.000;	#-  |  -
+			IPC::A3S17		1508.00126;	#-  |  -
+			IPC::A3S17_1	[U]	 0.000;	#-  |  -
+			IPC::A3S18		1508.00127;	#-  |  -
+			IPC::A3S18_1	[U]	 0.000;	#-  |  -
+			IPC::A3S19		1508.00128;	#-  |  -
+			IPC::A3S19_1	[U]	 0.000;	#-  |  -
+			IPC::A3S2		1508.00112;	#-  |  -
+			IPC::A3S2_1	[U]	 0.000;	#-  |  -
+			IPC::A3S20		1508.00129;	#-  |  -
+			IPC::A3S20_1	[U]	 0.000;	#-  |  -
+			IPC::A3S21		1508.00130;	#-  |  -
+			IPC::A3S21_1	[U]	 0.000;	#-  |  -
+			IPC::A3S24		1508.00131;	#-  |  -
+			IPC::A3S24_1	[U]	 0.000;	#-  |  -
+			IPC::A3S25		1508.00132;	#-  |  -
+			IPC::A3S25_1	[U]	 0.000;	#-  |  -
+			IPC::A3S26		1508.00133;	#-  |  -
+			IPC::A3S26_1	[U]	 0.000;	#-  |  -
+			IPC::A3S27		1508.00134;	#-  |  -
+			IPC::A3S27_1	[U]	 0.000;	#-  |  -
+			IPC::A3S28		1508.00135;	#-  |  -
+			IPC::A3S28_1	[U]	 0.000;	#-  |  -
+			IPC::A3S29		1508.00136;	#-  |  -
+			IPC::A3S29_1	[U]	 0.000;	#-  |  -
+			IPC::A3S3		1508.00113;	#-  |  -
+			IPC::A3S3_1	[U]	 0.000;	#-  |  -
+			IPC::A3S4		1508.00114;	#-  |  -
+			IPC::A3S4_1	[U]	 0.000;	#-  |  -
+			IPC::A3S5		1508.00115;	#-  |  -
+			IPC::A3S5_1	[U]	 0.000;	#-  |  -
+			IPC::A3S6		1508.00116;	#-  |  -
+			IPC::A3S6_1	[U]	 0.000;	#-  |  -
+			IPC::A3S7		1508.00117;	#-  |  -
+			IPC::A3S7_1	[U]	 0.000;	#-  |  -
+			IPC::A3S8		1508.00118;	#-  |  -
+			IPC::A3S8_1	[U]	 0.000;	#-  |  -
+			IPC::A3S9		1508.00119;	#-  |  -
+			IPC::A3S9_1	[U]	 0.000;	#-  |  -
+			IPC::AON		1508.00000;	#-  |  -
+			IPC::AON_1	[U]	 0.000;	#-  |  -
+			IPC::C0S0		1508.00137;	#-  |  -
+			IPC::C0S0_1	[U]	 0.000;	#-  |  -
+			IPC::C0S1		1508.00138;	#-  |  -
+			IPC::C0S1_1	[U]	 0.000;	#-  |  -
+			IPC::C0S10		1508.00147;	#-  |  -
+			IPC::C0S10_1	[U]	 0.000;	#-  |  -
+			IPC::C0S11		1508.00148;	#-  |  -
+			IPC::C0S11_1	[U]	 0.000;	#-  |  -
+			IPC::C0S12		1508.00149;	#-  |  -
+			IPC::C0S12_1	[U]	 0.000;	#-  |  -
+			IPC::C0S13		1508.00150;	#-  |  -
+			IPC::C0S13_1	[U]	 0.000;	#-  |  -
+			IPC::C0S14		1508.00151;	#-  |  -
+			IPC::C0S14_1	[U]	 0.000;	#-  |  -
+			IPC::C0S15		1508.00152;	#-  |  -
+			IPC::C0S15_1	[U]	 0.000;	#-  |  -
+			IPC::C0S2		1508.00139;	#-  |  -
+			IPC::C0S2_1	[U]	 0.000;	#-  |  -
+			IPC::C0S3		1508.00140;	#-  |  -
+			IPC::C0S3_1	[U]	 0.000;	#-  |  -
+			IPC::C0S4		1508.00141;	#-  |  -
+			IPC::C0S4_1	[U]	 0.000;	#-  |  -
+			IPC::C0S5		1508.00142;	#-  |  -
+			IPC::C0S5_1	[U]	 0.000;	#-  |  -
+			IPC::C0S6		1508.00143;	#-  |  -
+			IPC::C0S6_1	[U]	 0.000;	#-  |  -
+			IPC::C0S7		1508.00144;	#-  |  -
+			IPC::C0S7_1	[U]	 0.000;	#-  |  -
+			IPC::C0S8		1508.00145;	#-  |  -
+			IPC::C0S8_1	[U]	 0.000;	#-  |  -
+			IPC::C0S9		1508.00146;	#-  |  -
+			IPC::C0S9_1	[U]	 0.000;	#-  |  -
+			IPC::C1S0		1508.00153;	#-  |  -
+			IPC::C1S0_1	[U]	 0.000;	#-  |  -
+			IPC::C1S1		1508.00154;	#-  |  -
+			IPC::C1S1_1	[U]	 0.000;	#-  |  -
+			IPC::C1S10		1508.00163;	#-  |  -
+			IPC::C1S10_1	[U]	 0.000;	#-  |  -
+			IPC::C1S11		1508.00164;	#-  |  -
+			IPC::C1S11_1	[U]	 0.000;	#-  |  -
+			IPC::C1S12		1508.00165;	#-  |  -
+			IPC::C1S12_1	[U]	 0.000;	#-  |  -
+			IPC::C1S13		1508.00166;	#-  |  -
+			IPC::C1S13_1	[U]	 0.000;	#-  |  -
+			IPC::C1S14		1508.00167;	#-  |  -
+			IPC::C1S14_1	[U]	 0.000;	#-  |  -
+			IPC::C1S15		1508.00168;	#-  |  -
+			IPC::C1S15_1	[U]	 0.000;	#-  |  -
+			IPC::C1S2		1508.00155;	#-  |  -
+			IPC::C1S2_1	[U]	 0.000;	#-  |  -
+			IPC::C1S3		1508.00156;	#-  |  -
+			IPC::C1S3_1	[U]	 0.000;	#-  |  -
+			IPC::C1S4		1508.00157;	#-  |  -
+			IPC::C1S4_1	[U]	 0.000;	#-  |  -
+			IPC::C1S5		1508.00158;	#-  |  -
+			IPC::C1S5_1	[U]	 0.000;	#-  |  -
+			IPC::C1S6		1508.00159;	#-  |  -
+			IPC::C1S6_1	[U]	 0.000;	#-  |  -
+			IPC::C1S7		1508.00160;	#-  |  -
+			IPC::C1S7_1	[U]	 0.000;	#-  |  -
+			IPC::C1S8		1508.00161;	#-  |  -
+			IPC::C1S8_1	[U]	 0.000;	#-  |  -
+			IPC::C1S9		1508.00162;	#-  |  -
+			IPC::C1S9_1	[U]	 0.000;	#-  |  -
+			IPC::C2S0		1508.00169;	#-  |  -
+			IPC::C2S0_1	[U]	 0.000;	#-  |  -
+			IPC::C2S1		1508.00170;	#-  |  -
+			IPC::C2S1_1	[U]	 0.000;	#-  |  -
+			IPC::C2S10		1508.00179;	#-  |  -
+			IPC::C2S10_1	[U]	 0.000;	#-  |  -
+			IPC::C2S11		1508.00180;	#-  |  -
+			IPC::C2S11_1	[U]	 0.000;	#-  |  -
+			IPC::C2S12		1508.00181;	#-  |  -
+			IPC::C2S12_1	[U]	 0.000;	#-  |  -
+			IPC::C2S13		1508.00182;	#-  |  -
+			IPC::C2S13_1	[U]	 0.000;	#-  |  -
+			IPC::C2S14		1508.00183;	#-  |  -
+			IPC::C2S14_1	[U]	 0.000;	#-  |  -
+			IPC::C2S15		1508.00184;	#-  |  -
+			IPC::C2S15_1	[U]	 0.000;	#-  |  -
+			IPC::C2S2		1508.00171;	#-  |  -
+			IPC::C2S2_1	[U]	 0.000;	#-  |  -
+			IPC::C2S3		1508.00172;	#-  |  -
+			IPC::C2S3_1	[U]	 0.000;	#-  |  -
+			IPC::C2S4		1508.00173;	#-  |  -
+			IPC::C2S4_1	[U]	 0.000;	#-  |  -
+			IPC::C2S5		1508.00174;	#-  |  -
+			IPC::C2S5_1	[U]	 0.000;	#-  |  -
+			IPC::C2S6		1508.00175;	#-  |  -
+			IPC::C2S6_1	[U]	 0.000;	#-  |  -
+			IPC::C2S7		1508.00176;	#-  |  -
+			IPC::C2S7_1	[U]	 0.000;	#-  |  -
+			IPC::C2S8		1508.00177;	#-  |  -
+			IPC::C2S8_1	[U]	 0.000;	#-  |  -
+			IPC::C2S9		1508.00178;	#-  |  -
+			IPC::C2S9_1	[U]	 0.000;	#-  |  -
+			IPC::C3S0		1508.00185;	#-  |  -
+			IPC::C3S0_1	[U]	 0.000;	#-  |  -
+			IPC::C3S1		1508.00186;	#-  |  -
+			IPC::C3S1_1	[U]	 0.000;	#-  |  -
+			IPC::C3S10		1508.00195;	#-  |  -
+			IPC::C3S10_1	[U]	 0.000;	#-  |  -
+			IPC::C3S11		1508.00196;	#-  |  -
+			IPC::C3S11_1	[U]	 0.000;	#-  |  -
+			IPC::C3S12		1508.00197;	#-  |  -
+			IPC::C3S12_1	[U]	 0.000;	#-  |  -
+			IPC::C3S13		1508.00198;	#-  |  -
+			IPC::C3S13_1	[U]	 0.000;	#-  |  -
+			IPC::C3S14		1508.00199;	#-  |  -
+			IPC::C3S14_1	[U]	 0.000;	#-  |  -
+			IPC::C3S15		1508.00200;	#-  |  -
+			IPC::C3S15_1	[U]	 0.000;	#-  |  -
+			IPC::C3S2		1508.00187;	#-  |  -
+			IPC::C3S2_1	[U]	 0.000;	#-  |  -
+			IPC::C3S3		1508.00188;	#-  |  -
+			IPC::C3S3_1	[U]	 0.000;	#-  |  -
+			IPC::C3S4		1508.00189;	#-  |  -
+			IPC::C3S4_1	[U]	 0.000;	#-  |  -
+			IPC::C3S5		1508.00190;	#-  |  -
+			IPC::C3S5_1	[U]	 0.000;	#-  |  -
+			IPC::C3S6		1508.00191;	#-  |  -
+			IPC::C3S6_1	[U]	 0.000;	#-  |  -
+			IPC::C3S7		1508.00192;	#-  |  -
+			IPC::C3S7_1	[U]	 0.000;	#-  |  -
+			IPC::C3S8		1508.00193;	#-  |  -
+			IPC::C3S8_1	[U]	 0.000;	#-  |  -
+			IPC::C3S9		1508.00194;	#-  |  -
+			IPC::C3S9_1	[U]	 0.000;	#-  |  -
+			IPC::C4S0		1508.00201;	#-  |  -
+			IPC::C4S0_1	[U]	 0.000;	#-  |  -
+			IPC::C4S1		1508.00202;	#-  |  -
+			IPC::C4S1_1	[U]	 0.000;	#-  |  -
+			IPC::C4S10		1508.00211;	#-  |  -
+			IPC::C4S10_1	[U]	 0.000;	#-  |  -
+			IPC::C4S11		1508.00212;	#-  |  -
+			IPC::C4S11_1	[U]	 0.000;	#-  |  -
+			IPC::C4S12		1508.00213;	#-  |  -
+			IPC::C4S12_1	[U]	 0.000;	#-  |  -
+			IPC::C4S13		1508.00214;	#-  |  -
+			IPC::C4S13_1	[U]	 0.000;	#-  |  -
+			IPC::C4S14		1508.00215;	#-  |  -
+			IPC::C4S14_1	[U]	 0.000;	#-  |  -
+			IPC::C4S15		1508.00216;	#-  |  -
+			IPC::C4S15_1	[U]	 0.000;	#-  |  -
+			IPC::C4S2		1508.00203;	#-  |  -
+			IPC::C4S2_1	[U]	 0.000;	#-  |  -
+			IPC::C4S3		1508.00204;	#-  |  -
+			IPC::C4S3_1	[U]	 0.000;	#-  |  -
+			IPC::C4S4		1508.00205;	#-  |  -
+			IPC::C4S4_1	[U]	 0.000;	#-  |  -
+			IPC::C4S5		1508.00206;	#-  |  -
+			IPC::C4S5_1	[U]	 0.000;	#-  |  -
+			IPC::C4S6		1508.00207;	#-  |  -
+			IPC::C4S6_1	[U]	 0.000;	#-  |  -
+			IPC::C4S7		1508.00208;	#-  |  -
+			IPC::C4S7_1	[U]	 0.000;	#-  |  -
+			IPC::C4S8		1508.00209;	#-  |  -
+			IPC::C4S8_1	[U]	 0.000;	#-  |  -
+			IPC::C4S9		1508.00210;	#-  |  -
+			IPC::C4S9_1	[U]	 0.000;	#-  |  -
+			IPC::C5S0		1508.00217;	#-  |  -
+			IPC::C5S0_1	[U]	 0.000;	#-  |  -
+			IPC::C5S1		1508.00218;	#-  |  -
+			IPC::C5S1_1	[U]	 0.000;	#-  |  -
+			IPC::C5S10		1508.00227;	#-  |  -
+			IPC::C5S10_1	[U]	 0.000;	#-  |  -
+			IPC::C5S11		1508.00228;	#-  |  -
+			IPC::C5S11_1	[U]	 0.000;	#-  |  -
+			IPC::C5S12		1508.00229;	#-  |  -
+			IPC::C5S12_1	[U]	 0.000;	#-  |  -
+			IPC::C5S13		1508.00230;	#-  |  -
+			IPC::C5S13_1	[U]	 0.000;	#-  |  -
+			IPC::C5S14		1508.00231;	#-  |  -
+			IPC::C5S14_1	[U]	 0.000;	#-  |  -
+			IPC::C5S15		1508.00232;	#-  |  -
+			IPC::C5S15_1	[U]	 0.000;	#-  |  -
+			IPC::C5S2		1508.00219;	#-  |  -
+			IPC::C5S2_1	[U]	 0.000;	#-  |  -
+			IPC::C5S3		1508.00220;	#-  |  -
+			IPC::C5S3_1	[U]	 0.000;	#-  |  -
+			IPC::C5S4		1508.00221;	#-  |  -
+			IPC::C5S4_1	[U]	 0.000;	#-  |  -
+			IPC::C5S5		1508.00222;	#-  |  -
+			IPC::C5S5_1	[U]	 0.000;	#-  |  -
+			IPC::C5S6		1508.00223;	#-  |  -
+			IPC::C5S6_1	[U]	 0.000;	#-  |  -
+			IPC::C5S7		1508.00224;	#-  |  -
+			IPC::C5S7_1	[U]	 0.000;	#-  |  -
+			IPC::C5S8		1508.00225;	#-  |  -
+			IPC::C5S8_1	[U]	 0.000;	#-  |  -
+			IPC::C5S9		1508.00226;	#-  |  -
+			IPC::C5S9_1	[U]	 0.000;	#-  |  -
+			IPC::C6S0		1508.00233;	#-  |  -
+			IPC::C6S0_1	[U]	 0.000;	#-  |  -
+			IPC::C6S1		1508.00234;	#-  |  -
+			IPC::C6S1_1	[U]	 0.000;	#-  |  -
+			IPC::C6S10		1508.00243;	#-  |  -
+			IPC::C6S10_1	[U]	 0.000;	#-  |  -
+			IPC::C6S11		1508.00244;	#-  |  -
+			IPC::C6S11_1	[U]	 0.000;	#-  |  -
+			IPC::C6S12		1508.00245;	#-  |  -
+			IPC::C6S12_1	[U]	 0.000;	#-  |  -
+			IPC::C6S13		1508.00246;	#-  |  -
+			IPC::C6S13_1	[U]	 0.000;	#-  |  -
+			IPC::C6S14		1508.00247;	#-  |  -
+			IPC::C6S14_1	[U]	 0.000;	#-  |  -
+			IPC::C6S15		1508.00248;	#-  |  -
+			IPC::C6S15_1	[U]	 0.000;	#-  |  -
+			IPC::C6S2		1508.00235;	#-  |  -
+			IPC::C6S2_1	[U]	 0.000;	#-  |  -
+			IPC::C6S3		1508.00236;	#-  |  -
+			IPC::C6S3_1	[U]	 0.000;	#-  |  -
+			IPC::C6S4		1508.00237;	#-  |  -
+			IPC::C6S4_1	[U]	 0.000;	#-  |  -
+			IPC::C6S5		1508.00238;	#-  |  -
+			IPC::C6S5_1	[U]	 0.000;	#-  |  -
+			IPC::C6S6		1508.00239;	#-  |  -
+			IPC::C6S6_1	[U]	 0.000;	#-  |  -
+			IPC::C6S7		1508.00240;	#-  |  -
+			IPC::C6S7_1	[U]	 0.000;	#-  |  -
+			IPC::C6S8		1508.00241;	#-  |  -
+			IPC::C6S8_1	[U]	 0.000;	#-  |  -
+			IPC::C6S9		1508.00242;	#-  |  -
+			IPC::C6S9_1	[U]	 0.000;	#-  |  -
+			IPC::C7S0		1508.00249;	#-  |  -
+			IPC::C7S0_1	[U]	 0.000;	#-  |  -
+			IPC::C7S1		1508.00250;	#-  |  -
+			IPC::C7S1_1	[U]	 0.000;	#-  |  -
+			IPC::C7S10		1508.00259;	#-  |  -
+			IPC::C7S10_1	[U]	 0.000;	#-  |  -
+			IPC::C7S11		1508.00260;	#-  |  -
+			IPC::C7S11_1	[U]	 0.000;	#-  |  -
+			IPC::C7S12		1508.00261;	#-  |  -
+			IPC::C7S12_1	[U]	 0.000;	#-  |  -
+			IPC::C7S13		1508.00262;	#-  |  -
+			IPC::C7S13_1	[U]	 0.000;	#-  |  -
+			IPC::C7S14		1508.00263;	#-  |  -
+			IPC::C7S14_1	[U]	 0.000;	#-  |  -
+			IPC::C7S15		1508.00264;	#-  |  -
+			IPC::C7S15_1	[U]	 0.000;	#-  |  -
+			IPC::C7S2		1508.00251;	#-  |  -
+			IPC::C7S2_1	[U]	 0.000;	#-  |  -
+			IPC::C7S3		1508.00252;	#-  |  -
+			IPC::C7S3_1	[U]	 0.000;	#-  |  -
+			IPC::C7S4		1508.00253;	#-  |  -
+			IPC::C7S4_1	[U]	 0.000;	#-  |  -
+			IPC::C7S5		1508.00254;	#-  |  -
+			IPC::C7S5_1	[U]	 0.000;	#-  |  -
+			IPC::C7S6		1508.00255;	#-  |  -
+			IPC::C7S6_1	[U]	 0.000;	#-  |  -
+			IPC::C7S7		1508.00256;	#-  |  -
+			IPC::C7S7_1	[U]	 0.000;	#-  |  -
+			IPC::C7S8		1508.00257;	#-  |  -
+			IPC::C7S8_1	[U]	 0.000;	#-  |  -
+			IPC::C7S9		1508.00258;	#-  |  -
+			IPC::C7S9_1	[U]	 0.000;	#-  |  -
+			IPC::CCF0S0		1508.00001;	#-  |  -
+			IPC::CCF0S0_1	[U]	 0.000;	#-  |  -
+			IPC::CCF0S1		1508.00002;	#-  |  -
+			IPC::CCF0S1_1	[U]	 0.000;	#-  |  -
+			IPC::CCF0S2		1508.00003;	#-  |  -
+			IPC::CCF0S2_1	[U]	 0.000;	#-  |  -
+			IPC::CCF0S3		1508.00004;	#-  |  -
+			IPC::CCF0S3_1	[U]	 0.000;	#-  |  -
+			IPC::CCF0S4		1508.00005;	#-  |  -
+			IPC::CCF0S4_1	[U]	 0.000;	#-  |  -
+			IPC::CCF0S5		1508.00006;	#-  |  -
+			IPC::CCF0S5_1	[U]	 0.000;	#-  |  -
+			IPC::CCF0S6		1508.00007;	#-  |  -
+			IPC::CCF0S6_1	[U]	 0.000;	#-  |  -
+			IPC::CCF0S7		1508.00008;	#-  |  -
+			IPC::CCF0S7_1	[U]	 0.000;	#-  |  -
+			IPC::CCF0S8		1508.00009;	#-  |  -
+			IPC::CCF0S8_1	[U]	 0.000;	#-  |  -
+			IPC::CCF0S9		1508.00010;	#-  |  -
+			IPC::CCF0S9_1	[U]	 0.000;	#-  |  -
+			IPC::CCF1S0		1508.00011;	#-  |  -
+			IPC::CCF1S0_1	[U]	 0.000;	#-  |  -
+			IPC::CCF1S1		1508.00012;	#-  |  -
+			IPC::CCF1S1_1	[U]	 0.000;	#-  |  -
+			IPC::CCF1S2		1508.00013;	#-  |  -
+			IPC::CCF1S2_1	[U]	 0.000;	#-  |  -
+			IPC::CCF1S3		1508.00014;	#-  |  -
+			IPC::CCF1S3_1	[U]	 0.000;	#-  |  -
+			IPC::CCF2S0		1508.00015;	#-  |  -
+			IPC::CCF2S0_1	[U]	 0.000;	#-  |  -
+			IPC::CCF2S1		1508.00016;	#-  |  -
+			IPC::CCF2S1_1	[U]	 0.000;	#-  |  -
+			IPC::CCF2S2		1508.00017;	#-  |  -
+			IPC::CCF2S2_1	[U]	 0.000;	#-  |  -
+			IPC::CCF2S3		1508.00018;	#-  |  -
+			IPC::CCF2S3_1	[U]	 0.000;	#-  |  -
+			IPC::CCF2S4		1508.00019;	#-  |  -
+			IPC::CCF2S4_1	[U]	 0.000;	#-  |  -
+			IPC::CCF2S5		1508.00020;	#-  |  -
+			IPC::CCF2S5_1	[U]	 0.000;	#-  |  -
+			IPC::CCF2S6		1508.00021;	#-  |  -
+			IPC::CCF2S6_1	[U]	 0.000;	#-  |  -
+			IPC::CCF2S7		1508.00022;	#-  |  -
+			IPC::CCF2S7_1	[U]	 0.000;	#-  |  -
+			IPC::CCF2S8		1508.00023;	#-  |  -
+			IPC::CCF2S8_1	[U]	 0.000;	#-  |  -
+			IPC::CCF2S9		1508.00024;	#-  |  -
+			IPC::CCF2S9_1	[U]	 0.000;	#-  |  -
+			IPC::CCF3S0		1508.00025;	#-  |  -
+			IPC::CCF3S0_1	[U]	 0.000;	#-  |  -
+			IPC::CCF3S1		1508.00026;	#-  |  -
+			IPC::CCF3S1_1	[U]	 0.000;	#-  |  -
+			IPC::CCF3S2		1508.00027;	#-  |  -
+			IPC::CCF3S2_1	[U]	 0.000;	#-  |  -
+			IPC::CCF3S3		1508.00028;	#-  |  -
+			IPC::CCF3S3_1	[U]	 0.000;	#-  |  -
+		}
+
+		Resource VLC
+		{
+			HVM_TESTMODE		0.10;	#HVM_TESTMODE  |  HVM_TESTMODE
+			TIU_CLKCHIP_HUBHVMCLK_VIH		0.15;	#TIU_CLKCHIP_HUBHVMCLK_VIH  |  TIU_CLKCHIP_HUBHVMCLK_VIH
+			TIU_CLKCHIP_OUTPUT_ENABLE		0.11;	#TIU_CLKCHIP_OUTPUT_ENABLE  |  TIU_CLKCHIP_OUTPUT_ENABLE
+			TIU_CLKCHIP_OUTPUT_VIH		0.13;	#TIU_CLKCHIP_OUTPUT_VIH  |  TIU_CLKCHIP_OUTPUT_VIH
+			TIU_CLKCHIP_RTCCLKIN_VIH		0.12;	#TIU_CLKCHIP_RTCCLKIN_VIH  |  TIU_CLKCHIP_RTCCLKIN_VIH
+			IPP::HVM_TESTMODE	[U]	 0.000;	#HVM_TESTMODE  |  HVM_TESTMODE
+			IPP::VCCFPGM_PCD_EXT_EHV		0.07;	#VCCFPGM_PCD_EXT_EHV  |  VCCFPGM_PCD_EXT_EHV
+			IPP::VCCFPGM_PCD_EXT_NOM		0.06;	#VCCFPGM_PCD_EXT_NOM  |  VCCFPGM_PCD_EXT_NOM
+			IPP::VCCFPGM_PCD_OSSE_EHV		0.08;	#VCCFPGM_PCD_OSSE_EHV  |  VCCFPGM_PCD_OSSE_EHV
+			IPP::VCCFPGM_PCD_OSSE_NOM		0.09;	#VCCFPGM_PCD_OSSE_NOM  |  VCCFPGM_PCD_OSSE_NOM
+			IPH::HVM_TESTMODE	[U]	 0.000;	#HVM_TESTMODE  |  HVM_TESTMODE
+			IPH::VCCFPGM_HUB		0.05;	#VCCFPGM_HUB  |  VCCFPGM_HUB
+			IPG::HVM_TESTMODE	[U]	 0.000;	#HVM_TESTMODE  |  HVM_TESTMODE
+			IPG::VCCFPGM_GCD		0.04;	#VCCFPGM_GCD  |  VCCFPGM_GCD
+			IPC::HVM_TESTMODE	[U]	 0.000;	#HVM_TESTMODE  |  HVM_TESTMODE
+			IPC::VCCFPGM_CPU0_0		0.00;	#VCCFPGM_CPU0_0  |  VCCFPGM_CPU0_0
+			IPC::VCCFPGM_CPU0_1		0.01;	#VCCFPGM_CPU0_1  |  VCCFPGM_CPU0_1
+			IPC::VCCFPGM_CPU1_0	[U]	 0.000;	#VCCFPGM_CPU1_0  |  VCCFPGM_CPU1_0
+			IPC::VCCFPGM_CPU1_1	[U]	 0.000;	#VCCFPGM_CPU1_1  |  VCCFPGM_CPU1_1
+		}
+
+	}
+
+}

@@ -1,0 +1,38 @@
+START_SCREEN:NVL_CLASS_IDEALITY_PRINT_18A
+EXEC   ; IDEALITYAPPLY_ITUFF      ; STRING ; GSDS       ; G.U.S.IDEALITYAPPLY_ITUFF              ; SET ; EXPRESSION ; ToString([__shared__::PTHVars.CPU0_TDAU0_IDEALITY_DYNAMIC])+'|'+ [__shared__::PTHVars.HUB_TDAU0_IDEALITY_DYNAMIC]+'|'+[__shared__::PTHVars.GCD_TDAU0_IDEALITY_DYNAMIC]  	; - ; IDEALITYAPPLY_PRINT    ; 2
+EXEC	:IDEALITYAPPLY_PRINT		:STRING 		:EXPRESSION		: ExecCallback('PrintToItuff', '--tname_suf _IDEALITYAPPLY_CPU0_HUB_GCD --body_type strgval --body_data  G.U.S.IDEALITYAPPLY_ITUFF')	: - : - :-					:-		:IDEALITYAPPLYCOLD_ITUFF	:2
+
+EXEC   ; IDEALITYAPPLYCOLD_ITUFF      ; STRING ; GSDS       ; G.U.S.IDEALITYAPPLYCOLD_ITUFF              ; SET ; EXPRESSION ; ToString([__shared__::PTHVars.CPU0_TDAU0_IDEALITY_DYNAMIC_Cold])+'|'+ [__shared__::PTHVars.HUB_TDAU0_IDEALITY_DYNAMIC_Cold]+'|'+[__shared__::PTHVars.GCD_TDAU0_IDEALITY_DYNAMIC_Cold]  	; - ; IDEALITYAPPLYCOLD_PRINT    ; 2
+EXEC	:IDEALITYAPPLYCOLD_PRINT		:STRING 		:EXPRESSION		: ExecCallback('PrintToItuff', '--tname_suf _IDEALITYAPPLYCOLD_CPU0_HUB_GCD --body_type strgval --body_data  G.U.S.IDEALITYAPPLYCOLD_ITUFF')	: - : - :-					:-		:IDEALITYCALC_ITUFF	:2
+
+EXEC   ; IDEALITYCALC_ITUFF      ; STRING ; GSDS       ; G.U.S.IDEALITYCALC_ITUFF              ; SET ; EXPRESSION ; ToString([__shared__::PTHVars.CPU_TDAU0_IDEALITY])+'|'+ [__shared__::PTHVars.HUB_TDAU0_IDEALITY]+'|'+[__shared__::PTHVars.GCD_TDAU0_IDEALITY]  	; - ; IDEALITYCALC_PRINT    ; 2
+EXEC	:IDEALITYCALC_PRINT		:STRING 		:EXPRESSION		: ExecCallback('PrintToItuff', '--tname_suf _IDEALITYCALC_CPU0_HUB_GCD --body_type strgval --body_data  G.U.S.IDEALITYCALC_ITUFF')	: - : - :-					:-		:1	:2
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+END_SCREEN
+START_SCREEN:NVL_CLASS_IDEALITY_PRINT_N2P
+EXEC   ; IDEALITYAPPLY_ITUFF      ; STRING ; GSDS       ; G.U.S.IDEALITYAPPLY_ITUFF              ; SET ; EXPRESSION ; ToString([__shared__::PTHVars.HUB_TDAU0_IDEALITY_DYNAMIC])+'|'+[__shared__::PTHVars.GCD_TDAU0_IDEALITY_DYNAMIC]  	; - ; IDEALITYAPPLY_PRINT    ; 2
+EXEC	:IDEALITYAPPLY_PRINT		:STRING 		:EXPRESSION		: ExecCallback('PrintToItuff', '--tname_suf _IDEALITYAPPLY_HUB_GCD --body_type strgval --body_data  G.U.S.IDEALITYAPPLY_ITUFF')	: - : - :-					:-		:IDEALITYAPPLYCOLD_ITUFF	:2
+
+EXEC   ; IDEALITYAPPLYCOLD_ITUFF      ; STRING ; GSDS       ; G.U.S.IDEALITYAPPLYCOLD_ITUFF              ; SET ; EXPRESSION ; ToString([__shared__::PTHVars.HUB_TDAU0_IDEALITY_DYNAMIC_Cold])+'|'+[__shared__::PTHVars.GCD_TDAU0_IDEALITY_DYNAMIC_Cold]  	; - ; IDEALITYAPPLYCOLD_PRINT    ; 2
+EXEC	:IDEALITYAPPLYCOLD_PRINT		:STRING 		:EXPRESSION		: ExecCallback('PrintToItuff', '--tname_suf _IDEALITYAPPLYCOLD_HUB_GCD --body_type strgval --body_data  G.U.S.IDEALITYAPPLYCOLD_ITUFF')	: - : - :-					:-		:IDEALITYCALC_ITUFF	:2
+
+EXEC   ; IDEALITYCALC_ITUFF      ; STRING ; GSDS       ; G.U.S.IDEALITYCALC_ITUFF              ; SET ; EXPRESSION ; ToString([__shared__::PTHVars.CPU_TDAU0_IDEALITY])+'|'+ [__shared__::PTHVars.HUB_TDAU0_IDEALITY]+'|'+[__shared__::PTHVars.GCD_TDAU0_IDEALITY]  	; - ; IDEALITYCALC_PRINT    ; 2
+EXEC	:IDEALITYCALC_PRINT		:STRING 		:EXPRESSION		: ExecCallback('PrintToItuff', '--tname_suf _IDEALITYCALC_CPU0_HUB_GCD --body_type strgval --body_data  G.U.S.IDEALITYCALC_ITUFF')	: - : - :-					:-		:1	:2
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+END_SCREEN
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+START_SCREEN:NVL_CLASS_IDEALITY_S52C_PRINT
+EXEC   ; IDEALITYAPPLY_ITUFF      ; STRING ; GSDS       ; G.U.S.IDEALITYAPPLY_ITUFF              ; SET ; EXPRESSION ; ToString([__shared__::PTHVars.CPU0_TDAU0_IDEALITY_DYNAMIC])+'|'+[__shared__::PTHVars.CPU1_TDAU0_IDEALITY_DYNAMIC]+'|'+[__shared__::PTHVars.HUB_TDAU0_IDEALITY_DYNAMIC]+'|'+[__shared__::PTHVars.GCD_TDAU0_IDEALITY_DYNAMIC]  	; - ; IDEALITYAPPLY_PRINT    ; 2
+EXEC	:IDEALITYAPPLY_PRINT		:STRING 		:EXPRESSION		: ExecCallback('PrintToItuff', '--tname_suf _IDEALITYAPPLY_CPU0_CPU1_HUB_GCD --body_type strgval --body_data  G.U.S.IDEALITYAPPLY_ITUFF')	: - : - :-					:-		:IDEALITYAPPLYCOLD_ITUFF	:2
+
+EXEC   ; IDEALITYAPPLYCOLD_ITUFF      ; STRING ; GSDS       ; G.U.S.IDEALITYAPPLYCOLD_ITUFF              ; SET ; EXPRESSION ; ToString([__shared__::PTHVars.CPU0_TDAU0_IDEALITY_DYNAMIC_Cold])+'|'+[__shared__::PTHVars.CPU1_TDAU0_IDEALITY_DYNAMIC_Cold]+'|'+[__shared__::PTHVars.HUB_TDAU0_IDEALITY_DYNAMIC_Cold]+'|'+[__shared__::PTHVars.GCD_TDAU0_IDEALITY_DYNAMIC_Cold]  	; - ; IDEALITYAPPLYCOLD_PRINT    ; 2
+EXEC	:IDEALITYAPPLYCOLD_PRINT		:STRING 		:EXPRESSION		: ExecCallback('PrintToItuff', '--tname_suf _IDEALITYAPPLYCOLD_CPU0_CPU1_HUB_GCD --body_type strgval --body_data  G.U.S.IDEALITYAPPLYCOLD_ITUFF')	: - : - :-					:-		:IDEALITYCALC_ITUFF	:2
+
+EXEC   ; IDEALITYCALC_ITUFF      ; STRING ; GSDS       ; G.U.S.IDEALITYCALC_ITUFF              ; SET ; EXPRESSION ; ToString([__shared__::PTHVars.CPU_TDAU0_IDEALITY])+'|'+[__shared__::PTHVars.HUB_TDAU0_IDEALITY]+'|'+[__shared__::PTHVars.GCD_TDAU0_IDEALITY]  	; - ; IDEALITYCALC_PRINT    ; 2
+EXEC	:IDEALITYCALC_PRINT		:STRING 		:EXPRESSION		: ExecCallback('PrintToItuff', '--tname_suf _IDEALITYCALC_CPU0_HUB_GCD --body_type strgval --body_data  G.U.S.IDEALITYCALC_ITUFF')	: - : - :-					:-		:1	:2
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+END_SCREEN
+#--

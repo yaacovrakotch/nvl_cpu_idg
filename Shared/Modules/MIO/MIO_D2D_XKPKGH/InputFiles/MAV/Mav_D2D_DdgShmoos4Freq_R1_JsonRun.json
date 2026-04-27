@@ -1,0 +1,102 @@
+{
+  "instances": 
+  {
+    "HUB2CPU": 
+	{
+      "skip": false,
+      "restore": true,
+      "instance": "MIO_D2D_XKPKGH::FBIST_D2D_SHMOO_E_BEGIN_X_X_X_X_VNNAONFREQ_TRY",
+      "stop_on_fail": false,
+      "nested_loops": {
+        "plist": 
+		[
+			"hnoc0_cnoc0_all_edc",
+			"hnoc0_cnoc0_all"
+        ],
+		"freqSet":
+		[
+			"MNCdrv:c2hfreq_MAV:4.0GHz,MNHdrv:H2C_PLL_H2C_PLL_FUSE_FRACTIONAL_CONTROL_INT_RATIO_MAV:4000MHz",
+			"MNCdrv:c2hfreq_MAV:4.4GHz,MNHdrv:H2C_PLL_H2C_PLL_FUSE_FRACTIONAL_CONTROL_INT_RATIO_MAV:4400MHz",
+			"MNCdrv:c2hfreq_MAV:4.8GHz,MNHdrv:H2C_PLL_H2C_PLL_FUSE_FRACTIONAL_CONTROL_INT_RATIO_MAV:4800MHz",
+			"MNCdrv:c2hfreq_MAV:5.2GHz,MNHdrv:H2C_PLL_H2C_PLL_FUSE_FRACTIONAL_CONTROL_INT_RATIO_MAV:5200MHz"
+		]
+      },
+      "parameters": 
+	  {
+		"BypassPort":  "-1",
+		"PreInstance": "SetAltInstanceName(HUB2CPU_${plist})",
+		"Patlist": "${plist}",
+	    "LevelsTc": "MIO_D2D_XKPKGH::d2d_bf_x_x_pkg_lvl_nom_710VNNAON_Shmoo",
+		"TimingsTc": "BASE::d2d_timing_mts100_tstprtclk50_tck100",
+		"XAxisParam": "p_vnnaon_spec",
+		"XAxisParamType": "LevelsTestCondition",
+		"XAxisRange": "0.6:0.01:24",
+		"PrintFormat": "ShmooHub",
+		"SetPointsPreInstance": "${freqSet}"
+      }
+    },
+	
+    "HUB2GCD": 
+	{
+      "skip": false,
+      "restore": true,
+      "instance": "MIO_D2D_XKPKGH::FBIST_D2D_SHMOO_E_BEGIN_X_X_X_X_VNNAONFREQ_TRY",
+      "stop_on_fail": false,
+      "nested_loops": {
+        "plist": 
+		[
+			"hubgcd_all_slt_speed_edc",
+			"hubgcd_all_slt_speed"
+        ],
+		"freqSet":
+		[
+			"MNHdrv:h2gfreq_MAV:4000MHz,MNGdrv:g2hfreq_MAV:4.0GHz",
+			"MNHdrv:h2gfreq_MAV:4400MHz,MNGdrv:g2hfreq_MAV:4.4GHz",
+			"MNHdrv:h2gfreq_MAV:4800MHz,MNGdrv:g2hfreq_MAV:4.8GHz"
+		]		
+      },
+      "parameters": 
+	  {
+		"BypassPort":  "-1",
+		"PreInstance": "SetAltInstanceName(HUB2GCD_${plist})",
+		"Patlist": "${plist}",
+	    "LevelsTc": "MIO_D2D_XKPKGH::d2d_bf_x_x_pkg_lvl_nom_710VNNAON_Shmoo",
+		"TimingsTc": "BASE::d2d_timing_mts100_tstprtclk50_tck100",
+		"XAxisParam": "p_vnnaon_spec",
+		"XAxisParamType": "LevelsTestCondition",
+		"XAxisRange": "0.6:0.01:24",
+		"PrintFormat": "ShmooHub",
+		"SetPointsPreInstance": "${freqSet}"
+      }
+    },	
+	
+    "HUB2PCD_ALL": 
+	{
+      "skip": false,
+      "restore": true,
+      "instance": "MIO_D2D_XKPKGH::FBIST_D2D_SHMOO_E_BEGIN_X_X_X_X_VNNAONFREQ_TRY",
+      "stop_on_fail": false,
+      "nested_loops": {
+        "plist": 
+		[
+			"hubpcd_all_slt_speed_edc",
+			"hubpcd_all_slt_speed"
+        ]	
+      },
+      "parameters": 
+	  {
+		"BypassPort":  "-1",
+		"PreInstance": "SetAltInstanceName(HUB2PCD_${plist})",
+		"Patlist": "${plist}",
+	    "LevelsTc": "MIO_D2D_XKPKGH::d2d_H_bf_x_x_pkg_lvl_nom_710VNNAON_Shmoo",
+		"TimingsTc": "BASE::d2d_timing_mts100_tstprtclk50_tck100",
+		"XAxisParam": "p_vnnaon_spec",
+		"XAxisParamType": "LevelsTestCondition",
+		"XAxisRange": "0.6:0.01:24",
+		"PrintFormat": "ShmooHub",
+		"SetPointsPreInstance": ""
+      }
+    }
+	
+  }
+}

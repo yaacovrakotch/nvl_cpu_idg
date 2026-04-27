@@ -1,0 +1,5 @@
+- Content: CLK
+- Contact: mpe_ddg_pde_analog_clk_my@intel.com
+- Dielet: CPU
+- Scope: Base module tests the trim content for the CLK team, including global broadcast of per-part trims (where necessary).
+- SIRP: https://wiki.ith.intel.com/display/ATVSecureWiki/NVL+Clock+HVM+SiRP

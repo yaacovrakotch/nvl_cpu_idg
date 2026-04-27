@@ -1,0 +1,408 @@
+﻿================================================================================
+MTPL BLUEPRINT EXPANSION PROMPT
+Module: ARR_ATOM_CXPKGS9
+Generated: 2026-04-26 07:49
+================================================================================
+
+This BluePrint (.mtpl.bp) is a minimized, symbolized version of the full
+module MTPL file.  Symbols are enclosed in backslashes: \SYMBOL_NAME\.
+To regenerate the full MTPL, expand each symbol placeholder with every
+value listed below, creating one test instance per combination.
+
+--------------------------------------------------------------------------------
+SYMBOL DEFINITIONS
+--------------------------------------------------------------------------------
+
+  Symbol:      \FREQ_CORNER\
+  Description: Frequency corner for VMIN search tests. F1 is the lowest standard corner, F4 the highest.
+  Values:      F1, F2, F3, F4
+
+  Symbol:      \COVERAGE_TYPE\
+  Description: Coverage variant for array tests: COMBINED=all arrays, SSA=single-sided only, SSA_L2DATA=L2 data arrays, MEC=maximum error count.
+  Values:      COMBINED, SSA, SSA_L2DATA, MEC
+
+  Symbol:      \MODULE_INDEX\
+  Description: L2 cache module index (M0-M3). Each physical module is tested independently in the raster repair pipeline.
+  Values:      M0, M1, M2, M3
+
+  Symbol:      \CPU_DIE\
+  Description: CPU die selector. Tests are duplicated for the second die with _CPU1 suffix. CPU0=no suffix.
+  Values:      CPU0 (no suffix), CPU1 (_CPU1 suffix)
+
+  Symbol:      \PMUX_INDEX\
+  Description: Power-mux callback index (0-3), one per ATOM compute cluster.
+  Values:      0, 1, 2, 3
+
+  Symbol:      \VOLTAGE_CORNER\
+  Description: Voltage corner for raster capture/repair tests. MIN=minimum voltage, MAX=maximum voltage.
+  Values:      MIN, MAX
+
+  Symbol:      \SSA_ARRAY_TYPE\
+  Description: SSA array type: L2_DATA covers data arrays, L2_TAG covers tag arrays.
+  Values:      L2_DATA, L2_TAG
+
+  Symbol:      \LSA_ARRAY_TYPE\
+  Description: LSA array type: L2_C6 (C6 retention), L2_LRU (least recently used), L2_STATE (state arrays).
+  Values:      L2_C6, L2_LRU, L2_STATE
+
+  Symbol:      \REP_DIRECTION\
+  Description: Repair direction: VMIN-side vs VMAX-side repair flag.
+  Values:      VMIN, VMAX
+
+  Symbol:      \L2_ENDCPU_TYPE\
+  Description: L2 sub-array tested at ENDCPU: TAG or DATA.
+  Values:      TAG, DATA
+
+  Symbol:      \HRY_PHASE\
+  Description: HRY test phase: PRE runs before repair, POST runs after repair.
+  Values:      PRE, POST
+
+  Symbol:      \RASTERLOOP_TYPE\
+  Description: PatConfig raster loop type: VMAXRASTERLOOP or VMINRASTERLOOP.
+  Values:      VMAXRASTERLOOP, VMINRASTERLOOP
+
+--------------------------------------------------------------------------------
+EXPANSION GROUPS
+--------------------------------------------------------------------------------
+
+GROUP 13  (4 instances)
+  Test type: CSharpTest RunCallback
+  Original instances:
+    - ARR_ATOM_RUNCALLBACK_K_ENDCPU_HITO_X_X_X_PMUX_CO_FREQ0
+    - ARR_ATOM_RUNCALLBACK_K_ENDCPU_HITO_X_X_X_PMUX_CO_FREQ1
+    - ARR_ATOM_RUNCALLBACK_K_ENDCPU_HITO_X_X_X_PMUX_CO_FREQ2
+    - ARR_ATOM_RUNCALLBACK_K_ENDCPU_HITO_X_X_X_PMUX_CO_FREQ3
+  Varying symbols:
+    \MODULE_INDEX\ = [M0, M1, M2, M3]
+    \PMUX_INDEX\ = [0, 1, 2, 3]
+  -> Expand: create one instance for each combination of the above symbol values.
+
+GROUP 14  (2 instances)
+  Test type: CSharpTest VminTC
+  Original instances:
+    - ARR_ATOM_VMIN_E_ENDCPU_HITO_VCCIA_X_X_L2_TAG
+    - ARR_ATOM_VMIN_E_ENDCPU_HITO_VCCIA_X_X_L2_DATA
+  Varying symbols:
+    \FREQ_CORNER\ = [F1, F4]
+    \MODULE_INDEX\ = [M0, M1, M2, M3]
+    \PMUX_INDEX\ = [0, 1, 2, 3]
+    \SSA_ARRAY_TYPE\ = [L2_DATA, L2_TAG]
+    \L2_ENDCPU_TYPE\ = [DATA, TAG]
+  -> Expand: create one instance for each combination of the above symbol values.
+
+GROUP 20  (3 instances)
+  Test type: CSharpTest NVLRasterExtension
+  Original instances:
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_DATA_M0_1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_DATA_M1_1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_DATA_M3_1
+  Varying symbols:
+    \MODULE_INDEX\ = [M0, M1, M3]
+    \PMUX_INDEX\ = [0, 1, 2, 3]
+  -> Expand: create one instance for each combination of the above symbol values.
+
+GROUP 21  (16 instances)
+  Test type: CSharpTest PrimeRepairToFuseTestMethod
+  Original instances:
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_DATA_M0_REP2FUSE_1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_DATA_M1_REP2FUSE_1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_DATA_M2_REP2FUSE_1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_DATA_M3_REP2FUSE_1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_TAG_M0_REP2FUSE_1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_TAG_M1_REP2FUSE_1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_TAG_M2_REP2FUSE_1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_TAG_M3_REP2FUSE_1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_DATA_M0_REP2FUSE_1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_DATA_M1_REP2FUSE_1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_DATA_M2_REP2FUSE_1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_DATA_M3_REP2FUSE_1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_TAG_M0_REP2FUSE_1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_TAG_M1_REP2FUSE_1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_TAG_M2_REP2FUSE_1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_TAG_M3_REP2FUSE_1
+  Varying symbols:
+    \MODULE_INDEX\ = [M0, M1, M2, M3]
+    \PMUX_INDEX\ = [0, 1, 2, 3]
+    \VOLTAGE_CORNER\ = [MAX, MIN]
+    \SSA_ARRAY_TYPE\ = [L2_DATA, L2_TAG]
+    \L2_ENDCPU_TYPE\ = [DATA, TAG]
+  -> Expand: create one instance for each combination of the above symbol values.
+
+GROUP 22  (2 instances)
+  Test type: CSharpTest PrimeCaptureVectorsTestMethod
+  Original instances:
+    - SSA_ATOM_CAPPKTS_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_DATA_M1_1
+    - SSA_ATOM_CAPPKTS_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_DATA_M2_1
+  Varying symbols:
+    \MODULE_INDEX\ = [M0, M1, M2, M3]
+    \PMUX_INDEX\ = [0, 1, 2, 3]
+  -> Expand: create one instance for each combination of the above symbol values.
+
+GROUP 23  (4 instances)
+  Test type: CSharpTest NVLRasterExtension
+  Original instances:
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_DATA_M2_1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_DATA_M1_1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_DATA_M2_1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_DATA_M3_1
+  Varying symbols:
+    \MODULE_INDEX\ = [M1, M2, M3]
+    \PMUX_INDEX\ = [0, 1, 2, 3]
+    \VOLTAGE_CORNER\ = [MAX, MIN]
+  -> Expand: create one instance for each combination of the above symbol values.
+
+GROUP 25  (2 instances)
+  Test type: CSharpTest PrimeCaptureVectorsTestMethod
+  Original instances:
+    - SSA_ATOM_CAPPKTS_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_TAG_M0_1
+    - SSA_ATOM_CAPPKTS_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_TAG_M3_1
+  Varying symbols:
+    \MODULE_INDEX\ = [M0, M1, M2, M3]
+    \PMUX_INDEX\ = [0, 1, 2, 3]
+  -> Expand: create one instance for each combination of the above symbol values.
+
+GROUP 26  (3 instances)
+  Test type: CSharpTest NVLRasterExtension
+  Original instances:
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_TAG_M0_1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_TAG_M2_1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_TAG_M3_1
+  Varying symbols:
+    \MODULE_INDEX\ = [M0, M2, M3]
+    \PMUX_INDEX\ = [0, 1, 2, 3]
+    \VOLTAGE_CORNER\ = [MAX, MIN]
+  -> Expand: create one instance for each combination of the above symbol values.
+
+GROUP 28  (4 instances)
+  Test type: CSharpTest NVLRasterExtension
+  Original instances:
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_TAG_M1_1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_TAG_M2_1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_TAG_M0_1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_TAG_M1_1
+  Varying symbols:
+    \MODULE_INDEX\ = [M0, M1, M2]
+    \PMUX_INDEX\ = [0, 1, 2]
+    \VOLTAGE_CORNER\ = [MAX, MIN]
+  -> Expand: create one instance for each combination of the above symbol values.
+
+GROUP 33  (23 instances)
+  Test type: CSharpTest PrimeRepairToFuseTestMethod
+  Original instances:
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_STATE_M0_REP2FUSE_1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_STATE_M1_REP2FUSE_1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_STATE_M2_REP2FUSE_1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_STATE_M3_REP2FUSE_1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_C6_M0_REP2FUSE_1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_C6_M1_REP2FUSE_1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_C6_M2_REP2FUSE_1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_C6_M3_REP2FUSE_1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_LRU_M0_REP2FUSE_1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_LRU_M1_REP2FUSE_1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_LRU_M2_REP2FUSE_1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_LRU_M3_REP2FUSE_1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_STATE_M0_REP2FUSE_1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_STATE_M1_REP2FUSE_1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_STATE_M2_REP2FUSE_1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_STATE_M3_REP2FUSE_1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_C6_M0_REP2FUSE_1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_C6_M1_REP2FUSE_1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_C6_M2_REP2FUSE_1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_C6_M3_REP2FUSE_1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_LRU_M1_REP2FUSE_1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_LRU_M2_REP2FUSE_1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_LRU_M3_REP2FUSE_1
+  Varying symbols:
+    \MODULE_INDEX\ = [M0, M1, M2, M3]
+    \PMUX_INDEX\ = [0, 1, 2, 3]
+    \VOLTAGE_CORNER\ = [MAX, MIN]
+    \LSA_ARRAY_TYPE\ = [L2_C6, L2_LRU, L2_STATE]
+  -> Expand: create one instance for each combination of the above symbol values.
+
+GROUP 82  (2 instances)
+  Test type: CSharpTest PrimeCaptureVectorsTestMethod
+  Original instances:
+    - SSA_ATOM_CAPPKTS_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_TAG_M0_1
+    - SSA_ATOM_CAPPKTS_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_TAG_M2_1
+  Varying symbols:
+    \MODULE_INDEX\ = [M0, M1, M2, M3]
+    \PMUX_INDEX\ = [0, 1, 2, 3]
+  -> Expand: create one instance for each combination of the above symbol values.
+
+GROUP 128  (2 instances)
+  Test type: CSharpTest NVLRasterExtension
+  Original instances:
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_DATA_M0_1_CPU1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_DATA_M3_1_CPU1
+  Varying symbols:
+    \MODULE_INDEX\ = [M0, M3]
+    \PMUX_INDEX\ = [0, 1, 2, 3]
+  -> Expand: create one instance for each combination of the above symbol values.
+
+GROUP 129  (16 instances)
+  Test type: CSharpTest PrimeRepairToFuseTestMethod
+  Original instances:
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_DATA_M0_REP2FUSE_1_CPU1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_DATA_M1_REP2FUSE_1_CPU1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_DATA_M2_REP2FUSE_1_CPU1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_DATA_M3_REP2FUSE_1_CPU1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_TAG_M0_REP2FUSE_1_CPU1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_TAG_M1_REP2FUSE_1_CPU1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_TAG_M2_REP2FUSE_1_CPU1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_TAG_M3_REP2FUSE_1_CPU1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_DATA_M0_REP2FUSE_1_CPU1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_DATA_M1_REP2FUSE_1_CPU1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_DATA_M2_REP2FUSE_1_CPU1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_DATA_M3_REP2FUSE_1_CPU1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_TAG_M0_REP2FUSE_1_CPU1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_TAG_M1_REP2FUSE_1_CPU1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_TAG_M2_REP2FUSE_1_CPU1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_TAG_M3_REP2FUSE_1_CPU1
+  Varying symbols:
+    \MODULE_INDEX\ = [M0, M1, M2, M3]
+    \PMUX_INDEX\ = [0, 1, 2, 3]
+    \VOLTAGE_CORNER\ = [MAX, MIN]
+    \SSA_ARRAY_TYPE\ = [L2_DATA, L2_TAG]
+    \L2_ENDCPU_TYPE\ = [DATA, TAG]
+  -> Expand: create one instance for each combination of the above symbol values.
+
+GROUP 130  (2 instances)
+  Test type: CSharpTest PrimeCaptureVectorsTestMethod
+  Original instances:
+    - SSA_ATOM_CAPPKTS_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_DATA_M1_1_CPU1
+    - SSA_ATOM_CAPPKTS_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_DATA_M3_1_CPU1
+  Varying symbols:
+    \MODULE_INDEX\ = [M0, M1, M2, M3]
+    \PMUX_INDEX\ = [0, 1, 2, 3]
+  -> Expand: create one instance for each combination of the above symbol values.
+
+GROUP 131  (3 instances)
+  Test type: CSharpTest NVLRasterExtension
+  Original instances:
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_DATA_M1_1_CPU1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_DATA_M0_1_CPU1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_DATA_M2_1_CPU1
+  Varying symbols:
+    \MODULE_INDEX\ = [M0, M1, M2]
+    \PMUX_INDEX\ = [0, 1, 2]
+    \VOLTAGE_CORNER\ = [MAX, MIN]
+  -> Expand: create one instance for each combination of the above symbol values.
+
+GROUP 133  (2 instances)
+  Test type: CSharpTest NVLRasterExtension
+  Original instances:
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_DATA_M2_1_CPU1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_DATA_M1_1_CPU1
+  Varying symbols:
+    \MODULE_INDEX\ = [M1, M2]
+    \PMUX_INDEX\ = [0, 1, 2]
+    \VOLTAGE_CORNER\ = [MAX, MIN]
+  -> Expand: create one instance for each combination of the above symbol values.
+
+GROUP 134  (2 instances)
+  Test type: CSharpTest PrimeCaptureVectorsTestMethod
+  Original instances:
+    - SSA_ATOM_CAPPKTS_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_TAG_M0_1_CPU1
+    - SSA_ATOM_CAPPKTS_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_TAG_M3_1_CPU1
+  Varying symbols:
+    \MODULE_INDEX\ = [M0, M1, M2, M3]
+    \PMUX_INDEX\ = [0, 1, 2, 3]
+  -> Expand: create one instance for each combination of the above symbol values.
+
+GROUP 135  (2 instances)
+  Test type: CSharpTest NVLRasterExtension
+  Original instances:
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_TAG_M0_1_CPU1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_TAG_M2_1_CPU1
+  Varying symbols:
+    \MODULE_INDEX\ = [M0, M2]
+    \PMUX_INDEX\ = [0, 1, 2]
+    \VOLTAGE_CORNER\ = [MAX, MIN]
+  -> Expand: create one instance for each combination of the above symbol values.
+
+GROUP 137  (2 instances)
+  Test type: CSharpTest NVLRasterExtension
+  Original instances:
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_TAG_M1_1_CPU1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_TAG_M0_1_CPU1
+  Varying symbols:
+    \MODULE_INDEX\ = [M0, M1]
+    \PMUX_INDEX\ = [0, 1, 2]
+    \VOLTAGE_CORNER\ = [MAX, MIN]
+  -> Expand: create one instance for each combination of the above symbol values.
+
+GROUP 143  (23 instances)
+  Test type: CSharpTest PrimeRepairToFuseTestMethod
+  Original instances:
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_STATE_M0_REP2FUSE_1_CPU1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_STATE_M1_REP2FUSE_1_CPU1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_STATE_M2_REP2FUSE_1_CPU1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_STATE_M3_REP2FUSE_1_CPU1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_C6_M0_REP2FUSE_1_CPU1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_C6_M1_REP2FUSE_1_CPU1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_C6_M2_REP2FUSE_1_CPU1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_C6_M3_REP2FUSE_1_CPU1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_LRU_M0_REP2FUSE_1_CPU1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_LRU_M1_REP2FUSE_1_CPU1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_LRU_M2_REP2FUSE_1_CPU1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MIN_X_L2_LRU_M3_REP2FUSE_1_CPU1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_C6_M0_REP2FUSE_1_CPU1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_C6_M1_REP2FUSE_1_CPU1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_C6_M2_REP2FUSE_1_CPU1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_C6_M3_REP2FUSE_1_CPU1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_STATE_M0_REP2FUSE_1_CPU1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_STATE_M1_REP2FUSE_1_CPU1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_STATE_M2_REP2FUSE_1_CPU1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_STATE_M3_REP2FUSE_1_CPU1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_LRU_M1_REP2FUSE_1_CPU1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_LRU_M2_REP2FUSE_1_CPU1
+    - LSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_LRU_M3_REP2FUSE_1_CPU1
+  Varying symbols:
+    \MODULE_INDEX\ = [M0, M1, M2, M3]
+    \PMUX_INDEX\ = [0, 1, 2, 3]
+    \VOLTAGE_CORNER\ = [MAX, MIN]
+    \LSA_ARRAY_TYPE\ = [L2_C6, L2_LRU, L2_STATE]
+  -> Expand: create one instance for each combination of the above symbol values.
+
+GROUP 184  (2 instances)
+  Test type: CSharpTest ScreenTC
+  Original instances:
+    - ALL_ATOM_SCREENTC_E_BEGINCPUNOM_X_X_X_X_SETL2RR_VMINREP_CPU1
+    - ALL_ATOM_SCREENTC_E_BEGINCPUNOM_X_X_X_X_SETL2RR_VMAXREP_CPU1
+  Varying symbols:
+    \PMUX_INDEX\ = [1, 2]
+    \VOLTAGE_CORNER\ = [MAX, MIN]
+    \REP_DIRECTION\ = [VMAX, VMIN]
+  -> Expand: create one instance for each combination of the above symbol values.
+
+GROUP 206  (2 instances)
+  Test type: CSharpTest NVLRasterExtension
+  Original instances:
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_TAG_M1_1_CPU1
+    - SSA_ATOM_REPAIR_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_TAG_M3_1_CPU1
+  Varying symbols:
+    \MODULE_INDEX\ = [M1, M3]
+    \PMUX_INDEX\ = [0, 1, 2, 3]
+  -> Expand: create one instance for each combination of the above symbol values.
+
+GROUP 207  (2 instances)
+  Test type: CSharpTest PrimeCaptureVectorsTestMethod
+  Original instances:
+    - SSA_ATOM_CAPPKTS_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_TAG_M2_1_CPU1
+    - SSA_ATOM_CAPPKTS_E_BEGINCPUNOM_TITO_VCCIA_MAX_X_L2_TAG_M3_1_CPU1
+  Varying symbols:
+    \MODULE_INDEX\ = [M0, M1, M2, M3]
+    \PMUX_INDEX\ = [0, 1, 2, 3]
+  -> Expand: create one instance for each combination of the above symbol values.
+
+--------------------------------------------------------------------------------
+NOTES
+--------------------------------------------------------------------------------
+- Counters section is kept verbatim from the original file.
+- BaseNumbers are unique per instance; assign sequentially when expanding.
+- Tests with _CPU1 suffix duplicate the base test for the second compute die.
+- F5 corner uses a different trial variable (ATOM_TOP) and freq references
+  (Corners.AT_C5, FreqValues.AT_C5) - kept as a separate template.
+- FMIN corner uses different timing TC and voltage forwarding from F1 results.
+- When generating a product-specific MTPL, consult the Test Plan Wiki for
+  the actual symbol values (frequencies, voltage limits, etc).

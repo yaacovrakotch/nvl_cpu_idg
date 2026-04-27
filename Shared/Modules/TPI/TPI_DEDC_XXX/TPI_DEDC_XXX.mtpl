@@ -1,0 +1,53 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan TPI_DEDC_XXX;
+
+Import "TPI_DEDC_XXX.usrv";
+
+# Test Counter Definition
+
+Counters
+{
+    n93005480_fail_CTRL_X_DEDCRV_E_INIT_X_X_X_X_CALLBACK_0
+} # End of Test Counter Definition
+
+CSharpTest DedcRVCallbackTC CTRL_X_DEDCRV_E_INIT_X_X_X_X_CALLBACK
+{
+    ForceFlow = TPI_DEDC_XXX_Rules.RegisterFORCEFLOW("ENABLE","DISABLE");
+    Mode = TPI_DEDC_XXX_Rules.RegisterDEDC("REGISTER","REGISTER","REGISTER","REGISTER","REGISTER","REGISTER","REGISTER","REGISTER","REGISTER","UNREGISTER");
+    TestTimeSoftCap = TPI_DEDC_XXX_Rules.RegisterDEDC(3000000,3000000,3000000,3000000,3000000,3000000,3000000,3000000,3000000,3000000);
+    UseLegacyBinning = "DISABLE";
+}
+
+Flow TPI_DEDC_XXX_INIT
+{
+    FlowItem CTRL_X_DEDCRV_E_INIT_X_X_X_X_CALLBACK CTRL_X_DEDCRV_E_INIT_X_X_X_X_CALLBACK @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99937500_fail_TPI_DEDC_XXX_CTRL_X_DEDCRV_E_INIT_X_X_X_X_CALLBACK_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98937500_fail_TPI_DEDC_XXX_CTRL_X_DEDCRV_E_INIT_X_X_X_X_CALLBACK_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            IncrementCounters TPI_DEDC_XXX::n93005480_fail_CTRL_X_DEDCRV_E_INIT_X_X_X_X_CALLBACK_0;
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}

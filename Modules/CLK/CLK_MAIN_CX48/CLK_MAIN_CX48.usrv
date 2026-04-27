@@ -1,0 +1,58 @@
+Version 1.0;
+
+UserVars CLK_MAIN_CXXX
+{
+    String MIN_DATA = "SDC";
+    String NOM_DATA = "SDC";
+    String MAX_DATA = "SDC";
+    Integer SampleBypass = -1;
+}
+
+SelectorRuleCollection SampleRate
+{
+    SelectorRule VMIN_HVM(sampled, notsampled)
+    {
+        sampled => CLK_MAIN_CXXX.MIN_DATA == "ALLSAMPLED";
+        notsampled;
+    }
+    SelectorRule VMIN_BBS(sampled, notsampled)
+    {
+        sampled => CLK_MAIN_CXXX.MIN_DATA == "ALLSAMPLED" || CLK_MAIN_CXXX.MIN_DATA == "HVM";
+        notsampled;
+    }
+    SelectorRule VMIN_SDC(sampled, notsampled)
+    {
+        sampled => CLK_MAIN_CXXX.MIN_DATA == "ALLSAMPLED" || CLK_MAIN_CXXX.MIN_DATA == "HVM" || CLK_MAIN_CXXX.MIN_DATA == "BBS";
+        notsampled;
+    }
+    SelectorRule VNOM_HVM(sampled, notsampled)
+    {
+        sampled => CLK_MAIN_CXXX.NOM_DATA == "ALLSAMPLED";
+        notsampled;
+    }
+    SelectorRule VNOM_BBS(sampled, notsampled)
+    {
+        sampled => CLK_MAIN_CXXX.NOM_DATA == "ALLSAMPLED" || CLK_MAIN_CXXX.NOM_DATA == "HVM";
+        notsampled;
+    }
+    SelectorRule VNOM_SDC(sampled, notsampled)
+    {
+        sampled => CLK_MAIN_CXXX.NOM_DATA == "ALLSAMPLED" || CLK_MAIN_CXXX.NOM_DATA == "HVM" || CLK_MAIN_CXXX.NOM_DATA == "BBS";
+        notsampled;
+    }
+    SelectorRule VMAX_HVM(sampled, notsampled)
+    {
+        sampled => CLK_MAIN_CXXX.MAX_DATA == "ALLSAMPLED";
+        notsampled;
+    }
+    SelectorRule VMAX_BBS(sampled, notsampled)
+    {
+        sampled => CLK_MAIN_CXXX.MAX_DATA == "ALLSAMPLED" || CLK_MAIN_CXXX.MAX_DATA == "HVM";
+        notsampled;
+    }
+    SelectorRule VMAX_SDC(sampled, notsampled)
+    {
+        sampled => CLK_MAIN_CXXX.MAX_DATA == "ALLSAMPLED" || CLK_MAIN_CXXX.MAX_DATA == "HVM" || CLK_MAIN_CXXX.MAX_DATA == "BBS";
+        notsampled;
+    }
+}

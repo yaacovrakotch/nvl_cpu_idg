@@ -1,0 +1,140 @@
+Version 1.0;
+
+SpecificationSet  cpu_clk_override_distmin_lvl (max, min, nom) Inherits CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC
+{
+Voltage p_vnnaon_spec = 0.825V,0.71V,0.77V;
+Voltage p_vccio_spec = 1.3125V,1.1875V,1.25V;
+Voltage p_v1p8_spec = 1.89V,1.67V,1.80V;
+
+}
+
+SpecificationSet  cpu_clk_override_distnom_lvl (max, min, nom) Inherits CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC
+{
+Voltage p_vnnaon_spec = 0.825V,0.71V,0.77V;
+Voltage p_vccio_spec = 1.3125V,1.1875V,1.25V;
+Voltage p_v1p8_spec = 1.89V,1.67V,1.80V;
+
+}
+
+SpecificationSet  cpu0_clk_override_distnom_lvl (max, min, nom) Inherits CPU_IP_BASE::cpu0_all_bf_x_x_ipc_lvl_CPU_BFUNC
+{
+Voltage p_vnnaon_spec = 0.825V,0.71V,0.77V;
+Voltage p_vccio_spec = 1.3125V,1.1875V,1.25V;
+Voltage p_v1p8_spec = 1.89V,1.67V,1.80V;
+
+}
+
+SpecificationSet  cpu1_clk_override_distnom_lvl (max, min, nom) Inherits CPU_IP_BASE::cpu1_all_bf_x_x_ipc_lvl_CPU_BFUNC
+{
+Voltage p_vnnaon_spec = 0.825V,0.71V,0.77V;
+Voltage p_vccio_spec = 1.3125V,1.1875V,1.25V;
+Voltage p_v1p8_spec = 1.89V,1.67V,1.80V;
+
+}
+
+SpecificationSet  cpu_clk_override_distmax_lvl (max, min, nom) Inherits CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC
+{
+Voltage p_vnnaon_spec = 0.825V,0.71V,0.77V;
+Voltage p_vccio_spec = 1.3125V,1.1875V,1.25V;
+Voltage p_v1p8_spec = 1.89V,1.67V,1.80V;
+
+}
+
+SpecificationSet  cpu_clk_override_dcadistmax_lvl (max, min, nom) Inherits CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC
+{
+Voltage p_vnnaon_spec = 0.825V,0.71V,0.77V;
+Voltage p_vccio_spec = 1.3125V,1.1875V,1.25V;
+Voltage p_v1p8a_spec = 1.89V,1.67V,1.80V;
+
+}
+
+TestConditionGroup cpu_clk_override_distmin_lvl_tcg
+{
+	SpecificationSet = cpu_clk_override_distmin_lvl;
+	Level = CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl;
+}
+
+TestConditionGroup cpu_clk_override_distnom_lvl_tcg
+{
+	SpecificationSet = cpu_clk_override_distnom_lvl;
+	Level = CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl;
+}
+TestConditionGroup cpu0_clk_override_distnom_lvl_tcg
+{
+	SpecificationSet = cpu0_clk_override_distnom_lvl;
+	Level = CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl;
+}
+TestConditionGroup cpu1_clk_override_distnom_lvl_tcg
+{
+	SpecificationSet = cpu1_clk_override_distnom_lvl;
+	Level = CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl;
+}
+TestConditionGroup cpu_clk_override_distmax_lvl_tcg
+{
+	SpecificationSet = cpu_clk_override_distmax_lvl;
+	Level = CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl;
+}
+TestConditionGroup cpu_clk_override_dcadistmax_lvl_tcg
+{
+	SpecificationSet = cpu_clk_override_dcadistmax_lvl;
+	Level = CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl;
+}
+TestCondition cpu_clk_override_distnom_sharednom_lvl
+{
+	TestConditionGroup  = cpu_clk_override_distnom_lvl_tcg;
+	Selector = nom;
+}
+
+TestCondition cpu_clk_override_distmax_sharedmax_lvl
+{
+	TestConditionGroup  = cpu_clk_override_distmax_lvl_tcg;
+	Selector = max;
+}
+
+TestCondition cpu_clk_override_dcadistmax_sharedmax_lvl
+{
+	TestConditionGroup  = cpu_clk_override_dcadistmax_lvl_tcg;
+	Selector = max;
+}
+
+TestCondition cpu_clk_override_dcadistmax_sharednom_lvl
+{
+	TestConditionGroup  = cpu_clk_override_dcadistmax_lvl_tcg;
+	Selector = nom;
+}
+
+TestCondition cpu_clk_override_dcadistmax_sharedmin_lvl
+{
+	TestConditionGroup  = cpu_clk_override_dcadistmax_lvl_tcg;
+	Selector = min;
+}
+
+TestCondition cpu_clk_override_distmin_sharedmin_lvl
+{
+	TestConditionGroup  = cpu_clk_override_distmin_lvl_tcg;
+	Selector = min;
+}
+
+TestCondition cpu_clk_override_distnom_sharedmin_lvl
+{
+	TestConditionGroup  = cpu_clk_override_distnom_lvl_tcg;
+	Selector = min;
+}
+
+TestCondition cpu0_clk_override_distnom_sharedmin_lvl
+{
+	TestConditionGroup  = cpu0_clk_override_distnom_lvl_tcg;
+	Selector = min;
+}
+
+TestCondition cpu1_clk_override_distnom_sharedmin_lvl
+{
+	TestConditionGroup  = cpu1_clk_override_distnom_lvl_tcg;
+	Selector = min;
+}
+
+TestCondition cpu_clk_override_distmax_sharedmin_lvl
+{
+	TestConditionGroup  = cpu_clk_override_distmax_lvl_tcg;
+	Selector = min;
+}

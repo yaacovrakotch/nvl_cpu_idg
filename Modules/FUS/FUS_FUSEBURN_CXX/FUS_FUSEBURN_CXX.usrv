@@ -1,0 +1,44 @@
+Version 1.0;
+
+SelectorRuleCollection  FUS_FUSEBURN_CXX_Rules
+{	
+	SelectorRule FUSEREAD_CfgFile (Outcome1, Outcome2, Outcome3, Outcome4)
+	{
+		Outcome1 => __shared__::_UserVars.IF_ProcessType == "INT" && GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+		Outcome2 => __shared__::_UserVars.IF_ProcessType == "BLLC" && (GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52CB" || GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S52CB");
+		Outcome3 => __shared__::_UserVars.IF_ProcessType == "BLLC" && GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28CB";
+		Outcome4;
+	}
+
+	SelectorRule FUSEBURN_CfgFile (Outcome1, Outcome2, Outcome3, Outcome4)
+	{
+		Outcome1 => __shared__::_UserVars.IF_ProcessType == "INT" && GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+		Outcome2 => __shared__::_UserVars.IF_ProcessType == "BLLC" && (GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52CB" || GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S52CB");
+		Outcome3 => __shared__::_UserVars.IF_ProcessType == "BLLC" && GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28CB";
+		Outcome4;
+	}
+
+	SelectorRule FUSEBURN_CtvFile (Outcome1, Outcome2, Outcome3, Outcome4, Outcome5)
+	{
+		Outcome1 => __shared__::_UserVars.IF_ProcessType == "INT" && GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+		Outcome2 => __shared__::_UserVars.IF_ProcessType == "INT" && GetEnvironmentVariable("BOMGROUP") != "CLASS_NVL_S52C";
+		Outcome3 => __shared__::_UserVars.IF_ProcessType == "BLLC" && (GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52CB" || GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S52CB");
+		Outcome4 => __shared__::_UserVars.IF_ProcessType == "BLLC" && GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28CB";
+        Outcome5;
+	}
+}
+UserVars FUS_FUSEBURN_CXX
+{
+	String FuseReadLockBitsString_CPU0 = "";
+	String FuseReadOutputStr_CPU0 = "";
+	String FuseReadOutputStrAfterECC_CPU0 = "";
+	String FuseReadRepair_CPU0 = "";
+	String FuseReadSPROWD0 = "";
+	String FuseReadLockBitsString_CPU1 = "";
+	String FuseReadOutputStr_CPU1 = "";
+	String FuseReadOutputStrAfterECC_CPU1 = "";
+	String FuseReadRepair_CPU1 = "";
+	String FuseReadSPROWD1 = "";
+	String iseedFlagSet = "0";
+	Integer QualProgBypass = 1;
+}

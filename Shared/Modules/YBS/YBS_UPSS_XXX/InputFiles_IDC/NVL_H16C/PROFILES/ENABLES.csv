@@ -1,0 +1,23 @@
+Component,Attribute,DataType,LPATOMb_FMAX,ATP0,IAP0,P1,GTP0,SA_LMPD-1111,SA_LMPD-0000,SA_LMPD-0001,SA_LMPD-0100,SA_LMPD-0110,SA_LMPD-0111,SA_LMPD-1100,SA_LMPD-1000,SA_LMPD-1001,SA_LMPD-1101,SA_LMPD-0101
+LPATOMb,SA_ENABLED,string,({NA::LI::PROCESSOR_LP_ECORE_PHYS_QTY@double} > 0) && ({NA::PKG::C_PACKAGE_TYPE@string} == ''MBL''),false,false,true,false,true,false,false,false,false,false,true,true,true,true,false
+NPU,SA_ENABLED,string,false,false,false,false,false,true,false,true,false,false,true,false,false,true,true,true
+IPU,SA_ENABLED,string,false,false,false,false,false,true,false,false,false,true,true,false,false,false,false,false
+LPATOM,SA_ENABLED,string,false,false,false,true,false,true,false,false,false,false,false,true,true,true,true,false
+MEDIA,SA_ENABLED,string,false,false,false,false,false,true,false,false,true,true,true,true,false,false,true,true
+NPU,IS_ENABLED,string,false,false,false,false,false,true,true,true,true,true,true,true,true,true,true,true
+MEDIA,IS_ENABLED,string,false,false,false,false,false,true,true,true,true,true,true,true,true,true,true,true
+LPATOM,IS_ENABLED,string,false,false,false,"Utils.SWITCH({NA::PKG::C_PACKAGE_TYPE@string},(''MBL'', ''FALSE''),(''DT'', ''TRUE''))",false,"Utils.SWITCH({NA::PKG::C_PACKAGE_TYPE@string},(''MBL'', ''FALSE''),(''DT'', ''TRUE''))",false,false,false,false,false,true,true,true,true,false
+IA,IS_ENABLED,string,false,false,{IS_ENABLED_BY_PCPS@bool},true,false,false,false,false,false,false,false,false,false,false,false,false
+GT,IS_ENABLED,string,false,false,false,true,true,false,false,false,false,false,false,false,false,false,false,false
+DE,IS_ENABLED,string,false,false,false,true,false,true,true,true,true,true,true,true,true,true,true,true
+AT,IS_ENABLED,string,false,{IS_ENABLED_BY_PCPS@bool},false,true,false,false,false,false,false,false,false,false,false,false,false,false
+QCLK,IS_ENABLED,string,false,false,false,true,false,true,true,true,true,true,true,true,true,true,true,true
+NCLK,IS_ENABLED,string,false,false,false,true,false,true,true,true,true,true,true,true,true,true,true,true
+IOCCLK,IS_ENABLED,string,false,false,false,true,false,true,true,true,true,true,true,true,true,true,true,true
+CCLK,IS_ENABLED,string,false,false,false,true,false,true,true,true,true,true,true,true,true,true,true,true
+SAREST,IS_ENABLED,string,false,false,false,true,false,true,true,true,true,true,true,true,true,true,true,true
+CCF,IS_ENABLED,string,false,{AT<<INDEX@string>>[0-4].+::IS_ENABLED@bool}.Any(e=>e.Value == true),{IA<<INDEX@string>>[0-4].+::IS_ENABLED@bool}.Any(e=>e.Value == true),true,false,false,false,false,false,false,false,false,false,false,false,false
+ATPCPS,IS_ENABLED,string,false,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false
+IAPCPS,IS_ENABLED,string,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,false
+LPATOMb,IS_ENABLED,string,({NA::LI::PROCESSOR_LP_ECORE_PHYS_QTY@double} > 0) && ({NA::PKG::C_PACKAGE_TYPE@string} == ''MBL''),false,false,"Utils.SWITCH({NA::PKG::C_PACKAGE_TYPE@string},(''MBL'', ''TRUE''),(''DT'', ''FALSE''))",false,true,false,false,false,false,false,true,true,true,true,false
+IPU,IS_ENABLED,string,false,false,false,false,false,true,true,true,true,true,true,true,true,true,true,true

@@ -1,0 +1,37 @@
+name: PR checks
+
+on:
+  pull_request:
+    branches: [ main, jdr_branch ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  run_unittests:
+    runs-on: [self-hosted]
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Read read_ut_sha
+      id: read_ut_sha
+      run: |
+        SHA=$(cat unittest_sha.txt)
+        if [ -z "$SHA" ]; then
+          echo "ERROR: unittest_sha.txt is empty or not found!"; exit 1
+        fi
+        echo "sha=$SHA" >> $GITHUB_OUTPUT
+      shell: bash
+    - name: Checkout pytpd-unittest
+      run: |
+        cd ../pytpd-unittest
+        git status > /dev/null 2>&1 || { echo "ERROR: Not a valid git repository!"; exit 1; }
+        git reset --hard HEAD
+        git clean -fdx
+        git fetch
+        git checkout ${{ steps.read_ut_sha.outputs.sha }} || { echo "ERROR: SHA ${{ steps.read_ut_sha.outputs.sha }} not found in repo!"; exit 1; }
+    - name: run_tests
+      run: main/run_tests.py -show -gadget
+      

@@ -1,0 +1,25 @@
+#####################################################
+##### Reset Repair DFF
+#####################################################
+
+START_SCREEN:CCFPmuxCal
+#RunOn 	: TestName : DataType 	: ParamType 	: Param1				: Operation 	: ParamType 	: Param2   			: TmpStore 		: OnTrue 		: OnFalse
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EXEC:  SetDefaultFreq0         : DOUBLE    : GSDS      : G.I.S.CCF_CLRPMUX_FREQ_0    : SET    : LITERAL    : 1.2    : -    : SetDefaultFreq0IP    : 2
+EXEC:  SetDefaultFreq0IP        : DOUBLE    : GSDS      : G.I.S.CCF_CLRPMUX_FREQ_0    : SET    : GSDS    :  G.U.S.CCF_CLRPMUX_FREQ_0   : -    : GetFreq    : 2
+EXEC: 	GetFreq					: DOUBLE		: GSDS	   		: I.D.CCF_CLRPMUX_FREQ_D		:	SET			: EXPRESSION	:	ToDouble([G.I.S.CCF_CLRPMUX_FREQ_0])*1e3	:    -          : CheckUpperLimitFreq	: 2
+EXEC: 	CheckUpperLimitFreq		: DOUBLE		: GSDS	   		: I.D.CCF_CLRPMUX_FREQ_D		:	>			: LITERAL   	:	5000									:    -          : SetUpper 				: CheckSingleA
+EXEC: 	SetUpper				: STRING		: GSDS			: I.S.CCF_CLRPMUX_FREQ_FINAL	:	SET			: LITERAL		:	"5.0"									:    -          : ToSetDomain			: 2
+EXEC: 	CheckSingleD			: DOUBLE		: GSDS	   		: I.D.CCF_CLRPMUX_FREQ_D		:	==			: LITERAL   	:	4000									:    -          : SetSingleD			: CheckSingleA
+EXEC: 	CheckSingleA			: DOUBLE		: GSDS	   		: I.D.CCF_CLRPMUX_FREQ_D		:	==			: LITERAL   	:	3000									:    -          : SetSingleA			: CheckSingleB
+EXEC: 	CheckSingleB			: DOUBLE		: GSDS	   		: I.D.CCF_CLRPMUX_FREQ_D		:	==			: LITERAL   	:	2000									:    -          : SetSingleB			: CheckSingleC
+EXEC: 	CheckSingleC			: DOUBLE		: GSDS	   		: I.D.CCF_CLRPMUX_FREQ_D		:	==			: LITERAL   	:	1000									:    -          : SetSingleC			: SetCalculated
+EXEC: 	SetSingleD				: STRING		: GSDS	   		: I.S.CCF_CLRPMUX_FREQ_FINAL	:	SET	        : LITERAL   	:	"4.0"									:    -          : ToSetDomain			: 2
+EXEC: 	SetSingleA				: STRING		: GSDS	   		: I.S.CCF_CLRPMUX_FREQ_FINAL	:	SET	        : LITERAL   	:	"3.0"									:    -          : ToSetDomain			: 2
+EXEC: 	SetSingleB				: STRING		: GSDS	   		: I.S.CCF_CLRPMUX_FREQ_FINAL	:	SET	        : LITERAL   	:	"2.0"									:    -          : ToSetDomain			: 2
+EXEC: 	SetSingleC				: STRING		: GSDS	   		: I.S.CCF_CLRPMUX_FREQ_FINAL	:	SET	        : LITERAL   	:	"1.0"									:    -          : ToSetDomain			: 2
+EXEC: 	SetCalculated			: STRING		: GSDS	   		: I.S.CCF_CLRPMUX_FREQ_FINAL	:	SET	        : GSDS   		:	I.S.CCF_CLRPMUX_FREQ_0					:    -          : ToSetDomain			: 2
+EXEC:	ToSetDomain				: STRING		: GSDS			: I.S.CCF_CALC_VAL				:	SET			: LITERAL		:	"MCdrv:ringfreq_0:"						:    -          : ToSetValue			: 2
+EXEC:	ToSetValue				: STRING		: GSDS			: I.S.CCF_CALC_VAL				:	APPEND		: GSDS			:	I.S.CCF_CLRPMUX_FREQ_FINAL				:    -          : ToSetGHz				: 2
+EXEC:	ToSetGHz				: STRING		: GSDS			: I.S.CCF_CALC_VAL				:	APPEND		: LITERAL		:	"GHz"									:    -          : 1						: 2
+END_SCREEN

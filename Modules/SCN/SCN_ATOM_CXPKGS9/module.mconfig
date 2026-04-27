@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ModuleConfiguration>
+	<Patterns>
+		<!--The PORRoot section is used to declare production plists used by the module.
+				PORRoot can be declared per BomGroup or decorated with the IP name if, in Itradut TP,  IP plists are used by package module.
+				<PORRoot IP="" BomGroup="" Path="" Rev="" Patch="">-->
+		<PORRoot Path="I:\hdmxpats\nvl_cpu\MCAscn\" Rev="RevTC52XA0.2" Patch="p5">
+			<PlistFiles>
+				<PlistFile>iascan.class.hvm.arw.hptp800_allplist.plist</PlistFile>
+				<PlistFile>iascan.class.hvm.bbs.arw.hptp800_allplist.plist</PlistFile>
+				<PlistFile>iascan.class.dbg.arw.hptp800_debug.plist</PlistFile>
+				<PlistFile>iascan.class.hvm_occ.arw.hptp800_allplist.plist</PlistFile>
+			</PlistFiles>
+		</PORRoot>
+
+		<!--The ENGRoot section is used to declare engineering plists used by the module.
+			  IP attribute can be used for ENGRoot: <ENGRoot IP="" Path="">-->
+		<!--<ENGRoot Path="" >
+			<PlistFiles>
+			  <PlistFile> </PlistFile>
+			  <PlistFile BomGroup=""> </PlistFile>
+			</PlistFiles>
+		  </ENGRoot>-->
+
+	</Patterns>
+
+	<!--The AlephFiles section is used to declare Aleph json files which are used by the module. 
+		  Alpeh files must reside inside the repository. -->
+	<AlephFiles>
+		<AlephFile>InputFiles/NVL_SCN_ATOM_INIT.patmod.json</AlephFile>
+		<AlephFile>InputFiles/NVL_SCN_ATOM_patConfigSetPoints.json</AlephFile>
+		<AlephFile>InputFiles/NVL_SCN_ATOM_patmod.json</AlephFile>
+	</AlephFiles>
+
+	<!--The IPName is used for modules in IntraDut test program to declare the IP it belongs to.
+		  For package level modules do not add the <IPName> element at all-->
+	<IPName>IPC</IPName>
+
+
+</ModuleConfiguration>

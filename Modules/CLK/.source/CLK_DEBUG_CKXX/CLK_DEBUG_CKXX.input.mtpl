@@ -1,0 +1,1168 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan `TestPlanName`;
+
+Import `_ModuleFolderName`.usrv;
+Import `_ModuleFolderName`_Levels.tcg;
+
+#Test Counter Definition removed as part of bin/counter generator update.
+
+####################################### INIT #######################################
+
+CSharpTest PrimePauseTestMethod RECIPE_X_PATCFG_K_`INIT`_X_X_X_X_X_X `sds class flow only`
+{
+    SetPointsPlistMode = "Global";
+    SetPointsPreInstance = `RECIPE`;
+    SleepTime = 1;
+    BypassPort = 1;
+}
+Flow `TestPlanName`_INIT @INIT `sds class flow only`
+{
+    FlowItem RECIPE_X_PATCFG_K_`INIT`_X_X_X_X_X_X RECIPE_X_PATCFG_K_`INIT`_X_X_X_X_X_X @KILL
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1 { Property PassFail = "Pass"; Return 1; }
+        Result 2 { Property PassFail = "Pass"; Return 1; }
+        Result 3 { Property PassFail = "Pass"; Return 1; }
+        Result 4 { Property PassFail = "Pass"; Return 1; }
+        Result 5 { Property PassFail = "Pass"; Return 1; }
+    }
+}
+
+####################################### TESTERDV #######################################
+
+Flow `DebugSubFlow`_MARGIN
+{
+    FlowItem SPETRIM_PLL_CMEM_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV SPETRIM_PLL_CMEM_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; GoTo LOCK100X_X_CMEM_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 1 { Property PassFail = "Pass"; GoTo LOCK100X_X_CMEM_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 2 { Property PassFail = "Fail"; GoTo LOCK100X_X_CMEM_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 3 { Property PassFail = "Fail"; GoTo LOCK100X_X_CMEM_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 4 { Property PassFail = "Fail"; GoTo LOCK100X_X_CMEM_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+    }
+    FlowItem LOCK100X_X_CMEM_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV LOCK100X_X_CMEM_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; GoTo PERFREQ_PNC0_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 1 { Property PassFail = "Pass"; GoTo PERFREQ_PNC0_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 2 { Property PassFail = "Fail"; GoTo PERFREQ_PNC0_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 3 { Property PassFail = "Fail"; GoTo PERFREQ_PNC0_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 4 { Property PassFail = "Fail"; GoTo PERFREQ_PNC0_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+    }
+    FlowItem PERFREQ_PNC0_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV PERFREQ_PNC0_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; GoTo PERFREQ_PNC1_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 1 { Property PassFail = "Pass"; GoTo PERFREQ_PNC1_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 2 { Property PassFail = "Fail"; GoTo PERFREQ_PNC1_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 3 { Property PassFail = "Fail"; GoTo PERFREQ_PNC1_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 4 { Property PassFail = "Fail"; GoTo PERFREQ_PNC1_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 5 { Property PassFail = "Fail"; GoTo PERFREQ_PNC1_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+    }
+    FlowItem PERFREQ_PNC1_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV PERFREQ_PNC1_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; GoTo PERFREQ_PNC2_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 1 { Property PassFail = "Pass"; GoTo PERFREQ_PNC2_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 2 { Property PassFail = "Fail"; GoTo PERFREQ_PNC2_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 3 { Property PassFail = "Fail"; GoTo PERFREQ_PNC2_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 4 { Property PassFail = "Fail"; GoTo PERFREQ_PNC2_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 5 { Property PassFail = "Fail"; GoTo PERFREQ_PNC2_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+    }
+    FlowItem PERFREQ_PNC2_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV PERFREQ_PNC2_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; GoTo PERFREQ_PNC3_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 1 { Property PassFail = "Pass"; GoTo PERFREQ_PNC3_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 2 { Property PassFail = "Fail"; GoTo PERFREQ_PNC3_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 3 { Property PassFail = "Fail"; GoTo PERFREQ_PNC3_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 4 { Property PassFail = "Fail"; GoTo PERFREQ_PNC3_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 5 { Property PassFail = "Fail"; GoTo PERFREQ_PNC3_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+    }
+    FlowItem PERFREQ_PNC3_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV PERFREQ_PNC3_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; GoTo PERFREQ_ARW0_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 1 { Property PassFail = "Pass"; GoTo PERFREQ_ARW0_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 2 { Property PassFail = "Fail"; GoTo PERFREQ_ARW0_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 3 { Property PassFail = "Fail"; GoTo PERFREQ_ARW0_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 4 { Property PassFail = "Fail"; GoTo PERFREQ_ARW0_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 5 { Property PassFail = "Fail"; GoTo PERFREQ_ARW0_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+    }
+    FlowItem PERFREQ_ARW0_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV PERFREQ_ARW0_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; GoTo PERFREQ_ARW1_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 1 { Property PassFail = "Pass"; GoTo PERFREQ_ARW1_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 2 { Property PassFail = "Fail"; GoTo PERFREQ_ARW1_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 3 { Property PassFail = "Fail"; GoTo PERFREQ_ARW1_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 4 { Property PassFail = "Fail"; GoTo PERFREQ_ARW1_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 5 { Property PassFail = "Fail"; GoTo PERFREQ_ARW1_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+    }
+    FlowItem PERFREQ_ARW1_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV PERFREQ_ARW1_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; GoTo PERFREQ_ARW2_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 1 { Property PassFail = "Pass"; GoTo PERFREQ_ARW2_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 2 { Property PassFail = "Fail"; GoTo PERFREQ_ARW2_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 3 { Property PassFail = "Fail"; GoTo PERFREQ_ARW2_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 4 { Property PassFail = "Fail"; GoTo PERFREQ_ARW2_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 5 { Property PassFail = "Fail"; GoTo PERFREQ_ARW2_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+    }
+    FlowItem PERFREQ_ARW2_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV PERFREQ_ARW2_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; GoTo PERFREQ_ARW3_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 1 { Property PassFail = "Pass"; GoTo PERFREQ_ARW3_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 2 { Property PassFail = "Fail"; GoTo PERFREQ_ARW3_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 3 { Property PassFail = "Fail"; GoTo PERFREQ_ARW3_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 4 { Property PassFail = "Fail"; GoTo PERFREQ_ARW3_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 5 { Property PassFail = "Fail"; GoTo PERFREQ_ARW3_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+    }
+    FlowItem PERFREQ_ARW3_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV PERFREQ_ARW3_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; GoTo PERFREQ_RING_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 1 { Property PassFail = "Pass"; GoTo PERFREQ_RING_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 2 { Property PassFail = "Fail"; GoTo PERFREQ_RING_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 3 { Property PassFail = "Fail"; GoTo PERFREQ_RING_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 4 { Property PassFail = "Fail"; GoTo PERFREQ_RING_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 5 { Property PassFail = "Fail"; GoTo PERFREQ_RING_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+    }
+    FlowItem PERFREQ_RING_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV PERFREQ_RING_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; GoTo PERFREQ_DFX_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 1 { Property PassFail = "Pass"; GoTo PERFREQ_DFX_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 2 { Property PassFail = "Fail"; GoTo PERFREQ_DFX_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 3 { Property PassFail = "Fail"; GoTo PERFREQ_DFX_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 4 { Property PassFail = "Fail"; GoTo PERFREQ_DFX_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 5 { Property PassFail = "Fail"; GoTo PERFREQ_DFX_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+    }
+    FlowItem PERFREQ_DFX_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV PERFREQ_DFX_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; GoTo PERFREQ_DLVR_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 1 { Property PassFail = "Pass"; GoTo PERFREQ_DLVR_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 2 { Property PassFail = "Fail"; GoTo PERFREQ_DLVR_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 3 { Property PassFail = "Fail"; GoTo PERFREQ_DLVR_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 4 { Property PassFail = "Fail"; GoTo PERFREQ_DLVR_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 5 { Property PassFail = "Fail"; GoTo PERFREQ_DLVR_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+    }
+    FlowItem PERFREQ_DLVR_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV PERFREQ_DLVR_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; GoTo PERFREQ_C2H_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 1 { Property PassFail = "Pass"; GoTo PERFREQ_C2H_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 2 { Property PassFail = "Fail"; GoTo PERFREQ_C2H_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 3 { Property PassFail = "Fail"; GoTo PERFREQ_C2H_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 4 { Property PassFail = "Fail"; GoTo PERFREQ_C2H_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 5 { Property PassFail = "Fail"; GoTo PERFREQ_C2H_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+    }
+    FlowItem PERFREQ_C2H_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV PERFREQ_C2H_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; GoTo RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_VNNAON; }
+        Result 1 { Property PassFail = "Pass"; GoTo RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_VNNAON; }
+        Result 2 { Property PassFail = "Fail"; GoTo RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_VNNAON; }
+        Result 3 { Property PassFail = "Fail"; GoTo RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_VNNAON; }
+        Result 4 { Property PassFail = "Fail"; GoTo RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_VNNAON; }
+        Result 5 { Property PassFail = "Fail"; GoTo RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_VNNAON; }
+    }
+    FlowItem RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_VNNAON RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_VNNAON @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; GoTo RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_VCCR; }
+        Result 1 { Property PassFail = "Pass"; GoTo RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_VCCR; }
+        Result 2 { Property PassFail = "Pass"; GoTo RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_VCCR; }
+        Result 3 { Property PassFail = "Pass"; GoTo RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_VCCR; }
+    }
+    FlowItem RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_VCCR RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_VCCR @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; GoTo RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_ATOMS; }
+        Result 1 { Property PassFail = "Pass"; GoTo RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_ATOMS; }
+        Result 2 { Property PassFail = "Pass"; GoTo RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_ATOMS; }
+        Result 3 { Property PassFail = "Pass"; GoTo RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_ATOMS; }
+    }
+        FlowItem RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_ATOMS RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_ATOMS @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; GoTo RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_CORES; }
+        Result 1 { Property PassFail = "Pass"; GoTo RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_CORES; }
+        Result 2 { Property PassFail = "Pass"; GoTo RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_CORES; }
+        Result 3 { Property PassFail = "Pass"; GoTo RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_CORES; }
+    }
+        FlowItem RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_CORES RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_CORES @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 1; }
+        Result 1 { Property PassFail = "Pass"; Return 1; }
+        Result 2 { Property PassFail = "Pass"; Return 1; }
+        Result 3 { Property PassFail = "Pass"; Return 1; }
+    }
+}
+
+CSharpTest CsioCmemTC SPETRIM_PLL_CMEM_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_spetrim_list";
+    PlistConfigurationFile = GetEnvironmentVariable("`patmodify path`")+"/clk_cpu_x_spetrim_list.plist.json";
+    PrePlist = "`preplist_MIN`";
+    IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.`_BomGroupName``C0`.json";
+    LimitsConfigurationFile = "./InputFiles/clk.`_TcgProduct`.limits.csv";
+    PlistConfigSet = "clk_cpu_x_spetrim_list";
+    FunctionCall = "Ljpll_4p0_SpeTrim";
+    EdcEnable = "ENABLED";
+    KillDecode = "DISABLED";
+    CtvCapturePins = "`TDO`";
+    LevelsTc = "`TestPlanName`::`TestCondition_min`";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    PostInstance = "`smartTC_disable`";
+    BypassPort = -1;
+}
+CSharpTest CsioCmemTC LOCK100X_X_CMEM_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_100xlock40_list";
+    PlistConfigurationFile = GetEnvironmentVariable("`patmodify path`")+"/clk_cpu_x_100xlock40_list.plist.json";
+    PrePlist = "`preplist_MIN`";
+    IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.`_BomGroupName``C0`.json";
+    LimitsConfigurationFile = "./InputFiles/clk.`_TcgProduct`.limits.csv";
+    PlistConfigSet = "clk_cpu_x_100xlock40_list";
+    FunctionCall = "Ljpll_4p0_Lock100x";
+    EdcEnable = "ENABLED";
+    KillDecode = "DISABLED";
+    CtvCapturePins = "`TDO`";
+    LevelsTc = "`TestPlanName`::`TestCondition_min`";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+}
+CSharpTest VminTC PERFREQ_PNC0_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_lockvmin_pnc0_list";
+    LevelsTc = "`TestPlanName`::`TestCondition_min`";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    EndVoltageLimits = "0.85";
+    StartVoltages = "0.4";
+    StepSize = 0.02;
+    TestMode = "SingleVmin";
+    PatternNameCounterIndexes = "104,105,106,107";
+    VoltageConverter = "`VminTC VoltageConverter`";
+    VoltageTargets = "`VminTC VoltageTargets CORE0`";
+    VminResult = "PNC0_Vmin";
+    FeatureSwitchSettings = "`FeatureSwitchSettings`";
+    FivrCondition = "`FivrCondition`";
+    `n2p hxb0 bypassed`
+}
+CSharpTest VminTC PERFREQ_PNC1_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_lockvmin_pnc1_list";
+    LevelsTc = "`TestPlanName`::`TestCondition_min`";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    EndVoltageLimits = "0.85";
+    StartVoltages = "0.4";
+    StepSize = 0.02;
+    TestMode = "SingleVmin";
+    PatternNameCounterIndexes = "104,105,106,107";
+    VoltageConverter = "`VminTC VoltageConverter`";
+    VoltageTargets = "`VminTC VoltageTargets CORE1`";
+    VminResult = "PNC1_Vmin";
+    FeatureSwitchSettings = "`FeatureSwitchSettings`";
+    FivrCondition = "`FivrCondition`";
+    `n2p hxb0 bypassed`
+}
+CSharpTest VminTC PERFREQ_PNC2_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV `no at c48 flow`
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_lockvmin_pnc2_list";
+    LevelsTc = "`TestPlanName`::`TestCondition_min`";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    EndVoltageLimits = "0.85";
+    StartVoltages = "0.4";
+    StepSize = 0.02;
+    TestMode = "SingleVmin";
+    PatternNameCounterIndexes = "104,105,106,107";
+    VoltageConverter = "`VminTC VoltageConverter`";
+    VoltageTargets = "`VminTC VoltageTargets CORE2`";
+    VminResult = "PNC2_Vmin";
+    FeatureSwitchSettings = "`FeatureSwitchSettings`";
+    FivrCondition = "`FivrCondition`";
+    `n2p hxb0 bypassed`
+}
+CSharpTest VminTC PERFREQ_PNC3_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV `no at c48 flow`
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_lockvmin_pnc3_list";
+    LevelsTc = "`TestPlanName`::`TestCondition_min`";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    EndVoltageLimits = "0.85";
+    StartVoltages = "0.4";
+    StepSize = 0.02;
+    TestMode = "SingleVmin";
+    PatternNameCounterIndexes = "104,105,106,107";
+    VoltageConverter = "`VminTC VoltageConverter`";
+    VoltageTargets = "`VminTC VoltageTargets CORE3`";
+    VminResult = "PNC3_Vmin";
+    FeatureSwitchSettings = "`FeatureSwitchSettings`";
+    FivrCondition = "`FivrCondition`";
+    `n2p hxb0 bypassed`
+}
+CSharpTest VminTC PERFREQ_ARW0_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV `no at c40 flow`
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_lockvmin_arw0_list";
+    LevelsTc = "`TestPlanName`::`TestCondition_min`";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    EndVoltageLimits = "0.85";
+    StartVoltages = "0.4";
+    StepSize = 0.02;
+    TestMode = "SingleVmin";
+    PatternNameCounterIndexes = "104,105,106,107";
+    VoltageConverter = "`VminTC VoltageConverter`";
+    VoltageTargets = "`VminTC VoltageTargets ATOM0`";
+    VminResult = "ARW0_Vmin";
+    FeatureSwitchSettings = "`FeatureSwitchSettings`";
+    FivrCondition = "`FivrCondition`";
+    `n2p hxb0 bypassed`
+}
+CSharpTest VminTC PERFREQ_ARW1_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV `no at c40 flow`
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_lockvmin_arw1_list";
+    LevelsTc = "`TestPlanName`::`TestCondition_min`";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    EndVoltageLimits = "0.85";
+    StartVoltages = "0.4";
+    StepSize = 0.02;
+    TestMode = "SingleVmin";
+    PatternNameCounterIndexes = "104,105,106,107";
+    VoltageConverter = "`VminTC VoltageConverter`";
+    VoltageTargets = "`VminTC VoltageTargets ATOM1`";
+    VminResult = "ARW1_Vmin";
+    FeatureSwitchSettings = "`FeatureSwitchSettings`";
+    FivrCondition = "`FivrCondition`";
+    `n2p hxb0 bypassed`
+}
+CSharpTest VminTC PERFREQ_ARW2_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV `no at c48 flow`
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_lockvmin_arw2_list";
+    LevelsTc = "`TestPlanName`::`TestCondition_min`";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    EndVoltageLimits = "0.85";
+    StartVoltages = "0.4";
+    StepSize = 0.02;
+    TestMode = "SingleVmin";
+    PatternNameCounterIndexes = "104,105,106,107";
+    VoltageConverter = "`VminTC VoltageConverter`";
+    VoltageTargets = "`VminTC VoltageTargets ATOM2`";
+    VminResult = "ARW2_Vmin";
+    FeatureSwitchSettings = "`FeatureSwitchSettings`";
+    FivrCondition = "`FivrCondition`";
+    `n2p hxb0 bypassed`
+}
+CSharpTest VminTC PERFREQ_ARW3_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV `no at c48 flow`
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_lockvmin_arw3_list";
+    LevelsTc = "`TestPlanName`::`TestCondition_min`";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    EndVoltageLimits = "0.85";
+    StartVoltages = "0.4";
+    StepSize = 0.02;
+    TestMode = "SingleVmin";
+    PatternNameCounterIndexes = "104,105,106,107";
+    VoltageConverter = "`VminTC VoltageConverter`";
+    VoltageTargets = "`VminTC VoltageTargets ATOM3`";
+    VminResult = "ARW3_Vmin";
+    FeatureSwitchSettings = "`FeatureSwitchSettings`";
+    FivrCondition = "`FivrCondition`";
+    `n2p hxb0 bypassed`
+}
+CSharpTest VminTC PERFREQ_RING_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_lockvmin_ring_list";
+    LevelsTc = "`TestPlanName`::`TestCondition_min`";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    EndVoltageLimits = "0.85";
+    StartVoltages = "0.4";
+    StepSize = 0.02;
+    TestMode = "SingleVmin";
+    PatternNameCounterIndexes = "104,105,106,107";
+    VoltageConverter = "`VminTC VoltageConverter`";
+    VoltageTargets = "`VminTC VoltageTargets CCF`";
+    VminResult = "RING_Vmin";
+    FeatureSwitchSettings = "`FeatureSwitchSettings`";
+    FivrCondition = "`FivrCondition`";
+    `n2p hxb0 bypassed`
+}
+CSharpTest VminTC PERFREQ_DFX_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_lockvmin_dfx_list";
+    LevelsTc = "`TestPlanName`::`TestCondition_min`";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    EndVoltageLimits = "0.85";
+    StartVoltages = "0.4";
+    StepSize = 0.02;
+    TestMode = "SingleVmin";
+    PatternNameCounterIndexes = "103,104,105,106";
+    VoltageConverter = "";
+    VoltageTargets = "`VminTC VoltageTargets DFX`";
+    VminResult = "DFX_Vmin";
+    FeatureSwitchSettings = "per_pattern_printing";
+    FivrCondition = "";
+    `n2p hxb0 bypassed`
+}
+CSharpTest VminTC PERFREQ_DLVR_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_lockvmin_dlvr_list";
+    LevelsTc = "`TestPlanName`::`TestCondition_min`";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    EndVoltageLimits = "0.85";
+    StartVoltages = "0.4";
+    StepSize = 0.02;
+    TestMode = "SingleVmin";
+    PatternNameCounterIndexes = "104,105,106,107";
+    VoltageConverter = "";
+    VoltageTargets = "`VminTC VoltageTargets DLVR`";
+    VminResult = "DLVR_Vmin";
+    FeatureSwitchSettings = "per_pattern_printing";
+    FivrCondition = "";
+    `n2p hxb0 bypassed`
+}
+CSharpTest VminTC PERFREQ_C2H_VMIN_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_lockvmin_c2h_list";
+    LevelsTc = "`TestPlanName`::`TestCondition_min`";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    EndVoltageLimits = "0.85";
+    StartVoltages = "0.4";
+    StepSize = 0.02;
+    TestMode = "SingleVmin";
+    PatternNameCounterIndexes = "103,104,105,106";
+    VoltageConverter = "";
+    VoltageTargets = "`VminTC VoltageTargets C2H`";
+    VminResult = "C2H_Vmin";
+    FeatureSwitchSettings = "per_pattern_printing";
+    FivrCondition = "";
+    PostInstance = "`smartTC_enable`";
+    `n2p hxb0 bypassed`
+}
+CSharpTest DDGShmooTC RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_VCCR
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_resetcheck_list";
+    LevelsTc = "`TestPlanName`::`TestCondition_min`";
+    PrintFormat = "ShmooHub";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    VoltageConverter = "`DDGShmoo VoltageConverter`";
+    XAxisParam = "p_cpu_per";
+    XAxisRange = "7e-9:0.5e-9:13";
+    XAxisType = "SpecSetVariable";
+    XAxisParamType = "TimingTestCondition";
+    YAxisParam = "`DDGSHmoo VCCR`";
+    YAxisRange = "0.9:-0.05:14";
+    YAxisType = "`DDGShmoo AxisType`";
+    YAxisParamType = "`DDGShmoo AxisParamType`";
+    `class bypassed`
+}
+CSharpTest DDGShmooTC RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_ATOMS
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_resetcheck_list";
+    LevelsTc = "`TestPlanName`::`TestCondition_min`";
+    PrintFormat = "ShmooHub";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    VoltageConverter = "`DDGShmoo VoltageConverter`";
+    XAxisParam = "p_cpu_per";
+    XAxisRange = "7e-9:0.5e-9:13";
+    XAxisType = "SpecSetVariable";
+    XAxisParamType = "TimingTestCondition";
+    YAxisParam = "`DDGSHmoo ATOM`";
+    YAxisRange = "0.9:-0.05:14";
+    YAxisType = "`DDGShmoo AxisType`";
+    YAxisParamType = "`DDGShmoo AxisParamType`";
+    `class bypassed`
+}
+CSharpTest DDGShmooTC RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_CORES
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_resetcheck_list";
+    LevelsTc = "`TestPlanName`::`TestCondition_min`";
+    PrintFormat = "ShmooHub";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    VoltageConverter = "`DDGShmoo VoltageConverter`";
+    XAxisParam = "p_cpu_per";
+    XAxisRange = "7e-9:0.5e-9:13";
+    XAxisType = "SpecSetVariable";
+    XAxisParamType = "TimingTestCondition";
+    YAxisParam = "`DDGSHmoo CORE`";
+    YAxisRange = "0.9:-0.05:14";
+    YAxisType = "`DDGShmoo AxisType`";
+    YAxisParamType = "`DDGShmoo AxisParamType`";
+    `class bypassed`
+}
+CSharpTest DDGShmooTC RESETCHECK_X_SHMOO_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV_VNNAON
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_resetcheck_list";
+    LevelsTc = "`TestPlanName`::`TestCondition_min`";
+    PrintFormat = "ShmooHub";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    VoltageConverter = "";
+    XAxisParam = "p_cpu_per";
+    XAxisRange = "7e-9:0.5e-9:13";
+    XAxisType = "SpecSetVariable";
+    XAxisParamType = "TimingTestCondition";
+    YAxisParam = "`DDGSHmoo VNNAON`";
+    YAxisRange = "1.1:-0.05:14";
+    YAxisType = "SpecSetVariable";
+    YAxisParamType = "LevelsTestCondition";
+    BypassPort = -1;
+}
+
+Flow `DebugSubFlow`_RECIPE_CHAR
+{
+    FlowItem STARTUPRDAC_PLL_SWEEP_E_`DebugSubFlow`_X_X_X_X_X_TDV STARTUPRDAC_PLL_SWEEP_E_`DebugSubFlow`_X_X_X_X_X_TDV @EDCRULE
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1 { Property PassFail = "Pass"; GoTo VCOTUNING_PLL_SWEEP_E_`DebugSubFlow`_X_X_X_X_X_TDV; }
+    }
+    FlowItem VCOTUNING_PLL_SWEEP_E_`DebugSubFlow`_X_X_X_X_X_TDV VCOTUNING_PLL_SWEEP_E_`DebugSubFlow`_X_X_X_X_X_TDV @EDCRULE
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1 { Property PassFail = "Pass"; GoTo DCOTUNING_FLL_SWEEP_E_`DebugSubFlow`_X_X_X_X_X_TDV; }
+    }
+    FlowItem DCOTUNING_FLL_SWEEP_E_`DebugSubFlow`_X_X_X_X_X_TDV DCOTUNING_FLL_SWEEP_E_`DebugSubFlow`_X_X_X_X_X_TDV @EDCRULE
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1 { Property PassFail = "Pass"; GoTo RECIPE_X_PATCFG_E_`DebugSubFlow`_X_X_X_X_X_TDV_REVERT1; }
+    }
+    FlowItem RECIPE_X_PATCFG_E_`DebugSubFlow`_X_X_X_X_X_TDV_REVERT1 RECIPE_X_PATCFG_E_`DebugSubFlow`_X_X_X_X_X_TDV_REVERT1 @EDCRULE
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return -1; }
+        Result 1 { Property PassFail = "Pass"; GoTo AFSDELTAF_FLL_CMEM_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 2 { Property PassFail = "Pass"; GoTo AFSDELTAF_FLL_CMEM_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 3 { Property PassFail = "Pass"; GoTo AFSDELTAF_FLL_CMEM_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 4 { Property PassFail = "Pass"; GoTo AFSDELTAF_FLL_CMEM_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+        Result 5 { Property PassFail = "Pass"; GoTo AFSDELTAF_FLL_CMEM_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV; }
+    }
+    FlowItem AFSDELTAF_FLL_CMEM_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV AFSDELTAF_FLL_CMEM_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; GoTo RECIPE_X_PATCFG_E_`DebugSubFlow`_X_X_X_X_X_TDV_REVERT2; }
+        Result 1 { Property PassFail = "Pass"; GoTo RECIPE_X_PATCFG_E_`DebugSubFlow`_X_X_X_X_X_TDV_REVERT2; }
+        Result 2 { Property PassFail = "Fail"; GoTo RECIPE_X_PATCFG_E_`DebugSubFlow`_X_X_X_X_X_TDV_REVERT2; }
+        Result 3 { Property PassFail = "Fail"; GoTo RECIPE_X_PATCFG_E_`DebugSubFlow`_X_X_X_X_X_TDV_REVERT2; }
+        Result 4 { Property PassFail = "Fail"; GoTo RECIPE_X_PATCFG_E_`DebugSubFlow`_X_X_X_X_X_TDV_REVERT2; }
+    }
+    FlowItem RECIPE_X_PATCFG_E_`DebugSubFlow`_X_X_X_X_X_TDV_REVERT2 RECIPE_X_PATCFG_E_`DebugSubFlow`_X_X_X_X_X_TDV_REVERT2 @EDCRULE
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return -1; }
+        Result 1 { Property PassFail = "Pass"; GoTo DCSSHMOO_X_PATCFG_E_`DebugSubFlow`_X_X_X_X_X_TDV; }
+        Result 2 { Property PassFail = "Pass"; GoTo DCSSHMOO_X_PATCFG_E_`DebugSubFlow`_X_X_X_X_X_TDV; }
+        Result 3 { Property PassFail = "Pass"; GoTo DCSSHMOO_X_PATCFG_E_`DebugSubFlow`_X_X_X_X_X_TDV; }
+        Result 4 { Property PassFail = "Pass"; GoTo DCSSHMOO_X_PATCFG_E_`DebugSubFlow`_X_X_X_X_X_TDV; }
+        Result 5 { Property PassFail = "Pass"; GoTo DCSSHMOO_X_PATCFG_E_`DebugSubFlow`_X_X_X_X_X_TDV; }
+    }
+    FlowItem DCSSHMOO_X_PATCFG_E_`DebugSubFlow`_X_X_X_X_X_TDV DCSSHMOO_X_PATCFG_E_`DebugSubFlow`_X_X_X_X_X_TDV @EDCRULE
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return -1; }
+        Result 1 { Property PassFail = "Pass"; GoTo DCSSHMOO_X_SWEEP_E_`DebugSubFlow`_X_X_X_X_X_TDV; }
+    }
+    FlowItem DCSSHMOO_X_SWEEP_E_`DebugSubFlow`_X_X_X_X_X_TDV DCSSHMOO_X_SWEEP_E_`DebugSubFlow`_X_X_X_X_X_TDV @EDCRULE
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1 { Property PassFail = "Pass"; GoTo RECIPE_X_PATCFG_E_`DebugSubFlow`_X_X_X_X_X_TDV_REVERT3; }
+    }
+    FlowItem RECIPE_X_PATCFG_E_`DebugSubFlow`_X_X_X_X_X_TDV_REVERT3 RECIPE_X_PATCFG_E_`DebugSubFlow`_X_X_X_X_X_TDV_REVERT3 @EDCRULE
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return -1; }
+        Result 1 { Property PassFail = "Pass"; Return 1; }
+        Result 2 { Property PassFail = "Pass"; Return 1; }
+        Result 3 { Property PassFail = "Pass"; Return 1; }
+        Result 4 { Property PassFail = "Pass"; Return 1; }
+        Result 5 { Property PassFail = "Pass"; Return 1; }
+    }
+    FlowItem FVCURVE_PLL_CMEM_E_`DebugSubFlow`_TAP_X_NOM_X_40_TDV FVCURVE_PLL_CMEM_E_`DebugSubFlow`_TAP_X_NOM_X_40_TDV @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return -1; }
+        Result 1 { Property PassFail = "Pass"; Return -1; }
+        Result 2 { Property PassFail = "Fail"; Return -1; }
+        Result 3 { Property PassFail = "Fail"; Return -1; }
+        Result 4 { Property PassFail = "Fail"; Return -1; }
+    }
+    FlowItem OPENLOOP_FLL_CMEM_E_`DebugSubFlow`_TAP_X_NOM_X_40_TDV OPENLOOP_FLL_CMEM_E_`DebugSubFlow`_TAP_X_NOM_X_40_TDV @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return -1; }
+        Result 1 { Property PassFail = "Pass"; Return -1; }
+        Result 2 { Property PassFail = "Fail"; Return -1; }
+        Result 3 { Property PassFail = "Fail"; Return -1; }
+        Result 4 { Property PassFail = "Fail"; Return -1; }
+    }
+    FlowItem LOCK_X_CMEM_E_`DebugSubFlow`_TAP_X_NOM_X_40_TDV LOCK_X_CMEM_E_`DebugSubFlow`_TAP_X_NOM_X_40_TDV @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return -1; }
+        Result 1 { Property PassFail = "Pass"; Return -1; }
+        Result 2 { Property PassFail = "Fail"; Return -1; }
+        Result 3 { Property PassFail = "Fail"; Return -1; }
+        Result 4 { Property PassFail = "Fail"; Return -1; }
+    }
+    FlowItem VIEWPIN_X_FUNC_E_`DebugSubFlow`_TAP_X_NOM_X_40_TDV VIEWPIN_X_FUNC_E_`DebugSubFlow`_TAP_X_NOM_X_40_TDV @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return -1; }
+        Result 1 { Property PassFail = "Pass"; Return -1; }
+        Result 2 { Property PassFail = "Fail"; Return -1; }
+        Result 3 { Property PassFail = "Fail"; Return -1; }
+        Result 4 { Property PassFail = "Fail"; Return -1; }
+        Result 5 { Property PassFail = "Fail"; Return -1; }
+    }
+}
+
+CSharpTest RunCallback STARTUPRDAC_PLL_SWEEP_E_`DebugSubFlow`_X_X_X_X_X_TDV
+{
+    Callback = "JsonRun";
+    Parameters = "./Modules/`SubFolderName``_ModuleFolderName`/InputFiles/clk.cpu.jsonrun.`_BomGroupName`.json startuprdac" ;
+    BypassPort = -1;
+}
+CSharpTest RunCallback VCOTUNING_PLL_SWEEP_E_`DebugSubFlow`_X_X_X_X_X_TDV
+{
+    Callback = "JsonRun";
+    Parameters = "./Modules/`SubFolderName``_ModuleFolderName`/InputFiles/clk.cpu.jsonrun.`_BomGroupName`.json vcotuning";
+    BypassPort = -1;
+}
+CSharpTest RunCallback DCOTUNING_FLL_SWEEP_E_`DebugSubFlow`_X_X_X_X_X_TDV
+{
+    Callback = "JsonRun";
+    Parameters = "./Modules/`SubFolderName``_ModuleFolderName`/InputFiles/clk.cpu.jsonrun.`_BomGroupName`.json dcotuning";
+    BypassPort = -1;
+}
+CSharpTest PrimePauseTestMethod RECIPE_X_PATCFG_E_`DebugSubFlow`_X_X_X_X_X_TDV_REVERT1
+{
+    SetPointsPlistMode = "Global";
+    SetPointsPreInstance = `RECIPE`;
+    SleepTime = 1;
+    `c48 bypassed`
+}
+CSharpTest CsioCmemTC AFSDELTAF_FLL_CMEM_E_`DebugSubFlow`_TAP_X_MIN_X_40_TDV
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_fllafsdeltaf_list";
+    PlistConfigurationFile = GetEnvironmentVariable("`patmodify path`")+"/clk_cpu_x_fllafsdeltaf_list.plist.json";
+    PrePlist = "`preplist_NOM`";
+    IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.`_BomGroupName``C0`.json";
+    LimitsConfigurationFile = "./InputFiles/clk.`_TcgProduct`.limits.csv";
+    PlistConfigSet = "clk_cpu_x_fllafsdeltaf_list";
+    FunctionCall = "Ljpll_4p0_AfsCbSlowdown";
+    EdcEnable = "ENABLED";
+    KillDecode = "DISABLED";
+    CtvCapturePins = "`TDO`";
+    LevelsTc = "`TestPlanName`::cpu_clk_override_distnom_sharedmin_lvl";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+}
+CSharpTest PrimePauseTestMethod RECIPE_X_PATCFG_E_`DebugSubFlow`_X_X_X_X_X_TDV_REVERT2
+{
+    SetPointsPlistMode = "Global";
+    SetPointsPreInstance = `RECIPE`;
+    SleepTime = 1;
+    `c48 bypassed`
+}
+CSharpTest PrimePatConfigTestMethod DCSSHMOO_X_PATCFG_E_`DebugSubFlow`_X_X_X_X_X_TDV
+{
+    ConfigurationFile = "./InputFiles/clk.cpu.dcsrunmode.setpoints.json";
+    SetPoint = "dcsrunmode";
+    BypassPort = -1;
+}
+CSharpTest RunCallback DCSSHMOO_X_SWEEP_E_`DebugSubFlow`_X_X_X_X_X_TDV
+{
+    Callback = "JsonRun";
+    Parameters = "./Modules/`SubFolderName``_ModuleFolderName`/InputFiles/clk.cpu.jsonrun.`_BomGroupName`.json dcsshmoo";
+    `class bypassed`
+}
+CSharpTest PrimePauseTestMethod RECIPE_X_PATCFG_E_`DebugSubFlow`_X_X_X_X_X_TDV_REVERT3
+{
+    SetPointsPlistMode = "Global";
+    SetPointsPreInstance = `RECIPE`;
+    SleepTime = 1;
+    `c48 bypassed`
+}
+CSharpTest CsioCmemTC FVCURVE_PLL_CMEM_E_`DebugSubFlow`_TAP_X_NOM_X_40_TDV
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_fvcurve_list";
+    PlistConfigurationFile = GetEnvironmentVariable("`patmodify path`")+"/clk_cpu_x_fvcurve_list.plist.json";
+    PrePlist = "`preplist_NOM`";
+    IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.`_BomGroupName``C0`.json";
+    LimitsConfigurationFile = "./InputFiles/clk.`_TcgProduct`.limits.csv";
+    PlistConfigSet = "clk_cpu_x_fvcurve_list";
+    FunctionCall = "Ljpll_4p0_FvCurve";
+    EdcEnable = "ENABLED";
+    KillDecode = "DISABLED";
+    CtvCapturePins = "`TDO`";
+    LevelsTc = "`TestPlanName`::`TestCondition_nom`";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    PreInstance = "ReadSpecSet(--levels cpu_clk_univ_x_x_pkg_lvl_nom_distnom_lvl --name `level_vnnaon` --gsds G.U.D.clk_cpu_vnnaon --print)";
+    BypassPort = -1;
+}
+CSharpTest CsioCmemTC OPENLOOP_FLL_CMEM_E_`DebugSubFlow`_TAP_X_NOM_X_40_TDV
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_openloop_list";
+    PlistConfigurationFile = GetEnvironmentVariable("`patmodify path`")+"/clk_cpu_x_openloop_list.plist.json";
+    PrePlist = "`preplist_NOM`";
+    IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.`_BomGroupName``C0`.json";
+    LimitsConfigurationFile = "./InputFiles/clk.`_TcgProduct`.limits.csv";
+    PlistConfigSet = "clk_cpu_x_openloop_list";
+    FunctionCall = "Ljpll_4p0_DcoOpenLoop";
+    EdcEnable = "ENABLED";
+    KillDecode = "DISABLED";
+    CtvCapturePins = "`TDO`";
+    LevelsTc = "`TestPlanName`::`TestCondition_nom`";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+}
+CSharpTest CsioCmemTC LOCK_X_CMEM_E_`DebugSubFlow`_TAP_X_NOM_X_40_TDV
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_lock40_list";
+    PlistConfigurationFile = GetEnvironmentVariable("`patmodify path`")+"/clk_cpu_x_lock40_list.plist.json";
+    PrePlist = "`preplist_NOM`";
+    IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.`_BomGroupName``C0`.json";
+    LimitsConfigurationFile = "./InputFiles/clk.`_TcgProduct`.limits.csv";
+    PlistConfigSet = "clk_cpu_x_lock40_list";
+    FunctionCall = "Ljpll_4p0_Lock";
+    EdcEnable = "ENABLED";
+    KillDecode = "DISABLED";
+    CtvCapturePins = "`TDO`";
+    LevelsTc = "`TestPlanName`::`TestCondition_nom`"; 
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+}
+CSharpTest DDGFunctionalTC VIEWPIN_X_FUNC_E_`DebugSubFlow`_TAP_X_NOM_X_40_TDV
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_viewpin_list";
+    LevelsTc = "`TestPlanName`::`TestCondition_nom`";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    FailuresToCapturePerPattern = 1;
+    FailuresToCaptureTotal = 1;
+    MaxFailuresPerPatternToItuff = 1;
+    MaxFailuresToItuff = 1;
+    `c40 bypassed`
+}
+
+Flow `TestPlanName`_`DebugSubFlow` @`DebugSubFlow`_SubFlow
+{
+    FlowItem FORK_X_SCREEN_K_`DebugSubFlow`_X_X_X_X_X_TDV FORK_X_SCREEN_K_`DebugSubFlow`_X_X_X_X_X_TDV @KILL
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1 { Property PassFail = "Pass"; GoTo `DebugSubFlow`_MARGIN; }
+        Result 2 { Property PassFail = "Pass"; Return 1; }
+    }
+    FlowItem `DebugSubFlow`_MARGIN `DebugSubFlow`_MARGIN
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1 { Property PassFail = "Pass"; GoTo `DebugSubFlow`_RECIPE_CHAR; }
+    }
+    FlowItem `DebugSubFlow`_RECIPE_CHAR `DebugSubFlow`_RECIPE_CHAR
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1 { Property PassFail = "Pass"; Return 1; }
+    }
+}
+
+CSharpTest AuxiliaryTC FORK_X_SCREEN_K_`DebugSubFlow`_X_X_X_X_X_TDV
+{
+    Expression = "IsMatch([`TestPlanName`::`TestPlanName`.TESTERDV_Enable],'1')";
+    DataType = "String";
+    ResultPort = "[R]?1:2";
+}
+
+
+####################################### COLD EDC #######################################
+
+
+Flow `TestPlanName`_COLDFINAL @COLDFINAL_SubFlow `sds flow only`
+{
+    FlowItem SETUP_X_SAMPLE_E_COLDFINAL_X_X_MIN_X_X_X SETUP_X_SAMPLE_E_COLDFINAL_X_X_MIN_X_X_X @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; GoTo VCCPLL_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM; }
+        Result 1 { Property PassFail = "Fail"; GoTo VCCPLL_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM; }
+        Result 2 { Property PassFail = "Fail"; Return 1; }
+    }
+    FlowItem VCCPLL_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM VCCPLL_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; GoTo IREFTRIM_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM; }
+        Result 1  { Property PassFail = "Pass"; GoTo IREFTRIM_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM; }
+        Result 2  { Property PassFail = "Fail"; GoTo IREFTRIM_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM; }
+        Result 3  { Property PassFail = "Fail"; GoTo IREFTRIM_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM; }
+        Result 4  { Property PassFail = "Fail"; GoTo IREFTRIM_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM; }
+    }
+    FlowItem IREFTRIM_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM IREFTRIM_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; GoTo DCATRIM_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM; }
+        Result 1  { Property PassFail = "Pass"; GoTo DCATRIM_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM; }
+        Result 2  { Property PassFail = "Fail"; GoTo DCATRIM_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM; }
+        Result 3  { Property PassFail = "Fail"; GoTo DCATRIM_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM; }
+        Result 4  { Property PassFail = "Fail"; GoTo DCATRIM_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM; }
+    }
+    FlowItem DCATRIM_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM DCATRIM_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; GoTo AFSTRIM_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM; }
+        Result 1  { Property PassFail = "Pass"; GoTo AFSTRIM_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM; }
+        Result 2  { Property PassFail = "Fail"; GoTo AFSTRIM_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM; }
+        Result 3  { Property PassFail = "Fail"; GoTo AFSTRIM_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM; }
+        Result 4  { Property PassFail = "Fail"; GoTo AFSTRIM_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM; }
+    }
+    FlowItem AFSTRIM_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM AFSTRIM_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 1; }
+        Result 1  { Property PassFail = "Pass"; Return 1; }
+        Result 2  { Property PassFail = "Fail"; Return 1; }
+        Result 3  { Property PassFail = "Fail"; Return 1; }
+        Result 4  { Property PassFail = "Fail"; Return 1; }
+    }
+}
+
+CSharpTest PrimeSampleRateTestMethod SETUP_X_SAMPLE_E_COLDFINAL_X_X_MIN_X_X_X `sds flow only`
+{
+    SamplingRateValue = "1";
+    WaferSampleRateValue = "1";
+    ShouldFirstBeSampled = "True";
+    `sds executed`
+}
+CSharpTest CsioCmemTC VCCPLL_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM `sds flow only`
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_vccpll_list";
+    PlistConfigurationFile = GetEnvironmentVariable("`patmodify path`")+"/clk_cpu_x_vccpll_list.plist.json";
+    IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.COLDFINAL_`_BomGroupName`.json";
+    LimitsConfigurationFile = "./InputFiles/clk.`_TcgProduct`.limits.csv";
+    PlistConfigSet = "clk_cpu_x_vccpll_list";
+    FunctionCall = "Ljpll_4p0_VccPll";
+    EdcEnable = "ENABLED";
+    KillDecode = "ENABLED";
+    CtvCapturePins = "`TDO`";
+    LevelsTc = "`TestPlanName`::cpu_clk_override_distnom_sharedmin_lvl";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    PreInstance = "ReadSpecSet(--levels `TestPlanName`::cpu_clk_override_distnom_sharedmin_lvl --name `level_vnnaon` --gsds G.U.D.clk_cpu_vnnaon --print)";
+    `sds executed`
+}
+CSharpTest CsioCmemTC IREFTRIM_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM `sds flow only`
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_ireftrim_list";
+    PlistConfigurationFile = GetEnvironmentVariable("`patmodify path`")+"/clk_cpu_x_ireftrim_list.plist.json";
+    IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.COLDFINAL_`_BomGroupName`.json";
+    LimitsConfigurationFile = "./InputFiles/clk.`_TcgProduct`.limits.csv";
+    PlistConfigSet = "clk_cpu_x_ireftrim_list";
+    FunctionCall = "Ljpll_4p0_IrefTrimConverge";
+    EdcEnable = "ENABLED";
+    KillDecode = "ENABLED";
+    CtvCapturePins = "`TDO`";
+    LevelsTc = "`TestPlanName`::cpu_clk_override_distmax_sharedmin_lvl";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    `sds executed`
+}
+CSharpTest CsioCmemTC DCATRIM_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM `sds flow only`
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_dcatrim_list";
+    PlistConfigurationFile = GetEnvironmentVariable("`patmodify path`")+"/clk_cpu_x_dcatrim_list.plist.json";
+    IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.COLDFINAL_`_BomGroupName`.json";
+    LimitsConfigurationFile = "./InputFiles/clk.`_TcgProduct`.limits.csv";
+    PlistConfigSet = "clk_cpu_x_dcatrim_list";
+    FunctionCall = "Ljpll_4p0_DcaTrim";
+    EdcEnable = "ENABLED";
+    KillDecode = "ENABLED";
+    CtvCapturePins = "`TDO`";
+    LevelsTc = "`TestPlanName`::`TestCondition_dcamin`";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    `sds executed`
+}
+CSharpTest CsioCmemTC AFSTRIM_X_CMEM_E_COLDFINAL_TAP_X_MIN_X_40_HVM `sds flow only`
+{
+    Patlist = "`patlist_prefix`clk_cpu_x_afstrim_list";
+    PlistConfigurationFile = GetEnvironmentVariable("`patmodify path`")+"/clk_cpu_x_afstrim_list.plist.json";
+    IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.COLDFINAL_`_BomGroupName`.json";
+    LimitsConfigurationFile = "./InputFiles/clk.`_TcgProduct`.limits.csv";
+    PlistConfigSet = "clk_cpu_x_afstrim_list";
+    FunctionCall = "Ljpll_4p0_AfsTrim";
+    EdcEnable = "ENABLED";
+    KillDecode = "ENABLED";
+    CtvCapturePins = "`TDO`";
+    LevelsTc = "`TestPlanName`::cpu_clk_override_distnom_sharedmin_lvl";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    `sds executed`
+}
+####################################### STARTCPUPATMODSPKG #######################################
+
+Flow `TestPlanName`_STARTCPUPATMODSPKG @STARTCPUPATMODSPKG_SubFlow `class flow only`
+{
+    FlowItem VREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM VREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM @KILL
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1  { Property PassFail = "Pass"; GoTo IREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM; }
+        Result 2  { Property PassFail = "Pass"; GoTo IREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM; }
+        Result 3  { Property PassFail = "Pass"; GoTo IREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM; }
+        Result 4  { Property PassFail = "Pass"; GoTo IREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM; }
+        Result 5  { Property PassFail = "Pass"; GoTo IREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM; }
+    }
+    FlowItem IREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM IREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM @KILL
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1  { Property PassFail = "Pass"; GoTo DCATRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM; }
+        Result 2  { Property PassFail = "Pass"; GoTo DCATRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM; }
+        Result 3  { Property PassFail = "Pass"; GoTo DCATRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM; }
+        Result 4  { Property PassFail = "Pass"; GoTo DCATRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM; }
+        Result 5  { Property PassFail = "Pass"; GoTo DCATRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM; }
+    }
+    FlowItem DCATRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM DCATRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM @KILL
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1  { Property PassFail = "Pass"; GoTo AFSTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM; }
+        Result 2  { Property PassFail = "Pass"; GoTo AFSTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM; }
+        Result 3  { Property PassFail = "Pass"; GoTo AFSTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM; }
+        Result 4  { Property PassFail = "Pass"; GoTo AFSTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM; }
+        Result 5  { Property PassFail = "Pass"; GoTo AFSTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM; }
+    }
+    FlowItem AFSTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM AFSTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM @KILL
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1  { Property PassFail = "Pass"; Return 1; }
+        Result 2  { Property PassFail = "Pass"; Return 1; }
+        Result 3  { Property PassFail = "Pass"; Return 1; }
+        Result 4  { Property PassFail = "Pass"; Return 1; }
+        Result 5  { Property PassFail = "Pass"; Return 1; }
+    }
+    FlowItem VREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM VREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM @KILL
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1  { Property PassFail = "Pass"; GoTo IREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM; }
+        Result 2  { Property PassFail = "Pass"; GoTo IREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM; }
+        Result 3  { Property PassFail = "Pass"; GoTo IREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM; }
+        Result 4  { Property PassFail = "Pass"; GoTo IREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM; }
+        Result 5  { Property PassFail = "Pass"; GoTo IREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM; }
+    }
+    FlowItem IREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM IREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM @KILL
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1  { Property PassFail = "Pass"; GoTo DCATRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM; }
+        Result 2  { Property PassFail = "Pass"; GoTo DCATRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM; }
+        Result 3  { Property PassFail = "Pass"; GoTo DCATRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM; }
+        Result 4  { Property PassFail = "Pass"; GoTo DCATRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM; }
+        Result 5  { Property PassFail = "Pass"; GoTo DCATRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM; }
+    }
+    FlowItem DCATRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM DCATRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM @KILL
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1  { Property PassFail = "Pass"; GoTo AFSTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM; }
+        Result 2  { Property PassFail = "Pass"; GoTo AFSTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM; }
+        Result 3  { Property PassFail = "Pass"; GoTo AFSTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM; }
+        Result 4  { Property PassFail = "Pass"; GoTo AFSTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM; }
+        Result 5  { Property PassFail = "Pass"; GoTo AFSTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM; }
+    }
+    FlowItem AFSTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM AFSTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM @KILL
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1  { Property PassFail = "Pass"; GoTo VREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM; }
+        Result 2  { Property PassFail = "Pass"; GoTo VREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM; }
+        Result 3  { Property PassFail = "Pass"; GoTo VREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM; }
+        Result 4  { Property PassFail = "Pass"; GoTo VREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM; }
+        Result 5  { Property PassFail = "Pass"; GoTo VREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM; }
+    }
+    FlowItem VREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM VREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM @KILL
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1  { Property PassFail = "Pass"; GoTo IREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM; }
+        Result 2  { Property PassFail = "Pass"; GoTo IREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM; }
+        Result 3  { Property PassFail = "Pass"; GoTo IREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM; }
+        Result 4  { Property PassFail = "Pass"; GoTo IREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM; }
+        Result 5  { Property PassFail = "Pass"; GoTo IREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM; }
+    }
+    FlowItem IREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM IREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM @KILL
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1  { Property PassFail = "Pass"; GoTo DCATRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM; }
+        Result 2  { Property PassFail = "Pass"; GoTo DCATRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM; }
+        Result 3  { Property PassFail = "Pass"; GoTo DCATRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM; }
+        Result 4  { Property PassFail = "Pass"; GoTo DCATRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM; }
+        Result 5  { Property PassFail = "Pass"; GoTo DCATRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM; }
+    }
+    FlowItem DCATRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM DCATRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM @KILL
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1  { Property PassFail = "Pass"; GoTo AFSTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM; }
+        Result 2  { Property PassFail = "Pass"; GoTo AFSTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM; }
+        Result 3  { Property PassFail = "Pass"; GoTo AFSTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM; }
+        Result 4  { Property PassFail = "Pass"; GoTo AFSTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM; }
+        Result 5  { Property PassFail = "Pass"; GoTo AFSTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM; }
+    }
+    FlowItem AFSTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM AFSTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM @KILL
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1  { Property PassFail = "Pass"; Return 1; }
+        Result 2  { Property PassFail = "Pass"; Return 1; }
+        Result 3  { Property PassFail = "Pass"; Return 1; }
+        Result 4  { Property PassFail = "Pass"; Return 1; }
+        Result 5  { Property PassFail = "Pass"; Return 1; }
+    }
+}
+
+CSharpTest PrimePauseTestMethod VREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM `patcfg s28c flow only`
+{
+    SetPointsPlistMode = "Global";
+    SetPointsPreInstance = "clk_cpu:vrefpat_class:cpu,clk_cpu:vreffuse_class:cpu";
+    SleepTime = 1;
+    BypassPort = 1;
+}
+CSharpTest PrimePauseTestMethod VREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM `class s52c flow only`
+{
+    SetPointsPlistMode = "Global";
+    SetPointsPreInstance = "clk_cpu:vrefpat_class:cpu,clk_cpu:vreffuse_class:cpu";
+    SleepTime = 1;
+    BypassPort = 1;
+}
+CSharpTest PrimePauseTestMethod VREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM `class s52c flow only`
+{
+    SetPointsPlistMode = "Global";
+    SetPointsPreInstance = "clk_cpu:vrefpat_class_cpu1:cpu,clk_cpu:vreffuse_class_cpu1:cpu";
+    SleepTime = 1;
+    BypassPort = 1;
+}
+CSharpTest PrimePauseTestMethod IREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM `patcfg s28c flow only`
+{
+    SetPointsPlistMode = "Global";
+    SetPointsPreInstance = `SetPoints_iref`;
+    SleepTime = 1;
+    `class unbypassed`
+}
+CSharpTest PrimePauseTestMethod IREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM `class s52c flow only`
+{
+    SetPointsPlistMode = "Global";
+    SetPointsPreInstance = `SetPoints_iref`;
+    SleepTime = 1;
+    `class unbypassed`
+}
+CSharpTest PrimePauseTestMethod IREFTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM `class s52c flow only`
+{
+    SetPointsPlistMode = "Global";
+    SetPointsPreInstance = `SetPoints_iref_s52c`;
+    SleepTime = 1;
+    PreInstance = "SetCurrentDieId("+__shared__::DFFVars.DIEID_CPU1+")";
+    `class unbypassed`
+}
+CSharpTest PrimePauseTestMethod DCATRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM `patcfg s28c flow only`
+{
+    SetPointsPlistMode = "Global";
+    SetPointsPreInstance = "clk_cpu:dcapat_class:cpu,clk_cpu:dcafuse_class:cpu";
+    SleepTime = 1;
+    BypassPort = 1;
+}
+CSharpTest PrimePauseTestMethod DCATRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM `class s52c flow only`
+{
+    SetPointsPlistMode = "Global";
+    SetPointsPreInstance = "clk_cpu:dcapat_class:cpu,clk_cpu:dcafuse_class:cpu";
+    SleepTime = 1;
+    BypassPort = 1;
+}
+CSharpTest PrimePauseTestMethod DCATRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM `class s52c flow only`
+{
+    SetPointsPlistMode = "Global";
+    SetPointsPreInstance = "clk_cpu:dcapat_class_cpu1:cpu,clk_cpu:dcafuse_class_cpu1:cpu";
+    SleepTime = 1;
+    BypassPort = 1;
+}
+CSharpTest PrimePauseTestMethod AFSTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_HVM `patcfg s28c flow only`
+{
+    SetPointsPlistMode = "Global";
+    SetPointsPreInstance = `SetPoints_afs`;
+    SleepTime = 1;
+    `class unbypassed`
+}
+CSharpTest PrimePauseTestMethod AFSTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU0HVM `class s52c flow only`
+{
+    SetPointsPlistMode = "Global";
+    SetPointsPreInstance = `SetPoints_afs`;
+    SleepTime = 1;
+    `class unbypassed`
+}
+CSharpTest PrimePauseTestMethod AFSTRIM_X_PATCFG_K_STARTCPUPATMODSPKG_X_X_X_X_X_CPU1HVM `class s52c flow only`
+{
+    SetPointsPlistMode = "Global";
+    SetPointsPreInstance = `SetPoints_afs_s52c`;
+    SleepTime = 1;
+    PostInstance = "SetCurrentDieId("+__shared__::DFFVars.DIEID_CPU+")";
+    `class unbypassed`
+}

@@ -1,0 +1,19 @@
+set py3bin       = /intel/tpvalidation/engtools/tptools/mtl/pyston/pyston2.3.4/bin/pyston
+set cmd_tpd      = "import sys; import os; print(os.path.abspath(os.path.join(os.path.dirname(sys.argv[2]), 'main/swiss_knife.py')))"
+set checkenv_tpd = `$py3bin -c "$cmd_tpd" $_`
+
+#---------------------------------------------------------------
+# check if checkenv.py exist. This determines the value of PATH, PYTHONPATH and LD_LIBRARY_PATH
+#---------------------------------------------------------------
+if (! -e $checkenv_tpd) then
+    echo "$checkenv_tpd does not exist. This is a required tool for pytpd"
+	goto error2
+endif
+
+setenv PATH `$checkenv_tpd -path`
+echo `swiss_knife.py -checkenv`
+exit 0
+
+error2:
+    echo
+    exit 1

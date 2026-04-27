@@ -1,0 +1,51 @@
+[
+	{
+		"NAME": "SCN_CORE_AS",
+		"SIZE": 2,
+		"PatConfigSetPoints": [ 
+      		{ 
+      		  "Indexes": "1", 
+      		  "Values": [ 0 ], 
+      		  "SetPoints": [ "SCNCORE_AS:Core0:Enabled" ] 
+      		},
+      		{ 
+      		  "Indexes": "1", 
+      		  "Values": [ 1 ], 
+      		  "SetPoints": [ "SCNCORE_AS:Core0:Disabled" ] 
+      		},
+      		{ 
+      		  "Indexes": "0", 
+      		  "Values": [ 0 ], 
+      		  "SetPoints": [ "SCNCORE_AS:Core1:Enabled" ] 
+      		},
+      		{ 
+      		  "Indexes": "0", 
+      		  "Values": [ 1 ], 
+      		  "SetPoints": [ "SCNCORE_AS:Core1:Disabled" ] 
+      		},
+      		{
+      		  "Indexes": "0-1",
+            "SharedStorageTokens": {
+              "G.U.S.R1_SET_OPERAND": "'MOV '+Bin2Dec('111111111111'+'111111'+value)+',R1'"
+            },
+            "SetPoints": [ "MCdrv:R1_SET" ]
+      		}
+		],
+		"FailDataIndexMap" : [
+      		{
+      		  "PatternName": "nvlcpu_com_D_0UFxx_CA4P_MCscn_N48_T0_0", 
+      		  "Label": ".*_sfc_bcslice0_par_bsl_corel_wrap_corel.*sticky", 
+      		  "Domain": "CPU_ALL", 
+      		  "PinName": [ "CPU_TDO" ], 
+      		  "Index": [ 1 ] 
+      		},
+      		{
+      		  "PatternName": "nvlcpu_com_D_0UFxx_CA4P_MCscn_N48_T0_0", 
+      		  "Label": ".*_sfc_bcslice0_par_bsr_corer_wrap_corer.*sticky", 
+      		  "Domain": "CPU_ALL", 
+      		  "PinName": [ "CPU_TDO" ], 
+      		  "Index": [ 0 ] 
+      		}
+		]
+	}
+]

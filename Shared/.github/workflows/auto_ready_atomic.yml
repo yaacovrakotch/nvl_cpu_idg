@@ -1,0 +1,24 @@
+name: Post PR Merge
+
+on:
+  pull_request:
+    types:
+      - closed 
+
+jobs:
+  after-merge:
+    # run only if it was actually merged
+    if: github.event.pull_request.merged == true  
+    runs-on: [self-hosted, checkers_JF]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: check_if_atomic
+        continue-on-error: true
+        run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/tprobot.py CHECK_ATOMIC ${{ github.event.pull_request.number }}
+        env:
+            GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+            BASE_REF: ${{ github.base_ref }}
+

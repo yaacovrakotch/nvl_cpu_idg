@@ -1,0 +1,159 @@
+Version 1.0;
+
+SelectorRuleCollection  TPI_BASE_XXX_Rules
+{
+
+	
+	SelectorRule CTRL_X_SAMPLERATE_K_TESTPLANSTARTFLOW_X_X_X_X_sample_rate (Outcome1, Outcome2)
+	{
+		Outcome1 => __shared__::SCVars.SC_ENGID == "TT";
+		Outcome2;
+	}	
+	
+	SelectorRule CTRL_X_SCREEN_K_FACT_X_X_X_X_KLOTREBIN_bypass_global (P281, P682, M281, default)
+	{
+		P281 => contains(__shared__::SCVars.SC_DEVICE, "AAA");
+		P682 => contains(__shared__::SCVars.SC_DEVICE, "CAB");
+		M281 => contains(__shared__::SCVars.SC_DEVICE, "ABB");		
+		default;
+	}	
+	SelectorRule IsNotBenchtop (Outcome1, Outcome2, Outcome3)
+	{
+		Outcome1 =>  __shared__::SCVars.SC_BENCHTOP==-1;
+		Outcome2 =>  __shared__::SCVars.SC_BENCHTOP==1; 
+		Outcome3;
+	}	
+	SelectorRule LttcFork (Outcome1, Outcome2, Outcome3, Outcome4)
+	{
+		Outcome1 => __shared__::SCVars.SC_BENCHTOP==1;
+		Outcome2 => contains(__shared__::LocationSets.CH_CHVM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome3 => contains(__shared__::LocationSets.CH_CRV,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome4;
+	}
+	SelectorRule CTRL_X_RUNCALLBACK_K_INIT_X_X_X_X_CQNQUALCHECK (Outcome1, Outcome2, Outcome3)
+	{
+		Outcome1 => contains(__shared__::LocationSets.COLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome2 => __shared__::SCVars.SC_ENGID == "QE" || __shared__::SCVars.SC_ENGID == "QQ";
+		Outcome3;
+	}
+		SelectorRule DffMappingOptype (Outcome1, Outcome2)
+	{
+		Outcome1 => contains(__shared__::LocationSets.RC_S1,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome2;
+	}	
+
+	SelectorRule DffMappingSet (Outcome1, Outcome2, Outcome3, Outcome4, Outcome5, Outcome6)
+	{
+		Outcome1 => contains(__shared__::LocationSets.PHMROOM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome2 => contains(__shared__::LocationSets.PHMHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome3 => contains(__shared__::LocationSets.CH_HVM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.CH_RV,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome4 => contains(__shared__::LocationSets.RCHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome5 => contains(__shared__::LocationSets.FH_ENG,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome6;
+	}	
+	
+	SelectorRule VMINFORWARDING (Outcome1, Outcome2, Outcome3, Outcome4, Outcome5, Outcome6, Outcome7)
+	{
+		Outcome1 => __shared__::SCVars.SC_ENGID == "QE"||__shared__::SCVars.SC_ENGID == "QQ";		
+		Outcome2 => contains(__shared__::LocationSets.CH_HVM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.CH_RV,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome3 => contains(__shared__::LocationSets.RCHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome4 => contains(__shared__::LocationSets.PHM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.FH_ENG,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.FC_ENG,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome5 => __shared__::SCVars.SC_CURRENT_PROCESS_TYPE == "CSM"||__shared__::SCVars.SC_CURRENT_PROCESS_STEP == "CSM";	
+		Outcome6 => __shared__::SCVars.SC_LOCN == "6197";
+		Outcome7;
+	}	
+
+	SelectorRule VminSinglePointMode (Outcome1, Outcome2, Outcome3, Outcome4, Outcome5, Outcome6)
+	{
+		Outcome1 => __shared__::SCVars.SC_ENGID == "QE"||__shared__::SCVars.SC_ENGID == "QQ";		
+		Outcome2 => contains(__shared__::LocationSets.CH_HVM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.CH_RV,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome3 => contains(__shared__::LocationSets.RCHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome4 => __shared__::SCVars.SC_CURRENT_PROCESS_TYPE == "CSM"||__shared__::SCVars.SC_CURRENT_PROCESS_STEP == "CSM";
+		Outcome5 => contains(__shared__::LocationSets.PHM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]")||contains(__shared__::LocationSets.FH_ENG,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome6;
+	}
+
+	SelectorRule PHMandENG (Outcome1, Outcome2)
+	{
+		Outcome1 => contains(__shared__::LocationSets.PHM, "[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.FH_ENG,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.FC_ENG,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome2;
+	}
+
+	SelectorRule CSETOKEN (Outcome1, Outcome2, Outcome3, Outcome4, Outcome5, Outcome6, Outcome7, Outcome8)
+	{
+		Outcome1 => contains(__shared__::LocationSets.CHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome2 => contains(__shared__::LocationSets.RCHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome3 => contains(__shared__::LocationSets.PHMHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome4 => contains(__shared__::LocationSets.CCOLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome5 => contains(__shared__::LocationSets.RCCOLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome6 => contains(__shared__::LocationSets.PHMCOLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome7 => contains(__shared__::LocationSets.PHMROOM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome8;
+	}	
+	
+	SelectorRule FUSETPNAME_screen (Outcome1, Outcome2)
+	{
+		Outcome1 => contains(__shared__::LocationSets.RC,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome2;
+	}
+
+	SelectorRule MPSSKIPUNIT (Outcome2, Outcome3, Outcome4, Outcome5, Outcome6, Outcome7, Outcome8, Outcome9, Outcome10, Outcome11, Outcome12, Outcome13, Outcome14, Outcome15)
+	{
+		Outcome2 => contains(__shared__::LocationSets.CC_QUAL,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome3 => contains(__shared__::LocationSets.QA_S1_COLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::SCVars.SC_ENGID == "6N";
+		Outcome4 => contains(__shared__::LocationSets.QA_S1_COLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::SCVars.SC_ENGID == "6T";
+		Outcome5 => contains(__shared__::LocationSets.QA_S1_COLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::SCVars.SC_ENGID == "5N";
+		Outcome6 => contains(__shared__::LocationSets.QA_S1_COLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::SCVars.SC_ENGID == "5T";
+		Outcome7 => contains(__shared__::LocationSets.QA_S1_COLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::SCVars.SC_ENGID == "4T";
+		Outcome8 => contains(__shared__::LocationSets.QA_S1_COLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::SCVars.SC_ENGID == "4N";
+		Outcome9 => contains(__shared__::LocationSets.QA_S1_COLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::SCVars.SC_ENGID == "5M";
+		Outcome10 => contains(__shared__::LocationSets.QA_S1_COLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::SCVars.SC_ENGID == "5S";
+		Outcome11 => contains(__shared__::LocationSets.QA_S1_COLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::SCVars.SC_ENGID == "4M";
+		Outcome12 => contains(__shared__::LocationSets.QA_S1_COLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::SCVars.SC_ENGID == "4S";
+		Outcome13 => contains(__shared__::LocationSets.QA_S1_COLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::SCVars.SC_ENGID == "6M";
+		Outcome14 => contains(__shared__::LocationSets.QA_S1_COLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") && __shared__::SCVars.SC_ENGID == "6S";
+		Outcome15;
+	}	
+	SelectorRule FUSETPNAME_bypass_global (Outcome1, Outcome2, Outcome3)
+	{
+		Outcome1 => contains(__shared__::LocationSets.CH_CHVM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome2 => contains(__shared__::LocationSets.RCH_HVM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome3;
+	}
+	
+	SelectorRule Pin_Profiler_unbypass (yes, no)
+	{
+		yes => __shared__::SCVars.SC_ENGID == "TT";
+		no;
+	}
+
+	SelectorRule BOM_Klot (CLASS_NVL_S28C, CLASS_NVL_S52C, CLASS_NVL_HX28C,CLASS_NVL_H16C, CLASS_NVL_P16C,CLASS_DNL_S28C, CLASS_NVL_S16C, CLASS_NVL_S28CB, CLASS_NVL_UL6C, CLASS_NVL_U8C, CLASS_NVL_AX28C, CLASS_NVL_AX16C, OTHER)
+	{
+		CLASS_NVL_S28C => __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_S28C" ;
+		CLASS_NVL_S52C => __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_S52C";
+		CLASS_NVL_HX28C => __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_HX28C";
+		CLASS_NVL_H16C => __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_H16C";
+		CLASS_NVL_P16C => __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_P16C";
+		CLASS_DNL_S28C => __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_DNL_S28C";
+		CLASS_NVL_S16C => __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_S16C";
+		CLASS_NVL_S28CB => __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_S28CB";
+		CLASS_NVL_UL6C => __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_UL6C";
+		CLASS_NVL_U8C =>  __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_U8C";
+		CLASS_NVL_AX28C => __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_AX28C";
+		CLASS_NVL_AX16C => __shared__::_UserVars.UFG_PgmRules_BomGroup=="CLASS_NVL_AX16C";
+		OTHER;
+	}
+	#old rule
+	#	{
+	#		yes => contains(__shared__::SCVars.SC_FACILITYID, "GDL") && (__shared__::SCVars.SC_ENGID == "" || __shared__::SCVars.SC_ENGID == "AE" || __shared__::SCVars.SC_ENGID == "AF") && (__shared__::SCVars.SC_LOCN == "6248" || __shared__::SCVars.SC_LOCN == "7820");
+	#		no;
+	#	}
+}
+UserVars TPI_BASE_XXX
+{
+    Integer ORIBIN = 0;
+    Integer PinMonitorEnabled = 1;
+    #Integer PinMonitorEnable = -1;
+	Integer ParalleltoSerial = 1;
+	Integer PinMonitorEnable = TPI_BASE_XXX_Rules.Pin_Profiler_unbypass(-1,1);
+}

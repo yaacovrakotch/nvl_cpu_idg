@@ -1,0 +1,38 @@
+﻿﻿<?xml version="1.0" encoding="utf-8"?>
+<Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TestProgram>
+    <ProductCodeName>NVL_U8C</ProductCodeName>
+    <TestProgramDescriptiveName>NVL_U8C</TestProgramDescriptiveName>
+    <TeamEmailAddress>mpe_ddg_pde_10n_tp_team@intel.com</TeamEmailAddress>
+    <SortClassType>CLASS</SortClassType>
+    <TPNameUservar>TPNameVars.TPName1</TPNameUservar>
+    <TpTag></TpTag>
+  </TestProgram>
+  <TestProgramFiles>
+    <BaseTplPath>..\..\BaseTestPlan.tpl</BaseTplPath>
+    <ENVPath>EnvironmentFile.env</ENVPath>
+    <STPLPath>SubTestPlan.stpl</STPLPath>
+    <PlistPath>PLIST_ALL_CLASS_NVL_U8C.plist.xml</PlistPath>
+    <SOCPath>..\..\Shared\BaseInputs\Common\Common_Torch\HVM.soc</SOCPath>
+    <RootPath>..\..\</RootPath>
+  </TestProgramFiles>
+  <LTLTestProgramNameToSocketMapping>
+    <TPToSocketMapping TPNameUservar="TPNameVars.TPName1" SocketFile="..\..\Shared\BaseInputs\Common\Common_Torch\HVM.soc" />
+  </LTLTestProgramNameToSocketMapping>
+  <!--Delete this SupportedBomGroups section if you don't need Bom groups support-->
+  <!--Enter the Flow Matrix relative path-->
+  <SupportedBomGroups FlowMatrixPath="..\..\BaseInputs\Common\Common_NVL_U8C\BinMatrix.flm.xml">
+    <!--Enter the Bom group name and the Plist reference files path-->
+    <BomGroup name="CLASS_NVL_U8C" plist="PLIST_ALL_CLASS_NVL_U8C.plist.xml" slimplist="PLIST_SLIM_CLASS_NVL_U8C.slimplist.xml" />
+    <!--Add more BomGroup tags as needed-->
+  </SupportedBomGroups>
+  <!--Delete the Recipes section if you don't need Class ASTRA recipe generation-->
+  <Recipes>
+    <Seeds DirectoryName="I:\engineering\dev\sctp\TPI_class\NVL_U8C\R00_NVL_NO_RCS" />
+    <LocationsStandard FileName="..\..\Shared\BaseInputs\Common\Common_Files\MPS_LocationStandard.xlsx" />
+    <Settings FileName="CLASS_NVL_U8C.xlsx" />
+  </Recipes>
+  <TPCustomAttributes>
+    <!--Define any custom XML tags here-->
+  </TPCustomAttributes>
+</Configuration>

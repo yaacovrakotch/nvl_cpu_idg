@@ -1,0 +1,377 @@
+name: TEAMBOT
+
+on:
+  workflow_dispatch: 
+    inputs:
+
+      sites:
+        description: 'I Drive Site (Fastest JF)'
+        type: choice
+        options:
+          - JF
+          - PG
+          - FM
+          - IDC
+          - BA
+        required: true
+
+      name:
+        description: 'MV_json_file or FULL - rev1'
+        # Default value if no value is explicitly provided
+        default: 'FULL'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      BOMGroups:
+        description: 'Target BOMGroups to build out: Class_NVL_S28C | ALL | comma delimiter'
+        # Default value if no value is explicitly provided
+        default: 'Class_NVL_S28C'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      destination:
+        description: 'I:/ path to copy TP. Leave alone to not copy.'
+        # Default value if no value is explicitly provided
+        default: 'I:/'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      repjson:
+        description: 'replace_for_mv_json_file_name'
+        # Default value if no value is explicitly provided
+        default: 'None'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      email:
+        description: 'Email address'
+        # Default value if no value is explicitly provided
+        default: ''
+        # Input has to be provided for the workflow to run
+        required: true
+
+      team:
+        description: 'Requested team. Please select one option below'
+        # Input has to be provided for the workflow to run
+        required: true 
+        type: choice
+        options:
+          - TPD
+          - DFS
+          - Digital
+          - Analog
+          - xsite
+
+      tester:
+        description: 'Enter tester name if you want to request a specific tester. Array mapping: any OR comma-separated list matching BOM count'
+        # Default value if no value is explicitly provided
+        default: 'any'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      whattime:
+        description: 'Request time (24 hours period only in PST time, ex: 3pm, 10am)'
+        # Default value if no value is explicitly provided
+        default: 'now'
+        # Input has to be provided for the workflow to run
+        required: true
+
+
+jobs:
+  validate-and-filter:
+    name: Validate Input and Filter BOMs
+    runs-on:
+    - self-hosted
+    - checkers_${{ inputs.sites }}
+    timeout-minutes: 10
+    outputs:
+      bom-matrix: ${{ steps.filter.outputs.bom-matrix }}
+      tester-mapping: ${{ steps.filter.outputs.tester-mapping }}
+
+    steps:
+    - name: Validate and filter BOMs
+      id: filter
+      shell: powershell
+      run: |
+        # ============================================
+        # MULTISWITCH CONFIGURATION (ADMIN ONLY)
+        # 1 = Enable Multiple BOMs/Testers (Original functionality)
+        # 0 = Disable Multiple BOMs/Testers (Single BOM/Tester only)
+        # ============================================
+        $multiSwitch = 0
+        # ============================================
+
+        $targetBom = "${{ inputs.BOMGroups }}"
+        $testerInput = "${{ inputs.tester }}"
+
+        Write-Host "Starting BOM validation and filtering..."
+        Write-Host "Target BOM input: $targetBom"
+        Write-Host "Tester input: $testerInput"
+        Write-Host "Site: ${{ inputs.sites }}"
+        Write-Host "MultiSwitch: $multiSwitch (1=Multiple BOMs/Testers Enabled, 0=Single BOM/Tester Only)"
+
+        # Define all available BOMs
+        $allBoms = @(
+          @{ name = "NS28C"; class = "Class_NVL_S28C"; bot_runner = "nvl2_teambot._ALL_.nvl_dielet" },
+          @{ name = "NS52C"; class = "Class_NVL_S52C"; bot_runner = "nvl2_teambot._ALL_.nvl_dielet" },
+          @{ name = "NHX28C"; class = "Class_NVL_HX28C"; bot_runner = "nvl2_teambot._ALL_.nvl_dielet" },
+          @{ name = "NH16C"; class = "Class_NVL_H16C"; bot_runner = "nvl2_teambot._ALL_.nvl_dielet" },
+          @{ name = "NP16C"; class = "Class_NVL_P16C"; bot_runner = "nvl2_teambot._ALL_.nvl_dielet" },
+          @{ name = "NS16C"; class = "Class_NVL_S16C"; bot_runner = "nvl2_teambot._ALL_.nvl_diele.nvls28c" },
+          @{ name = "DS28C"; class = "Class_DNL_S28C"; bot_runner = "nvl2_teambot._ALL_.nvl_dielet.nvls28c" }
+        )
+
+        Write-Host "Total available BOMs: $($allBoms.Count)"
+
+        # MultiSwitch validation - Check for multiple BOMs/Testers when disabled
+        if ($multiSwitch -eq 0) {
+            Write-Host ""
+            Write-Host "MultiSwitch is DISABLED (0) - Enforcing single BOM and single tester only"
+
+            # Check for multiple BOMs
+            if ($targetBom -eq "ALL") {
+                Write-Host "ERROR: Single Mode is enabled - 'ALL' BOMs option is not available"
+                Write-Host "Please select ONE specific BOM class from: $($allBoms.class -join ', ')"
+                Write-Host "Example: Use 'Class_NVL_S28C' instead of 'ALL'"
+                exit 1
+            }
+
+            $targetClasses = $targetBom -split ',' | ForEach-Object { $_.Trim() } | Where-Object { -not [string]::IsNullOrEmpty($_) }
+            if ($targetClasses.Count -gt 1) {
+                Write-Host "ERROR: Single Mode is enabled - Multiple BOMs detected: $($targetClasses -join ', ')"
+                Write-Host "Please select only ONE BOM class"
+                Write-Host "Example: Use 'Class_NVL_S28C' instead of 'Class_NVL_S28C,Class_NVL_S52C'"
+                exit 1
+            }
+
+            # Check for multiple testers
+            $cleanTesterInput = $testerInput.Trim()
+            if ($cleanTesterInput -like "*,*") {
+                $testerList = @($cleanTesterInput -split ',' | ForEach-Object { $_.Trim() } | Where-Object { -not [string]::IsNullOrEmpty($_) })
+                if ($testerList.Count -gt 1) {
+                    Write-Host "ERROR: Single Mode is enabled - Multiple testers detected: $($testerList -join ', ')"
+                    Write-Host "Please use only ONE tester option: 'any' or a single tester name"
+                    Write-Host "Example: Use 'any' instead of 'PG,JF'"
+                    exit 1
+                }
+            }
+
+            Write-Host "MultiSwitch validation passed - Single BOM and single tester configuration detected"
+        } else {
+            Write-Host ""
+            Write-Host "MultiSwitch is ENABLED (1) - Multiple BOMs and testers are allowed"
+        }
+
+        # Filter BOMs based on target
+        if ($targetBom -eq "ALL") {
+            $filteredBoms = $allBoms
+            Write-Host "Target: ALL - will run all BOMs"
+        } else {
+            $targetClasses = $targetBom -split ',' | ForEach-Object { $_.Trim() }
+            $filteredBoms = @($allBoms | Where-Object { $targetClasses -contains $_.class })
+            Write-Host "Target: Specific BOMs - filtering..."
+        }
+
+        Write-Host "Filtered BOMs: $($filteredBoms.Count) out of $($allBoms.Count)"
+        $filteredBoms | ForEach-Object { Write-Host "  - $($_.name) ($($_.class))" }
+
+        if ($filteredBoms.Count -eq 0) {
+            Write-Host "ERROR: No valid BOMs found for target: $targetBom"
+            Write-Host "Available BOM classes: $($allBoms.class -join ', ')"
+            exit 1
+        }
+
+        # Additional MultiSwitch validation after filtering
+        if ($multiSwitch -eq 0 -and $filteredBoms.Count -gt 1) {
+            Write-Host "ERROR: MultiSwitch is disabled but filtering resulted in multiple BOMs"
+            Write-Host "Filtered BOMs: $($filteredBoms.class -join ', ')"
+            Write-Host "This should not happen - please check BOM filtering logic"
+            exit 1
+        }
+
+        # Validate tester configuration
+        $cleanTesterInput = $testerInput.Trim()
+        $testerMapping = @{}
+
+        Write-Host ""
+        Write-Host "Validating tester configuration..."
+
+        if ($cleanTesterInput -eq "any") {
+            # Single 'any' - applies to all BOMs (Examples 1 & 4)
+            foreach ($bom in $filteredBoms) {
+                $testerMapping[$bom.class] = "any"
+            }
+            Write-Host "Tester mapping: All BOMs -> 'any' (Examples 1 and 4)"
+        } elseif ($cleanTesterInput -like "*,*") {
+            # Multiple testers - must match BOM count (Examples 2, 5, 6)
+            $testerList = @($cleanTesterInput -split ',' | ForEach-Object { 
+                $trimmed = $_.Trim()
+                if ([string]::IsNullOrEmpty($trimmed)) {
+                    Write-Host "WARNING: Found empty tester entry in comma-separated list"
+                }
+                $trimmed
+            } | Where-Object { -not [string]::IsNullOrEmpty($_) })
+
+            Write-Host "Multiple testers detected: $($testerList -join ', ')"
+            Write-Host "BOM count: $($filteredBoms.Count), Tester count: $($testerList.Count)"
+
+            if ($testerList.Count -ne $filteredBoms.Count) {
+                Write-Host ""
+                Write-Host "ERROR: Tester count mismatch!"
+                Write-Host "Reading detailed error message from tester_selection_error.md..."
+
+                # Show detailed error with .md file from I:\ drive
+                try {
+                    $errorContent = Get-Content -Path "I:\tpvalidation\engtools\tptools\mtl\infra\torch\botos\example_error\tester_selection_error.md" -Raw
+                    $errorContent = $errorContent -replace '\{BOMLIST\}', ($filteredBoms.class -join ', ')
+                    $errorContent = $errorContent -replace '\{TESTERLIST\}', ($testerList -join ', ')
+                    $errorContent = $errorContent -replace '\{BOMCOUNT\}', $filteredBoms.Count
+                    $errorContent = $errorContent -replace '\{TESTERCOUNT\}', $testerList.Count
+                    $errorContent = $errorContent -replace '\{ALLMATRIXBOMS\}', ($allBoms.class -join ', ')
+                    $errorContent = $errorContent -replace '\{TOTALMATRIXCOUNT\}', $allBoms.Count
+                    Write-Host $errorContent
+                } catch {
+                    Write-Host "Could not read tester_selection_error.md file from I:\ drive path."
+                    Write-Host "Using fallback error message."
+                    Write-Host "ERROR: Tester count ($($testerList.Count)) does not match BOM count ($($filteredBoms.Count))"
+                    Write-Host "Target BOMs: $($filteredBoms.class -join ', ')"
+                    Write-Host "Tester Input: $($testerList -join ', ')"
+                    Write-Host "Available Matrix BOMs: $($allBoms.class -join ', ')"
+                    Write-Host ""
+                    Write-Host "Examples of correct usage:"
+                    Write-Host "- Single 'any': tester='any'"
+                    Write-Host "- Exact match: For $($filteredBoms.Count) BOMs, provide $($filteredBoms.Count) testers"
+                    Write-Host "- Current BOMs: $($filteredBoms.class -join ',')"
+                    Write-Host "- Example fix: tester='$($testerList -join ','),any'"
+                }
+                exit 1
+            }
+
+            # Map testers by position (array mapping)
+            for ($i = 0; $i -lt $filteredBoms.Count; $i++) {
+                $testerMapping[$filteredBoms[$i].class] = $testerList[$i]
+                Write-Host "Array mapping - BOM '$($filteredBoms[$i].class)' at index $i -> Tester: '$($testerList[$i])' (Examples 2, 5, 6)"
+            }
+        } else {
+            # Single tester for all BOMs (Example 3)
+            foreach ($bom in $filteredBoms) {
+                $testerMapping[$bom.class] = $cleanTesterInput
+            }
+            Write-Host "Tester mapping: All BOMs -> '$cleanTesterInput' (Example 3)"
+        }
+
+        Write-Host ""
+        Write-Host "Final tester assignments:"
+        foreach ($bom in $filteredBoms) {
+            Write-Host "  - $($bom.name) ($($bom.class)) -> $($testerMapping[$bom.class])"
+        }
+
+        # FIXED: Force JSON array format even for single items
+        if ($filteredBoms.Count -eq 1) {
+            # For single item, manually create array JSON format
+            $bomMatrix = "[$($filteredBoms[0] | ConvertTo-Json -Compress)]"
+        } else {
+            # For multiple items, normal array conversion
+            $bomMatrix = $filteredBoms | ConvertTo-Json -Compress
+        }
+        $testerMappingJson = $testerMapping | ConvertTo-Json -Compress
+
+        Write-Host ""
+        Write-Host "DEBUG: BOM Matrix JSON: $bomMatrix"
+        Write-Host "DEBUG: Tester Mapping JSON: $testerMappingJson"
+
+        echo "bom-matrix=$bomMatrix" >> $env:GITHUB_OUTPUT
+        echo "tester-mapping=$testerMappingJson" >> $env:GITHUB_OUTPUT
+
+        Write-Host ""
+        Write-Host "Validation completed successfully!"
+        Write-Host "Will proceed to run $($filteredBoms.Count) BOM(s)"
+        if ($multiSwitch -eq 0) {
+            Write-Host "MultiSwitch Mode: SINGLE (0) - Only one BOM and one tester allowed"
+        } else {
+            Write-Host "MultiSwitch Mode: MULTIPLE (1) - Multiple BOMs and testers allowed"
+        }
+
+  TEAMBOT:
+    name: TEAMBOT_${{ matrix.bom.name }}
+    runs-on:
+    - self-hosted
+    - checkers_${{ inputs.sites }}
+    timeout-minutes: 120
+    needs: validate-and-filter
+    if: needs.validate-and-filter.outputs.bom-matrix != '[]'
+
+    strategy:
+      fail-fast: false
+      matrix:
+        bom: ${{ fromJson(needs.validate-and-filter.outputs.bom-matrix) }}
+
+    steps:
+    - name: Get assigned tester
+      id: should-run
+      shell: powershell
+      run: |
+        $testerMapping = '${{ needs.validate-and-filter.outputs.tester-mapping }}' | ConvertFrom-Json
+        $assignedTester = $testerMapping.'${{ matrix.bom.class }}'
+
+        Write-Host "BOM: ${{ matrix.bom.name }} (${{ matrix.bom.class }})"
+        Write-Host "Assigned tester: $assignedTester"
+
+        # This BOM was pre-validated, so it should always run
+        echo "should-run=true" >> $env:GITHUB_OUTPUT
+        echo "tester=$assignedTester" >> $env:GITHUB_OUTPUT
+
+    - name: Log Inputs
+      if: steps.should-run.outputs.should-run == 'true'
+      shell: powershell
+      run: |
+        $inputs = @'
+        ${{ toJSON(inputs) }}
+        '@
+        Write-Host "Inputs: $inputs"
+        Write-Host "Running BOM: ${{ matrix.bom.name }} (${{ matrix.bom.class }})"
+        Write-Host "Bot Runner: ${{ matrix.bom.bot_runner }}"
+        Write-Host "Assigned Tester: ${{ steps.should-run.outputs.tester }}"
+
+    - name: i drive check
+      if: steps.should-run.outputs.should-run == 'true'
+      shell: powershell
+      run: >
+        python -c "import os, socket;
+        assert os.path.isdir('I:/tpvalidation'),
+        f'I:/ drive is not accessible. Pls contact TPD to fix drive mapping on {socket.gethostname()} right away.'"
+
+    - name: repo_init_check
+      if: steps.should-run.outputs.should-run == 'true'
+      continue-on-error: true
+      shell: powershell
+      run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/tprobot.py REPO_INIT main
+
+    - uses: actions/checkout@v6
+      if: steps.should-run.outputs.should-run == 'true'
+      with:
+        fetch-depth: 0
+        clean: true
+        ref: ${{ github.event.pull_request.head.ref }}
+
+    - name: Checkout submodules
+      if: steps.should-run.outputs.should-run == 'true'
+      shell: powershell
+      run: |
+        git submodule sync --recursive
+        git submodule update --init --recursive --force
+
+    - name: TPBuild
+      if: steps.should-run.outputs.should-run == 'true'
+      shell: powershell
+      run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/runner_botos.py ${{ matrix.bom.bot_runner }}
+      env:
+          TEAM: ${{ inputs.team }}
+          TESTER: ${{ steps.should-run.outputs.tester }}
+          WHATTIME: ${{ inputs.whattime }}
+          DEST: ${{ inputs.destination }}
+          EMAIL: ${{ inputs.email }}
+          IN1: ${{ inputs.name }}
+          TARGETBOM: ${{ matrix.bom.class }}
+          CLEANTP: True
+          DIEINDICATOR: CPU

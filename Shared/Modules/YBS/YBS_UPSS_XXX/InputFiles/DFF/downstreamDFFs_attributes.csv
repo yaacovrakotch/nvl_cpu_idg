@@ -1,0 +1,46 @@
+Scenario,Component,Attribute,ValueGroup,SubAttribute,DataType,Value
+NA,ColdPrep,ITD_MODEL_MAP,,,UPS.Core.Logic.DataTypes.Itd.ItdEquationMap,{PKG::C_ITD_MODEL_MAP@string}
+NA,ColdPrep,VMIN_MEASUREMENTS,,,UPS.Core.Logic.DataTypes.Vmin.IVminMeasurement,{VMIN_OR_NULL@vmin}
+NA,ColdPrep,FAST_CORNERS,,,UPS.Core.Logic.DataTypes.Fast.IFastMeasurement,''<<INDEX.DIE@string>>'' == ''CDIE0'' ? {GSDS_D_S::FAST_STC_V_U1PU5@fast} : (''<<INDEX.DIE@string>>'' == ''CDIE1'' ? {GSDS_D_S::FAST_STC_V_U1PU6@fast} : (''<<INDEX.DIE@string>>'' == ''GDIE'' ? {GSDS_D_S::FAST_STC_V_U1PU4@fast} : {GSDS_D_S::FAST_STC_V_U1PU2@fast}))
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,0,DOMAIN,string,CR
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,0,MODEL,string,IA
+NA,ColdPrep,VMIN_TEMPERATURES,,,UPS.Core.Logic.DataTypes.VminTemperature.IVminTemperatures,100
+NA,ColdPrep,TARGET_TEMPERATURE,,,double,"Utils.SWITCH(''<<INDEX.TEMP@string>>'', (''COLD'', -5), (''ROOM'', 25), (''HOT'', 100))!"
+NA,ColdPrep,IS_ENABLED,,,bool,{VMIN_OR_NULL@vmin} != null
+NA,ColdPrep,INDEX,,,string,"TEMP=COLD,ROOM,HOT;DIE=CDIE0,CDIE1,GDIE,HUB"
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,1,DOMAIN,string,AT
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,1,MODEL,string,AT
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,2,DOMAIN,string,CCF
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,2,MODEL,string,CCF
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,3,DOMAIN,string,GT
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,3,MODEL,string,GT
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,4,DOMAIN,string,GTVPG
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,4,MODEL,string,GT
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,5,DOMAIN,string,SAQ
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,5,MODEL,string,HUB
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,6,DOMAIN,string,SAC
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,6,MODEL,string,HUB
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,7,DOMAIN,string,SAN
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,7,MODEL,string,HUB
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,8,DOMAIN,string,SACD
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,8,MODEL,string,HUB
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,9,DOMAIN,string,SAVPU
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,9,MODEL,string,HUB
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,10,DOMAIN,string,SAME
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,10,MODEL,string,HUB
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,11,DOMAIN,string,SAIOC
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,11,MODEL,string,HUB
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,12,DOMAIN,string,SADPU
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,12,MODEL,string,HUB
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,13,DOMAIN,string,SAAT
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,13,MODEL,string,"Utils.SWITCH({GSDS_D_S::UPS_PKG_TYPE@string}, (''MBL'',''LPATOM''), (''DT'', ''HUB''))"
+NA,PKG,EXTENSIONS_CS_FILE,,,UPS.Contract.ICustomUpsCode,NA
+NA,PKG,INDEX,,,System.String,0
+NA,PKG,IS_ENABLED,,,bool,true
+NA,PKG,PRODUCT_BINS,,,UPS.Core.Logic.DataTypes.ProductBins.IProductBins,{FILE::%DFF%\\downstreamDFFs_ProductBins.csv@bins}
+NA,PKG,QDF_DESCRIPTION,,,System.String,
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,14,DOMAIN,string,SAPS
+NA,ColdPrep,DOMAIN_TO_ITD_MAP,14,MODEL,string,HUB
+NA,PKG,C_ITD_MODEL_MAP,,,,{GSDS_D_S::UPS_ITD_MODEL@string}
+NA,ColdPrep,VMIN_OR_NULL,,,,''<<INDEX.DIE@string>>'' == ''CDIE0'' ? {GSDS_D_S::UPSVFPASSFLOW_U1PU5@vmin?}.GetOrDefault(null) : (''<<INDEX.DIE@string>>'' == ''CDIE1'' ? {GSDS_D_S::UPSVFPASSFLOW_U1PU6@vmin?}.GetOrDefault(null) : (''<<INDEX.DIE@string>>'' == ''GDIE'' ? {GSDS_D_S::UPSVFPASSFLOW_U1PU4@vmin?}.GetOrDefault(null) : {GSDS_D_S::UPSVFPASSFLOW_U1PU2@vmin?}.GetOrDefault(null)))
+NA,PKG,FUSES_FOR_ALL_PASSING_QDFS,,,bool,false

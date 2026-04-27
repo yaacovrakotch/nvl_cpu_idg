@@ -1,0 +1,51 @@
+Version 1.0;
+
+UserVars FUN_CORE_CXPKGS9_Specs
+{
+	Const Integer FailCaptureCount = 1;
+	Const Double StepSize = 0.01;
+	Const String PatNameIndex = "9,10,11,12,13,14,15";
+	Const String corefreq = "corefreq";
+	Const String ringfreq = "ringfreq_0";
+	Const String dtsconfig = "ALL";
+	Const String dtsconfigS52C = "ALL_CDIE_S52C";
+	#Const String dtsconfig_ctv = "nvl_cpu_all_ctv";
+	#Const String dtsconfig_noctv = "nvl_cpu_all_noctv";
+	Const String dtsconfig_ctv = "ALL_CDIE_S52C";
+	Const String dtsconfig_noctv = "ALL_CDIE_S52C";
+	Const String PinMap_FREQ_NONMISR = "FUNCORE_NONMISR_FREQ_PM";
+	Const String PinMap_FREQ_NONMISR_APEX = "FUNCORE_NONMISR_FREQ_PM_APEX";
+	Const String PinMap_FREQ_MISR = "FUNCORE_MISR_FREQ_PM";
+	Array<String> Apex_Multipass = ["1100","0011"];
+	Const String VoltageConverter_NBLRail = "--dlvrpins VCCIA --railconfigurations CDIE_CORE_NBLCTRL0 CDIE_CORE_NBLCTRL1 CDIE_CORE_NBLCTRL2 CDIE_CORE_NBLCTRL3 --expressions ";
+	Const String VoltageConverter_NBLRail_NoExp = "--dlvrpins VCCIA --railconfigurations CDIE_CORE_NBLCTRL0 CDIE_CORE_NBLCTRL1 CDIE_CORE_NBLCTRL2 CDIE_CORE_NBLCTRL3";
+	Const String VoltageConverter_NBLRailCCF = " --dlvrpins VCCIA --railconfigurations CDIE_CCF_POWERMUX CDIE_CORE_NBLCTRL0 CDIE_CORE_NBLCTRL1 CDIE_CORE_NBLCTRL2 CDIE_CORE_NBLCTRL3 --expressions ";
+	Const String VoltageConverter_NoNBLRail = "--dlvrpins VCCIA --expressions ";
+	Const String VoltageConverter_NoNBLRailCCF = " --dlvrpins VCCIA --expressions ";
+	Const String VoltageConverter_NBLRailS52C = "--dlvrpins VCCIA --railconfigurations CDIE_CORE_NBLCTRL0 CDIE_CORE_NBLCTRL1 CDIE_CORE_NBLCTRL2 CDIE_CORE_NBLCTRL3 CDIE1_CORE_NBLCTRL0 CDIE1_CORE_NBLCTRL1 CDIE1_CORE_NBLCTRL2 CDIE1_CORE_NBLCTRL3 --expressions ";
+	Const String VoltageConverter_NBLRailCCFS52C = " --dlvrpins VCCIA --railconfigurations CDIE_CORE_NBLCTRL0 CDIE_CORE_NBLCTRL1 CDIE_CORE_NBLCTRL2 CDIE_CORE_NBLCTRL3 CDIE1_CORE_NBLCTRL0 CDIE1_CORE_NBLCTRL1 CDIE1_CORE_NBLCTRL2 CDIE1_CORE_NBLCTRL3 --expressions ";
+	Const String CORE_RecoveryMode_MTT = "Default";
+	Const String CORE_RecoveryMode_NoRec = "NoRecovery";
+	String MultiPass = "1100,0011";
+	String MultiPass_2CDIESLC = "11001100,00110011";
+	String MultiPass_2CDIE = "11000011,00111100";
+	#String MultiPass_2CDIE_4Pass = "11111100,11110011,11001111,00111111";
+	String MultiPass_2CDIE_4Pass = "11101110,11011101,10111011,01110111";
+	Const String MCfun_FMIN_MASK_CR = "MCfun:FUNCORE_DRV:FUNCORE_MASK";
+	Const String MCfun_FMIN_UNMASK_CR = "MCfun:FUNCORE_DRV:FUNCORE_UNMASK";
+	Const String InitialMaskEnM0M1 = "1100";
+	Const String InitialMaskEnM2M3 = "0011";
+	Const String FMIN_FF_VMINRESULTS = "SBFT_MLC_CR3_FMIN_FF_SEARCH,SBFT_MLC_CR2_FMIN_FF_SEARCH,SBFT_MLC_CR1_FMIN_FF_SEARCH,SBFT_MLC_CR0_FMIN_FF_SEARCH";
+	Const String VoltageTarget1C = "CORE3,CORE2,CORE1,CORE0";
+	Const String VoltageTarget2C = "CORE31,CORE21,CORE11,CORE01,CORE3,CORE2,CORE1,CORE0";
+	Const String CDIE0_Recovery_Tracking = "CR";
+	Const String CDIE1_CDIE0_Recovery_Tracking = "CR_B,CR";
+	Const String ApexTC_1CDIE_Targets = "FCORE3,FCORE2,FCORE1,FCORE0";
+	Const String ApexTC_2CDIE_Targets = "FCORE31,FCORE21,FCORE11,FCORE01,FCORE3,FCORE2,FCORE1,FCORE0";
+	Const String ApexTC_1CDIE_ExportTokens = "FXCRC3,FXCRC2,FXCRC1,FXCRC0";
+	Const String ApexTC_2CDIE_ExportTokens = "FXCRC31,FXCRC21,FXCRC11,FXCRC01,FXCRC3,FXCRC2,FXCRC1,FXCRC0";
+	Const String FeatureSwitchSettings = "disable_masked_targets,print_per_target_increments,print_scoreboard_counters,fivr_mode_on";
+	Const String FeatureSwitchSettings_CTV = "disable_masked_targets,print_per_target_increments,print_scoreboard_counters,fivr_mode_on,CapturedBitsPerPattern";
+	String PreInstanceShmoo = "Call(EvaluateExpression(--expression 'MOV 0,R1' --result G.U.S.R1_SET_OPERAND --datatype string --storagetype gsds),EvaluateExpression(--expression 'MOV 0,R2' --result G.U.S.R2_SET_OPERAND --datatype string --storagetype gsds))";
+}
+

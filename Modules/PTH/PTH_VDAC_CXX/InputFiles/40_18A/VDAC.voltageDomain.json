@@ -1,0 +1,147 @@
+{
+  "Domains": [
+    {
+      "name": "CCF",
+      "pattern_modify": {
+        "initial_voltage": {
+          "multiplier": 400,
+          "configuration": "CCF_TARGET_VOLTAGE",
+          "number_of_targets": 1
+        }
+      },
+      "default_value": 0.9
+    },
+    {
+      "name": "CORE0",
+      "pattern_modify": {
+        "initial_voltage": {
+          "multiplier": 400,
+          "configuration": "CORE0_TARGET_VOLTAGE",
+          "number_of_targets": 1
+        }
+      },
+      "default_value": 0.9
+    },
+    {
+      "name": "CORE1",
+      "pattern_modify": {
+        "initial_voltage": {
+          "multiplier": 400,
+          "configuration": "CORE1_TARGET_VOLTAGE",
+          "number_of_targets": 1
+        }
+      },
+      "default_value": 0.9
+    }
+  ],
+  "DomainGroups": [
+    {
+      "name": "CORES",
+      "domains": [
+        "CORE0",
+        "CORE1"
+      ]
+    }
+  ],
+  "PatternModify": [
+    {
+      "pattern_modify_name": "CDIE_CCF_POWERMUX",
+      "module": "MCdrv",
+      "group": "pwrmux_sel_ccf_0",
+      "selector": "0.715 > CCF",
+      "set_point_for_true": "vnnaon",
+      "set_point_for_false": "vcclogic"
+    },
+    {
+      "pattern_modify_name": "CDIE_CCF_NBLCTRL",
+      "module": "CCF",
+      "group": "nblctrl_ccf",
+      "selector": "1.0 < CCF",
+      "set_point_for_true": "ccfnbloff",
+      "set_point_for_false": "ccfnblon"
+    },
+    {
+      "pattern_modify_name": "CDIE_CORE_NBLCTRL0",
+      "module": "CORE",
+      "group": "nblctrl_core_l2",
+      "selector": "1.0 < max(CORE0)",
+      "set_point_for_true": "nbloff",
+      "set_point_for_false": "nblon"
+    },
+    {
+      "pattern_modify_name": "CDIE_CORE_NBLCTRL1",
+      "module": "CORE",
+      "group": "nblctrl_core_l2",
+      "selector": "1.0 < max(CORE1)",
+      "set_point_for_true": "nbloff",
+      "set_point_for_false": "nblon"
+    }
+  ],
+  "DlvrPins": [
+    {
+      "pin_name": "VCCIA",
+      "voltage_expression": [
+        {
+          "expression_name": "ALL",
+          "expression_value": "max(CCF,CORE0,CORE1)+0.125"
+        },
+        {
+          "expression_name": "CCF",
+          "expression_value": "max(CCF)+0.1"
+        },
+        {
+          "expression_name": "CCF_CORE",
+          "expression_value": "max(CCF,CORE0,CORE1)+0.125"
+        },
+        {
+          "expression_name": "CCF_PS0",
+          "expression_value": "max(CCF)+0.125"
+        },
+        {
+          "expression_name": "CCF_PS1",
+          "expression_value": "max(CCF)+0.075"
+        },
+        {
+          "expression_name": "CCF_PS2",
+          "expression_value": "max(CCF)+0.040"
+        },
+        {
+          "expression_name": "CCF_PS3",
+          "expression_value": "max(CCF)+0.028"
+        },
+        {
+          "expression_name": "CORE",
+          "expression_value": "max(CORE0,CORE1)+0.125"
+        },
+        {
+          "expression_name": "CORE_PS0",
+          "expression_value": "max(CORE0,CORE1)+0.125"
+        },
+        {
+          "expression_name": "CORE_PS1",
+          "expression_value": "max(CORE0,CORE1)+0.1"
+        },
+        {
+          "expression_name": "CORE_PS2",
+          "expression_value": "max(CORE0,CORE1)+0.075"
+        },
+        {
+          "expression_name": "CORE_PS3",
+          "expression_value": "max(CORE0,CORE1)+0.075"
+        },
+        {
+          "expression_name": "F6",
+          "expression_value": "max(CCF,CORE0,CORE1,1.2)+0.125"
+        },
+        {
+          "expression_name": "VCCIA_1P5",
+          "expression_value": "1.5"
+        }
+      ],
+      "min": 0.7,
+      "max": 1.6,
+      "step_size": 0.01
+    }
+  ]
+
+}

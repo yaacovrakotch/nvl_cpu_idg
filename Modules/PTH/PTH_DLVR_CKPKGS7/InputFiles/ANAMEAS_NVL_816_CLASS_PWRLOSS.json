@@ -1,0 +1,110 @@
+{
+    "DC": [
+        {
+            "Measurements": {
+                "VCCIA": {
+                    "Pin": "IPC::VCCIA",
+                    "Average": 10,
+                    "Expect": 30
+                },
+                "VNNAON": {
+                    "Pin": "VNNAON",
+                    "Average": 10,
+                    "Expect": 30
+                },
+                "VCC1P8": {
+                    "Pin": "V1P8_CPU",
+                    "Average": 10,
+                    "Expect": 30
+                }
+            },
+            "Domains": ["VCCIA", "VNNAON", "VCC1P8"],
+            "Token": "STATE1_PS3_0V",
+            "Equations": [
+                {
+                    "Expression": "Round(SelectArrayElement([{DOMAIN}], 0), 4)"
+                }
+            ]
+        },
+        {
+            "Domains": ["VCCIA", "VNNAON", "VCC1P8"],
+            "Token": "STATE2_PS7",
+            "Equations": [
+                {
+                    "Expression": "Round(SelectArrayElement([{DOMAIN}], 1), 4)"
+                }
+            ]
+        },
+        {
+            "Domains": ["VCCIA", "VNNAON", "VCC1P8"],
+            "Token": "STATE3_VCCIA0V",
+            "Equations": [
+                {
+                    "Expression": "Round(SelectArrayElement([{DOMAIN}], 2), 4)"
+                }
+            ]
+        },
+        {
+            "Domains": ["VCCIA"],
+            "Token": "VCCIA_PS3_IDLE_mW",
+            "Equations": [
+                {
+                    "Expression": "Round( (SelectArrayElement([{DOMAIN}], 0) - SelectArrayElement([{DOMAIN}], 1) ) *1.0*1000 , 4)"
+                }
+            ]
+        },
+        {
+            "Domains": ["VCCIA"],
+            "Token": "VCCIA_IDLE_DEEP_mW",
+            "Equations": [
+                {
+                    "Expression": "Round( (SelectArrayElement([{DOMAIN}], 1) - SelectArrayElement([{DOMAIN}], 2) ) *1.0*1000 , 4)"
+                }
+            ]
+        },
+        {
+            "Domains": ["VNNAON"],
+            "Token": "VNNAON_PS3_IDLE_mW",
+            "Equations": [
+                {
+                    "Expression": "Round( (SelectArrayElement([{DOMAIN}], 0) - SelectArrayElement([{DOMAIN}], 1) ) * 0.715*1000 , 4)",
+                    "LowLimit": "100.0000",
+                    "HighLimit": "240.0000"
+                }
+            ]
+        },
+        {
+            "Domains": ["VNNAON"],
+            "Token": "VNNAON_IDLE_DEEP_mW",
+            "Equations": [
+                {
+                    "Expression": "Round( (SelectArrayElement([{DOMAIN}], 1) - SelectArrayElement([{DOMAIN}], 2) ) * 0.715*1000 , 4)",
+                    "LowLimit": "-30.0000",
+                    "HighLimit": "28.0000"
+                }
+            ]
+        },
+        {
+            "Domains": ["VCC1P8"],
+            "Token": "VCC1P8_PS3_IDLE_mW",
+            "Equations": [
+                {
+                    "Expression": "Round( (SelectArrayElement([{DOMAIN}], 0) - SelectArrayElement([{DOMAIN}], 1) ) * 1.71*1000 , 4)",
+                    "LowLimit": "100.0000",
+                    "HighLimit": "240.0000"
+                }
+            ]
+        },
+        {
+            "Domains": ["VCC1P8"],
+            "Token": "VCC1P8_IDLE_DEEP_mW",
+            "Equations": [
+                {
+                    "Expression": "Round( (SelectArrayElement([{DOMAIN}], 1) - SelectArrayElement([{DOMAIN}], 2) ) * 1.71*1000 , 4)",
+                    "LowLimit": "-30.0000",
+                    //"HighLimit": "28.0000"
+                }
+            ]
+        }
+    ]
+}

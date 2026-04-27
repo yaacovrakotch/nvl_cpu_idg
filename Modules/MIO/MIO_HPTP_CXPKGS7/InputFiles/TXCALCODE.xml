@@ -1,0 +1,3248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<analog_config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="GEN_AnalogMeasure_tt.xsd">
+
+	<ConfigList name="HPTP_ALL_MEASURE_VOLTAGE">
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>HPTP_ALL_MEASURE_VOLTAGE</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<!-- Measure voltage on pins -->
+							<Equations>
+								<Pin>hptp_tx</Pin>
+								<Equation>(hptp_tx{1}[0])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-1000.0</LimitLoUserVar>
+					<LimitHiUserVar>1000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>1</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-1.4</limit_low>
+						<limit_high>4.4</limit_high>
+						<clamp_low>-1.5</clamp_low>
+						<clamp_high>4.5</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>ISVM</measure_mode>
+						<force_value>0.0</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>AUTO</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+	</ConfigList>
+
+
+
+	<ConfigList name="HPTP_ALL_MEASURE_CURRENT">
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>HPTP_ALL_MEASURE_CURRENT</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<!-- Measure voltage on pins -->
+							<Equations>
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{1}[0] + 0.000001)))</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-1000.0</LimitLoUserVar>
+					<LimitHiUserVar>1000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>1</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>AUTO</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+	</ConfigList>
+	
+
+
+	<ConfigList name="MEASURE_RES">
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_1</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{1}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>1</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_2</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{2}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>2</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_3</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{3}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>3</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_4</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{4}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>4</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_5</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{5}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>5</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_6</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{6}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>6</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_7</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{7}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>7</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_8</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{8}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>8</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_9</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{9}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>9</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_10</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{10}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>10</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_11</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{11}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>11</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_12</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{12}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>12</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_13</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{13}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>13</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_14</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{14}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>14</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_15</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{15}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>15</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_16</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{16}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>16</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_17</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{17}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>17</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_18</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{18}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>18</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_19</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{19}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>19</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_20</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{20}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>20</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_21</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{21}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>21</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_22</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{22}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>22</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_23</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{23}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>23</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_24</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{24}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>24</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_25</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{25}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>25</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_26</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{26}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>26</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_27</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{27}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>27</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_28</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{28}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>28</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_29</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{29}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>29</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_30</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{30}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>30</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_31</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{31}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>31</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_32</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{32}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>32</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_33</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{33}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>33</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_34</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{34}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>34</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_35</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{35}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>35</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_36</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{36}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>36</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_37</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{37}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>37</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_38</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{38}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>38</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_39</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{39}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>39</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_40</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{40}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>40</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_41</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{41}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>41</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_42</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{42}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>42</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_43</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{43}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>43</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_44</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{44}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>44</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_45</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{45}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>45</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_46</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{46}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>46</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_47</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{47}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>47</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_48</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{48}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>48</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_49</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{49}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>49</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_50</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{50}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>50</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_51</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{51}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>51</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_52</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{52}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>52</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_53</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{53}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>53</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_54</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{54}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>54</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_55</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{55}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>55</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_56</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{56}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>56</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_57</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{57}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>57</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_58</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{58}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>58</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+        <Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_59</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{59}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>59</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_60</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{60}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>60</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_61</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{61}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>61</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_62</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{62}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>62</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_63</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{63}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>63</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+		<Config>
+			<Cores>
+				<Core>
+					<iTuff UseFailPort="true">
+						<Token>MEASURE_RES_64</Token>
+						<UseInstName>true</UseInstName>
+						<Compression>true</Compression>
+						<Precision>4</Precision>
+						<DataLookup>
+							<Equations>
+
+								<Pin>hptp_tx</Pin>
+								<Equation>(abs(0.4/(hptp_tx{64}[0] + 0.000001)) - R[hptp_tx])</Equation>
+							</Equations>
+						</DataLookup>
+					</iTuff>
+					<LimitLoUserVar>-10000000.0</LimitLoUserVar>
+					<LimitHiUserVar>10000000.0</LimitHiUserVar>
+				</Core>
+			</Cores>
+			<Measurements>
+				<Measurement>
+					<Pin>hptp_tx</Pin>
+					<!-- add VIDs pins-->
+					<MeasurementSettings>
+						<!-- ########################## -->
+						<PatternTriggerType>SNDC</PatternTriggerType>
+						<MeasurementOperand>
+							<Operand>64</Operand>
+						</MeasurementOperand>
+						<pre_pause>0.005</pre_pause>
+						<dps_settling_time>0.005</dps_settling_time>
+						<central_pmu_enable>false</central_pmu_enable>
+						<!-- ########################## -->
+						<limit_low>-0.039</limit_low>
+						<limit_high>0.039</limit_high>
+						<clamp_low>-0.040</clamp_low>
+						<clamp_high>0.040</clamp_high>
+						<!-- ########################## -->
+						<measure_mode>VSIM</measure_mode>
+						<force_value>0.4</force_value>
+						<!--  <===============   -->
+						<measure_type>FORCEMEASURE</measure_type>
+						<measure_range>IR40mA</measure_range>
+						<!-- ########################## -->
+					</MeasurementSettings>
+				</Measurement>
+			</Measurements>
+		</Config>
+
+	</ConfigList>
+
+</analog_config>

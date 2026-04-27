@@ -1,0 +1,854 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- JP:  UF requires two modes: INIT and Update -->
+<repair_to_fuse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="GEN_RepairToFuse.xsd">
+  <xmlversion>											<!-- XML File Revision History -->
+	<!-- Version number	Date:  Modified by:   Comment:						-->
+	<version rev="01"> 	23wwWW05.4   rbalasu1     First Version				</version>
+  </xmlversion>
+  <product_setup name="LNL"  description="LNL 442 CDIE">
+  <input>
+	<variable id="ATOMREPSRAM"	gsds="G.I.S.REPSRAM"		fuse_group_size="23" array_match_bits="17-20" port_bits="21-22" /> <!-- get GSDS name from repair definition -->
+	<variable id="ATOMREPRF"	gsds="G.I.S.REPRF"		    fuse_group_size="32" array_match_bits="28-29" port_bits="30-31" /> <!-- get GSDS name from repair definition -->	
+  </input>
+
+  <output>    
+	<variable id="ATOMVFALL"		gsds="G.I.S.SSKTR"	total_ports="4"	size="5058"	default="X"	type="virtual" direction="lsb-msb"> <!-- can use usrvar="abc" instead of gsds -->
+	<!-- segment definition needed here -->
+	
+		<segment size_multiple_of="32"     		default="X"  			start_at="0"/>		    	<!-- segment 0  for L2 LRU row repair -->
+		<segment size_multiple_of="2304"   		default="X"  			start_at="32"/>				<!-- segment 1  for LSA RF row repair -->
+		<segment size_multiple_of="1152"    	default="X"  			start_at="2336"/>			<!-- segment 2  for L2 data col repair -->
+		<segment size_multiple_of="96"     		default="X"  			start_at="3488"/>			<!-- segment 3  for L2 tag/state col repair -->
+		<segment size_multiple_of="14" 	 	 	default="X" 	  		start_at="3584"/>			<!-- segment 4  for L2 C6 col repair -->
+		<segment size_multiple_of="1152" 	 	default="X" 	  		start_at="3598"/>			<!-- segment 5  for L2 data mid/left row repair-->
+		<segment size_multiple_of="144" 	 	default="X" 	  		start_at="4750"/>			<!-- segment 6  for L2 data mid/left row repair valid-->
+		<segment size_multiple_of="128"  		default="X" 	  		start_at="4894"/>			<!-- segment 7  for L2 TAG row repair bits -->
+		<segment size_multiple_of="32" 		 	default="X" 	  		start_at="5022"/>			<!-- segment 8  for L2 C6 row repair bits -->
+		<segment size_multiple_of="4" 	 		default="X" 	  		start_at="5054"/>			<!-- segment 9  for L2 C6 row repair valid bits -->
+
+
+	</variable>
+  </output>
+  
+  <match_conditions>	
+
+	<condition input_id="ATOMREPRF" array_match="1">						<!-- segment 0  for L2 LRU row repair -->
+		<output id="ATOMVFALL" segment="0">
+			<fuse_group	data_bits="0-14,24"	index_bits="25" >
+                <map_bits key="0" value="0" />								<!-- cpu0_fuse/FB_PMA_FIELD_REPAIR_BUS_R0_FUSE -->
+                <map_bits key="1" value="16" />								<!-- cpu0_fuse/FB_PMA_FIELD_REPAIR_BUS_R1_FUSE -->
+			</fuse_group>
+		</output>
+	</condition>
+	
+	<condition input_id="ATOMREPRF" array_match="2">						<!-- segment 1  for LSA RF row repair -->
+		<output id="ATOMVFALL" segment="1">
+			<fuse_group	data_bits="0-10,15-18,24"	index_bits="25-27,19-23" > 
+
+                <map_bits key="128" value="0" />
+                <map_bits key="129" value="16" />
+                <map_bits key="136" value="32" />
+                <map_bits key="137" value="48" />
+                <map_bits key="144" value="64" />
+                <map_bits key="145" value="80" />
+                <map_bits key="8" value="96" />
+                <map_bits key="9" value="112" />
+                <map_bits key="16" value="128" />
+                <map_bits key="17" value="144" />
+                <map_bits key="24" value="160" />
+                <map_bits key="25" value="176" />
+                <map_bits key="32" value="192" />
+                <map_bits key="33" value="208" />
+                <map_bits key="40" value="224" />
+                <map_bits key="41" value="240" />
+                <map_bits key="48" value="256" />
+                <map_bits key="49" value="272" />
+                <map_bits key="72" value="288" />
+                <map_bits key="73" value="304" />
+                <map_bits key="80" value="320" />
+                <map_bits key="81" value="336" />
+                <map_bits key="56" value="352" />
+                <map_bits key="57" value="368" />
+                <map_bits key="64" value="384" />
+                <map_bits key="65" value="400" />
+                <map_bits key="88" value="416" />
+                <map_bits key="89" value="432" />
+                <map_bits key="96" value="448" />
+                <map_bits key="97" value="464" />
+                <map_bits key="104" value="480" />
+                <map_bits key="105" value="496" />
+                <map_bits key="112" value="512" />
+                <map_bits key="113" value="528" />
+                <map_bits key="120" value="544" />
+                <map_bits key="121" value="560" />
+                <map_bits key="130" value="576" />
+                <map_bits key="131" value="592" />
+                <map_bits key="138" value="608" />
+                <map_bits key="139" value="624" />
+                <map_bits key="146" value="640" />
+                <map_bits key="147" value="656" />
+                <map_bits key="10" value="672" />
+                <map_bits key="11" value="688" />
+                <map_bits key="18" value="704" />
+                <map_bits key="19" value="720" />
+                <map_bits key="26" value="736" />
+                <map_bits key="27" value="752" />
+                <map_bits key="34" value="768" />
+                <map_bits key="35" value="784" />
+                <map_bits key="42" value="800" />
+                <map_bits key="43" value="816" />
+                <map_bits key="50" value="832" />
+                <map_bits key="51" value="848" />
+                <map_bits key="74" value="864" />
+                <map_bits key="75" value="880" />
+                <map_bits key="82" value="896" />
+                <map_bits key="83" value="912" />
+                <map_bits key="58" value="928" />
+                <map_bits key="59" value="944" />
+                <map_bits key="66" value="960" />
+                <map_bits key="67" value="976" />
+                <map_bits key="90" value="992" />
+                <map_bits key="91" value="1008" />
+                <map_bits key="98" value="1024" />
+                <map_bits key="99" value="1040" />
+                <map_bits key="106" value="1056" />
+                <map_bits key="107" value="1072" />
+                <map_bits key="114" value="1088" />
+                <map_bits key="115" value="1104" />
+                <map_bits key="122" value="1120" />
+                <map_bits key="123" value="1136" />
+                <map_bits key="132" value="1152" />
+                <map_bits key="133" value="1168" />
+                <map_bits key="140" value="1184" />
+                <map_bits key="141" value="1200" />
+                <map_bits key="148" value="1216" />
+                <map_bits key="149" value="1232" />
+                <map_bits key="12" value="1248" />
+                <map_bits key="13" value="1264" />
+                <map_bits key="20" value="1280" />
+                <map_bits key="21" value="1296" />
+                <map_bits key="28" value="1312" />
+                <map_bits key="29" value="1328" />
+                <map_bits key="36" value="1344" />
+                <map_bits key="37" value="1360" />
+                <map_bits key="44" value="1376" />
+                <map_bits key="45" value="1392" />
+                <map_bits key="52" value="1408" />
+                <map_bits key="53" value="1424" />
+                <map_bits key="76" value="1440" />
+                <map_bits key="77" value="1456" />
+                <map_bits key="84" value="1472" />
+                <map_bits key="85" value="1488" />
+                <map_bits key="60" value="1504" />
+                <map_bits key="61" value="1520" />
+                <map_bits key="68" value="1536" />
+                <map_bits key="69" value="1552" />
+                <map_bits key="92" value="1568" />
+                <map_bits key="93" value="1584" />
+                <map_bits key="100" value="1600" />
+                <map_bits key="101" value="1616" />
+                <map_bits key="108" value="1632" />
+                <map_bits key="109" value="1648" />
+                <map_bits key="116" value="1664" />
+                <map_bits key="117" value="1680" />
+                <map_bits key="124" value="1696" />
+                <map_bits key="125" value="1712" />
+                <map_bits key="134" value="1728" />
+                <map_bits key="135" value="1744" />
+                <map_bits key="142" value="1760" />
+                <map_bits key="143" value="1776" />
+                <map_bits key="150" value="1792" />
+                <map_bits key="151" value="1808" />
+                <map_bits key="14" value="1824" />
+                <map_bits key="15" value="1840" />
+                <map_bits key="22" value="1856" />
+                <map_bits key="23" value="1872" />
+                <map_bits key="30" value="1888" />
+                <map_bits key="31" value="1904" />
+                <map_bits key="38" value="1920" />
+                <map_bits key="39" value="1936" />
+                <map_bits key="46" value="1952" />
+                <map_bits key="47" value="1968" />
+                <map_bits key="54" value="1984" />
+                <map_bits key="55" value="2000" />
+                <map_bits key="78" value="2016" />
+                <map_bits key="79" value="2032" />
+                <map_bits key="86" value="2048" />
+                <map_bits key="87" value="2064" />
+                <map_bits key="62" value="2080" />
+                <map_bits key="63" value="2096" />
+                <map_bits key="70" value="2112" />
+                <map_bits key="71" value="2128" />
+                <map_bits key="94" value="2144" />
+                <map_bits key="95" value="2160" />
+                <map_bits key="102" value="2176" />
+                <map_bits key="103" value="2192" />
+                <map_bits key="110" value="2208" />
+                <map_bits key="111" value="2224" />
+                <map_bits key="118" value="2240" />
+                <map_bits key="119" value="2256" />
+                <map_bits key="126" value="2272" />
+                <map_bits key="127" value="2288" />
+				
+			</fuse_group>
+		</output>
+	</condition>	
+
+	<condition input_id="ATOMREPSRAM" array_match="1">						<!-- segment 2  for L2 data col repair-->
+		<output id="ATOMVFALL" segment="2">
+			<fuse_group	data_bits="0-5"	index_bits="9,10-11,15,12-14,16" > 
+
+				<map_bits key="0" value="864" />
+				<map_bits key="1" value="870" />
+				<map_bits key="2" value="0" />
+				<map_bits key="3" value="6" />
+				<map_bits key="4" value="12" />
+				<map_bits key="5" value="18" />
+				<map_bits key="6" value="24" />
+				<map_bits key="7" value="30" />
+				<map_bits key="18" value="36" />
+				<map_bits key="19" value="42" />
+				<map_bits key="20" value="48" />
+				<map_bits key="21" value="54" />
+				<map_bits key="22" value="60" />
+				<map_bits key="23" value="66" />
+				<map_bits key="34" value="72" />
+				<map_bits key="35" value="78" />
+				<map_bits key="36" value="84" />
+				<map_bits key="37" value="90" />
+				<map_bits key="38" value="96" />
+				<map_bits key="39" value="102" />
+				<map_bits key="50" value="108" />
+				<map_bits key="51" value="114" />
+				<map_bits key="52" value="120" />
+				<map_bits key="53" value="126" />
+				<map_bits key="54" value="132" />
+				<map_bits key="55" value="138" />
+				<map_bits key="66" value="144" />
+				<map_bits key="67" value="150" />
+				<map_bits key="68" value="156" />
+				<map_bits key="69" value="162" />
+				<map_bits key="70" value="168" />
+				<map_bits key="71" value="174" />
+				<map_bits key="82" value="180" />
+				<map_bits key="83" value="186" />
+				<map_bits key="84" value="192" />
+				<map_bits key="85" value="198" />
+				<map_bits key="86" value="204" />
+				<map_bits key="87" value="210" />
+				<map_bits key="10" value="216" />
+				<map_bits key="11" value="222" />
+				<map_bits key="12" value="228" />
+				<map_bits key="13" value="234" />
+				<map_bits key="14" value="240" />
+				<map_bits key="15" value="246" />
+				<map_bits key="26" value="252" />
+				<map_bits key="27" value="258" />
+				<map_bits key="28" value="264" />
+				<map_bits key="29" value="270" />
+				<map_bits key="30" value="276" />
+				<map_bits key="31" value="282" />
+				<map_bits key="42" value="288" />
+				<map_bits key="43" value="294" />
+				<map_bits key="44" value="300" />
+				<map_bits key="45" value="306" />
+				<map_bits key="46" value="312" />
+				<map_bits key="47" value="318" />
+				<map_bits key="58" value="324" />
+				<map_bits key="59" value="330" />
+				<map_bits key="60" value="336" />
+				<map_bits key="61" value="342" />
+				<map_bits key="62" value="348" />
+				<map_bits key="63" value="354" />
+				<map_bits key="74" value="360" />
+				<map_bits key="75" value="366" />
+				<map_bits key="76" value="372" />
+				<map_bits key="77" value="378" />
+				<map_bits key="78" value="384" />
+				<map_bits key="79" value="390" />
+				<map_bits key="90" value="396" />
+				<map_bits key="91" value="402" />
+				<map_bits key="92" value="408" />
+				<map_bits key="93" value="414" />
+				<map_bits key="94" value="420" />
+				<map_bits key="95" value="426" />
+				<map_bits key="130" value="432" />
+				<map_bits key="131" value="438" />
+				<map_bits key="132" value="444" />
+				<map_bits key="133" value="450" />
+				<map_bits key="134" value="456" />
+				<map_bits key="135" value="462" />
+				<map_bits key="146" value="468" />
+				<map_bits key="147" value="474" />
+				<map_bits key="148" value="480" />
+				<map_bits key="149" value="486" />
+				<map_bits key="150" value="492" />
+				<map_bits key="151" value="498" />
+				<map_bits key="162" value="504" />
+				<map_bits key="163" value="510" />
+				<map_bits key="164" value="516" />
+				<map_bits key="165" value="522" />
+				<map_bits key="166" value="528" />
+				<map_bits key="167" value="534" />
+				<map_bits key="178" value="540" />
+				<map_bits key="179" value="546" />
+				<map_bits key="180" value="552" />
+				<map_bits key="181" value="558" />
+				<map_bits key="182" value="564" />
+				<map_bits key="183" value="570" />
+				<map_bits key="194" value="576" />
+				<map_bits key="195" value="582" />
+				<map_bits key="196" value="588" />
+				<map_bits key="197" value="594" />
+				<map_bits key="198" value="600" />
+				<map_bits key="199" value="606" />
+				<map_bits key="210" value="612" />
+				<map_bits key="211" value="618" />
+				<map_bits key="212" value="624" />
+				<map_bits key="213" value="630" />
+				<map_bits key="214" value="636" />
+				<map_bits key="215" value="642" />
+				<map_bits key="138" value="648" />
+				<map_bits key="139" value="654" />
+				<map_bits key="140" value="660" />
+				<map_bits key="141" value="666" />
+				<map_bits key="142" value="672" />
+				<map_bits key="143" value="678" />
+				<map_bits key="154" value="684" />
+				<map_bits key="155" value="690" />
+				<map_bits key="156" value="696" />
+				<map_bits key="157" value="702" />
+				<map_bits key="158" value="708" />
+				<map_bits key="159" value="714" />
+				<map_bits key="170" value="720" />
+				<map_bits key="171" value="726" />
+				<map_bits key="172" value="732" />
+				<map_bits key="173" value="738" />
+				<map_bits key="174" value="744" />
+				<map_bits key="175" value="750" />
+				<map_bits key="186" value="756" />
+				<map_bits key="187" value="762" />
+				<map_bits key="188" value="768" />
+				<map_bits key="189" value="774" />
+				<map_bits key="190" value="780" />
+				<map_bits key="191" value="786" />
+				<map_bits key="202" value="792" />
+				<map_bits key="203" value="798" />
+				<map_bits key="204" value="804" />
+				<map_bits key="205" value="810" />
+				<map_bits key="206" value="816" />
+				<map_bits key="207" value="822" />
+				<map_bits key="218" value="828" />
+				<map_bits key="219" value="834" />
+				<map_bits key="220" value="840" />
+				<map_bits key="221" value="846" />
+				<map_bits key="222" value="852" />
+				<map_bits key="223" value="858" />
+				<map_bits key="16" value="876" />
+				<map_bits key="17" value="882" />
+				<map_bits key="32" value="888" />
+				<map_bits key="33" value="894" />
+				<map_bits key="48" value="900" />
+				<map_bits key="49" value="906" />
+				<map_bits key="64" value="912" />
+				<map_bits key="65" value="918" />
+				<map_bits key="80" value="924" />
+				<map_bits key="81" value="930" />
+				<map_bits key="8" value="936" />
+				<map_bits key="9" value="942" />
+				<map_bits key="24" value="948" />
+				<map_bits key="25" value="954" />
+				<map_bits key="40" value="960" />
+				<map_bits key="41" value="966" />
+				<map_bits key="56" value="972" />
+				<map_bits key="57" value="978" />
+				<map_bits key="72" value="984" />
+				<map_bits key="73" value="990" />
+				<map_bits key="88" value="996" />
+				<map_bits key="89" value="1002" />
+				<map_bits key="128" value="1008" />
+				<map_bits key="129" value="1014" />
+				<map_bits key="144" value="1020" />
+				<map_bits key="145" value="1026" />
+				<map_bits key="160" value="1032" />
+				<map_bits key="161" value="1038" />
+				<map_bits key="176" value="1044" />
+				<map_bits key="177" value="1050" />
+				<map_bits key="192" value="1056" />
+				<map_bits key="193" value="1062" />
+				<map_bits key="208" value="1068" />
+				<map_bits key="209" value="1074" />
+				<map_bits key="136" value="1080" />
+				<map_bits key="137" value="1086" />
+				<map_bits key="152" value="1092" />
+				<map_bits key="153" value="1098" />
+				<map_bits key="168" value="1104" />
+				<map_bits key="169" value="1110" />
+				<map_bits key="184" value="1116" />
+				<map_bits key="185" value="1122" />
+				<map_bits key="200" value="1128" />
+				<map_bits key="201" value="1134" />
+				<map_bits key="216" value="1140" />
+				<map_bits key="217" value="1146" />
+			</fuse_group>
+		</output>
+	</condition>
+
+	<condition input_id="ATOMREPSRAM" array_match="7">						<!-- segment 3  for L2 tag/state col repair-->
+		<output id="ATOMVFALL" segment="3">
+			<fuse_group	data_bits="0-5"	index_bits="13-16" >
+				<map_bits key="1" value="0" />
+				<map_bits key="2" value="6" />
+				<map_bits key="3" value="12" />
+				<map_bits key="5" value="18" />
+				<map_bits key="6" value="24" />
+				<map_bits key="7" value="30" />
+				<map_bits key="9" value="36" />
+				<map_bits key="10" value="42" />
+				<map_bits key="11" value="48" />
+				<map_bits key="13" value="54" />
+				<map_bits key="14" value="60" />
+				<map_bits key="15" value="66" />
+				<map_bits key="0" value="72" />
+				<map_bits key="4" value="78" />
+				<map_bits key="8" value="84" />
+				<map_bits key="12" value="90" />
+
+			</fuse_group>
+		</output>
+	</condition>
+
+	<condition input_id="ATOMREPSRAM" array_match="8">						<!-- segment 4  for L2 C6 col repair-->
+		<output id="ATOMVFALL" segment="4">
+			<fuse_group	data_bits="0-6"	index_bits="16" >
+				<map_bits key="0" value="0" /> 								<!-- cpu0_fuse/FB_PMA_L2_C6REDN_COL_S0_FUSE -->
+				<map_bits key="1" value="7" /> 								<!-- cpu0_fuse/FB_PMA_L2_C6REDN_COL_S1_FUSE -->
+			</fuse_group>
+		</output>
+	</condition>
+            	
+	<condition input_id="ATOMREPSRAM" array_match="10">						<!-- segment 5  for L2 data mid/left row repair RR0-->
+		<output id="ATOMVFALL" segment="5">
+			<fuse_group	data_bits="0-7"	index_bits="10-14,16" >
+
+				<map_bits key="1" value="0" />
+				<map_bits key="2" value="24" />
+				<map_bits key="3" value="48" />
+				<map_bits key="5" value="72" />
+				<map_bits key="6" value="96" />
+				<map_bits key="7" value="120" />
+				<map_bits key="9" value="144" />
+				<map_bits key="10" value="168" />
+				<map_bits key="11" value="192" />
+				<map_bits key="13" value="216" />
+				<map_bits key="14" value="240" />
+				<map_bits key="15" value="264" />
+				<map_bits key="17" value="288" />
+				<map_bits key="18" value="312" />
+				<map_bits key="19" value="336" />
+				<map_bits key="21" value="360" />
+				<map_bits key="22" value="384" />
+				<map_bits key="23" value="408" />
+				<map_bits key="33" value="432" />
+				<map_bits key="34" value="456" />
+				<map_bits key="35" value="480" />
+				<map_bits key="37" value="504" />
+				<map_bits key="38" value="528" />
+				<map_bits key="39" value="552" />
+				<map_bits key="41" value="576" />
+				<map_bits key="42" value="600" />
+				<map_bits key="43" value="624" />
+				<map_bits key="45" value="648" />
+				<map_bits key="46" value="672" />
+				<map_bits key="47" value="696" />
+				<map_bits key="49" value="720" />
+				<map_bits key="50" value="744" />
+				<map_bits key="51" value="768" />
+				<map_bits key="53" value="792" />
+				<map_bits key="54" value="816" />
+				<map_bits key="55" value="840" />
+				<map_bits key="0" value="864" />
+				<map_bits key="4" value="888" />
+				<map_bits key="8" value="912" />
+				<map_bits key="12" value="936" />
+				<map_bits key="16" value="960" />
+				<map_bits key="20" value="984" />
+				<map_bits key="32" value="1008" />
+				<map_bits key="36" value="1032" />
+				<map_bits key="40" value="1056" />
+				<map_bits key="44" value="1080" />
+				<map_bits key="48" value="1104" />
+				<map_bits key="52" value="1128" />
+
+
+			</fuse_group>
+		</output>
+	</condition>	
+	
+	<condition input_id="ATOMREPSRAM" array_match="11">						<!-- segment 5  for L2 data mid/left row repair RR1-->
+		<output id="ATOMVFALL" segment="5">
+			<fuse_group	data_bits="0-7"	index_bits="10-14,16" >
+
+				<map_bits key="1" value="8" />
+				<map_bits key="2" value="32" />
+				<map_bits key="3" value="56" />
+				<map_bits key="5" value="80" />
+				<map_bits key="6" value="104" />
+				<map_bits key="7" value="128" />
+				<map_bits key="9" value="152" />
+				<map_bits key="10" value="176" />
+				<map_bits key="11" value="200" />
+				<map_bits key="13" value="224" />
+				<map_bits key="14" value="248" />
+				<map_bits key="15" value="272" />
+				<map_bits key="17" value="296" />
+				<map_bits key="18" value="320" />
+				<map_bits key="19" value="344" />
+				<map_bits key="21" value="368" />
+				<map_bits key="22" value="392" />
+				<map_bits key="23" value="416" />
+				<map_bits key="33" value="440" />
+				<map_bits key="34" value="464" />
+				<map_bits key="35" value="488" />
+				<map_bits key="37" value="512" />
+				<map_bits key="38" value="536" />
+				<map_bits key="39" value="560" />
+				<map_bits key="41" value="584" />
+				<map_bits key="42" value="608" />
+				<map_bits key="43" value="632" />
+				<map_bits key="45" value="656" />
+				<map_bits key="46" value="680" />
+				<map_bits key="47" value="704" />
+				<map_bits key="49" value="728" />
+				<map_bits key="50" value="752" />
+				<map_bits key="51" value="776" />
+				<map_bits key="53" value="800" />
+				<map_bits key="54" value="824" />
+				<map_bits key="55" value="848" />
+				<map_bits key="0" value="872" />
+				<map_bits key="4" value="896" />
+				<map_bits key="8" value="920" />
+				<map_bits key="12" value="944" />
+				<map_bits key="16" value="968" />
+				<map_bits key="20" value="992" />
+				<map_bits key="32" value="1016" />
+				<map_bits key="36" value="1040" />
+				<map_bits key="40" value="1064" />
+				<map_bits key="44" value="1088" />
+				<map_bits key="48" value="1112" />
+				<map_bits key="52" value="1136" />
+
+			</fuse_group>
+		</output>
+	</condition>	
+
+	<condition input_id="ATOMREPSRAM" array_match="12">						<!-- segment 5  for L2 data mid/left row repair RR2-->
+		<output id="ATOMVFALL" segment="5">
+			<fuse_group	data_bits="0-7"	index_bits="10-14,16" >
+
+				<map_bits key="1" value="16" />
+				<map_bits key="2" value="40" />
+				<map_bits key="3" value="64" />
+				<map_bits key="5" value="88" />
+				<map_bits key="6" value="112" />
+				<map_bits key="7" value="136" />
+				<map_bits key="9" value="160" />
+				<map_bits key="10" value="184" />
+				<map_bits key="11" value="208" />
+				<map_bits key="13" value="232" />
+				<map_bits key="14" value="256" />
+				<map_bits key="15" value="280" />
+				<map_bits key="17" value="304" />
+				<map_bits key="18" value="328" />
+				<map_bits key="19" value="352" />
+				<map_bits key="21" value="376" />
+				<map_bits key="22" value="400" />
+				<map_bits key="23" value="424" />
+				<map_bits key="33" value="448" />
+				<map_bits key="34" value="472" />
+				<map_bits key="35" value="496" />
+				<map_bits key="37" value="520" />
+				<map_bits key="38" value="544" />
+				<map_bits key="39" value="568" />
+				<map_bits key="41" value="592" />
+				<map_bits key="42" value="616" />
+				<map_bits key="43" value="640" />
+				<map_bits key="45" value="664" />
+				<map_bits key="46" value="688" />
+				<map_bits key="47" value="712" />
+				<map_bits key="49" value="736" />
+				<map_bits key="50" value="760" />
+				<map_bits key="51" value="784" />
+				<map_bits key="53" value="808" />
+				<map_bits key="54" value="832" />
+				<map_bits key="55" value="856" />
+				<map_bits key="0" value="880" />
+				<map_bits key="4" value="904" />
+				<map_bits key="8" value="928" />
+				<map_bits key="12" value="952" />
+				<map_bits key="16" value="976" />
+				<map_bits key="20" value="1000" />
+				<map_bits key="32" value="1024" />
+				<map_bits key="36" value="1048" />
+				<map_bits key="40" value="1072" />
+				<map_bits key="44" value="1096" />
+				<map_bits key="48" value="1120" />
+				<map_bits key="52" value="1144" />
+
+			</fuse_group>
+		</output>
+	</condition>	
+	
+	<condition input_id="ATOMREPSRAM" array_match="10">						<!-- segment 6  for L2 data mid/left row repair valid RR0-->
+		<output id="ATOMVFALL" segment="6">
+			<fuse_group	data_bits="18"	index_bits="10-14,16" >
+
+				<map_bits key="1" value="0" />
+				<map_bits key="5" value="1" />
+				<map_bits key="9" value="2" />
+				<map_bits key="13" value="3" />
+				<map_bits key="17" value="4" />
+				<map_bits key="21" value="5" />
+				<map_bits key="2" value="18" />
+				<map_bits key="6" value="19" />
+				<map_bits key="10" value="20" />
+				<map_bits key="14" value="21" />
+				<map_bits key="18" value="22" />
+				<map_bits key="22" value="23" />
+				<map_bits key="3" value="36" />
+				<map_bits key="7" value="37" />
+				<map_bits key="11" value="38" />
+				<map_bits key="15" value="39" />
+				<map_bits key="19" value="40" />
+				<map_bits key="23" value="41" />
+				<map_bits key="33" value="54" />
+				<map_bits key="37" value="55" />
+				<map_bits key="41" value="56" />
+				<map_bits key="45" value="57" />
+				<map_bits key="49" value="58" />
+				<map_bits key="53" value="59" />
+				<map_bits key="34" value="72" />
+				<map_bits key="38" value="73" />
+				<map_bits key="42" value="74" />
+				<map_bits key="46" value="75" />
+				<map_bits key="50" value="76" />
+				<map_bits key="54" value="77" />
+				<map_bits key="35" value="90" />
+				<map_bits key="39" value="91" />
+				<map_bits key="43" value="92" />
+				<map_bits key="47" value="93" />
+				<map_bits key="51" value="94" />
+				<map_bits key="55" value="95" />
+				<map_bits key="0" value="108" />
+				<map_bits key="4" value="109" />
+				<map_bits key="8" value="110" />
+				<map_bits key="12" value="111" />
+				<map_bits key="16" value="112" />
+				<map_bits key="20" value="113" />
+				<map_bits key="32" value="126" />
+				<map_bits key="36" value="127" />
+				<map_bits key="40" value="128" />
+				<map_bits key="44" value="129" />
+				<map_bits key="48" value="130" />
+				<map_bits key="52" value="131" />
+				
+			</fuse_group>
+		</output>
+	</condition>	
+	
+	<condition input_id="ATOMREPSRAM" array_match="11">						<!-- segment 6  for L2 data mid/left row repair valid RR1-->
+		<output id="ATOMVFALL" segment="6">
+			<fuse_group	data_bits="18"	index_bits="10-14,16" >
+
+				<map_bits key="1" value="6" />
+				<map_bits key="5" value="7" />
+				<map_bits key="9" value="8" />
+				<map_bits key="13" value="9" />
+				<map_bits key="17" value="10" />
+				<map_bits key="21" value="11" />
+				<map_bits key="2" value="24" />
+				<map_bits key="6" value="25" />
+				<map_bits key="10" value="26" />
+				<map_bits key="14" value="27" />
+				<map_bits key="18" value="28" />
+				<map_bits key="22" value="29" />
+				<map_bits key="3" value="42" />
+				<map_bits key="7" value="43" />
+				<map_bits key="11" value="44" />
+				<map_bits key="15" value="45" />
+				<map_bits key="19" value="46" />
+				<map_bits key="23" value="47" />
+				<map_bits key="33" value="60" />
+				<map_bits key="37" value="61" />
+				<map_bits key="41" value="62" />
+				<map_bits key="45" value="63" />
+				<map_bits key="49" value="64" />
+				<map_bits key="53" value="65" />
+				<map_bits key="34" value="78" />
+				<map_bits key="38" value="79" />
+				<map_bits key="42" value="80" />
+				<map_bits key="46" value="81" />
+				<map_bits key="50" value="82" />
+				<map_bits key="54" value="83" />
+				<map_bits key="35" value="96" />
+				<map_bits key="39" value="97" />
+				<map_bits key="43" value="98" />
+				<map_bits key="47" value="99" />
+				<map_bits key="51" value="100" />
+				<map_bits key="55" value="101" />
+				<map_bits key="0" value="114" />
+				<map_bits key="4" value="115" />
+				<map_bits key="8" value="116" />
+				<map_bits key="12" value="117" />
+				<map_bits key="16" value="118" />
+				<map_bits key="20" value="119" />
+				<map_bits key="32" value="132" />
+				<map_bits key="36" value="133" />
+				<map_bits key="40" value="134" />
+				<map_bits key="44" value="135" />
+				<map_bits key="48" value="136" />
+				<map_bits key="52" value="137" />
+
+
+				
+			</fuse_group>
+		</output>
+	</condition>	
+	
+	<condition input_id="ATOMREPSRAM" array_match="12">						<!-- segment 6  for L2 data mid/left row repair valid RR2-->
+		<output id="ATOMVFALL" segment="6">
+			<fuse_group	data_bits="18"	index_bits="10-14,16" >
+
+				<map_bits key="1" value="12" />
+				<map_bits key="5" value="13" />
+				<map_bits key="9" value="14" />
+				<map_bits key="13" value="15" />
+				<map_bits key="17" value="16" />
+				<map_bits key="21" value="17" />
+				<map_bits key="2" value="30" />
+				<map_bits key="6" value="31" />
+				<map_bits key="10" value="32" />
+				<map_bits key="14" value="33" />
+				<map_bits key="18" value="34" />
+				<map_bits key="22" value="35" />
+				<map_bits key="3" value="48" />
+				<map_bits key="7" value="49" />
+				<map_bits key="11" value="50" />
+				<map_bits key="15" value="51" />
+				<map_bits key="19" value="52" />
+				<map_bits key="23" value="53" />
+				<map_bits key="33" value="66" />
+				<map_bits key="37" value="67" />
+				<map_bits key="41" value="68" />
+				<map_bits key="45" value="69" />
+				<map_bits key="49" value="70" />
+				<map_bits key="53" value="71" />
+				<map_bits key="34" value="84" />
+				<map_bits key="38" value="85" />
+				<map_bits key="42" value="86" />
+				<map_bits key="46" value="87" />
+				<map_bits key="50" value="88" />
+				<map_bits key="54" value="89" />
+				<map_bits key="35" value="102" />
+				<map_bits key="39" value="103" />
+				<map_bits key="43" value="104" />
+				<map_bits key="47" value="105" />
+				<map_bits key="51" value="106" />
+				<map_bits key="55" value="107" />
+				<map_bits key="0" value="120" />
+				<map_bits key="4" value="121" />
+				<map_bits key="8" value="122" />
+				<map_bits key="12" value="123" />
+				<map_bits key="16" value="124" />
+				<map_bits key="20" value="125" />
+				<map_bits key="32" value="138" />
+				<map_bits key="36" value="139" />
+				<map_bits key="40" value="140" />
+				<map_bits key="44" value="141" />
+				<map_bits key="48" value="142" />
+				<map_bits key="52" value="143" />
+
+			</fuse_group>
+		</output>
+	</condition>	
+	
+	<condition input_id="ATOMREPSRAM" array_match="4">						<!-- segment 7  for L2 TAG row repair bits, MIDRR0 -->
+		<output id="ATOMVFALL" segment="7">
+			<fuse_group	data_bits="0-6,8"	index_bits="15-16" >
+
+                <map_bits key="0" value="0" />
+                <map_bits key="1" value="24" />
+                <map_bits key="2" value="48" />
+                <map_bits key="3" value="72" />
+
+			</fuse_group>
+		</output>
+	</condition>	
+	
+	<condition input_id="ATOMREPSRAM" array_match="5">						<!-- segment 7  for L2 TAG row repair bits, MIDRR1 -->
+		<output id="ATOMVFALL" segment="7">
+			<fuse_group	data_bits="0-6,8"	index_bits="15-16" >
+
+                <map_bits key="0" value="8" />
+                <map_bits key="1" value="32" />
+                <map_bits key="2" value="56" />
+                <map_bits key="3" value="80" />
+
+			</fuse_group>
+		</output>
+	</condition>		
+	
+	<condition input_id="ATOMREPSRAM" array_match="6">						<!-- segment 7  for L2 TAG row repair bits, MIDRR2 -->
+		<output id="ATOMVFALL" segment="7">
+			<fuse_group	data_bits="0-6,8"	index_bits="15-16" >
+
+                <map_bits key="0" value="16" />
+                <map_bits key="1" value="40" />
+                <map_bits key="2" value="56" />
+                <map_bits key="3" value="88" />
+
+			</fuse_group>
+		</output>
+	</condition>	
+	    
+	<condition input_id="ATOMREPSRAM" array_match="3">						<!-- segment 7  for L2 TAG row repair bits, LEFT -->
+		<output id="ATOMVFALL" segment="7">
+			<fuse_group	data_bits="0-6,8"	index_bits="7,16" >
+
+                <map_bits key="0" value="96" />
+                <map_bits key="1" value="104" />
+                <map_bits key="2" value="112" />
+                <map_bits key="3" value="120" />
+
+			</fuse_group>
+		</output>
+	</condition>
+	
+	<condition input_id="ATOMREPSRAM" array_match="9">						<!-- segment 8  for L2 C6 row repair bits -->
+		<output id="ATOMVFALL" segment="8">
+			<fuse_group	data_bits="0-7"	index_bits="8,16" >
+                <map_bits key="0" value="0" /> 								<!-- cpu0_fuse/FB_PMA_L2_C6REDN_ROW_ADDR_S0_RR0_FUSE -->
+                <map_bits key="1" value="8" /> 								<!-- cpu0_fuse/FB_PMA_L2_C6REDN_ROW_ADDR_S0_RR1_FUSE -->
+                <map_bits key="2" value="16" /> 							<!-- cpu0_fuse/FB_PMA_L2_C6REDN_ROW_ADDR_S1_RR0_FUSE -->
+                <map_bits key="3" value="24" /> 							<!-- cpu0_fuse/FB_PMA_L2_C6REDN_ROW_ADDR_S1_RR1_FUSE -->
+			</fuse_group>
+		</output>
+	</condition>
+	
+	<condition input_id="ATOMREPSRAM" array_match="9">						<!-- segment 9	for L2 C6 row repair valid bits -->
+		<output id="ATOMVFALL" segment="9">
+			<fuse_group	data_bits="20"	index_bits="8,16" >
+                <map_bits key="0" value="0" /> 								<!-- cpu0_fuse/FB_PMA_L2_C6REDN_ROW_VALID_FUSE -->
+                <map_bits key="1" value="1" /> 								<!-- cpu0_fuse/FB_PMA_L2_C6REDN_ROW_VALID_FUSE -->
+                <map_bits key="2" value="2" /> 								<!-- cpu0_fuse/FB_PMA_L2_C6REDN_ROW_VALID_FUSE -->
+                <map_bits key="3" value="3" /> 								<!-- cpu0_fuse/FB_PMA_L2_C6REDN_ROW_VALID_FUSE -->
+			</fuse_group>
+		</output>
+	</condition>	
+	
+  </match_conditions>
+  
+   
+
+ </product_setup>
+</repair_to_fuse>

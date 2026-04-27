@@ -1,0 +1,90 @@
+Version 1.0;
+
+Shared
+{
+    SelectorRuleCollection  FlwSkpCollect
+    {
+        ### AHMT Logic
+        SelectorRule if_ahmt(yes, no) 
+        {
+          yes => __shared__::SCVars.SC_LOCN == "6167" || __shared__::SCVars.SC_LOCN == "5167" || __shared__::SCVars.SC_LOCN == "6168" || __shared__::SCVars.SC_LOCN == "5168";
+          no;
+        }
+		### Die Select Logic
+        SelectorRule if_dieslc_sc(yes, no) {
+          yes => __shared__::SCVars.SC_DIESLCT == "SC";  # Select CPU die
+          no;
+        }
+    	SelectorRule if_dieslc_ec(yes, no) {
+          yes => __shared__::SCVars.SC_DIESLCT == "EC";  # Exclude CPU die
+          no;
+        }
+        SelectorRule if_dieslc_sg(yes, no) {
+          yes => __shared__::SCVars.SC_DIESLCT == "SG";  # Select GCD die
+          no;
+        }
+    	SelectorRule if_dieslc_eg(yes, no) {
+          yes => __shared__::SCVars.SC_DIESLCT == "EG";  # Exclude GCD die
+          no;
+        }
+        SelectorRule if_dieslc_sh(yes, no) {
+          yes => __shared__::SCVars.SC_DIESLCT == "SH";  # Select HUB die
+          no;
+        }
+    	SelectorRule if_dieslc_eh(yes, no) {
+          yes => __shared__::SCVars.SC_DIESLCT == "EH";  # Exclude HUB die
+          no;
+        }
+        SelectorRule if_dieslc_sp(yes, no) {
+          yes => __shared__::SCVars.SC_DIESLCT == "SP";  # Select PCD die
+          no;
+        }
+    	SelectorRule if_dieslc_ep(yes, no) {
+          yes => __shared__::SCVars.SC_DIESLCT == "EP";  # Exclude PCD die
+          no;
+        }
+        ### QE Logic
+        SelectorRule if_qe(yes, no) 
+        {
+          yes => __shared__::SCVars.SC_ENGID == "QE";  # Bypass if EngID == "QE"
+          no;
+        }
+        ### Only LTTC subflows
+        SelectorRule if_lttc(yes, no)
+        {
+          yes => contains(__shared__::LocationSets.CH_CHVM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.CH_CRV,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+    	  no;
+        }
+        SelectorRule FlwSkpRule(Con1, Con2, Con3, Con4, Con5, Con6, Con7, Con8, Con9, Con10, Con11, Con12, Con13, Con14, Con15, Con16, Con17, Con18, Con19, Con20, Con21, Con22, Con23, Con24, Con25, Con26, Con27, default)
+        {
+          Con1 =>   FlwSkpCollect.if_ahmt(True, False);
+          Con2 =>   FlwSkpCollect.if_dieslc_sc(True, False) && FlwSkpCollect.if_lttc(True, False);
+          Con3 =>   FlwSkpCollect.if_dieslc_sc(True, False) && (!FlwSkpCollect.if_lttc(True, False)) && (!FlwSkpCollect.if_qe(True, False));
+          Con4 =>   FlwSkpCollect.if_dieslc_sc(True, False) && (!FlwSkpCollect.if_lttc(True, False)) && (FlwSkpCollect.if_qe(True, False));
+          Con5 =>   FlwSkpCollect.if_dieslc_ec(True, False) && FlwSkpCollect.if_lttc(True, False);
+          Con6 =>   FlwSkpCollect.if_dieslc_ec(True, False) && (!FlwSkpCollect.if_lttc(True, False)) && (!FlwSkpCollect.if_qe(True, False));
+          Con7 =>   FlwSkpCollect.if_dieslc_ec(True, False) && (!FlwSkpCollect.if_lttc(True, False)) && (FlwSkpCollect.if_qe(True, False));
+          Con8 =>   FlwSkpCollect.if_dieslc_sg(True, False) && FlwSkpCollect.if_lttc(True, False);
+          Con9 =>   FlwSkpCollect.if_dieslc_sg(True, False) && (!FlwSkpCollect.if_lttc(True, False)) && (!FlwSkpCollect.if_qe(True, False));
+          Con10 =>  FlwSkpCollect.if_dieslc_sg(True, False) && (!FlwSkpCollect.if_lttc(True, False)) && (FlwSkpCollect.if_qe(True, False));
+          Con11 =>  FlwSkpCollect.if_dieslc_eg(True, False) && FlwSkpCollect.if_lttc(True, False);
+          Con12 =>  FlwSkpCollect.if_dieslc_eg(True, False) && (!FlwSkpCollect.if_lttc(True, False)) && (!FlwSkpCollect.if_qe(True, False));
+          Con13 =>  FlwSkpCollect.if_dieslc_eg(True, False) && (!FlwSkpCollect.if_lttc(True, False)) && (FlwSkpCollect.if_qe(True, False));
+          Con14 =>  FlwSkpCollect.if_dieslc_sh(True, False) && FlwSkpCollect.if_lttc(True, False);
+          Con15 =>  FlwSkpCollect.if_dieslc_sh(True, False) && (!FlwSkpCollect.if_lttc(True, False)) && (!FlwSkpCollect.if_qe(True, False));
+          Con16 =>  FlwSkpCollect.if_dieslc_sh(True, False) && (!FlwSkpCollect.if_lttc(True, False)) && (FlwSkpCollect.if_qe(True, False));
+          Con17 =>  FlwSkpCollect.if_dieslc_eh(True, False) && FlwSkpCollect.if_lttc(True, False);
+          Con18 =>  FlwSkpCollect.if_dieslc_eh(True, False) && (!FlwSkpCollect.if_lttc(True, False)) && (!FlwSkpCollect.if_qe(True, False));
+          Con19 =>  FlwSkpCollect.if_dieslc_eh(True, False) && (!FlwSkpCollect.if_lttc(True, False)) && (FlwSkpCollect.if_qe(True, False));
+          Con20 =>  FlwSkpCollect.if_dieslc_sp(True, False) && FlwSkpCollect.if_lttc(True, False);
+          Con21 =>  FlwSkpCollect.if_dieslc_sp(True, False) && (!FlwSkpCollect.if_lttc(True, False)) && (!FlwSkpCollect.if_qe(True, False));
+          Con22 =>  FlwSkpCollect.if_dieslc_sp(True, False) && (!FlwSkpCollect.if_lttc(True, False)) && (FlwSkpCollect.if_qe(True, False));
+          Con23 =>  FlwSkpCollect.if_dieslc_ep(True, False) && FlwSkpCollect.if_lttc(True, False);
+          Con24 =>  FlwSkpCollect.if_dieslc_ep(True, False) && (!FlwSkpCollect.if_lttc(True, False)) && (!FlwSkpCollect.if_qe(True, False));
+          Con25 =>  FlwSkpCollect.if_dieslc_ep(True, False) && (!FlwSkpCollect.if_lttc(True, False)) && (FlwSkpCollect.if_qe(True, False));
+          Con26 =>  (!FlwSkpCollect.if_lttc(True, False)) && (!FlwSkpCollect.if_qe(True, False));
+          Con27 =>  (!FlwSkpCollect.if_lttc(True, False)) && (FlwSkpCollect.if_qe(True, False));
+          default;
+        }
+    }
+}

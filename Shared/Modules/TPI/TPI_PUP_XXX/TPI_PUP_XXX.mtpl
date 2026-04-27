@@ -1,0 +1,165 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan TPI_PUP_XXX;
+
+Import "TPI_PUP_XXX.usrv";
+
+# Test Counter Definition
+
+Counters
+{
+    n93120000_fail_CTRL_X_PUP_K_TESTPLANENDFLOW_X_X_X_X_PRINTITUFF_0
+} # End of Test Counter Definition
+
+CSharpTest PrimeCallbacksRegistrarTestMethod CTRL_X_CALLBACKS_K_INIT_X_X_X_X_PUP
+{
+    LogLevel = "Disabled";
+}
+
+CSharpTest PlistConfigTC CTRL_X_PLISTCONFIG_E_INIT_X_X_X_X_SKIPSHORT
+{
+    BypassPort = 1;
+    ConfigMode = "PATLIST";
+    ElementRegex = "__0";
+    OptionName = "Skip";
+    OptionValue = __shared__::PUPHERMESRules.PUPSupportedOperation("False", "True", "True", "False");
+    PatlistRegex = ".*";
+    RecursiveMode = "True";
+}
+
+CSharpTest PlistConfigTC CTRL_X_PLISTCONFIG_E_INIT_X_X_X_X_SKIPLONG
+{
+    BypassPort = 1;
+    ConfigMode = "PATLIST";
+    ElementRegex = "__1";
+    OptionName = "Skip";
+    OptionValue = __shared__::PUPHERMESRules.PUPSupportedOperation("False", "True", "True", "False");
+    PatlistRegex = ".*";
+    RecursiveMode = "True";
+}
+
+CSharpTest PrimePUPTestMethod CTRL_X_PUP_K_TESTPLANENDFLOW_X_X_X_X_PRINTITUFF
+{
+    LogLevel = "Disabled";
+    Mode = "Disabled";
+    MonitorLoopNum = 3;
+    PatternsFilePath = "$PUP_PATTERNS_DIR\\@LATEST_REV@\\PAS_PTD.pup.json";
+    PupDebugMode = "Disabled";
+    PupMatchMode = "VidAndEfuseBoth";
+}
+
+Flow TPI_PUP_XXX_INIT
+{
+    FlowItem CTRL_X_CALLBACKS_K_INIT_X_X_X_X_PUP CTRL_X_CALLBACKS_K_INIT_X_X_X_X_PUP
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99936501_fail_TPI_PUP_XXX_CTRL_X_CALLBACKS_K_INIT_X_X_X_X_PUP_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98936501_fail_TPI_PUP_XXX_CTRL_X_CALLBACKS_K_INIT_X_X_X_X_PUP_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_PLISTCONFIG_E_INIT_X_X_X_X_SKIPSHORT;
+        }
+    }
+    
+    FlowItem CTRL_X_PLISTCONFIG_E_INIT_X_X_X_X_SKIPSHORT CTRL_X_PLISTCONFIG_E_INIT_X_X_X_X_SKIPSHORT
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99936502_fail_TPI_PUP_XXX_CTRL_X_PLISTCONFIG_E_INIT_X_X_X_X_SKIPSHORT_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98936502_fail_TPI_PUP_XXX_CTRL_X_PLISTCONFIG_E_INIT_X_X_X_X_SKIPSHORT_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_PLISTCONFIG_E_INIT_X_X_X_X_SKIPLONG;
+        }
+    }
+    
+    FlowItem CTRL_X_PLISTCONFIG_E_INIT_X_X_X_X_SKIPLONG CTRL_X_PLISTCONFIG_E_INIT_X_X_X_X_SKIPLONG
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99936503_fail_TPI_PUP_XXX_CTRL_X_PLISTCONFIG_E_INIT_X_X_X_X_SKIPLONG_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98936503_fail_TPI_PUP_XXX_CTRL_X_PLISTCONFIG_E_INIT_X_X_X_X_SKIPLONG_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow TPI_PUP_XXX_TESTPLANENDFLOW
+{
+    FlowItem CTRL_X_PUP_K_TESTPLANENDFLOW_X_X_X_X_PRINTITUFF CTRL_X_PUP_K_TESTPLANENDFLOW_X_X_X_X_PRINTITUFF
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99936504_fail_TPI_PUP_XXX_CTRL_X_PUP_K_TESTPLANENDFLOW_X_X_X_X_PRINTITUFF_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98936504_fail_TPI_PUP_XXX_CTRL_X_PUP_K_TESTPLANENDFLOW_X_X_X_X_PRINTITUFF_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93120000_fail_TPI_PUP_XXX_CTRL_X_PUP_K_TESTPLANENDFLOW_X_X_X_X_PRINTITUFF_0;
+            IncrementCounters TPI_PUP_XXX::n93120000_fail_CTRL_X_PUP_K_TESTPLANENDFLOW_X_X_X_X_PRINTITUFF_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}

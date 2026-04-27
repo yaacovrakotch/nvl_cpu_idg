@@ -1,0 +1,140 @@
+Version 1.0;
+
+SpecificationSet cpu_fun_timing_CPU_PARAMS_pncarrmts400 (mts100_tstprtclk50_tck100,mts1000_tstprtclk500_tck62p5,mts1400_tstprtclk700_tck87p5,mts1500_tstprtclk750_tck93p75,mts1600_tstprtclk800_tck100,mts200_tstprtclk100_tck12p5,mts200_tstprtclk100_tck25,mts400_tstprtclk200_tck25,mts400_tstprtclk200_tck50,mts500_tstprtclk250_tck31p25,mts500_tstprtclk250_tck62p5,mts800_tstprtclk400_tck100,mts800_tstprtclk400_tck50,mts96_tstprtclk48_tck96_hvmclk96) Inherits __main__::pkg_cpu_fun_timing_CPU_PARAMS
+{
+	Double p_cpu_tstprt_i_drv_mul = 1.4;
+	Double p_cpu_tstprt_o_stb_mul = 1.4;
+}
+TestConditionGroup cpu_fun_timing_pncarrmts400_TCG
+{
+	SpecificationSet = cpu_fun_timing_CPU_PARAMS_pncarrmts400 ;
+	Timing = __main__::pkg_cpu_fun_timing;
+}
+
+TestCondition cpu_fun_timing_mts400_tstprtclk200_tck50_pncarrmts400
+{
+	TestConditionGroup = cpu_fun_timing_pncarrmts400_TCG;
+	Selector = mts400_tstprtclk200_tck50;
+}
+
+SpecificationSet cpu_fun_timing_CPU_PARAMS_pncarrmts800 (mts100_tstprtclk50_tck100,mts1000_tstprtclk500_tck62p5,mts1400_tstprtclk700_tck87p5,mts1500_tstprtclk750_tck93p75,mts1600_tstprtclk800_tck100,mts200_tstprtclk100_tck12p5,mts200_tstprtclk100_tck25,mts400_tstprtclk200_tck25,mts400_tstprtclk200_tck50,mts500_tstprtclk250_tck31p25,mts500_tstprtclk250_tck62p5,mts800_tstprtclk400_tck100,mts800_tstprtclk400_tck50,mts96_tstprtclk48_tck96_hvmclk96) Inherits __main__::pkg_cpu_fun_timing_CPU_PARAMS
+{
+	Double p_cpu_tstprt_i_drv_mul = 0.5;
+	Double p_cpu_tstprt_o_stb_mul = 0.9;
+}
+TestConditionGroup cpu_fun_timing_pncarrmts800_TCG
+{
+	SpecificationSet = cpu_fun_timing_CPU_PARAMS_pncarrmts800 ;
+	Timing = __main__::pkg_cpu_fun_timing;
+}
+
+TestCondition cpu_fun_timing_mts800_tstprtclk400_tck100_pncarrmts800
+{
+	TestConditionGroup = cpu_fun_timing_pncarrmts800_TCG;
+	Selector = mts800_tstprtclk400_tck100;
+}
+
+
+SpecificationSet cpu_hvm_timing_CPU_PARAMS_pncarrmts800_T0 (mts100_tstprtclk50_tck100,mts1000_tstprtclk500_tck62p5,mts1500_tstprtclk750_tck93p75,mts1500_tstprtclk750_tck93p75_dyn,mts1600_tstprtclk800_tck100,mts200_tstprtclk100_tck25,mts400_tstprtclk200_tck25,mts400_tstprtclk200_tck50,mts500_tstprtclk250_tck31p25,mts800_tstprtclk400_tck100,mts800_tstprtclk400_tck50,mts96_tstprtclk48_tck96_hvmclk96) Inherits __main__::pkg_cpu_hvm_timing_CPU_PARAMS_2
+{
+	Double cpu_tstprt_i_drv_mul = 1.3;
+	Double cpu_tstprt_o_stb_mul = 1.4;	
+}
+SpecificationSet cpu_hvm_timing_CPU_PARAMS_pncarrmts400_T0 (mts100_tstprtclk50_tck100,mts1000_tstprtclk500_tck62p5,mts1500_tstprtclk750_tck93p75,mts1500_tstprtclk750_tck93p75_dyn,mts1600_tstprtclk800_tck100,mts200_tstprtclk100_tck25,mts400_tstprtclk200_tck25,mts400_tstprtclk200_tck50,mts500_tstprtclk250_tck31p25,mts800_tstprtclk400_tck100,mts800_tstprtclk400_tck50,mts96_tstprtclk48_tck96_hvmclk96) Inherits __main__::pkg_cpu_hvm_timing_CPU_PARAMS_2
+{
+	Double cpu_tstprt_i_drv_mul = 1.6;
+	Double cpu_tstprt_o_stb_mul = 1.7;
+}
+TestConditionGroup cpu_hvm_timing_pncarrmts800_T0_TCG
+{
+	SpecificationSet = cpu_hvm_timing_CPU_PARAMS_pncarrmts800_T0;
+	Timing = __main__::pkg_cpu_hvm_timing;
+}
+TestConditionGroup cpu_hvm_timing_pncarrmts400_T0_TCG
+{
+	SpecificationSet = cpu_hvm_timing_CPU_PARAMS_pncarrmts400_T0;
+	Timing = __main__::pkg_cpu_hvm_timing;
+}
+TestCondition cpu_hvm_timing_mts800_tstprtclk400_tck100_pncarrmts800_T0
+{
+	TestConditionGroup = cpu_hvm_timing_pncarrmts800_T0_TCG;
+	Selector = mts800_tstprtclk400_tck100;
+}
+TestCondition cpu_hvm_timing_mts400_tstprtclk200_tck50_pncarrmts400_T0
+{
+	TestConditionGroup = cpu_hvm_timing_pncarrmts400_T0_TCG;
+	Selector = mts400_tstprtclk200_tck50;
+}
+SpecificationSet cpu_hvm_timing_CPU_PARAMS_pncarrmts800_T0_S16 (mts100_tstprtclk50_tck100,mts1000_tstprtclk500_tck62p5,mts1500_tstprtclk750_tck93p75,mts1500_tstprtclk750_tck93p75_dyn,mts1600_tstprtclk800_tck100,mts200_tstprtclk100_tck25,mts400_tstprtclk200_tck25,mts400_tstprtclk200_tck50,mts500_tstprtclk250_tck31p25,mts800_tstprtclk400_tck100,mts800_tstprtclk400_tck50,mts96_tstprtclk48_tck96_hvmclk96) Inherits __main__::pkg_cpu_hvm_timing_CPU_PARAMS_2
+{
+	Double cpu_tstprt_i_drv_mul = 1.9;
+	Double cpu_tstprt_o_stb_mul = 1.7;	
+}
+TestConditionGroup cpu_hvm_timing_pncarrmts800_T0_TCG_S16
+{
+	SpecificationSet = cpu_hvm_timing_CPU_PARAMS_pncarrmts800_T0_S16;
+	Timing = __main__::pkg_cpu_hvm_timing;
+}
+TestCondition cpu_hvm_timing_mts800_tstprtclk400_tck100_pncarrmts800_T0_S16
+{
+	TestConditionGroup = cpu_hvm_timing_pncarrmts800_T0_TCG_S16;
+	Selector = mts800_tstprtclk400_tck100;
+}
+SpecificationSet cpu_hvm_timing_CPU_PARAMS_pncarrmts400_T0_S16 (mts100_tstprtclk50_tck100,mts1000_tstprtclk500_tck62p5,mts1500_tstprtclk750_tck93p75,mts1500_tstprtclk750_tck93p75_dyn,mts1600_tstprtclk800_tck100,mts200_tstprtclk100_tck25,mts400_tstprtclk200_tck25,mts400_tstprtclk200_tck50,mts500_tstprtclk250_tck31p25,mts800_tstprtclk400_tck100,mts800_tstprtclk400_tck50,mts96_tstprtclk48_tck96_hvmclk96) Inherits __main__::pkg_cpu_hvm_timing_CPU_PARAMS_2
+{
+	Double cpu_tstprt_i_drv_mul = 2.0;
+	Double cpu_tstprt_o_stb_mul = 1.9;
+}
+TestConditionGroup cpu_hvm_timing_pncarrmts400_T0_TCG_S16
+{
+	SpecificationSet = cpu_hvm_timing_CPU_PARAMS_pncarrmts400_T0_S16;
+	Timing = __main__::pkg_cpu_hvm_timing;
+}
+TestCondition cpu_hvm_timing_mts400_tstprtclk200_tck50_pncarrmts400_T0_S16
+{
+	TestConditionGroup = cpu_hvm_timing_pncarrmts400_T0_TCG_S16;
+	Selector = mts400_tstprtclk200_tck50;
+}
+
+SpecificationSet cpu_hvm_timing_CPU_PARAMS_pncarrmts400_hxb0 (mts100_tstprtclk50_tck100,mts1000_tstprtclk500_tck62p5,mts1500_tstprtclk750_tck93p75,mts1500_tstprtclk750_tck93p75_dyn,mts1600_tstprtclk800_tck100,mts200_tstprtclk100_tck25,mts400_tstprtclk200_tck25,mts400_tstprtclk200_tck50,mts500_tstprtclk250_tck31p25,mts800_tstprtclk400_tck100,mts800_tstprtclk400_tck50,mts96_tstprtclk48_tck96_hvmclk96)  Inherits __main__::pkg_cpu_hvm_timing_CPU_PARAMS_2
+{
+	Double cpu_tstprt_i_drv_mul = 2.0;
+	Double cpu_tstprt_o_stb_mul = 2.0;
+}
+TestConditionGroup cpu_hvm_timing_pncarrmts400_hxb0
+{
+	SpecificationSet = cpu_hvm_timing_CPU_PARAMS_pncarrmts400_hxb0;
+	Timing = __main__::pkg_cpu_hvm_timing;
+}
+TestCondition cpu_hvm_timing_mts400_tstprtclk200_tck50_pncarrmts400_hxb0
+{
+	TestConditionGroup = cpu_hvm_timing_pncarrmts400_hxb0;
+	Selector = mts400_tstprtclk200_tck50;
+}
+
+SpecificationSet cpu_hvm_timing_CPU_PARAMS_dnls28c (mts100_tstprtclk50_tck100,mts1000_tstprtclk500_tck62p5,mts1500_tstprtclk750_tck93p75,mts1500_tstprtclk750_tck93p75_dyn,mts1600_tstprtclk800_tck100,mts200_tstprtclk100_tck25,mts400_tstprtclk200_tck25,mts400_tstprtclk200_tck50,mts500_tstprtclk250_tck31p25,mts800_tstprtclk400_tck100,mts800_tstprtclk400_tck50,mts96_tstprtclk48_tck96_hvmclk96)  Inherits __main__::pkg_cpu_hvm_timing_CPU_PARAMS_2
+{
+	Double cpu_tstprt_i_clk_mul	= 1.3;
+	Double cpu_tstprt_i_drv_mul = 1.8;
+	Double cpu_tstprt_o_stb_mul = 1.9;
+}
+TestConditionGroup cpu_hvm_timing_dnls28c
+{
+	SpecificationSet = cpu_hvm_timing_CPU_PARAMS_dnls28c;
+	Timing = __main__::pkg_cpu_hvm_timing;
+}
+TestCondition cpu_hvm_timing_mts800_tstprtclk400_tck100_dnls28c
+{
+	TestConditionGroup = cpu_hvm_timing_dnls28c;
+	Selector = mts800_tstprtclk400_tck100;
+}
+TestCondition cpu_hvm_timing_mts400_tstprtclk200_tck50_dnls28c
+{
+	TestConditionGroup = cpu_hvm_timing_dnls28c;
+	Selector = mts400_tstprtclk200_tck50;
+}
+TestCondition cpu_hvm_timing_mts100_tstprtclk50_tck100_dnls28c
+{
+	TestConditionGroup = cpu_hvm_timing_dnls28c;
+	Selector = mts100_tstprtclk50_tck100;
+}

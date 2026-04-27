@@ -1,0 +1,218 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan PTH_DLVR_CK48;
+
+Import "PTH_DLVR_CK48.usrv";
+Import "PTH_DLVR_CK48_LevelsSequences.lvl";
+Import "PTH_DLVR_CK48_Levels.tcg";
+Import "PTH_DLVR_CK48_PatternTrigger.ptm";
+
+# Test Counter Definition
+
+Counters
+{
+    n27720000_fail_DLVR_X_ANAMEAS_K_ENDCPUPKG_X_X_X_X_POWERLOSS_0,
+    n27720001_fail_DLVR_X_ANAMEAS_K_ENDCPUPKG_X_X_X_X_POWERLOSS_2,
+    n27720002_fail_DLVR_X_ANAMEAS_K_ENDCPUPKG_X_X_X_X_POWERLOSS_3,
+    n27720003_fail_DLVR_X_ANAMEAS_K_ENDCPUPKG_X_X_X_X_POWERLOSS_4,
+    n27720004_fail_DLVR_X_ANAMEAS_K_ENDCPUPKG_X_X_X_X_POWERLOSS_5,
+    n27910000_fail_DLVR_X_ANAMEAS_E_ENDCPUPKG_X_X_X_X_VCCIO_0,
+    n27910001_fail_DLVR_X_ANAMEAS_E_ENDCPUPKG_X_X_X_X_VCCIO_2,
+    n27910002_fail_DLVR_X_ANAMEAS_E_ENDCPUPKG_X_X_X_X_VCCIO_3,
+    n27910003_fail_DLVR_X_ANAMEAS_E_ENDCPUPKG_X_X_X_X_VCCIO_4,
+    n27910004_fail_DLVR_X_ANAMEAS_E_ENDCPUPKG_X_X_X_X_VCCIO_5,
+    n27930000_fail_DLVR_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_FUSECONFIG_ALL_X1_0,
+    p27915555_pass_DLVR_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_FUSECONFIG_ALL_X1_1,
+    p27915556_pass_DLVR_X_ANAMEAS_K_ENDCPUPKG_X_X_X_X_POWERLOSS_1,
+    p27915557_pass_DLVR_X_ANAMEAS_E_ENDCPUPKG_X_X_X_X_VCCIO_1
+} # End of Test Counter Definition
+
+CSharpTest PrimePatConfigTestMethod DLVR_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_FUSECONFIG_ALL_X1
+{
+    ConfigurationFile = "./InputFiles/PATCONFIG_NVL_48_FUSE.setpoints.json";
+    RegEx = "[gdx].......C........_.._......._............._...C............._.1.*";
+    SetPoint = "DLVR_FUSE_ALL_1";
+}
+
+CSharpTest AnalogDcTC DLVR_X_ANAMEAS_K_ENDCPUPKG_X_X_X_X_POWERLOSS
+{
+    Patlist = "pth_dlvr_power_loss_pkg_list";
+    LevelsTc = "PTH_DLVR_CK48::DLVR_VCCIA_1P0V_MIN";
+    TimingsTc = "BASE::pkg_cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = __shared__::TpRule.If_POSTFUSED(1,-1);
+    DataBaseFile = __shared__::TpRule.If_M_PKGs("./InputFiles/ANAMEAS_NVL_48_CLASS_PWRLOSS_M.json","./InputFiles/ANAMEAS_NVL_48_CLASS_PWRLOSS_D.json");
+    DatalogLevel = "PIN_DETAIL";
+    FlushLevels = "ENABLED";
+    MeasurementTypes = "C,C,C";
+    ParallelCtvProcessing = "DISABLED";
+    Pins = __shared__::TpRule.If_M_PKGs("VCCIA,VNNAON,V1P8_FLTRB","VCCIA,VNNAON,V1P8_CPU");
+    TriggerMapName = __shared__::TpRule.If_M_PKGs("PTH_DLVR_CK48::DLVR_VINOUT_VIEWPIN_TriggerMap_HX","PTH_DLVR_CK48::DLVR_VINOUT_VIEWPIN_TriggerMap");
+}
+
+CSharpTest AnalogDcTC DLVR_X_ANAMEAS_E_ENDCPUPKG_X_X_X_X_VCCIO
+{
+    Patlist = "pth_dlvr_vccio_meas_pkg_list";
+    LevelsTc = "PTH_DLVR_CK48::DLVR_VCCIA_1P0V_MIN";
+    TimingsTc = "BASE::pkg_cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = __shared__::TpRule.If_POSTFUSED(1,-1);
+    DataBaseFile = "./InputFiles/ANAMEAS_NVL_CLASS_VCCIO.json";
+    DatalogLevel = "PIN_DETAIL";
+    FlushLevels = "ENABLED";
+    MeasurementTypes = "V,V,V";
+    ParallelCtvProcessing = "DISABLED";
+    Pins = "VCCIA,VCCIO,VCCIO_OUT_SVID";
+    TriggerMapName = "PTH_DLVR_CK48::DLVR_VINOUT_VIEWPIN_TriggerMap";
+}
+
+Flow PTH_DLVR_CK48_STARTCPUPATMODSPKG @STARTCPUPATMODSPKG_SubFlow
+{
+    FlowItem DLVR_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_FUSECONFIG_ALL_X1 DLVR_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_FUSECONFIG_ALL_X1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99270700_fail_PTH_DLVR_CK48_DLVR_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_FUSECONFIG_ALL_X1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98270700_fail_PTH_DLVR_CK48_DLVR_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_FUSECONFIG_ALL_X1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b27930000_fail_PTH_DLVR_CK48_DLVR_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_FUSECONFIG_ALL_X1_0;
+            IncrementCounters PTH_DLVR_CK48::n27930000_fail_DLVR_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_FUSECONFIG_ALL_X1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            IncrementCounters PTH_DLVR_CK48::p27915555_pass_DLVR_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_FUSECONFIG_ALL_X1_1;
+            Return 1;
+        }
+    }
+    
+}
+
+Flow PTH_DLVR_CK48_ENDCPUPKG @ENDCPUPKG_SubFlow
+{
+    FlowItem DLVR_X_ANAMEAS_K_ENDCPUPKG_X_X_X_X_POWERLOSS DLVR_X_ANAMEAS_K_ENDCPUPKG_X_X_X_X_POWERLOSS
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99270701_fail_PTH_DLVR_CK48_DLVR_X_ANAMEAS_K_ENDCPUPKG_X_X_X_X_POWERLOSS_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98270701_fail_PTH_DLVR_CK48_DLVR_X_ANAMEAS_K_ENDCPUPKG_X_X_X_X_POWERLOSS_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b27720000_fail_PTH_DLVR_CK48_DLVR_X_ANAMEAS_K_ENDCPUPKG_X_X_X_X_POWERLOSS_0;
+            IncrementCounters PTH_DLVR_CK48::n27720000_fail_DLVR_X_ANAMEAS_K_ENDCPUPKG_X_X_X_X_POWERLOSS_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            IncrementCounters PTH_DLVR_CK48::p27915556_pass_DLVR_X_ANAMEAS_K_ENDCPUPKG_X_X_X_X_POWERLOSS_1;
+            GoTo DLVR_X_ANAMEAS_E_ENDCPUPKG_X_X_X_X_VCCIO;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b27720001_fail_PTH_DLVR_CK48_DLVR_X_ANAMEAS_K_ENDCPUPKG_X_X_X_X_POWERLOSS_2;
+            IncrementCounters PTH_DLVR_CK48::n27720001_fail_DLVR_X_ANAMEAS_K_ENDCPUPKG_X_X_X_X_POWERLOSS_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b27720002_fail_PTH_DLVR_CK48_DLVR_X_ANAMEAS_K_ENDCPUPKG_X_X_X_X_POWERLOSS_3;
+            IncrementCounters PTH_DLVR_CK48::n27720002_fail_DLVR_X_ANAMEAS_K_ENDCPUPKG_X_X_X_X_POWERLOSS_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b27720003_fail_PTH_DLVR_CK48_DLVR_X_ANAMEAS_K_ENDCPUPKG_X_X_X_X_POWERLOSS_4;
+            IncrementCounters PTH_DLVR_CK48::n27720003_fail_DLVR_X_ANAMEAS_K_ENDCPUPKG_X_X_X_X_POWERLOSS_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b27720004_fail_PTH_DLVR_CK48_DLVR_X_ANAMEAS_K_ENDCPUPKG_X_X_X_X_POWERLOSS_5;
+            IncrementCounters PTH_DLVR_CK48::n27720004_fail_DLVR_X_ANAMEAS_K_ENDCPUPKG_X_X_X_X_POWERLOSS_5;
+            Return 0;
+        }
+    }
+    
+    FlowItem DLVR_X_ANAMEAS_E_ENDCPUPKG_X_X_X_X_VCCIO DLVR_X_ANAMEAS_E_ENDCPUPKG_X_X_X_X_VCCIO @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99270702_fail_PTH_DLVR_CK48_DLVR_X_ANAMEAS_E_ENDCPUPKG_X_X_X_X_VCCIO_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98270702_fail_PTH_DLVR_CK48_DLVR_X_ANAMEAS_E_ENDCPUPKG_X_X_X_X_VCCIO_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b27910000_fail_PTH_DLVR_CK48_DLVR_X_ANAMEAS_E_ENDCPUPKG_X_X_X_X_VCCIO_0;
+            IncrementCounters PTH_DLVR_CK48::n27910000_fail_DLVR_X_ANAMEAS_E_ENDCPUPKG_X_X_X_X_VCCIO_0;
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            IncrementCounters PTH_DLVR_CK48::p27915557_pass_DLVR_X_ANAMEAS_E_ENDCPUPKG_X_X_X_X_VCCIO_1;
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b27910001_fail_PTH_DLVR_CK48_DLVR_X_ANAMEAS_E_ENDCPUPKG_X_X_X_X_VCCIO_2;
+            IncrementCounters PTH_DLVR_CK48::n27910001_fail_DLVR_X_ANAMEAS_E_ENDCPUPKG_X_X_X_X_VCCIO_2;
+            Return 1;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b27910002_fail_PTH_DLVR_CK48_DLVR_X_ANAMEAS_E_ENDCPUPKG_X_X_X_X_VCCIO_3;
+            IncrementCounters PTH_DLVR_CK48::n27910002_fail_DLVR_X_ANAMEAS_E_ENDCPUPKG_X_X_X_X_VCCIO_3;
+            Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b27910003_fail_PTH_DLVR_CK48_DLVR_X_ANAMEAS_E_ENDCPUPKG_X_X_X_X_VCCIO_4;
+            IncrementCounters PTH_DLVR_CK48::n27910003_fail_DLVR_X_ANAMEAS_E_ENDCPUPKG_X_X_X_X_VCCIO_4;
+            Return 1;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b27910004_fail_PTH_DLVR_CK48_DLVR_X_ANAMEAS_E_ENDCPUPKG_X_X_X_X_VCCIO_5;
+            IncrementCounters PTH_DLVR_CK48::n27910004_fail_DLVR_X_ANAMEAS_E_ENDCPUPKG_X_X_X_X_VCCIO_5;
+            Return 1;
+        }
+    }
+    
+}

@@ -1,0 +1,3817 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan PTH_POWER_CXPKGS9;
+
+Import "PTH_POWER_CXPKGS9.usrv";
+Import "PTH_POWER_CXPKGS9_LevelsSequences.lvl";
+Import "PTH_POWER_CXPKGS9_Levels.tcg";
+Import "PTH_POWER_CXPKGS9_PatternTrigger.ptm";
+
+#Test Counter Definition
+Counters
+{
+	n18002001_fail_POWER_X_PATCONFIG_E_STARTPWRCPU_X_X_X_X_DLVR_DELAY_DBG_0,
+	n18132022_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V2_CPU01_2,
+	n18132023_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V2_CPU01_5,
+	n18132024_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V2_RECOVERY_CPU01_2,
+	n18132025_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V2_RECOVERY_CPU01_5,
+	n18132026_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_CPU01_2,
+	n18132027_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_CPU01_5,
+	n18132028_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_RECOVERY_CPU01_2,
+	n18132029_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_RECOVERY_CPU01_5,
+	n18132030_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_CPU01_2,
+	n18132031_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_CPU01_5,
+	n18132032_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_RECOVERY_CPU01_2,
+	n18132033_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_RECOVERY_CPU01_5,
+	n18132034_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_RECOVERY_CPU01_2,
+	n18132035_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_RECOVERY_CPU01_5,
+	n18132036_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_CPU01_2,
+	n18132037_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_CPU01_5,
+	n18132038_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_CPU01_2,
+	n18132039_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_CPU01_5,
+	n18132040_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_RECOVERY_CPU01_2,
+	n18132041_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_RECOVERY_CPU01_5,
+	n18132042_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_RECOVERY_CPU01_2,
+	n18132043_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_RECOVERY_CPU01_5,
+	n18142073_fail_POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU0_0,
+	n18142074_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_CPU01_2,
+	n18142075_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_CPU01_5,
+	n18142076_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_CPU01_2,
+	n18142077_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_CPU01_5,
+	n18142078_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_RECOVERY_CPU01_2,
+	n18142079_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_RECOVERY_CPU01_5,
+	n18142080_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_RECOVERY_CPU01_2,
+	n18142081_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_RECOVERY_CPU01_5,
+	n18142082_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_CPU01_2,
+	n18142083_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_CPU01_5,
+	n18142084_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_RECOVERY_CPU01_2,
+	n18142085_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_RECOVERY_CPU01_5,
+	n18142086_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_CPU01_2,
+	n18142087_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_CPU01_5,
+	n18142088_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_RECOVERY_CPU01_2,
+	n18142089_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_RECOVERY_CPU01_5,
+	n18142090_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_CPU01_2,
+	n18142091_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_CPU01_5,
+	n18142092_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V1_CPU01_2,
+	n18142093_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V1_CPU01_5,
+	n18142094_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V1_RECOVERY_CPU01_2,
+	n18142095_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V1_RECOVERY_CPU01_5,
+	n18142096_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_CPU01_2,
+	n18142097_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_CPU01_5,
+	n18142098_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_RECOVERY_CPU01_2,
+	n18142099_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_RECOVERY_CPU01_5,
+	n18142100_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_CPU01_2,
+	n18142101_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_CPU01_5,
+	n18142102_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_RECOVERY_CPU01_2,
+	n18142103_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_RECOVERY_CPU01_5,
+	n18142104_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_RECOVERY_CPU01_2,
+	n18142105_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_RECOVERY_CPU01_5,
+	n18142106_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_CPU01_2,
+	n18142107_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_CPU01_5,
+	n18142108_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_CPU01_2,
+	n18142109_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_CPU01_5,
+	n18142110_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_RECOVERY_CPU01_2,
+	n18142111_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_RECOVERY_CPU01_5,
+	n18142112_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_RECOVERY_CPU01_2,
+	n18142113_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_RECOVERY_CPU01_5,
+	n18142114_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_CPU01_2,
+	n18142115_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_CPU01_5,
+	n18142116_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_CPU01_2,
+	n18142117_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_CPU01_5,
+	n18142118_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_RECOVERY_CPU01_2,
+	n18142119_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_RECOVERY_CPU01_5,
+	n18142120_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_RECOVERY_CPU01_2,
+	n18142121_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_RECOVERY_CPU01_5,
+	n18142122_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_CPU01_2,
+	n18142123_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_CPU01_5,
+	n18142124_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_RECOVERY_CPU01_2,
+	n18142125_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_RECOVERY_CPU01_5,
+	n18142126_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_CPU01_2,
+	n18142127_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_CPU01_5,
+	n18142128_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_RECOVERY_CPU01_2,
+	n18142129_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_RECOVERY_CPU01_5,
+	n18142130_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_CPU01_2,
+	n18142131_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_CPU01_5,
+	n18142132_fail_POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU1_0,
+	n18142133_fail_POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_INIT_CPU01_0,
+	n18142134_fail_POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_INIT_CPU01_2,
+	n18142135_fail_POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_INIT_CPU01_3,
+	n18142136_fail_POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP1_CPU01_0,
+	n18142137_fail_POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP1_CPU01_2,
+	n18142138_fail_POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP1_CPU01_3,
+	n18142139_fail_POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP1_CPU01_4,
+	n18142140_fail_POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP1_CPU01_5,
+	n18142141_fail_POWER_X_AUX_E_STARTPWRCPU_X_X_X_X_SICC_CPU01_0,
+	n18142142_fail_POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP2_CPU01_0,
+	n18142143_fail_POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP2_CPU01_2,
+	n18142144_fail_POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP2_CPU01_3,
+	n18142145_fail_POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP2_CPU01_4,
+	n18142146_fail_POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP2_CPU01_5,
+	n18152003_fail_POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU0_2,
+	n18152004_fail_POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU0_3,
+	n18152005_fail_POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU0_4,
+	n18152005_fail_POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_CAL_CPU01_0,
+	n18152006_fail_POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_CAL_CPU01_2,
+	n18152007_fail_CTRL_X_PWR_E_STARTPWRCPU_X_X_X_X_FLOWFORK_0,
+	n18152007_fail_POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_CAL_CPU01_3,
+	n18152008_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V1_SORT_SCALING_2,
+	n18152008_fail_POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_CAL_CPU01_4,
+	n18152009_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V1_SORT_SCALING_5,
+	n18152009_fail_POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_CAL_CPU01_5,
+	n18152010_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V1_RECOVERY_SORT_SCALING_2,
+	n18152011_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V1_RECOVERY_SORT_SCALING_5,
+	n18152012_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_SORT_SCALING_2,
+	n18152013_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_SORT_SCALING_5,
+	n18152014_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_RECOVERY_SORT_SCALING_2,
+	n18152015_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_RECOVERY_SORT_SCALING_5,
+	n18152016_fail_POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU1_2,
+	n18152017_fail_POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU1_3,
+	n18152018_fail_POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU1_4
+}
+
+CSharpTest PowerSequenceHandler CTRL_X_PWR_E_STARTPWRCPU_X_X_X_X_FLOWFORK
+{
+	ApplyPowerDown = "Always";
+	PowerDownTc = "CPU_IP_BASE::Power_dwn_IPC_xxx_pwrd_zerzer";
+	AlarmMode = "Enabled";
+	PostInstance = "Sleep(1000)";
+	BypassPort = PTH_POWER_CXPKGS9_Rules.PTHSICCFlowControl(-1,-1,2);
+}
+CSharpTest PTHGetSetGsdsDffTC POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU0
+{
+	ConfigurationFile = "./InputFiles/PTHGetSetGsdsDffTC_NVL_C816P_CLASS_DFF_CAPTURED_CPU0.json";
+	OPType = "DFF2GSDS";
+	PreInstance = "SetCurrentDieId("+__shared__::DFFVars.DIEID_CPU+")";
+#	PostInstance = "SetCurrentDieId(PKG)";
+	BypassPort = -1;
+}
+
+CSharpTest PTHGetSetGsdsDffTC POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU1
+{
+	BypassPort = -1;
+	ConfigurationFile = "./InputFiles/PTHGetSetGsdsDffTC_NVL_C816P_CLASS_DFF_CAPTURED_CPU1.json";
+	OPType = "DFF2GSDS";
+	PreInstance = "SetCurrentDieId("+__shared__::DFFVars.DIEID_CPU1+")";
+#	PostInstance = "SetCurrentDieId(PKG)";
+}
+
+#END_CPU1
+
+#START_CPU01
+
+CSharpTest ScreenTC POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_INIT_CPU01
+{
+	ScreenTestSet = "CLASS_POWER_INIT";
+	ScreenTestsFile = "./InputFiles/ScreenTC_NVL_C816P_CLASS_POWER_INIT.txt";
+	LogLevel = "Enabled";
+	BypassPort = -1;
+	InstanceSummaryMode = "Enabled";
+}
+
+CSharpTest PrimeThermalSingleMeasurementTestMethod POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP1_CPU01
+{
+	LowerTolerance = "30";
+	PinNames = "IPC::CPU_TDAU0,IPC::CPU1_TDAU0,";
+	UpperTolerance = "30";
+	UserVarStoreNames = "PTH_POWER_CXPKGS9::PTH_POWER_CXPKGS9.tdau_cpu_sicc_1,PTH_POWER_CXPKGS9::PTH_POWER_CXPKGS9.tdau_cpu_sicc_2";
+	LogLevel = "Enabled";
+	BypassPort = -1;
+	InstanceSummaryMode = "Enabled";
+}
+
+CSharpTest AuxiliaryTC POWER_X_AUX_E_STARTPWRCPU_X_X_X_X_SICC_CPU01
+{
+	Expression = "([PTH_POWER_CXPKGS9::PTH_POWER_CXPKGS9.tdau_cpu_sicc_1] + [PTH_POWER_CXPKGS9::PTH_POWER_CXPKGS9.tdau_cpu_sicc_2] + [PTH_POWER_CXPKGS9::PTH_POWER_CXPKGS9.tdau_cpu_sicc_3] + [PTH_POWER_CXPKGS9::PTH_POWER_CXPKGS9.tdau_cpu_sicc_4])/4";
+	DataType = "Double";
+	ResultToken = "G.U.D.CPU_SICC_TEMP";
+	Datalog = "Enabled";
+	BypassPort = -1;
+}
+
+CSharpTest PrimeThermalSingleMeasurementTestMethod POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP2_CPU01
+{
+	LowerTolerance = "30";
+	PinNames = "IPC::CPU_TDAU0,IPC::CPU1_TDAU0,";
+	UpperTolerance = "30";
+	UserVarStoreNames = "PTH_POWER_CXPKGS9::PTH_POWER_CXPKGS9.tdau_cpu_sicc_3,PTH_POWER_CXPKGS9::PTH_POWER_CXPKGS9.tdau_cpu_sicc_4";
+	BypassPort = -1;
+} 
+
+CSharpTest ScreenTC POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_CAL_CPU01
+{
+	ScreenTestSet = "CLASS_POWER_CALC";
+	ScreenTestsFile = "./InputFiles/ScreenTC_NVL_C816P_CLASS_POWER_CALC_P01.txt";
+	LogLevel = "Enabled";
+	BypassPort = -1;
+	InstanceSummaryMode = "Enabled";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V1_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_BYP_V1.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P70V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_byp_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p70_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V1_RECOVERY_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_BYP_V1.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P70V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_byp_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p70_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_BC0_V1.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P70V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_bc0_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p70_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_RECOVERY_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_BC0_V1.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P70V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_bc0_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p70_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_BC1_V1.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P70V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_bc1_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p70_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_RECOVERY_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_BC1_V1.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P70V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_bc1_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p70_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_RECOVERY_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_BC2_V1.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P70V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_bc2_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p70_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_BC2_V1.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P70V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_bc2_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p70_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_BC3_V1.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P70V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_bc3_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p70_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_RECOVERY_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_BC3_V1.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P70V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_bc2_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p70_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_RECOVERY_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_AT0_V1.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P70V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_at0_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p70_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_AT0_V1.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P70V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_at0_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p70_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_AT1_V1.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P70V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_at1_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p70_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_RECOVERY_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_AT1_V1.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P70V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_at1_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p70_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_RECOVERY_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_AT2_V1.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P70V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_at2_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p70_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_AT2_V1.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P70V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_at2_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p70_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_RECOVERY_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_CCF_V1.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P70V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_ccf_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p70_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_AT3_V1.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P70V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_at3_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p70_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_RECOVERY_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_AT3_V1.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P70V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_at3_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p70_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_CCF_V1.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P70V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_ccf_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p70_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V2_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_BYP_V2.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P95V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_byp_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p95_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V2_RECOVERY_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_BYP_V2.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P95V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_byp_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p95_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_BC0_V2.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P95V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_bc0_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p95_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_RECOVERY_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_BC0_V2.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P95V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_bc0_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p95_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_BC1_V2.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P95V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_bc1_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p95_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_RECOVERY_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_BC1_V2.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P95V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_bc1_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p95_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_RECOVERY_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_BC2_V2.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P95V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_bc2_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p95_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_BC2_V2.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P95V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_bc2_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p95_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_BC3_V2.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P95V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_bc3_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p95_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_RECOVERY_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_BC3_V2.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P95V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_bc3_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p95_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_RECOVERY_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_AT0_V2.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P95V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_at0_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p95_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_AT0_V2.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P95V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_at0_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p95_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_AT1_V2.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P95V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_at1_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p95_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_RECOVERY_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_AT1_V2.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P95V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_at1_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p95_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_RECOVERY_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_AT2_V2.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P95V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_at2_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p95_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_AT2_V2.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P95V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_at2_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p95_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_RECOVERY_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_CCF_V2.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P95V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_ccf_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p95_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_AT3_V2.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P95V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_at3_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p95_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_RECOVERY_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_AT3_V2.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P95V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_at3_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p95_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_CPU01
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_DCM3_CCF_V2.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P95V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_dcm3_ccf_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p95_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+#END_CPU01
+
+#START_SORT_SCALING
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V1_SORT_SCALING
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_SORT_SCALING_V1_PR0.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P70V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_idle_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p70_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V1_RECOVERY_SORT_SCALING
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_SORT_SCALING_V1_PR0.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P70V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_idle_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p70_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;	
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_SORT_SCALING
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_SORT_SCALING_V2_PR0.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P95V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_idle_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p95_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest AnalogDcTC POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_RECOVERY_SORT_SCALING
+{
+	DatalogLevel = "ALL";
+	DataBaseFile = "./InputFiles/AnalogDcTc_NVL_C816P_CLASS_DLVR_SORT_SCALING_V2_PR0.json";
+	LevelsTc = "IPC::PTH_POWER_CXPKGS9::PWR_VCCIA_0P95V_NOM";
+	Patlist = "pth_cpu_sicc_ph2all_idle_list";
+	Pins = "VCCIA";
+	TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	TriggerMapName = "IPC::PTH_POWER_CXPKGS9::sicc_0p95_24A_TriggerMap";
+	FlushLevels = "ENABLED";
+	SamplingCount = "35";
+	BypassPort = -1;
+	LogLevel = "Enabled";
+	InstanceSummaryMode = "Enabled";
+	AlarmPortRedirect = "ENABLED";
+#	MaskPins = "IPC::CPU_TDO";
+}
+
+CSharpTest PrimePatConfigTestMethod POWER_X_PATCONFIG_E_STARTPWRCPU_X_X_X_X_DLVR_DELAY_DBG
+{
+	ConfigurationFile = "./InputFiles/PTH_S52.patconfigsetpoints.json";
+	SetPoint = "S52C_DLVR_DELAY";
+	LogLevel = "Enabled";
+	BypassPort = -1;
+	InstanceSummaryMode = "Enabled";
+}
+Flow DCM3_V2_CPU01
+{
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V2_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V2_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182076_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V2_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182076_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V2_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18132022_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V2_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V2_RECOVERY_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18132023_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V2_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V2_RECOVERY_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V2_RECOVERY_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V2_RECOVERY_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182078_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V2_RECOVERY_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182078_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V2_RECOVERY_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18132024_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V2_RECOVERY_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18132025_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V2_RECOVERY_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182044_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182044_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18132026_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_RECOVERY_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18132027_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_RECOVERY_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_RECOVERY_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_RECOVERY_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182046_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_RECOVERY_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182046_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_RECOVERY_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18132028_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_RECOVERY_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18132029_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V2_RECOVERY_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182052_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182052_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18132030_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_RECOVERY_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18132031_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_RECOVERY_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_RECOVERY_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_RECOVERY_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182054_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_RECOVERY_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182054_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_RECOVERY_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18132032_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_RECOVERY_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18132033_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V2_RECOVERY_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_RECOVERY_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_RECOVERY_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182062_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_RECOVERY_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182062_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_RECOVERY_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18132034_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_RECOVERY_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18132035_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_RECOVERY_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182060_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182060_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18132036_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_RECOVERY_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18132037_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V2_RECOVERY_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182068_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182068_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18132038_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_RECOVERY_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18132039_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_RECOVERY_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_RECOVERY_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_RECOVERY_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182070_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_RECOVERY_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182070_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_RECOVERY_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18132040_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_RECOVERY_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18132041_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V2_RECOVERY_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_RECOVERY_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_RECOVERY_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182014_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_RECOVERY_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182014_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_RECOVERY_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18132042_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_RECOVERY_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18132043_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_RECOVERY_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182012_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182012_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142074_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_RECOVERY_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142075_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V2_RECOVERY_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182020_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182020_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142076_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_RECOVERY_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142077_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_RECOVERY_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_RECOVERY_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_RECOVERY_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182022_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_RECOVERY_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182022_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_RECOVERY_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142078_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_RECOVERY_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142079_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V2_RECOVERY_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_RECOVERY_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_RECOVERY_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182030_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_RECOVERY_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182030_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_RECOVERY_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142080_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_RECOVERY_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142081_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_RECOVERY_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182028_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182028_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142082_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_RECOVERY_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142083_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V2_RECOVERY_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_RECOVERY_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_RECOVERY_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182086_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_RECOVERY_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182086_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_RECOVERY_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142084_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_RECOVERY_CPU01_2;
+			Return 1;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142085_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_RECOVERY_CPU01_5;
+			Return 1;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182036_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182036_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142086_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_RECOVERY_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142087_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_RECOVERY_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_RECOVERY_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_RECOVERY_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182038_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_RECOVERY_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182038_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_RECOVERY_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142088_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_RECOVERY_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142089_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V2_RECOVERY_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182084_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182084_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142090_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_RECOVERY_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142091_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V2_RECOVERY_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+	}
+}
+Flow DCM3_V1_CPU01
+{
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V1_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V1_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182072_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V1_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182072_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V1_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142092_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V1_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V1_RECOVERY_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142093_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V1_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V1_RECOVERY_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V1_RECOVERY_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V1_RECOVERY_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182074_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V1_RECOVERY_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182074_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V1_RECOVERY_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142094_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V1_RECOVERY_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142095_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BYP_V1_RECOVERY_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182040_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182040_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142096_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_RECOVERY_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142097_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_RECOVERY_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_RECOVERY_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_RECOVERY_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182042_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_RECOVERY_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182042_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_RECOVERY_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142098_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_RECOVERY_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142099_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC0_V1_RECOVERY_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182048_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182048_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142100_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_RECOVERY_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142101_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_RECOVERY_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_RECOVERY_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_RECOVERY_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182050_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_RECOVERY_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182050_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_RECOVERY_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142102_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_RECOVERY_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142103_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC1_V1_RECOVERY_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_RECOVERY_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_RECOVERY_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182058_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_RECOVERY_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182058_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_RECOVERY_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142104_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_RECOVERY_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142105_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_RECOVERY_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182056_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182056_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142106_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_RECOVERY_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142107_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC2_V1_RECOVERY_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182064_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182064_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142108_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_RECOVERY_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142109_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_RECOVERY_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_RECOVERY_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_RECOVERY_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182066_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_RECOVERY_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182066_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_RECOVERY_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142110_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_RECOVERY_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142111_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_BC3_V1_RECOVERY_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_RECOVERY_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_RECOVERY_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182010_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_RECOVERY_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182010_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_RECOVERY_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142112_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_RECOVERY_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142113_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_RECOVERY_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182008_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182008_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142114_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_RECOVERY_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142115_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT0_V1_RECOVERY_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182016_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182016_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142116_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_RECOVERY_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142117_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_RECOVERY_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_RECOVERY_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_RECOVERY_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182018_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_RECOVERY_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182018_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_RECOVERY_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142118_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_RECOVERY_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142119_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT1_V1_RECOVERY_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_RECOVERY_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_RECOVERY_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182026_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_RECOVERY_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182026_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_RECOVERY_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142120_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_RECOVERY_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142121_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_RECOVERY_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182024_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182024_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142122_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_RECOVERY_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142123_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT2_V1_RECOVERY_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_RECOVERY_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_RECOVERY_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182082_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_RECOVERY_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182082_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_RECOVERY_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142124_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_RECOVERY_CPU01_2;
+			Return 1;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142125_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_RECOVERY_CPU01_5;
+			Return 1;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182032_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182032_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142126_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_RECOVERY_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142127_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_RECOVERY_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_RECOVERY_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_RECOVERY_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182034_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_RECOVERY_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182034_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_RECOVERY_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142128_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_RECOVERY_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142129_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_AT3_V1_RECOVERY_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_CPU01;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_CPU01 POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182080_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182080_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142130_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_CPU01_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_RECOVERY_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142131_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_CPU01_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_CCF_V1_RECOVERY_CPU01;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+	}
+}
+
+Flow DCM3_CPU01
+{
+	FlowItem DCM3_V1_CPU01 DCM3_V1_CPU01
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			GoTo DCM3_V2_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo DCM3_V2_CPU01;
+		}
+	}
+	FlowItem DCM3_V2_CPU01 DCM3_V2_CPU01
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			Return 1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+	}
+}
+Flow LVL_CPU01
+{
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V1_SORT_SCALING POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V1_SORT_SCALING @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182088_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V1_SORT_SCALING_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182088_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V1_SORT_SCALING_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_SORT_SCALING;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_SORT_SCALING;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18152008_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V1_SORT_SCALING_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V1_RECOVERY_SORT_SCALING;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_SORT_SCALING;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_SORT_SCALING;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18152009_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V1_SORT_SCALING_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V1_RECOVERY_SORT_SCALING;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_SORT_SCALING;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V1_RECOVERY_SORT_SCALING POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V1_RECOVERY_SORT_SCALING @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182087_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V1_RECOVERY_SORT_SCALING_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182087_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V1_RECOVERY_SORT_SCALING_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_SORT_SCALING;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_SORT_SCALING;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18152010_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V1_RECOVERY_SORT_SCALING_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_SORT_SCALING;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_SORT_SCALING;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_SORT_SCALING;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18152011_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V1_RECOVERY_SORT_SCALING_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_SORT_SCALING;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_SORT_SCALING;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_SORT_SCALING POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_SORT_SCALING @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182090_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_SORT_SCALING_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182090_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_SORT_SCALING_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18152012_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_SORT_SCALING_2;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_RECOVERY_SORT_SCALING;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18152013_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_SORT_SCALING_5;
+			GoTo POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_RECOVERY_SORT_SCALING;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+	}
+	FlowItem POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_RECOVERY_SORT_SCALING POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_RECOVERY_SORT_SCALING @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182089_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_RECOVERY_SORT_SCALING_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182089_fail_PTH_POWER_CXPKGS9_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_RECOVERY_SORT_SCALING_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18152014_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_RECOVERY_SORT_SCALING_2;
+			Return 1;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18152015_fail_POWER_X_MEASURE_E_STARTPWRCPU_X_X_X_X_DLVR_PS7_V2_RECOVERY_SORT_SCALING_5;
+			Return 1;
+		}
+		Result 6
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+	}
+
+}
+Flow DFF_CPU01
+{
+	FlowItem POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU0 POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU0 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182005_fail_PTH_POWER_CXPKGS9_POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU0_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182005_fail_PTH_POWER_CXPKGS9_POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU0_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142073_fail_POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU0_0;
+			GoTo POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18152003_fail_POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU0_2;
+			GoTo POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU1;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18152004_fail_POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU0_3;
+			GoTo POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU1;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18152005_fail_POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU0_4;
+			GoTo POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU1;
+		}
+	}
+	FlowItem POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU1 POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU1 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182006_fail_PTH_POWER_CXPKGS9_POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU1_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182006_fail_PTH_POWER_CXPKGS9_POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU1_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142132_fail_POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU1_0;
+			Return 1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18152016_fail_POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU1_2;
+			Return 1;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18152017_fail_POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU1_3;
+			Return 1;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18152018_fail_POWER_X_DFFCDIE_E_STARTPWRCPU_X_X_X_X_X_CPU1_4;
+			Return 1;
+		}
+	}
+}
+Flow PARALLEL_CPU01
+{
+	FlowItem POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_INIT_CPU01 POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_INIT_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182096_fail_PTH_POWER_CXPKGS9_POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_INIT_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182096_fail_PTH_POWER_CXPKGS9_POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_INIT_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142133_fail_POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_INIT_CPU01_0;
+			GoTo POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP1_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP1_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142134_fail_POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_INIT_CPU01_2;
+			GoTo POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP1_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142135_fail_POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_INIT_CPU01_3;
+			GoTo POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP1_CPU01;
+		}
+	}
+	FlowItem POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP1_CPU01 POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP1_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182098_fail_PTH_POWER_CXPKGS9_POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP1_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182098_fail_PTH_POWER_CXPKGS9_POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP1_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142136_fail_POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP1_CPU01_0;
+			GoTo LVL_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo LVL_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142137_fail_POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP1_CPU01_2;
+			GoTo LVL_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142138_fail_POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP1_CPU01_3;
+			GoTo LVL_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142139_fail_POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP1_CPU01_4;
+			GoTo LVL_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142140_fail_POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP1_CPU01_5;
+			GoTo LVL_CPU01;
+		}
+	}
+	FlowItem POWER_X_AUX_E_STARTPWRCPU_X_X_X_X_SICC_CPU01 POWER_X_AUX_E_STARTPWRCPU_X_X_X_X_SICC_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182003_fail_PTH_POWER_CXPKGS9_POWER_X_AUX_E_STARTPWRCPU_X_X_X_X_SICC_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182003_fail_PTH_POWER_CXPKGS9_POWER_X_AUX_E_STARTPWRCPU_X_X_X_X_SICC_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142141_fail_POWER_X_AUX_E_STARTPWRCPU_X_X_X_X_SICC_CPU01_0;
+			GoTo POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_CAL_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_CAL_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_CAL_CPU01;
+		}
+	}
+	FlowItem POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP2_CPU01 POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP2_CPU01 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182100_fail_PTH_POWER_CXPKGS9_POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP2_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182100_fail_PTH_POWER_CXPKGS9_POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP2_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142142_fail_POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP2_CPU01_0;
+			GoTo POWER_X_AUX_E_STARTPWRCPU_X_X_X_X_SICC_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_AUX_E_STARTPWRCPU_X_X_X_X_SICC_CPU01;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142143_fail_POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP2_CPU01_2;
+			GoTo POWER_X_AUX_E_STARTPWRCPU_X_X_X_X_SICC_CPU01;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142144_fail_POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP2_CPU01_3;
+			GoTo POWER_X_AUX_E_STARTPWRCPU_X_X_X_X_SICC_CPU01;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142145_fail_POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP2_CPU01_4;
+			GoTo POWER_X_AUX_E_STARTPWRCPU_X_X_X_X_SICC_CPU01;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18142146_fail_POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP2_CPU01_5;
+			GoTo POWER_X_AUX_E_STARTPWRCPU_X_X_X_X_SICC_CPU01;
+		}
+	}
+	FlowItem POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_CAL_CPU01 POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_CAL_CPU01
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182094_fail_PTH_POWER_CXPKGS9_POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_CAL_CPU01_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182094_fail_PTH_POWER_CXPKGS9_POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_CAL_CPU01_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18152005_fail_POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_CAL_CPU01_0;
+			SetBin b18152005_fail_PTH_POWER_CXPKGS9_POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_CAL_CPU01_0;
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18152006_fail_POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_CAL_CPU01_2;
+			SetBin b18152006_fail_PTH_POWER_CXPKGS9_POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_CAL_CPU01_2;
+			Return 0;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18152007_fail_POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_CAL_CPU01_3;
+			SetBin b18152007_fail_PTH_POWER_CXPKGS9_POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_CAL_CPU01_3;
+			Return 0;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18152008_fail_POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_CAL_CPU01_4;
+			SetBin b18152008_fail_PTH_POWER_CXPKGS9_POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_CAL_CPU01_4;
+			Return 0;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18152009_fail_POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_CAL_CPU01_5;
+			SetBin b18152009_fail_PTH_POWER_CXPKGS9_POWER_X_SCREEN_E_STARTPWRCPU_X_X_X_X_CAL_CPU01_5;
+			Return 0;
+		}
+	}
+	FlowItem DCM3_CPU01 DCM3_CPU01
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			GoTo POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP2_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_TDAU_E_STARTPWRCPU_X_X_X_X_TEMP2_CPU01;
+		}
+	}
+	FlowItem LVL_CPU01 LVL_CPU01
+	{
+		Result -2 { Property PassFail = "Fail"; Return -2; }
+		Result -1 { Property PassFail = "Fail"; Return -1; }
+		Result 0 { Property PassFail = "Fail";
+			GoTo DCM3_CPU01; }
+		Result 1 { Property PassFail = "Pass";
+			GoTo DCM3_CPU01; }
+	}
+}
+Flow PTH_POWER_CXPKGS9_STARTPWRCPU @STARTPWRCPU_SubFlow
+{
+	FlowItem CTRL_X_PWR_E_STARTPWRCPU_X_X_X_X_FLOWFORK CTRL_X_PWR_E_STARTPWRCPU_X_X_X_X_FLOWFORK @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182001_fail_PTH_POWER_CXPKGS9_CTRL_X_PWR_E_STARTPWRCPU_X_X_X_X_FLOWFORK_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182001_fail_PTH_POWER_CXPKGS9_CTRL_X_PWR_E_STARTPWRCPU_X_X_X_X_FLOWFORK_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18152007_fail_CTRL_X_PWR_E_STARTPWRCPU_X_X_X_X_FLOWFORK_0;
+			GoTo POWER_X_PATCONFIG_E_STARTPWRCPU_X_X_X_X_DLVR_DELAY_DBG;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo POWER_X_PATCONFIG_E_STARTPWRCPU_X_X_X_X_DLVR_DELAY_DBG;
+		}
+		Result 2
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+	}
+	FlowItem DFF_CPU01 DFF_CPU01
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			GoTo PARALLEL_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo PARALLEL_CPU01;
+		}
+	}
+	FlowItem PARALLEL_CPU01 PARALLEL_CPU01 @STARTPWRCPU_Subflow
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+	}
+	FlowItem POWER_X_PATCONFIG_E_STARTPWRCPU_X_X_X_X_DLVR_DELAY_DBG POWER_X_PATCONFIG_E_STARTPWRCPU_X_X_X_X_DLVR_DELAY_DBG @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin b99182092_fail_PTH_POWER_CXPKGS9_POWER_X_PATCONFIG_E_STARTPWRCPU_X_X_X_X_DLVR_DELAY_DBG_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin b98182092_fail_PTH_POWER_CXPKGS9_POWER_X_PATCONFIG_E_STARTPWRCPU_X_X_X_X_DLVR_DELAY_DBG_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters PTH_POWER_CXPKGS9::n18002001_fail_POWER_X_PATCONFIG_E_STARTPWRCPU_X_X_X_X_DLVR_DELAY_DBG_0;
+			GoTo DFF_CPU01;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo DFF_CPU01;
+		}
+	}
+}

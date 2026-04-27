@@ -1,0 +1,52 @@
+Version 1.0;
+
+UserVars FUN_ATOM_CX816_Specs
+#Still using dummy values for the user variables
+{
+	Const String L2_Recovery_Tracking_In = "ACRM3,ACRM2,ACRM1,ACRM0";
+	Const String L2_Recovery_Tracking_Out = "ACRM3,ACRM2,ACRM1,ACRM0";
+	#Const String L2_LOCKSTEP_Pin_Map = "ACRM3,ACRM2,ACRM1,ACRM0";
+	#Const String SLC_DRAGON_Pin_Map = "ACRM3,ACRM2,ACRM1,ACRM0";
+	Const String L2_Pin_Map = "ATOM3,ATOM2,ATOM1,ATOM0";
+    Const Integer Fail_Capture_Count = 100;
+	Const Double StepSize = 0.01;
+	Const String recov_pinmap_l2_lockstep = "FATOM_CX816_L2_Lockstep_Pinmap";
+	Const String dtsconfig_noctv = "ALL_CDIE_S28C";
+	Const String dtsconfig_noctv_S28C_n2p = "ALL_CDIE_S28C_N2P";
+	Const String dtsconfig_noctv_S52C_n2p = "ALL_CDIE_S28C_N2P";
+	Const String dtsconfig_noctv_HX28C_n2p = "ALL_CDIE_S28C_N2P";
+	Const String dtsconfig_noctv_P16C_n2p = "ALL_CDIE_S28C_N2P";
+	Const String recov_pinmap_l2_dragon = "FATOM_CX816_L2_Dragon_Pinmap";
+	Const String recov_pinmap_slc_dragon = "FATOM_CX816_SLC_Dragon_Pinmap";
+	Const String recov_pinmap_l2_lockstep_freq = "FATOM_CX816_L2_Lockstep_Pinmap_Freq";
+	Const String recov_pinmap_l2_dragon_freq = "FATOM_CX816_L2_Dragon_Pinmap_Freq";
+	Const String recov_pinmap_slc_dragon_freq = "FATOM_CX816_SLC_Dragon_Pinmap_Freq";
+	Array<String> Apex_Multipass = ["1110","1101","1011","0111"];
+
+ 
+}
+UserVars FunThermal
+{
+	String Thermal70 = "ApplyControlSetpoint(--setpoint 70 --uei IPC::UEISLAVE_IPC --index 30 --diode IPC::CPU_TDAU0 --time 6000 --tolerance 4)";
+	String Thermal75 = "ApplyControlSetpoint(--setpoint 75 --uei IPC::UEISLAVE_IPC --index 31 --diode IPC::CPU_TDAU0 --time 6000 --tolerance 4)";
+	String Thermal80 = "ApplyControlSetpoint(--setpoint 80 --uei IPC::UEISLAVE_IPC --index 32 --diode IPC::CPU_TDAU0 --time 6000 --tolerance 4)";
+	String Thermal85 = "ApplyControlSetpoint(--setpoint 85 --uei IPC::UEISLAVE_IPC --index 33 --diode IPC::CPU_TDAU0 --time 6000 --tolerance 4)";
+	String Thermal90 = "ApplyControlSetpoint(--setpoint 90 --uei IPC::UEISLAVE_IPC --index 34 --diode IPC::CPU_TDAU0 --time 6000 --tolerance 4)";
+	String Thermal100 = "ApplyControlSetpoint(--setpoint 100 --uei IPC::UEISLAVE_IPC --index 3 --diode IPC::CPU_TDAU0 --time 6000 --tolerance 10)";
+	String RCT70 = "--setpoint 70 --uei IPC::UEISLAVE_IPC --index 30 --diode IPC::CPU_TDAU0 --time 6000 --tolerance 4";
+	String RCT75 = "--setpoint 75 --uei IPC::UEISLAVE_IPC --index 31 --diode IPC::CPU_TDAU0 --time 6000 --tolerance 4";
+	String RCT80 = "--setpoint 80 --uei IPC::UEISLAVE_IPC --index 32 --diode IPC::CPU_TDAU0 --time 6000 --tolerance 4";
+	String RCT85 = "--setpoint 85 --uei IPC::UEISLAVE_IPC --index 33 --diode IPC::CPU_TDAU0 --time 6000 --tolerance 4";
+	String RCT90 = "--setpoint 90 --uei IPC::UEISLAVE_IPC --index 34 --diode IPC::CPU_TDAU0 --time 6000 --tolerance 4";
+	String RCT100 = "--setpoint 100 --uei IPC::UEISLAVE_IPC --index 3 --diode IPC::CPU_TDAU0 --time 6000 --tolerance 10";
+}
+
+SelectorRuleCollection  FUN_ATOM_CX816_Rules
+{
+	SelectorRule If_HOT (CHOT, PHOT, DEFAULT)
+    {
+        CHOT => contains(__shared__::LocationSets.CHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		PHOT => contains(__shared__::LocationSets.PHMHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+        DEFAULT;
+    }
+}

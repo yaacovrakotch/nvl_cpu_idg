@@ -1,0 +1,308 @@
+{
+    "CTV": [
+        {
+            "PinName": "CPU_TDO",
+            "Equations": [
+            {
+				"RegName": "CPU_PG_AVG_DIV_01_0_RINGPRIM",
+				"StartBit": 0,
+				"Length": 22,
+				"SaveResult": true,
+				"Equation": "Bin2Dec([This])/4"
+			},
+			{
+				"RegName": "CPU_TEL_VRCI_01_0_RINGPRIM",
+				"StartBit": 22,
+				"Length": 16,
+				"SaveResult": true
+			},
+			{
+				"RegName": "CPU_SIRP_01_0_RINGPRIM",
+				"StartBit": 38,
+				"Length": 11,
+				"SaveResult": true
+			},
+			{
+				"RegName": "CPU_ADCVCSX_01_0_RINGPRIM",
+				"StartBit": 49,
+				"Length": 20,
+				"SaveResult": true
+			},
+			{
+				"RegName": "CPU_LIMC_01_0_RINGPRIM",
+				"StartBit": 69,
+				"Length": 11,
+				"SaveResult": true
+			},
+			{
+				"RegName": "CPU_ADC_01_0_RINGPRIM",
+				"StartBit": 80,
+				"Length": 10,
+				"SaveResult": true
+			},
+			{
+				"RegName": "CPU_ADC_01_0_RINGSEC0",
+				"StartBit": 90,
+				"Length": 10,
+				"SaveResult": true
+			},
+			{
+				"RegName": "CPU_PG_AVG_DIV_01_1_RINGPRIM",
+				"StartBit": 100,
+				"Length": 22,
+				"SaveResult": true,
+				"Equation": "Bin2Dec([This])/4"
+			},
+			{
+				"RegName": "CPU_TEL_VRCI_01_1_RINGPRIM",
+				"StartBit": 122,
+				"Length": 16,
+				"SaveResult": true
+			},
+			{
+				"RegName": "CPU_SIRP_01_1_RINGPRIM",
+				"StartBit": 138,
+				"Length": 11,
+				"SaveResult": true
+			},
+			{
+				"RegName": "CPU_ADCVCSX_01_1_RINGPRIM",
+				"StartBit": 149,
+				"Length": 20,
+				"SaveResult": true
+			},
+			{
+				"RegName": "CPU_LIMC_01_1_RINGPRIM",
+				"StartBit": 169,
+				"Length": 11,
+				"SaveResult": true
+			},
+			{
+				"RegName": "CPU_ADC_01_1_RINGPRIM",
+				"StartBit": 180,
+				"Length": 10,
+				"SaveResult": true
+			},
+			{
+				"RegName": "CPU_ADC_01_1_RINGSEC0",
+				"StartBit": 190,
+				"Length": 10,
+				"SaveResult": true
+			},
+			{
+				"RegName": "CPU_PG_AVG_DIV_0_0_RINGPRIM",
+				"StartBit": 200,
+				"Length": 22,
+				"SaveResult": true,
+				"Equation": "Bin2Dec([This])/4"
+			},
+			{
+				"RegName": "CPU_TEL_VRCI_0_0_RINGPRIM",
+				"StartBit": 222,
+				"Length": 16,
+				"SaveResult": true
+			},
+			{
+				"RegName": "CPU_SIRP_0_0_RINGPRIM",
+				"StartBit": 238,
+				"Length": 11,
+				"SaveResult": true
+			},
+			{
+				"RegName": "CPU_ADCVCSX_0_0_RINGPRIM",
+				"StartBit": 249,
+				"Length": 20,
+				"SaveResult": true
+			},
+			{
+				"RegName": "CPU_LIMC_0_0_RINGPRIM",
+				"StartBit": 269,
+				"Length": 11,
+				"SaveResult": true
+			},
+			{
+				"RegName": "CPU_ADC_0_0_RINGPRIM",
+				"StartBit": 280,
+				"Length": 10,
+				"SaveResult": true
+			},
+			{
+				"RegName": "CPU_ADC_0_0_RINGSEC0",
+				"StartBit": 290,
+				"Length": 10,
+				"SaveResult": true
+			},
+			{
+				"RegName": "CPU_PG_AVG_DIV_0_1_RINGPRIM",
+				"StartBit": 300,
+				"Length": 22,
+				"SaveResult": true,
+				"Equation": "Bin2Dec([This])/4"
+			},
+			{
+				"RegName": "CPU_TEL_VRCI_0_1_RINGPRIM",
+				"StartBit": 322,
+				"Length": 16,
+				"SaveResult": true
+			},
+			{
+				"RegName": "CPU_SIRP_0_1_RINGPRIM",
+				"StartBit": 338,
+				"Length": 11,
+				"SaveResult": true
+			},
+			{
+				"RegName": "CPU_ADCVCSX_0_1_RINGPRIM",
+				"StartBit": 349,
+				"Length": 20,
+				"SaveResult": true
+			},
+			{
+				"RegName": "CPU_LIMC_0_1_RINGPRIM",
+				"StartBit": 369,
+				"Length": 11,
+				"SaveResult": true
+			},
+			{
+				"RegName": "CPU_ADC_0_1_RINGPRIM",
+				"StartBit": 380,
+				"Length": 10,
+				"SaveResult": true
+			},
+			{
+				"RegName": "CPU_ADC_0_1_RINGSEC0",
+				"StartBit": 390,
+				"Length": 10,
+				"SaveResult": true
+			}
+            ]
+        }
+    ],
+    "DC": [
+        {
+            "Measurements": {
+                "VCCIA": {
+                    "Pin": "IPC::VCCIA",
+                    "Average": 10,
+                    "Expect": 40
+                }
+            },
+            "Equations": [
+                {
+                    "Name": "CPU_RING01_LOLOAD",
+                    "Expression": "Round(SelectArrayElement([VCCIA], 0), 3)",
+                    "SaveResult": true
+                },
+                {
+                    "Name": "CPU_RING01_HILOAD",
+                    "Expression": "Round(SelectArrayElement([VCCIA], 1), 3)",
+                    "SaveResult": true
+                },
+                {
+                    "Name": "CPU_RING0_LOLOAD",
+                    "Expression": "Round(SelectArrayElement([VCCIA], 2), 3)",
+                    "SaveResult": true
+                },
+                {
+                    "Name": "CPU_RING0_HILOAD",
+                    "Expression": "Round(SelectArrayElement([VCCIA], 3), 3)",
+                    "SaveResult": true
+                },
+            ]
+        },
+        {
+            "Domains": [
+                "RING01",
+                "RING0"
+            ],
+            "Equations": [
+                {
+                    "Expression": "[CPU_{DOMAIN}_LOLOAD]"
+                }
+            ]
+        },
+        {
+            "Domains": [
+                "RING01",
+                "RING0"
+            ],
+            "Equations": [
+                {
+                    "Expression": "[CPU_{DOMAIN}_HILOAD]"
+                }
+            ]
+        },
+        {
+            "Domains": [
+                "01",
+                "0"
+            ],
+            "Equations": [
+                {
+                    "Expression": "[CPU_PG_AVG_DIV_{DOMAIN}_0_RINGPRIM]"
+                }
+            ]
+        },
+        {
+            "Domains": [
+                "01",
+                "0"
+            ],
+            "Equations": [
+                {
+                    "Expression": "[CPU_PG_AVG_DIV_{DOMAIN}_1_RINGPRIM]"
+                }
+            ]
+        },
+        {
+            "Domains": ["01","0"],
+            "Token": "PGCODE_DELTA_CHK",
+            "Equations": [
+                {
+                    "Expression": "if(ToInt32(CPU_PG_AVG_DIV_{DOMAIN}_0_RINGPRIM) = ToInt32(CPU_PG_AVG_DIV_{DOMAIN}_1_RINGPRIM), 1, 0)",
+                    "HighLimit": "0"
+                },
+            ]
+        },
+        {
+            "Equations": [
+                {
+                    "Expression": "Round(((([CPU_RING01_HILOAD] - [CPU_RING01_LOLOAD])/([CPU_PG_AVG_DIV_01_1_RINGPRIM] - [CPU_PG_AVG_DIV_01_0_RINGPRIM]))/144)*1000000, 4)",
+					"DatalogFormat": "DBL",
+                    "SaveToSharedStorage": "CPU_GANG_ALLRING_EN"
+                },
+                {
+                    "Expression": "Round(((([CPU_RING0_HILOAD] - [CPU_RING0_LOLOAD])/([CPU_PG_AVG_DIV_0_1_RINGPRIM] - [CPU_PG_AVG_DIV_0_0_RINGPRIM]))/72)*1000000, 4)",
+                    "DatalogFormat": "DBL",
+                    "SaveToSharedStorage": "CPU_GANG_EN_RINGPRIM"
+                }
+            ]
+        },
+        {
+            "Domains": [
+                "0_RINGPRIM",
+                "0_RINGSEC0",
+                "1_RINGPRIM",
+                "1_RINGSEC0"
+            ],
+            "Equations": [
+                {
+                    "Expression": "[CPU_ADC_01_{DOMAIN}]"
+                }
+            ]
+        },
+        {
+            "Domains": [
+                "0_RINGPRIM",
+                "0_RINGSEC0",
+                "1_RINGPRIM",
+                "1_RINGSEC0"
+            ],
+            "Equations": [
+                {
+                    "Expression": "[CPU_ADC_0_{DOMAIN}]"
+                }
+            ]
+        },
+    ]
+}

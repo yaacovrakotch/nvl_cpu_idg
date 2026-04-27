@@ -1,0 +1,220 @@
+{
+	"Configurations": [
+		{
+			"Name": "FULLSPEED_LB_DEFAULT_ORI",
+			"ConfigurationElement": [
+				{
+					"Type": "PINDATA",
+					"IsChannelLink": false,
+					"Pin": [ "IPC::CPU_TDI" ],
+					"StartAddress": [ "PAR_IOBOT__TDR_OUT_TX_DEEMPH_PDB0__MPE_TXPD_CALIBRATION_SEQ_0_13" ],
+					"StartAddressOffset": [ 0 ],
+					"EndAddress": [ "PAR_IOBOT__TDR_OUT_TX_DEEMPH_PDB0__MPE_TXPD_CALIBRATION_SEQ_0_13" ],
+					"EndAddressOffset": [ 59 ],
+					"Ratio": 1,
+					"Data": "110000100011110011110011110011110011110011110011110011110011",
+					"PatternsRegEx": [
+						".*hptp_precat.*"
+					]
+				}
+			]
+		},
+        		{
+			"Name": "FULLSPEED_LB_DEFAULT",
+			"ConfigurationElement": [
+				{
+					"Type": "PINDATA",
+					"IsChannelLink": false,
+					"Pin": [ "IPC::CPU_TDI" ],
+					"StartAddress": [ "PAR_IOBOT_HPTP_WRAPPER_HPTP_TDR_WRAPPER_INST_HPTP_TDR_INST_HPTP_DATA_REG_TDR_OUT_TX_DEEMPH_PDB0__patmod_0_19" ],
+					"StartAddressOffset": [ 0 ],
+					"EndAddress": [ "PAR_IOBOT_HPTP_WRAPPER_HPTP_TDR_WRAPPER_INST_HPTP_TDR_INST_HPTP_DATA_REG_TDR_OUT_TX_DEEMPH_PDB0__patmod_0_19" ],
+					"EndAddressOffset": [ 59 ],
+					"Ratio": 1,
+					"PatternsRegEx": [
+						".*mpe_txpu_calibration_patmod*"
+					]
+				}
+			]
+		},
+				{
+			"Name": "TXCOMP_OVR",
+			"ConfigurationElement": [
+				{
+					"Type": "PINDATA",
+					"IsChannelLink": false,
+					"Pin": [ "IPC::CPU_TDI" ],
+					"StartAddress": [ "PAR_IOBOT_HPTP_WRAPPER_HPTP_TDR_WRAPPER_INST_HPTP_TDR_INST_HPTP_DATA_REG_TDR_OUT_TX_DEEMPH_PDB0__txpu_0_.*" ],
+					"StartAddressOffset": [ 0 ],
+					"EndAddress": [ "^" ],
+					"EndAddressOffset": [ 5 ],
+					"Ratio": 1,
+                    "Data": "111111",
+					"PatternsRegEx": [
+						".*mpe_txpu_calibration_seq"
+					],
+					"ValidationMode": "ALLOW_LABEL_NO_MATCHING"
+				},
+				{
+					"Type": "PINDATA",
+					"IsChannelLink": false,
+					"Pin": [ "IPC::CPU_TDI" ],
+					"StartAddress": [ "PAR_IOBOT_HPTP_WRAPPER_HPTP_TDR_WRAPPER_INST_HPTP_TDR_INST_HPTP_DATA_REG_TDR_OUT_TX_MAIN_PDB0__txpu_0_.*" ],
+					"StartAddressOffset": [ 0 ],
+					"EndAddress": [ "^" ],
+					"EndAddressOffset": [ 5 ],
+					"Ratio": 1,
+                    "Data": "111111",
+					"PatternsRegEx": [
+						".*mpe_txpu_calibration_seq"
+					],
+					"ValidationMode": "ALLOW_LABEL_NO_MATCHING"
+				},
+                {
+					"Type": "PINDATA",
+					"IsChannelLink": false,
+					"Pin": [ "IPC::CPU_TDI" ],
+					"StartAddress": [ "PAR_IOBOT_HPTP_WRAPPER_HPTP_TDR_WRAPPER_INST_HPTP_TDR_INST_HPTP_DATA_REG_TDR_OUT_TX_DEEMPH_PDB1__txpu_0_.*" ],
+					"StartAddressOffset": [ 0 ],
+					"EndAddress": [ "^" ],
+					"EndAddressOffset": [ 5 ],
+					"Ratio": 1,
+                    "Data": "111111",
+					"PatternsRegEx": [
+						".*mpe_txpu_calibration_seq"
+					],
+					"ValidationMode": "ALLOW_LABEL_NO_MATCHING"
+				},
+                {
+					"Type": "PINDATA",
+					"IsChannelLink": false,
+					"Pin": [ "IPC::CPU_TDI" ],
+					"StartAddress": [ "PAR_IOBOT_HPTP_WRAPPER_HPTP_TDR_WRAPPER_INST_HPTP_TDR_INST_HPTP_DATA_REG_TDR_OUT_TX_MAIN_PDB1__txpu_0_.*" ],
+					"StartAddressOffset": [ 0 ],
+					"EndAddress": [ "^" ],
+					"EndAddressOffset": [ 5 ],
+					"Ratio": 1,
+                    "Data": "111111",
+					"PatternsRegEx": [
+						".*mpe_txpu_calibration_seq"
+					],
+					"ValidationMode": "ALLOW_LABEL_NO_MATCHING"
+				}
+			]
+		},
+		
+		{
+			"Name": "RxTermCharPatmod",
+			"ConfigurationElement": [
+				{
+					"Type": "PINDATA",
+					"IsChannelLink": false,
+					"Pin": [ "IPC::CPU_TDI" ],
+					"StartAddress": [ "PAR_IOBOT_HPTP_WRAPPER_HPTP_TDR_WRAPPER_INST_HPTP_TDR_INST_HPTP_DATA_REG_TDR_OUT_TERM_RCOMPB0__rxterm_0_19" ],
+					"StartAddressOffset": [ 0 ],
+					"EndAddress": [ "PAR_IOBOT_HPTP_WRAPPER_HPTP_TDR_WRAPPER_INST_HPTP_TDR_INST_HPTP_DATA_REG_TDR_OUT_TERM_RCOMPB0__rxterm_0_19" ],
+					"EndAddressOffset": [ 5 ],
+					"Ratio": 1,
+					"PatternsRegEx": [
+						".*mpe_rxrterm_calibration_pmu_seq"
+					]
+				},
+				{
+					"Type": "PINDATA",
+					"IsChannelLink": false,
+					"Pin": [ "IPC::CPU_TDI" ],
+					"StartAddress": [ "PAR_IOBOT_HPTP_WRAPPER_HPTP_TDR_WRAPPER_INST_HPTP_TDR_INST_HPTP_DATA_REG_TDR_OUT_TERM_RCOMPB1__rxterm_0_19" ],
+					"StartAddressOffset": [ 0 ],
+					"EndAddress": [ "PAR_IOBOT_HPTP_WRAPPER_HPTP_TDR_WRAPPER_INST_HPTP_TDR_INST_HPTP_DATA_REG_TDR_OUT_TERM_RCOMPB1__rxterm_0_19" ],
+					"EndAddressOffset": [ 5 ],
+					"Ratio": 1,
+					"PatternsRegEx": [
+						".*mpe_rxrterm_calibration_pmu_seq"
+					]
+				}
+			]
+		},
+		{
+			"Name": "PullUpCodePatmod",
+			"ConfigurationElement": [
+				{
+					"Type": "PINDATA",
+					"IsChannelLink": false,
+					"Pin": [ "IPC::CPU_TDI" ],
+					"StartAddress": [ "PAR_IOBOT_HPTP_WRAPPER_HPTP_TDR_WRAPPER_INST_HPTP_TDR_INST_HPTP_DATA_REG_TDR_OUT_TX_MAIN_PU0__txpu_0_19" ],
+					"StartAddressOffset": [ 0 ],
+					"EndAddress": [ "PAR_IOBOT_HPTP_WRAPPER_HPTP_TDR_WRAPPER_INST_HPTP_TDR_INST_HPTP_DATA_REG_TDR_OUT_TX_MAIN_PU0__txpu_0_19" ],
+					"EndAddressOffset": [ 5 ],
+					"Ratio": 1,
+					"PatternsRegEx": [
+						".*mpe_txpu_calibration_pmu_seq"
+					]
+				},
+				{
+					"Type": "PINDATA",
+					"IsChannelLink": false,
+					"Pin": [ "IPC::CPU_TDI" ],
+					"StartAddress": [ "PAR_IOBOT_HPTP_WRAPPER_HPTP_TDR_WRAPPER_INST_HPTP_TDR_INST_HPTP_DATA_REG_TDR_OUT_TX_MAIN_PU1__txpu_0_19" ],
+					"StartAddressOffset": [ 0 ],
+					"EndAddress": [ "PAR_IOBOT_HPTP_WRAPPER_HPTP_TDR_WRAPPER_INST_HPTP_TDR_INST_HPTP_DATA_REG_TDR_OUT_TX_MAIN_PU1__txpu_0_19" ],
+					"EndAddressOffset": [ 5 ],
+					"Ratio": 1,
+					"PatternsRegEx": [
+						".*mpe_txpu_calibration_pmu_seq"
+					]
+				}
+			]
+		},
+		{
+			"Name": "PullDownCodePatmod",
+			"ConfigurationElement": [
+				{
+					"Type": "PINDATA",
+					"IsChannelLink": false,
+					"Pin": [ "IPC::CPU_TDI" ],
+					"StartAddress": [ "PAR_IOBOT_HPTP_WRAPPER_HPTP_TDR_WRAPPER_INST_HPTP_TDR_INST_HPTP_DATA_REG_TDR_OUT_TX_MAIN_PDB0__txdn_0_19" ],
+					"StartAddressOffset": [ 0 ],
+					"EndAddress": [ "PAR_IOBOT_HPTP_WRAPPER_HPTP_TDR_WRAPPER_INST_HPTP_TDR_INST_HPTP_DATA_REG_TDR_OUT_TX_MAIN_PDB0__txdn_0_19" ],
+					"EndAddressOffset": [ 5 ],
+					"Ratio": 1,
+					"PatternsRegEx": [
+						".*mpe_txdn_calibration_pmu_seq"
+					]
+				},
+				{
+					"Type": "PINDATA",
+					"IsChannelLink": false,
+					"Pin": [ "IPC::CPU_TDI" ],
+					"StartAddress": [ "PAR_IOBOT_HPTP_WRAPPER_HPTP_TDR_WRAPPER_INST_HPTP_TDR_INST_HPTP_DATA_REG_TDR_OUT_TX_MAIN_PDB1__txdn_0_19" ],
+					"StartAddressOffset": [ 0 ],
+					"EndAddress": [ "PAR_IOBOT_HPTP_WRAPPER_HPTP_TDR_WRAPPER_INST_HPTP_TDR_INST_HPTP_DATA_REG_TDR_OUT_TX_MAIN_PDB1__txdn_0_19" ],
+					"EndAddressOffset": [ 5 ],
+					"Ratio": 1,
+					"PatternsRegEx": [
+						".*mpe_txdn_calibration_pmu_seq"
+					]
+				}
+			]
+		},
+		{
+			"Name": "HPTP_MASKING",
+			"ConfigurationElement": [
+				{
+					"Type": "PINDATA",
+					"IsChannelLink": false,
+					"Pin": [ "IPC::CPU_TSTPRT_O_00","IPC::CPU_TSTPRT_O_01","IPC::CPU_TSTPRT_O_02","IPC::CPU_TSTPRT_O_03","IPC::CPU_TSTPRT_O_04","IPC::CPU_TSTPRT_O_05","IPC::CPU_TSTPRT_O_06","IPC::CPU_TSTPRT_O_07","IPC::CPU_TSTPRT_O_08","IPC::CPU_TSTPRT_O_09","IPC::CPU_TSTPRT_O_10","IPC::CPU_TSTPRT_O_11","IPC::CPU_TSTPRT_O_12","IPC::CPU_TSTPRT_O_13","IPC::CPU_TSTPRT_O_14","IPC::CPU_TSTPRT_O_15" ],
+					"StartAddress": [ "53309" ],
+					"StartAddressOffset": [ 0 ],
+					"EndAddress": [ "53309" ],
+					"EndAddressOffset": [ 0 ],
+					"Ratio": 1,
+					"Data": "X",
+					"PatternsRegEx": [
+						"hptp.*loopback_seq"
+					]
+				}
+			]
+		}
+	]
+
+}

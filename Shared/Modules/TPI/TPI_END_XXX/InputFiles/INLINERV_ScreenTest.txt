@@ -1,0 +1,21 @@
+START_SCREEN:INLINERVREBIN
+#InlineRV rebinning infrastructure. Port 2 is general failures (get bin failure or unit is reject escape).
+#Process step = CHR and location set = INLINE_REBI_RV, rebin passing unit to 8020 (port 6)
+#Process step = CHR and location set != FH_ENG, rebin passing unit to 8080 (port 7)
+#Process step = PHR, rebin passing unit to 8030 (port 3)
+#Process step = PCR, rebin passing unit to 8040 (port 4)
+#Process step = PRR, rebin passing unit to 8050 (port 5)
+#RunOn	; TestName		;Data Type	;Param Type		;Param1   							;Operation  ; Param Type	; Param2  		     ; TmpStore  ; OnTrue  	   ; OnFalse
+EXEC	: INLINE002		: INT		: EXPRESSION	: GetCurrentHardBin()				: >			: LITERAL		: 999       : - : INLINE003 : INLINE002A
+EXEC	: INLINE002A	: INT		: EXPRESSION	: GetCurrentHardBin()				: <			: LITERAL		: 7         : - : INLINE003 : 2         
+EXEC	; INLINE003		; STRING	; GLOBAL		; __shared__::SCVars.SC_CURRENT_PROCESS_STEP	; ==		; LITERAL		; PHMHOTR   ; - ; 3         ; INLINE004 
+EXEC	; INLINE004		; STRING	; GLOBAL		; __shared__::SCVars.SC_CURRENT_PROCESS_STEP	; ==		; LITERAL		; PHMCOLDR  ; - ; 4         ; INLINE005 
+EXEC	; INLINE005		; STRING	; GLOBAL		; __shared__::SCVars.SC_CURRENT_PROCESS_STEP	; ==		; LITERAL		; PHMROOMR  ; - ; 5         ; INLINE006 
+EXEC	; INLINE006		; STRING	; GLOBAL		; __shared__::SCVars.SC_CURRENT_PROCESS_STEP	; ==		; LITERAL		; CLASSHOTR ; - ; INLINE007 ; 1         
+EXEC	; INLINE007		; STRING	; GLOBAL		; __shared__::SCVars.SC_LOCN					; ==		; LITERAL		; 7821      ; - ; 6         ; INLINE008 
+EXEC	; INLINE008		; STRING	; GLOBAL		; __shared__::SCVars.SC_LOCN					; ==		; LITERAL		; 7823      ; - ; 6         ; INLINE009 
+EXEC	; INLINE009		; STRING	; GLOBAL		; __shared__::SCVars.SC_LOCN					; ==		; LITERAL ; 5821      ; - ; 6         ; INLINE010 
+EXEC	; INLINE010		; STRING	; GLOBAL		; __shared__::SCVars.SC_LOCN					; ==		; LITERAL ; 5823      ; - ; 6         ; INLINE011 
+EXEC	; INLINE011		; STRING	; GLOBAL		; __shared__::SCVars.SC_LOCN					; ==		; LITERAL ; 6233      ; - ; 1         ; INLINE012 
+EXEC	; INLINE012		; STRING	; GLOBAL		; __shared__::SCVars.SC_LOCN					; ==		; LITERAL ; 6234      ; - ; 1         ; 7         
+END_SCREEN

@@ -1,0 +1,18 @@
+Version 1.0;
+
+SpecificationSet SBF_BFUNC_nom_lv_0P8V (max_lvl,min_lvl,nom_lvl) Inherits __main__::SBF_BFUNC
+{
+	Voltage p_vccextbgref_spec = 0.8V;
+}
+
+TestConditionGroup bf_lvl_PARAMS_nom_lvl_0P8V_TCG
+{
+	SpecificationSet = SBF_BFUNC_nom_lv_0P8V;
+	Level = __main__::SBF;
+}
+
+TestCondition bf_lvl_nom_lvl_0P8V
+{
+	TestConditionGroup  = bf_lvl_PARAMS_nom_lvl_0P8V_TCG;
+	Selector = nom_lvl;
+}

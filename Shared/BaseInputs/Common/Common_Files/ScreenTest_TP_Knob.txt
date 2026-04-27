@@ -1,0 +1,21 @@
+START_SCREEN:PrimarySocketCheck
+#RunOn: TestName  	    : Data Type	: Param Type	:  Param1   				     : Operation 	: Param Type  	: Param2  		 : TmpStore 	: OnTrue  	: OnFalse
+EXEC   : CHKPROTYPE01 : STRING : GLOBAL : SCVars.SC_CURRENT_PROCESS_TYPE : == : LITERAL : CLASSHOT  : - : 1 : CHKPROTYPE02
+EXEC   : CHKPROTYPE02 : STRING : GLOBAL : SCVars.SC_CURRENT_PROCESS_TYPE : == : LITERAL : CLASSHOTR : - : 1 : 2           
+END_SCREEN
+
+START_SCREEN:RejectFork
+#RunOn	: TestName  	: Data Type	: Param Type	:  Param1   				: Operation 	: Param Type  	: Param2  			: TmpStore 	: OnTrue  	: OnFalse
+EXEC	: CHK02			: INT		: EXPRESSION : GetCurrentHardBin() : > : LITERAL : 999 : - : 1     : CHK04
+EXEC	: CHK04			: INT		: EXPRESSION : GetCurrentHardBin() : < : LITERAL : 7   : - : 1     : 2    
+END_SCREEN
+
+START_SCREEN:HVBI_CPU_GT_Fork
+#RunOn	:	TestName  	:	Data Type	:	Param Type	:	Param1   						:	Operation 	:	Param Type	:	Param2  		:	TmpStore 	:	OnTrue				:	OnFalse
+EXEC   : CHECKLOC1 : STRING : GLOBAL : SCVars.SC_LOCN                 : == : LITERAL : 6248     : - : CHECKLOC5 : CHECKLOC2
+EXEC   : CHECKLOC2 : STRING : GLOBAL : SCVars.SC_LOCN                 : == : LITERAL : 7820     : - : CHECKLOC5 : CHECKLOC3
+EXEC   : CHECKLOC3 : STRING : GLOBAL : SCVars.SC_LOCN                 : == : LITERAL : 7821     : - : CHECKLOC5 : CHECKLOC4
+EXEC   : CHECKLOC4 : STRING : GLOBAL : SCVars.SC_LOCN                 : == : LITERAL : 7823     : - : CHECKLOC5 : 2        
+EXEC   : CHECKLOC5 : STRING : GLOBAL : SCVars.SC_CURRENT_PROCESS_TYPE : == : LITERAL : CLASSHOT : - : 1         : 2        
+END_SCREEN
+

@@ -1,0 +1,222 @@
+name: TPRobot_All_Boms
+env:
+  CustomPath: "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe"
+
+on:
+  pull_request:
+    types: [labeled]
+    branches: [main*]
+
+jobs:
+  tprobot:
+    name: TPRobot_${{ matrix.bom.name }}
+    runs-on: [self-hosted, tpbot]
+    timeout-minutes: 600
+
+    strategy:
+      fail-fast: false
+      matrix:
+        bom:
+          - name: "NS28C"
+            class: "Class_NVL_S28C"
+            required_label: "PASSED_S28C"
+            tprobot_label: "tprobot_S28"
+            bot_runner: "nvl2_tpbot._ALL_.nvl_common.nvls28c"
+            bypass: false
+          - name: "NS52C"
+            class: "Class_NVL_S52C"
+            required_label: "PASSED_S52C"
+            tprobot_label: "tprobot_S52"
+            bot_runner: "nvl2_tpbot._ALL_.nvl_common.nvls52c"
+            bypass: false
+          - name: "NHX28C"
+            class: "Class_NVL_HX28C"
+            required_label: "PASSED_HX28C"
+            tprobot_label: "tprobot_HX28"
+            bot_runner: "nvl2_tpbot._ALL_.nvl_common.nvlhx28c"
+            bypass: false
+          - name: "NH16C"
+            class: "Class_NVL_H16C"
+            required_label: "PASSED_H16C"
+            tprobot_label: "tprobot_H16"
+            bot_runner: "nvl2_tpbot._ALL_.nvl_common.nvlh16c"
+            bypass: false
+          - name: "NP16C"
+            class: "Class_NVL_P16C"
+            required_label: "PASSED_P16C"
+            tprobot_label: "tprobot_P16"
+            bot_runner: "nvl2_tpbot._ALL_.nvl_common.nvlp16c"
+            bypass: false
+          - name: "NS16C"
+            class: "Class_NVL_S16C"
+            required_label: "PASSED_S16C"
+            tprobot_label: "tprobot_S16"
+            bot_runner: "nvl2_tpbot._ALL_.nvl_common.nvls16c"
+            bypass: false
+          - name: "DS28C"
+            class: "Class_DNL_S28C"
+            required_label: "PASSED_DS28C"
+            tprobot_label: "tprobot_DS28"
+            bot_runner: "nvl2_tpbot._ALL_.nvl_common.dnls28c"
+            bypass: false
+          - name: "NU8C"
+            class: "Class_NVL_U8C"
+            required_label: "PASSED_U8C"
+            tprobot_label: "tprobot_U8"
+            bot_runner: "nvl2_tpbot._ALL_.nvl_common.nvlhx28c"
+            bypass: false
+
+    concurrency:
+     group: tprobot_${{ matrix.bom.name }}-${{ github.event.pull_request.number }}
+     cancel-in-progress: true
+
+    outputs:
+      runner1: ${{ steps.step1.outputs.runner1 }}
+      runner2: ${{ steps.step2.outputs.runner2 }}
+
+    # This step runs for both bypass and successful completion
+    steps:
+    - id: step1
+      shell: powershell
+      run: echo "::set-output name=runner1::$(hostname)"
+      
+    - id: step2
+      shell: powershell
+      run: echo "::set-output name=runner2::$env:GITHUB_WORKSPACE"
+
+    # This step runs for both bypass and successful completion
+    - name: check checker label for ${{ matrix.bom.name }}
+      shell: powershell
+      run: |
+          $eventJson = Get-Content $env:GITHUB_EVENT_PATH | ConvertFrom-Json
+          $labels = $eventJson.pull_request.labels.name
+          Write-Host "Labels: $($labels -join ', ')"
+          # Save labels as job output
+          "labels=$labels" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          if ($labels -notcontains "${{ matrix.bom.required_label }}") {
+              Write-Host "Required label '${{ matrix.bom.required_label }}' not found. Failing..."
+              exit 1
+          } else {
+              Write-Host "Required label '${{ matrix.bom.required_label }}' is present."
+          }
+
+    # This step runs for both bypass and successful completion
+    - name: check tprobot passed label for ${{ matrix.bom.name }}
+      id: skip
+      shell: powershell
+      run: |
+          $labels = $env:labels
+          Write-Host "Labels from previous job: $labels"
+          if ($labels -match "${{ matrix.bom.tprobot_label }}") {
+              Write-Host "Label ${{ matrix.bom.tprobot_label }} exists."
+              Write-Host "skip=true"
+              "skip=true" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+              exit 0
+          } else {
+              Write-Host "skip=false"
+              "skip=false" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+          }
+
+    # This step runs for both bypass and successful completion
+    - name: i drive check
+      shell: powershell
+      run: >
+        python -c "import os, socket;
+        assert os.path.isdir('I:/tpvalidation'),
+        f'I:/ drive is not accessible. Pls contact TPD to fix drive mapping on {socket.gethostname()} right away.'"
+
+    # This step runs for both bypass and successful completion
+    - name: check_state for ${{ matrix.bom.name }}
+      if: ${{ steps.skip.outputs.skip != 'true' }}
+      shell: powershell
+      run: |
+          echo "BOM: ${{ matrix.bom.name }}"
+          echo "CLASS: ${{ matrix.bom.class }}"
+          echo "RUNNER_NAME: ${{ steps.step1.outputs.runner1 }}"
+          echo "CURRENT_WORKSPACE: ${{ steps.step2.outputs.runner2 }}"
+          python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/tprobot.py PRE_CHECK ${{ github.event.label.name }}
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    # This step runs for both bypass and successful completion
+    - name: repo_init_check
+      if: ${{ steps.skip.outputs.skip != 'true' }}
+      continue-on-error: true
+      shell: powershell
+      run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/tprobot.py REPO_INIT main
+
+    # This step runs for both bypass and successful completion
+    - uses: actions/checkout@v6
+      if: ${{ steps.skip.outputs.skip != 'true' }}
+      with: 
+        fetch-depth: 0
+        clean: true
+        ref: ${{ github.event.pull_request.head.ref }}
+
+    # This step runs for both bypass and successful completion
+    - name: Checkout submodules
+      if: ${{ steps.skip.outputs.skip != 'true' }}
+      shell: powershell
+      run: |
+        git submodule sync --recursive
+        git submodule update --init --recursive --force
+
+    # This step runs for both bypass and successful completion
+    - name: check_latest_commit for ${{ matrix.bom.name }}
+      if: ${{ steps.skip.outputs.skip != 'true' }}
+      shell: powershell
+      run: python I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/tprobot.py MAIN ${{ github.event.pull_request.head.sha }}
+      env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          TARGETBOM: ${{ matrix.bom.class }}
+
+    - name: merge_master
+      if: ${{ !matrix.bom.bypass && steps.skip.outputs.skip != 'true' }}
+      shell: powershell
+      run: |
+        echo $(git remote get-url origin)
+        git config user.name "GitHub Action Bot"
+        git config user.email "<>"
+        git fetch
+        git merge origin/${{ github.base_ref }} --no-commit
+        git submodule update --init --recursive --force
+
+    - name: clone dielets for ${{ matrix.bom.name }}
+      if: ${{ !matrix.bom.bypass && steps.skip.outputs.skip != 'true' }}
+      shell: powershell
+      run: python I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/nvl_buildtp.py ${{ matrix.bom.class }} -clone
+      env:
+          IS_PR_COMMON: True
+          BASE_REF: ${{ github.base_ref }}
+
+    - name: Bot run for ${{ matrix.bom.name }}
+      if: ${{ !matrix.bom.bypass && steps.skip.outputs.skip != 'true' }}
+      shell: powershell
+      run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/runner_botos.py ${{ matrix.bom.bot_runner }}
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BASE_REF: ${{ github.base_ref }}
+          CLEANTP: True
+          TARGETBOM: ${{ matrix.bom.class }}
+          REPO_DIR: ${{ github.workspace }}
+
+    # Bypass notification (optional)
+    - name: Bypass notification for ${{ matrix.bom.name }}
+      if: ${{ matrix.bom.bypass }}
+      shell: powershell
+      run: |
+          Write-Host "Bypassing TPRobot workflow for ${{ matrix.bom.name }} - only adding tprobot label"
+          $prNumber = (Get-Content $env:GITHUB_EVENT_PATH | ConvertFrom-Json).pull_request.number
+          Write-Host "PR number: $prNumber"
+
+    # This step runs for both bypass and successful completion
+    - name: Add tprobot label for ${{ matrix.bom.name }}
+      if: ${{ matrix.bom.bypass || steps.skip.outputs.skip != 'true' }}
+      shell: powershell
+      run: |
+            $prNumber = (Get-Content $env:GITHUB_EVENT_PATH | ConvertFrom-Json).pull_request.number
+            Write-Host "PR number: $prNumber"
+            gh pr edit $prNumber --add-label "${{ matrix.bom.tprobot_label }}"
+      env:
+
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,45 @@
+[
+  {
+    "Name": "FATOM_CX48_L2_Dragon_Pinmap_Freq", "Size": 2,
+    "PatConfigSetPoints": [
+		{
+			"Indexes": "1",
+			"Values":[1],
+			"Setpoints":["MCdrv:atomfreq0_0:0.8GHz"]
+		},
+		{
+			"Indexes": "1",
+			"Values":[0],
+			"Setpoints":["Fun_Atom_FREQ:atomfreq_A0:dynamic_freq"]
+		},
+		{
+			"Indexes": "0",
+			"Values":[1],
+			"Setpoints":["MCdrv:atomfreq1_0:0.8GHz"]
+		},
+		{
+			"Indexes": "0",
+			"Values":[0],
+			"Setpoints":["Fun_Atom_FREQ:atomfreq_A1:dynamic_freq"]
+		},
+        {
+            "Indexes": "0-1",
+          "SharedStorageTokens": {
+            "G.U.S.R1_SET_OPERAND": "'MOV '+Bin2Dec('111111111111'+'11'+value+'1111')+',R1'"
+          },
+            "SetPoints": [ "MCdrv:R1_SET" ]
+        }
+    ],
+    "FailDataIndexMap": [
+        {
+            "Label": "^STROBE_.*ATOMSLICE0_PAR_ASL_L2_DRAGON$",
+            "Index": [1]
+        },
+        {
+            "Label": "^STROBE_.*ATOMSLICE0_PAR_ASR_L2_DRAGON$",
+            "Index": [0]
+        }
+    ]
+  }
+]
+

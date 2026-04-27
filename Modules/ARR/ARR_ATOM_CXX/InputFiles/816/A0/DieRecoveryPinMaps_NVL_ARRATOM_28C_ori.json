@@ -1,0 +1,94 @@
+[
+  {
+    "Name": "NVL_ARRATOM",
+    "Size": 4,
+    "PatConfigSetPoints": [
+
+      {
+        "Indexes": "3",
+        "Values": [ 0 ],
+        "SetPoints": [ "MCdrv:atomcoremod_disable_atom0_0:all_enabled" ]
+      },
+      {
+        "Indexes": "3",
+        "Values": [ 1 ],
+        "SetPoints": [ "MCdrv:atomcoremod_disable_atom0_0:all_disabled" ]
+      },
+      {
+        "Indexes": "2",
+        "Values": [ 0 ],
+        "SetPoints": [ "MCdrv:atomcoremod_disable_atom1_0:all_enabled" ]
+      },
+      {
+        "Indexes": "2",
+        "Values": [ 1 ],
+        "SetPoints": [ "MCdrv:atomcoremod_disable_atom1_0:all_disabled" ]
+      },
+      {
+        "Indexes": "1",
+        "Values": [ 0 ],
+        "SetPoints": [ "MCdrv:atomcoremod_disable_atom2_0:all_enabled" ]
+      },
+      {
+        "Indexes": "1",
+        "Values": [ 1 ],
+        "SetPoints": [ "MCdrv:atomcoremod_disable_atom2_0:all_disabled" ]
+      },
+      {
+        "Indexes": "0",
+        "Values": [ 0 ],
+        "SetPoints": [ "MCdrv:atomcoremod_disable_atom3_0:all_enabled" ]
+      },
+      {
+        "Indexes": "0",
+        "Values": [ 1 ],
+        "SetPoints": [ "MCdrv:atomcoremod_disable_atom3_0:all_disabled" ]
+      },
+      
+	  {
+        "Indexes": "0-3",
+        "SharedStorageTokens":{
+            "G.U.S.R1_SET_OPERAND": "'MOV '+Bin2Dec('000000000000'+value+'0000')+',R1'"
+        },
+        "SetPoints": [ "MCdrv:R1_SET" ]
+      }    
+
+    ],
+
+    "FailDataIndexMap": [
+      {
+        "PatternName": "[dg]\\d{7}C\\d{7}._.._..XCA.._.{13}_I8G.*",
+        "Label": "disable_ignore_fail_on_atom0.*",
+        "Domain": "IPC::CPU_ALL",
+        "PinName": [ "IPC::CPU_TDO" ],
+        "Index": [ 3 ]
+      },
+
+      {
+        "PatternName": "[dg]\\d{7}C\\d{7}._.._..XCA.._.{13}_I8G.*",
+        "Label": "disable_ignore_fail_on_atom1.*",
+        "Domain": "IPC::CPU_ALL",
+        "PinName": [ "IPC::CPU_TDO" ],
+        "Index": [ 2 ]
+      },
+
+	  {
+        "PatternName": "[dg]\\d{7}C\\d{7}._.._..XCA.._.{13}_I8G.*",
+        "Label": "disable_ignore_fail_on_atom2.*",
+        "Domain": "IPC::CPU_ALL",
+        "PinName": [ "IPC::CPU_TDO" ],
+        "Index": [ 1 ]
+      },
+      
+	  {
+        "PatternName": "[dg]\\d{7}C\\d{7}._.._..XCA.._.{13}_I8G.*",
+        "Label": "disable_ignore_fail_on_atom3.*",
+        "Domain": "IPC::CPU_ALL",
+        "PinName": [ "IPC::CPU_TDO" ],
+        "Index": [ 0 ]
+      }
+
+    ]
+	
+  }
+]

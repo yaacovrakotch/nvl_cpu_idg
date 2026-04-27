@@ -1,0 +1,161 @@
+name: Common Change Form
+description: Common Change that affects more than 1 product
+title: '[CHANGE]: '
+labels:
+  - CHANGE
+assignees:
+  # Site reps (approvers) — replace with real GitHub usernames
+  - pavel-bogomolov-intel
+  - satheesh-naini-intel
+  - sam-ren-jie-yap-intel
+  - john-q-delos-reyes-intel
+  - keren-fadida-intel
+  - chen3-chen-intel
+  # Dielet owners — replace with real GitHub usernames
+  - alan-l-richardson-intel
+  - wai-ying-wong-intel
+  - pramod-kumar-k-intel
+  - erick-a-lang-intel
+  - teong-eng-lim-intel
+  # Product owners — replace with real GitHub usernames
+  - maroon-maroon-intel
+  - oren-mark-intel
+  - weng-keen-wong-intel
+  - bommu-vamsi-krishna-reddy-intel
+
+body:
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Common Change Form
+        Use this form to request a common change that affects more than one product.
+        For help or more details, visit the [Common change process wiki](https://wiki.ith.intel.com/spaces/ITSpdxtp/pages/4606199806/Common+change+process).
+
+  - type: textarea
+    id: problem-statement
+    attributes:
+      label: Problem Statement
+      description: Describe the problem why this change is being requested.
+      placeholder: What problem does this change solve?
+    validations:
+      required: true
+
+  - type: textarea
+    id: change-description
+    attributes:
+      label: Change Description
+      description: Details of the change. Include background as necessary.
+      placeholder: Describe what will change and why.
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact or Side Effects
+      description: Specify the impact or side effects of this change.
+      placeholder: What are the known or potential impacts?
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: affected-dielets
+    attributes:
+      label: Affected Dielets
+      description: Select all dielets impacted by this change.
+      options:
+        - label: CPU
+        - label: GCD
+        - label: HUB
+        - label: PCD
+        - label: Other (specify in Change Description)
+
+  - type: textarea
+    id: affected-packages
+    attributes:
+      label: Affected Packages
+      description: List any packages affected by this change.
+      placeholder: "e.g. NVL_S28C, NVL_S16C"
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: approval
+    attributes:
+      label: Approval
+      description: Check the box for each approver group that has approved this change.
+      options:
+        - label: DDG JF
+        - label: DDG PG
+        - label: CDG IDC
+        - label: CDG BA
+        - label: PGM FM
+        - label: PGM PG
+
+  - type: markdown
+    attributes:
+      value: "## Implementation Details"
+
+  - type: input
+    id: date-of-implementation
+    attributes:
+      label: Date Of Implementation
+      description: "IMPORTANT: Exact date you plan to merge the common PR."
+      placeholder: "e.g. 2026-03-17"
+    validations:
+      required: true
+
+
+  - type: input
+    id: target-tp-name
+    attributes:
+      label: Target TP Name
+      placeholder: "e.g. NVL_Common_v1.2.3"
+    validations:
+      required: false
+
+  - type: input
+    id: branch-name
+    attributes:
+      label: Branch Name
+      placeholder: "e.g. feature/my-change"
+    validations:
+      required: false
+
+  - type: textarea
+    id: potentially-affected-modules
+    attributes:
+      label: Potentially Affected Modules
+      description: List any modules that could be impacted by this change.
+      placeholder: |
+        e.g.
+        - PTH_XXXXX
+        - FUS_FACT_XXX
+    validations:
+      required: false
+
+  - type: textarea
+    id: module-sequence
+    attributes:
+      label: Module Sequence
+      description: List the expected sequence of module execution, if applicable.
+      placeholder: |
+        e.g.
+        1. Module A
+        2. Module B
+    validations:
+      required: false
+
+  - type: textarea
+    id: validation-checklist
+    attributes:
+      label: Validation Checklist
+      description: List the validation steps that must be completed before this change is merged.
+      placeholder: |
+        - [ ] Load/Init validation
+        - [ ] Standing die validation
+        - [ ] VPO validation
+        - [ ] MBOT validation
+    validations:
+      required: false

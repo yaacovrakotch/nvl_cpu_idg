@@ -1,0 +1,15 @@
+Version 1.0;
+
+
+SelectorRuleCollection  FUS_ISEED_XXX_Rules
+{
+    SelectorRule FUSE_X_ISEED_K_INIT_X_X_X_X_GETSD_bypass_global (Outcome1, Outcome2)
+    {
+        Outcome1 => contains(__shared__::LocationSets.PHMF,"[" + __shared__::SCVars.SC_LOCN + "]");
+        Outcome2;
+    }    
+}
+UserVars FUS_ISEED_XXX
+{
+	String partID = "";
+}

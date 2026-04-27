@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<lya_setup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="GEN_LYA_TT.XSD">
+	<TargetArrayName name="LLC_DAT" >
+		<patmodify_globals>
+			<!-- Patmod global for LYA setting where the LYA globals are referred from BSV's in ArrayMap -->
+			<global	name="GHalf"			size="4"	lya="half" 		value="1" />		
+			<global	name="GBanksel"			size="4"	lya="banksel"	value="2" />		
+			<global	name="GTxaddr"			size="8"	lya="txaddr"	value="167" />		
+			<global	name="GTyaddr"			size="4"	lya="tyaddr"	value="4" />		
+			<global	name="GSlice"			size="3"	lya="slice"		value="1" />		
+			<global	name="GLYAData"			size="532"	lya="LYAData"   value="498"/> 		
+			<!-- New for ARL LYA from MTL. LLC_PBIST_ENG_CONTROL "LYA_bank" must be modified -->
+			<!-- On MTL: LYA_BANK[3:0] is one-hot where each bit position enables the corresponding quad from 0-3 -->
+			<!--         MTL HVM just set all four bits to 1 in the patterns themselves -->
+			<!-- On ARL: LYA_BANK[1:0] Select which quad for LYA with a value between 0-3 assigned to [1:0] -->
+			<!--         LYA_BANK[2]   Select quad-half (which half of the quad) to perform LYA -->
+			<!--         LYA_BANK[3]   UNUSED -->
+			<global	name="GQuarter"			size="2"	lya="quarter"	value="1" />		
+			<global	name="GQuarterhalf"		size="1"	lya="quadhalf"	value="0" />		
+
+			<!-- ******************************************************** -->
+			<!-- Patmod global for WA ON setting for LYA current measurements on WA ON. All reset fuses should be in strong state -->
+			<global	name="SETWLBIAS"		size="3"					value="0" />    <!-- strongest N bias 11 -->
+			<global	name="SETWLBIASSTEP"		size="3"					value="0" />    <!-- strongest WL assist level primary 1111 -->
+			<global	name="SETWLBIASSTEPEN"		size="1"					value="0" />    <!-- strongest WA pulse width 111 -->
+			<global	name="SETWADIS"			size="1"					value="1" />    <!-- strongest WA pulse width enable 1 -->
+			<global	name="SETWAPW"			size="4"					value="8" />    <!-- strongesfromt WL assist level secondary 1111 -->
+			<global	name="SETWASTR"			size="3"					value="5" />    <!-- strongest dual level WL assist enable 1 -->
+			<global	name="SETLYASTKWL"		size="1"					value="1" />    <!-- Float bit line enable 1 -->
+			<!-- ******************************************************** -->
+			<!-- WA off setting for LYA current measurements on WA OFF setting. All reset fuses should be in default or original state -->                                                                 
+			<global	name="WLBIAS"			size="3"					value="0" />    <!-- strongest N bias 11 -->
+			<global	name="WLBIASSTEP"		size="3"					value="0" />    <!-- strongest WL assist level primary 1111 -->
+			<global	name="WLBIASSTEPEN"		size="1"					value="0" />    <!-- strongest WA pulse width 111 -->
+			<global	name="WADIS"			size="1"					value="0" />    <!-- strongest WA pulse width enable 1 -->
+			<global	name="WAPW"			size="4"					value="8" />    <!-- strongest WL assist level secondary 1111 -->
+			<global	name="WASTR"			size="3"					value="5" />    <!-- strongest dual level WL assist enable 1 -->
+			<global	name="LYASTKWL"			size="1"					value="1" />    <!-- Float bit line enable 1 -->
+		</patmodify_globals>
+		
+		<GoodCells>
+		  <darray_address>
+			<input ssi="0" block="15" row="255" column="0"/>
+			<!-- <input ssi="1" block="182" row="296" column="76"/> -->
+			<!-- <input ssi="1" block="182" row="297" column="76"/> -->
+		 </darray_address>
+		  
+		  <!-- <logical_address> -->
+			<!--input ssi="0" set="0" way="0" bit="1"/-->
+			<!-- <input ssi="1" set="0" way="0" bit="135"/> -->
+			<!-- <input ssi="1" set="1187" way="2" bit="988"/> -->
+			<!-- <input ssi="1" set="1191" way="2" bit="988"/> -->
+			<!-- <input ssi="2" set="0" way="10" bit="150"/> -->
+			<!-- <input ssi="3" set="0" way="0" bit="100"/> -->
+		  <!-- </logical_address> -->
+		
+		</GoodCells>
+
+		<IO_PatModify>
+			<max_bit_size>532</max_bit_size> 		<!-- size of all lablels -->
+			<direction>lsb_msb</direction>			<!-- selection of lsb_msb or msb_lsb, default is msb_lsb -->
+			<bit_location>GLYAData</bit_location>		<!-- bit location, value or patmodify_global name -->
+			
+			<labels> <!-- Make sure the below labels are in the same order as in the pattern -->
+				<label name="Start_Driving_CR_LLC_DATA_CHUNK0_0_L_CCF_TAP2IOSFGP_TAP_SBMSGGO_DR1" pinGroup="ZZ_SORT_CDIE_TAP_TDI" offset="64" size="32" numvec="1"/>
+				<label name="Start_Driving_CR_LLC_DATA_CHUNK0_0_H_CCF_TAP2IOSFGP_TAP_SBMSGGO_DR1" pinGroup="ZZ_SORT_CDIE_TAP_TDI" offset="64" size="32" numvec="1"/>
+				<label name="Start_Driving_CR_LLC_DATA_CHUNK0_1_L_CCF_TAP2IOSFGP_TAP_SBMSGGO_DR1" pinGroup="ZZ_SORT_CDIE_TAP_TDI" offset="64" size="32" numvec="1"/>
+				<label name="Start_Driving_CR_LLC_DATA_CHUNK0_1_H_CCF_TAP2IOSFGP_TAP_SBMSGGO_DR1" pinGroup="ZZ_SORT_CDIE_TAP_TDI" offset="64" size="32" numvec="1"/>
+				<label name="Start_Driving_CR_LLC_DATA_CHUNK0_2_L_CCF_TAP2IOSFGP_TAP_SBMSGGO_DR1" pinGroup="ZZ_SORT_CDIE_TAP_TDI" offset="64" size="32" numvec="1"/>
+				<label name="Start_Driving_CR_LLC_DATA_CHUNK0_2_H_CCF_TAP2IOSFGP_TAP_SBMSGGO_DR1" pinGroup="ZZ_SORT_CDIE_TAP_TDI" offset="64" size="32" numvec="1"/>
+				<label name="Start_Driving_CR_LLC_DATA_CHUNK0_3_L_CCF_TAP2IOSFGP_TAP_SBMSGGO_DR1" pinGroup="ZZ_SORT_CDIE_TAP_TDI" offset="64" size="32" numvec="1"/>
+				<label name="Start_Driving_CR_LLC_DATA_CHUNK0_3_H_CCF_TAP2IOSFGP_TAP_SBMSGGO_DR1" pinGroup="ZZ_SORT_CDIE_TAP_TDI" offset="64" size="32" numvec="1"/>
+				<label name="Start_Driving_CR_LLC_DATA_ECC_CHUNK0_CCF_TAP2IOSFGP_TAP_SBMSGGO_DR1" pinGroup="ZZ_SORT_CDIE_TAP_TDI" offset="64" size="10" numvec="1"/>
+				<label name="Start_Driving_CR_LLC_DATA_CHUNK1_0_L_CCF_TAP2IOSFGP_TAP_SBMSGGO_DR1" pinGroup="ZZ_SORT_CDIE_TAP_TDI" offset="64" size="32" numvec="1"/>
+				<label name="Start_Driving_CR_LLC_DATA_CHUNK1_0_H_CCF_TAP2IOSFGP_TAP_SBMSGGO_DR1" pinGroup="ZZ_SORT_CDIE_TAP_TDI" offset="64" size="32" numvec="1"/>
+				<label name="Start_Driving_CR_LLC_DATA_CHUNK1_1_L_CCF_TAP2IOSFGP_TAP_SBMSGGO_DR1" pinGroup="ZZ_SORT_CDIE_TAP_TDI" offset="64" size="32" numvec="1"/>
+				<label name="Start_Driving_CR_LLC_DATA_CHUNK1_1_H_CCF_TAP2IOSFGP_TAP_SBMSGGO_DR1" pinGroup="ZZ_SORT_CDIE_TAP_TDI" offset="64" size="32" numvec="1"/>
+				<label name="Start_Driving_CR_LLC_DATA_CHUNK1_2_L_CCF_TAP2IOSFGP_TAP_SBMSGGO_DR1" pinGroup="ZZ_SORT_CDIE_TAP_TDI" offset="64" size="32" numvec="1"/>
+				<label name="Start_Driving_CR_LLC_DATA_CHUNK1_2_H_CCF_TAP2IOSFGP_TAP_SBMSGGO_DR1" pinGroup="ZZ_SORT_CDIE_TAP_TDI" offset="64" size="32" numvec="1"/>
+				<label name="Start_Driving_CR_LLC_DATA_CHUNK1_3_L_CCF_TAP2IOSFGP_TAP_SBMSGGO_DR1" pinGroup="ZZ_SORT_CDIE_TAP_TDI" offset="64" size="32" numvec="1"/>
+				<label name="Start_Driving_CR_LLC_DATA_CHUNK1_3_H_CCF_TAP2IOSFGP_TAP_SBMSGGO_DR1" pinGroup="ZZ_SORT_CDIE_TAP_TDI" offset="64" size="32" numvec="1"/>
+				<label name="Start_Driving_CR_LLC_DATA_ECC_CHUNK1_CCF_TAP2IOSFGP_TAP_SBMSGGO_DR1" pinGroup="ZZ_SORT_CDIE_TAP_TDI" offset="64" size="10" numvec="1"/>
+			</labels>
+			<Enable>on</Enable>			<!-- turn on to apply this patmod in patmodify_group which without setup ID (all presetupID) -->
+		</IO_PatModify>
+		
+		<VectorModifyParams>
+			<PatModify_Group> 									<!-- LYA_patmod ALL -->
+			  <presetupID>ALL</presetupID>
+			  <!-- EVG 5.02.0.0 release is in flight to remove the below patlist section once schema file gets the enhancement -->
+			  <patlist>arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_read0_list</patlist>
+			  <patlist>arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_read1_list</patlist>
+			  <patlist>arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_nowl0_list</patlist>
+			  <patlist>arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_nowl1_list</patlist>
+			  <patlist>arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_mux0_list</patlist>
+			  <patlist>arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_mux1_list</patlist>
+			   
+			  <pattern_modify_setup>
+				<pingroup name="ZZ_SORT_CDIE_TAP_TDI"  label="t_x_min_0" 	direction="lsb_msb" offset="0"	numvec="1" PatModglobal="GTxaddr"/>
+				<pingroup name="ZZ_SORT_CDIE_TAP_TDI"  label="banksel_1" 	direction="lsb_msb" offset="0"	numvec="1" PatModglobal="GBanksel"/>
+				<pingroup name="ZZ_SORT_CDIE_TAP_TDI"  label="t_x_max_0" 	direction="lsb_msb" offset="0"	numvec="1" PatModglobal="GTxaddr"/>
+				<pingroup name="ZZ_SORT_CDIE_TAP_TDI"  label="t_y_min_0" 	direction="lsb_msb" offset="0"	numvec="1" PatModglobal="GTyaddr"/>
+				<pingroup name="ZZ_SORT_CDIE_TAP_TDI"  label="t_y_max_0" 	direction="lsb_msb" offset="0"	numvec="1" PatModglobal="GTyaddr"/>
+				<pingroup name="ZZ_SORT_CDIE_TAP_TDI"  label="dword_0"  	direction="lsb_msb" offset="0"	numvec="1" PatModglobal="GHalf"/>
+				<pingroup name="ZZ_SORT_CDIE_TAP_TDI"  label="dword_1"  	direction="lsb_msb" offset="0"	numvec="1" PatModglobal="GHalf"/>
+				<!-- LYA_BANK also touched on ARL -->
+				<pingroup name="ZZ_SORT_CDIE_TAP_TDI"  label="lya_bank_1" 	direction="lsb_msb" offset="0"	numvec="1" PatModglobal="GQuarter"/>
+				<!-- quadhalf on LYA_BANK bit [2] actual starts at offset of 1 from the label -->
+				<pingroup name="ZZ_SORT_CDIE_TAP_TDI"  label="lya_bank_1_1" direction="lsb_msb" offset="1"	numvec="1" PatModglobal="GQuarterhalf"/>
+				
+			  </pattern_modify_setup> 
+			</PatModify_Group>
+			
+			<PatModify_Group> 									<!-- LYA_*_WAoff -->
+			  <presetupID>LYA_RD0_WAoff,LYA_RD1_WAoff,LYA_NO_WL1_WAoff</presetupID>
+			  <!-- EVG 5.02.0.0 release is in flight to remove the below patlist section once schema file gets the enhancement -->
+			  <patlist>arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_read0_list</patlist>
+			  <patlist>arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_read1_list</patlist>
+			  <patlist>arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_nowl0_list</patlist>
+			  <patlist>arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_nowl1_list</patlist>
+			  <patlist>arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_mux0_list</patlist>
+			  <patlist>arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_mux1_list</patlist>	  
+
+			  <pattern_modify_setup> <!-- Check reset label and update if needed, WA settings need to be added below. Below LYA patmod will be removed as it is already defiend above -->
+<!-- Need to check test will take regex -->
+				<pingroup name="ZZ_SORT_CDIE_TAP_TDI"  label="*LLC_CFG_DATA_WL_BIAS_CBOPAIR*"    				direction="lsb_msb" offset="0"	numvec="1"    PatModglobal="WLBIAS"/>
+				<pingroup name="ZZ_SORT_CDIE_TAP_TDI"  label="*LLC_CFG_DATA_WL_BIAS_STEP_CBOPAIR*"       		direction="lsb_msb" offset="0"	numvec="1"    PatModglobal="WLBIASSTEP"/>				
+				<pingroup name="ZZ_SORT_CDIE_TAP_TDI"  label="*LLC_CFG_DATA_WL_BIAS_STEP_EN_CBOPAIR*"    		direction="lsb_msb" offset="0"	numvec="1"    PatModglobal="WLBIASSTEPEN"/>
+				<pingroup name="ZZ_SORT_CDIE_TAP_TDI"  label="*LLC_CFG_DATA_WL_BIAS_STEP_EN_CBOPAIR*"       	direction="lsb_msb" offset="1"	numvec="1"    PatModglobal="WADIS"/>				
+				<pingroup name="ZZ_SORT_CDIE_TAP_TDI"  label="*LLC_CFG_DATA_WR_AST_PW_CBOPAIR*"    				direction="lsb_msb" offset="0"	numvec="1"    PatModglobal="WAPW"/>
+				<pingroup name="ZZ_SORT_CDIE_TAP_TDI"  label="*LLC_CFG_DATA_WR_AST_STRENGTH_CBOPAIR*"    		direction="lsb_msb" offset="0"	numvec="1"    PatModglobal="WASTR"/>			
+				 <!--<pingroup name="ZZ_SORT_CDIE_TAP_TDI"  label="*LLC_CFG_DATA_LYASTICKYWL_CBOPAIR*"      	direction="lsb_msb" offset="0"	numvec="1"    PatModglobal="LYASTKWL"/>	 -->	<!--ashwini : currently no fuse exist  ww31.3 2023 -->		
+				<pingroup name="ZZ_SORT_CDIE_TAP_TDI"  label="*lya_stickywl_1*"        							direction="lsb_msb" offset="0"	numvec="1"    PatModglobal="LYASTKWL"/>				
+			  </pattern_modify_setup> 
+			</PatModify_Group>
+			
+			<PatModify_Group> 									<!-- LYA_*_WAon -->
+			  <presetupID>LYA_RD0_WAon,LYA_RD1_WAon,LYA_NO_WL1_WAon</presetupID>
+			  <!-- EVG 5.02.0.0 release is in flight to remove the below patlist section once schema file gets the enhancement -->
+			  <patlist>arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_read0_list</patlist>
+			  <patlist>arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_read1_list</patlist>
+			  <patlist>arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_nowl0_list</patlist>
+			  <patlist>arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_nowl1_list</patlist>
+			  <patlist>arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_mux0_list</patlist>
+			  <patlist>arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_mux1_list</patlist>	  
+
+			  <pattern_modify_setup> <!-- WA settings need to be added below. Below LYA patmod will be removed as it is already defiend above -->
+				<pingroup name="ZZ_SORT_CDIE_TAP_TDI"  label="*LLC_CFG_DATA_WL_BIAS_CBOPAIR*"    				direction="lsb_msb" offset="0"	numvec="1"    PatModglobal="SETWLBIAS"/>
+				<pingroup name="ZZ_SORT_CDIE_TAP_TDI"  label="*LLC_CFG_DATA_WL_BIAS_STEP_CBOPAIR*"       		direction="lsb_msb" offset="0"	numvec="1"    PatModglobal="SETWLBIASSTEP"/>				
+				<pingroup name="ZZ_SORT_CDIE_TAP_TDI"  label="*LLC_CFG_DATA_WL_BIAS_STEP_EN_CBOPAIR*"    		direction="lsb_msb" offset="0"	numvec="1"    PatModglobal="SETWLBIASSTEPEN"/>
+				<pingroup name="ZZ_SORT_CDIE_TAP_TDI"  label="*LLC_CFG_DATA_WL_BIAS_STEP_EN_CBOPAIR*"        	direction="lsb_msb" offset="1"	numvec="1"    PatModglobal="SETWADIS"/>				
+				<pingroup name="ZZ_SORT_CDIE_TAP_TDI"  label="*LLC_CFG_DATA_WR_AST_PW_CBOPAIR*"    				direction="lsb_msb" offset="0"	numvec="1"    PatModglobal="SETWAPW"/>
+				<pingroup name="ZZ_SORT_CDIE_TAP_TDI"  label="*LLC_CFG_DATA_WR_AST_STRENGTH_CBOPAIR*"    		direction="lsb_msb" offset="0"	numvec="1"    PatModglobal="SETWASTR"/>			
+				<!-- <pingroup name="ZZ_SORT_CDIE_TAP_TDI"  label="*LLC_CFG_DATA_LYASTICKYWL_CBOPAIR*"        	direction="lsb_msb" offset="0"	numvec="1"    PatModglobal="SETLYASTKWL"/>	--> <!--ashwini : currently no fuse exist  ww31.3 2023 -->	
+				<pingroup name="ZZ_SORT_CDIE_TAP_TDI"  label="*lya_stickywl_1*"        							direction="lsb_msb" offset="0"	numvec="1"    PatModglobal="SETLYASTKWL"/>		
+			  </pattern_modify_setup> 
+			</PatModify_Group>
+			
+		</VectorModifyParams>
+
+		<SetupTests> <!-- The setup tests might break to execute the patmod after apply as the same setup name has used. Need to look back to split the XML per slice or one set of plist for all slices -->
+		<!-- Slice 0 setup -->
+			<setup name="LYA_RD0_WAoff"    		patlist="arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_read0_list" 	burst="OFF" />
+			<setup name="LYA_RD1_WAoff"         patlist="arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_read1_list" 	burst="OFF" />
+			<setup name="LYA_NO_WL0_WAoff"      patlist="arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_nowl0_list" 	burst="OFF" />
+			<setup name="LYA_NO_WL1_WAoff"      patlist="arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_nowl1_list" 	burst="OFF" />			
+			<setup name="LYA_MUX1_WAoff"      	patlist="arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_mux1_list" 	burst="OFF" />
+			<setup name="LYA_MUX0_WAoff"      	patlist="arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_mux0_list" 	burst="OFF" />
+			
+			<setup name="LYA_RD0_WAon" 			patlist="arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_read0_list" 	burst="OFF" />
+			<setup name="LYA_RD1_WAon"          patlist="arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_read1_list"	burst="OFF" />
+			<setup name="LYA_NO_WL0_WAon"  		patlist="arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_nowl0_list" 	burst="OFF" />
+			<setup name="LYA_NO_WL1_WAon"      	patlist="arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_nowl1_list" 	burst="OFF" />	
+			<setup name="LYA_MUX0_WAon"  		patlist="arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_mux0_list" 	burst="OFF" />
+			<setup name="LYA_MUX1_WAon"  		patlist="arr_cdie_begin_pbist_ccf_tap_lya_ssa_llc_dat_s0_mux1_list" 	burst="OFF" />
+		
+		</SetupTests> 
+
+		<TestsParams>
+			<grouptest>						<!-- LYA test with WA OFF --> 
+			  <!-- BaseNumber needs to be included in LYA input parameter. --> 
+			  <test name="BLR"        NumPoints="11"   PreSetup="LYA_RD0_WAoff"        />
+			  <test name="BLbR"       NumPoints="11"   PreSetup="LYA_RD1_WAoff"        />
+			  <test name="PCR"        NumPoints="11"   PreSetup="LYA_RD1_WAoff"        />
+			  <test name="PCbR"       NumPoints="11"   PreSetup="LYA_RD0_WAoff"        />
+			  <test name="BLTP"       NumPoints="11"   PreSetup="LYA_RD0_WAoff"        />
+			  <test name="BLbTP"      NumPoints="11"   PreSetup="LYA_RD1_WAoff"        />
+			  <test name="BLINT"      NumPoints="11"   PreSetup="LYA_NO_WL0_WAoff"     />
+			  <test name="BLbINT"     NumPoints="11"   PreSetup="LYA_NO_WL1_WAoff"     />
+			  <test name="BLEXT"      NumPoints="11"   PreSetup="LYA_MUX0_WAoff"     />
+			  <test name="BLbEXT"     NumPoints="11"   PreSetup="LYA_MUX1_WAoff"     />
+			</grouptest> 
+			
+			<grouptest>						<!-- LYA test with WA ON --> 
+			  <BaseNumberOffset>1000</BaseNumberOffset>	<!-- If offset isn't present, it will use the basenumber as the starting point-->
+			  <test name="BLR"        NumPoints="11"   PreSetup="LYA_RD0_WAon"         />
+			  <test name="BLbR"       NumPoints="11"   PreSetup="LYA_RD1_WAon"         />
+			  <test name="PCR"        NumPoints="11"   PreSetup="LYA_RD1_WAon"         />
+			  <test name="PCbR"       NumPoints="11"   PreSetup="LYA_RD0_WAon"         />
+			  <test name="BLTP"       NumPoints="11"   PreSetup="LYA_RD0_WAon"         />
+			  <test name="BLbTP"      NumPoints="11"   PreSetup="LYA_RD1_WAon"         />
+			  <test name="BLINT"      NumPoints="11"   PreSetup="LYA_NO_WL0_WAon"      />
+			  <test name="BLbINT"     NumPoints="11"   PreSetup="LYA_NO_WL1_WAon"      />
+			  <test name="BLEXT"      NumPoints="11"   PreSetup="LYA_MUX0_WAon"  	   />
+			  <test name="BLbEXT"     NumPoints="11"   PreSetup="LYA_MUX1_WAon"  	   />
+			</grouptest>
+		</TestsParams>
+		<!-- random cell selection setup: only use for manufacturing mode and random cell prioritization -->
+		<CellSelection>			<!-- SNR TNT has 288 blocks per ssi, evenly distribute to 8 sections -->
+			<CellPrioritization bit="30" col="15" row="15" SB="15" MB="5" DBV="5" DBH="5" /> <!-- prioritize which defect type to get the LYA measurements, SB/MB/DBV/DBH are group of bit defect -->
+			<!-- hardcoded limit bit=20, col=5, row=5 in the code -->
+			<ArraySections>
+				<darray section="0" ssi="0-5" block="0-23" /> <!-- will enhance for partial LYA -->
+				<darray section="1" ssi="0-5" block="24-47" />
+				<darray section="2" ssi="0-5" block="48-71" />
+				<darray section="3" ssi="0-5" block="72-95" />
+				<darray section="4" ssi="0-5" block="96-119" />
+				<darray section="5" ssi="0-5" block="120-143" />
+				<darray section="6" ssi="0-5" block="144-167" />
+				<darray section="7" ssi="0-5" block="168-191" />
+			</ArraySections>
+		</CellSelection>
+	</TargetArrayName>
+</lya_setup>

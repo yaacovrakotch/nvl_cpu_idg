@@ -1,0 +1,59 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan TPI_MIXDETCT_XXX;
+
+
+# Test Counter Definition
+
+Counters
+{
+    n49000000_fail_CTRL_X_MIXDET_K_STARTPREPRL1_X_X_X_X_DLCPMIXDET_0,
+    n49000001_fail_CTRL_X_MIXDET_K_STARTPREPRL1_X_X_X_X_DLCPMIXDET_2
+} # End of Test Counter Definition
+
+CSharpTest PrimeMixingDetectionTestMethod CTRL_X_MIXDET_K_STARTPREPRL1_X_X_X_X_DLCPMIXDET
+{
+    BypassPort = __shared__::DieIndic.DieCombo(-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);
+    ConfigurationFilePath = "./Shared/Modules/TPI/TPI_MIXDETCT_XXX/InputFiles/configurationFile_" +__shared__::FlowMatrix.BomGroupName+ "_Pass.mdet.json";
+}
+
+Flow TPI_MIXDETCT_XXX_STARTPREPRL1
+{
+    FlowItem CTRL_X_MIXDET_K_STARTPREPRL1_X_X_X_X_DLCPMIXDET CTRL_X_MIXDET_K_STARTPREPRL1_X_X_X_X_DLCPMIXDET
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99490000_fail_TPI_MIXDETCT_XXX_CTRL_X_MIXDET_K_STARTPREPRL1_X_X_X_X_DLCPMIXDET_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98490000_fail_TPI_MIXDETCT_XXX_CTRL_X_MIXDET_K_STARTPREPRL1_X_X_X_X_DLCPMIXDET_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b49000000_fail_TPI_MIXDETCT_XXX_CTRL_X_MIXDET_K_STARTPREPRL1_X_X_X_X_DLCPMIXDET_0;
+            IncrementCounters TPI_MIXDETCT_XXX::n49000000_fail_CTRL_X_MIXDET_K_STARTPREPRL1_X_X_X_X_DLCPMIXDET_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b49000001_fail_TPI_MIXDETCT_XXX_CTRL_X_MIXDET_K_STARTPREPRL1_X_X_X_X_DLCPMIXDET_2;
+            IncrementCounters TPI_MIXDETCT_XXX::n49000001_fail_CTRL_X_MIXDET_K_STARTPREPRL1_X_X_X_X_DLCPMIXDET_2;
+            Return 0;
+        }
+    }
+    
+}

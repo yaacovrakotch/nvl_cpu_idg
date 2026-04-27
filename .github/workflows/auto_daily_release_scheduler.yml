@@ -1,0 +1,507 @@
+name: AutoDailyReleaseScheduler
+
+# This workflow monitors required PRs and triggers AutoDailyRelease at the right time.
+#
+# Behavior:
+#   1. At 3pm Pacific (Mon-Fri): Reads per-BOM JSON configs from ProductConfig/.
+#      - No PRs listed or all already merged -> triggers AutoDailyRelease immediately.
+#      - PRs not yet merged -> enters "waiting" state (deferred).
+#   2. At 8pm Pacific (Mon-Fri): Re-checks any deferred BOMs whose PRs may now be merged.
+#   3. When a PR is merged on main: Re-checks ALL deferred BOMs.
+#      - If all PRs merged for a BOM -> triggers AutoDailyRelease for that BOM.
+#   4. At 8am Pacific next morning (Tue-Sat): Forces trigger for any remaining deferred BOMs.
+#   5. Manual trigger: Checks per-BOM PRs (or forces trigger with force_trigger flag).
+#      Optionally accepts a custom config_dir_path to override the default config directory.
+#
+# Per-BOM JSON config format (auto_daily_release_*.json files in ProductConfig/ on I: drive):
+#   {
+#     "ref": "main",
+#     "wait_prs": [1234, 5678],    <-- PR numbers this BOM must wait for (empty [] = no wait)
+#     "BOMGroups": "Class_NVL_S28C",
+#     ...other workflow inputs...
+#   }
+#
+# Files on I: drive (self-hosted runner):
+#   - ProductConfig/:                   Directory containing auto_daily_release_*.json per-BOM config files
+#   - scheduler_state.json:             Internal state file (auto-managed, do not edit)
+
+on:
+  schedule:
+    # 3:00 PM GMT+8 = 07:00 UTC
+    - cron: '00 7 * * 1-5'
+    # 11:55 PM GMT+8 = 15:55 UTC  
+    - cron: '55 15 * * 1-5'
+    # 8:00 AM GMT+8 = 00:00 UTC (next day)
+    - cron: '0 0 * * 2-6'
+
+  pull_request:
+    types: [closed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      force_trigger:
+        description: 'Force trigger AutoDailyRelease regardless of PR merge status'
+        type: boolean
+        default: false
+      config_dir_path:
+        description: 'Path to directory containing auto_daily_release_*.json per-BOM config files (on I: drive). Leave empty to use default ProductConfig directory.'
+        type: string
+        default: ''
+
+env:
+  CONFIG_DIR: 'I:\tpvalidation\engtools\tptools\mtl\infra\torch\botos\example_error\ProductConfig'
+  STATE_FILE: 'I:\tpvalidation\engtools\tptools\mtl\infra\torch\botos\example_error\scheduler_state.json'
+  CRON_3PM: '55 6 * * 1-5'
+  CRON_12AM: '55 15 * * 1-5'
+  CRON_8AM: '0 0 * * 2-6'
+
+jobs:
+  check_and_trigger:
+    # Skip PR close events that are not actual merges
+    if: github.event_name != 'pull_request' || github.event.pull_request.merged == true
+    runs-on: 
+    - self-hosted
+    - checkers_PG
+
+    steps:
+    - name: Check PR Merge Status and Trigger AutoDailyRelease
+      shell: powershell
+      env:
+        GH_TOKEN: ${{ secrets.PAT_GH_CROSS_REPO }}
+        FORCE_TRIGGER: ${{ github.event.inputs.force_trigger || 'false' }}
+        CONFIG_DIR_OVERRIDE: ${{ github.event.inputs.config_dir_path || '' }}
+        EVENT_NAME: ${{ github.event_name }}
+        EVENT_SCHEDULE: ${{ github.event.schedule }}
+        PR_NUMBER: ${{ github.event.pull_request.number }}
+        REPO_FULL: ${{ github.repository }}
+      run: |
+        $ErrorActionPreference = "Stop"
+
+        # ============================================================
+        # Configuration
+        # ============================================================
+        $configDir   = $env:CONFIG_DIR
+        $stateFile   = $env:STATE_FILE
+
+        # Override config directory path if provided via manual trigger input
+        if ($env:CONFIG_DIR_OVERRIDE -and $env:CONFIG_DIR_OVERRIDE.Trim() -ne '') {
+            $configDir = $env:CONFIG_DIR_OVERRIDE.Trim()
+            Write-Host "Config directory overridden via manual input: $configDir"
+        }
+        $repo        = $env:REPO_FULL
+        $apiBase     = "https://api.github.com/repos/$repo"
+        $headers     = @{
+            "Authorization"        = "Bearer $env:GH_TOKEN"
+            "Accept"               = "application/vnd.github.v3+json"
+            "X-GitHub-Api-Version" = "2022-11-28"
+        }
+
+        # Identify trigger type
+        $isSchedule3pm  = ($env:EVENT_NAME -eq 'schedule' -and $env:EVENT_SCHEDULE -eq $env:CRON_3PM)
+        $isSchedule12AM  = ($env:EVENT_NAME -eq 'schedule' -and $env:EVENT_SCHEDULE -eq $env:CRON_12AM)
+        $isSchedule8am  = ($env:EVENT_NAME -eq 'schedule' -and $env:EVENT_SCHEDULE -eq $env:CRON_8AM)
+        $isPRMerge      = ($env:EVENT_NAME -eq 'pull_request')
+        $isManual       = ($env:EVENT_NAME -eq 'workflow_dispatch')
+        $forceRequested = ($env:FORCE_TRIGGER -eq 'true')
+
+        Write-Host "============================================"
+        Write-Host " AutoDailyRelease Scheduler"
+        Write-Host "============================================"
+        Write-Host "Event:      $($env:EVENT_NAME)"
+        Write-Host "Schedule:   $($env:EVENT_SCHEDULE)"
+        Write-Host "Force:      $forceRequested"
+        Write-Host "Config Dir: $configDir"
+        Write-Host "PR Number:  $($env:PR_NUMBER)"
+        Write-Host "Time (UTC): $((Get-Date).ToUniversalTime().ToString('yyyy-MM-dd HH:mm:ss'))"
+        Write-Host ""
+
+        # Validate token
+        if (-not $env:GH_TOKEN) {
+            Write-Host "ERROR: PAT_GH_CROSS_REPO secret is not set. Cannot access GitHub API."
+            exit 1
+        }
+
+        # ============================================================
+        # Helper: Read / Write State
+        # ============================================================
+        function Read-SchedulerState {
+            if (Test-Path $stateFile) {
+                try {
+                    $raw = Get-Content $stateFile -Raw | ConvertFrom-Json
+                    $s = if ($raw.PSObject.Properties['status'])         { [string]$raw.status }         else { "idle" }
+                    $t = if ($raw.PSObject.Properties['started_at'])     { [string]$raw.started_at }     else { "" }
+                    $b = if ($raw.PSObject.Properties['triggered_boms']) { @($raw.triggered_boms) }      else { @() }
+                    $d = if ($raw.PSObject.Properties['deferred_boms'])  { @($raw.deferred_boms) }       else { @() }
+                    return @{ status = $s; started_at = $t; triggered_boms = $b; deferred_boms = $d }
+                } catch {
+                    Write-Host "  Warning: Could not parse state file. Starting fresh."
+                }
+            }
+            return @{ status = "idle"; started_at = ""; triggered_boms = @(); deferred_boms = @() }
+        }
+
+        function Write-SchedulerState($status, $started_at, $triggered_boms, $deferred_boms) {
+            $obj = @{ status = $status; started_at = $started_at; triggered_boms = $triggered_boms; deferred_boms = $deferred_boms }
+            $obj | ConvertTo-Json -Depth 3 | Set-Content $stateFile -Force
+            Write-Host "  State updated -> status=$status, started_at=$started_at, triggered_boms=$($triggered_boms -join ', '), deferred_boms=$($deferred_boms -join ', ')"
+        }
+
+        # ============================================================
+        # Helper: Check if a single PR is merged
+        # ============================================================
+        function Test-PrMerged([int]$prNumber) {
+            try {
+                $pr = Invoke-RestMethod -Uri "$apiBase/pulls/$prNumber" -Headers $headers -Method Get
+                return ($pr.merged -eq $true)
+            } catch {
+                Write-Host "  Warning: Could not check PR #$prNumber - $_"
+                return $false
+            }
+        }
+
+        # ============================================================
+        # Helper: Get wait_prs list from a BOM config object
+        # ============================================================
+        function Get-BomWaitPrs($config) {
+            if ($config.PSObject.Properties['wait_prs'] -and $config.wait_prs -is [array]) {
+                $prs = @()
+                foreach ($item in $config.wait_prs) {
+                    try {
+                        $prs += [int]$item
+                    } catch {
+                        Write-Host "    Warning: Skipping invalid wait_prs entry: '$item'"
+                    }
+                }
+                return $prs
+            }
+            return @()
+        }
+
+        # ============================================================
+        # Helper: Check if all wait_prs for a BOM are merged
+        # ============================================================
+        function Test-BomPrsMerged($config, $bomName) {
+            $requiredPRs = Get-BomWaitPrs $config
+
+            if ($requiredPRs.Count -eq 0) {
+                Write-Host "    No PRs to wait for -> ready to trigger."
+                return $true
+            }
+
+            Write-Host "    Required PRs: $($requiredPRs -join ', ')"
+            $allMerged = $true
+            foreach ($pr in $requiredPRs) {
+                $merged = Test-PrMerged $pr
+                $icon = if ($merged) { "[MERGED]" } else { "[PENDING]" }
+                Write-Host "      PR #${pr}: $icon"
+                if (-not $merged) { $allMerged = $false }
+            }
+            return $allMerged
+        }
+
+        # ============================================================
+        # Helper: Load config files from CONFIG_DIR
+        # ============================================================
+        function Get-BomConfigs {
+            if (-not (Test-Path $configDir)) {
+                Write-Host "ERROR: Config directory not found: $configDir"
+                Write-Host "Please create the directory with per-BOM JSON config files."
+                throw "Config directory missing"
+            }
+
+            $configFiles = Get-ChildItem -Path $configDir -Filter "auto_daily_release_*.json" | Sort-Object Name
+
+            if ($configFiles.Count -eq 0) {
+                Write-Host "ERROR: No auto_daily_release_*.json config files found in: $configDir"
+                throw "No BOM config files found"
+            }
+
+            Write-Host "  Found $($configFiles.Count) BOM config file(s):"
+            foreach ($f in $configFiles) {
+                Write-Host "    - $($f.Name)"
+            }
+            Write-Host ""
+
+            return $configFiles
+        }
+
+        # ============================================================
+        # Helper: Trigger AutoDailyRelease for a single BOM config
+        # ============================================================
+        function Invoke-SingleBomTrigger($file) {
+            $config = Get-Content $file.FullName -Raw | ConvertFrom-Json
+
+            # Extract ref (branch to trigger on), default to 'main'
+            $ref = if ($config.PSObject.Properties['ref']) { $config.ref } else { "main" }
+
+            # Build inputs dictionary (exclude 'ref' and 'wait_prs' since they are not workflow inputs)
+            $inputs = @{}
+            foreach ($prop in $config.PSObject.Properties) {
+                if ($prop.Name -ne 'ref' -and $prop.Name -ne 'wait_prs') {
+                    $inputs[$prop.Name] = [string]$prop.Value
+                }
+            }
+
+            $body = @{
+                ref    = $ref
+                inputs = $inputs
+            } | ConvertTo-Json -Depth 5
+
+            Write-Host "    Ref:    $ref"
+            Write-Host "    BOM:    $($inputs['BOMGroups'])"
+            Write-Host "    Inputs: $($inputs | ConvertTo-Json -Compress)"
+
+            try {
+                $response = Invoke-RestMethod `
+                    -Uri "$apiBase/actions/workflows/auto_daily_release.yml/dispatches" `
+                    -Headers $headers `
+                    -Method Post `
+                    -Body $body `
+                    -ContentType "application/json"
+
+                Write-Host "    SUCCESS: AutoDailyRelease triggered!"
+                
+                # Remove the JSON file after successful trigger
+                try {
+                    Remove-Item -Path $file.FullName -Force
+                    Write-Host "    CLEANUP: Removed JSON file $($file.Name)"
+                } catch {
+                    Write-Host "    WARNING: Could not remove JSON file $($file.Name) - $($_.Exception.Message)"
+                }
+                
+                return $true
+            } catch {
+                Write-Host "    ERROR: Failed to trigger AutoDailyRelease - $($_.Exception.Message)"
+                return $false
+            }
+        }
+
+        # ============================================================
+        # Helper: Process BOMs - check per-BOM PRs and trigger ready ones
+        # ============================================================
+        function Invoke-ProcessBoms([bool]$force) {
+            Write-Host ""
+            Write-Host "============================================"
+            Write-Host " Processing BOMs (force=$force)"
+            Write-Host "============================================"
+
+            $configFiles = Get-BomConfigs
+            $state = Read-SchedulerState
+            $alreadyTriggered = @($state.triggered_boms)
+            $deferredBoms = @($state.deferred_boms)
+
+            $triggerCount = 0
+            $pendingCount = 0
+            $skippedCount = 0
+            $errors = @()
+
+            foreach ($file in $configFiles) {
+                $bomName = [System.IO.Path]::GetFileNameWithoutExtension($file.Name)
+                Write-Host "--------------------------------------------"
+                Write-Host "  BOM: $bomName"
+                Write-Host "  Config: $($file.FullName)"
+
+                # Skip if already triggered this session
+                if ($alreadyTriggered -contains $bomName) {
+                    Write-Host "    Already triggered this session. Skipping."
+                    $skippedCount++
+                    continue
+                }
+
+                try {
+                    $config = Get-Content $file.FullName -Raw | ConvertFrom-Json
+
+                    # Check per-BOM PRs (unless forcing)
+                    if (-not $force) {
+                        $ready = Test-BomPrsMerged $config $bomName
+                        if (-not $ready) {
+                            Write-Host "    PRs still pending. Deferring this BOM."
+                            if ($deferredBoms -notcontains $bomName) {
+                                $deferredBoms += $bomName
+                            }
+                            $pendingCount++
+                            continue
+                        }
+                    } else {
+                        Write-Host "    Force mode: skipping PR check."
+                    }
+
+                    # Trigger this BOM
+                    $triggerSuccess = Invoke-SingleBomTrigger $file
+                    if ($triggerSuccess) {
+                        $alreadyTriggered += $bomName
+                        # Remove from deferred list if it was there
+                        $deferredBoms = @($deferredBoms | Where-Object { $_ -ne $bomName })
+                        $triggerCount++
+                    } else {
+                        $errors += $bomName
+                    }
+
+                    # Small delay between API calls to avoid rate limiting
+                    Start-Sleep -Seconds 2
+
+                } catch {
+                    Write-Host "    ERROR: Failed to process $bomName - $_"
+                    $errors += $bomName
+                }
+            }
+
+            # Update state with newly triggered BOMs and deferred list
+            $newStatus = $state.status
+            if (($triggerCount + $skippedCount) -eq $configFiles.Count -and $errors.Count -eq 0) {
+                $newStatus = "triggered"
+            }
+            Write-SchedulerState $newStatus $state.started_at $alreadyTriggered $deferredBoms
+
+            Write-Host ""
+            Write-Host "============================================"
+            Write-Host "  Trigger Summary:"
+            Write-Host "    Triggered now:     $triggerCount"
+            Write-Host "    Already done:      $skippedCount"
+            Write-Host "    Still pending PRs: $pendingCount"
+            Write-Host "    Errors:            $($errors.Count)"
+            if ($errors.Count -gt 0) {
+                Write-Host "    Failed BOMs: $($errors -join ', ')"
+            }
+            Write-Host "============================================"
+
+            if ($errors.Count -gt 0 -and $triggerCount -eq 0 -and $skippedCount -eq 0) {
+                throw "All BOM triggers failed"
+            }
+
+            $allDone = ($pendingCount -eq 0 -and $errors.Count -eq 0)
+            return $allDone
+        }
+
+        # ============================================================
+        # Main Logic
+        # ============================================================
+        $state = Read-SchedulerState
+        Write-Host "Current state: status=$($state.status), started_at=$($state.started_at), triggered_boms=$($state.triggered_boms -join ', '), deferred_boms=$($state.deferred_boms -join ', ')"
+        Write-Host ""
+
+        # --- MANUAL FORCE TRIGGER ---
+        if ($isManual -and $forceRequested) {
+            Write-Host ">> Manual force trigger requested."
+            # Reset state for a fresh force-trigger session
+            $now = (Get-Date).ToUniversalTime().ToString('o')
+            Write-SchedulerState "waiting" $now @() @()
+            Invoke-ProcessBoms $true
+            exit 0
+        }
+
+        # --- 3PM SCHEDULE: Start new session ---
+        if ($isSchedule3pm) {
+            Write-Host ">> 3pm schedule: Starting new trigger session."
+            $now = (Get-Date).ToUniversalTime().ToString('o')
+            Write-SchedulerState "waiting" $now @() @()
+
+            Write-Host ""
+            Write-Host "Processing all BOMs..."
+            $allDone = Invoke-ProcessBoms $false
+
+            if ($allDone) {
+                Write-Host ""
+                Write-Host "All BOMs triggered successfully."
+            } else {
+                Write-Host ""
+                Write-Host "Some BOMs still pending PRs."
+                Write-Host "Deferred BOMs will be re-checked on PR merge events."
+                Write-Host "Will force trigger all remaining BOMs at 8am deadline."
+            }
+            exit 0
+        }
+
+        # --- 8PM SCHEDULE: Re-check deferred BOMs ---
+        if ($isSchedule8pm) {
+            Write-Host ">> 8pm schedule: Re-checking deferred BOMs."
+
+            if ($state.status -eq 'triggered') {
+                Write-Host "All BOMs already triggered for this session. Nothing to do."
+                exit 0
+            }
+
+            if ($state.status -ne 'waiting') {
+                Write-Host "No active session from 3pm. Starting a new session."
+                $now = (Get-Date).ToUniversalTime().ToString('o')
+                Write-SchedulerState "waiting" $now @() @()
+            }
+
+            Write-Host ""
+            Write-Host "Re-checking all remaining BOMs..."
+            $allDone = Invoke-ProcessBoms $false
+
+            if ($allDone) {
+                Write-Host ""
+                Write-Host "All BOMs now triggered!"
+            } else {
+                Write-Host ""
+                Write-Host "Some BOMs still have pending PRs. Continuing to wait..."
+                Write-Host "Will force trigger remaining BOMs at 8am deadline."
+            }
+            exit 0
+        }
+
+        # --- 8AM SCHEDULE: Deadline force trigger ---
+        if ($isSchedule8am) {
+            Write-Host ">> 8am deadline schedule."
+
+            if ($state.status -eq 'triggered') {
+                Write-Host "All BOMs already triggered for this session. Nothing to do."
+                exit 0
+            }
+
+            if ($state.status -ne 'waiting') {
+                Write-Host "No active waiting session. Nothing to do."
+                exit 0
+            }
+
+            Write-Host "DEADLINE REACHED: Force-triggering any remaining BOMs regardless of PR status."
+            Invoke-ProcessBoms $true
+            exit 0
+        }
+
+        # --- PR MERGE EVENT ---
+        if ($isPRMerge) {
+            Write-Host ">> PR #$($env:PR_NUMBER) was merged on main."
+
+            if ($state.status -eq 'triggered') {
+                Write-Host "All BOMs already triggered for this session. Skipping."
+                exit 0
+            }
+
+            if ($state.status -ne 'waiting') {
+                Write-Host "No active waiting session (3pm schedule has not fired yet). Skipping."
+                exit 0
+            }
+
+            Write-Host ""
+            Write-Host "Active session detected. Re-checking ALL deferred BOMs..."
+            $allDone = Invoke-ProcessBoms $false
+
+            if ($allDone) {
+                Write-Host ""
+                Write-Host "All BOMs now triggered!"
+            } else {
+                Write-Host ""
+                Write-Host "Some BOMs still have pending PRs. Continuing to wait..."
+            }
+            exit 0
+        }
+
+        # --- MANUAL (no force) ---
+        if ($isManual) {
+            Write-Host ">> Manual trigger (no force flag). Checking per-BOM PRs..."
+            # Reset state for a fresh manual session
+            $now = (Get-Date).ToUniversalTime().ToString('o')
+            Write-SchedulerState "waiting" $now @() @()
+            $allDone = Invoke-ProcessBoms $false
+
+            if (-not $allDone) {
+                Write-Host ""
+                Write-Host "Some BOMs still have pending PRs. Use force_trigger=true to override."
+            }
+            exit 0
+        }
+
+        Write-Host "Unrecognized event type: $($env:EVENT_NAME). No action taken."

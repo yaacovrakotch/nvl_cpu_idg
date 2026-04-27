@@ -1,0 +1,15 @@
+Version 1.0;
+
+UserVars `TestPlanName`
+{
+    String TESTERDV_Enable = "0";
+}
+
+`#onlysort`SelectorRuleCollection ClkRule
+`#onlysort`{
+`#onlysort`    SelectorRule Patcfg(rawclass, default)
+`#onlysort`    {
+`#onlysort`        rawclass => contains(__shared__::LocationSets.RC_S1,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+`#onlysort`        default;
+`#onlysort`    }
+`#onlysort`}

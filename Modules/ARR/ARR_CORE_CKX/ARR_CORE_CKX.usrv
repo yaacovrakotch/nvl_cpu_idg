@@ -1,0 +1,82 @@
+Version 1.0;
+
+SelectorRuleCollection  ARR_CORE_Rules
+{
+	SelectorRule QA_HOT_Default (QA,HOT, Default)
+	{
+		QA => contains("[5M],[5S],[4M],[4S],[QQ],[QE],[QP],[QC],[QZ],[Q8]","[" + __shared__::SCVars.SC_ENGID + "]") && contains(__shared__::LocationSets.QA_S1,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		HOT => contains(__shared__::LocationSets.CH_CHVM + "," + __shared__::LocationSets.CH_CRV + "," + __shared__::LocationSets.CHM_ENG,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.RCHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Default;
+	}
+	SelectorRule RC_S1 (RC, Default)
+	{
+		RC => contains(__shared__::LocationSets.RC_S1,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Default;
+	}
+	SelectorRule TPRules (Outcome1, Outcome2, Outcome3, Outcome4, Outcome5, Outcome6, Outcome7, Outcome8)
+	{
+		Outcome1 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C";
+        Outcome2 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+		Outcome3 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C";
+		Outcome4 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C";
+		Outcome5 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C";
+		Outcome6 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C";
+		Outcome7 => GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C";
+		Outcome8;
+	}
+}
+
+UserVars ARR_CORE_CKX_Specs
+{
+	Const String ringfreq = "ringfreq_0";
+	Const String corefreq = "corefreq";
+	Const Integer RASTER_BYPASS = 1;
+	Const String CORE_PMTM_RecoveryModeDownbin = "Disabled";
+	Const String CORE_PMTM_RecoveryConfigurationFile = ""; # WIP - GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "/Modules/ARR_CORE/InputFiles/CoreRecoveryMap.json"
+	Array<String> Apex_Multipass = ["1110","1101","1011","0111"];
+	Const String FeatureSwitchNonMTT = "disable_masked_targets,fivr_mode_on";
+	Const String FeatureSwitchMTT = "disable_masked_targets,print_per_target_increments,print_scoreboard_counters,fivr_mode_on";
+	Const String PatternMap = "9,10,11,12,13,14,15";
+	Const String CORE_PMUCS_VoltageTarget = "CCF";
+	Const String DTSConfig = "nvl_cpu816_all";
+	Const String dtsconfig_ctv = "nvl_cpu_all_ctv";
+	Const String dtsconfig_noctv = "nvl_cpu_all_noctv";
+	Const String Recovery_PinMap = ARR_CORE_Rules.TPRules("ARR_DCM_3,ARR_DCM_2,ARR_DCM_1,ARR_DCM_0","ARR_DCM_3,ARR_DCM_2,ARR_DCM_1,ARR_DCM_0","ARR_DCM_HX_3,ARR_DCM_HX_2,ARR_DCM_HX_1,ARR_DCM_HX_0","ARR_DCM_1,ARR_DCM_0","ARR_DCM_1,ARR_DCM_0","ARR_DCM_1,ARR_DCM_0","ARR_DCM_3,ARR_DCM_2,ARR_DCM_1,ARR_DCM_0","ARR_DCM_3,ARR_DCM_2,ARR_DCM_1,ARR_DCM_0");
+	Const String ForwardingMode_EDC = "Input";
+	Const String ForwardingMode_Kill = "InputOutput";
+	Const String Recovery_Mode = "RecoveryPort";
+	Const String Recovery_Mode_Speedflow = "RecoveryPort";
+	Const String Recovery_Options = ARR_CORE_Rules.TPRules("CLASS_NVL_S28C_6C","CLASS_NVL_S52C_12C","CLASS_NVL_HX28C_6C","CLASS_NVL_P16C_6C","CLASS_NVL_S16C_4C","CLASS_NVL_HX28C_6C","CLASS_DNL_S28C_6C","CLASS_NVL_S28C_6C");
+	Const String Recovery_Options_Speedflow = "";
+	Const String RecoveryTracker_Incoming = "CR";
+	Const String RecoveryTracker_Outgoing = "CR";
+	Const String RecoveryTracker_Outgoing_Speedflow = "";
+	Const String RecoveryTracker_Incoming_48 = "CR1,CR0";
+	Const String RecoveryTracker_Outgoing_48 = "CR1,CR0";
+	Const String RecoveryTracker_Outgoing_Speedflow_48 = "";
+	Const String VoltageConverter_rail = "--dlvrpins VCCIA --railconfigurations CDIE_CORE_NBLCTRL0 CDIE_CORE_NBLCTRL1 CDIE_CORE_NBLCTRL2 CDIE_CORE_NBLCTRL3 --expressions ";
+	Const String VoltageConverter_rail_noexp = "--dlvrpins VCCIA --railconfigurations CDIE_CORE_NBLCTRL0 CDIE_CORE_NBLCTRL1 CDIE_CORE_NBLCTRL2 CDIE_CORE_NBLCTRL3 ";
+	Const String nbl_off = "CORE:nblctrl_core_l2:nbloff,CCF:nblctrl_ccf:ccfnbloff";
+	Const String nbl_on = "CORE:nblctrl_core_l2:nblon,CCF:nblctrl_ccf:ccfnblon";
+	Const String FivrConditionNom = "NOM_CCF_CORE";
+	String s28_timing = "IPC::ARR_CORE_CXX::cpu_fun_timing_mts800_tstprtclk400_tck100_pncarrmts800_b0";
+	String dnls28c_timing = "IPC::ARR_CORE_CXX::cpu_hvm_timing_mts800_tstprtclk400_tck100_dnls28c";
+	String hxb0_hvmtiming = "IPC::ARR_CORE_CXX::cpu_hvm_timing_mts800_tstprtclk400_tck100_hxb0";
+	String hxb0_800_hvmtiming = "IPC::ARR_CORE_CXX::cpu_hvm_timing_mts800_tstprtclk400_tck100_pncarrmts800_hxb0";
+	String hxb0_400_hvmtiming = "IPC::ARR_CORE_CXX::cpu_hvm_timing_mts800_tstprtclk400_tck100_pncarrmts400_hxb0";
+	String others_timing = "IPC::ARR_CORE_CXX::cpu_fun_timing_mts800_tstprtclk400_tck100_pncarrmts800";
+	String timing_48 = "IPC::ARR_CORE_CXX::cpu_hvm_timing_mts800_tstprtclk400_tck100_pncarrmts800_T0";
+	String dcm01plist_max_others = "IPC::arr_cdie_endcpupkg_mbist_core_pnc_pm_dcm01_ssa_vccinf_ks_x_class_hptp_max_list";
+	String allplist_max_48 = "IPC::arr_cdie_endcpupkg_mbist_core_pnc_pm_all_ssa_vccinf_ks_x_class_hptp_max_list";
+	String dcm01plist_min_others = "IPC::arr_cdie_endcpupkg_mbist_core_pnc_pm_dcm01_ssa_vccinf_ks_x_class_hptp_min_list";
+	String allplist_min_48 = "IPC::arr_cdie_endcpupkg_mbist_core_pnc_pm_all_ssa_vccinf_ks_x_class_hptp_min_list";
+	String timing_48_S16 = "IPC::ARR_CORE_CXX::cpu_hvm_timing_mts800_tstprtclk400_tck100_pncarrmts800_T0_S16";
+	String dcm23plist_min_others = "IPC::arr_cdie_endcpupkg_mbist_core_pnc_pm_dcm23_ssa_vccinf_ks_x_class_hptp_min_list";
+	String dcm23plist_max_others = "IPC::arr_cdie_endcpupkg_mbist_core_pnc_pm_dcm23_ssa_vccinf_ks_x_class_hptp_max_list";
+
+	String timingRules = ARR_CORE_Rules.TPRules(ARR_CORE_CKX_Specs.s28_timing,ARR_CORE_CKX_Specs.others_timing,ARR_CORE_CKX_Specs.hxb0_800_hvmtiming,ARR_CORE_CKX_Specs.timing_48,ARR_CORE_CKX_Specs.timing_48_S16,ARR_CORE_CKX_Specs.timing_48,ARR_CORE_CKX_Specs.s28_timing,ARR_CORE_CKX_Specs.others_timing);
+	String RecoveryTracker_In_Rules = ARR_CORE_Rules.TPRules(ARR_CORE_CKX_Specs.RecoveryTracker_Incoming,ARR_CORE_CKX_Specs.RecoveryTracker_Incoming,ARR_CORE_CKX_Specs.RecoveryTracker_Incoming,ARR_CORE_CKX_Specs.RecoveryTracker_Incoming_48,ARR_CORE_CKX_Specs.RecoveryTracker_Incoming_48,ARR_CORE_CKX_Specs.RecoveryTracker_Incoming_48,ARR_CORE_CKX_Specs.RecoveryTracker_Incoming,ARR_CORE_CKX_Specs.RecoveryTracker_Incoming);
+	String RecoveryTracker_Out_Rules = ARR_CORE_Rules.TPRules(ARR_CORE_CKX_Specs.RecoveryTracker_Outgoing,ARR_CORE_CKX_Specs.RecoveryTracker_Outgoing,ARR_CORE_CKX_Specs.RecoveryTracker_Outgoing,ARR_CORE_CKX_Specs.RecoveryTracker_Outgoing_48,ARR_CORE_CKX_Specs.RecoveryTracker_Outgoing_48,ARR_CORE_CKX_Specs.RecoveryTracker_Outgoing_48,ARR_CORE_CKX_Specs.RecoveryTracker_Outgoing,ARR_CORE_CKX_Specs.RecoveryTracker_Outgoing);
+	
+}
+

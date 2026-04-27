@@ -1,0 +1,115 @@
+#Run  : Test  : Data: Param      : Param1             : Oper : Param   : Param2 : Tmp  : On   : On
+#On   : Name  : Type: Type       :                    :      : Type    :        : Store: True : False
+
+START_SCREEN:D2D_CPU_MAXFREQ_52
+EXEC    : COMPARE       : INT				: GSDS				: U.I.D2D_CPU_MAXFREQ									:   SET : EXPRESSION: Min([G.U.I.D2D_CPU_MAXFREQ], 52)   : -    : PROCESS		   : 4
+EXEC    : PROCESS       : STRING            : GLOBAL            : SCVars.SC_CURRENT_PROCESS_TYPE                        :   ==  : LITERAL   : "CLASSHOT"                         : -    : SETDFF:1
+EXEC    : SETDFF        : INT				: DFF				: CURRENT.CURRENT.CD2DFRQ							    :   SET : GSDS      : U.I.D2D_CPU_MAXFREQ                : -    : 1		   : 4
+
+END_SCREEN 
+
+START_SCREEN:D2D_CPU_MAXFREQ_48
+EXEC    : COMPARE       : INT				: GSDS				: U.I.D2D_CPU_MAXFREQ									:   SET : EXPRESSION: Min([G.U.I.D2D_CPU_MAXFREQ], 48)   : -    : PROCESS		   : 4
+EXEC    : PROCESS       : STRING            : GLOBAL            : SCVars.SC_CURRENT_PROCESS_TYPE                        :   ==  : LITERAL   : "CLASSHOT"                         : -    : SETDFF:1
+EXEC    : SETDFF        : INT				: DFF				: CURRENT.CURRENT.CD2DFRQ							    :   SET : GSDS      : U.I.D2D_CPU_MAXFREQ                : -    : 1		   : 4
+END_SCREEN 
+
+START_SCREEN:D2D_CPU_MAXFREQ_44
+EXEC    : COMPARE       : INT				: GSDS				: U.I.D2D_CPU_MAXFREQ									:   SET : EXPRESSION: Min([G.U.I.D2D_CPU_MAXFREQ], 44)   : -    : PROCESS		   : 4
+EXEC    : PROCESS       : STRING            : GLOBAL            : SCVars.SC_CURRENT_PROCESS_TYPE                        :   ==  : LITERAL   : "CLASSHOT"                         : -    : SETDFF:1
+EXEC    : SETDFF        : INT				: DFF				: CURRENT.CURRENT.CD2DFRQ							    :   SET : GSDS      : U.I.D2D_CPU_MAXFREQ                : -    : 1		   : 4
+END_SCREEN
+
+START_SCREEN:D2D_CPU_MAXFREQ_40
+EXEC    : COMPARE       : INT				: GSDS				: U.I.D2D_CPU_MAXFREQ									:   SET : EXPRESSION: Min([G.U.I.D2D_CPU_MAXFREQ], 40)   : -    : PROCESS		   : 4
+EXEC    : PROCESS       : STRING            : GLOBAL            : SCVars.SC_CURRENT_PROCESS_TYPE                        :   ==  : LITERAL   : "CLASSHOT"                         : -    : SETDFF:1
+EXEC    : SETDFF        : INT				: DFF				: CURRENT.CURRENT.CD2DFRQ							    :   SET : GSDS      : U.I.D2D_CPU_MAXFREQ                : -    : 1		   : 4
+END_SCREEN
+
+START_SCREEN:D2D_CPU_MAXFREQ_FAIL
+EXEC    : COMPARE  : INT				: GSDS				: U.I.D2D_CPU_MAXFREQ									:   SET : LITERAL: 0   : -    : 1		   : 4
+
+END_SCREEN
+
+START_SCREEN:D2D_CPU_MAXFREQ_PRINT
+EXEC    : PRINTTOKEN  : INT             : DFF               : CURRENT.CURRENT.CD2DFRQ : SET : GSDS : U.I.D2D_CPU_MAXFREQ : -       : PRINTDLCP : 4
+EXEC    : PRINTDLCP   : INT             : EXPRESSION        : ExecCallback('PrintToItuff','--body_type mrslt --body_data G.U.I.D2D_CPU_MAXFREQ')    : - : - : -     : -     : 1                 : 4
+
+END_SCREEN
+
+START_SCREEN:D2D_CPU1_MAXFREQ_52
+EXEC    : COMPARE       : INT				: GSDS				: U.I.D2D_CPU1_MAXFREQ									:   SET : EXPRESSION: Min([G.U.I.D2D_CPU1_MAXFREQ], 52)   : -    : PROCESS		   : 4
+EXEC    : PROCESS       : STRING            : GLOBAL            : SCVars.SC_CURRENT_PROCESS_TYPE                        :   ==  : LITERAL   : "CLASSHOT"                         : -    : SETDFF:1
+EXEC    : SETDFF        : INT				: DFF				: CURRENT.CURRENT.C1D2DFRQ							    :   SET : GSDS      : U.I.D2D_CPU1_MAXFREQ                : -    : 1		   : 4
+
+END_SCREEN 
+
+START_SCREEN:D2D_CPU1_MAXFREQ_48
+EXEC    : COMPARE       : INT				: GSDS				: U.I.D2D_CPU1_MAXFREQ									:   SET : EXPRESSION: Min([G.U.I.D2D_CPU1_MAXFREQ], 48)   : -    : PROCESS		   : 4
+EXEC    : PROCESS       : STRING            : GLOBAL            : SCVars.SC_CURRENT_PROCESS_TYPE                        :   ==  : LITERAL   : "CLASSHOT"                         : -    : SETDFF:1
+EXEC    : SETDFF        : INT				: DFF				: CURRENT.CURRENT.C1D2DFRQ							    :   SET : GSDS      : U.I.D2D_CPU1_MAXFREQ                : -    : 1		   : 4
+
+END_SCREEN 
+
+START_SCREEN:D2D_CPU1_MAXFREQ_44
+EXEC    : COMPARE       : INT				: GSDS				: U.I.D2D_CPU1_MAXFREQ									:   SET : EXPRESSION: Min([G.U.I.D2D_CPU1_MAXFREQ], 44)   : -    : PROCESS		   : 4
+EXEC    : PROCESS       : STRING            : GLOBAL            : SCVars.SC_CURRENT_PROCESS_TYPE                        :   ==  : LITERAL   : "CLASSHOT"                         : -    : SETDFF:1
+EXEC    : SETDFF        : INT				: DFF				: CURRENT.CURRENT.C1D2DFRQ							    :   SET : GSDS      : U.I.D2D_CPU1_MAXFREQ                : -    : 1		   : 4
+
+END_SCREEN
+
+START_SCREEN:D2D_CPU1_MAXFREQ_40
+EXEC    : COMPARE       : INT				: GSDS				: U.I.D2D_CPU1_MAXFREQ									:   SET : EXPRESSION: Min([G.U.I.D2D_CPU1_MAXFREQ], 40)   : -    : PROCESS		   : 4
+EXEC    : PROCESS       : STRING            : GLOBAL            : SCVars.SC_CURRENT_PROCESS_TYPE                        :   ==  : LITERAL   : "CLASSHOT"                         : -    : SETDFF:1
+EXEC    : SETDFF        : INT				: DFF				: CURRENT.CURRENT.C1D2DFRQ							    :   SET : GSDS      : U.I.D2D_CPU1_MAXFREQ                : -    : 1		   : 4
+
+END_SCREEN
+
+START_SCREEN:D2D_CPU1_MAXFREQ_FAIL
+EXEC    : COMPARE  : INT				: GSDS				: U.I.D2D_CPU1_MAXFREQ									:   SET : LITERAL: 0   : -    : 1		   : 4
+
+END_SCREEN
+
+START_SCREEN:D2D_CPU1_MAXFREQ_PRINT
+EXEC    : PRINTTOKEN  : INT             : DFF               : CURRENT.CURRENT.C1D2DFRQ : SET : GSDS : U.I.D2D_CPU1_MAXFREQ : -       : PRINTDLCP : 4
+EXEC    : PRINTDLCP   : INT             : EXPRESSION        : ExecCallback('PrintToItuff','--body_type mrslt --body_data G.U.I.D2D_CPU1_MAXFREQ')    : - : - : -     : -     : 1                 : 4
+
+END_SCREEN
+
+START_SCREEN:D2D_GCD_MAXFREQ_52
+EXEC    : COMPARE       : INT				: GSDS				: U.I.D2D_GCD_MAXFREQ									:   SET : EXPRESSION: Min([G.U.I.D2D_GCD_MAXFREQ], 52)   : -    : PROCESS		   : 4
+EXEC    : PROCESS       : STRING            : GLOBAL            : SCVars.SC_CURRENT_PROCESS_TYPE                        :   ==  : LITERAL   : "CLASSHOT"                         : -    : SETDFF:1
+EXEC    : SETDFF        : INT				: DFF				: CURRENT.CURRENT.GD2DFRQ							    :   SET : GSDS      : U.I.D2D_GCD_MAXFREQ                : -    : 1		   : 4
+
+END_SCREEN 
+
+START_SCREEN:D2D_GCD_MAXFREQ_48
+EXEC    : COMPARE       : INT				: GSDS				: U.I.D2D_GCD_MAXFREQ									:   SET : EXPRESSION: Min([G.U.I.D2D_GCD_MAXFREQ], 48)   : -    : PROCESS		   : 4
+EXEC    : PROCESS       : STRING            : GLOBAL            : SCVars.SC_CURRENT_PROCESS_TYPE                        :   ==  : LITERAL   : "CLASSHOT"                         : -    : SETDFF:1
+EXEC    : SETDFF        : INT				: DFF				: CURRENT.CURRENT.GD2DFRQ							    :   SET : GSDS      : U.I.D2D_GCD_MAXFREQ                : -    : 1		   : 4
+
+END_SCREEN 
+
+START_SCREEN:D2D_GCD_MAXFREQ_44
+EXEC    : COMPARE       : INT				: GSDS				: U.I.D2D_GCD_MAXFREQ									:   SET : EXPRESSION: Min([G.U.I.D2D_GCD_MAXFREQ], 44)   : -    : PROCESS		   : 4
+EXEC    : PROCESS       : STRING            : GLOBAL            : SCVars.SC_CURRENT_PROCESS_TYPE                        :   ==  : LITERAL   : "CLASSHOT"                         : -    : SETDFF:1
+EXEC    : SETDFF        : INT				: DFF				: CURRENT.CURRENT.GD2DFRQ							    :   SET : GSDS      : U.I.D2D_GCD_MAXFREQ                : -    : 1		   : 4
+
+END_SCREEN
+
+START_SCREEN:D2D_GCD_MAXFREQ_40
+EXEC    : COMPARE       : INT				: GSDS				: U.I.D2D_GCD_MAXFREQ									:   SET : EXPRESSION: Min([G.U.I.D2D_GCD_MAXFREQ], 40)   : -    : PROCESS		   : 4
+EXEC    : PROCESS       : STRING            : GLOBAL            : SCVars.SC_CURRENT_PROCESS_TYPE                        :   ==  : LITERAL   : "CLASSHOT"                         : -    : SETDFF:1
+EXEC    : SETDFF        : INT				: DFF				: CURRENT.CURRENT.GD2DFRQ							    :   SET : GSDS      : U.I.D2D_GCD_MAXFREQ                : -    : 1		   : 4
+
+END_SCREEN
+
+START_SCREEN:D2D_GCD_MAXFREQ_FAIL
+EXEC    : COMPARE  : INT				: GSDS				: U.I.D2D_GCD_MAXFREQ									:   SET : LITERAL: 0   : -    : 1		   : 4
+
+END_SCREEN
+START_SCREEN:D2D_GCD_MAXFREQ_PRINT
+EXEC    : PRINTTOKEN  : INT             : DFF               : CURRENT.CURRENT.GD2DFRQ : SET : GSDS : U.I.D2D_GCD_MAXFREQ : -       : PRINTDLCP : 4
+EXEC    : PRINTDLCP   : INT             : EXPRESSION        : ExecCallback('PrintToItuff','--body_type mrslt --body_data G.U.I.D2D_GCD_MAXFREQ')    : - : - : -     : -     : 1                 : 4
+
+END_SCREEN

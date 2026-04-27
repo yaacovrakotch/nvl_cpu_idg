@@ -1,0 +1,48 @@
+name: GoldFail_Tagging
+
+env:
+  CustomPath: "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe"
+
+on:
+  workflow_dispatch:
+    inputs:
+      TPPath:
+        description: 'TP Path from I:/'
+        required: true
+        default: 'I:/engineering/dev/team_client_tpi/chungshe/TestProgram/DRV_2/POR_TP/Class_NVL_S52C'
+        type: string
+      GoldDielet:
+        description: 'Set Gold Tag - CPU,GCD,PCD,HUB'
+        required: false
+        default: ''
+        type: string
+      FailDielet:
+        description: 'Set Fail Tag - CPU,GCD,PCD,HUB'
+        required: false
+        default: ''
+        type: string
+
+jobs:
+  Create_Tags:
+    runs-on: [self-hosted, checkers_PG]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          clean: true              # remove untracked files before checkout
+
+      - name: Checkout submodules
+        run: |
+          git submodule sync --recursive
+          git submodule update --init --recursive --force
+      - name: Log Inputs
+        run: echo "${{ toJSON(github.event.inputs) }}"
+      - name: Run script to create tags in Selected Dielet Repo
+        env:
+          GITHUB_TOKEN: ${{ secrets.CPUTOK }}
+          TPPath: ${{ github.event.inputs.TPPath }}
+          GoldDielet: ${{ github.event.inputs.GoldDielet }}
+          FailDielet: ${{ github.event.inputs.FailDielet }}
+        run: |
+          python -u I:/tpvalidation/engtools/tptools/mtl/beta/pytpd.chungshe/main/GoldFailTag.py

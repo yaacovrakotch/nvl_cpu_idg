@@ -1,0 +1,12 @@
+Version 1.0;
+
+SelectorRuleCollection  TPI_PUP_XXX_Rules
+{
+	SelectorRule CTRL_X_PUP_K_TESTPLANENDFLOW_X_X_X_X_PRINTITUFF_Mode (Outcome1, Outcome2, Outcome3)
+	{
+		Outcome1 => contains(__shared__::LocationSets.CHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome2 => contains(__shared__::LocationSets.RCHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome3;
+	}
+}
+

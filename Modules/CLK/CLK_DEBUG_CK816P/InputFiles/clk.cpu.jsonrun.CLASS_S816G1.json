@@ -1,0 +1,365 @@
+{
+	"instances": {
+		"CLK_DEBUG_CKXX::STARTUPRDAC_PLL_SWEEP_E_BEGINCPUPKG_X_X_X_X_X_TDV": {
+			"skip": false,
+			"filter_set": "startuprdac",
+			"restore": true,
+			"stop_on_fail": false,
+			"instance": "CLK_DEBUG_CKXX::LOCK_X_CMEM_E_BEGINCPUPKG_TAP_X_NOM_X_40_TDV",
+			"nested_loops": {
+				"rdac_hi": ["(0:1:16:2:4:r)"],
+				"rdac_low": ["(0:1:16:2:4:r)"]
+			},
+			"parameters": {
+				"PreInstance": "SetAltInstanceName(${instance})",
+			},
+			"pattern_modifications": [{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_c2h_fc_100p0_4800_pllfuseovrd",
+				"label": ".*LJPLL_FUSECR_PROC_CFG_FUSECR_PROC_1_STARTUP_RDAC_HIFREQ_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI",
+				"bits": "${rdac_hi}"
+			},
+			{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_c2h_fc_100p0_4800_pllfuseovrd",
+				"label": ".*LJPLL_FUSECR_PROC_CFG_FUSECR_PROC_1_STARTUP_RDAC_LOWFREQ_OFFSET_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI",
+				"bits": "${rdac_low}"
+			},
+			{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_dlvr_fc_040p0_1272_pllfuseovrd",
+				"label": ".*LJPLL_FUSECR_PROC_CFG_FUSECR_PROC_1_STARTUP_RDAC_HIFREQ_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI",
+				"bits": "${rdac_hi}"
+			},
+			{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_dlvr_fc_040p0_1272_pllfuseovrd",
+				"label": ".*LJPLL_FUSECR_PROC_CFG_FUSECR_PROC_1_STARTUP_RDAC_LOWFREQ_OFFSET_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI",
+				"bits": "${rdac_low}"
+			}]
+		},
+		"CLK_DEBUG_CKXX::DCOTUNING_FLL_SWEEP_E_BEGINCPUPKG_X_X_X_X_X_TDV": {
+			"skip": false,
+			"filter_set": "dcotuning",
+			"restore": true,
+			"stop_on_fail": false,
+			"instance": "CLK_DEBUG_CKXX::OPENLOOP_FLL_CMEM_E_BEGINCPUPKG_TAP_X_NOM_X_40_TDV",
+			"nested_loops": {
+				"ireftune": ["(1:1:15:2:4:r)"]
+			},
+			"parameters": {
+				"PreInstance": "SetAltInstanceName(${instance})"
+			},
+			"pattern_modifications": [{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_pnc0_fc_016p7_0400_fllfuseovrd",
+				"label": ".*LJPLL_FUSECR_FLL_PROC_CFG_FUSECR_FLL_PROC_0_DCO_IREFTUNE_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI", 
+				"bits": "${ireftune}"
+			},
+			{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_pnc1_fc_016p7_0400_fllfuseovrd",
+				"label": ".*LJPLL_FUSECR_FLL_PROC_CFG_FUSECR_FLL_PROC_0_DCO_IREFTUNE_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI", 
+				"bits": "${ireftune}"
+			},
+			{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_pnc2_fc_016p7_0400_fllfuseovrd",
+				"label": ".*LJPLL_FUSECR_FLL_PROC_CFG_FUSECR_FLL_PROC_0_DCO_IREFTUNE_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI", 
+				"bits": "${ireftune}"
+			},
+			{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_pnc3_fc_016p7_0400_fllfuseovrd",
+				"label": ".*LJPLL_FUSECR_FLL_PROC_CFG_FUSECR_FLL_PROC_0_DCO_IREFTUNE_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI", 
+				"bits": "${ireftune}"
+			},
+			{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_arw0_fc_016p7_0400_fllfuseovrd",
+				"label": ".*LJPLL_FUSECR_FLL_PROC_CFG_FUSECR_FLL_PROC_0_DCO_IREFTUNE_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI", 
+				"bits": "${ireftune}"
+			},
+			{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_arw1_fc_016p7_0400_fllfuseovrd",
+				"label": ".*LJPLL_FUSECR_FLL_PROC_CFG_FUSECR_FLL_PROC_0_DCO_IREFTUNE_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI", 
+				"bits": "${ireftune}"
+			},
+			{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_arw2_fc_016p7_0400_fllfuseovrd",
+				"label": ".*LJPLL_FUSECR_FLL_PROC_CFG_FUSECR_FLL_PROC_0_DCO_IREFTUNE_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI", 
+				"bits": "${ireftune}"
+			},
+			{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_arw3_fc_016p7_0400_fllfuseovrd",
+				"label": ".*LJPLL_FUSECR_FLL_PROC_CFG_FUSECR_FLL_PROC_0_DCO_IREFTUNE_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI", 
+				"bits": "${ireftune}"
+			},
+			{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_ring_fc_016p7_0400_fllfuseovrd",
+				"label": ".*LJPLL_FUSECR_FLL_PROC_CFG_FUSECR_FLL_PROC_0_DCO_IREFTUNE_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI", 
+				"bits": "${ireftune}"
+			},
+			{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_dfx_fc_040p0_1600_fllfuseovrd",
+				"label": ".*LJPLL_FUSECR_FLL_PROC_CFG_FUSECR_FLL_PROC_0_DCO_IREFTUNE_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI", 
+				"bits": "${ireftune}"
+			}]
+		},
+		"CLK_DEBUG_CKXX::VCOTUNING_PLL_SWEEP_E_BEGINCPUPKG_X_X_X_X_X_TDV": {
+			"skip": false,
+			"filter_set": "vcotuning",
+			"restore": true,
+			"stop_on_fail": false,
+			"instance": "CLK_DEBUG_CKXX::FVCURVE_PLL_CMEM_E_BEGINCPUPKG_TAP_X_NOM_X_40_TDV",
+			"nested_loops": {
+				"pg": ["(0:1:8:2:4:r)"],
+				"cb": ["(0:1:4:2:2:r)"]
+			},
+			"parameters": {
+				"PreInstance": "SetAltInstanceName(${instance})"
+			},
+			"pattern_modifications": [{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_c2h_fc_100p0_4800_pllfuseovrd",
+				"label": ".*LJPLL_FUSECR_PROC_CFG_FUSECR_PROC_1_VCO_TRIM_PG_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI", 
+				"bits": "${pg}"
+			},
+			{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_dlvr_fc_040p0_1272_pllfuseovrd",
+				"label": ".*LJPLL_FUSECR_PROC_CFG_FUSECR_PROC_1_VCO_TRIM_PG_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI",
+				"bits": "${pg}"
+			},
+			{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_c2h_fc_100p0_4800_pllfuseovrd",
+				"label": ".*LJPLL_FUSECR_PROC_CFG_FUSECR_PROC_1_VCO_CB_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI",
+				"bits": "${cb}"
+			},
+			{
+				"type": "pin_data",
+				"pattern_name": ".*clk_cpu_dlvr_fc_040p0_1272_pllfuseovrd",
+				"label": ".*LJPLL_FUSECR_PROC_CFG_FUSECR_PROC_1_VCO_CB_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI",
+				"bits": "${cb}"
+			}]
+		},
+		"CLK_DEBUG_CKXX::DCSSHMOO_X_SWEEP_E_BEGINCPUPKG_X_X_X_X_X_TDV_vcccore": {
+			"skip": false,
+			"filter_set": "dcsshmoo",
+			"restore": true,
+			"stop_on_fail": false,
+			"instance": "CLK_DEBUG_CKXX::LOCK_X_CMEM_E_BEGINCPUPKG_TAP_X_NOM_X_40_TDV",
+			"nested_loops": {
+				"vccdist": ["0.4","0.5","0.6","0.7","0.8","0.9","1.0","1.1","1.2"],
+				"dca":["(0:1:64:2:6:r)"]
+			},
+			"parameters": {
+				"PreInstance": "SetAltInstanceName(${instance})",
+				"Patlist": "IPC::clk_cpu_x_lock40_list",
+				"PlistConfigSet": "IPC::clk_cpu_x_lock40_list",
+				"PostInstance": ""
+			},
+			"level":{
+				"p_vcccore0_spec": "${vccdist}"
+			},
+			"pattern_modifications": [{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_pnc0_fc_016p7_0400_fllfuseovrd",
+				"label": ".*LJPLL_FUSECR_DCC_CFG_FUSECR_DCC_0_DCA_INITIAL_VALUE_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI",
+				"bits": "${dca}"
+			},
+			{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_pnc1_fc_016p7_0400_fllfuseovrd",
+				"label": ".*LJPLL_FUSECR_DCC_CFG_FUSECR_DCC_0_DCA_INITIAL_VALUE_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI",
+				"bits": "${dca}"
+			},
+			{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_pnc2_fc_016p7_0400_fllfuseovrd",
+				"label": ".*LJPLL_FUSECR_DCC_CFG_FUSECR_DCC_0_DCA_INITIAL_VALUE_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI",
+				"bits": "${dca}"
+			},
+			{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_pnc3_fc_016p7_0400_fllfuseovrd",
+				"label": ".*LJPLL_FUSECR_DCC_CFG_FUSECR_DCC_0_DCA_INITIAL_VALUE_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI",
+				"bits": "${dca}"
+			}]
+		},
+		"CLK_DEBUG_CKXX::DCSSHMOO_X_SWEEP_E_BEGINCPUPKG_X_X_X_X_X_TDV_vccatom": {
+			"skip": false,
+			"filter_set": "dcsshmoo",
+			"restore": true,
+			"stop_on_fail": false,
+			"instance": "CLK_DEBUG_CKXX::LOCK_X_CMEM_E_BEGINCPUPKG_TAP_X_NOM_X_40_TDV",
+			"nested_loops": {
+				"vccdist": ["0.4","0.5","0.6","0.7","0.8","0.9","1.0","1.1","1.2"],
+				"dca":["(0:1:64:2:6:r)"]
+			},
+			"parameters": {
+				"PreInstance": "SetAltInstanceName(${instance})",
+				"Patlist": "IPC::clk_cpu_x_lock40_list",
+				"PlistConfigSet": "IPC::clk_cpu_x_lock40_list",
+				"PostInstance": ""
+			},
+			"level":{
+				"p_vccatom0_spec": "${vccdist}"
+			},
+			"pattern_modifications": [{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_arw0_fc_016p7_0400_fllfuseovrd",
+				"label": ".*LJPLL_FUSECR_DCC_CFG_FUSECR_DCC_0_DCA_INITIAL_VALUE_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI",
+				"bits": "${dca}"
+			},
+			{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_arw1_fc_016p7_0400_fllfuseovrd",
+				"label": ".*LJPLL_FUSECR_DCC_CFG_FUSECR_DCC_0_DCA_INITIAL_VALUE_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI",
+				"bits": "${dca}"
+			},
+			{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_arw2_fc_016p7_0400_fllfuseovrd",
+				"label": ".*LJPLL_FUSECR_DCC_CFG_FUSECR_DCC_0_DCA_INITIAL_VALUE_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI",
+				"bits": "${dca}"
+			},
+			{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_arw3_fc_016p7_0400_fllfuseovrd",
+				"label": ".*LJPLL_FUSECR_DCC_CFG_FUSECR_DCC_0_DCA_INITIAL_VALUE_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI",
+				"bits": "${dca}"
+			}]
+		},
+		"CLK_DEBUG_CKXX::DCSSHMOO_X_SWEEP_E_BEGINCPUPKG_X_X_X_X_X_TDV_vccr": {
+			"skip": false,
+			"filter_set": "dcsshmoo",
+			"restore": true,
+			"stop_on_fail": false,
+			"instance": "CLK_DEBUG_CKXX::LOCK_X_CMEM_E_BEGINCPUPKG_TAP_X_NOM_X_40_TDV",
+			"nested_loops": {
+				"vccdist": ["0.4","0.5","0.6","0.7","0.8","0.9","1.0","1.1","1.2"],
+				"dca":["(0:1:64:2:6:r)"]
+			},
+			"parameters": {
+				"PreInstance": "SetAltInstanceName(${instance})",
+				"Patlist": "IPC::clk_cpu_x_lock40_list",
+				"PlistConfigSet": "IPC::clk_cpu_x_lock40_list",
+				"PostInstance": ""
+			},
+			"level":{
+				"p_vccr_spec": "${vccdist}"
+			},
+			"pattern_modifications": [{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_ring_fc_016p7_0400_fllfuseovrd",
+				"label": ".*LJPLL_FUSECR_DCC_CFG_FUSECR_DCC_0_DCA_INITIAL_VALUE_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI",
+				"bits": "${dca}"
+			}]
+		},
+		"CLK_DEBUG_CKXX::DCSSHMOO_X_SWEEP_E_BEGINCPUPKG_X_X_X_X_X_TDV_vnnaon": {
+			"skip": false,
+			"filter_set": "dcsshmoo",
+			"restore": true,
+			"stop_on_fail": false,
+			"instance": "CLK_DEBUG_CKXX::LOCK_X_CMEM_E_BEGINCPUPKG_TAP_X_NOM_X_40_TDV",
+			"nested_loops": {
+				"vccdist": ["0.4","0.5","0.6","0.7","0.8","0.9","1.0","1.1","1.2"],
+				"dca":["(0:1:64:2:6:r)"]
+			},
+			"parameters": {
+				"PreInstance": "SetAltInstanceName(${instance})",
+				"Patlist": "IPC::clk_cpu_x_lock40_list",
+				"PlistConfigSet": "IPC::clk_cpu_x_lock40_list",
+				"PostInstance": ""
+			},
+			"level":{
+				"p_vccvnnaon_spec": "${vccdist}"
+			},
+			"pattern_modifications": [{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_c2h_fc_100p0_4800_pllfuseovrd",
+				"label": ".*LJPLL_FUSECR_DCC_CFG_FUSECR_DCC_0_DCA_INITIAL_VALUE_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI",
+				"bits": "${dca}"
+			},
+			{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_dfx_fc_040p0_1600_fllfuseovrd",
+				"label": ".*LJPLL_FUSECR_DCC_CFG_FUSECR_DCC_0_DCA_INITIAL_VALUE_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI",
+				"bits": "${dca}"
+			},
+			{
+				"type": "pin_data",
+				"pattern_name": ".*_clk_cpu_dlvr_fc_040p0_1272_pllfuseovrd",
+				"label": ".*LJPLL_FUSECR_DCC_CFG_FUSECR_DCC_0_DCA_INITIAL_VALUE_0_.*",
+				"offset": 0,
+				"pin_name": "IPC::CPU_TDI",
+				"bits": "${dca}"
+			}]
+		}
+	}
+}

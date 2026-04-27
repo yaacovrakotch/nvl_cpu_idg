@@ -1,0 +1,122 @@
+name: Copilot Coding Agent Task
+description: Assign a coding task to the AI coding agent for this repository
+title: "[AI Task]: "
+labels: ["copilot-coding-agent"]
+assignees: []
+body:
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Coding Agent Template
+        This template helps you assign structured coding tasks to the AI agent. Please fill out all required sections with as much detail as possible.
+
+  - type: dropdown
+    id: task-type
+    attributes:
+      label: Task Type
+      description: What type of work does this task involve?
+      options:
+        - Bug Fix
+        - New Feature
+        - Refactoring
+        - Documentation
+        - Testing
+        - Performance Optimization
+        - Code Cleanup
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: task-description
+    attributes:
+      label: Task Description
+      description: Clearly describe what needs to be done. Be specific about the problem or feature.
+      placeholder: |
+        Example:
+        - Fix the parsing error in the mtpl2py module when handling nested templates
+        - Add support for new test pattern format in the core module
+        - Refactor the binary counter logic to improve readability
+    validations:
+      required: true
+
+  - type: textarea
+    id: target-files
+    attributes:
+      label: Target Files/Locations
+      description: List the files or directories that should be modified. Use checkboxes for tracking.
+      placeholder: |
+        Example:
+        - [ ] pymtpl/core.py
+        - [ ] pymtpl/helpers.py
+        - [ ] pymtpl/test/test_core.py
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-changes
+    attributes:
+      label: Expected Changes
+      description: Describe the specific modifications needed for each file. What should change and how?
+      placeholder: |
+        Example:
+        - [ ] pymtpl/core.py - Add new validation function for template syntax
+        - [ ] pymtpl/helpers.py - Update helper method to handle edge cases
+        - [ ] Add unit tests for new validation logic
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation-guidelines
+    attributes:
+      label: Implementation Guidelines
+      description: Provide specific approaches, patterns, constraints, or pseudocode for implementation. How would you solve this if you were coding it?
+      placeholder: |
+        Example:
+        - Use the existing validation pattern from the binctr module
+        - Ensure backward compatibility with existing templates
+        - Follow the error handling pattern used in similar functions
+        - Consider performance impact for large template files
+    validations:
+      required: false
+
+  - type: textarea
+    id: success-criteria
+    attributes:
+      label: Success Criteria
+      description: Define what the final output should contain or look like. How will we know this is complete?
+      placeholder: |
+        Example:
+        - [ ] All existing unit tests pass
+        - [ ] New unit tests added with >90% coverage
+        - [ ] Code formatted with autopep8
+        - [ ] No regression in template processing performance
+        - [ ] Documentation updated if API changes
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Provide any links, examples, error messages, or references that may help the AI agent understand the task better.
+      placeholder: |
+        Example:
+        - Link to related issue: #123
+        - Error message: "ValueError: Invalid template syntax at line 45"
+        - Reference implementation: /path/to/example/file.py
+        - Documentation: https://example.com/docs
+    validations:
+      required: false
+
+  - type: markdown
+    attributes:
+      value: |
+        ### Instructions for AI Coding Agent
+    
+        Instructions to the AI Agent working on the task:
+        - Review all referenced files before making changes
+        - Follow existing code style and patterns
+        - Comment code where logic is complex
+        - Summarize changes in the PR description. You MUST follow the repository's PR template if present.

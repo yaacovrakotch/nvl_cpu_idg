@@ -1,0 +1,31 @@
+ECHO off
+SET SSCEXEPATH=%HDMTTOS%\Runtime\Release
+REM Make it work on the Cart/HDE
+
+REM bot_hx28c_before_init.bat
+%SSCEXEPATH%\SingleScriptCmd.exe setUserVar "SCVars" "SC_FACILITYID" "%COMPUTERNAME%"
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "TPI_BASE_XXX::CTRL_X_PRIMELOTSTART_K_LOTSTARTFLOW_X_X_X_X_PRIMESTARTLOTDATALOG" "StreamDestination" "OUTPUT_TO_FILE" 
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "TPI_BASE_XXX::CTRL_X_UF_E_TESTPLANSTARTFLOW_X_X_X_X_PINPROFILERSTARTMONITOR" "BypassPort" 1
+
+REM Run XIU normally
+REM %SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "TPI_XIU_XXX::CTRL_X_TDRCAL_K_INIT_X_X_X_X_TDRCLIBRATION" "LoadDataFromFile" "TRUE"
+REM %SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "TPI_XIU_XXX::CTRL_X_XIUPOWERSUPPLY_K_INIT_X_X_X_X_XIUCONTINUITY" "BypassPort" 1
+REM %SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "TPI_XIU_XXX::CTRL_X_XIUPINLEAKGE_K_INIT_X_X_X_X_XIUHVMLEAKAGE" "BypassPort" 1
+REM %SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "TPI_XIU_XXX::CTRL_X_XIUIDENTITY_K_INIT_X_X_X_X_XIUNAME" "ValidTiuRegex" "^BB2T4H1P[0-9]+:NVL[H|P][X|Z][a-zA-Z0-9]+[T|F][0-9]+$"
+
+
+%SSCEXEPATH%\SingleScriptCmd.exe setUserVar "SCVars" "SC_BENCHTOP" "-1"
+%SSCEXEPATH%\SingleScriptCmd.exe setUserVar "SCVars" "SC_PACKAGE" "66"
+%SSCEXEPATH%\SingleScriptCmd.exe setUserVar "SCVars" "SC_DEVICE" "4AAA2V"
+%SSCEXEPATH%\SingleScriptCmd.exe setUserVar "SCVars" "SC_STEP" "A"
+%SSCEXEPATH%\SingleScriptCmd.exe setUserVar "SCVars" "SC_REV" ""
+
+REM bot_hx28c_after_init.bat
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "TPI_DFF_XXX::DFFX_X_PRIMEULT_K_STARTPREPRL1_X_X_X_X_DUMMYULT" "BypassPort" 1
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "TPI_MIXDETCT_XXX::CTRL_X_MIXDET_K_STARTPREPRL1_X_X_X_X_DLCPMIXDET" "BypassPort" 1
+
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "TPI_DFF_XXX::DFFX_X_DFFREAD_K_STARTPREPRL1_X_X_X_X_DFFREAD" "EnabledModules" "NONKILL"
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "TPI_DFF_XXX::DFFX_X_DFFENDFLOW_K_FINAL_X_X_X_X_DFFVAL" "BypassPort" 1
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "PTH_CEP_HKPKGS7::CEP_X_SCREEN_E_BEGINHUBPKG_X_X_X_X_CEP_EVENT0_CALC" "BypassPort" 1
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "IPH::PTH_DTS_HXPKGS7::DTS_X_SCREEN_K_LTTCHUB_X_X_X_X_DTSCALC" "BypassPort" 1
+%SSCEXEPATH%\SingleScriptCmd.exe setInstanceParam "IPH::PTH_DTS_HXPKGS7::DTS_X_GSDS2DFF_E_LTTCHUB_X_X_X_X_SDTCLASS" "BypassPort" 1

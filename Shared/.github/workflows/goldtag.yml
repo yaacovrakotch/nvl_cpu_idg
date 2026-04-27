@@ -1,0 +1,57 @@
+name: goldtag
+
+on:
+  workflow_dispatch:
+    inputs:
+
+      sites:
+        description: 'Target ONE Site'
+        type: choice
+        options:
+          - JF
+          - PG
+          - FM
+          - IDC
+          - BA
+        required: true
+
+      TPPath:
+        description: 'TP Path eg : I:/hdmxprogs/nvl/NVLS356A0H01B0AS528/POR_TP/Class_NVL_S28C'
+        required: true
+        default: 'I:/'
+        type: string
+
+      GoldDielet:
+        description: 'Set Gold Tag - CPU,GCD,PCD,HUB or empty'
+        required: false
+        default: ''
+        type: string
+
+      FailDielet:
+        description: 'Set Fail Tag - CPU,GCD,PCD,HUB or empty'
+        required: false
+        default: ''
+        type: string
+
+jobs:
+  Create_Tags:
+    runs-on:
+    - self-hosted
+    - checkers_${{ inputs.sites }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Log Inputs
+        run: echo "${{ toJSON(github.event.inputs) }}"
+
+      - name: Run script to create tags in Selected Dielet Repo
+        env:
+          GITHUB_TOKEN: ${{ secrets.CPUTOK }}
+          TPPath: ${{ github.event.inputs.TPPath }}
+          GoldDielet: ${{ github.event.inputs.GoldDielet }}
+          FailDielet: ${{ github.event.inputs.FailDielet }}
+          SITE: ${{ github.event.inputs.sites }}
+        run: |
+          python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/goldtag.py

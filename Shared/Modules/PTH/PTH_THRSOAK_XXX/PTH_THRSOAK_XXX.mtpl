@@ -1,0 +1,1172 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan PTH_THRSOAK_XXX;
+
+Import "PTH_THRSOAK_XXX.usrv";
+
+# Test Counter Definition
+
+Counters
+{
+    n97680000_fail_TD_X_TDAU_K_START_X_X_X_X_DIEFORCE_0,
+    n97680001_fail_TD_X_TDAU_K_START_X_X_X_X_DIEFORCE_2,
+    n97680002_fail_TD_X_TDAU_K_START_X_X_X_X_DIEFORCE_3,
+    n97680003_fail_TD_X_TDAU_K_START_X_X_X_X_DIEFORCE_4,
+    n97680004_fail_TD_X_TDAU_K_START_X_X_X_X_DIEFORCE_5,
+    n97710000_fail_TD_X_SOAK_K_SPEEDPREPRL1_X_X_X_X_RAMPDWN_0,
+    n97710001_fail_TD_X_SOAK_K_SPEEDPREPRL2_X_X_X_X_RAMPUP_0,
+    n97710002_fail_TD_X_SOAK_K_START_X_X_X_X_THRSOAK_0,
+    n97710003_fail_TD_X_PARDATA_E_SPEEDPREPRL1_X_X_X_X_INTEC_2_0,
+    n97710004_fail_TD_X_PARDATA_E_SPEEDPREPRL2_X_X_X_X_INTEC_3_0,
+    n97710005_fail_TD_X_SOAK_K_END_X_X_X_X_RAMPDWN_0,
+    n97710006_fail_TD_X_SOAK_K_END_X_X_X_X_RAMPDWN_2,
+    n97710007_fail_TD_X_SOAK_K_END_X_X_X_X_RAMPDWN_3,
+    n97710008_fail_TD_X_SOAK_K_END_X_X_X_X_RAMPDWN_4,
+    n97710009_fail_TD_X_SOAK_K_END_X_X_X_X_RAMPDWN_5,
+    n97710011_fail_TD_X_PARDATA_E_END_X_X_X_X_INTEC_4_0,
+    n97720000_fail_TD_X_SOAK_K_SPEEDPREPRL1_X_X_X_X_RAMPDWN_2,
+    n97720001_fail_TD_X_SOAK_K_SPEEDPREPRL2_X_X_X_X_RAMPUP_2,
+    n97720002_fail_TD_X_SOAK_K_START_X_X_X_X_THRSOAK_2,
+    n97730000_fail_TD_X_SOAK_K_SPEEDPREPRL1_X_X_X_X_RAMPDWN_3,
+    n97730001_fail_TD_X_SOAK_K_SPEEDPREPRL2_X_X_X_X_RAMPUP_3,
+    n97730002_fail_TD_X_SOAK_K_START_X_X_X_X_THRSOAK_3,
+    n97740000_fail_TD_X_SOAK_K_SPEEDPREPRL1_X_X_X_X_RAMPDWN_4,
+    n97740001_fail_TD_X_SOAK_K_SPEEDPREPRL2_X_X_X_X_RAMPUP_4,
+    n97740002_fail_TD_X_SOAK_K_START_X_X_X_X_THRSOAK_4,
+    n97750000_fail_TD_X_SOAK_K_SPEEDPREPRL1_X_X_X_X_RAMPDWN_5,
+    n97750001_fail_TD_X_SOAK_K_SPEEDPREPRL2_X_X_X_X_RAMPUP_5,
+    n97750002_fail_TD_X_SOAK_K_START_X_X_X_X_THRSOAK_5
+} # End of Test Counter Definition
+
+CSharpTest PrimeApplyTestConditionTestMethod TD_X_APPLYTC_E_START_X_X_X_X_PSMSETUP_CPU
+{
+    TestConditionCategory = "THERMAL";
+    TestConditionName = "PowerSumming_TC_CPU";
+}
+
+CSharpTest PrimeApplyTestConditionTestMethod TD_X_APPLYTC_E_START_X_X_X_X_PSMSETUP_PCH
+{
+    BypassPort = 1;
+    TestConditionCategory = "THERMAL";
+    TestConditionName = "PowerSumming_TC_PCH";
+}
+
+CSharpTest PrimeTdauParametricDataLoggerTestMethod TD_X_PARDATA_E_START_X_X_X_X
+{
+    PinNames = "IPC::CPU_TDAU0,IPH::HUB_TDAU0,IPG::GCD_TDAU0,IPP::PCD_TDAU0";
+}
+
+CSharpTest UserCodeTC TD_X_PARDATA_E_START_X_X_X_X_IDEALITYCALC
+{
+    InputFile = "./InputFiles/TDAU_ideality.cs";
+    Method = "TDAUIdealityCalc";
+    NamespaceClass = "TDAU.TDAUIdeality";
+}
+
+CSharpTest ScreenTC TD_X_SCREEN_E_START_X_X_X_X_IDEALITYCALC
+{
+    ScreenTestSet = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("NVL_CLASS_IDEALITY_PRINT_N2P","NVL_CLASS_IDEALITY_S52C_PRINT","NVL_CLASS_IDEALITY_PRINT_N2P","NVL_CLASS_IDEALITY_PRINT_N2P","NVL_CLASS_IDEALITY_PRINT_N2P","NVL_CLASS_IDEALITY_PRINT_N2P","NVL_CLASS_IDEALITY_PRINT_N2P","NVL_CLASS_IDEALITY_PRINT_18A");
+    ScreenTestsFile = "./InputFiles/NVL_CLASS_IDEALITY_PRINT.txt";
+}
+
+CSharpTest PrimeApplyTestConditionTestMethod TD_X_APPLYTC_E_START_X_X_X_X_STOP
+{
+    BypassPort = 1;
+    TestConditionCategory = "THERMAL";
+    TestConditionName = PTH_THRSOAK_XXX_Rules.Select_by_BOM_and_LocationSets("TDAU_EOT_TC_S28CH","TDAU_EOT_TC_S52CH","TDAU_EOT_TC_S28CC","TDAU_EOT_TC_S52CC","TDAU_EOT_TC_S28CH","TDAU_EOT_TC_S52CH","TDAU_EOT_TC_S28CH","TDAU_EOT_TC_S52CH","TDAU_EOT_TC_HX28CH","TDAU_EOT_TC_HX28CC","TDAU_EOT_TC_HX28CH","TDAU_EOT_TC_HX28CH","TDAU_EOT_TC_HX28CH","TDAU_EOT_TC_HX28CC","TDAU_EOT_TC_HX28CH","TDAU_EOT_TC_HX28CH","TDAU_EOT_TC_H16CH","TDAU_EOT_TC_H16CC","TDAU_EOT_TC_H16CH","TDAU_EOT_TC_H16CH","TDAU_EOT_TC_S16CH","TDAU_EOT_TC_S16CC","TDAU_EOT_TC_S16CH","TDAU_EOT_TC_S16CH","TDAU_EOT_TC_DNLS28CH","TDAU_EOT_TC_DNLS28CC","TDAU_EOT_TC_DNLS28CH","TDAU_EOT_TC_DNLS28CH","TDAU_EOT_TC_S28CH");
+}
+
+CSharpTest PrimeApplyTestConditionTestMethod TD_X_APPLYTC_E_START_X_X_X_X_CAL
+{
+    BypassPort = 1;
+    TestConditionCategory = "LEVELS_POWER_DOWN";
+    TestConditionName = PTH_THRSOAK_XXX_Rules.Select_by_BOM_and_LocationSets("TDAU_CAL_TC_S28CH_PER","TDAU_CAL_TC_S52CH_PER","TDAU_CAL_TC_S28CC","TDAU_CAL_TC_S52CC","TDAU_CAL_TC_S28CH","TDAU_CAL_TC_S52CH","TDAU_CAL_TC_S28CH","TDAU_CAL_TC_S52CH","TDAU_CAL_TC_HX28CH_PER","TDAU_CAL_TC_HX28CC","TDAU_CAL_TC_HX28CH","TDAU_CAL_TC_HX28CH","TDAU_CAL_TC_HX28CH_PER","TDAU_CAL_TC_HX28CC","TDAU_CAL_TC_HX28CH","TDAU_CAL_TC_HX28CH","TDAU_CAL_TC_H16CH_PER","TDAU_CAL_TC_H16CC","TDAU_CAL_TC_H16CH","TDAU_CAL_TC_H16CH","TDAU_CAL_TC_S16CH_PER","TDAU_CAL_TC_S16CC","TDAU_CAL_TC_S16CH","TDAU_CAL_TC_S16CH","TDAU_CAL_TC_DNLS28CH_PER","TDAU_CAL_TC_DNLS28CC","TDAU_CAL_TC_DNLS28CH","TDAU_CAL_TC_DNLS28CH","TDAU_CAL_TC_S28CH");
+}
+
+CSharpTest PrimeApplyTestConditionTestMethod TD_X_APPLYTC_E_START_X_X_X_X_SCOC
+{
+    BypassPort = 1;
+    TestConditionCategory = "THERMAL";
+    TestConditionName = PTH_THRSOAK_XXX_Rules.Select_by_BOM_and_LocationSets("TDAU_SCOC_TC_S28CH_PER","TDAU_SCOC_TC_S52CH_PER","TDAU_SCOC_TC_S28CC","TDAU_SCOC_TC_S52CC","TDAU_SCOC_TC_S28CH","TDAU_SCOC_TC_S52CH","TDAU_SCOC_TC_S28CH","TDAU_SCOC_TC_S52CH","TDAU_SCOC_TC_HX28CH_PER","TDAU_SCOC_TC_HX28CC","TDAU_SCOC_TC_HX28CH","TDAU_SCOC_TC_HX28CH","TDAU_SCOC_TC_HX28CH_PER","TDAU_SCOC_TC_HX28CC","TDAU_SCOC_TC_HX28CH","TDAU_SCOC_TC_HX28CH","TDAU_SCOC_TC_H16CH_PER","TDAU_SCOC_TC_H16CC","TDAU_SCOC_TC_H16CH","TDAU_SCOC_TC_H16CH","TDAU_SCOC_TC_S16CH_PER","TDAU_SCOC_TC_S16CC","TDAU_SCOC_TC_S16CH","TDAU_SCOC_TC_S16CH","TDAU_SCOC_TC_DNLS28CH_PER","TDAU_SCOC_TC_DNLS28CC","TDAU_SCOC_TC_DNLS28CH","TDAU_SCOC_TC_DNLS28CH","TDAU_SCOC_TC_S28CH");
+}
+
+CSharpTest PrimeThermalSingleMeasurementTestMethod TD_X_TDAU_K_START_X_X_X_X_DIEFORCE
+{
+    BypassPort = __shared__::SCVars.SC_BENCHTOP;
+    IntegrityHighLimit = 200;
+    IntegrityLowLimit = 130;
+    LowerTolerance = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("30,30,30,30","30,30,30,30,30","30,30,30,30","30,30,30,30","30,30,30,30","30,30,30,30","30,30,30,30","30, 30, 30");
+    MeasurementType = "CHECK_DIE_FORCE";
+    PinNames = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPC::CPU1_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPH::HUB_TDAU0");
+    UpperTolerance = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("30,30,30,30","30,30,30,30,30","30,30,30,30","30,30,30,30","30,30,30,30","30,30,30,30","30,30,30,30","30, 30, 30");
+}
+
+CSharpTest PrimeThermalUeiStreamTestMethod TD_X_UEISTREAM_E_START_X_X_X_X_STARTSTREAM
+{
+    ActionType = "Start";
+    BypassPort = 1;
+    CollectPins = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPC::CPU1_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPH::HUB_TDAU0");
+    UeiSlaveType = "TCC";
+}
+
+CSharpTest PrimeThermalControlSetTestMethod TD_X_CS_E_START_X_X_X_X_DIODESOT
+{
+    BypassPort = -1;
+    ControlSet = "DIODESOT";
+    PostInstance = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("","","","","","","","");
+    UeiPinName = "IPC::UEISLAVE_IPC";
+}
+
+CSharpTest PrimeThermalRampTestMethod TD_X_SOAK_K_START_X_X_X_X_THRSOAK
+{
+    BypassPort = __shared__::SCVars.SC_BENCHTOP;
+    IntegrityHighLimit = 200;
+    IntegrityLowLimit = 130;
+    LogPinToken = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("1,2,3,4","1,2,3,4,5","1,2,3,4","1,2,3,4","1,2,3,4","1,2,3,4","1,2,3,4","1,2,3");
+    LowerTolerance = PTH_THRSOAK_XXX_Rules.If_FUSE(__shared__::TpRule.If_S28_S52_HX28_P16C_H16C_S16C_DS28C("30,30,30,30","30,30,30,30,30","30,30,30,30","30,30,30,30","30,30,30,30","30,30,30,30","30,30,30,30","30,30,30"),__shared__::TpRule.If_S28_S52_HX28_P16C_H16C_S16C_DS28C("10,10,3,10","10,10,10,3,10","10,10,3,10","20,10,3,10","20,10,3,10","10,10,3,10","10,10,3,10","10,10,10"));
+    PinNames = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPC::CPU1_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPH::HUB_TDAU0");
+    RampMode = "Soak";
+    SetPoints = __shared__::SCVars.SC_TEMPERATURE;
+    Timeout = 60000;
+    UpperTolerance = PTH_THRSOAK_XXX_Rules.If_FUSE(__shared__::TpRule.If_S28_S52_HX28_P16C_H16C_S16C_DS28C("30,30,30,30","30,30,30,30,30","30,30,30,30","30,30,30,30","30,30,30,30","30,30,30,30","30,30,30,30","30,30,30"),__shared__::TpRule.If_S28_S52_HX28_P16C_H16C_S16C_DS28C("10,10,3,10","10,10,10,3,10","10,10,3,10","20,10,3,10","20,10,3,10","10,10,3,10","10,10,3,10","10,10,10"));
+}
+
+CSharpTest PrimeThermalControlSetTestMethod TD_X_CS_E_SPEEDPREPRL1_X_X_X_X_RAMPDWN
+{
+    BypassPort = PTH_THRSOAK_XXX_Rules.If_HOT(-1,1);
+    ControlSet = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("TEST80","TEST80","TEST80","TEST70","TEST70","TEST80","TEST80","TEST80");
+    PostInstance = "Sleep(5000)";
+    UeiPinName = "IPC::UEISLAVE_IPC";
+}
+
+CSharpTest PrimeThermalRampTestMethod TD_X_SOAK_K_SPEEDPREPRL1_X_X_X_X_RAMPDWN
+{
+    BypassPort = PTH_THRSOAK_XXX_Rules.If_HOT(__shared__::SCVars.SC_BENCHTOP,1);
+    IntegrityHighLimit = 200;
+    IntegrityLowLimit = 130;
+    LogPinToken = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("1,3","1,2,4","1,3","1,3","1,3","1,3","1,3","1,3");
+    LowerTolerance = PTH_THRSOAK_XXX_Rules.If_FUSE(__shared__::TpRule.If_CLASS_NVL_S52C("30,30,30","30,30"),__shared__::TpRule.If_CLASS_NVL_S52C("10,10,10", __shared__::TpRule.If_CLASS_NVL_HX28C("20,20","10,10")));
+    PinNames = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("IPC::CPU_TDAU0, IPP::PCD_TDAU0","IPC::CPU_TDAU0, IPC::CPU1_TDAU0,IPP::PCD_TDAU0","IPC::CPU_TDAU0, IPP::PCD_TDAU0","IPC::CPU_TDAU0, IPP::PCD_TDAU0","IPC::CPU_TDAU0, IPP::PCD_TDAU0","IPC::CPU_TDAU0, IPP::PCD_TDAU0","IPC::CPU_TDAU0, IPP::PCD_TDAU0","IPC::CPU_TDAU0, IPP::PCD_TDAU0");
+    RampMode = "Soak";
+    SetPoints = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("80","80","80","70","70","80","80","80");
+    Timeout = 60000;
+    UpperTolerance = PTH_THRSOAK_XXX_Rules.If_FUSE(__shared__::TpRule.If_CLASS_NVL_S52C("30,30,30","30,30"),__shared__::TpRule.If_CLASS_NVL_S52C("10,10,10", __shared__::TpRule.If_CLASS_NVL_HX28C("20,20","10,10")));
+}
+
+CSharpTest PrimeThermalSingleMeasurementTestMethod TD_X_TDAU_E_SPEEDPREPRL1_X_X_X_X_SOT
+{
+    BypassPort = PTH_THRSOAK_XXX_Rules.If_HOT(__shared__::SCVars.SC_BENCHTOP,1);
+    ContinuousRead = "Enabled";
+    IntegrityHighLimit = 200;
+    IntegrityLowLimit = 130;
+    LowerTolerance = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("95,95,95,95","95,95,95,95,95","95,95,95,95","95, 95, 95","95,95,95,95","95,95,95,95","95,95,95,95","95, 95, 95");
+    PinNames = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPC::CPU1_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPH::HUB_TDAU0");
+    UpperTolerance = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("5,5,5,5","5,5,5,5,5","5,5,5,5","5, 5, 5","5,5,5,5","5,5,5,5","5,5,5,5","5, 5, 5");
+}
+
+CSharpTest IntecTC TD_X_PARDATA_E_SPEEDPREPRL1_X_X_X_X_INTEC_2
+{
+    BypassPort = __shared__::SCVars.SC_INTEC_PF_ENABLED;
+    Channels = "0";
+    Delay = 1;
+    Feedback = "PowerFollowing";
+    FollowingOffset = 0;
+    FollowingSlope = __shared__::SCVars.SC_PF_SLOPE;
+    IntecJson = "../PTH_DIODE_XXX/InputFiles/intec.json";
+    Operation = "SetTemperature";
+    PolarisApp = "../../../../UserCode/lib/Release/net462/SetTemperature.exe";
+    PolarisTimeOut = 60000;
+    SetPoint = __shared__::SCVars.SC_TEMP_DROP;
+    Tolerance = 1;
+}
+
+CSharpTest PrimeThermalControlSetTestMethod TD_X_CS_E_SPEEDPREPRL2_X_X_X_X_RAMPUP
+{
+    BypassPort = PTH_THRSOAK_XXX_Rules.If_HOT(-1,1);
+    ControlSet = "TEST";
+    PostInstance = "Sleep(5000)";
+    UeiPinName = "IPC::UEISLAVE_IPC";
+}
+
+CSharpTest PrimeThermalRampTestMethod TD_X_SOAK_K_SPEEDPREPRL2_X_X_X_X_RAMPUP
+{
+    BypassPort = PTH_THRSOAK_XXX_Rules.If_HOT(__shared__::SCVars.SC_BENCHTOP,1);
+    IntegrityHighLimit = 200;
+    IntegrityLowLimit = 130;
+    LogPinToken = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("1,3","1,2,4","1,3","1,3","1,3","1,3","1,3","1,3");
+    LowerTolerance = PTH_THRSOAK_XXX_Rules.If_FUSE(__shared__::TpRule.If_CLASS_NVL_S52C("30,30,30","30,30"),__shared__::TpRule.If_CLASS_NVL_S52C("10,10,10", __shared__::TpRule.If_CLASS_NVL_HX28C("20,20","10,10")));
+    PinNames = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("IPC::CPU_TDAU0, IPP::PCD_TDAU0","IPC::CPU_TDAU0, IPC::CPU1_TDAU0,IPP::PCD_TDAU0","IPC::CPU_TDAU0, IPP::PCD_TDAU0","IPC::CPU_TDAU0, IPP::PCD_TDAU0","IPC::CPU_TDAU0, IPP::PCD_TDAU0","IPC::CPU_TDAU0, IPP::PCD_TDAU0","IPC::CPU_TDAU0, IPP::PCD_TDAU0","IPC::CPU_TDAU0, IPP::PCD_TDAU0");
+    RampMode = "Soak";
+    SetPoints = __shared__::SCVars.SC_TEMPERATURE;
+    Timeout = 60000;
+    UpperTolerance = PTH_THRSOAK_XXX_Rules.If_FUSE(__shared__::TpRule.If_CLASS_NVL_S52C("30,30,30","30,30"),__shared__::TpRule.If_CLASS_NVL_S52C("10,10,10", __shared__::TpRule.If_CLASS_NVL_HX28C("20,20","10,10")));
+}
+
+CSharpTest PrimeThermalSingleMeasurementTestMethod TD_X_TDAU_E_SPEEDPREPRL2_X_X_X_X_SOT
+{
+    BypassPort = PTH_THRSOAK_XXX_Rules.If_HOT(__shared__::SCVars.SC_BENCHTOP,1);
+    ContinuousRead = "Enabled";
+    IntegrityHighLimit = 200;
+    IntegrityLowLimit = 130;
+    LowerTolerance = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("95,95,95,95","95,95,95,95,95","95,95,95,95","95, 95, 95","95,95,95,95","95,95,95,95","95,95,95,95","95, 95, 95");
+    PinNames = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPC::CPU1_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPH::HUB_TDAU0");
+    UpperTolerance = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("5,5,5,5","5,5,5,5,5","5,5,5,5","5, 5, 5","5,5,5,5","5,5,5,5","5,5,5,5","5, 5, 5");
+}
+
+CSharpTest IntecTC TD_X_PARDATA_E_SPEEDPREPRL2_X_X_X_X_INTEC_3
+{
+    BypassPort = __shared__::SCVars.SC_INTEC_PF_ENABLED;
+    Channels = "0";
+    Delay = 1;
+    Feedback = "PowerFollowing";
+    FollowingOffset = 0;
+    FollowingSlope = __shared__::SCVars.SC_PF_SLOPE;
+    IntecJson = "../PTH_DIODE_XXX/InputFiles/intec.json";
+    Operation = "SetTemperature";
+    PolarisApp = "../../../../UserCode/lib/Release/net462/SetTemperature.exe";
+    PolarisTimeOut = 60000;
+    SetPoint = "SC_TEMPERATURE";
+    Tolerance = 1;
+}
+
+CSharpTest PrimeThermalControlSetTestMethod TD_X_CS_E_END_X_X_X_X_RAMPDWN
+{
+    BypassPort = PTH_THRSOAK_XXX_Rules.If_HOT(-1,1);
+    ControlSet = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("TEST80","TEST80","TEST80","TEST70","TEST70","TEST80","TEST80","TEST80");
+    PostInstance = "Sleep(5000)";
+    UeiPinName = "IPC::UEISLAVE_IPC";
+}
+
+CSharpTest PrimeThermalRampTestMethod TD_X_SOAK_K_END_X_X_X_X_RAMPDWN
+{
+    BypassPort = PTH_THRSOAK_XXX_Rules.If_HOT(__shared__::SCVars.SC_BENCHTOP,1);
+    IntegrityHighLimit = 200;
+    IntegrityLowLimit = 130;
+    LogPinToken = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("1,3","1,2,4","1,3","1,3","1,3","1,3","1,3","1,3");
+    LowerTolerance = PTH_THRSOAK_XXX_Rules.If_FUSE(__shared__::TpRule.If_CLASS_NVL_S52C("30,30,30","30,30"),__shared__::TpRule.If_CLASS_NVL_S52C("10,10,10", __shared__::TpRule.If_CLASS_NVL_HX28C("20,20","10,10")));
+    PinNames = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("IPC::CPU_TDAU0, IPP::PCD_TDAU0","IPC::CPU_TDAU0, IPC::CPU1_TDAU0,IPP::PCD_TDAU0","IPC::CPU_TDAU0, IPP::PCD_TDAU0","IPC::CPU_TDAU0, IPP::PCD_TDAU0","IPC::CPU_TDAU0, IPP::PCD_TDAU0","IPC::CPU_TDAU0, IPP::PCD_TDAU0","IPC::CPU_TDAU0, IPP::PCD_TDAU0","IPC::CPU_TDAU0, IPP::PCD_TDAU0");
+    RampMode = "Soak";
+    SetPoints = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("80","80","80","70","70","80","80","80");
+    Timeout = 60000;
+    UpperTolerance = PTH_THRSOAK_XXX_Rules.If_FUSE(__shared__::TpRule.If_CLASS_NVL_S52C("30,30,30","30,30"),__shared__::TpRule.If_CLASS_NVL_S52C("10,10,10", __shared__::TpRule.If_CLASS_NVL_HX28C("20,20","10,10")));
+}
+
+CSharpTest PrimeThermalSingleMeasurementTestMethod TD_X_TDAU_E_END_X_X_X_X_SOT
+{
+    BypassPort = PTH_THRSOAK_XXX_Rules.If_HOT(__shared__::SCVars.SC_BENCHTOP,1);
+    ContinuousRead = "Enabled";
+    IntegrityHighLimit = 200;
+    IntegrityLowLimit = 130;
+    LowerTolerance = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("95,95,95,95","95,95,95,95,95","95,95,95,95","95, 95, 95","95,95,95,95","95,95,95,95","95,95,95,95","95, 95, 95");
+    PinNames = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPC::CPU1_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPP::PCD_TDAU0, IPH::HUB_TDAU0","IPC::CPU_TDAU0, IPG::GCD_TDAU0, IPH::HUB_TDAU0");
+    UpperTolerance = PTH_THRSOAK_XXX_Rules.Select_S28_S52_Otherwise("5,5,5,5","5,5,5,5,5","5,5,5,5","5, 5, 5","5,5,5,5","5,5,5,5","5,5,5,5","5, 5, 5");
+}
+
+CSharpTest IntecTC TD_X_PARDATA_E_END_X_X_X_X_INTEC_4
+{
+    BypassPort = __shared__::SCVars.SC_INTEC_PF_ENABLED;
+    Channels = "0";
+    Delay = 1;
+    Feedback = "PowerFollowing";
+    FollowingOffset = 0;
+    FollowingSlope = __shared__::SCVars.SC_PF_SLOPE;
+    IntecJson = "../PTH_DIODE_XXX/InputFiles/intec.json";
+    Operation = "SetTemperature";
+    PolarisApp = "../../../../UserCode/lib/Release/net462/SetTemperature.exe";
+    PolarisTimeOut = 60000;
+    SetPoint = __shared__::SCVars.SC_TEMP_DROP;
+    Tolerance = 1;
+}
+
+Flow PTH_THRSOAK_XXX_START
+{
+    FlowItem TD_X_APPLYTC_E_START_X_X_X_X_PSMSETUP_CPU TD_X_APPLYTC_E_START_X_X_X_X_PSMSETUP_CPU @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970011_fail_PTH_THRSOAK_XXX_TD_X_APPLYTC_E_START_X_X_X_X_PSMSETUP_CPU_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970011_fail_PTH_THRSOAK_XXX_TD_X_APPLYTC_E_START_X_X_X_X_PSMSETUP_CPU_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_APPLYTC_E_START_X_X_X_X_PSMSETUP_PCH;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_APPLYTC_E_START_X_X_X_X_PSMSETUP_PCH;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_APPLYTC_E_START_X_X_X_X_PSMSETUP_PCH;
+        }
+    }
+    
+    FlowItem TD_X_APPLYTC_E_START_X_X_X_X_PSMSETUP_PCH TD_X_APPLYTC_E_START_X_X_X_X_PSMSETUP_PCH @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970012_fail_PTH_THRSOAK_XXX_TD_X_APPLYTC_E_START_X_X_X_X_PSMSETUP_PCH_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970012_fail_PTH_THRSOAK_XXX_TD_X_APPLYTC_E_START_X_X_X_X_PSMSETUP_PCH_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_PARDATA_E_START_X_X_X_X;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_PARDATA_E_START_X_X_X_X;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_PARDATA_E_START_X_X_X_X;
+        }
+    }
+    
+    FlowItem TD_X_PARDATA_E_START_X_X_X_X TD_X_PARDATA_E_START_X_X_X_X @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970044_fail_PTH_THRSOAK_XXX_TD_X_PARDATA_E_START_X_X_X_X_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970044_fail_PTH_THRSOAK_XXX_TD_X_PARDATA_E_START_X_X_X_X_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_PARDATA_E_START_X_X_X_X_IDEALITYCALC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_PARDATA_E_START_X_X_X_X_IDEALITYCALC;
+        }
+    }
+    
+    FlowItem TD_X_PARDATA_E_START_X_X_X_X_IDEALITYCALC TD_X_PARDATA_E_START_X_X_X_X_IDEALITYCALC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970045_fail_PTH_THRSOAK_XXX_TD_X_PARDATA_E_START_X_X_X_X_IDEALITYCALC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970045_fail_PTH_THRSOAK_XXX_TD_X_PARDATA_E_START_X_X_X_X_IDEALITYCALC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_SCREEN_E_START_X_X_X_X_IDEALITYCALC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_SCREEN_E_START_X_X_X_X_IDEALITYCALC;
+        }
+    }
+    
+    FlowItem TD_X_SCREEN_E_START_X_X_X_X_IDEALITYCALC TD_X_SCREEN_E_START_X_X_X_X_IDEALITYCALC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970050_fail_PTH_THRSOAK_XXX_TD_X_SCREEN_E_START_X_X_X_X_IDEALITYCALC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970050_fail_PTH_THRSOAK_XXX_TD_X_SCREEN_E_START_X_X_X_X_IDEALITYCALC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_APPLYTC_E_START_X_X_X_X_STOP;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_APPLYTC_E_START_X_X_X_X_STOP;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_APPLYTC_E_START_X_X_X_X_STOP;
+        }
+    }
+    
+    FlowItem TD_X_APPLYTC_E_START_X_X_X_X_STOP TD_X_APPLYTC_E_START_X_X_X_X_STOP @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970014_fail_PTH_THRSOAK_XXX_TD_X_APPLYTC_E_START_X_X_X_X_STOP_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970014_fail_PTH_THRSOAK_XXX_TD_X_APPLYTC_E_START_X_X_X_X_STOP_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_APPLYTC_E_START_X_X_X_X_CAL;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_APPLYTC_E_START_X_X_X_X_CAL;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_APPLYTC_E_START_X_X_X_X_CAL;
+        }
+    }
+    
+    FlowItem TD_X_APPLYTC_E_START_X_X_X_X_CAL TD_X_APPLYTC_E_START_X_X_X_X_CAL @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970010_fail_PTH_THRSOAK_XXX_TD_X_APPLYTC_E_START_X_X_X_X_CAL_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970010_fail_PTH_THRSOAK_XXX_TD_X_APPLYTC_E_START_X_X_X_X_CAL_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_APPLYTC_E_START_X_X_X_X_SCOC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_APPLYTC_E_START_X_X_X_X_SCOC;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_APPLYTC_E_START_X_X_X_X_SCOC;
+        }
+    }
+    
+    FlowItem TD_X_APPLYTC_E_START_X_X_X_X_SCOC TD_X_APPLYTC_E_START_X_X_X_X_SCOC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970013_fail_PTH_THRSOAK_XXX_TD_X_APPLYTC_E_START_X_X_X_X_SCOC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970013_fail_PTH_THRSOAK_XXX_TD_X_APPLYTC_E_START_X_X_X_X_SCOC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_K_START_X_X_X_X_DIEFORCE;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_TDAU_K_START_X_X_X_X_DIEFORCE;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_TDAU_K_START_X_X_X_X_DIEFORCE;
+        }
+    }
+    
+    FlowItem TD_X_TDAU_K_START_X_X_X_X_DIEFORCE TD_X_TDAU_K_START_X_X_X_X_DIEFORCE
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970067_fail_PTH_THRSOAK_XXX_TD_X_TDAU_K_START_X_X_X_X_DIEFORCE_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970067_fail_PTH_THRSOAK_XXX_TD_X_TDAU_K_START_X_X_X_X_DIEFORCE_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b97680000_fail_PTH_THRSOAK_XXX_TD_X_TDAU_K_START_X_X_X_X_DIEFORCE_0;
+            IncrementCounters PTH_THRSOAK_XXX::n97680000_fail_TD_X_TDAU_K_START_X_X_X_X_DIEFORCE_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_UEISTREAM_E_START_X_X_X_X_STARTSTREAM;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b97680001_fail_PTH_THRSOAK_XXX_TD_X_TDAU_K_START_X_X_X_X_DIEFORCE_2;
+            IncrementCounters PTH_THRSOAK_XXX::n97680001_fail_TD_X_TDAU_K_START_X_X_X_X_DIEFORCE_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b97680002_fail_PTH_THRSOAK_XXX_TD_X_TDAU_K_START_X_X_X_X_DIEFORCE_3;
+            IncrementCounters PTH_THRSOAK_XXX::n97680002_fail_TD_X_TDAU_K_START_X_X_X_X_DIEFORCE_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97680003_fail_PTH_THRSOAK_XXX_TD_X_TDAU_K_START_X_X_X_X_DIEFORCE_4;
+            IncrementCounters PTH_THRSOAK_XXX::n97680003_fail_TD_X_TDAU_K_START_X_X_X_X_DIEFORCE_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b97680004_fail_PTH_THRSOAK_XXX_TD_X_TDAU_K_START_X_X_X_X_DIEFORCE_5;
+            IncrementCounters PTH_THRSOAK_XXX::n97680004_fail_TD_X_TDAU_K_START_X_X_X_X_DIEFORCE_5;
+            Return 0;
+        }
+    }
+    
+    FlowItem TD_X_UEISTREAM_E_START_X_X_X_X_STARTSTREAM TD_X_UEISTREAM_E_START_X_X_X_X_STARTSTREAM @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970071_fail_PTH_THRSOAK_XXX_TD_X_UEISTREAM_E_START_X_X_X_X_STARTSTREAM_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970071_fail_PTH_THRSOAK_XXX_TD_X_UEISTREAM_E_START_X_X_X_X_STARTSTREAM_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_CS_E_START_X_X_X_X_DIODESOT;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_CS_E_START_X_X_X_X_DIODESOT;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_CS_E_START_X_X_X_X_DIODESOT;
+        }
+    }
+    
+    FlowItem TD_X_CS_E_START_X_X_X_X_DIODESOT TD_X_CS_E_START_X_X_X_X_DIODESOT @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970035_fail_PTH_THRSOAK_XXX_TD_X_CS_E_START_X_X_X_X_DIODESOT_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970035_fail_PTH_THRSOAK_XXX_TD_X_CS_E_START_X_X_X_X_DIODESOT_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_SOAK_K_START_X_X_X_X_THRSOAK;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_SOAK_K_START_X_X_X_X_THRSOAK;
+        }
+    }
+    
+    FlowItem TD_X_SOAK_K_START_X_X_X_X_THRSOAK TD_X_SOAK_K_START_X_X_X_X_THRSOAK
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970055_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_START_X_X_X_X_THRSOAK_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970055_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_START_X_X_X_X_THRSOAK_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b97710002_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_START_X_X_X_X_THRSOAK_0;
+            IncrementCounters PTH_THRSOAK_XXX::n97710002_fail_TD_X_SOAK_K_START_X_X_X_X_THRSOAK_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b97720002_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_START_X_X_X_X_THRSOAK_2;
+            IncrementCounters PTH_THRSOAK_XXX::n97720002_fail_TD_X_SOAK_K_START_X_X_X_X_THRSOAK_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b97730002_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_START_X_X_X_X_THRSOAK_3;
+            IncrementCounters PTH_THRSOAK_XXX::n97730002_fail_TD_X_SOAK_K_START_X_X_X_X_THRSOAK_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97740002_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_START_X_X_X_X_THRSOAK_4;
+            IncrementCounters PTH_THRSOAK_XXX::n97740002_fail_TD_X_SOAK_K_START_X_X_X_X_THRSOAK_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b97750002_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_START_X_X_X_X_THRSOAK_5;
+            IncrementCounters PTH_THRSOAK_XXX::n97750002_fail_TD_X_SOAK_K_START_X_X_X_X_THRSOAK_5;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow PTH_THRSOAK_XXX_SPEEDPREPRL1
+{
+    FlowItem TD_X_CS_E_SPEEDPREPRL1_X_X_X_X_RAMPDWN TD_X_CS_E_SPEEDPREPRL1_X_X_X_X_RAMPDWN @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970033_fail_PTH_THRSOAK_XXX_TD_X_CS_E_SPEEDPREPRL1_X_X_X_X_RAMPDWN_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970033_fail_PTH_THRSOAK_XXX_TD_X_CS_E_SPEEDPREPRL1_X_X_X_X_RAMPDWN_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_SOAK_K_SPEEDPREPRL1_X_X_X_X_RAMPDWN;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_SOAK_K_SPEEDPREPRL1_X_X_X_X_RAMPDWN;
+        }
+    }
+    
+    FlowItem TD_X_SOAK_K_SPEEDPREPRL1_X_X_X_X_RAMPDWN TD_X_SOAK_K_SPEEDPREPRL1_X_X_X_X_RAMPDWN
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970053_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_SPEEDPREPRL1_X_X_X_X_RAMPDWN_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970053_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_SPEEDPREPRL1_X_X_X_X_RAMPDWN_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b97710000_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_SPEEDPREPRL1_X_X_X_X_RAMPDWN_0;
+            IncrementCounters PTH_THRSOAK_XXX::n97710000_fail_TD_X_SOAK_K_SPEEDPREPRL1_X_X_X_X_RAMPDWN_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_TDAU_E_SPEEDPREPRL1_X_X_X_X_SOT;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b97720000_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_SPEEDPREPRL1_X_X_X_X_RAMPDWN_2;
+            IncrementCounters PTH_THRSOAK_XXX::n97720000_fail_TD_X_SOAK_K_SPEEDPREPRL1_X_X_X_X_RAMPDWN_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b97730000_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_SPEEDPREPRL1_X_X_X_X_RAMPDWN_3;
+            IncrementCounters PTH_THRSOAK_XXX::n97730000_fail_TD_X_SOAK_K_SPEEDPREPRL1_X_X_X_X_RAMPDWN_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97740000_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_SPEEDPREPRL1_X_X_X_X_RAMPDWN_4;
+            IncrementCounters PTH_THRSOAK_XXX::n97740000_fail_TD_X_SOAK_K_SPEEDPREPRL1_X_X_X_X_RAMPDWN_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b97750000_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_SPEEDPREPRL1_X_X_X_X_RAMPDWN_5;
+            IncrementCounters PTH_THRSOAK_XXX::n97750000_fail_TD_X_SOAK_K_SPEEDPREPRL1_X_X_X_X_RAMPDWN_5;
+            Return 0;
+        }
+    }
+    
+    FlowItem TD_X_TDAU_E_SPEEDPREPRL1_X_X_X_X_SOT TD_X_TDAU_E_SPEEDPREPRL1_X_X_X_X_SOT @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99971000_fail_PTH_THRSOAK_XXX_TD_X_TDAU_E_SPEEDPREPRL1_X_X_X_X_SOT_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98971000_fail_PTH_THRSOAK_XXX_TD_X_TDAU_E_SPEEDPREPRL1_X_X_X_X_SOT_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_PARDATA_E_SPEEDPREPRL1_X_X_X_X_INTEC_2;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_PARDATA_E_SPEEDPREPRL1_X_X_X_X_INTEC_2;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_PARDATA_E_SPEEDPREPRL1_X_X_X_X_INTEC_2;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_PARDATA_E_SPEEDPREPRL1_X_X_X_X_INTEC_2;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_PARDATA_E_SPEEDPREPRL1_X_X_X_X_INTEC_2;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_PARDATA_E_SPEEDPREPRL1_X_X_X_X_INTEC_2;
+        }
+    }
+    
+    FlowItem TD_X_PARDATA_E_SPEEDPREPRL1_X_X_X_X_INTEC_2 TD_X_PARDATA_E_SPEEDPREPRL1_X_X_X_X_INTEC_2
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970042_fail_PTH_THRSOAK_XXX_TD_X_PARDATA_E_SPEEDPREPRL1_X_X_X_X_INTEC_2_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970042_fail_PTH_THRSOAK_XXX_TD_X_PARDATA_E_SPEEDPREPRL1_X_X_X_X_INTEC_2_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b97710003_fail_PTH_THRSOAK_XXX_TD_X_PARDATA_E_SPEEDPREPRL1_X_X_X_X_INTEC_2_0;
+            IncrementCounters PTH_THRSOAK_XXX::n97710003_fail_TD_X_PARDATA_E_SPEEDPREPRL1_X_X_X_X_INTEC_2_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow PTH_THRSOAK_XXX_SPEEDPREPRL2
+{
+    FlowItem TD_X_CS_E_SPEEDPREPRL2_X_X_X_X_RAMPUP TD_X_CS_E_SPEEDPREPRL2_X_X_X_X_RAMPUP @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970034_fail_PTH_THRSOAK_XXX_TD_X_CS_E_SPEEDPREPRL2_X_X_X_X_RAMPUP_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970034_fail_PTH_THRSOAK_XXX_TD_X_CS_E_SPEEDPREPRL2_X_X_X_X_RAMPUP_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_SOAK_K_SPEEDPREPRL2_X_X_X_X_RAMPUP;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_SOAK_K_SPEEDPREPRL2_X_X_X_X_RAMPUP;
+        }
+    }
+    
+    FlowItem TD_X_SOAK_K_SPEEDPREPRL2_X_X_X_X_RAMPUP TD_X_SOAK_K_SPEEDPREPRL2_X_X_X_X_RAMPUP
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970054_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_SPEEDPREPRL2_X_X_X_X_RAMPUP_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970054_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_SPEEDPREPRL2_X_X_X_X_RAMPUP_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b97710001_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_SPEEDPREPRL2_X_X_X_X_RAMPUP_0;
+            IncrementCounters PTH_THRSOAK_XXX::n97710001_fail_TD_X_SOAK_K_SPEEDPREPRL2_X_X_X_X_RAMPUP_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_TDAU_E_SPEEDPREPRL2_X_X_X_X_SOT;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b97720001_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_SPEEDPREPRL2_X_X_X_X_RAMPUP_2;
+            IncrementCounters PTH_THRSOAK_XXX::n97720001_fail_TD_X_SOAK_K_SPEEDPREPRL2_X_X_X_X_RAMPUP_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b97730001_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_SPEEDPREPRL2_X_X_X_X_RAMPUP_3;
+            IncrementCounters PTH_THRSOAK_XXX::n97730001_fail_TD_X_SOAK_K_SPEEDPREPRL2_X_X_X_X_RAMPUP_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97740001_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_SPEEDPREPRL2_X_X_X_X_RAMPUP_4;
+            IncrementCounters PTH_THRSOAK_XXX::n97740001_fail_TD_X_SOAK_K_SPEEDPREPRL2_X_X_X_X_RAMPUP_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b97750001_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_SPEEDPREPRL2_X_X_X_X_RAMPUP_5;
+            IncrementCounters PTH_THRSOAK_XXX::n97750001_fail_TD_X_SOAK_K_SPEEDPREPRL2_X_X_X_X_RAMPUP_5;
+            Return 0;
+        }
+    }
+    
+    FlowItem TD_X_TDAU_E_SPEEDPREPRL2_X_X_X_X_SOT TD_X_TDAU_E_SPEEDPREPRL2_X_X_X_X_SOT @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99971001_fail_PTH_THRSOAK_XXX_TD_X_TDAU_E_SPEEDPREPRL2_X_X_X_X_SOT_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98971001_fail_PTH_THRSOAK_XXX_TD_X_TDAU_E_SPEEDPREPRL2_X_X_X_X_SOT_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_PARDATA_E_SPEEDPREPRL2_X_X_X_X_INTEC_3;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_PARDATA_E_SPEEDPREPRL2_X_X_X_X_INTEC_3;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_PARDATA_E_SPEEDPREPRL2_X_X_X_X_INTEC_3;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_PARDATA_E_SPEEDPREPRL2_X_X_X_X_INTEC_3;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_PARDATA_E_SPEEDPREPRL2_X_X_X_X_INTEC_3;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_PARDATA_E_SPEEDPREPRL2_X_X_X_X_INTEC_3;
+        }
+    }
+    
+    FlowItem TD_X_PARDATA_E_SPEEDPREPRL2_X_X_X_X_INTEC_3 TD_X_PARDATA_E_SPEEDPREPRL2_X_X_X_X_INTEC_3
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99970043_fail_PTH_THRSOAK_XXX_TD_X_PARDATA_E_SPEEDPREPRL2_X_X_X_X_INTEC_3_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98970043_fail_PTH_THRSOAK_XXX_TD_X_PARDATA_E_SPEEDPREPRL2_X_X_X_X_INTEC_3_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b97710004_fail_PTH_THRSOAK_XXX_TD_X_PARDATA_E_SPEEDPREPRL2_X_X_X_X_INTEC_3_0;
+            IncrementCounters PTH_THRSOAK_XXX::n97710004_fail_TD_X_PARDATA_E_SPEEDPREPRL2_X_X_X_X_INTEC_3_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow PTH_THRSOAK_XXX_END
+{
+    FlowItem TD_X_CS_E_END_X_X_X_X_RAMPDWN TD_X_CS_E_END_X_X_X_X_RAMPDWN @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99971002_fail_PTH_THRSOAK_XXX_TD_X_CS_E_END_X_X_X_X_RAMPDWN_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98971002_fail_PTH_THRSOAK_XXX_TD_X_CS_E_END_X_X_X_X_RAMPDWN_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_SOAK_K_END_X_X_X_X_RAMPDWN;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_SOAK_K_END_X_X_X_X_RAMPDWN;
+        }
+    }
+    
+    FlowItem TD_X_SOAK_K_END_X_X_X_X_RAMPDWN TD_X_SOAK_K_END_X_X_X_X_RAMPDWN
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99971003_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_END_X_X_X_X_RAMPDWN_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98971003_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_END_X_X_X_X_RAMPDWN_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b97710005_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_END_X_X_X_X_RAMPDWN_0;
+            IncrementCounters PTH_THRSOAK_XXX::n97710005_fail_TD_X_SOAK_K_END_X_X_X_X_RAMPDWN_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_TDAU_E_END_X_X_X_X_SOT;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b97710006_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_END_X_X_X_X_RAMPDWN_2;
+            IncrementCounters PTH_THRSOAK_XXX::n97710006_fail_TD_X_SOAK_K_END_X_X_X_X_RAMPDWN_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b97710007_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_END_X_X_X_X_RAMPDWN_3;
+            IncrementCounters PTH_THRSOAK_XXX::n97710007_fail_TD_X_SOAK_K_END_X_X_X_X_RAMPDWN_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97710008_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_END_X_X_X_X_RAMPDWN_4;
+            IncrementCounters PTH_THRSOAK_XXX::n97710008_fail_TD_X_SOAK_K_END_X_X_X_X_RAMPDWN_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b97710009_fail_PTH_THRSOAK_XXX_TD_X_SOAK_K_END_X_X_X_X_RAMPDWN_5;
+            IncrementCounters PTH_THRSOAK_XXX::n97710009_fail_TD_X_SOAK_K_END_X_X_X_X_RAMPDWN_5;
+            Return 0;
+        }
+    }
+    
+    FlowItem TD_X_TDAU_E_END_X_X_X_X_SOT TD_X_TDAU_E_END_X_X_X_X_SOT @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99971004_fail_PTH_THRSOAK_XXX_TD_X_TDAU_E_END_X_X_X_X_SOT_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98971004_fail_PTH_THRSOAK_XXX_TD_X_TDAU_E_END_X_X_X_X_SOT_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_PARDATA_E_END_X_X_X_X_INTEC_4;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo TD_X_PARDATA_E_END_X_X_X_X_INTEC_4;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_PARDATA_E_END_X_X_X_X_INTEC_4;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_PARDATA_E_END_X_X_X_X_INTEC_4;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_PARDATA_E_END_X_X_X_X_INTEC_4;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            GoTo TD_X_PARDATA_E_END_X_X_X_X_INTEC_4;
+        }
+    }
+    
+    FlowItem TD_X_PARDATA_E_END_X_X_X_X_INTEC_4 TD_X_PARDATA_E_END_X_X_X_X_INTEC_4
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99971006_fail_PTH_THRSOAK_XXX_TD_X_PARDATA_E_END_X_X_X_X_INTEC_4_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98971006_fail_PTH_THRSOAK_XXX_TD_X_PARDATA_E_END_X_X_X_X_INTEC_4_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b97710011_fail_PTH_THRSOAK_XXX_TD_X_PARDATA_E_END_X_X_X_X_INTEC_4_0;
+            IncrementCounters PTH_THRSOAK_XXX::n97710011_fail_TD_X_PARDATA_E_END_X_X_X_X_INTEC_4_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}

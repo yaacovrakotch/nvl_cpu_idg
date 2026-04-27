@@ -1,0 +1,145 @@
+name: TorchLatest_JF
+
+env:
+  CustomPath: "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe"
+  
+on: 
+  workflow_dispatch: 
+    inputs:
+
+      TorchVersion:
+        description: 'For selective Torch version release validation. eg: I:/tpapps/TORCH/Prod22/CLI/4.4.0/Torch.exe'
+        # Default value if no value is explicitly provided
+        default: 'I:\tpapps\TORCH\PreProd22\CLI\Torch.exe'
+        # Input has to be provided for the workflow to run
+        required: true
+        
+      BOMGroups:
+        description: 'Target BOMGroups to build out'
+        # Default value if no value is explicitly provided
+        default: 'Class_NVL_S28C'
+        # Input has to be provided for the workflow to run
+        required: true
+        
+      name:
+        description: 'MV_json_file or FULL'
+        # Default value if no value is explicitly provided
+        default: 'FULL'
+        # Input has to be provided for the workflow to run
+        required: true
+        
+      destination:
+        description: 'I:\ drive destination'
+        # Default value if no value is explicitly provided
+        default: 'I:\'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      CPUBranch:
+        description: 'CPUBranchname|tag|sha|none'
+        # Default value if no value is explicitly provided
+        default: 'main'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      GCDBranch:
+        description: 'GCDBranchname|tag|sha|none'
+        # Default value if no value is explicitly provided
+        default: 'main'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      HUBBranch:
+        description: 'HUBBranchname|tag|sha|none'
+        # Default value if no value is explicitly provided
+        default: 'main'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      PCDBranch:
+        description: 'PCDBranchname|tag|sha|none'
+        # Default value if no value is explicitly provided
+        default: 'main'
+        # Input has to be provided for the workflow to run
+        required: true
+
+      cleantp:
+        type: boolean
+        description: 'Clean TP Enable. Default is false'
+        default: false
+
+      acpy:
+        description: 'TPSwitch or ACPY:'
+        default: 'None'
+        required: false
+  
+  schedule:
+    # Runs at 4 PM UTC (8 AM PST) only on Tue, Fri
+    - cron: '0 16 * * 2,5'
+    
+jobs:
+  TorchLatest_JF:
+    runs-on: [self-hosted, checkers_JF]
+
+    steps:
+    - name: Log Inputs
+      run: echo "${{ toJSON(github.event.inputs) }}"
+
+    - name: repo_init_check
+      continue-on-error: true
+      run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/tprobot.py REPO_INIT main
+
+    - uses: actions/checkout@v6
+      with: 
+        fetch-depth: 0
+        clean: true              # remove untracked files before checkout
+        ref: ${{ github.event.pull_request.head.ref }}
+       
+    - name: submodule add
+      run: |
+        git submodule sync --recursive
+        git submodule update --init --recursive --force
+
+    - name: clone dielets
+      run: python I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/nvl_buildtp.py ${{ github.event.inputs.BOMGroups || 'Class_NVL_S28C' }} -clone
+      env:
+         CPU_Branch: ${{ github.event.inputs.CPUBranch || 'main' }}
+         GCD_Branch: ${{ github.event.inputs.GCDBranch || 'main' }}
+         PCD_Branch: ${{ github.event.inputs.PCDBranch || 'main' }}
+         HUB_Branch: ${{ github.event.inputs.HUBBranch || 'main' }}         
+
+    - name: TP Build
+      id: checks
+      if: always()
+      run: python -u I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/nvl_buildtp.py ${{ github.event.inputs.BOMGroups || 'Class_NVL_S28C' }} -flow -common -output ${{ github.event.inputs.destination || 'I:\' }}
+      env:
+          BOMGroups: ${{ github.event.inputs.BOMGroups || 'Class_NVL_S28C' }}
+          TORCH_VERSION: ${{ github.event.inputs.TorchVersion || 'I:\tpapps\TORCH\PreProd22\CLI\Torch.exe' }}
+          IN1: ${{ github.event.inputs.name || 'FULL' }}
+          CPU_Branch: ${{ github.event.inputs.CPUBranch || 'main' }}
+          GCD_Branch: ${{ github.event.inputs.GCDBranch || 'main' }}
+          PCD_Branch: ${{ github.event.inputs.PCDBranch || 'main' }}
+          HUB_Branch: ${{ github.event.inputs.HUBBranch || 'main' }}  
+          CLEANTP: ${{ github.event.inputs.cleantp || 'false' }}
+          ACPY: ${{ github.event.inputs.acpy || 'None' }}
+          IS_PR_COMMON: True
+          CURRENT_BRANCH: ${{ github.ref_name }}
+          DEST: ${{ github.event.inputs.destination || 'I:\' }}
+        
+    - name: Set Workflow Result
+      id: result
+      if: always()
+      shell: powershell
+      run: |
+        if ("${{ steps.checks.outcome }}" -eq "success") {
+          echo "WORKFLOW_RESULT=Pass" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+        } else {
+          echo "WORKFLOW_RESULT=Fail" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+        }
+        
+    - name: Send Email Notification
+      if: always()
+      run: python I:/tpvalidation/engtools/tptools/mtl/beta/gen1/main/tprobot.py SENDEMAILS
+      env:
+        WORKFLOW_RESULT: ${{ env.WORKFLOW_RESULT }}
+        TO_LIST: "mpe_ddg_pde_tp_team@intel.com,oren.sasson@intel.com,torch.team@intel.com"

@@ -1,0 +1,49 @@
+Version 1.0;
+
+SelectorRuleCollection  TPI_SKUCTRL_XXX_Rules
+{
+	# SelectorRule for VminForwardInit BypassPort
+	# Sets BypassPort to "1" for primary socket location or location sets with write enabled
+	SelectorRule VminForwardInit_BypassPort (Outcome1, Outcome2, Outcome3)
+	{	
+		Outcome1 => contains(__shared__::LocationSets.PBIC_DAB,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome2 => contains(__shared__::LocationSets.RCHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome3;
+	}	
+
+	# SelectorRule for VminForwardInit BypassPort
+	# Sets DFFPrefix to use the letter based on the temperature LocationSets, with default value using "E"
+	SelectorRule VminForwardInit_DFFPrefix (Outcome1, Outcome2, Outcome3, Outcome4)
+	{
+		Outcome1 => contains(__shared__::LocationSets.ROOM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome2 => contains(__shared__::LocationSets.HOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome3 => contains(__shared__::LocationSets.COLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome4;
+	}	
+
+	# SelectorRule for VminForwardInit ReadDffOptype
+	# Sets ReadDffOptype to RC_S1 for RawClass downstream; Else, PBIC_DAB by default.
+	SelectorRule VminForwardInit_ReadDffOptype (Outcome1, Outcome2)
+	{
+		Outcome1 => contains(__shared__::LocationSets.RCCOLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome2;
+	}	
+	
+	# SelectorRule for Predictor Mode
+	# Sets ClassHotProcessOptype to RC_S1 in order to correctly enable 6163 as a primary RC_S1 location/socket. Default to "CLASSHOT,PBIC_DAB" for general ClassTP support
+	SelectorRule PredictorMode_ClassHotProcessOptype (Outcome1, Outcome2)
+	{
+		Outcome1 => contains(__shared__::LocationSets.RC_S1,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome2;
+	}	
+	
+	# SelectorRule for Predictor Mode
+	# Sets ClassHotProcessOptype to RC_S1 in order to correctly enable 6163 as a primary RC_S1 location/socket. Default to "CLASSHOT,PBIC_DAB" for general ClassTP support
+
+	SelectorRule Run_only_in_CHOT_With_FRWD (bypass_QNR,no_bypass,bypass )
+	{
+		bypass_QNR => __shared__::SCVars.SC_ENGID == "QC"|| __shared__::SCVars.SC_ENGID == "QE"|| __shared__::SCVars.SC_ENGID == "QQ" || __shared__::SCVars.SC_ENGID == "QT";
+		no_bypass => contains(__shared__::LocationSets.CHOT, "[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		bypass;
+	}
+}

@@ -1,0 +1,184 @@
+Version 1.0;
+
+Shared
+{
+SelectorRuleCollection TpRuleSC
+{
+	SelectorRule If_BOMname(Outcome1, Outcome2, Outcome3, Outcome4, Outcome5, Outcome6, Outcome7, Outcome8, Outcome9)
+	{
+		Outcome1 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C";
+        Outcome2 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+		Outcome3 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C";
+		Outcome4 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C";
+		Outcome5 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C";
+		Outcome6 => GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C";
+		Outcome7 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C";
+		Outcome8 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C";
+		Outcome9;
+	}
+	SelectorRule If_BOMname10(Outcome1, Outcome2, Outcome3, Outcome4, Outcome5, Outcome6, Outcome7, Outcome8, Outcome9, Outcome10)
+	{
+		Outcome1 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C";
+        Outcome2 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+		Outcome3 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C";
+		Outcome4 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C";
+		Outcome5 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C";
+		Outcome6 => GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C";
+		Outcome7 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C";
+		Outcome8 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C";
+		Outcome9 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28CB";
+		Outcome10;
+	}
+}
+UserVars SCVars
+{
+	String SC_PPR_LUT_CONTENT = "{\r\n  \"LutTimeStamp\": \"20230622T104413192\",\r\n  \"PreEmphasisTimeOut\": 0.1,\r\n  \"PprControlSet\": \"PPR\",\r\n\"StopLearning\":false,\r\n  \"ActionDefinition\":[\r\n  {\r\n  \"TestInstanceName\":\"IP_CPU::ARR_CCF_DATC68::SSA_X_VMIN_K_CCLRF5_080808_VCCR_F5_3400_LLCDAT_S0123_POST_1503\",\r\n  \"TTRActions\":[\r\n  {\r\n  \"TtrMode\":[\"MONITOR\"],\r\n  \"PreEmphasisTimeOutOverride\":0.1,\r\n  \"PowerScalingFactor\":1.0,\r\n  \"TemperatureOffset\":2,\r\n  \"ReleaseTemperatureUpperTolerance\":10,\r\n  \"ReleaseTemperatureLowerTolerance\":10,\r\n  \"PowerSurgeTime\":48,\r\n  \"DesiredTestTemperatureScUserGlobal\":\"SC_TEMPERATURE_110\",\r\n  \"PprExitTempRangeUpperTolerance\":0,\r\n  \"PprExitTempRangeLowerTolerance\":60,\r\n  \"IsBackToBack\":false},\r\n  {\"TtrMode\":[\"FULL\"],\r\n  \"PreEmphasisTimeOutOverride\":0.1,\r\n  \"PowerScalingFactor\":1.0,\r\n  \"TemperatureOffset\":2,\r\n  \"ReleaseTemperatureUpperTolerance\":10,\r\n  \"ReleaseTemperatureLowerTolerance\":10,\r\n  \"PowerSurgeTime\":48,\r\n  \"DesiredTestTemperatureScUserGlobal\":\"SC_TEMPERATURE_110\",\r\n  \"PprExitTempRangeUpperTolerance\":0,\r\n  \"PprExitTempRangeLowerTolerance\":60,\r\n  \"IsBackToBack\":false},\r\n  {\"TtrMode\":[\"SHORT\"],\r\n  \"PreEmphasisTimeOutOverride\":0.1,\r\n  \"PowerScalingFactor\":1.0,\r\n  \"TemperatureOffset\":2,\r\n  \"ReleaseTemperatureUpperTolerance\":10,\r\n  \"ReleaseTemperatureLowerTolerance\":10,\r\n  \"PowerSurgeTime\":48,\r\n  \"DesiredTestTemperatureScUserGlobal\":\"SC_TEMPERATURE_110\",\r\n  \"PprExitTempRangeUpperTolerance\":0,\r\n  \"PprExitTempRangeLowerTolerance\":60,\r\n  \"IsBackToBack\":false}]}]}";
+	String SC_PPR_FUNCTIONAL_STATUS = "1";
+	String ENABLE_PPR_PROFILE = "0";
+	String EI_ATC_CHUCKDETAIL_INFO = "";
+	String EI_ATC_CHUCKID_INFO = "";
+	String EI_DOC_COMMAND = "";
+	String EI_HANDLER_ID = "SUMMIT";
+	String EI_HWRT_FLG = "";
+	String EI_HWRT_ORG_HARD_BIN = "";
+	String EI_HWRT_ORG_SOFT_BIN = "";
+	String EI_HWRT_REPROBE_TIME = "";
+	String EI_HWRT_RETEST_NUM = "";
+	String EI_VISUALID = "12345678";
+	String EI_X_COORDINATE = "";
+	String EI_Y_COORDINATE = "";
+	String ENG_LC = "";
+	String IT_STNC_DEVICE = "";
+	String IT_STNC_LOCN = "";
+	String IT_STNC_LOTNAME = "";
+	String IT_STNC_SUMMARY_NAME = "";
+	String IT_STNC_TIU_MAX_SOCKET = "";
+	String IT_STNC_XIU_MODE = "01";
+	String IT_TP_TESTBOARD_ID = "";
+	String MODULAR_TP_PROGRAM_NAME = "";
+	String PCATEnableFlags = "";
+	String PCATModelNames = "";
+	String PCATModelTokens = "";
+	String SC_ASSEMID = "";
+	Integer SC_BENCHTOP = -1;
+	String SC_CHUCKID_INFO = "";
+	String SC_CTSC_ACTIVE = "FALSE";
+	String SC_CURRENT_PROCESS_STEP = "CLASSHOT";
+	String SC_CURRENT_PROCESS_TYPE = "CLASSHOT";
+	String SC_DEVICE = "4AAA2V";
+	String SC_DIESLCT = "NA";
+	String SC_DOC_DATALOG = "";
+	String SC_DOC_OVERTRAVEL = "1";
+	String SC_DOC_STDDEV = "";
+	String SC_ELECZHT = "";
+	String SC_ELECZHTFSTPN = "";
+	String SC_ENGID = "";
+	String SC_Env_File = "";
+	String SC_EZA_OPEN_PINS = "";
+	String SC_EZA_TEST_RESULT = "";
+	String SC_FABID = "X";
+	String SC_FACILITYID = "GDLJF";
+	String SC_FACTMODE = "OFF";
+	String SC_FACTPROCESSSTEP = "CLASSHOT";
+	String SC_FLEXBOMRECIPE = "000000000000";
+	String SC_FLEXBOMHRI = "";
+	String SC_FRFPATH = "I:\\fuse\\release\\MTL_Pre_Silicon\\";
+	String SC_FUSEID = "";
+	String SC_FUSEOPTIONS = "";
+	String SC_GROUPTESTITERATION = "-999";
+	String SC_Handler_Recipe = "";
+	String SC_HANDLER_TYPE = "HDMT";
+	String SC_HANDLERUNIQUEID = "";
+	String SC_HCSLMODE = "TRUE";
+	String SC_HRECIPENAME = "";
+	String SC_HWRT_FLG = "FALSE";
+	String SC_LOADULT = "TRUE";
+	String SC_LOCN = "6248";
+	String SC_LOT_WAFER = "123";
+	String SC_LOTNAME = "DUMMYLOT";
+	String SC_LOTSIZE = "";
+	String SC_LRFDOWNLOADPATH = "J:\\fact_download\\";
+	String SC_MASSVAL = "FALSE";
+	String SC_MODE = "HVM";
+	String SC_MPS = "";
+	String SC_NAME = "";
+	String SC_OPRID = "";
+	String SC_PACKAGE = "63";
+	String SC_PARTIALWAFID = "";
+	String SC_PROBER_HANDLER_ID = "";
+	String SC_PROCESS_STEP_SEQUENCE = "CLASSHOT|CLASSCOLD|CSM|FUSE|PHMHOT|PHMHOTR|PHMCOLD|PHMCOLDR|CLASSHOTR";
+	String SC_PUP_FILE_PATH = "~HDMT_TPL_DIR\\Shared\\BaseInputs\\Common\\Common_" + GetEnvironmentVariable("BOMGROUP");
+	String SC_RASTER_DLOG_PATH = "";
+	String SC_RECIPE_GUID = "";
+	String SC_REV = "";
+	String SC_RFBTENABLED = "";
+	String SC_SCAN_DLOG_PATH = "";
+	String SC_SITE = "GDLJF";
+	String SC_Soc_File = "";
+	String SC_SSPEC = "XXXX";
+	String SC_STDCORR_FLG = "FALSE";
+	String SC_STEP = "A";
+	String SC_SUMMARY_NAME = "1A";
+	String SC_TDNSEQ = "1";
+	String SC_TEMPERATURE = "100";
+	String SC_TEMPERATURE_90 = "90"; 
+	String SC_TEMPERATURE_105 = "105"; 
+	String SC_TEMPERATURE_110 = "110";
+	String SC_TEMPERATURE_70 = "70";
+	String SC_TEST_FLOW = "CCLASS";
+	String SC_TEST_GROUP_COUNT = "";
+	String SC_TEST_GROUP_COUNTER = "";
+	String SC_TESTERID = "CMTDUMMY";
+	String SC_THERMALHDID = "";
+	String SC_TIU_DISCONNECT = "";
+	String SC_TIU_MAX_SOCKET = "100000";
+	String SC_TOTAL_INS = "10";
+	String SC_TOTAL_TESTED = "1";
+	String SC_TP_CAL_FLG = "";
+	String SC_TP_PATH = "";
+	String SC_TP_RECIPE = "";
+	String SC_TPALT_NAME = "";
+	String SC_TWOSTEPFACT = "FALSE";
+	String SC_ULAT_FILE = "~HDMT_TPL_DIR\\Shared\\BaseInputs\\Common\\Common_" + GetEnvironmentVariable("BOMGROUP") + "\\DUMMYLOT_6248.ulat.xml";
+	String SC_ULAT_MODE = "OFF";
+	String SC_ULAT_TYPE = "";
+	String SC_ULT_DOWNLOAD_PATH = "~HDMT_TPL_DIR\\Shared\\BaseInputs\\Common\\Common_"+ GetEnvironmentVariable("BOMGROUP") + "\\DFF.ube";
+	String SC_ULT_REMOTE_PATH = "";
+	String SC_UNITGROUPING = "";
+	String SC_USE_OCR = "";
+	String SC_USE_OFR = "";
+	String SC_VISUALID = "D5FG859400226";
+	String SC_XIU_CHECK_FLG = "";
+	String SC_XIU_MODE = "01";
+	String SC_TDRLOG = "-1";
+	String TP_ATC_CHUCKDETAIL_ENABLE = "TRUE";
+	String TP_ATC_CHUCKID_ENABLE = "TRUE";
+	String TP_ATC_CYCLES = "1500";
+	String TP_DOC_INST = "DUTChangeFlow";
+	String TP_DOC_RESULT = "";
+	String TP_ENABLE_DFF_TIMESTAMP = "TRUE";
+	String TP_FUSE_ENABLED = "FALSE";
+	String SC_FUSE_ENABLED = "FALSE";
+	String TP_INIT_ERRMSG = "";
+	String TP_MDMTYPE = "";
+	String TP_PROGRAM_NAME = "BaseTestPlan";
+	String TP_TESTBOARD_ID = "MTL";
+	String TP_TESTERBOARD_ID = "";
+	String TP_TIU_SOCKET_COUNT = "15000";
+	String TP_ULTDB_VERSION = "4.0";
+	String TP_UNIT_ID = "";
+	String TP_ZHEIGHT_FAILPINS = "";
+	String TP_ZHEIGHT_FAILPINS_LIMIT = "";
+	Integer SC_CONTROLSET_DELAY = 100;
+	String SC_SessionType = "PROD";
+	String SC_MODULEID = "TPbot";
+	String SC_SITEID = "JFlab";
+    # This conditional below - Will allow user to drop temp down to 80C if they are running above 80C - As the PRL flow needs 80C.
+    # If the user is running below 80C - The PRL flow will use whatever temp the user sets as there is no risk then.
+    String SC_TEMP_DROP = toInteger(SC_TEMPERATURE) > 80 ? "80" : SC_TEMPERATURE;
+	Double SC_PF_SLOPE = toInteger(SC_TEMPERATURE) > 80 ? 0.6 : 0.5;
+    # Site IDs - JFlab | BAlab | PGlab | HAlab | FMlab - For future reference
+	Integer SC_INTEC_PF_ENABLED = toInteger(SC_SITEID == "JFlab" || SC_SITEID == "FMlab" ? "-1" : "1");
+}
+
+}

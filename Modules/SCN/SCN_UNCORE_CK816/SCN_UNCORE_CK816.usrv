@@ -1,0 +1,21 @@
+Version 1.0;
+
+SelectorRuleCollection  SCN_UNCORE_Rules
+{
+	SelectorRule If_DS0_DS1_M(Outcome1, Outcome2, Outcome3, Outcome4)
+		{
+			Outcome1 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28CB" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C";
+			Outcome2 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C";
+			Outcome3 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_UL6C";
+			Outcome4;
+		}
+}
+
+UserVars SCN_UNCORE_CK816_Specs
+{
+	String s28_s16c_dnl_timing = "IPC::SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE";
+	String s52c_timing = "IPC::SCN_UNCORE_CX816::cpu_fun_timing_mts800_tstprtclk400_tck100_OVERRIDEPKG";
+	String hx_h16c_p16c_timing = "IPC::SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500";
+	String others_timing = "IPC::SCN_UNCORE_CX816::cpu_fun_timing_mts800_tstprtclk400_tck100_OVERRIDEPKG";
+	String timingRules = SCN_UNCORE_Rules.If_DS0_DS1_M(SCN_UNCORE_CK816_Specs.s28_s16c_dnl_timing,SCN_UNCORE_CK816_Specs.s52c_timing,SCN_UNCORE_CK816_Specs.hx_h16c_p16c_timing,SCN_UNCORE_CK816_Specs.others_timing);
+}

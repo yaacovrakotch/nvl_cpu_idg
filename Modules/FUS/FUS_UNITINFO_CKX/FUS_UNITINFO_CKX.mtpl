@@ -1,0 +1,386 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan FUS_UNITINFO_CKX;
+
+
+# Test Counter Definition
+
+Counters
+{
+    n31402058_fail_FUSE_X_AUX_K_STARTCPUPATMODSPKG_X_X_X_X_LOCKSTATUS_CHECK_0,
+    n31472030_fail_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_LEGACY_UNLOCK_X1_0,
+    n31472031_fail_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_RED_UNLOCK_X1_0,
+    n31482050_fail_FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_UNLOCK_SETUP_0,
+    n31482051_fail_FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_UNLOCK_SETUP_2,
+    n31482052_fail_FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_UNLOCK_SETUP_3,
+    n31482053_fail_FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_UNLOCK_SETUP_4,
+    n31482054_fail_FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_RED_UNLOCK_SETUP_0,
+    n31482055_fail_FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_RED_UNLOCK_SETUP_2
+} # End of Test Counter Definition
+
+CSharpTest ScreenTC FUSE_X_SCREENTC_K_INIT_X_X_X_X_UNLOCK_SETUP
+{
+    BypassPort = -1;
+    ScreenTestSet = "LEG_KEY_split_by_32bits_MsbToLsb";
+    ScreenTestsFile = __shared__::TpRule.If_MICP("./InputFiles/UNITINFO_CK2X.screen.json","./InputFiles/UNITINFO_CK1X.screen.json");
+}
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_LEGACY_SETUP_EXE_X1
+{
+    BypassPort = -1;
+    ConfigurationFile = __shared__::TpRule.If_MICP("./InputFiles/UNITINFO_CK2X.patConfigSetpoints.json","./InputFiles/UNITINFO_CK1X.patConfigSetpoints.json");
+    SetPoint = "LGULCDIE_RATIO1_splitby32_MsbToLsb";
+}
+
+CSharpTest ScreenTC FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_UNLOCK_SETUP
+{
+    ScreenTestSet = "LEG_KEY_split_by_32bits_MsbToLsb";
+    ScreenTestsFile = __shared__::TpRule.If_MICP("./InputFiles/UNITINFO_CK2X.screen.json","./InputFiles/UNITINFO_CK1X.screen.json");
+}
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_LEGACY_UNLOCK_X1
+{
+    BypassPort = -1;
+    ConfigurationFile = __shared__::TpRule.If_MICP("./InputFiles/UNITINFO_CK2X.patConfigSetpoints.json","./InputFiles/UNITINFO_CK1X.patConfigSetpoints.json");
+    SetPoint = "LGULCDIE_RATIO1_splitby32_MsbToLsb";
+}
+
+CSharpTest ScreenTC FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_RED_UNLOCK_SETUP
+{
+    ScreenTestSet = "RED_KEY_split_by_32bits_MsbToLsb";
+    ScreenTestsFile = __shared__::TpRule.If_MICP("./InputFiles/UNITINFO_CK2X.screen.json","./InputFiles/UNITINFO_CK1X.screen.json");
+}
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_RED_UNLOCK_X1
+{
+    BypassPort = -1;
+    ConfigurationFile = __shared__::TpRule.If_MICP("./InputFiles/UNITINFO_CK2X.patConfigSetpoints.json","./InputFiles/UNITINFO_CK1X.patConfigSetpoints.json");
+    SetPoint = "RDULCDIE_RATIO1_splitby32_MsbToLsb";
+}
+
+CSharpTest AuxiliaryTC FUSE_X_AUX_K_STARTCPUPATMODSPKG_X_X_X_X_LOCKSTATUS_CHECK
+{
+    DataType = "String";
+    Expression = "[G.U.S.LCKSTATUS_CPU0]='RDUL_CPU0'";
+    ResultPort = "[R]?1:2";
+    Storage = "SharedStorage";
+}
+
+Flow FUSE_CONFIG_PREP
+{
+    FlowItem FUSE_X_SCREENTC_K_INIT_X_X_X_X_UNLOCK_SETUP FUSE_X_SCREENTC_K_INIT_X_X_X_X_UNLOCK_SETUP
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312209_fail_FUS_UNITINFO_CKX_FUSE_X_SCREENTC_K_INIT_X_X_X_X_UNLOCK_SETUP_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312209_fail_FUS_UNITINFO_CKX_FUSE_X_SCREENTC_K_INIT_X_X_X_X_UNLOCK_SETUP_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_LEGACY_SETUP_EXE_X1;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_LEGACY_SETUP_EXE_X1 FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_LEGACY_SETUP_EXE_X1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312125_fail_FUS_UNITINFO_CKX_FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_LEGACY_SETUP_EXE_X1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312125_fail_FUS_UNITINFO_CKX_FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_LEGACY_SETUP_EXE_X1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow FUS_UNITINFO_CKX_INIT
+{
+    FlowItem FUSE_CONFIG_PREP FUSE_CONFIG_PREP
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow LEGACY_UNLOCK
+{
+    FlowItem FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_UNLOCK_SETUP FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_UNLOCK_SETUP
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312220_fail_FUS_UNITINFO_CKX_FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_UNLOCK_SETUP_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312220_fail_FUS_UNITINFO_CKX_FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_UNLOCK_SETUP_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482050_fail_FUS_UNITINFO_CKX_FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_UNLOCK_SETUP_0;
+            IncrementCounters FUS_UNITINFO_CKX::n31482050_fail_FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_UNLOCK_SETUP_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_LEGACY_UNLOCK_X1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31482051_fail_FUS_UNITINFO_CKX_FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_UNLOCK_SETUP_2;
+            IncrementCounters FUS_UNITINFO_CKX::n31482051_fail_FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_UNLOCK_SETUP_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b31482052_fail_FUS_UNITINFO_CKX_FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_UNLOCK_SETUP_3;
+            IncrementCounters FUS_UNITINFO_CKX::n31482052_fail_FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_UNLOCK_SETUP_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b31482053_fail_FUS_UNITINFO_CKX_FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_UNLOCK_SETUP_4;
+            IncrementCounters FUS_UNITINFO_CKX::n31482053_fail_FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_UNLOCK_SETUP_4;
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_LEGACY_UNLOCK_X1 FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_LEGACY_UNLOCK_X1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312136_fail_FUS_UNITINFO_CKX_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_LEGACY_UNLOCK_X1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312136_fail_FUS_UNITINFO_CKX_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_LEGACY_UNLOCK_X1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31472030_fail_FUS_UNITINFO_CKX_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_LEGACY_UNLOCK_X1_0;
+            IncrementCounters FUS_UNITINFO_CKX::n31472030_fail_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_LEGACY_UNLOCK_X1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow RED_UNLOCK
+{
+    FlowItem FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_RED_UNLOCK_SETUP FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_RED_UNLOCK_SETUP
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312219_fail_FUS_UNITINFO_CKX_FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_RED_UNLOCK_SETUP_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312219_fail_FUS_UNITINFO_CKX_FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_RED_UNLOCK_SETUP_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482054_fail_FUS_UNITINFO_CKX_FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_RED_UNLOCK_SETUP_0;
+            IncrementCounters FUS_UNITINFO_CKX::n31482054_fail_FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_RED_UNLOCK_SETUP_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_RED_UNLOCK_X1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31482055_fail_FUS_UNITINFO_CKX_FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_RED_UNLOCK_SETUP_2;
+            IncrementCounters FUS_UNITINFO_CKX::n31482055_fail_FUSE_X_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_RED_UNLOCK_SETUP_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_RED_UNLOCK_X1 FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_RED_UNLOCK_X1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312137_fail_FUS_UNITINFO_CKX_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_RED_UNLOCK_X1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312137_fail_FUS_UNITINFO_CKX_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_RED_UNLOCK_X1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31472031_fail_FUS_UNITINFO_CKX_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_RED_UNLOCK_X1_0;
+            IncrementCounters FUS_UNITINFO_CKX::n31472031_fail_FUSE_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_RED_UNLOCK_X1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow FUS_UNITINFO_CKX_STARTCPUPATMODSPKG
+{
+    FlowItem FUSE_X_AUX_K_STARTCPUPATMODSPKG_X_X_X_X_LOCKSTATUS_CHECK FUSE_X_AUX_K_STARTCPUPATMODSPKG_X_X_X_X_LOCKSTATUS_CHECK
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312008_fail_FUS_UNITINFO_CKX_FUSE_X_AUX_K_STARTCPUPATMODSPKG_X_X_X_X_LOCKSTATUS_CHECK_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312008_fail_FUS_UNITINFO_CKX_FUSE_X_AUX_K_STARTCPUPATMODSPKG_X_X_X_X_LOCKSTATUS_CHECK_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31402058_fail_FUS_UNITINFO_CKX_FUSE_X_AUX_K_STARTCPUPATMODSPKG_X_X_X_X_LOCKSTATUS_CHECK_0;
+            IncrementCounters FUS_UNITINFO_CKX::n31402058_fail_FUSE_X_AUX_K_STARTCPUPATMODSPKG_X_X_X_X_LOCKSTATUS_CHECK_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo RED_UNLOCK;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo LEGACY_UNLOCK;
+        }
+    }
+    
+    FlowItem RED_UNLOCK RED_UNLOCK
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+    FlowItem LEGACY_UNLOCK LEGACY_UNLOCK
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}

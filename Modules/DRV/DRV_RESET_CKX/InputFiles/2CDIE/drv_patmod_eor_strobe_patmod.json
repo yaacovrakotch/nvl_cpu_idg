@@ -1,0 +1,283 @@
+{
+  "Configurations": [
+    {
+      "ConfigurationElement": [
+        {
+          "Domain": [
+            "CPU_ALL",
+	    "CPU_ALL_1"
+          ],
+          "Type": "PINDATA",
+          "StartAddress": [
+            "SFC_.*SLICE._PAR_.*__DLVR_IN_PS0__DLVR_CHECK.*"
+          ],
+          "StartAddressOffset": [
+            0
+          ],
+          "EndAddress": [
+            "^"
+          ],
+          "EndAddressOffset": [
+            0
+          ],
+          "Pin": [
+            "CPU_TDO",
+	    "CPU1_TDO"
+          ],
+          "IsChannelLink": false,
+          "PatternsRegEx": [
+            ".*longreset_phase2.*",
+            ".*longreset_phase_dlvr.*"
+          ],
+          "ValidationMode": "ALLOW_LABEL_NO_MATCHING"
+        }
+      ],
+      "Name": "patmod_ps0_eor_check"
+    },
+    {
+      "ConfigurationElement": [
+        {
+          "Domain": [
+            "CPU_ALL",
+	    "CPU_ALL_1"
+          ],
+          "Type": "PINDATA",
+          "StartAddress": [
+            "SFC_.*SLICE._PAR_.*__DLVR_IN_PS7__DLVR_CHECK.*"
+          ],
+          "StartAddressOffset": [
+            0
+          ],
+          "EndAddress": [
+            "^"
+          ],
+          "EndAddressOffset": [
+            0
+          ],
+          "Pin": [
+            "CPU_TDO",
+	    "CPU1_TDO"
+          ],
+          "IsChannelLink": false,
+          "PatternsRegEx": [
+            ".*longreset_phase2.*",
+            ".*longreset_phase_dlvr.*"
+          ],
+          "ValidationMode": "ALLOW_LABEL_NO_MATCHING"
+        }
+      ],
+      "Name": "patmod_ps7_eor_check"
+    },
+    {
+      "ConfigurationElement": [
+        {
+          "Domain": [
+            "IPC::CPU_ALL",
+	    "IPC::CPU_ALL_1"
+          ],
+          "Type": "INSTRUCTION",
+          "StartAddress": [
+            "PhDlvr_WaitDlvrCoreBotTapRampDisable"
+          ],
+          "StartAddressOffset": [
+            1
+          ],
+          "EndAddress": [
+            "PhDlvr_WaitDlvrCoreBotTapRampDisable"
+          ],
+          "EndAddressOffset": [
+            1
+          ],
+          "IsChannelLink": false,
+          "PatternsRegEx": [
+            ".*longreset_phase_dlvr.*"
+          ]
+        }
+      ],
+      "Name": "patmod_delay_core_tap_ramp_en_ipc"
+    },
+    {
+      "ConfigurationElement": [
+        {
+          "Domain": [
+            "CPU_ALL",
+	    "CPU_ALL_1"
+          ],
+          "Type": "INSTRUCTION",
+          "StartAddress": [
+            "PhDlvr_WaitDlvrCoreBotTapRampDisable"
+          ],
+          "StartAddressOffset": [
+            1
+          ],
+          "EndAddress": [
+            "PhDlvr_WaitDlvrCoreBotTapRampDisable"
+          ],
+          "EndAddressOffset": [
+            1
+          ],
+          "IsChannelLink": false,
+          "PatternsRegEx": [
+            ".*longreset_phase_dlvr.*"
+          ]
+        }
+      ],
+      "Name": "patmod_delay_core_tap_ramp_en"
+    },
+	{
+		"ConfigurationElement": [
+        {
+			"Domain": [
+				"IPC::CPU_ALL",
+				"IPC::CPU_ALL_1"
+			],
+			"Type": "INSTRUCTION",
+			"StartAddress": [
+				"Fuse_WaitRamZeroingDone"
+			],
+			"StartAddressOffset": [
+				1
+			],
+			"EndAddress": [
+				"Fuse_WaitRamZeroingDone"
+			],
+			"EndAddressOffset": [
+				1
+			],
+			"IsChannelLink": false,
+			"PatternsRegEx": [
+				"[gdx]\\S{7}C0000012.*_longreset_fuseoverride.*"
+			]
+        }
+		],
+		"Name": "patmod_WaitRamZeroingDone_ipc"
+	},
+	{
+		"ConfigurationElement": [
+        {
+			"Domain": [
+				"CPU_ALL",
+				"CPU_ALL_1"
+			],
+			"Type": "INSTRUCTION",
+			"StartAddress": [
+				"Fuse_WaitRamZeroingDone"
+			],
+			"StartAddressOffset": [
+				1
+			],
+			"EndAddress": [
+				"Fuse_WaitRamZeroingDone"
+			],
+			"EndAddressOffset": [
+				1
+			],
+			"IsChannelLink": false,
+			"PatternsRegEx": [
+				"[gdx]\\S{7}C0000012.*_longreset_fuseoverride.*"
+			]
+        }
+		],
+		"Name": "patmod_WaitRamZeroingDone"
+	},
+	{
+      "ConfigurationElement": [
+        {
+          "Domain": [
+            "CPU_ALL",
+	    "CPU_ALL_1"
+          ],
+          "Type": "PINDATA",
+          "StartAddress": [
+            "SFC_D2D_PAR_FUSE__DLCS__STATUS_0_CHECKER.*"
+          ],
+          "StartAddressOffset": [
+            0
+          ],
+          "EndAddress": [
+            "^"
+          ],
+          "EndAddressOffset": [
+            0
+          ],
+          "Pin": [
+            "CPU_TDO",
+	    "CPU1_TDO"
+          ],
+          "IsChannelLink": false,
+          "PatternsRegEx": [
+            ".*longreset_infra.*"
+          ],
+          "ValidationMode": "ALLOW_LABEL_NO_MATCHING"
+        }
+      ],
+      "Name": "patmod_dlcs_post_fuse_check"
+    },
+	{
+      "ConfigurationElement": [
+        {
+          "Domain": [
+            "CPU_ALL",
+	    "CPU_ALL_1"
+          ],
+          "Type": "PINDATA",
+          "StartAddress": [
+            "SFC_D2D_PAR_FUSE__POLICY_OUTPUT__STATUS_0_CHECKER.*"
+          ],
+          "StartAddressOffset": [
+            7
+          ],
+          "EndAddress": [
+            "^"
+          ],
+          "EndAddressOffset": [
+            0
+          ],
+          "Pin": [
+            "CPU_TDO",
+	    "CPU1_TDO"
+          ],
+          "IsChannelLink": false,
+          "PatternsRegEx": [
+            ".*_.[1].{18}_longreset_infra.*"
+          ],
+          "ValidationMode": "ALLOW_LABEL_NO_MATCHING"
+        }
+      ],
+      "Name": "patmod_policy_output_post_fuse_check_r1"
+    },
+	{
+      "ConfigurationElement": [
+        {
+          "Domain": [
+            "CPU_ALL",
+	    "CPU_ALL_1"
+          ],
+          "Type": "PINDATA",
+          "StartAddress": [
+            "SFC_D2D_PAR_FUSE__POLICY_OUTPUT__STATUS_0_CHECKER.*"
+          ],
+          "StartAddressOffset": [
+            15
+          ],
+          "EndAddress": [
+            "^"
+          ],
+          "EndAddressOffset": [
+            0
+          ],
+          "Pin": [
+            "CPU_TDO",
+	    "CPU1_TDO"
+          ],
+          "IsChannelLink": false,
+          "PatternsRegEx": [
+            ".*_.[F|8].{18}_longreset_infra.*"
+          ],
+          "ValidationMode": "ALLOW_LABEL_NO_MATCHING"
+        }
+      ],
+      "Name": "patmod_policy_output_post_fuse_check_r8_r16"
+    }
+  ]
+}

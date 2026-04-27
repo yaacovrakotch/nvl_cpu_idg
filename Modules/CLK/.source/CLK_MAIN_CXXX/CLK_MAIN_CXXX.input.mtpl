@@ -1,0 +1,534 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan `TestPlanName`;
+
+Import `_ModuleFolderName`.usrv;
+Import `_ModuleFolderName`_Levels.tcg;
+
+#TestCounter Definition removed as part of bin/counter generator update.
+
+
+####################################### VMIN #######################################
+
+Flow `MinComposite`_BBS
+{
+    FlowItem FUSECHECK_X_CMEM_K_`MinSubflow`_TAP_X_MIN_X_40_BBS FUSECHECK_X_CMEM_K_`MinSubflow`_TAP_X_MIN_X_40_BBS @EDCRULE
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1 { Property PassFail = "Pass"; Return 1; }
+        Result 2 { Property PassFail = "Fail"; Return 0; }
+        Result 3 { Property PassFail = "Fail"; Return 0; }
+        Result 4 { Property PassFail = "Fail"; Return 0; }
+        Result 5 { Property PassFail = "Fail"; Return 0; }
+    }
+}
+
+CSharpTest DDGFunctionalTC FUSECHECK_X_CMEM_K_`MinSubflow`_TAP_X_MIN_X_40_BBS
+{
+    Patlist = "clk_cpu_x_fusecheck_list";
+    LevelsTc = "`TestPlanName`::cpu_clk_override_distnom_sharedmin_lvl";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    FailuresToCapturePerPattern = 1;
+    FailuresToCaptureTotal = 1;
+    MaxFailuresPerPatternToItuff = 1;
+    MaxFailuresToItuff = 1;
+    `PHMBypassPRIME`
+}
+Flow `MinComposite`_HVM
+{
+    FlowItem LOCK_X_CMEM_K_`MinSubflow`_TAP_X_MIN_X_40_HVM LOCK_X_CMEM_K_`MinSubflow`_TAP_X_MIN_X_40_HVM `edc2kill`
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1  { Property PassFail = "Pass"; GoTo LOCK_X_CMEM_K_`MinSubflow`_TAP_X_MIN_X_38_HVM; }
+        Result 2  { Property PassFail = "Fail"; Return 0; }
+        Result 3  { Property PassFail = "Fail"; Return 0; }
+        Result 4  { Property PassFail = "Fail"; Return 0; }
+        Result 5  { Property PassFail = "Fail"; Return 0; }
+        Result 6  { Property PassFail = "Fail"; Return 0; }
+        Result 7  { Property PassFail = "Fail"; Return 0; }
+        Result 8  { Property PassFail = "Fail"; Return 0; }
+        Result 9  { Property PassFail = "Fail"; Return 0; }
+        Result 10  { Property PassFail = "Fail"; Return 0; }
+        Result 11  { Property PassFail = "Fail"; Return 0; }
+        Result 12  { Property PassFail = "Fail"; Return 0; }
+        Result 13  { Property PassFail = "Fail"; Return 0; }
+        Result 14  { Property PassFail = "Fail"; Return 0; }
+        Result 15  { Property PassFail = "Fail"; Return 0; }
+    }
+    FlowItem LOCK_X_CMEM_K_`MinSubflow`_TAP_X_MIN_X_38_HVM LOCK_X_CMEM_K_`MinSubflow`_TAP_X_MIN_X_38_HVM `edc2kill`
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1  { Property PassFail = "Pass"; Return 1; }
+        Result 2  { Property PassFail = "Fail"; Return 0; }
+        Result 3  { Property PassFail = "Fail"; Return 0; }
+        Result 4  { Property PassFail = "Fail"; Return 0; }
+        Result 5  { Property PassFail = "Fail"; Return 0; }
+    }
+}
+CSharpTest CsioCmemTC LOCK_X_CMEM_K_`MinSubflow`_TAP_X_MIN_X_40_HVM
+{
+    Patlist = "clk_cpu_x_lock40_list";
+    PlistConfigurationFile = GetEnvironmentVariable("`patmodify path`")+"/clk_cpu_x_lock40_list.plist.json";
+    PrePlist = "`preplist_MIN`";
+    IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.`_BomGroupName``C0`.json";
+    LimitsConfigurationFile = "./InputFiles/clk.`_TcgProduct`.limits.csv";
+    PlistConfigSet = "clk_cpu_x_lock40_list";
+    FunctionCall = "Ljpll_4p0_Lock";
+    EdcEnable = `TestPlanName`::`TestPlanName`.MIN_DATA;
+    KillDecode = "ENABLED";
+    CtvCapturePins = "`TDO`";
+    LevelsTc = "`TestPlanName`::`TestCondition_min`";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    `PHMBypassPRIME`
+}
+CSharpTest CsioCmemTC LOCK_X_CMEM_K_`MinSubflow`_TAP_X_MIN_X_38_HVM
+{
+    Patlist = "clk_cpu_x_lock38_list";
+    PlistConfigurationFile = GetEnvironmentVariable("`patmodify path`")+"/clk_cpu_x_lock38_list.plist.json";
+    PrePlist = "`preplist_MIN`";
+    IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.`_BomGroupName``C0`.json";
+    LimitsConfigurationFile = "./InputFiles/clk.`_TcgProduct`.limits.csv";
+    PlistConfigSet = "clk_cpu_x_lock38_list";
+    FunctionCall = "Ljpll_4p0_Lock";
+    EdcEnable = `TestPlanName`::`TestPlanName`.MIN_DATA;
+    KillDecode = "ENABLED";
+    CtvCapturePins = "`TDO`";
+    LevelsTc = "`TestPlanName`::`TestCondition_min`";
+    TimingsTc = "`timing_prefix``timing_group`_mts96_tstprtclk48_tck96_hvmclk96";
+    `PHMBypassPRIME`
+
+}
+Flow `TestPlanName`_`MinComposite` @`MinSubflow`_SubFlow
+{
+    FlowItem SETUP_X_SCREEN_K_`MinSubflow`_X_X_MIN_X_X_X SETUP_X_SCREEN_K_`MinSubflow`_X_X_MIN_X_X_X @KILL
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1 { Property PassFail = "Pass"; GoTo FORK_X_SAMPLE_K_`MinSubflow`_X_X_MIN_X_X_BBS; }
+    }
+    FlowItem FORK_X_SAMPLE_K_`MinSubflow`_X_X_MIN_X_X_BBS FORK_X_SAMPLE_K_`MinSubflow`_X_X_MIN_X_X_BBS @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; GoTo `MinComposite`_BBS; }
+        Result 1 { Property PassFail = "Fail"; GoTo `MinComposite`_BBS; }
+        Result 2 { Property PassFail = "Fail"; GoTo FORK_X_SAMPLE_K_`MinSubflow`_X_X_MIN_X_X_HVM; }
+    }
+    FlowItem `MinComposite`_BBS `MinComposite`_BBS
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1 { Property PassFail = "Pass"; GoTo FORK_X_SAMPLE_K_`MinSubflow`_X_X_MIN_X_X_HVM; }
+    }
+    FlowItem FORK_X_SAMPLE_K_`MinSubflow`_X_X_MIN_X_X_HVM FORK_X_SAMPLE_K_`MinSubflow`_X_X_MIN_X_X_HVM @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; GoTo `MinComposite`_HVM; }
+        Result 1 { Property PassFail = "Fail"; GoTo `MinComposite`_HVM; }
+        Result 2 { Property PassFail = "Fail"; GoTo FORK_X_SAMPLE_K_`MinSubflow`_X_X_MIN_X_X_SDC; }
+    }
+    FlowItem `MinComposite`_HVM `MinComposite`_HVM
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1 { Property PassFail = "Pass"; GoTo FORK_X_SAMPLE_K_`MinSubflow`_X_X_MIN_X_X_SDC; }
+    }
+    FlowItem FORK_X_SAMPLE_K_`MinSubflow`_X_X_MIN_X_X_SDC FORK_X_SAMPLE_K_`MinSubflow`_X_X_MIN_X_X_SDC @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 1; }
+        Result 1 { Property PassFail = "Fail"; Return 1; }
+        Result 2 { Property PassFail = "Fail"; Return 1; }
+    }
+}
+
+CSharpTest AuxiliaryTC SETUP_X_SCREEN_K_`MinSubflow`_X_X_MIN_X_X_X
+{
+    Expression = "IsMatch([D.`DieID`.SORT.SCSAMP],'1')?1:(IsMatch([`TestPlanName`::`TestPlanName`.MIN_DATA],'DISABLED')?2:-1)";
+    DataType = "Integer";
+    Storage = "UserVar";
+    ResultToken = "`TestPlanName`::`TestPlanName`.SampleBypass";
+	`FUSEBypassPRIME`
+}
+CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_`MinSubflow`_X_X_MIN_X_X_BBS
+{
+    SamplingRateValue = `TestPlanName`::SampleRate.VMIN_BBS("100","1");
+    WaferSampleRateValue = "1";
+    ShouldFirstBeSampled = "True";
+    BypassPort = `TestPlanName`::`TestPlanName`.SampleBypass;
+}
+CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_`MinSubflow`_X_X_MIN_X_X_HVM
+{
+    SamplingRateValue = `TestPlanName`::SampleRate.VMIN_HVM("100","1");
+    WaferSampleRateValue = "1";
+    ShouldFirstBeSampled = "True";
+    BypassPort = `TestPlanName`::`TestPlanName`.SampleBypass;
+}
+CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_`MinSubflow`_X_X_MIN_X_X_SDC
+{
+    SamplingRateValue = `TestPlanName`::SampleRate.VMIN_SDC("100","1");
+    WaferSampleRateValue = "1";
+    ShouldFirstBeSampled = "True";
+    BypassPort = `TestPlanName`::`TestPlanName`.SampleBypass;
+}
+
+####################################### VNOM #######################################
+
+Flow `NomComposite`_HVM
+{
+    FlowItem LOCK_X_CMEM_K_`NomSubflow`_TAP_X_NOM_X_40_HVM LOCK_X_CMEM_K_`NomSubflow`_TAP_X_NOM_X_40_HVM `edc2kill`
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1  { Property PassFail = "Pass"; GoTo LOCK_X_CMEM_K_`NomSubflow`_TAP_X_NOM_X_38_HVM; }
+        Result 2  { Property PassFail = "Fail"; Return 0; }
+        Result 3  { Property PassFail = "Fail"; Return 0; }
+        Result 4  { Property PassFail = "Fail"; Return 0; }
+        Result 5  { Property PassFail = "Fail"; Return 0; }
+        Result 6  { Property PassFail = "Fail"; Return 0; }
+        Result 7  { Property PassFail = "Fail"; Return 0; }
+        Result 8  { Property PassFail = "Fail"; Return 0; }
+        Result 9  { Property PassFail = "Fail"; Return 0; }
+        Result 10  { Property PassFail = "Fail"; Return 0; }
+        Result 11  { Property PassFail = "Fail"; Return 0; }
+        Result 12  { Property PassFail = "Fail"; Return 0; }
+        Result 13  { Property PassFail = "Fail"; Return 0; }
+        Result 14  { Property PassFail = "Fail"; Return 0; }
+	Result 15  { Property PassFail = "Fail"; Return 0; }
+    }
+    FlowItem LOCK_X_CMEM_K_`NomSubflow`_TAP_X_NOM_X_38_HVM LOCK_X_CMEM_K_`NomSubflow`_TAP_X_NOM_X_38_HVM `edc2kill`
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1  { Property PassFail = "Pass"; Return 1; }
+        Result 2  { Property PassFail = "Fail"; Return 0; }
+        Result 3  { Property PassFail = "Fail"; Return 0; }
+        Result 4  { Property PassFail = "Fail"; Return 0; }
+        Result 5  { Property PassFail = "Fail"; Return 0; }
+    }
+}
+
+CSharpTest CsioCmemTC LOCK_X_CMEM_K_`NomSubflow`_TAP_X_NOM_X_40_HVM
+{
+    Patlist = "clk_cpu_x_lock40_list";
+    PlistConfigurationFile = GetEnvironmentVariable("`patmodify path`")+"/clk_cpu_x_lock40_list.plist.json";
+    PrePlist = "`preplist_NOM`";
+    IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.`_BomGroupName``C0`.json";
+    LimitsConfigurationFile = "./InputFiles/clk.`_TcgProduct`.limits.csv";
+    PlistConfigSet = "clk_cpu_x_lock40_list";
+    FunctionCall = "Ljpll_4p0_Lock";
+    EdcEnable = `TestPlanName`::`TestPlanName`.NOM_DATA;
+    KillDecode = "ENABLED";
+    CtvCapturePins = "`TDO`";
+    LevelsTc = "`TestPlanName`::`TestCondition_nom`";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    `PHMBypassPRIME`
+}
+CSharpTest CsioCmemTC LOCK_X_CMEM_K_`NomSubflow`_TAP_X_NOM_X_38_HVM
+{
+    Patlist = "clk_cpu_x_lock38_list";
+    PlistConfigurationFile = GetEnvironmentVariable("`patmodify path`")+"/clk_cpu_x_lock38_list.plist.json";
+    PrePlist = "`preplist_NOM`";
+    IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.`_BomGroupName``C0`.json";
+    LimitsConfigurationFile = "./InputFiles/clk.`_TcgProduct`.limits.csv";
+    PlistConfigSet = "clk_cpu_x_lock38_list";
+    FunctionCall = "Ljpll_4p0_Lock";
+    EdcEnable = `TestPlanName`::`TestPlanName`.NOM_DATA;
+    KillDecode = "ENABLED";
+    CtvCapturePins = "`TDO`";
+    LevelsTc = "`TestPlanName`::`TestCondition_nom`";
+    TimingsTc = "`timing_prefix``timing_group`_mts96_tstprtclk48_tck96_hvmclk96";
+    `PHMBypassPRIME`
+}
+Flow `NomComposite`_SDC
+{
+    FlowItem FVCURVE_PLL_CMEM_E_`NomSubflow`_TAP_X_NOM_X_40_SDC FVCURVE_PLL_CMEM_E_`NomSubflow`_TAP_X_NOM_X_40_SDC @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; GoTo OPENLOOP_FLL_CMEM_E_`NomSubflow`_TAP_X_NOM_X_40_SDC; }
+        Result 1  { Property PassFail = "Pass"; GoTo OPENLOOP_FLL_CMEM_E_`NomSubflow`_TAP_X_NOM_X_40_SDC; }
+        Result 2  { Property PassFail = "Fail"; GoTo OPENLOOP_FLL_CMEM_E_`NomSubflow`_TAP_X_NOM_X_40_SDC; }
+        Result 3  { Property PassFail = "Fail"; GoTo OPENLOOP_FLL_CMEM_E_`NomSubflow`_TAP_X_NOM_X_40_SDC; }
+        Result 4  { Property PassFail = "Fail"; GoTo OPENLOOP_FLL_CMEM_E_`NomSubflow`_TAP_X_NOM_X_40_SDC; }
+    }
+    FlowItem OPENLOOP_FLL_CMEM_E_`NomSubflow`_TAP_X_NOM_X_40_SDC OPENLOOP_FLL_CMEM_E_`NomSubflow`_TAP_X_NOM_X_40_SDC @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 1; }
+        Result 1  { Property PassFail = "Pass"; Return 1; }
+        Result 2  { Property PassFail = "Fail"; Return 1; }
+        Result 3  { Property PassFail = "Fail"; Return 1; }
+        Result 4  { Property PassFail = "Fail"; Return 1; }
+    }
+}
+CSharpTest CsioCmemTC FVCURVE_PLL_CMEM_E_`NomSubflow`_TAP_X_NOM_X_40_SDC
+{
+    Patlist = "clk_cpu_x_fvcurve_list";
+    PlistConfigurationFile = GetEnvironmentVariable("`patmodify path`")+"/clk_cpu_x_fvcurve_list.plist.json";
+    PrePlist = "`preplist_NOM`";
+    IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.`_BomGroupName``C0`.json";
+    LimitsConfigurationFile = "./InputFiles/clk.`_TcgProduct`.limits.csv";
+    PlistConfigSet = "clk_cpu_x_fvcurve_list";
+    FunctionCall = "Ljpll_4p0_FvCurve";
+    EdcEnable = `TestPlanName`::`TestPlanName`.NOM_DATA;
+    KillDecode = "DISABLED";
+    CtvCapturePins = "`TDO`";
+    LevelsTc = "`TestPlanName`::`TestCondition_nom`";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    PreInstance = "ReadSpecSet(--levels `TestPlanName`::`TestCondition_nom` --name `level_vnnaon` --gsds G.U.D.clk_cpu_vnnaon --print)";
+    `PHMBypassPRIME`
+}
+CSharpTest CsioCmemTC OPENLOOP_FLL_CMEM_E_`NomSubflow`_TAP_X_NOM_X_40_SDC
+{
+    Patlist = "clk_cpu_x_openloop_list";
+    PlistConfigurationFile = GetEnvironmentVariable("`patmodify path`")+"/clk_cpu_x_openloop_list.plist.json";
+    PrePlist = "`preplist_NOM`";
+    IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.`_BomGroupName``C0`.json";
+    LimitsConfigurationFile = "./InputFiles/clk.`_TcgProduct`.limits.csv";
+    PlistConfigSet = "clk_cpu_x_openloop_list";
+    FunctionCall = "Ljpll_4p0_DcoOpenLoop";
+    EdcEnable = `TestPlanName`::`TestPlanName`.NOM_DATA;
+    KillDecode = "DISABLED";
+    CtvCapturePins = "`TDO`";
+    LevelsTc = "`TestPlanName`::`TestCondition_nom`";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    `PHMBypassPRIME`
+}
+
+Flow `TestPlanName`_`NomComposite` @`NomSubflow`_SubFlow
+{
+    FlowItem SETUP_X_SCREEN_K_`NomSubflow`_X_X_NOM_X_X_X SETUP_X_SCREEN_K_`NomSubflow`_X_X_NOM_X_X_X @KILL
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0;  }
+        Result 1 { Property PassFail = "Pass"; GoTo FORK_X_SAMPLE_K_`NomSubflow`_X_X_NOM_X_X_BBS; }
+    }
+    FlowItem FORK_X_SAMPLE_K_`NomSubflow`_X_X_NOM_X_X_BBS FORK_X_SAMPLE_K_`NomSubflow`_X_X_NOM_X_X_BBS @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; GoTo FORK_X_SAMPLE_K_`NomSubflow`_X_X_NOM_X_X_HVM;  }
+        Result 1 { Property PassFail = "Fail"; GoTo FORK_X_SAMPLE_K_`NomSubflow`_X_X_NOM_X_X_HVM; }
+        Result 2 { Property PassFail = "Fail"; GoTo FORK_X_SAMPLE_K_`NomSubflow`_X_X_NOM_X_X_HVM; }
+    }
+    FlowItem FORK_X_SAMPLE_K_`NomSubflow`_X_X_NOM_X_X_HVM FORK_X_SAMPLE_K_`NomSubflow`_X_X_NOM_X_X_HVM @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; GoTo `NomComposite`_HVM;  }
+        Result 1 { Property PassFail = "Fail"; GoTo `NomComposite`_HVM; }
+        Result 2 { Property PassFail = "Fail"; GoTo FORK_X_SAMPLE_K_`NomSubflow`_X_X_NOM_X_X_SDC; }
+    }
+    FlowItem `NomComposite`_HVM `NomComposite`_HVM
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0;  }
+        Result 1 { Property PassFail = "Pass"; GoTo FORK_X_SAMPLE_K_`NomSubflow`_X_X_NOM_X_X_SDC; }
+    }
+    FlowItem FORK_X_SAMPLE_K_`NomSubflow`_X_X_NOM_X_X_SDC FORK_X_SAMPLE_K_`NomSubflow`_X_X_NOM_X_X_SDC @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; GoTo `NomComposite`_SDC;  }
+        Result 1 { Property PassFail = "Fail"; GoTo `NomComposite`_SDC; }
+        Result 2 { Property PassFail = "Fail"; Return 1; }
+    }
+    FlowItem `NomComposite`_SDC `NomComposite`_SDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0;  }
+        Result 1 { Property PassFail = "Pass"; Return 1; }
+    }
+}
+
+CSharpTest AuxiliaryTC SETUP_X_SCREEN_K_`NomSubflow`_X_X_NOM_X_X_X
+{
+    Expression = "IsMatch([D.`DieID`.SORT.SCSAMP],'1')?1:(IsMatch([`TestPlanName`::`TestPlanName`.NOM_DATA],'DISABLED')?2:-1)";
+    DataType = "Integer";
+    Storage = "UserVar";
+    ResultToken = "`TestPlanName`::`TestPlanName`.SampleBypass";
+	`FUSEBypassPRIME`
+}
+CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_`NomSubflow`_X_X_NOM_X_X_BBS
+{
+    SamplingRateValue = `TestPlanName`::SampleRate.VNOM_BBS("100","1");
+    WaferSampleRateValue = "1";
+    ShouldFirstBeSampled = "True";
+    BypassPort = `TestPlanName`::`TestPlanName`.SampleBypass;
+}
+CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_`NomSubflow`_X_X_NOM_X_X_HVM
+{
+    SamplingRateValue = `TestPlanName`::SampleRate.VNOM_HVM("100","1");
+    WaferSampleRateValue = "1";
+    ShouldFirstBeSampled = "True";
+    BypassPort = `TestPlanName`::`TestPlanName`.SampleBypass;
+}
+CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_`NomSubflow`_X_X_NOM_X_X_SDC
+{
+    SamplingRateValue = `TestPlanName`::SampleRate.VNOM_SDC("100","1");
+    WaferSampleRateValue = "1";
+    ShouldFirstBeSampled = "True";
+    BypassPort = `TestPlanName`::`TestPlanName`.SampleBypass;
+}
+
+####################################### VMAX #######################################
+
+Flow `MaxComposite`_HVM
+{
+    FlowItem LOCK_X_CMEM_K_`MaxSubflow`_TAP_X_MAX_X_40_HVM LOCK_X_CMEM_K_`MaxSubflow`_TAP_X_MAX_X_40_HVM `edc2kill`
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1  { Property PassFail = "Pass"; GoTo LOCK_X_CMEM_K_`MaxSubflow`_TAP_X_MAX_X_38_HVM; }
+        Result 2  { Property PassFail = "Fail"; Return 0; }
+        Result 3  { Property PassFail = "Fail"; Return 0; }
+        Result 4  { Property PassFail = "Fail"; Return 0; }
+        Result 5  { Property PassFail = "Fail"; Return 0; }
+        Result 6  { Property PassFail = "Fail"; Return 0; }
+        Result 7  { Property PassFail = "Fail"; Return 0; }
+        Result 8  { Property PassFail = "Fail"; Return 0; }
+        Result 9  { Property PassFail = "Fail"; Return 0; }
+        Result 10  { Property PassFail = "Fail"; Return 0; }
+        Result 11  { Property PassFail = "Fail"; Return 0; }
+        Result 12  { Property PassFail = "Fail"; Return 0; }
+        Result 13  { Property PassFail = "Fail"; Return 0; }
+        Result 14  { Property PassFail = "Fail"; Return 0; }
+	Result 15  { Property PassFail = "Fail"; Return 0; }
+    }
+    FlowItem LOCK_X_CMEM_K_`MaxSubflow`_TAP_X_MAX_X_38_HVM LOCK_X_CMEM_K_`MaxSubflow`_TAP_X_MAX_X_38_HVM `edc2kill`
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0; }
+        Result 1  { Property PassFail = "Pass"; Return 1; }
+        Result 2  { Property PassFail = "Fail"; Return 0; }
+        Result 3  { Property PassFail = "Fail"; Return 0; }
+        Result 4  { Property PassFail = "Fail"; Return 0; }
+        Result 5  { Property PassFail = "Fail"; Return 0; }
+    }
+}
+
+CSharpTest CsioCmemTC LOCK_X_CMEM_K_`MaxSubflow`_TAP_X_MAX_X_40_HVM
+{
+    Patlist = "clk_cpu_x_lock40_list";
+    PlistConfigurationFile = GetEnvironmentVariable("`patmodify path`")+"/clk_cpu_x_lock40_list.plist.json";
+    PrePlist = "`preplist_MAX`";
+    IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.`_BomGroupName``C0`.json";
+    LimitsConfigurationFile = "./InputFiles/clk.`_TcgProduct`.limits.csv";
+    PlistConfigSet = "clk_cpu_x_lock40_list";
+    FunctionCall = "Ljpll_4p0_Lock";
+    EdcEnable = `TestPlanName`::`TestPlanName`.MAX_DATA;
+    KillDecode = "ENABLED";
+    CtvCapturePins = "`TDO`";
+    LevelsTc = "`TestPlanName`::`TestCondition_max`";
+    TimingsTc = "`timing_prefix``timing_group`_mts100_tstprtclk50_tck100";
+    `PHMBypassPRIME`
+}
+CSharpTest CsioCmemTC LOCK_X_CMEM_K_`MaxSubflow`_TAP_X_MAX_X_38_HVM
+{
+    Patlist = "clk_cpu_x_lock38_list";
+    PlistConfigurationFile = GetEnvironmentVariable("`patmodify path`")+"/clk_cpu_x_lock38_list.plist.json";
+    PrePlist = "`preplist_MAX`";
+    IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.`_BomGroupName``C0`.json";
+    LimitsConfigurationFile = "./InputFiles/clk.`_TcgProduct`.limits.csv";
+    PlistConfigSet = "clk_cpu_x_lock38_list";
+    FunctionCall = "Ljpll_4p0_Lock";
+    EdcEnable = `TestPlanName`::`TestPlanName`.MAX_DATA;
+    KillDecode = "ENABLED";
+    CtvCapturePins = "`TDO`";
+    LevelsTc = "`TestPlanName`::`TestCondition_max`";
+    TimingsTc = "`timing_prefix``timing_group`_mts96_tstprtclk48_tck96_hvmclk96";
+    `PHMBypassPRIME`
+}
+Flow `TestPlanName`_`MaxComposite` @`MaxSubflow`_SubFlow
+{
+    FlowItem SETUP_X_SCREEN_K_`MaxSubflow`_X_X_MAX_X_X_X SETUP_X_SCREEN_K_`MaxSubflow`_X_X_MAX_X_X_X @KILL
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0;  }
+        Result 1 { Property PassFail = "Pass"; GoTo FORK_X_SAMPLE_K_`MaxSubflow`_X_X_MAX_X_X_BBS; }
+    }
+    FlowItem FORK_X_SAMPLE_K_`MaxSubflow`_X_X_MAX_X_X_BBS FORK_X_SAMPLE_K_`MaxSubflow`_X_X_MAX_X_X_BBS @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; GoTo FORK_X_SAMPLE_K_`MaxSubflow`_X_X_MAX_X_X_HVM;  }
+        Result 1 { Property PassFail = "Fail"; GoTo FORK_X_SAMPLE_K_`MaxSubflow`_X_X_MAX_X_X_HVM; }
+        Result 2 { Property PassFail = "Fail"; GoTo FORK_X_SAMPLE_K_`MaxSubflow`_X_X_MAX_X_X_HVM; }
+    }
+    FlowItem FORK_X_SAMPLE_K_`MaxSubflow`_X_X_MAX_X_X_HVM FORK_X_SAMPLE_K_`MaxSubflow`_X_X_MAX_X_X_HVM @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; GoTo `MaxComposite`_HVM;  }
+        Result 1 { Property PassFail = "Fail"; GoTo `MaxComposite`_HVM; }
+        Result 2 { Property PassFail = "Fail"; GoTo FORK_X_SAMPLE_K_`MaxSubflow`_X_X_MAX_X_X_SDC; }
+    }
+    FlowItem `MaxComposite`_HVM `MaxComposite`_HVM
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 0;  }
+        Result 1 { Property PassFail = "Pass"; GoTo FORK_X_SAMPLE_K_`MaxSubflow`_X_X_MAX_X_X_SDC; }
+    }
+    FlowItem FORK_X_SAMPLE_K_`MaxSubflow`_X_X_MAX_X_X_SDC FORK_X_SAMPLE_K_`MaxSubflow`_X_X_MAX_X_X_SDC @EDC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0  { Property PassFail = "Fail"; Return 1;  }
+        Result 1 { Property PassFail = "Fail"; Return 1; }
+        Result 2 { Property PassFail = "Fail"; Return 1; }
+    }
+}
+
+CSharpTest AuxiliaryTC SETUP_X_SCREEN_K_`MaxSubflow`_X_X_MAX_X_X_X
+{
+    Expression = "IsMatch([D.`DieID`.SORT.SCSAMP],'1')?1:(IsMatch([`TestPlanName`::`TestPlanName`.MAX_DATA],'DISABLED')?2:-1)";
+    DataType = "Integer";
+    Storage = "UserVar";
+    ResultToken = "`TestPlanName`::`TestPlanName`.SampleBypass";
+	`FUSEBypassPRIME`
+}
+CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_`MaxSubflow`_X_X_MAX_X_X_BBS
+{
+    SamplingRateValue = `TestPlanName`::SampleRate.VMAX_BBS("100","1");
+    WaferSampleRateValue = "1";
+    ShouldFirstBeSampled = "True";
+    BypassPort = `TestPlanName`::`TestPlanName`.SampleBypass;
+}
+CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_`MaxSubflow`_X_X_MAX_X_X_HVM
+{
+    SamplingRateValue = `TestPlanName`::SampleRate.VMAX_HVM("100","1");
+    WaferSampleRateValue = "1";
+    ShouldFirstBeSampled = "True";
+    BypassPort = `TestPlanName`::`TestPlanName`.SampleBypass;
+}
+CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_`MaxSubflow`_X_X_MAX_X_X_SDC
+{
+    SamplingRateValue = `TestPlanName`::SampleRate.VMAX_SDC("100","1");
+    WaferSampleRateValue = "1";
+    ShouldFirstBeSampled = "True";
+    BypassPort = `TestPlanName`::`TestPlanName`.SampleBypass;
+}

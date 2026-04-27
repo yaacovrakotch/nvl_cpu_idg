@@ -1,0 +1,124 @@
+# this file should only be sourced, not executed
+# To be used when sourcing the veplibrary from a VSCode terminal
+if ($?PYTHONPATH) then
+   setenv VEP2_PREVPYTHONPATH  $PYTHONPATH
+endif
+
+#---------------------------------------------------------------
+# Handle DEBUG_PRODCODE env var
+#---------------------------------------------------------------
+if ($1 == "DEBUG" || $2 == "DEBUG") then
+   setenv DEBUG_PRODCODE "True"
+else
+   unsetenv DEBUG_PRODCODE
+endif
+
+#---------------------------------------------------------------
+# Handle VEP2_PRODUCT env var
+#---------------------------------------------------------------
+# Unsetenv regardless
+unsetenv VEP2_PRODUCT
+
+# Setenv if product given
+foreach arg ($argv)
+   @ len = `echo $arg | wc -c` - 1
+   if ($len == 3) then
+     setenv VEP2_PRODUCT $arg
+   endif
+end
+
+set pybin        = /usr/intel/bin/python3
+set cmd          = "import sys; import os; print(os.path.abspath(os.path.join(os.path.dirname(sys.argv[1]),'checkenv.py')))"
+set checkenv     = `$pybin -c "$cmd" /p/pde/tvpv/mtl/vep2/rel/library/bin/sourceme.rc`
+set help_message = "Usage: source <thisfile.rc>"
+
+#---------------------------------------------------------------
+# check if checkenv.py exist. This determines the value of PATH, PYTHONPATH and LD_LIBRARY_PATH
+#---------------------------------------------------------------
+if (! -e $checkenv) then
+    echo "$checkenv does not exist. This is a required tool for vep2"
+	goto error2
+endif
+
+
+#---------------------------------------------------------------
+# Try first, if fail remove pythonpatn, then try again
+#---------------------------------------------------------------
+$checkenv MESSAGE
+if ($status) then
+   echo
+   echo ERROR Putting back original pythonpath. vep2 is NOT sourced!!!!
+   echo
+   if ($?VEP2_PREVPYTHONPATH) then
+      setenv PYTHONPATH $VEP2_PREVPYTHONPATH
+   else
+      unsetenv PYTHONPATH
+   endif
+   exit(1)
+endif 
+
+#---------------------------------------------------------------
+# determine 'location' argument
+#---------------------------------------------------------------
+set location     = `$checkenv LOCATION`     # [rel|dev|<full_path_to_project>]
+    
+# if location is not 'rel' or 'dev', it should be full path to your VEP2 working
+if (! -e $location) then
+    echo "given project location does not exist: '$location'"
+    goto error2
+endif
+if (! -e $location/library) then
+    echo "library dir does not exist in given path: '$location/library'"
+    goto error2
+endif
+
+#---------------------------------------------------------------
+# Check location validity
+#---------------------------------------------------------------
+set res = `$checkenv TEST $location`
+if ("$res" != "WORKING") then
+   echo
+   echo '#############################################################################'
+   echo 'ERROR: Source failed! Something went wrong. Pls contact TVPV ################'
+   echo '#############################################################################'
+   exit 1
+endif
+
+# update variable the env variables
+setenv LD_LIBRARY_PATH `$checkenv LD_LIBRARY_PATH $location`
+setenv PYTHONPATH `$checkenv PYTHONPATH $location`
+setenv PATH `$checkenv PATH $location`
+setenv VEP2_ROOT $location
+
+#---------------------------------------------------------------
+# Print values of the environment variables updated
+#---------------------------------------------------------------
+#echo PATH = ${PATH}
+#echo PYTHONPATH = ${PYTHONPATH}
+#echo LD_LIBRARY_PATH = ${LD_LIBRARY_PATH}
+
+#---------------------------------------------------------------
+# VEP2 aliases - Edit bin/product_aliases.rc file for product specific aliases
+#---------------------------------------------------------------
+source "`$checkenv ALIASES`"
+alias pydoc /usr/bin/pydoc3
+alias fossil fs
+alias python /usr/intel/bin/python3
+
+#---------------------------------------------------------------
+# success: display success message and exit 
+#---------------------------------------------------------------
+echo "`$checkenv SUCCESS`"
+exit 0
+
+#---------------------------------------------------------------
+# all errors go here: display help message and exit
+#---------------------------------------------------------------
+error:
+    echo
+    echo "$help_message"
+    exit 1
+
+error2:
+    echo
+    exit 1

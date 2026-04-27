@@ -1,0 +1,170 @@
+Version 1.0;
+
+SelectorRuleCollection  TPI_DIERCVRY_CXX_Rules
+{
+	SelectorRule Tracker_Bypass (Outcome1, Outcome2, Outcome3)
+	{
+		Outcome1 => contains(__shared__::LocationSets.PBIC_DAB,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome2 => contains(__shared__::LocationSets.RCH_HVM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome3;
+	}	
+	#SelectorRule CTRL_X_RUNCALLBACK_K_INIT_X_X_X_X_CQNQUALCHECK (Outcome1, Outcome2, Outcome3)
+	#{
+	#	Outcome1 => contains(__shared__::LocationSets.COLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+	#	Outcome2 => __shared__::SCVars.SC_ENGID == "QE" || __shared__::SCVars.SC_ENGID == "QQ";
+	#	Outcome3;
+	#}
+
+	#	SelectorRule DFF_READ_OPTYPE (Outcome1, Outcome2, Outcome3)
+	#{
+	#	Outcome1 => contains(__shared__::LocationSets.CC_QUAL_RV,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.CC_QUAL,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+	#	Outcome2 => __shared__::SCVars.SC_LOCN == "6233";
+	#	Outcome3;
+	#}
+	SelectorRule RecoveryRule (Outcome1, Outcome2, Outcome3, Outcome4)
+	{
+		Outcome1 => contains(__shared__::LocationSets.CH_HVM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.CH_RV,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") ;
+		Outcome2 => contains(__shared__::LocationSets.RCHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome3 => contains(__shared__::LocationSets.RCCOLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome4;
+	}
+	SelectorRule RecoveryBypass (Outcome1, Outcome2, Outcome3, Outcome4, Outcome5)
+	{
+		Outcome1 => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_U8C";
+		Outcome2 => contains(__shared__::LocationSets.CH_HVM,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.CH_RV,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") ;
+		Outcome3 => contains(__shared__::LocationSets.RCHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome4 => contains(__shared__::LocationSets.RCCOLD,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Outcome5;
+	}
+	SelectorRule MTT_Rule(RV_HVM_HOT, default)
+	{
+		RV_HVM_HOT => contains(__shared__::LocationSets.CH_CHVM, "[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.RCHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") ;
+		default;
+	}
+	SelectorRule PO_Z_step_bypass (Outcome1, default)
+	{
+		Outcome1 => contains(__shared__::SCVars.SC_STEP,"Z");
+		default;
+	}
+	SelectorRule If_ENGTP(yes_mv_tp_value, default)
+	{
+		yes_mv_tp_value => False;
+		default;
+	}
+
+
+}
+
+UserVars BEG_CORE0TOTRACKER
+{
+	String C48_40_Tracker = TPI_DIERCVRY_CXX_Rules.RecoveryRule("--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR3,CR2,CR1,CR0 --dff "+__shared__::DFFVars.DIEID_CPU+":SORT:COREREC","--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR3,CR2,CR1,CR0 --dff "+__shared__::DFFVars.DIEID_CPU+":SORT:COREREC","--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR3,CR2,CR1,CR0 --dff "+__shared__::DFFVars.DIEID_CPU+":RC_S1:COREREC","--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR3,CR2,CR1,CR0 --dff "+__shared__::DFFVars.DIEID_CPU+":PBIC_DAB:COREREC");
+	String C816_Tracker = TPI_DIERCVRY_CXX_Rules.RecoveryRule("--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR --dff "+__shared__::DFFVars.DIEID_CPU+":SORT:COREREC","--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR --dff "+__shared__::DFFVars.DIEID_CPU+":SORT:COREREC","--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR --dff "+__shared__::DFFVars.DIEID_CPU+":RC_S1:COREREC","--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR --dff "+__shared__::DFFVars.DIEID_CPU+":PBIC_DAB:COREREC");
+}
+
+UserVars BEG_SLICE0TOTRACKER
+{
+	String S28C_Tracker = TPI_DIERCVRY_CXX_Rules.RecoveryRule("--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":SORT:SLICEREC  --rule CLASS_NVL_S28C_6C","--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":SORT:SLICEREC  --rule CLASS_NVL_S28C_6C","--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":RC_S1:SLICEREC  --rule CLASS_NVL_S28C_6C","--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":PBIC_DAB:SLICEREC  --rule CLASS_NVL_S28C_6C");
+	String S52C_Tracker = TPI_DIERCVRY_CXX_Rules.RecoveryRule("--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":SORT:SLICEREC","--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":SORT:SLICEREC","--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":RC_S1:SLICEREC","--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":PBIC_DAB:SLICEREC");
+	String HX28C_Tracker = TPI_DIERCVRY_CXX_Rules.RecoveryRule("--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":SORT:SLICEREC  --rule CLASS_NVL_HX28C_6C","--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":SORT:SLICEREC  --rule CLASS_NVL_HX28C_6C","--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":RC_S1:SLICEREC  --rule CLASS_NVL_HX28C_6C","--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":PBIC_DAB:SLICEREC  --rule CLASS_NVL_HX28C_6C");
+	String P16C_Tracker = TPI_DIERCVRY_CXX_Rules.RecoveryRule("--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":SORT:SLICEREC  --rule CLASS_NVL_P16C_2C","--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":SORT:SLICEREC  --rule CLASS_NVL_P16C_2C","--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":RC_S1:SLICEREC  --rule CLASS_NVL_P16C_2C","--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":PBIC_DAB:SLICEREC  --rule CLASS_NVL_P16C_2C");
+	String S16C_Tracker = TPI_DIERCVRY_CXX_Rules.RecoveryRule("--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":SORT:SLICEREC  --rule CLASS_NVL_S16C_2C","--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":SORT:SLICEREC  --rule CLASS_NVL_S16C_2C","--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":RC_S1:SLICEREC  --rule CLASS_NVL_S16C_2C","--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":PBIC_DAB:SLICEREC  --rule CLASS_NVL_S16C_2C");
+	String DNLS28C_Tracker = TPI_DIERCVRY_CXX_Rules.RecoveryRule("--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":SORT:SLICEREC  --rule CLASS_DNL_S28C_6C","--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":SORT:SLICEREC  --rule CLASS_DNL_S28C_6C","--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":RC_S1:SLICEREC  --rule CLASS_DNL_S28C_6C","--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":PBIC_DAB:SLICEREC  --rule CLASS_DNL_S28C_6C");
+	String U8C_Tracker = TPI_DIERCVRY_CXX_Rules.RecoveryRule("--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":SORT:SLICEREC  --rule CLASS_NVL_U8C_2C","--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":SORT:SLICEREC  --rule CLASS_NVL_U8C_2C","--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":RC_S1:SLICEREC  --rule CLASS_NVL_U8C_2C","--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":PBIC_DAB:SLICEREC  --rule CLASS_NVL_U8C_2C");
+	String H16C_Tracker = TPI_DIERCVRY_CXX_Rules.RecoveryRule("--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":SORT:SLICEREC  --rule CLASS_NVL_H16C_2C","--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":SORT:SLICEREC  --rule CLASS_NVL_H16C_2C","--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":RC_S1:SLICEREC  --rule CLASS_NVL_H16C_2C","--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":PBIC_DAB:SLICEREC  --rule CLASS_NVL_H16C_2C");
+}
+
+UserVars BEG_SLICETOTRACKERGSDS
+{
+	String S28C_Tracker = "--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --gsds G.I.S.SLCINIT";
+	String S52C_Tracker = "--tracker SLC11_B,SLC10_B,SLC9_B,SLC8_B,SLC7_B,SLC6_B,SLC5_B,SLC4_B,SLC3_B,SLC2_B,SLC1_B,SLC0_B,SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --gsds G.I.S.SLCINIT";
+	String HX28C_Tracker = "--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --gsds G.I.S.SLCINIT";
+	String P16C_Tracker = "--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --gsds G.I.S.SLCINIT";
+	String S16C_Tracker = "--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --gsds G.I.S.SLCINIT";
+	String DNLS28C_Tracker = "--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --gsds G.I.S.SLCINIT";
+	String U8C_Tracker = "--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --gsds G.I.S.SLCINIT";
+	String H16C_Tracker = "--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --gsds G.I.S.SLCINIT";
+}
+
+UserVars CR_RULE
+{
+	String S28C_CR_Rule = "--tracker CR --rule CLASS_NVL_S28C_6C";
+	String S52C_CR_Rule = "--tracker CR_B,CR --rule CLASS_NVL_S52C_12C";
+	String HX28C_CR_Rule = "--tracker CR --rule CLASS_NVL_HX28C_6C";
+	String P16C_CR_Rule = "--tracker CR3,CR2,CR1,CR0 --rule CLASS_NVL_P16C_2C";
+	String S16C_CR_Rule = "--tracker CR3,CR2,CR1,CR0 --rule CLASS_NVL_S16C_2C";
+	String DNLS28C_CR_Rule = "--tracker CR --rule CLASS_DNL_S28C_6C";
+	String U8C_CR_Rule = "--tracker CR3,CR2,CR1,CR0 --rule CLASS_NVL_U8C_2C";
+	String H16C_CR_Rule = "--tracker CR3,CR2,CR1,CR0 --rule CLASS_NVL_H16C_2C";
+}
+
+UserVars SLC_RULE
+{
+	String S28C_SLC_Rule = "--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --rule CLASS_NVL_S28C_6C";
+	String S52C_SLC_Rule = "--tracker SLC11_B,SLC10_B,SLC9_B,SLC8_B,SLC7_B,SLC6_B,SLC5_B,SLC4_B,SLC3_B,SLC2_B,SLC1_B,SLC0_B,SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --rule CLASS_NVL_S52C_12C";
+	String HX28C_SLC_Rule = "--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --rule CLASS_NVL_HX28C_6C";
+	String P16C_SLC_Rule = "--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --rule CLASS_NVL_P16C_2C";
+	String S16C_SLC_Rule = "--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --rule CLASS_NVL_S16C_2C";
+	String DNLS28C_SLC_Rule = "--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --rule CLASS_DNL_S28C_6C";
+	String U8C_SLC_Rule = "--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --rule CLASS_NVL_U8C_2C";
+	String H16C_SLC_Rule = "--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --rule CLASS_NVL_H16C_2C";
+}
+
+UserVars ACRM_RULE
+{
+	String S28C_ACRM_Rule = "--tracker ACRM3,ACRM2,ACRM1,ACRM0 --rule CLASS_NVL_S28C_8A";
+	String S52C_ACRM_Rule = "--tracker ACRM3_B,ACRM2_B,ACRM1_B,ACRM0_B,ACRM3,ACRM2,ACRM1,ACRM0 --rule CLASS_NVL_S52C_16A";
+	String HX28C_ACRM_Rule = "--tracker ACRM3,ACRM2,ACRM1,ACRM0 --rule CLASS_NVL_HX28C_8A";
+	String P16C_ACRM_Rule = "--tracker ACRM3,ACRM2,ACRM1,ACRM0 --rule CLASS_NVL_P16C_4A";
+	String S16C_ACRM_Rule = "--tracker ACRM3,ACRM2,ACRM1,ACRM0 --rule CLASS_NVL_S16C_4A";
+	String DNLS28C_ACRM_Rule = "--tracker ACRM3,ACRM2,ACRM1,ACRM0 --rule CLASS_DNL_S28C_8A";
+	String U8C_ACRM_Rule = "--tracker ACRM3,ACRM2,ACRM1,ACRM0 --rule CLASS_NVL_U8C_0A";
+	String H16C_ACRM_Rule = "--tracker ACRM3,ACRM2,ACRM1,ACRM0 --rule CLASS_NVL_H16C_4A";
+}
+
+UserVars CRFININITCHK
+{
+	String S28C_ACRMCR_FININIT = "CopyTracker(--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR --gsds G.I.S.CRFIN)";
+	String S52C_ACRMCR_FININIT = "CopyTracker(--tracker ACRM3_B,ACRM2_B,ACRM1_B,ACRM0_B,CR_B,ACRM3,ACRM2,ACRM1,ACRM0,CR --gsds G.I.S.CRFIN)";
+	String HX28C_ACRMCR_FININIT = "CopyTracker(--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR --gsds G.I.S.CRFIN)";
+	String P16C_ACRMCR_FININIT = "CopyTracker(--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR3,CR2,CR1,CR0 --gsds G.I.S.CRFIN)";
+	String S16C_ACRMCR_FININIT = "CopyTracker(--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR3,CR2,CR1,CR0 --gsds G.I.S.CRFIN)";
+	String DNLS28C_ACRMCR_FININIT = "CopyTracker(--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR --gsds G.I.S.CRFIN)";
+	String U8C_ACRMCR_FININIT = "CopyTracker(--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR3,CR2,CR1,CR0 --gsds G.I.S.CRFIN)";
+	String H16C_ACRMCR_FININIT = "CopyTracker(--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR3,CR2,CR1,CR0 --gsds G.I.S.CRFIN)";
+}
+
+UserVars SLCFININITCHK
+{
+	String S28C_SLC_FININIT = "CopyTracker(--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --gsds G.I.S.SLCFIN)";
+	String S52C_SLC_FININIT = "CopyTracker(--tracker SLC11_B,SLC10_B,SLC9_B,SLC8_B,SLC7_B,SLC6_B,SLC5_B,SLC4_B,SLC3_B,SLC2_B,SLC1_B,SLC0_B,SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --gsds G.I.S.SLCFIN)";
+	String HX28C_SLC_FININIT = "CopyTracker(--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --gsds G.I.S.SLCFIN)";
+	String P16C_SLC_FININIT = "CopyTracker(--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --gsds G.I.S.SLCFIN)";
+	String S16C_SLC_FININIT = "CopyTracker(--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --gsds G.I.S.SLCFIN)";
+	String DNLS28C_SLC_FININIT = "CopyTracker(--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --gsds G.I.S.SLCFIN)";
+	String U8C_SLC_FININIT = "CopyTracker(--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --gsds G.I.S.SLCFIN)";
+	String H16C_SLC_FININIT = "CopyTracker(--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --gsds G.I.S.SLCFIN)";
+}
+
+UserVars PRINTTOITUFF_SLICE
+{
+	String S28C_SLC_ITUFF = "CPD_Debug!ExecPrimeCsCallback CopyTracker(--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --gsds G.I.S.SLCITUFF)";
+	String S52C_SLC_ITUFF = "CPD_Debug!ExecPrimeCsCallback CopyTracker(--tracker SLC11_B,SLC10_B,SLC9_B,SLC8_B,SLC7_B,SLC6_B,SLC5_B,SLC4_B,SLC3_B,SLC2_B,SLC1_B,SLC0_B,SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --gsds G.I.S.SLCITUFF)";
+	String HX28C_SLC_ITUFF = "CPD_Debug!ExecPrimeCsCallback CopyTracker(--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --gsds G.I.S.SLCITUFF)";
+	String P16C_SLC_ITUFF = "CPD_Debug!ExecPrimeCsCallback CopyTracker(--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --gsds G.I.S.SLCITUFF)";
+	String S16C_SLC_ITUFF = "CPD_Debug!ExecPrimeCsCallback CopyTracker(--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --gsds G.I.S.SLCITUFF)";
+	String DNLS28C_SLC_ITUFF = "CPD_Debug!ExecPrimeCsCallback CopyTracker(--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --gsds G.I.S.SLCITUFF)";
+	String U8C_SLC_ITUFF = "CPD_Debug!ExecPrimeCsCallback CopyTracker(--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --gsds G.I.S.SLCITUFF)";
+	String H16C_SLC_ITUFF = "CPD_Debug!ExecPrimeCsCallback CopyTracker(--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --gsds G.I.S.SLCITUFF)";
+}
+
+UserVars PRINTTOITUFF_CORE
+{
+	String S28C_ACRMCR_ITUFF = "CPD_Debug!ExecPrimeCsCallback CopyTracker(--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR --gsds G.I.S.COREITUFF)";
+	String S52C_ACRMCR_ITUFF = "CPD_Debug!ExecPrimeCsCallback CopyTracker(--tracker ACRM3_B,ACRM2_B,ACRM1_B,ACRM0_B,CR_B,ACRM3,ACRM2,ACRM1,ACRM0,CR --gsds G.I.S.COREITUFF)";
+	String HX28C_ACRMCR_ITUFF = "CPD_Debug!ExecPrimeCsCallback CopyTracker(--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR --gsds G.I.S.COREITUFF)";
+	String P16C_ACRMCR_ITUFF = "CPD_Debug!ExecPrimeCsCallback CopyTracker(--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR3,CR2,CR1,CR0 --gsds G.I.S.COREITUFF)";
+	String S16C_ACRMCR_ITUFF = "CPD_Debug!ExecPrimeCsCallback CopyTracker(--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR3,CR2,CR1,CR0 --gsds G.I.S.COREITUFF)";
+	String DNLS28C_ACRMCR_ITUFF = "CPD_Debug!ExecPrimeCsCallback CopyTracker(--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR --gsds G.I.S.COREITUFF)";
+	String U8C_ACRMCR_ITUFF = "CPD_Debug!ExecPrimeCsCallback CopyTracker(--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR3,CR2,CR1,CR0 --gsds G.I.S.COREITUFF)";
+	String H16C_ACRMCR_ITUFF = "CPD_Debug!ExecPrimeCsCallback CopyTracker(--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR3,CR2,CR1,CR0 --gsds G.I.S.COREITUFF)";
+}

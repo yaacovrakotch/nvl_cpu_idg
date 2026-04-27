@@ -1,0 +1,33 @@
+Version 1.0;
+
+SelectorRuleCollection  TPI_DEDC_XXX_Rules
+{
+	SelectorRule RegisterDEDC (CORR, QUAL, SCRV, SCRV2, MVAL, RVMV1, RVMV2, SMPL, YIELD, Default)
+	{
+		CORR => (!(__shared__::SCVars.SC_ENGID == "QE"|| __shared__::SCVars.SC_ENGID == "QQ" || __shared__::SCVars.SC_ENGID == "QZ") && (__shared__::SCVars.SC_MASSVAL == "FALSE") && (__shared__::SCVars.SC_LOTNAME ~= ".+WT." || endsWith(__shared__::SCVars.SC_LOTNAME,"CR"))) || (endsWith(__shared__::SCVars.SC_LOTNAME,"DEDC"));		
+		QUAL => (__shared__::SCVars.SC_ENGID == "QE"||__shared__::SCVars.SC_ENGID == "QQ"||__shared__::SCVars.SC_ENGID == "QZ");
+		SCRV => (startsWith(__shared__::SCVars.SC_FACILITYID,"GDL")) && (__shared__::SCVars.SC_ENGID == "6M"||__shared__::SCVars.SC_ENGID == "6S"||__shared__::SCVars.SC_ENGID == "5M"||__shared__::SCVars.SC_ENGID == "5S"||__shared__::SCVars.SC_ENGID == "4M"||__shared__::SCVars.SC_ENGID == "4S"||__shared__::SCVars.SC_ENGID == "4R"||__shared__::SCVars.SC_ENGID == "6T"||__shared__::SCVars.SC_ENGID == "5T"||__shared__::SCVars.SC_ENGID == "4T"||__shared__::SCVars.SC_ENGID == "6N"||__shared__::SCVars.SC_ENGID == "5N"||__shared__::SCVars.SC_ENGID == "4N") && !(endsWith(__shared__::SCVars.SC_LOTNAME, "CR") || __shared__::SCVars.SC_LOTNAME ~= ".+WT." || startsWith(__shared__::SCVars.SC_LOTNAME,"JA")|| startsWith(__shared__::SCVars.SC_LOTNAME,"NA")|| endsWith(__shared__::SCVars.SC_LOTNAME,"MV")) && (__shared__::SCVars.SC_LOCN == "6274"||__shared__::SCVars.SC_LOCN == "5274"||__shared__::SCVars.SC_LOCN == "6275"||__shared__::SCVars.SC_LOCN == "5275"||__shared__::SCVars.SC_LOCN == "6248"||__shared__::SCVars.SC_LOCN == "5248"||__shared__::SCVars.SC_LOCN == "5820") && (__shared__::SCVars.SC_CURRENT_PROCESS_TYPE == "CLASSHOT"||__shared__::SCVars.SC_CURRENT_PROCESS_TYPE == "CSM"||startsWith(__shared__::SCVars.SC_CURRENT_PROCESS_TYPE,"PHM"));
+		SCRV2 => endsWith(__shared__::SCVars.SC_LOTNAME,"MV") && __shared__::SCVars.SC_ENGID == "AF" && (__shared__::SCVars.SC_LOCN == "6233" || __shared__::SCVars.SC_LOCN == "6248");
+		MVAL => (startsWith(__shared__::SCVars.SC_LOTNAME,"JA")||startsWith(__shared__::SCVars.SC_LOTNAME,"NA")||endsWith(__shared__::SCVars.SC_LOTNAME,"MV")) && __shared__::SCVars.SC_MASSVAL == "TRUE";
+		RVMV1 => !(startsWith(__shared__::SCVars.SC_FACILITYID,"GDL")) && (!(endsWith(__shared__::SCVars.SC_LOTNAME,"CR")|| endsWith(__shared__::SCVars.SC_LOTNAME,"HR")|| __shared__::SCVars.SC_LOTNAME ~= ".+WT.")) && (!(__shared__::SCVars.SC_ENGID == "QE"|| __shared__::SCVars.SC_ENGID == "QQ"|| __shared__::SCVars.SC_ENGID == "QZ"|| __shared__::SCVars.SC_ENGID == "QC"|| __shared__::SCVars.SC_ENGID == "QP" || __shared__::SCVars.SC_ENGID == "QB")) && (startsWith(__shared__::SCVars.SC_LOCN,"5")) && (startsWith(__shared__::SCVars.SC_CURRENT_PROCESS_TYPE,"PHM"));
+		RVMV2 => (endsWith(__shared__::SCVars.SC_LOTNAME,"MV")||startsWith(__shared__::SCVars.SC_LOTNAME,"NA")||startsWith(__shared__::SCVars.SC_LOTNAME,"JA")) && (!(__shared__::SCVars.SC_ENGID == "QE"|| __shared__::SCVars.SC_ENGID == "QQ"|| __shared__::SCVars.SC_ENGID == "QZ" || __shared__::SCVars.SC_ENGID == "QB"))  && __shared__::SCVars.SC_MASSVAL == "FALSE";
+		SMPL => (endsWith(__shared__::SCVars.SC_LOTNAME,"PO")||endsWith(__shared__::SCVars.SC_LOTNAME,"RS")||endsWith(__shared__::SCVars.SC_LOTNAME,"DL")||endsWith(__shared__::SCVars.SC_LOTNAME,"D1")||endsWith(__shared__::SCVars.SC_LOTNAME,"D2")||endsWith(__shared__::SCVars.SC_LOTNAME,"D3")) && __shared__::SCVars.SC_LOCN == "6248" ;
+		YIELD =>   __shared__::SCVars.SC_LOCN == "5248" && __shared__::SCVars.SC_ENGID == "AE";
+		Default;
+	}
+
+	SelectorRule RegisterFORCEFLOW (QUALFORCEFLOW, Default)
+	{
+		QUALFORCEFLOW => __shared__::SCVars.SC_ENGID == "QZ";		
+		Default;
+	}
+
+	SelectorRule DOE (RVMV, Default)
+	{
+		RVMV => !(startsWith(__shared__::SCVars.SC_FACILITYID,"GDL")) && !(__shared__::SCVars.SC_ENGID == "QE"|| __shared__::SCVars.SC_ENGID == "QQ");
+		Default;
+	}	
+}
+UserVars TPI_DEDC_XXX
+{
+}

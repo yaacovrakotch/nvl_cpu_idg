@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <CustomProjectExtensionsPath Condition=" '$(CustomProjectExtensionsPath)' == '' ">$(TorchCustomProjectPath)\</CustomProjectExtensionsPath>
+  </PropertyGroup>
+  <PropertyGroup Label="TorchConfiguration">
+    <IsMTTSpeedFlow>false</IsMTTSpeedFlow>
+  </PropertyGroup>
+  <Import Project="$(MSBuildProjectDirectory)\..\..\..\BomGroups.props" />
+  <Import Project="$(CustomProjectExtensionsPath)Torch.ProjectSystem.Common.props" />
+  <ItemGroup>
+    <Folder Include="Supersedes\" />
+    <Folder Include="Supersedes\patmod\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common_Files\Common_Files.ctproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <FlowMatrixFile Update="BinMatrix.flm.xml">
+      <LastGenOutput>BinMatrix.flm.usrv</LastGenOutput>
+      <SharedFlowMatrix>true</SharedFlowMatrix>
+    </FlowMatrixFile>
+  </ItemGroup>
+  <ItemGroup>
+    <UsrVarsFile Update="BinMatrix.flm.usrv">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BinMatrix.flm.xml</DependentUpon>
+    </UsrVarsFile>
+  </ItemGroup>
+  <Import Project="$(CustomProjectExtensionsPath)Torch.ProjectSystem.Common.targets" />
+</Project>

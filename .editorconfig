@@ -1,0 +1,35 @@
+###################
+# To learn more about .editorconfig see https://dev.azure.com/mit-is/TorchWiki/_wiki/wikis/TorchWiki.wiki/12939/Configure-Errors-Severity and https://aka.ms/editorconfigdocs
+
+# How to use .editorconfig: 
+# Enter file filter: all files [*.*]  |  extension [*.mtpl]  | specific file name [somefile.usrv]
+# Enter severity override: torch_diagnostic.[Errorcode].severity = {error\warning\suggestion\none\default}
+
+# Example: 
+# [*.mconfig]
+# torch_diagnostic.TP0072.severity = warning 
+###################
+# Cause by Torch single project vc NVL multi-imp file infra. Need seperate project to update NVL infra.
+[*.imp]
+torch_diagnostic.TP0004.severity = warning
+# Cause by Torch single project vc NVL multi-imp file infra. Need seperate project to update NVL infra.
+[*.imp]
+torch_diagnostic.TP0220.severity = warning
+# Cause by Torch single project vc NVL multi-imp file infra. Need seperate project to update NVL infra.
+[*.usrv]
+torch_diagnostic.TP0325.severity = warning
+# Cause by Torch single project vc NVL multi-imp file infra. Need seperate project to update NVL infra.
+[/Shared/BaseInputs/Common/Common_Files/common.usrv]
+torch_diagnostic.TP0090.severity = warning
+# Pending Torch fix, ETA 4.8/4.9
+[*.mconfig]
+torch_diagnostic.TP0332.severity = warning
+# Pending Torch fix
+[*.*]
+torch_diagnostic.TP0117.severity = warning
+# Cause by Torch single project vc NVL multi-imp file infra. Need seperate project to update NVL infra.
+[*.*]
+torch_diagnostic.TP0020.severity = warning
+# Cause my Hermes feature design, not compatible with Torch + NVL disagg infra
+[*.*]
+torch_diagnostic.TP0227.severity = warning

@@ -1,0 +1,104 @@
+{ 
+	"DC": [
+	{
+		"Token": "CPU0_BGR_VOUT",
+		"Equations": [
+		 {
+			"Name": "IPC::CPU_OBS_02",
+			"Expression": "([IPC::CPU_OBS_02{0}]+[IPC::CPU_OBS_02{1}]+[IPC::CPU_OBS_02{2}]+[IPC::CPU_OBS_02{3}]+[IPC::CPU_OBS_02{4}]+[IPC::CPU_OBS_02{5}]+[IPC::CPU_OBS_02{6}]+[IPC::CPU_OBS_02{7}]+[IPC::CPU_OBS_02{8}]+[IPC::CPU_OBS_02{9}])/10",
+		 }
+		]
+	},
+    {
+        "Token": "CPU0_BGR_VOUTCAL",
+		"Equations": [
+		 {
+			"Name": "IPC::CPU_OBS_02",
+			"Expression": "([IPC::CPU_OBS_02{0}]+[IPC::CPU_OBS_02{1}]+[IPC::CPU_OBS_02{2}]+[IPC::CPU_OBS_02{3}]+[IPC::CPU_OBS_02{4}]+[IPC::CPU_OBS_02{5}]+[IPC::CPU_OBS_02{6}]+[IPC::CPU_OBS_02{7}]+[IPC::CPU_OBS_02{8}]+[IPC::CPU_OBS_02{9}])/10-[PTH_BGR_CXPKGS9::PTH_BGR_CXPKGS9_Rules.CPU0_PROBECAL_CH0_800MV]",
+			"SaveToSharedStorage": "ANAPRB_BGR_VOUTCAL_LTTC"
+		 }
+		]
+	},
+    {
+        "Token": "CPU0_VCC_AGSBY2",
+		"Equations": [
+		 {
+			"Name": "IPC::CPU_OBS_03",
+			"Expression": "([IPC::CPU_OBS_03{0}]+[IPC::CPU_OBS_03{1}]+[IPC::CPU_OBS_03{2}]+[IPC::CPU_OBS_03{3}]+[IPC::CPU_OBS_03{4}]+[IPC::CPU_OBS_03{5}]+[IPC::CPU_OBS_03{6}]+[IPC::CPU_OBS_03{7}]+[IPC::CPU_OBS_03{8}]+[IPC::CPU_OBS_03{9}])/10",
+		 }
+		]
+	}, 
+	 
+	{
+        "Port": 2,
+		"Equations": [
+		 {
+			"Name": "CPU0_BGR_VOUT",
+			"Expression": "([IPC::CPU_OBS_02{0}]+[IPC::CPU_OBS_02{1}]+[IPC::CPU_OBS_02{2}]+[IPC::CPU_OBS_02{3}]+[IPC::CPU_OBS_02{4}]+[IPC::CPU_OBS_02{5}]+[IPC::CPU_OBS_02{6}]+[IPC::CPU_OBS_02{7}]+[IPC::CPU_OBS_02{8}]+[IPC::CPU_OBS_02{9}])/10",
+		 },
+		 {
+			"Name": "CPU0_BGR_VOUTCAL",
+			"Expression": "([IPC::CPU_OBS_02{0}]+[IPC::CPU_OBS_02{1}]+[IPC::CPU_OBS_02{2}]+[IPC::CPU_OBS_02{3}]+[IPC::CPU_OBS_02{4}]+[IPC::CPU_OBS_02{5}]+[IPC::CPU_OBS_02{6}]+[IPC::CPU_OBS_02{7}]+[IPC::CPU_OBS_02{8}]+[IPC::CPU_OBS_02{9}])/10-[PTH_BGR_CXPKGS9::PTH_BGR_CXPKGS9_Rules.CPU0_PROBECAL_CH0_800MV]",
+			"LowLimit": "0.79",
+			"HighLimit": "0.825"
+		 },
+		 {
+			"Name": "CPU0_VCC_AGSBY2",
+			"Expression": "([IPC::CPU_OBS_03{0}]+[IPC::CPU_OBS_03{1}]+[IPC::CPU_OBS_03{2}]+[IPC::CPU_OBS_03{3}]+[IPC::CPU_OBS_03{4}]+[IPC::CPU_OBS_03{5}]+[IPC::CPU_OBS_03{6}]+[IPC::CPU_OBS_03{7}]+[IPC::CPU_OBS_03{8}]+[IPC::CPU_OBS_03{9}])/10",
+			"LowLimit": "0.48",
+			"HighLimit": "0.63"
+		 }
+		]
+	},
+		{
+		"Token": "CPU1_BGR_VOUT",
+		"Equations": [
+		 {
+			"Name": "IPC::CPU1_OBS_02",
+			"Expression": "([IPC::CPU1_OBS_02{0}]+[IPC::CPU1_OBS_02{1}]+[IPC::CPU1_OBS_02{2}]+[IPC::CPU1_OBS_02{3}]+[IPC::CPU1_OBS_02{4}]+[IPC::CPU1_OBS_02{5}]+[IPC::CPU1_OBS_02{6}]+[IPC::CPU1_OBS_02{7}]+[IPC::CPU1_OBS_02{8}]+[IPC::CPU1_OBS_02{9}])/10",
+		 }
+		]
+	},
+    {
+        "Token": "CPU1_BGR_VOUTCAL",
+		"Equations": [
+		 {
+			"Name": "IPC::CPU1_OBS_02",
+			"Expression": "([IPC::CPU1_OBS_02{0}]+[IPC::CPU1_OBS_02{1}]+[IPC::CPU1_OBS_02{2}]+[IPC::CPU1_OBS_02{3}]+[IPC::CPU1_OBS_02{4}]+[IPC::CPU1_OBS_02{5}]+[IPC::CPU1_OBS_02{6}]+[IPC::CPU1_OBS_02{7}]+[IPC::CPU1_OBS_02{8}]+[IPC::CPU1_OBS_02{9}])/10-[PTH_BGR_CXPKGS9::PTH_BGR_CXPKGS9_Rules.CPU1_PROBECAL_CH0_800MV]",
+			"SaveToSharedStorage": "CPU1_ANAPRB_BGR_VOUTCAL_LTTC"
+		 }
+		]
+	},
+    {
+        "Token": "CPU1_VCC_AGSBY2",
+		"Equations": [
+		 {
+			"Name": "IPC::CPU1_OBS_03",
+			"Expression": "([IPC::CPU1_OBS_03{0}]+[IPC::CPU1_OBS_03{1}]+[IPC::CPU1_OBS_03{2}]+[IPC::CPU1_OBS_03{3}]+[IPC::CPU1_OBS_03{4}]+[IPC::CPU1_OBS_03{5}]+[IPC::CPU1_OBS_03{6}]+[IPC::CPU1_OBS_03{7}]+[IPC::CPU1_OBS_03{8}]+[IPC::CPU1_OBS_03{9}])/10",
+		 }
+		]
+	}, 
+	 
+	{
+        "Port": 2,
+		"Equations": [
+		 {
+			"Name": "CPU1_BGR_VOUT",
+			"Expression": "([IPC::CPU1_OBS_02{0}]+[IPC::CPU1_OBS_02{1}]+[IPC::CPU1_OBS_02{2}]+[IPC::CPU1_OBS_02{3}]+[IPC::CPU1_OBS_02{4}]+[IPC::CPU1_OBS_02{5}]+[IPC::CPU1_OBS_02{6}]+[IPC::CPU1_OBS_02{7}]+[IPC::CPU1_OBS_02{8}]+[IPC::CPU1_OBS_02{9}])/10",
+		 },
+		 {
+			"Name": "CPU1_BGR_VOUTCAL",
+			"Expression": "([IPC::CPU1_OBS_02{0}]+[IPC::CPU1_OBS_02{1}]+[IPC::CPU1_OBS_02{2}]+[IPC::CPU1_OBS_02{3}]+[IPC::CPU1_OBS_02{4}]+[IPC::CPU1_OBS_02{5}]+[IPC::CPU1_OBS_02{6}]+[IPC::CPU1_OBS_02{7}]+[IPC::CPU1_OBS_02{8}]+[IPC::CPU1_OBS_02{9}])/10-[PTH_BGR_CXPKGS9::PTH_BGR_CXPKGS9_Rules.CPU1_PROBECAL_CH0_800MV]",
+			"LowLimit": "0.79",
+			"HighLimit": "0.825"
+		 },
+		 {
+			"Name": "CPU1_VCC_AGSBY2",
+			"Expression": "([IPC::CPU1_OBS_03{0}]+[IPC::CPU1_OBS_03{1}]+[IPC::CPU1_OBS_03{2}]+[IPC::CPU1_OBS_03{3}]+[IPC::CPU1_OBS_03{4}]+[IPC::CPU1_OBS_03{5}]+[IPC::CPU1_OBS_03{6}]+[IPC::CPU1_OBS_03{7}]+[IPC::CPU1_OBS_03{8}]+[IPC::CPU1_OBS_03{9}])/10",
+			"LowLimit": "0.48",
+			"HighLimit": "0.63"
+		 }
+		]
+	}
+	]
+}

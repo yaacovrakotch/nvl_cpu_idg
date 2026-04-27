@@ -1,0 +1,885 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan ARR_COMMON_CKX;
+
+Import "ARR_COMMON_CKX.usrv";
+Import "ARR_COMMON_CKX_Timing.tcg";
+
+# Test Counter Definition
+
+Counters
+{
+    n21412001_fail_ALL_X_SCREEN_K_STARTCPUPATMODSPKG_X_X_X_X_ATOM_REP2FUSE_0,
+    n21422001_fail_ALL_ATOM_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_CONVERT_HEX2BIN_VFDM_DFF_0,
+    n21442001_fail_ALL_X_AUX_K_ENDCPUPKG_X_X_X_X_WRITE_CSVFDS_0,
+    n21452001_fail_ALL_X_AUX_K_ENDCPUPKG_X_X_X_X_WRITE_CSVHCS_0,
+    n60402003_fail_ALL_X_UF_K_INIT_X_X_X_X_PINMAP_0,
+    n60412001_fail_ALL_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_MBIST_RWA_PATCONFIG_0,
+    n60412005_fail_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_RESET_DEFAULT_0,
+    n60412006_fail_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_RESET_DEFAULT_2,
+    n60412011_fail_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_RESET_REVERSE_0,
+    n60412012_fail_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_RESET_REVERSE_2,
+    n60412017_fail_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_SORT_TP_0,
+    n60412018_fail_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_SORT_TP_2,
+    n60422002_fail_ALL_X_HRY_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_HRY_INIT_0,
+    n60422003_fail_ALL_X_HRY_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_HRY_INIT_2,
+    n60432001_fail_ALL_CORE_X_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_READ_0,
+    n60452001_fail_X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVHCS_0,
+    n60462001_fail_X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVFDS1_0,
+    n60472001_fail_X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVFDS2_0,
+    n60492001_fail_ALL_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_REPAIR_0,
+    n62002002_fail_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_SET_FDS_0,
+    n62002003_fail_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_SET_FDS_2,
+    n62012002_fail_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_SET_FDS_CSM_0,
+    n62012003_fail_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_SET_FDS_CSM_2,
+    n90214300_fail_X_CPU_GETDFF_K_STARTCPUPATMODSPKG_X_X_X_X_CSVHCS_0,
+    n90604400_fail_ALL_X_SCREEN_K_STARTCPUPATMODSPKG_X_X_X_X_VFDM_REBUILD_0
+} # End of Test Counter Definition
+
+CSharpTest RunCallback ALL_X_UF_K_INIT_X_X_X_X_PINMAP
+{
+    BypassPort = -1;
+    Callback = "LoadPinmapFile";
+    Parameters = ARR_COMMON_Rules.TPRules(ARR_COMMON_Specs.pinmap_816,ARR_COMMON_Specs.pinmap_816,ARR_COMMON_Specs.pinmap_816,ARR_COMMON_Specs.pinmap_48,ARR_COMMON_Specs.pinmap_48,ARR_COMMON_Specs.pinmap_48,ARR_COMMON_Specs.pinmap_816,ARR_COMMON_Specs.pinmap_816);
+}
+
+CSharpTest PrimePatConfigTestMethod ALL_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_MBIST_RWA_PATCONFIG
+{
+    BypassPort = -1;
+    ConfigurationFile = ARR_COMMON_Rules.TPRules(ARR_COMMON_Specs.mbist_fusecon_s28c,ARR_COMMON_Specs.mbist_fusecon_s28c,ARR_COMMON_Specs.mbist_fusecon_s28c,ARR_COMMON_Specs.mbist_fusecon_48,ARR_COMMON_Specs.mbist_fusecon_48,ARR_COMMON_Specs.mbist_fusecon_48,ARR_COMMON_Specs.mbist_fusecon_s28c,ARR_COMMON_Specs.mbist_fusecon_s28c);
+    RegEx = "[gdx].*_longreset_fuseover.*_MC.*(arr|fun.*)";
+    SetPoint = "MBIST_PER_DIE_RWA";
+}
+
+CSharpTest PrimeMbistTestMethod ALL_X_HRY_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_HRY_INIT
+{
+    Patlist = "IPC::arr_cdie_begincpupkg_mbist_uncore_unc_fuse_all_lsa_vnnaon_ks_x_class_hptp_min_list";
+    LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_min";
+    TimingsTc = ARR_COMMON_Specs.timingRules;
+    BisrMode = "uncompress";
+    BypassPort = ARR_COMMON_Rules.QA_HOT_Default(1,-1,1);
+    ClearVariables = "all";
+    FailCaptureCount = 10000000;
+	LookupTableConfigurationFile = ARR_COMMON_Rules.TPRules(ARR_COMMON_Specs.HRY_LIST_816,ARR_COMMON_Specs.HRY_LIST_others,ARR_COMMON_Specs.HRY_LIST_816,ARR_COMMON_Specs.HRY_LIST_48,ARR_COMMON_Specs.HRY_LIST_48,ARR_COMMON_Specs.HRY_LIST_48,ARR_COMMON_Specs.HRY_LIST_816,ARR_COMMON_Specs.HRY_LIST_others);
+	MappingConfigurationFile = ARR_COMMON_Rules.TPRules(ARR_COMMON_Specs.dffmap_s28c,ARR_COMMON_Specs.dffmap_s28c,ARR_COMMON_Specs.dffmap_s28c,ARR_COMMON_Specs.dffmap_48,ARR_COMMON_Specs.dffmap_48,ARR_COMMON_Specs.dffmap_48,ARR_COMMON_Specs.dffmap_s28c,ARR_COMMON_Specs.dffmap_s28c);
+    MbistTestMode = "Initialize";
+}
+
+CSharpTest PrimeMbistTestMethod ALL_CORE_X_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_READ
+{
+    Patlist = "IPC::arr_cdie_begincpupkg_mbist_uncore_unc_fuse_all_lsa_vnnaon_ks_x_class_hptp_min_list";
+    LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_min";
+    TimingsTc = ARR_COMMON_Specs.timingRules;
+    BisrMode = "compress";
+    BypassPort = ARR_COMMON_Rules.TPRules(ARR_COMMON_Rules.QA_HOT_Default(1,-1,1),ARR_COMMON_Rules.QA_HOT_Default(1,1,1),ARR_COMMON_Rules.QA_HOT_Default(1,-1,1),ARR_COMMON_Rules.QA_HOT_Default(1,-1,1),ARR_COMMON_Rules.QA_HOT_Default(1,-1,1),ARR_COMMON_Rules.QA_HOT_Default(1,-1,1),ARR_COMMON_Rules.QA_HOT_Default(1,-1,1),ARR_COMMON_Rules.QA_HOT_Default(1,-1,1));
+    ClearVariables = "hry,vmin";
+    FailCaptureCount = 10000000;
+	LookupTableConfigurationFile = ARR_COMMON_Rules.TPRules(ARR_COMMON_Specs.HRY_LIST_816,ARR_COMMON_Specs.HRY_LIST_others,ARR_COMMON_Specs.HRY_LIST_816,ARR_COMMON_Specs.HRY_LIST_48,ARR_COMMON_Specs.HRY_LIST_48,ARR_COMMON_Specs.HRY_LIST_48,ARR_COMMON_Specs.HRY_LIST_816,ARR_COMMON_Specs.HRY_LIST_others);
+	MappingConfigurationFile = ARR_COMMON_Rules.TPRules(ARR_COMMON_Specs.dffmap_s28c,ARR_COMMON_Specs.dffmap_s28c,ARR_COMMON_Specs.dffmap_s28c,ARR_COMMON_Specs.dffmap_48,ARR_COMMON_Specs.dffmap_48,ARR_COMMON_Specs.dffmap_48,ARR_COMMON_Specs.dffmap_s28c,ARR_COMMON_Specs.dffmap_s28c);
+    MbistTestMode = "Initialize";
+    DffOperation = "bisr,read";
+}
+
+CSharpTest PrimeRepairToFuseTestMethod ALL_X_SCREEN_K_STARTCPUPATMODSPKG_X_X_X_X_ATOM_REP2FUSE
+{
+    BypassPort = ARR_COMMON_Rules.TPRules(ARR_COMMON_Rules.QA_HOT_Default(1,-1,1),ARR_COMMON_Rules.QA_HOT_Default(1,1,1),ARR_COMMON_Rules.QA_HOT_Default(1,-1,1),ARR_COMMON_Rules.QA_HOT_Default(1,-1,1),ARR_COMMON_Rules.QA_HOT_Default(1,-1,1),ARR_COMMON_Rules.QA_HOT_Default(1,-1,1),ARR_COMMON_Rules.QA_HOT_Default(1,-1,1),ARR_COMMON_Rules.QA_HOT_Default(1,1,1));
+    FuseNamespace = "CPU0";
+    LogLevel = "Disabled";
+    RepairToFuseFilePath = ARR_COMMON_Rules.TPRules(ARR_COMMON_Specs.repairfuse_others,ARR_COMMON_Specs.repairfuse_others,ARR_COMMON_Specs.repairfuse_others,ARR_COMMON_Specs.repairfuse_48,ARR_COMMON_Specs.repairfuse_48,ARR_COMMON_Specs.repairfuse_48,ARR_COMMON_Specs.repairfuse_others,ARR_COMMON_Specs.repairfuse_others);
+    ResourcesFilePath = ARR_COMMON_Rules.TPRules(ARR_COMMON_Specs.arraymap_others,ARR_COMMON_Specs.arraymap_others,ARR_COMMON_Specs.arraymap_others,ARR_COMMON_Specs.arraymap_48,ARR_COMMON_Specs.arraymap_48,ARR_COMMON_Specs.arraymap_48,ARR_COMMON_Specs.arraymap_others,ARR_COMMON_Specs.arraymap_others);
+}
+
+CSharpTest PrimeVirtualFuseExportToSharedStorageTestMethod ALL_X_SCREEN_K_STARTCPUPATMODSPKG_X_X_X_X_VFDM_REBUILD
+{
+    BypassPort = ARR_COMMON_Rules.TPRules(ARR_COMMON_Rules.QA_HOT_Default(1,-1,1),ARR_COMMON_Rules.QA_HOT_Default(1,-1,1),ARR_COMMON_Rules.QA_HOT_Default(1,-1,1),ARR_COMMON_Rules.QA_HOT_Default(1,-1,1),ARR_COMMON_Rules.QA_HOT_Default(1,-1,1),ARR_COMMON_Rules.QA_HOT_Default(1,-1,1),ARR_COMMON_Rules.QA_HOT_Default(1,-1,1),ARR_COMMON_Rules.QA_HOT_Default(1,-1,1));
+    FdsSharedStorageKey = "CPU0_FUSE_EMB_VFDM_FDS_BINARY";
+    FuseDataGap = "CPU0.VF_Heap_Data_Gap.VF_Heap_Data_Gap";
+    FuseDescriptorGap = "CPU0.VF_Heap_Descriptor_Gap.VF_Heap_Descriptor_Gap";
+    HcsSharedStorageKey = "CPU0_FUSE_EMB_VFDM_HCS_BINARY";
+    Namespace = "CPU0";
+    Tags = "";
+}
+
+CSharpTest PrimeGetDffTestMethod X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVHCS
+{
+    BypassPort = ARR_COMMON_Rules.QA_HOT_Default(1,-1,1);
+    DieId = "DFFVars.DIEID_CPU";
+    ForceGetFromUBE = "ENABLED";
+    OpType = "SORT";
+    Storage = "CPU0_FUSE_EMB_VFDM_HCS1_BINARY";
+    TokenName = "SVHCS";
+}
+
+CSharpTest PrimeGetDffTestMethod X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVFDS1
+{
+    BypassPort = ARR_COMMON_Rules.QA_HOT_Default(1,-1,1);
+    DieId = "DFFVars.DIEID_CPU";
+    ForceGetFromUBE = "ENABLED";
+    OpType = "SORT";
+    Storage = "CPU0_FUSE_EMB_VFDM_FDS1_BINARY";
+    TokenName = "SVFDS1";
+}
+
+CSharpTest PrimeGetDffTestMethod X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVFDS2
+{
+    BypassPort = ARR_COMMON_Rules.QA_HOT_Default(1,-1,1);
+    DieId = "DFFVars.DIEID_CPU";
+    ForceGetFromUBE = "ENABLED";
+    OpType = "SORT";
+    Storage = "CPU0_FUSE_EMB_VFDM_FDS2_BINARY";
+    TokenName = "SVFDS2";
+}
+
+CSharpTest ScreenTC ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_SET_FDS
+{
+    BypassPort = ARR_COMMON_Rules.QA_HOT_Default(1,-1,1);
+    ScreenTestSet = "HcsFdsAppend";
+    ScreenTestsFile = ARR_COMMON_Rules.TPRules(ARR_COMMON_Specs.hextobin_others,ARR_COMMON_Specs.hextobin_others,ARR_COMMON_Specs.hextobin_others,ARR_COMMON_Specs.hextobin_48,ARR_COMMON_Specs.hextobin_48,ARR_COMMON_Specs.hextobin_48,ARR_COMMON_Specs.hextobin_others,ARR_COMMON_Specs.hextobin_others);
+}
+
+CSharpTest PrimePatConfigTestMethod ALL_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_REPAIR
+{
+    BypassPort = -1;
+    ConfigurationFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "\\Modules\\FUS\\FUS_FUSECFG_CXX\\InputFiles\\array_repair_perunit.PatConfigSetpoints.json";
+    RegEx = "[gdx].*_longreset_fuseover.*_MC.*(arr|fun.*)";
+    SetPoint = "CPU0_APPLY_VFDM";
+}
+
+CSharpTest ScreenTC ALL_ATOM_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_CONVERT_HEX2BIN_VFDM_DFF
+{
+    BypassPort = ARR_COMMON_Rules.TPRules(ARR_COMMON_Rules.QA_HOT_Default(1,-1,1),ARR_COMMON_Rules.QA_HOT_Default(1,1,1),ARR_COMMON_Rules.QA_HOT_Default(1,-1,1),ARR_COMMON_Rules.QA_HOT_Default(1,-1,1),ARR_COMMON_Rules.QA_HOT_Default(1,-1,1),ARR_COMMON_Rules.QA_HOT_Default(1,-1,1),ARR_COMMON_Rules.QA_HOT_Default(1,-1,1),ARR_COMMON_Rules.QA_HOT_Default(1,1,1));
+    ScreenTestSet = "DFF2GSDSRepairTokenAtom";
+    ScreenTestsFile = ARR_COMMON_Rules.TPRules(ARR_COMMON_Specs.atom_hex2bin_other,ARR_COMMON_Specs.atom_hex2bin_other,ARR_COMMON_Specs.atom_hex2bin_other,ARR_COMMON_Specs.atom_hex2bin_48,ARR_COMMON_Specs.atom_hex2bin_48,ARR_COMMON_Specs.atom_hex2bin_48,ARR_COMMON_Specs.atom_hex2bin_other,ARR_COMMON_Specs.atom_hex2bin_other);
+}
+
+CSharpTest PrimeVirtualFuseExportToSharedStorageTestMethod ALL_X_SCREEN_K_STARTCPUPATMODSPKG_X_X_X_X_ATOM_VFDM_REBUILD_1
+{
+    BypassPort = 1;
+    FdsSharedStorageKey = "CPU0_FUSE_EMB_VFDM_FDS_BINARY";
+    FuseDataGap = "CPU0.VF_Heap_Data_Gap.VF_Heap_Data_Gap";
+    FuseDescriptorGap = "CPU0.VF_Heap_Descriptor_Gap.VF_Heap_Descriptor_Gap";
+    HcsSharedStorageKey = "CPU0_FUSE_EMB_VFDM_HCS_BINARY";
+    LogLevel = "Disabled";
+    Namespace = "CPU0";
+    Tags = "";
+}
+
+CSharpTest AuxiliaryTC ALL_X_AUX_K_ENDCPUPKG_X_X_X_X_WRITE_CSVFDS
+{
+    BypassPort = ARR_COMMON_Rules.QA_HOT_Default(1,-1,1);
+    DataType = "String";
+    Expression = "Bin2Hex([G.U.S.CPU0_FUSE_EMB_VFDM_FDS_BINARY],4408)";
+    ResultToken = "CSVFDS";
+    Storage = "DFF";
+}
+
+CSharpTest AuxiliaryTC ALL_X_AUX_K_ENDCPUPKG_X_X_X_X_WRITE_CSVHCS
+{
+    BypassPort = ARR_COMMON_Rules.QA_HOT_Default(1,-1,1);
+    DataType = "String";
+    Expression = "Bin2Hex([G.U.S.CPU0_FUSE_EMB_VFDM_HCS_BINARY],1808)";
+    ResultToken = "CSVHCS";
+    Storage = "DFF";
+}
+
+CSharpTest PrimeGetDffTestMethod X_CPU_GETDFF_K_STARTCPUPATMODSPKG_X_X_X_X_CSVHCS
+{
+    BypassPort = ARR_COMMON_Rules.QA_HOT_Default(-1,1,-1);
+    DieId = "DFFVars.DIEID_CPU";
+    OpType = __shared__::DFFVars.READ_OPTYPE;
+    Storage = "CPU0_FUSE_EMB_VFDM_HCS_BINARY";
+    TokenName = "CSVHCS";
+}
+
+CSharpTest PrimeGetDffTestMethod X_CPU_GETDFF_K_STARTCPUPATMODSPKG_X_X_X_X_CSVFDS
+{
+    BypassPort = ARR_COMMON_Rules.QA_HOT_Default(-1,1,-1);
+    DieId = "DFFVars.DIEID_CPU";
+    OpType = __shared__::DFFVars.READ_OPTYPE;
+    Storage = "CPU0_FUSE_EMB_VFDM_FDS_BINARY";
+    TokenName = "CSVFDS";
+}
+
+CSharpTest ScreenTC ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_RESET_REVERSE
+{
+    ScreenTestSet = "MbistDFFReverseFix";
+    ScreenTestsFile = ARR_COMMON_Rules.TPRules(ARR_COMMON_Specs.resetdff_s28c,ARR_COMMON_Specs.resetdff_s28c,ARR_COMMON_Specs.resetdff_s28c,ARR_COMMON_Specs.resetdff_48,ARR_COMMON_Specs.resetdff_48,ARR_COMMON_Specs.resetdff_48,ARR_COMMON_Specs.resetdff_s28c,ARR_COMMON_Specs.resetdff_s28c);
+    BypassPort = 1;
+}
+
+CSharpTest ScreenTC ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_SORT_TP
+{
+    ScreenTestSet = "MbistCheckTPRev";
+    ScreenTestsFile = ARR_COMMON_Rules.TPRules(ARR_COMMON_Specs.resetdff_s28c,ARR_COMMON_Specs.resetdff_s28c,ARR_COMMON_Specs.resetdff_s28c,ARR_COMMON_Specs.resetdff_48,ARR_COMMON_Specs.resetdff_48,ARR_COMMON_Specs.resetdff_48,ARR_COMMON_Specs.resetdff_s28c,ARR_COMMON_Specs.resetdff_s28c);
+    BypassPort = -1;
+}
+
+CSharpTest ScreenTC ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_RESET_DEFAULT
+{
+    ScreenTestSet = "MbistDFFDefault";
+    ScreenTestsFile = ARR_COMMON_Rules.TPRules(ARR_COMMON_Specs.resetdff_s28c,ARR_COMMON_Specs.resetdff_s28c,ARR_COMMON_Specs.resetdff_s28c,ARR_COMMON_Specs.resetdff_48,ARR_COMMON_Specs.resetdff_48,ARR_COMMON_Specs.resetdff_48,ARR_COMMON_Specs.resetdff_s28c,ARR_COMMON_Specs.resetdff_s28c);
+    BypassPort = -1;
+}
+
+CSharpTest ScreenTC ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_SET_FDS_CSM
+{
+    BypassPort = ARR_COMMON_Rules.QA_HOT_Default(-1,1,-1);
+    ScreenTestSet = "HcsFdsAppendCSM";
+    ScreenTestsFile = ARR_COMMON_Rules.TPRules(ARR_COMMON_Specs.hextobin_others,ARR_COMMON_Specs.hextobin_others,ARR_COMMON_Specs.hextobin_others,ARR_COMMON_Specs.hextobin_48,ARR_COMMON_Specs.hextobin_48,ARR_COMMON_Specs.hextobin_48,ARR_COMMON_Specs.hextobin_others,ARR_COMMON_Specs.hextobin_others);
+}
+
+Flow ARR_COMMON_CKX_INIT
+{
+    FlowItem ALL_X_UF_K_INIT_X_X_X_X_PINMAP ALL_X_UF_K_INIT_X_X_X_X_PINMAP @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99602141_fail_ARR_COMMON_CKX_ALL_X_UF_K_INIT_X_X_X_X_PINMAP_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98602141_fail_ARR_COMMON_CKX_ALL_X_UF_K_INIT_X_X_X_X_PINMAP_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60402003_fail_ARR_COMMON_CKX_ALL_X_UF_K_INIT_X_X_X_X_PINMAP_0;
+            #IncrementCounters ARR_COMMON_CKX::n60402003_fail_ALL_X_UF_K_INIT_X_X_X_X_PINMAP_0;
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow ARR_COMMON_CKX_STARTCPUPATMODSPKG
+{
+    FlowItem ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_SORT_TP ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_SORT_TP @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99602119_fail_ARR_COMMON_CKX_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_SORT_TP_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98602119_fail_ARR_COMMON_CKX_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_SORT_TP_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60412017_fail_ARR_COMMON_CKX_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_SORT_TP_0;
+            IncrementCounters ARR_COMMON_CKX::n60412017_fail_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_SORT_TP_0;
+			GoTo ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_RESET_DEFAULT;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_RESET_REVERSE;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60412018_fail_ARR_COMMON_CKX_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_SORT_TP_2;
+            IncrementCounters ARR_COMMON_CKX::n60412018_fail_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_SORT_TP_2;
+			GoTo ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_RESET_DEFAULT;
+        }
+    }
+
+    FlowItem ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_RESET_REVERSE ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_RESET_REVERSE @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99602116_fail_ARR_COMMON_CKX_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_RESET_REVERSE_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98602116_fail_ARR_COMMON_CKX_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_RESET_REVERSE_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60412011_fail_ARR_COMMON_CKX_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_RESET_REVERSE_0;
+            IncrementCounters ARR_COMMON_CKX::n60412011_fail_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_RESET_REVERSE_0;
+            GoTo ALL_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_MBIST_RWA_PATCONFIG;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo ALL_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_MBIST_RWA_PATCONFIG;
+        }
+         Result 2
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60412012_fail_ARR_COMMON_CKX_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_RESET_REVERSE_2;
+            IncrementCounters ARR_COMMON_CKX::n60412012_fail_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_RESET_REVERSE_2;
+            GoTo ALL_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_MBIST_RWA_PATCONFIG;
+        }
+    }
+
+    FlowItem ALL_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_MBIST_RWA_PATCONFIG ALL_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_MBIST_RWA_PATCONFIG @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99602094_fail_ARR_COMMON_CKX_ALL_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_MBIST_RWA_PATCONFIG_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98602094_fail_ARR_COMMON_CKX_ALL_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_MBIST_RWA_PATCONFIG_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60412001_fail_ARR_COMMON_CKX_ALL_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_MBIST_RWA_PATCONFIG_0;
+            IncrementCounters ARR_COMMON_CKX::n60412001_fail_ALL_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_MBIST_RWA_PATCONFIG_0;
+            GoTo ALL_X_HRY_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_HRY_INIT;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo ALL_X_HRY_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_HRY_INIT;
+        }
+    }
+    
+    FlowItem ALL_X_HRY_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_HRY_INIT ALL_X_HRY_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_HRY_INIT @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99602108_fail_ARR_COMMON_CKX_ALL_X_HRY_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_HRY_INIT_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98602108_fail_ARR_COMMON_CKX_ALL_X_HRY_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_HRY_INIT_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60422002_fail_ARR_COMMON_CKX_ALL_X_HRY_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_HRY_INIT_0;
+            IncrementCounters ARR_COMMON_CKX::n60422002_fail_ALL_X_HRY_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_HRY_INIT_0;
+			GoTo X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVHCS;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVHCS;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60422003_fail_ARR_COMMON_CKX_ALL_X_HRY_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_HRY_INIT_2;
+            IncrementCounters ARR_COMMON_CKX::n60422003_fail_ALL_X_HRY_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_HRY_INIT_2;
+			GoTo X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVHCS;
+        }
+    }
+    
+    FlowItem ALL_CORE_X_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_READ ALL_CORE_X_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_READ @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99602091_fail_ARR_COMMON_CKX_ALL_CORE_X_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_READ_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98602091_fail_ARR_COMMON_CKX_ALL_CORE_X_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_READ_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60432001_fail_ARR_COMMON_CKX_ALL_CORE_X_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_READ_0;
+            IncrementCounters ARR_COMMON_CKX::n60432001_fail_ALL_CORE_X_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_READ_0;
+			GoTo ALL_ATOM_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_CONVERT_HEX2BIN_VFDM_DFF;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo ALL_ATOM_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_CONVERT_HEX2BIN_VFDM_DFF;
+        }
+    }
+    
+    FlowItem ALL_X_SCREEN_K_STARTCPUPATMODSPKG_X_X_X_X_ATOM_REP2FUSE ALL_X_SCREEN_K_STARTCPUPATMODSPKG_X_X_X_X_ATOM_REP2FUSE @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99212038_fail_ARR_COMMON_CKX_ALL_X_SCREEN_K_STARTCPUPATMODSPKG_X_X_X_X_ATOM_REP2FUSE_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98212038_fail_ARR_COMMON_CKX_ALL_X_SCREEN_K_STARTCPUPATMODSPKG_X_X_X_X_ATOM_REP2FUSE_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b21412001_fail_ARR_COMMON_CKX_ALL_X_SCREEN_K_STARTCPUPATMODSPKG_X_X_X_X_ATOM_REP2FUSE_0;
+            IncrementCounters ARR_COMMON_CKX::n21412001_fail_ALL_X_SCREEN_K_STARTCPUPATMODSPKG_X_X_X_X_ATOM_REP2FUSE_0;
+			GoTo ALL_X_SCREEN_K_STARTCPUPATMODSPKG_X_X_X_X_VFDM_REBUILD;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo ALL_X_SCREEN_K_STARTCPUPATMODSPKG_X_X_X_X_VFDM_REBUILD;
+        }
+    }
+    
+    FlowItem ALL_X_SCREEN_K_STARTCPUPATMODSPKG_X_X_X_X_VFDM_REBUILD ALL_X_SCREEN_K_STARTCPUPATMODSPKG_X_X_X_X_VFDM_REBUILD @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99602137_fail_ARR_COMMON_CKX_ALL_X_SCREEN_K_STARTCPUPATMODSPKG_X_X_X_X_VFDM_REBUILD_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98602137_fail_ARR_COMMON_CKX_ALL_X_SCREEN_K_STARTCPUPATMODSPKG_X_X_X_X_VFDM_REBUILD_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            #SetBin b90604400_fail_ARR_COMMON_CKX_ALL_X_VFDM_E_STARTCPUPATMODSPKG_X_X_X_X_VFDM_REBUILD;
+            IncrementCounters ARR_COMMON_CKX::n90604400_fail_ALL_X_SCREEN_K_STARTCPUPATMODSPKG_X_X_X_X_VFDM_REBUILD_0;
+			GoTo ALL_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_REPAIR;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo ALL_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_REPAIR;
+        }
+
+          Result 2
+        {
+            Property PassFail = "Pass";
+			GoTo ALL_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_REPAIR;
+        }
+
+           Result 3
+        {
+            Property PassFail = "Pass";
+			GoTo ALL_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_REPAIR;
+        }
+    }
+    
+    FlowItem X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVHCS X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVHCS @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99602840_fail_ARR_COMMON_CKX_X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVHCS_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98602840_fail_ARR_COMMON_CKX_X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVHCS_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60452001_fail_ARR_COMMON_CKX_X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVHCS_0;
+            IncrementCounters ARR_COMMON_CKX::n60452001_fail_X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVHCS_0;
+            GoTo X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVFDS1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVFDS1;
+        }
+    }
+    
+    FlowItem X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVFDS1 X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVFDS1 @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99602834_fail_ARR_COMMON_CKX_X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVFDS1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98602834_fail_ARR_COMMON_CKX_X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVFDS1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60462001_fail_ARR_COMMON_CKX_X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVFDS1_0;
+            IncrementCounters ARR_COMMON_CKX::n60462001_fail_X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVFDS1_0;
+            GoTo X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVFDS2;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVFDS2;
+        }
+    }
+    
+    FlowItem X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVFDS2 X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVFDS2 @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99602837_fail_ARR_COMMON_CKX_X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVFDS2_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98602837_fail_ARR_COMMON_CKX_X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVFDS2_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60472001_fail_ARR_COMMON_CKX_X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVFDS2_0;
+            IncrementCounters ARR_COMMON_CKX::n60472001_fail_X_CPU_GETDFF_E_STARTCPUPATMODSPKG_X_X_X_X_SVFDS2_0;
+			GoTo X_CPU_GETDFF_K_STARTCPUPATMODSPKG_X_X_X_X_CSVHCS;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo X_CPU_GETDFF_K_STARTCPUPATMODSPKG_X_X_X_X_CSVHCS;
+        }
+    }
+    
+    FlowItem ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_SET_FDS ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_SET_FDS
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99622088_fail_ARR_COMMON_CKX_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_SET_FDS_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98622088_fail_ARR_COMMON_CKX_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_SET_FDS_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b62002002_fail_ARR_COMMON_CKX_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_SET_FDS_0;
+            IncrementCounters ARR_COMMON_CKX::n62002002_fail_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_SET_FDS_0;
+			Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_SET_FDS_CSM;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b62002003_fail_ARR_COMMON_CKX_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_SET_FDS_2;
+            IncrementCounters ARR_COMMON_CKX::n62002003_fail_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_SET_FDS_2;
+			Return 0;
+        }
+    }
+    
+    FlowItem ALL_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_REPAIR ALL_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_REPAIR @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99602097_fail_ARR_COMMON_CKX_ALL_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_REPAIR_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98602097_fail_ARR_COMMON_CKX_ALL_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_REPAIR_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60492001_fail_ARR_COMMON_CKX_ALL_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_REPAIR_0;
+            IncrementCounters ARR_COMMON_CKX::n60492001_fail_ALL_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_REPAIR_0;
+			Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			Return 1;
+        }
+    }
+    
+    FlowItem ALL_ATOM_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_CONVERT_HEX2BIN_VFDM_DFF ALL_ATOM_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_CONVERT_HEX2BIN_VFDM_DFF @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99212001_fail_ARR_COMMON_CKX_ALL_ATOM_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_CONVERT_HEX2BIN_VFDM_DFF_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98212001_fail_ARR_COMMON_CKX_ALL_ATOM_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_CONVERT_HEX2BIN_VFDM_DFF_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b21422001_fail_ARR_COMMON_CKX_ALL_ATOM_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_CONVERT_HEX2BIN_VFDM_DFF_0;
+            IncrementCounters ARR_COMMON_CKX::n21422001_fail_ALL_ATOM_SCREENTC_K_STARTCPUPATMODSPKG_X_X_X_X_CONVERT_HEX2BIN_VFDM_DFF_0;
+            GoTo ALL_X_SCREEN_K_STARTCPUPATMODSPKG_X_X_X_X_ATOM_REP2FUSE;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo ALL_X_SCREEN_K_STARTCPUPATMODSPKG_X_X_X_X_ATOM_REP2FUSE;
+        }
+         Result 2
+        {
+            Property PassFail = "Fail";
+			GoTo ALL_X_SCREEN_K_STARTCPUPATMODSPKG_X_X_X_X_ATOM_REP2FUSE;
+        }
+    }
+    
+    FlowItem ALL_X_SCREEN_K_STARTCPUPATMODSPKG_X_X_X_X_ATOM_VFDM_REBUILD_1 ALL_X_SCREEN_K_STARTCPUPATMODSPKG_X_X_X_X_ATOM_VFDM_REBUILD_1 @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99602134_fail_ARR_COMMON_CKX_ALL_X_SCREEN_K_STARTCPUPATMODSPKG_X_X_X_X_ATOM_VFDM_REBUILD_1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98602134_fail_ARR_COMMON_CKX_ALL_X_SCREEN_K_STARTCPUPATMODSPKG_X_X_X_X_ATOM_VFDM_REBUILD_1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 0;
+        }
+    }
+
+    FlowItem X_CPU_GETDFF_K_STARTCPUPATMODSPKG_X_X_X_X_CSVHCS X_CPU_GETDFF_K_STARTCPUPATMODSPKG_X_X_X_X_CSVHCS @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99602846_fail_ARR_COMMON_CKX_X_CPU_GETDFF_K_STARTCPUPATMODSPKG_X_X_X_X_CSVHCS_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98602846_fail_ARR_COMMON_CKX_X_CPU_GETDFF_K_STARTCPUPATMODSPKG_X_X_X_X_CSVHCS_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            #SetBin b90214300_fail_ARR_COMMON_CKX_ALL_X_SCREEN_K_STARTCPUPATMODSPKG_X_X_X_X_ATOM_VFDM_REBUILD_1;
+            #IncrementCounters ARR_COMMON_CKX::n90214300_fail_X_CPU_GETDFF_K_STARTCPUPATMODSPKG_X_X_X_X_CSVHCS_0;
+            GoTo X_CPU_GETDFF_K_STARTCPUPATMODSPKG_X_X_X_X_CSVFDS;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo X_CPU_GETDFF_K_STARTCPUPATMODSPKG_X_X_X_X_CSVFDS;
+        }
+    }
+    
+    FlowItem X_CPU_GETDFF_K_STARTCPUPATMODSPKG_X_X_X_X_CSVFDS X_CPU_GETDFF_K_STARTCPUPATMODSPKG_X_X_X_X_CSVFDS @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99602843_fail_ARR_COMMON_CKX_X_CPU_GETDFF_K_STARTCPUPATMODSPKG_X_X_X_X_CSVFDS_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98602843_fail_ARR_COMMON_CKX_X_CPU_GETDFF_K_STARTCPUPATMODSPKG_X_X_X_X_CSVFDS_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+			GoTo ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_SET_FDS;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_SET_FDS;
+        }
+    }
+	    FlowItem ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_RESET_DEFAULT ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_RESET_DEFAULT @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99602113_fail_ARR_COMMON_CKX_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_RESET_DEFAULT_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98602113_fail_ARR_COMMON_CKX_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_RESET_DEFAULT_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60412005_fail_ARR_COMMON_CKX_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_RESET_DEFAULT_0;
+            IncrementCounters ARR_COMMON_CKX::n60412005_fail_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_RESET_DEFAULT_0;
+            GoTo ALL_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_MBIST_RWA_PATCONFIG;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo ALL_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_MBIST_RWA_PATCONFIG;
+        }
+         Result 2
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b60412006_fail_ARR_COMMON_CKX_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_RESET_DEFAULT_2;
+            IncrementCounters ARR_COMMON_CKX::n60412006_fail_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_RESET_DEFAULT_2;
+            GoTo ALL_X_FUSECONFIG_K_STARTCPUPATMODSPKG_X_X_X_X_MBIST_RWA_PATCONFIG;
+        }
+    }
+    
+    FlowItem ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_SET_FDS_CSM ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_SET_FDS_CSM
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99622091_fail_ARR_COMMON_CKX_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_SET_FDS_CSM_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98622091_fail_ARR_COMMON_CKX_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_SET_FDS_CSM_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b62012002_fail_ARR_COMMON_CKX_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_SET_FDS_CSM_0;
+            IncrementCounters ARR_COMMON_CKX::n62012002_fail_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_SET_FDS_CSM_0;
+			Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo ALL_CORE_X_E_STARTCPUPATMODSPKG_X_X_X_X_MBIST_DFF_READ;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b62012003_fail_ARR_COMMON_CKX_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_SET_FDS_CSM_2;
+            IncrementCounters ARR_COMMON_CKX::n62012003_fail_ALL_X_SCREEN_E_STARTCPUPATMODSPKG_X_X_X_X_SET_FDS_CSM_2;
+			Return 0;
+        }
+    }
+    
+}
+
+Flow ARR_COMMON_CKX_ENDCPUPKG
+{
+    FlowItem ALL_X_AUX_K_ENDCPUPKG_X_X_X_X_WRITE_CSVFDS ALL_X_AUX_K_ENDCPUPKG_X_X_X_X_WRITE_CSVFDS
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99212028_fail_ARR_COMMON_CKX_ALL_X_AUX_K_ENDCPUPKG_X_X_X_X_WRITE_CSVFDS_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98212028_fail_ARR_COMMON_CKX_ALL_X_AUX_K_ENDCPUPKG_X_X_X_X_WRITE_CSVFDS_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b21442001_fail_ARR_COMMON_CKX_ALL_X_AUX_K_ENDCPUPKG_X_X_X_X_WRITE_CSVFDS_0;
+            IncrementCounters ARR_COMMON_CKX::n21442001_fail_ALL_X_AUX_K_ENDCPUPKG_X_X_X_X_WRITE_CSVFDS_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo ALL_X_AUX_K_ENDCPUPKG_X_X_X_X_WRITE_CSVHCS;
+        }
+    }
+    
+    FlowItem ALL_X_AUX_K_ENDCPUPKG_X_X_X_X_WRITE_CSVHCS ALL_X_AUX_K_ENDCPUPKG_X_X_X_X_WRITE_CSVHCS
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99212031_fail_ARR_COMMON_CKX_ALL_X_AUX_K_ENDCPUPKG_X_X_X_X_WRITE_CSVHCS_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98212031_fail_ARR_COMMON_CKX_ALL_X_AUX_K_ENDCPUPKG_X_X_X_X_WRITE_CSVHCS_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b21452001_fail_ARR_COMMON_CKX_ALL_X_AUX_K_ENDCPUPKG_X_X_X_X_WRITE_CSVHCS_0;
+            IncrementCounters ARR_COMMON_CKX::n21452001_fail_ALL_X_AUX_K_ENDCPUPKG_X_X_X_X_WRITE_CSVHCS_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}

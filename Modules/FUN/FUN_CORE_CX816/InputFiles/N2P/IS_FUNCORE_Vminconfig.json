@@ -1,0 +1,1180 @@
+{
+  "VminParameters": {
+    "EndVoltageLimits": "1.15",
+    "LevelsTc": "IPC::CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_min",
+    "PatternNameCounterIndexes": "9,10,11,12,13,14,15",
+    "SetPointsPlistParamName": "Patlist",
+    "SetPointsPlistMode": "Local",
+    "PinMap": "FUNCORE_NONMISR_FREQ_PM",
+    "StartVoltages": "0.45",
+    "RecoveryOptions": "CLASS_NVL_S28C_6C",
+    "RecoveryTrackingIncoming": "CR",
+    "RecoveryTrackingOutgoing": "CR",
+    "StepSize": 0.01,
+    "FeatureSwitchSettings": "disable_masked_targets,print_per_target_increments,print_scoreboard_counters,fivr_mode_on",
+    "FivrCondition": "NOM_CCF_CORE",
+    "TestMode": "MultiVmin",
+    "TimingsTc": "IPC::FUN_CORE_CX816::cpu_fun_timing_mts800_tstprtclk400_tck100_fun_core",
+    "VoltageConverter": "--dlvrpins VCCIA --railconfigurations CDIE_CORE_NBLCTRL0 CDIE_CORE_NBLCTRL1 CDIE_CORE_NBLCTRL2 CDIE_CORE_NBLCTRL3 --expressions CORE_PS1",
+    "VoltageTargets": "CORE3,CORE2,CORE1,CORE0"
+  },
+  "Tests": [
+    {
+      "Name": "FMIN_0400_MLC_LS",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_ls_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1001",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS3,MCdrv:corefreq:0.4GHz,MCdrv:ringfreq_0:0.4GHz,MCfun:FUNCORE_DRV:FUNCORE_MASK",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0,MCfun:FUNCORE_DRV:FUNCORE_UNMASK",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput",
+        "TimingsTc": "IPC::FUN_CORE_CX816::cpu_fun_timing_mts400_tstprtclk200_tck50_i_drv_mul_fun_CORE"
+      }
+    },
+    {
+      "Name": "FMIN_0400_MLC_DRG_NONPSEUDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_nonpseudo_a_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1002",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS3,MCdrv:corefreq:0.4GHz,MCdrv:ringfreq_0:0.4GHz,MCfun:FUNCORE_DRV:FUNCORE_MASK",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0,MCfun:FUNCORE_DRV:FUNCORE_UNMASK",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput",
+        "TimingsTc": "IPC::FUN_CORE_CX816::cpu_fun_timing_mts400_tstprtclk200_tck50_i_drv_mul_fun_CORE"
+      }
+    },
+    {
+      "Name": "FMIN_0400_MLC_DRG_NONPSEUDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_nonpseudo_b_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1003",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS3,MCdrv:corefreq:0.4GHz,MCdrv:ringfreq_0:0.4GHz,MCfun:FUNCORE_DRV:FUNCORE_MASK",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0,MCfun:FUNCORE_DRV:FUNCORE_UNMASK",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput",
+        "TimingsTc": "IPC::FUN_CORE_CX816::cpu_fun_timing_mts400_tstprtclk200_tck50_i_drv_mul_fun_CORE"
+      }
+    },
+    {
+      "Name": "FMIN_0400_MLC_DRG_NONPSEUDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_nonpseudo_c_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1004",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS3,MCdrv:corefreq:0.4GHz,MCdrv:ringfreq_0:0.4GHz,MCfun:FUNCORE_DRV:FUNCORE_MASK",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0,MCfun:FUNCORE_DRV:FUNCORE_UNMASK",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput",
+        "TimingsTc": "IPC::FUN_CORE_CX816::cpu_fun_timing_mts400_tstprtclk200_tck50_i_drv_mul_fun_CORE"
+      }
+    },
+    {
+      "Name": "FMIN_0400_MLC_DRG_PSUEDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_pseudo_a_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1005",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS3,MCdrv:corefreq:0.4GHz,MCdrv:ringfreq_0:0.4GHz,MCfun:FUNCORE_DRV:FUNCORE_MASK",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0,MCfun:FUNCORE_DRV:FUNCORE_UNMASK",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput",
+        "TimingsTc": "IPC::FUN_CORE_CX816::cpu_fun_timing_mts400_tstprtclk200_tck50_i_drv_mul_fun_CORE"
+      }
+    },
+    {
+      "Name": "FMIN_0400_MLC_DRG_PSUEDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_pseudo_b_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1006",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS3,MCdrv:corefreq:0.4GHz,MCdrv:ringfreq_0:0.4GHz,MCfun:FUNCORE_DRV:FUNCORE_MASK",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0,MCfun:FUNCORE_DRV:FUNCORE_UNMASK",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput",
+        "TimingsTc": "IPC::FUN_CORE_CX816::cpu_fun_timing_mts400_tstprtclk200_tck50_i_drv_mul_fun_CORE"
+      }
+    },
+    {
+      "Name": "FMIN_0400_MLC_DRG_PSUEDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_pseudo_c_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1007",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS3,MCdrv:corefreq:0.4GHz,MCdrv:ringfreq_0:0.4GHz,MCfun:FUNCORE_DRV:FUNCORE_MASK",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0,MCfun:FUNCORE_DRV:FUNCORE_UNMASK",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput",
+        "TimingsTc": "IPC::FUN_CORE_CX816::cpu_fun_timing_mts400_tstprtclk200_tck50_i_drv_mul_fun_CORE"
+      }
+    },
+    {
+      "Name": "FMIN_0400_SLC_DRG_NONPSEUDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_nonpseudo_a_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1008",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS3,MCdrv:corefreq:0.4GHz,MCdrv:ringfreq_0:0.4GHz,MCfun:FUNCORE_DRV:FUNCORE_MASK",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0,MCfun:FUNCORE_DRV:FUNCORE_UNMASK",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput",
+        "TimingsTc": "IPC::FUN_CORE_CX816::cpu_fun_timing_mts400_tstprtclk200_tck50_i_drv_mul_fun_CORE"
+      }
+    },
+    {
+      "Name": "FMIN_0400_SLC_DRG_NONPSEUDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_nonpseudo_b_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1009",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS3,MCdrv:corefreq:0.4GHz,MCdrv:ringfreq_0:0.4GHz,MCfun:FUNCORE_DRV:FUNCORE_MASK",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0,MCfun:FUNCORE_DRV:FUNCORE_UNMASK",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput",
+        "TimingsTc": "IPC::FUN_CORE_CX816::cpu_fun_timing_mts400_tstprtclk200_tck50_i_drv_mul_fun_CORE"
+      }
+    },
+    {
+      "Name": "FMIN_0400_SLC_DRG_NONPSEUDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_nonpseudo_c_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1010",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS3,MCdrv:corefreq:0.4GHz,MCdrv:ringfreq_0:0.4GHz,MCfun:FUNCORE_DRV:FUNCORE_MASK",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0,MCfun:FUNCORE_DRV:FUNCORE_UNMASK",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput",
+        "TimingsTc": "IPC::FUN_CORE_CX816::cpu_fun_timing_mts400_tstprtclk200_tck50_i_drv_mul_fun_CORE"
+      }
+    },
+    {
+      "Name": "FMIN_0400_SLC_DRG_PSUEDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_pseudo_a_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1011",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS3,MCdrv:corefreq:0.4GHz,MCdrv:ringfreq_0:0.4GHz,MCfun:FUNCORE_DRV:FUNCORE_MASK",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0,MCfun:FUNCORE_DRV:FUNCORE_UNMASK",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput",
+        "TimingsTc": "IPC::FUN_CORE_CX816::cpu_fun_timing_mts400_tstprtclk200_tck50_i_drv_mul_fun_CORE"
+      }
+    },
+    {
+      "Name": "FMIN_0400_SLC_DRG_PSUEDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_pseudo_b_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1012",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS3,MCdrv:corefreq:0.4GHz,MCdrv:ringfreq_0:0.4GHz,MCfun:FUNCORE_DRV:FUNCORE_MASK",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0,MCfun:FUNCORE_DRV:FUNCORE_UNMASK",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput",
+        "TimingsTc": "IPC::FUN_CORE_CX816::cpu_fun_timing_mts400_tstprtclk200_tck50_i_drv_mul_fun_CORE"
+      }
+    },
+    {
+      "Name": "FMIN_0400_SLC_DRG_PSUEDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_pseudo_c_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1013",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS3,MCdrv:corefreq:0.4GHz,MCdrv:ringfreq_0:0.4GHz,MCfun:FUNCORE_DRV:FUNCORE_MASK",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0,MCfun:FUNCORE_DRV:FUNCORE_UNMASK",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput",
+        "TimingsTc": "IPC::FUN_CORE_CX816::cpu_fun_timing_mts400_tstprtclk200_tck50_i_drv_mul_fun_CORE"
+      }
+    },
+    {
+      "Name": "F1_1200_MLC_LS",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_ls_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1006",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS3,MCdrv:corefreq:1.2GHz,MCdrv:ringfreq_0:1.2GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F1_1200_MLC_DRG_NONPSEUDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_nonpseudo_a_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1007",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS3,MCdrv:corefreq:1.2GHz,MCdrv:ringfreq_0:1.2GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F1_1200_MLC_DRG_NONPSEUDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_nonpseudo_b_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1008",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS3,MCdrv:corefreq:1.2GHz,MCdrv:ringfreq_0:1.2GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F1_1200_MLC_DRG_NONPSEUDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_nonpseudo_c_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1009",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS3,MCdrv:corefreq:1.2GHz,MCdrv:ringfreq_0:1.2GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F1_1200_MLC_DRG_PSUEDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_pseudo_a_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1010",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS3,MCdrv:corefreq:1.2GHz,MCdrv:ringfreq_0:1.2GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F1_1200_MLC_DRG_PSUEDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_pseudo_b_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1011",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS3,MCdrv:corefreq:1.2GHz,MCdrv:ringfreq_0:1.2GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F1_1200_MLC_DRG_PSUEDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_pseudo_c_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1012",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS3,MCdrv:corefreq:1.2GHz,MCdrv:ringfreq_0:1.2GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F1_1200_SLC_DRG_NONPSEUDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_nonpseudo_a_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1013",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS3,MCdrv:corefreq:1.2GHz,MCdrv:ringfreq_0:1.2GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F1_1200_SLC_DRG_NONPSEUDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_nonpseudo_b_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1014",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS3,MCdrv:corefreq:1.2GHz,MCdrv:ringfreq_0:1.2GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F1_1200_SLC_DRG_NONPSEUDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_nonpseudo_c_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1015",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS3,MCdrv:corefreq:1.2GHz,MCdrv:ringfreq_0:1.2GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F1_1200_SLC_DRG_PSUEDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_pseudo_a_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1016",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS3,MCdrv:corefreq:1.2GHz,MCdrv:ringfreq_0:1.2GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F1_1200_SLC_DRG_PSUEDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_pseudo_b_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1017",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS3,MCdrv:corefreq:1.2GHz,MCdrv:ringfreq_0:1.2GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F1_1200_SLC_DRG_PSUEDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_pseudo_c_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1018",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS3,MCdrv:corefreq:1.2GHz,MCdrv:ringfreq_0:1.2GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F2_2400_MLC_LS",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_ls_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1011",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS2,MCdrv:corefreq:2.4GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F2_2400_MLC_DRG_NONPSEUDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_nonpseudo_a_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1012",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS2,MCdrv:corefreq:2.4GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F2_2400_MLC_DRG_NONPSEUDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_nonpseudo_b_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1013",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS2,MCdrv:corefreq:2.4GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F2_2400_MLC_DRG_NONPSEUDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_nonpseudo_c_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1014",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS2,MCdrv:corefreq:2.4GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F2_2400_MLC_DRG_PSUEDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_pseudo_a_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1015",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS2,MCdrv:corefreq:2.4GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F2_2400_MLC_DRG_PSUEDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_pseudo_b_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1016",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS2,MCdrv:corefreq:2.4GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F2_2400_MLC_DRG_PSUEDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_pseudo_c_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1017",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS2,MCdrv:corefreq:2.4GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F2_2400_SLC_DRG_NONPSEUDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_nonpseudo_a_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1018",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS2,MCdrv:corefreq:2.4GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F2_2400_SLC_DRG_NONPSEUDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_nonpseudo_b_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1019",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS2,MCdrv:corefreq:2.4GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F2_2400_SLC_DRG_NONPSEUDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_nonpseudo_c_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1020",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS2,MCdrv:corefreq:2.4GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F2_2400_SLC_DRG_PSUEDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_pseudo_a_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1021",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS2,MCdrv:corefreq:2.4GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F2_2400_SLC_DRG_PSUEDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_pseudo_b_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1022",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS2,MCdrv:corefreq:2.4GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F2_2400_SLC_DRG_PSUEDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_pseudo_c_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1023",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS2,MCdrv:corefreq:2.4GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F3_3400_MLC_LS",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_ls_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1016",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:3.4GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F3_3400_MLC_DRG_NONPSEUDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_nonpseudo_a_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1017",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:3.4GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F3_3400_MLC_DRG_NONPSEUDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_nonpseudo_b_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1018",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:3.4GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F3_3400_MLC_DRG_NONPSEUDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_nonpseudo_c_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1019",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:3.4GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F3_3400_MLC_DRG_PSUEDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_pseudo_a_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1020",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:3.4GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F3_3400_MLC_DRG_PSUEDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_pseudo_b_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1021",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:3.4GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F3_3400_MLC_DRG_PSUEDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_pseudo_c_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1022",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:3.4GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F3_3400_SLC_DRG_NONPSEUDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_nonpseudo_a_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1023",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:3.4GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F3_3400_SLC_DRG_NONPSEUDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_nonpseudo_b_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1024",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:3.4GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F3_3400_SLC_DRG_NONPSEUDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_nonpseudo_c_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1025",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:3.4GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F3_3400_SLC_DRG_PSUEDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_pseudo_a_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1026",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:3.4GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F3_3400_SLC_DRG_PSUEDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_pseudo_b_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1027",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:3.4GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F3_3400_SLC_DRG_PSUEDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_pseudo_c_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1028",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:3.4GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F4_4000_MLC_LS",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_ls_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1021",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.0GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F4_4000_MLC_DRG_NONPSEUDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_nonpseudo_a_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1022",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.0GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F4_4000_MLC_DRG_NONPSEUDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_nonpseudo_b_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1023",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.0GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F4_4000_MLC_DRG_NONPSEUDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_nonpseudo_c_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1024",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.0GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F4_4000_MLC_DRG_PSUEDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_pseudo_a_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1025",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.0GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F4_4000_MLC_DRG_PSUEDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_pseudo_b_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1026",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.0GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F4_4000_MLC_DRG_PSUEDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_pseudo_c_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1027",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.0GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F4_4000_SLC_DRG_NONPSEUDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_nonpseudo_a_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1028",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.0GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F4_4000_SLC_DRG_NONPSEUDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_nonpseudo_b_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1029",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.0GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F4_4000_SLC_DRG_NONPSEUDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_nonpseudo_c_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1030",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.0GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F4_4000_SLC_DRG_PSUEDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_pseudo_a_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1031",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.0GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F4_4000_SLC_DRG_PSUEDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_pseudo_b_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1032",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.0GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F4_4000_SLC_DRG_PSUEDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_pseudo_c_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1033",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.0GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F5_4100_MLC_LS",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_ls_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1026",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.1GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F5_4100_MLC_DRG_NONPSEUDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_nonpseudo_a_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1027",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.1GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F5_4100_MLC_DRG_NONPSEUDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_nonpseudo_b_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1028",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.1GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F5_4100_MLC_DRG_NONPSEUDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_nonpseudo_c_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1029",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.1GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F5_4100_MLC_DRG_PSUEDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_pseudo_a_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1030",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.1GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F5_4100_MLC_DRG_PSUEDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_pseudo_b_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1031",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.1GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F5_4100_MLC_DRG_PSUEDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_pseudo_c_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1032",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.1GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F5_4100_SLC_DRG_NONPSEUDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_nonpseudo_a_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1033",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.1GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F5_4100_SLC_DRG_NONPSEUDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_nonpseudo_b_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1034",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.1GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F5_4100_SLC_DRG_NONPSEUDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_nonpseudo_c_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1035",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.1GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F5_4100_SLC_DRG_PSUEDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_pseudo_a_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1036",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.1GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F5_4100_SLC_DRG_PSUEDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_pseudo_b_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1037",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.1GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F5_4100_SLC_DRG_PSUEDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_pseudo_c_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1038",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.1GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F6_4300_MLC_LS",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_ls_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1031",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.3GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F6_4300_MLC_DRG_NONPSEUDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_nonpseudo_a_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1032",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.3GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F6_4300_MLC_DRG_NONPSEUDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_nonpseudo_b_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1033",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.3GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F6_4300_MLC_DRG_NONPSEUDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_nonpseudo_c_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1034",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.3GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F6_4300_MLC_DRG_PSUEDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_pseudo_a_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1035",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.3GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F6_4300_MLC_DRG_PSUEDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_pseudo_b_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1036",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.3GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F6_4300_MLC_DRG_PSUEDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_pseudo_c_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1037",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.3GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F6_4300_SLC_DRG_NONPSEUDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_nonpseudo_a_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1038",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.3GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F6_4300_SLC_DRG_NONPSEUDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_nonpseudo_b_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1039",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.3GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F6_4300_SLC_DRG_NONPSEUDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_nonpseudo_c_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1040",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.3GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F6_4300_SLC_DRG_PSUEDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_pseudo_a_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1041",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.3GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F6_4300_SLC_DRG_PSUEDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_pseudo_b_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1042",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.3GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F6_4300_SLC_DRG_PSUEDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_pseudo_c_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1043",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.3GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F7_4600_MLC_LS",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_ls_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1035",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.6GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F7_4600_MLC_DRG_NONPSEUDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_nonpseudo_a_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1036",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.6GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F7_4600_MLC_DRG_NONPSEUDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_nonpseudo_b_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1037",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.6GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F7_4600_MLC_DRG_NONPSEUDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_nonpseudo_c_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1038",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.6GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F7_4600_MLC_DRG_PSUEDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_pseudo_a_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1039",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.6GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F7_4600_MLC_DRG_PSUEDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_pseudo_b_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1040",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.6GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F7_4600_MLC_DRG_PSUEDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_mlc_drg_is_pseudo_c_hptp800_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1041",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.6GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F7_4600_SLC_DRG_NONPSEUDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_nonpseudo_a_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1042",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.6GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F7_4600_SLC_DRG_NONPSEUDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_nonpseudo_b_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1043",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.6GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F7_4600_SLC_DRG_NONPSEUDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_nonpseudo_c_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1044",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.6GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F7_4600_SLC_DRG_PSUEDO_A",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_pseudo_a_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1045",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.6GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F7_4600_SLC_DRG_PSUEDO_B",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_pseudo_b_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1046",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.6GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    },
+    {
+      "Name": "F7_4600_SLC_DRG_PSUEDO_C",
+      "Patlist": "IPC::fun_cdie_f2xcr_slc_drg_is_pseudo_c_hptp800_burstoff_list_long__1",
+      "Overrides": {
+        "BaseNumbers": "1047",
+        "SetPointsPreInstance": "DLVRPS:CORE:PS1,MCdrv:corefreq:4.6GHz,MCdrv:ringfreq_0:2.4GHz",
+        "SetPointsPostInstance": "DLVRPS:CORE:PS0",
+        "ScoreboardEdgeTicks": 2,
+        "ForwardingMode": "InputOutput"
+      }
+    }
+  ]
+}

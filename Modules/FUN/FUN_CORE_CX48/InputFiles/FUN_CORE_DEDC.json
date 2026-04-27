@@ -1,0 +1,53 @@
+{
+  "Triggers": [
+    {
+      "TriggerName": "FUN_CORE_CX48",
+      "Condition": {
+        "TestNameRegex": "^(?!.*MISR|.*BURSTOFF).*FUN_CORE_CX48::.*F[123456].*(MLC|SLC).*$",
+        "PortRegex": "[02345]",
+        "BinRegex": "^90[^9]"
+      },
+      "Execute": {
+        "Executables": [
+          {
+            "Type": "Test",
+            "Name": "IPC::FUN_CORE_CX48::SBFT_CORE_SHMOO_E_FMINXCR_X_CR_X_X_DEDC_F1",
+            "Sufix": "FUN_CORE_SHMOO",
+            "Overrides": [
+              {
+                "ParameterName": "BypassPort",
+                "Type": "Explicit",
+                "Value": "-1"
+              },
+              {
+                "ParameterName": "SetPointsPreInstance",
+                "Type": "MatchingInstance",
+                "Value": "SetPointsPreInstance"
+              },
+              {
+                "ParameterName": "LevelsTc",
+                "Type": "MatchingInstance",
+                "Value": "LevelsTc"
+              },
+              {
+                "ParameterName": "Patlist",
+                "Type": "MatchingInstance",
+                "Value": "Patlist"
+              },
+              {
+                "ParameterName": "TimingsTc",
+                "Type": "MatchingInstance",
+                "Value": "TimingsTc"
+              },
+              {
+                "ParameterName": "YAxisRange",
+                "Type": "Explicit",
+                "Value": "0.5:0.05:16"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

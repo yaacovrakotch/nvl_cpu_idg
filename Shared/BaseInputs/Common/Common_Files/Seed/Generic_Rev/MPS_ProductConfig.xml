@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ComponentRecipe checksum="">
+  <BeginCheckSum />
+  <Identity type="ProductConfig" name="HDMxProductConfig" id="" version="1.000" asof="04/01/2014 10:00 AM" />
+  <Template name="ProductConfigRecipeTemplate-1_0_0_0" id="" />
+  <Menu name="BinningConfig" role="PE">
+    <Item name="MaxSummary" desc="int indicating maximum summary number" value="5" />
+    <Item name="SummaryThreshold" desc="float indicating mimimum percentage of units tested before end summary is allowed (.1 = 10%)" value=".01" />
+    <Item name="RetestConfig" desc="Retest Bin Group definitions">
+      <Retest>
+        <MaximumSocketCount>8</MaximumSocketCount>
+        <BounceBins>
+          <MaxCount>0</MaxCount>
+        </BounceBins>
+        <RetestBins>
+          <MaxCount>1</MaxCount>
+          <BinGroup>800-8009</BinGroup>
+		  <BinGroup>8011-8019</BinGroup>
+		  <BinGroup>8021-8029</BinGroup>
+		  <BinGroup>8031-8039</BinGroup>
+		  <BinGroup>8041-8049</BinGroup>
+		  <BinGroup>8051-9899</BinGroup>
+        </RetestBins>
+        <BinForSiteFailures>
+          <BinGroup>0</BinGroup>
+        </BinForSiteFailures>
+        <BinForCatastrophicAlarm />
+      </Retest>
+	</Item>
+    <Item name="BinningRoleConfig" desc="Binning Role Bin Group definitions">
+      <BinningRoles>
+        <BG1>
+          <BinGroup>100</BinGroup>
+          <BinGroup>0-699</BinGroup>
+        </BG1>
+        <BG2>
+          <BinGroup>800-899</BinGroup>
+          <BinGroup>900-999</BinGroup>
+          <BinGroup>1000-1099</BinGroup>
+          <BinGroup>1100-1199</BinGroup>
+          <BinGroup>1202</BinGroup>
+        </BG2>
+        <BG3>
+          <BinGroup>1203</BinGroup>
+        </BG3>
+        <BG4>
+          <BinGroup>1204</BinGroup>
+          <BinGroup>Default</BinGroup>
+        </BG4>
+      </BinningRoles>
+	</Item>
+  </Menu>
+  <Menu name="ULT" role="PE">
+    <Item name="CurrentPath" desc="BLL and PDEPlugin file path" value="M:\psharp_script\psharp_DFF_Scripts\prod\{ProductName}\{GenericTPName}" />
+    <Item name="FilePath" desc="BLL and PDEPlugin file path" value="M:\psharp_script\psharp_DFF_Scripts\prod\{ProductName}\{GenericTPName}" />
+    <Item name="BLLFileName" desc="BLL file name" value="I:\ulat\infra_bll\hdmx\prod\core\class_bll.pl" />
+    <Item name="BLLSubRoutine" desc="BLL SubRoutine to call" value="ultPreProcess" />
+    <Item name="PerlInterpreter" desc="location of the pudl repair exe which is also used for BLL" value="C:\EmbeddedSystems\PUDLRepair\PUDLPerlWrapper.exe" />
+    <Item name="ULTConstants" desc="ULT constants file" value="I:\ulat\infra_bll\hdmx\prod\products\{ProductName}\{SubFileName3}\class_constant.xml" />
+    <Item name="BLLEnable" desc="Run the BLL" value="True" />
+    <Item name="PerlEnabled" desc="boolean: true forces use of BLL Perl Script; false uses BLL Functionality of PDEPlugin dll" value="true" />
+    <Item name="PDEPluginDLLName" desc="name of the PDEPlugin dll, must be present for DFF Extraction. If PerlEnabled = false, then also used for BLL" value="" />
+    <Item name="PDEPluginConfigFileName" desc="name of the PDEPlugin config file, located in the same directory as the dll or must be a fully qualified path" value="I:\ulat\data_ff\mps\hdmx\prod\products\{ProductName}\PAL\{BOMGroupName}\PDEPluginProductConfig.xml" />
+    <Item name="ULTTokenConfigFile" value="M:\psharp_script\psharp_DFF_Scripts\prod\ULTHandlerConfig_perSSID.xml" desc="path to ult tokens config" />
+    <Item name="ULTUploadEnabled" value="True" desc="true enables ULTUpload false disables it" />
+    <Item name="EngrULTUploadUncomp" desc="Whether to generate a shadow, uncompressed copy of the ULT file for engineering purposes" value="False" />
+    <Item name="AddSCUserVarsSCTOTALINS" value="True" desc="Add SC User Var SC_TOTAL_INS to lot Prefetch" />
+    <Item name="CalculateULTDownloadQty" value="FALSE" desc="Whether to calculate ULT download qty or use SC WS qty"/>
+    <Item name="EnableSCTotalTested" value="True" desc="Boolean indicating if SC_TOTAL_TESTED is to be sent at each StartTest to SysC" />    
+    <Item name="PALImage" desc="PAL image spec " value="skysw.intel.com:9624/internal-mpe-docker-feed/library/pde-plugin:4.0.39@api:68be77b394b361ec68b4834e54847fe50e6a1c45" /> 
+    <Item name="PALImageOverrideFile" desc="Run the BLL" value="I:\ulat\pal\hdmx\prod\pal_image_ovveride.yaml" /> 
+    <Item name="PALConfigFile" desc="Run the BLL" value="I:\ulat\pal\hdmx\prod\PALConfig.xml" /> 
+ </Menu>
+  <Menu name="PUDLRepair" role="PE">
+    <Item name="PUDLRepairDllPath" desc="location of the pudl repair dll" value="" />
+    <Item name="PerlScriptPath" desc="location of the pudl script" value="" />
+    <Item name="PUDLRepairDllModule" desc="name of the pudl repair module" value="" />
+    <Item name="PerlEnabled" desc="boolean: true forces use of Perl Script; false uses c# dll" value="" />
+  </Menu>
+  <Menu name="ITUFF" role="PE">
+    <Item name="MidasEnabled" desc="boolean indicating if midas is enabled" value="True" />
+    <Item name="EngItuffSplit" desc="boolean indicating if engituffsplit is enabled" value="True" />
+  </Menu>
+  <Menu name="Vision" role="PE">
+    <Item name="MisorientedRescanThresholdPercentage" desc="this percentage will be used to block tray Eport if specified percentage of units in tray are misoriented" value="20" />
+    <Item name="AllowOnePartialTray" desc="allow a first valid partial tray into system or block it at Eport" value="True" />
+    <Item name="TrayRescanRequired" desc="percentage used to block tray Eport if specified percentage of units in tray are empty or no reads" value="20" />
+    <Item name="MaxTrayRescanCount" desc="Max number of times user can rescan tray" value="2" />
+  </Menu>
+  <Menu name="PCSConfig" role="PE">
+    <Item name="PCSE3UploadEnable" desc="Boolean indicating if PCS files should be uploaded to E3" value="False" />
+    <Item name="E3UploadEnable" desc="Boolean indicating if E3 should be uploaded to" value="False" />
+    <Item name="E3FileCreateEnable" desc="Boolean indicating if E3 files should be created locally" value="False" />
+    <Item name="E3DataPath" desc="Path to upload E3 file to" type="path" value="C:\HDMx\E3\" />
+    <Item name="E3SigPath" desc="Path to upload E3 signal file to" type="path" value="C:\HDMx\E3sig\" />
+    <Item name="iLLIADEnable" desc="Boolean indicating if the iLLIAD PCS system should be used" value="True" />
+    <Item name="iLLIADRecipeDirectory" desc="Directory of the product iLLIAD PCS recipe tree" value="M:\pcs\prod\{ProductName}\{BG_PCS}" />
+  </Menu>
+  <Menu name="SBL" role="PE">
+    <Item name="EssetConfigPath" desc="esset config path" type="path" value="M:\psharp_script\sbl\essetconfiguration.xml" />
+  </Menu>
+  <Menu name="RCSConfig" role="PE">
+    <Item name="RCSConfigPath" desc="rcs config path" type="path" value="M:\rcs\prod\{ProductName}\{SubFileName1}\" />
+  </Menu>
+  <Menu name="PCAT-VOL" role="PE">
+    <ProcessStep Names="CLASSHOT">
+      <Item name="PCATEnable" desc="boolean indicating if PCAT should occur" value="{BG_PCAT_ENABLED_HOT}" />
+      <Item name="PCATModelFile" desc="path to model file" value="M:\pcat\prod\{ProductName}\{BG_PCAT}\{BG_PCAT_REV}\{BG_PCAT_MODEL}.XML" />
+      <Item name="PCATEnableDebugDataFileOutput" desc="boolean indicating if PCAT output file should be created at C:\DpcLogs\PCAT\" value="True" />
+    </ProcessStep>
+	<ProcessStep Names="CLASSCOLD">
+      <Item name="PCATEnable" desc="boolean indicating if PCAT should occur" value="{BG_PCAT_ENABLED_COLD}" />
+      <Item name="PCATModelFile" desc="path to model file" value="M:\pcat\prod\{ProductName}\{BG_PCAT}\{BG_PCAT_REV}\{BG_PCAT_MODEL}.XML" />
+      <Item name="PCATEnableDebugDataFileOutput" desc="boolean indicating if PCAT output file should be created at C:\DpcLogs\PCAT\" value="True" />
+    </ProcessStep>
+  </Menu>
+  <Menu name="UserVars" role="PE">
+  	<Item name="MPSUserVars" desc="This where Uservar overrides are specified for each processStep">
+		<UserVars>
+			<ProcessStep name="CLASSHOT">
+				<UserVar scvar="SC_TEMPERATURE" value="{BG_CLASSHOT}" />
+				<UserVar scvar="SC_CURRENT_PROCESS_STEP" value="CLASSHOT" />
+				<UserVar scvar="SC_CURRENT_PROCESS_TYPE" value="CLASSHOT" />
+				<UserVar scvar="SC_MPS" value="1" />
+			</ProcessStep>
+			<ProcessStep name="CLASSHOTR">
+				<UserVar scvar="SC_TEMPERATURE" value="{BG_CLASSHOT}" />
+				<UserVar scvar="SC_CURRENT_PROCESS_STEP" value="CLASSHOTR" />
+				<UserVar scvar="SC_CURRENT_PROCESS_TYPE" value="CLASSHOT" />
+				<UserVar scvar="SC_MPS" value="2" />
+			</ProcessStep>
+			<ProcessStep name="CLASSCOLD">
+				<UserVar scvar="SC_TEMPERATURE" value="{BG_CLASSCOLD}" />
+				<UserVar scvar="SC_CURRENT_PROCESS_STEP" value="CLASSCOLD" />
+				<UserVar scvar="SC_CURRENT_PROCESS_TYPE" value="CLASSCOLD" />
+				<UserVar scvar="SC_MPS" value="3" />
+			</ProcessStep>
+			<ProcessStep name="CSM">
+				<UserVar scvar="SC_TEMPERATURE" value="{BG_CLASSCOLD}" />
+				<UserVar scvar="SC_CURRENT_PROCESS_STEP" value="CSM" />
+				<UserVar scvar="SC_CURRENT_PROCESS_TYPE" value="CSM" />
+				<UserVar scvar="SC_MPS" value="4" />
+			</ProcessStep>
+			<ProcessStep name="FUSE">
+				<UserVar scvar="SC_TEMPERATURE" value="{BG_FUSE}" />
+				<UserVar scvar="SC_CURRENT_PROCESS_STEP" value="FUSE" />
+				<UserVar scvar="SC_CURRENT_PROCESS_TYPE" value="FUSE" />
+				<UserVar scvar="SC_MPS" value="5" />
+			</ProcessStep>
+			<ProcessStep name="PHMHOT">
+				<UserVar scvar="SC_TEMPERATURE" value="{BG_PHMHOT}" />
+				<UserVar scvar="SC_CURRENT_PROCESS_STEP" value="PHMHOT" />
+				<UserVar scvar="SC_CURRENT_PROCESS_TYPE" value="PHMHOT" />
+				<UserVar scvar="SC_MPS" value="6" />
+			</ProcessStep>
+			<ProcessStep name="PHMHOTR">
+				<UserVar scvar="SC_TEMPERATURE" value="{BG_PHMHOT}" />
+				<UserVar scvar="SC_CURRENT_PROCESS_STEP" value="PHMHOTR" />
+				<UserVar scvar="SC_CURRENT_PROCESS_TYPE" value="PHMHOT" />
+				<UserVar scvar="SC_MPS" value="7" />
+			</ProcessStep>
+			<ProcessStep name="PHMCOLD">
+				<UserVar scvar="SC_TEMPERATURE" value="{BG_PHMCOLD}" />
+				<UserVar scvar="SC_CURRENT_PROCESS_STEP" value="PHMCOLD" />
+				<UserVar scvar="SC_CURRENT_PROCESS_TYPE" value="PHMCOLD" />
+				<UserVar scvar="SC_MPS" value="8" />
+			</ProcessStep>
+			<ProcessStep name="PHMCOLDR">
+				<UserVar scvar="SC_TEMPERATURE" value="{BG_PHMCOLD}" />
+				<UserVar scvar="SC_CURRENT_PROCESS_STEP" value="PHMCOLDR" />
+				<UserVar scvar="SC_CURRENT_PROCESS_TYPE" value="PHMCOLD" />
+				<UserVar scvar="SC_MPS" value="9" />
+			</ProcessStep>
+            <ProcessStep name="PHMROOM">
+                <UserVar scvar="SC_TEMPERATURE" value="{BG_ROOM}" />
+                <UserVar scvar="SC_CURRENT_PROCESS_STEP" value="PHMROOM" />
+                <UserVar scvar="SC_CURRENT_PROCESS_TYPE" value="PHMROOM" />
+				<UserVar scvar="SC_MPS" value="10" />
+             </ProcessStep>
+             <ProcessStep name="PHMROOMR">
+                <UserVar scvar="SC_TEMPERATURE" value="{BG_ROOM}" />
+                <UserVar scvar="SC_CURRENT_PROCESS_STEP" value="PHMROOMR" />
+                <UserVar scvar="SC_CURRENT_PROCESS_TYPE" value="PHMROOM" />
+				<UserVar scvar="SC_MPS" value="10" />
+             </ProcessStep>
+		 </UserVars>
+	</Item>
+  </Menu>
+</ComponentRecipe>

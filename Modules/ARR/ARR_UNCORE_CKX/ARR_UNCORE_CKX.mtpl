@@ -1,0 +1,1096 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan ARR_UNCORE_CKX;
+
+Import "ARR_UNCORE_CKX.usrv";
+Import "ARR_UNCORE_CKX_Level.tcg";
+Import "ARR_UNCORE_CKX_Timing.tcg";
+
+# Test Counter DefinitionALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_DUMMY
+
+Counters
+{
+    n21152003_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_DUMMY_0,
+    n21152004_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_DUMMY_2,
+    n21152005_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_DUMMY_3,
+    n21152009_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1_0,
+    n21152010_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1_2,
+    n21152011_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1_3,
+    p21162000_pass_ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SET_BYPASS_REPAIR_B0_0,
+    n21162004_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MAX_X_F1_0,
+    n21162005_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MAX_X_F1_2,
+    n21162006_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MAX_X_F1_3,
+    n21192003_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MAX_X_F1_5,
+    n21192005_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_DUMMY_5,
+    n21192007_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1_5,
+    n21232000_fail_ALL_UNCORE_VFDM_K_BEGINCPUPKG_X_X_X_X_X_REPAIR_FUSE_0,
+    n21232001_fail_ALL_UNCORE_VFDM_K_BEGINCPUPKG_X_X_X_X_X_REPAIR_FUSE_3,
+    n21242000_fail_ALL_UNCORE_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_X_NOM_0,
+    n61042012_fail_ALL_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_PRESCREEN_0,
+    n61042013_fail_ALL_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_PRESCREEN_5,
+    n61042014_fail_ALL_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_PRESCREEN_6,
+    n61042015_fail_ALL_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_PRESCREEN_7,
+    n61042016_fail_ALL_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_PRESCREEN_8,
+    n61042017_fail_ALL_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_PRESCREEN_9,
+    n61082014_fail_SSA_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_REPAIR_PRESCREEN_BIRA_BISR_DMU_0,
+    n61082015_fail_SSA_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_REPAIR_PRESCREEN_BIRA_BISR_DMU_5,
+    n61082016_fail_SSA_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_REPAIR_PRESCREEN_BIRA_BISR_DMU_6,
+    n61082017_fail_SSA_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_REPAIR_PRESCREEN_BIRA_BISR_DMU_7,
+    n61082018_fail_SSA_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_REPAIR_PRESCREEN_BIRA_BISR_DMU_8,
+    n61082019_fail_SSA_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_REPAIR_PRESCREEN_BIRA_BISR_DMU_9,
+    n61082020_fail_SSA_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SETBIN2_BIRA_BISR1_DMU_0,
+    n61092002_fail_ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SETBIN2_BIRA_BISR_0,
+    n61112002_fail_ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_NOM_CHECK_BIN_0,
+    n61142012_fail_ALL_UNCORE_X_E_BEGINCPUPKG_X_X_X_X_X_X_MBIST_DFF_WRITE_NOM_0,
+    n61142013_fail_ALL_UNCORE_X_E_BEGINCPUPKG_X_X_X_X_X_X_MBIST_DFF_WRITE_NOM_5,
+    n61142014_fail_ALL_UNCORE_X_E_BEGINCPUPKG_X_X_X_X_X_X_MBIST_DFF_WRITE_NOM_6,
+    n61142015_fail_ALL_UNCORE_X_E_BEGINCPUPKG_X_X_X_X_X_X_MBIST_DFF_WRITE_NOM_7,
+    n61142016_fail_ALL_UNCORE_X_E_BEGINCPUPKG_X_X_X_X_X_X_MBIST_DFF_WRITE_NOM_8,
+    n61142017_fail_ALL_UNCORE_X_E_BEGINCPUPKG_X_X_X_X_X_X_MBIST_DFF_WRITE_NOM_9,
+    n61152000_fail_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_0,
+    p61152001_pass_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_2,
+    p61152002_pass_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_3,
+    p61152003_pass_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_4,
+    n61152004_fail_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_5,
+    n61152005_fail_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_6,
+    n61152006_fail_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_7,
+    n61152007_fail_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_8,
+    n61152008_fail_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_9,
+    n61182002_fail_ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_NOM_SETBIN2_0,
+    n94192001_fail_ALL_UNCORE_SB_K_LTTCCPUPKG_X_VNNAON_MIN_X_F1_5,
+    n94212003_fail_ALL_UNCORE_SB_K_LTTCCPUPKG_X_VNNAON_MIN_X_F1_0,
+    n94212004_fail_ALL_UNCORE_SB_K_LTTCCPUPKG_X_VNNAON_MIN_X_F1_2,
+    n94212005_fail_ALL_UNCORE_SB_K_LTTCCPUPKG_X_VNNAON_MIN_X_F1_3,
+    n97212003_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MAX_X_F1_4,
+    n97212005_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_DUMMY_4,
+    n97212007_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1_4,
+    n97942001_fail_ALL_UNCORE_SB_K_LTTCCPUPKG_X_VNNAON_MIN_X_F1_4
+} # End of Test Counter Definition
+
+CSharpTest VminTC ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1
+{
+    Patlist = "IPC::arr_cdie_begincpupkg_mbist_uncore_all_all_vnnaon_ks_x_class_hptp_min_list";
+    LevelsTc = "ARR_UNCORE_CKX::arr_cpu_all_bf_x_x_ipc_lvl_PKG_BFUNC_ARR_MBIST_min_lvl";
+	TimingsTc = ARR_UNCORE_CKX_Specs.timingRules;
+    BaseNumbers = "12401";
+	BypassPort = -1;
+	DtsConfiguration = ARR_UNCORE_CKX_Specs.DTSConfig_Rules;
+    EndVoltageLimits = "0.625";
+    ForwardingMode = ARR_UNCORE_CKX_Specs.ForwardingMode_Kill;
+    RecoveryMode = "NoRecovery";
+    ExecutionMode = "SearchWithScoreboard";
+    FeatureSwitchSettings = ARR_UNCORE_CKX_Specs.FeatureSwitch_Uncore;
+    FivrCondition = ARR_UNCORE_CKX_Specs.FivrConditionNom;
+    MaxRepetitionCount = 1;
+    PatternNameCounterIndexes = ARR_UNCORE_CKX_Specs.PatternMap;
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPreInstance = "MCdrv:corefreq:"+ __shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:ringfreq_0:"+ __shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz";
+    StartVoltages = "0.625";
+    StepSize = 0.02;
+    TestMode = "Scoreboard";
+    VoltageTargets = ARR_UNCORE_CKX_Specs.UNCORE_VoltageTarget;
+}
+CSharpTest PrimeMbistTestMethod ALL_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_PRESCREEN
+{
+	BypassPort = ARR_UNCORE_Rules.QA_HOT_Default(1,-1,1);
+	Patlist = "IPC::arr_cdie_begincpupkg_mbist_uncore_unc_dmu_all_ssa_vnnaon_bhry_x_class_tap_list";
+	LevelsTc = "IPC::CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+	TimingsTc = ARR_UNCORE_CKX_Specs.repair_timingRules;	
+	BisrMode = "";
+	DffOperation = "";
+	FailCaptureCount = 10000000;
+	LookupTableConfigurationFile = ARR_UNCORE_CKX_Specs.HRY_LIST_Rules;
+	MappingConfigurationFile = ARR_UNCORE_CKX_Specs.dffmapRules;
+	MbistTestMode = "Hry";
+	RecoveryModeDownbin = "Disabled";
+	PrintToItuff = "hry";
+	PreInstance = "Call(ExecutePatConfigSetPoint(MCdrv:corefreq:"+__shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:ringfreq_0:"+__shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz))";
+}
+CSharpTest PrimeVirtualFuseExportToSharedStorageTestMethod ALL_UNCORE_VFDM_K_BEGINCPUPKG_X_X_X_X_X_REPAIR_FUSE
+{
+	BypassPort = -1;
+	FdsSharedStorageKey = "CPU0_FUSE_EMB_VFDM_FDS_BINARY";
+	FuseDataGap = "CPU0.VF_Heap_Data_Gap.VF_Heap_Data_Gap";
+	FuseDescriptorGap = "CPU0.VF_Heap_Descriptor_Gap.VF_Heap_Descriptor_Gap";
+	HcsSharedStorageKey = "CPU0_FUSE_EMB_VFDM_HCS_BINARY";
+	Namespace = "CPU0";
+	Tags = "";
+}
+CSharpTest PrimePatConfigTestMethod ALL_UNCORE_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_X_NOM
+{
+	BypassPort = -1;
+	ConfigurationFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "\\Modules\\FUS\\FUS_FUSECFG_CXX\\InputFiles\\array_repair_perunit.PatConfigSetpoints.json";
+	SetPoint = "CPU0_APPLY_VFDM";
+	RegEx = "[gdx].*_longreset_fuseover.*_MC.*(arr|fun)";
+}
+CSharpTest PrimeMbistTestMethod ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN
+{
+	BypassPort = ARR_UNCORE_Rules.QA_HOT_Default(1,-1,1);
+	Patlist = "IPC::arr_cdie_begincpupkg_mbist_uncore_all_xsa_vnnaon_all_hry_x_class_tap_list";
+	LevelsTc = "IPC::CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+	TimingsTc = ARR_UNCORE_CKX_Specs.repair_timingRules;	
+	BisrMode = "";
+	DffOperation = "";
+	FailCaptureCount = 10000000;
+	LookupTableConfigurationFile = ARR_UNCORE_CKX_Specs.HRY_LIST_Rules;	
+	MappingConfigurationFile = ARR_UNCORE_CKX_Specs.dffmapRules;
+	MbistTestMode = "PostRepair";
+	RecoveryModeDownbin = "Disabled";
+	PreInstance = "Call(ExecutePatConfigSetPoint(MCdrv:corefreq:"+__shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:ringfreq_0:"+__shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz))";
+}
+CSharpTest AuxiliaryTC ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SETBIN2_BIRA_BISR
+{
+	Expression = "0";
+    ResultPort = "1";
+	ResultToken = "G.I.S.ARR_MBIST_DEFECTREPAIR";
+}
+CSharpTest PrimeMbistTestMethod SSA_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_REPAIR_PRESCREEN_BIRA_BISR_DMU
+{
+	BypassPort = -1;
+	Patlist = "IPC::arr_cdie_begin_mbist_uncore_unc_dmu_ssa_vnnaon_bira_bisr_x_sds_tap_list";
+	LevelsTc = "IPC::CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+	TimingsTc = ARR_UNCORE_CKX_Specs.repair_timingRules;	
+	BisrMode="uncompress";
+	DffOperation = "";
+	FailCaptureCount = 10000000;
+	LookupTableConfigurationFile = ARR_UNCORE_CKX_Specs.HRY_LIST_Rules;	
+	MappingConfigurationFile = ARR_UNCORE_CKX_Specs.dffmapRules;
+	MbistTestMode = "RepairShareBira";
+	RecoveryModeDownbin = "Disabled";
+	PreInstance = "Call(ExecutePatConfigSetPoint(MCdrv:corefreq:"+__shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:ringfreq_0:"+__shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz))";
+}
+CSharpTest AuxiliaryTC SSA_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SETBIN2_BIRA_BISR1_DMU
+{
+	Expression = "1";
+	ResultPort = "1";
+	ResultToken = "G.I.S.ARR_MBIST_DEFECTREPAIR";
+}
+CSharpTest AuxiliaryTC ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_NOM_CHECK_BIN
+{
+	BypassPort = -1;
+	Expression = "1";
+	ResultPort = "[G.I.S.ARR_MBIST_DEFECTREPAIR]==1?1:2";
+}
+CSharpTest AuxiliaryTC ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_NOM_SETBIN2
+{
+	Expression = "1";
+	ResultPort = "1";
+	ResultToken = "G.I.S.DEFECTREPAIR";
+}
+CSharpTest PrimeMbistTestMethod ALL_UNCORE_X_E_BEGINCPUPKG_X_X_X_X_X_X_MBIST_DFF_WRITE_NOM
+{
+	BypassPort = ARR_UNCORE_Rules.QA_HOT_Default(1,1,1);
+	Patlist = "IPC::arr_cdie_begincpupkg_mbist_uncore_all_xsa_vnnaon_all_hry_x_class_tap_list";
+	LevelsTc = "IPC::CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+	TimingsTc = ARR_UNCORE_CKX_Specs.repair_timingRules;	
+	BisrMode = "compress";
+	DffOperation = "bisr,write";
+	FailCaptureCount = 10000000;
+	LookupTableConfigurationFile = ARR_UNCORE_CKX_Specs.HRY_LIST_Rules;	
+	MappingConfigurationFile = ARR_UNCORE_CKX_Specs.dffmapRules;
+	MbistTestMode = "Initialize";
+	RecoveryModeDownbin = "Disabled";
+	PreInstance = "Call(ExecutePatConfigSetPoint(MCdrv:corefreq:"+__shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:ringfreq_0:"+__shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz))";
+} # End of Test Counter Definition
+
+CSharpTest VminTC ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_DUMMY
+{
+    Patlist = ARR_UNCORE_Rules.TPRules(ARR_UNCORE_CKX_Specs.reset_s28c,ARR_UNCORE_CKX_Specs.reset_s28c,ARR_UNCORE_CKX_Specs.reset_s28c,ARR_UNCORE_CKX_Specs.reset_48,ARR_UNCORE_CKX_Specs.reset_48,ARR_UNCORE_CKX_Specs.reset_48,ARR_UNCORE_CKX_Specs.reset_s28c,ARR_UNCORE_CKX_Specs.reset_s28c);
+    LevelsTc = "IPC::CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+	TimingsTc = ARR_UNCORE_CKX_Specs.timingRules;
+	BaseNumbers = "17252";
+    BypassPort = -1;
+    EndVoltageLimits = "0.625";
+    ForwardingMode = "None";
+    RecoveryMode = "NoRecovery";
+    ExecutionMode = "SearchWithScoreboard";
+    FeatureSwitchSettings = ARR_UNCORE_CKX_Specs.FeatureSwitch_Uncore;
+    FivrCondition = ARR_UNCORE_CKX_Specs.FivrConditionNom;
+    MaxRepetitionCount = 1;
+    PatternNameCounterIndexes = ARR_UNCORE_CKX_Specs.PatternMap;
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPreInstance = "MCdrv:corefreq:"+ __shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:ringfreq_0:"+ __shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz,MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F1_FREQ+"GHz";
+    StartVoltages = "0.625";
+    StepSize = 0.02;
+    TestMode = "Scoreboard";
+    VoltageTargets = ARR_UNCORE_CKX_Specs.UNCORE_VoltageTarget;
+} # End of Test Counter Definition
+
+CSharpTest VminTC ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MAX_X_F1
+{
+    Patlist = "IPC::arr_cdie_begincpupkg_mbist_uncore_all_all_vnnaon_ks_x_class_hptp_max_list";
+    LevelsTc = "ARR_UNCORE_CKX::arr_cpu_all_bf_x_x_ipc_lvl_PKG_BFUNC_ARR_MBIST_max_lvl";
+	TimingsTc = ARR_UNCORE_CKX_Specs.timingRules;
+    BaseNumbers = "12402";
+    BypassPort = -1;
+	DtsConfiguration = ARR_UNCORE_CKX_Specs.DTSConfig_Rules;
+    EndVoltageLimits = "0.825";
+    ForwardingMode = "InputOutput";
+    RecoveryMode = "NoRecovery";
+    ExecutionMode = "SearchWithScoreboard";
+    FeatureSwitchSettings = ARR_UNCORE_CKX_Specs.FeatureSwitch_Uncore;
+    FivrCondition = ARR_UNCORE_CKX_Specs.FivrConditionNom;
+    MaxRepetitionCount = 1;
+    PatternNameCounterIndexes = ARR_UNCORE_CKX_Specs.PatternMap;
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPreInstance = "MCdrv:corefreq:"+ __shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:ringfreq_0:"+ __shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz";
+    StartVoltages = "0.825";
+    StepSize = 0.02;
+    TestMode = "Scoreboard";
+    VoltageTargets = ARR_UNCORE_CKX_Specs.UNCORE_VoltageTarget;
+}
+
+CSharpTest VminTC ALL_UNCORE_SB_K_LTTCCPUPKG_X_VNNAON_MIN_X_F1
+{
+	Patlist = "IPC::arr_cdie_begincpupkg_mbist_uncore_all_all_vnnaon_ks_x_class_hptp_min_lttc_list";
+    LevelsTc = "ARR_UNCORE_CKX::arr_cpu_all_bf_x_x_ipc_lvl_PKG_BFUNC_ARR_MBIST_min_lvl";
+	TimingsTc = ARR_UNCORE_CKX_Specs.timingRules;
+    BaseNumbers = "12406";
+    BypassPort = ARR_UNCORE_Rules.TPRules(-1,1,-1,1,1,1,-1,-1);
+	LimitGuardband = "31mV";
+    EndVoltageLimits = "0.625";
+    ForwardingMode = "Input";
+    RecoveryMode = "NoRecovery";
+    ExecutionMode = "SearchWithScoreboard";
+    FeatureSwitchSettings = ARR_UNCORE_CKX_Specs.FeatureSwitch_Uncore;
+    FivrCondition = ARR_UNCORE_CKX_Specs.FivrConditionNom;
+    MaxRepetitionCount = 1;
+    PatternNameCounterIndexes = ARR_UNCORE_CKX_Specs.PatternMap;
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPreInstance = "MCdrv:corefreq:"+ __shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:ringfreq_0:"+ __shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz,MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F1_FREQ+"GHz";
+    StartVoltages = "0.625";
+    StepSize = 0.02;
+    TestMode = "Scoreboard";
+    VoltageTargets = ARR_UNCORE_CKX_Specs.UNCORE_VoltageTarget;
+}
+CSharpTest AuxiliaryTC ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SET_BYPASS_REPAIR_B0
+{
+	BypassPort = ARR_UNCORE_Rules.TPRules(-1,1,-1,-1,-1,-1,-1,1);
+	DataType = "String";
+	Expression = "1==2";
+    ResultPort = "[R]=1?1:2";
+	#ResultToken = "G.I.S.VminRepair";
+	#Storage = "SharedStorage";
+}
+
+Flow BEGINNOM_FUSE_VFDM
+{
+	FlowItem ALL_UNCORE_VFDM_K_BEGINCPUPKG_X_X_X_X_X_REPAIR_FUSE ALL_UNCORE_VFDM_K_BEGINCPUPKG_X_X_X_X_X_REPAIR_FUSE @EDC
+	{
+		Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99212023_fail_ARR_UNCORE_CKX_ALL_UNCORE_VFDM_K_BEGINCPUPKG_X_X_X_X_X_REPAIR_FUSE_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98212023_fail_ARR_UNCORE_CKX_ALL_UNCORE_VFDM_K_BEGINCPUPKG_X_X_X_X_X_REPAIR_FUSE_n1;
+            Return -1;
+        }
+		Result 0
+		{
+			Property PassFail = "Fail";
+			##EDC## SetBin b21232000_fail_ARR_UNCORE_CKX_ALL_UNCORE_VFDM_K_BEGINCPUPKG_X_X_X_X_X_REPAIR_FUSE_0;
+			IncrementCounters ARR_UNCORE_CKX::n21232000_fail_ALL_UNCORE_VFDM_K_BEGINCPUPKG_X_X_X_X_X_REPAIR_FUSE_0;
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Pass";
+			GoTo ALL_UNCORE_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_X_NOM;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			##EDC## SetBin b21232001_fail_ARR_UNCORE_CKX_ALL_UNCORE_VFDM_K_BEGINCPUPKG_X_X_X_X_X_REPAIR_FUSE_3;
+			IncrementCounters ARR_UNCORE_CKX::n21232001_fail_ALL_UNCORE_VFDM_K_BEGINCPUPKG_X_X_X_X_X_REPAIR_FUSE_3;
+			Return 0;
+		}
+	}
+	FlowItem ALL_UNCORE_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_X_NOM ALL_UNCORE_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_X_NOM @EDC
+	{
+		Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99212007_fail_ARR_UNCORE_CKX_ALL_UNCORE_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_X_NOM_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98212007_fail_ARR_UNCORE_CKX_ALL_UNCORE_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_X_NOM_n1;
+            Return -1;
+        }
+		Result 0
+		{
+			Property PassFail = "Fail";
+			##EDC## SetBin b21242000_fail_ARR_UNCORE_CKX_ALL_UNCORE_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_X_NOM_0;
+			IncrementCounters ARR_UNCORE_CKX::n21242000_fail_ALL_UNCORE_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_X_NOM_0;
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+	}
+
+}
+Flow SSA_BEGINNOM_BIRA_BISR
+{
+	FlowItem ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SETBIN2_BIRA_BISR ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SETBIN2_BIRA_BISR @EDC
+	{
+		Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99212005_fail_ARR_UNCORE_CKX_ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SETBIN2_BIRA_BISR_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98212005_fail_ARR_UNCORE_CKX_ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SETBIN2_BIRA_BISR_n1;
+            Return -1;
+        }
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61092002_fail_ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SETBIN2_BIRA_BISR_0;
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo SSA_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_REPAIR_PRESCREEN_BIRA_BISR_DMU;
+		}
+	}
+	FlowItem SSA_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_REPAIR_PRESCREEN_BIRA_BISR_DMU SSA_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_REPAIR_PRESCREEN_BIRA_BISR_DMU @EDC
+	{
+		Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99212093_fail_ARR_UNCORE_CKX_SSA_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_REPAIR_PRESCREEN_BIRA_BISR_DMU_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98212093_fail_ARR_UNCORE_CKX_SSA_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_REPAIR_PRESCREEN_BIRA_BISR_DMU_n1;
+            Return -1;
+        }
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61082014_fail_SSA_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_REPAIR_PRESCREEN_BIRA_BISR_DMU_0;
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Pass";
+			GoTo SSA_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SETBIN2_BIRA_BISR1_DMU;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo SSA_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SETBIN2_BIRA_BISR1_DMU;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61082015_fail_SSA_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_REPAIR_PRESCREEN_BIRA_BISR_DMU_5;
+			Return 0;
+		}
+		Result 6
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61082016_fail_SSA_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_REPAIR_PRESCREEN_BIRA_BISR_DMU_6;
+			Return 0;
+		}
+		Result 7
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61082017_fail_SSA_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_REPAIR_PRESCREEN_BIRA_BISR_DMU_7;
+			Return 0;
+		}
+		Result 8
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61082018_fail_SSA_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_REPAIR_PRESCREEN_BIRA_BISR_DMU_8;
+			Return 0;
+		}
+		Result 9
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61082019_fail_SSA_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_REPAIR_PRESCREEN_BIRA_BISR_DMU_9;
+			Return 0;
+		}
+	}
+	FlowItem SSA_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SETBIN2_BIRA_BISR1_DMU SSA_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SETBIN2_BIRA_BISR1_DMU @EDC
+	{
+		Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99212092_fail_ARR_UNCORE_CKX_SSA_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SETBIN2_BIRA_BISR1_DMU_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98212092_fail_ARR_UNCORE_CKX_SSA_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SETBIN2_BIRA_BISR1_DMU_n1;
+            Return -1;
+        }
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61082020_fail_SSA_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SETBIN2_BIRA_BISR1_DMU_0;
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+	}
+}
+
+Flow NOM_REPAIR
+{
+    	FlowItem ALL_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_PRESCREEN ALL_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_PRESCREEN @EDC
+	{
+		Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99212010_fail_ARR_UNCORE_CKX_ALL_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_PRESCREEN_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98212010_fail_ARR_UNCORE_CKX_ALL_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_PRESCREEN_n1;
+            Return -1;
+        }
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61042012_fail_ALL_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_PRESCREEN_0;
+			GoTo SSA_BEGINNOM_BIRA_BISR;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN;
+		}
+		Result 2
+		{
+			Property PassFail = "Pass";
+			GoTo SSA_BEGINNOM_BIRA_BISR;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo SSA_BEGINNOM_BIRA_BISR;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo SSA_BEGINNOM_BIRA_BISR;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61042013_fail_ALL_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_PRESCREEN_5;
+			GoTo ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN;
+		}
+		Result 6
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61042014_fail_ALL_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_PRESCREEN_6;
+			GoTo ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN;
+		}
+		Result 7
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61042015_fail_ALL_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_PRESCREEN_7;
+			GoTo ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN;
+		}
+		Result 8
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61042016_fail_ALL_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_PRESCREEN_8;
+			GoTo ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN;
+		}
+		Result 9
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61042017_fail_ALL_UNCORE_HRY_E_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_PRESCREEN_9;
+			GoTo ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN;
+		}
+	}	
+	FlowItem BEGINNOM_FUSE_VFDM BEGINNOM_FUSE_VFDM
+	{
+		Result -2 
+		{ 
+			Property PassFail = "Fail"; 
+			Return -2; 
+		}
+		Result -1 
+		{ 
+			Property PassFail = "Fail"; 
+			Return -1; 
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_NOM_SETBIN2;
+		}
+	}
+	
+	FlowItem ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN @EDC
+	{
+		Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99612008_fail_ARR_UNCORE_CKX_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98612008_fail_ARR_UNCORE_CKX_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_n1;
+            Return -1;
+        }
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61152000_fail_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_0;
+			##EDC## SetBin b61152000_fail_ARR_UNCORE_CKX_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_0;
+			Return 1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Pass";
+			IncrementCounters ARR_UNCORE_CKX::p61152001_pass_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_2;
+			##EDC## SetBin b61152001_fail_ARR_UNCORE_CKX_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_2;
+			Return 1;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			IncrementCounters ARR_UNCORE_CKX::p61152002_pass_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_3;
+			##EDC## SetBin b61152002_fail_ARR_UNCORE_CKX_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_3;
+			Return 1;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			IncrementCounters ARR_UNCORE_CKX::p61152003_pass_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_4;
+			##EDC## SetBin b61152003_fail_ARR_UNCORE_CKX_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_4;
+			Return 1;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61152004_fail_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_5;
+			##EDC## SetBin b61152004_fail_ARR_UNCORE_CKX_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_5;
+			Return 1;
+		}
+		Result 6
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61152005_fail_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_6;
+			##EDC## SetBin b61152005_fail_ARR_UNCORE_CKX_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_6;		
+			
+			Return 1;
+		}
+		Result 7
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61152006_fail_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_7;
+			##EDC## SetBin b61152006_fail_ARR_UNCORE_CKX_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_7;
+			Return 1;
+		}
+		Result 8
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61152007_fail_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_8;
+			##EDC## SetBin b61152007_fail_ARR_UNCORE_CKX_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_8;
+			Return 1;
+		}
+		Result 9
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61152008_fail_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_9;
+			##EDC## SetBin b61152008_fail_ARR_UNCORE_CKX_ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN_9;
+			Return 1;
+		}
+	}
+	FlowItem SSA_BEGINNOM_BIRA_BISR SSA_BEGINNOM_BIRA_BISR
+	{
+		Result -2 
+		{ 
+			Property PassFail = "Fail"; 
+			Return -2; 
+		}
+		Result -1 
+		{ 
+			Property PassFail = "Fail"; 
+			Return -1; 
+		}
+		Result 0 
+		{ 
+			Property PassFail = "Fail";
+			GoTo ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_NOM_CHECK_BIN; 
+		}
+		Result 1 
+		{
+			Property PassFail = "Pass";
+			GoTo ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_NOM_CHECK_BIN; 
+		}
+	}
+	FlowItem ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_NOM_CHECK_BIN ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_NOM_CHECK_BIN @EDC
+	{
+		Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99212003_fail_ARR_UNCORE_CKX_ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_NOM_CHECK_BIN_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98212003_fail_ARR_UNCORE_CKX_ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_NOM_CHECK_BIN_n1;
+            Return -1;
+        }
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61112002_fail_ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_NOM_CHECK_BIN_0;
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BEGINNOM_FUSE_VFDM;
+		}
+		Result 2
+		{
+			Property PassFail = "Pass";
+			GoTo ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN;
+		}
+	}
+	FlowItem ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_NOM_SETBIN2 ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_NOM_SETBIN2 @EDC
+	{
+		Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99212004_fail_ARR_UNCORE_CKX_ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_NOM_SETBIN2_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98212004_fail_ARR_UNCORE_CKX_ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_NOM_SETBIN2_n1;
+            Return -1;
+        }
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61182002_fail_ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_NOM_SETBIN2_0;
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo ALL_UNCORE_HRY_K_BEGINCPUPKG_TAP_VNNAON_X_X_X_ALL_POSTSCREEN;
+		}
+	}
+}
+
+Flow ARR_UNCORE_CKX_BEGINCPUPKG
+{
+    FlowItem ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_DUMMY ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_DUMMY @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99212016_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_DUMMY_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98212016_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_DUMMY_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b21152003_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_DUMMY_0;
+            IncrementCounters ARR_UNCORE_CKX::n21152003_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_DUMMY_0;
+			GoTo ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SET_BYPASS_REPAIR_B0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SET_BYPASS_REPAIR_B0;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b21152004_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_DUMMY_2;
+            IncrementCounters ARR_UNCORE_CKX::n21152004_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_DUMMY_2;
+			GoTo ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SET_BYPASS_REPAIR_B0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b21152005_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_DUMMY_3;
+            IncrementCounters ARR_UNCORE_CKX::n21152005_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_DUMMY_3;
+			GoTo ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SET_BYPASS_REPAIR_B0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b97212005_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_DUMMY_4;
+            IncrementCounters ARR_UNCORE_CKX::n97212005_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_DUMMY_4;
+			GoTo ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SET_BYPASS_REPAIR_B0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b21192005_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_DUMMY_5;
+            IncrementCounters ARR_UNCORE_CKX::n21192005_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_DUMMY_5;
+			GoTo ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SET_BYPASS_REPAIR_B0;
+        }
+    }
+
+    FlowItem NOM_REPAIR NOM_REPAIR
+	{
+		Result -2 
+		{ 
+			Property PassFail = "Fail"; 
+			Return -2; 
+		}
+		Result -1 
+		{ 
+			Property PassFail = "Fail"; 
+			Return -1; 
+		}
+		Result 0 
+		{ 
+			Property PassFail = "Fail";
+			GoTo ALL_UNCORE_X_E_BEGINCPUPKG_X_X_X_X_X_X_MBIST_DFF_WRITE_NOM; }
+		Result 1 
+		{ 
+			Property PassFail = "Pass";
+			GoTo ALL_UNCORE_X_E_BEGINCPUPKG_X_X_X_X_X_X_MBIST_DFF_WRITE_NOM; 
+		}
+	}
+    FlowItem ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1 ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99212018_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98212018_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b21152009_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1_0;
+            IncrementCounters ARR_UNCORE_CKX::n21152009_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1_0;
+			Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MAX_X_F1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b21152010_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1_2;
+            IncrementCounters ARR_UNCORE_CKX::n21152010_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1_2;
+			Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b21152011_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1_3;
+            IncrementCounters ARR_UNCORE_CKX::n21152011_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1_3;
+			Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97212007_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1_4;
+            IncrementCounters ARR_UNCORE_CKX::n97212007_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1_4;
+			Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b21192007_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1_5;
+            IncrementCounters ARR_UNCORE_CKX::n21192007_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1_5;
+			Return 0;
+        }
+    }
+
+    FlowItem ALL_UNCORE_X_E_BEGINCPUPKG_X_X_X_X_X_X_MBIST_DFF_WRITE_NOM ALL_UNCORE_X_E_BEGINCPUPKG_X_X_X_X_X_X_MBIST_DFF_WRITE_NOM @EDC
+	{
+		Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99212026_fail_ARR_UNCORE_CKX_ALL_UNCORE_X_E_BEGINCPUPKG_X_X_X_X_X_X_MBIST_DFF_WRITE_NOM_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98212026_fail_ARR_UNCORE_CKX_ALL_UNCORE_X_E_BEGINCPUPKG_X_X_X_X_X_X_MBIST_DFF_WRITE_NOM_n1;
+            Return -1;
+        }
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61142012_fail_ALL_UNCORE_X_E_BEGINCPUPKG_X_X_X_X_X_X_MBIST_DFF_WRITE_NOM_0;
+			GoTo ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1;
+		}
+		Result 2
+		{
+			Property PassFail = "Pass";
+			GoTo ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1;
+		}
+        Result 3
+		{
+			Property PassFail = "Pass";
+			GoTo ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1;
+		}
+        Result 4
+		{
+			Property PassFail = "Pass";
+			GoTo ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1;
+		}
+        Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61142013_fail_ALL_UNCORE_X_E_BEGINCPUPKG_X_X_X_X_X_X_MBIST_DFF_WRITE_NOM_5;
+			GoTo ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1;
+		}
+        Result 6
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61142014_fail_ALL_UNCORE_X_E_BEGINCPUPKG_X_X_X_X_X_X_MBIST_DFF_WRITE_NOM_6;
+			GoTo ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1;
+		}
+        Result 7
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61142015_fail_ALL_UNCORE_X_E_BEGINCPUPKG_X_X_X_X_X_X_MBIST_DFF_WRITE_NOM_7;
+			GoTo ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1;
+		}
+        Result 8
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61142016_fail_ALL_UNCORE_X_E_BEGINCPUPKG_X_X_X_X_X_X_MBIST_DFF_WRITE_NOM_8;
+			GoTo ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1;
+		}
+        Result 9
+		{
+			Property PassFail = "Fail";
+			IncrementCounters ARR_UNCORE_CKX::n61142017_fail_ALL_UNCORE_X_E_BEGINCPUPKG_X_X_X_X_X_X_MBIST_DFF_WRITE_NOM_9;
+			GoTo ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1;
+		}
+
+	}
+    FlowItem ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MAX_X_F1 ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MAX_X_F1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99212014_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MAX_X_F1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98212014_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MAX_X_F1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b21162004_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MAX_X_F1_0;
+            IncrementCounters ARR_UNCORE_CKX::n21162004_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MAX_X_F1_0;
+			Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b21162005_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MAX_X_F1_2;
+            IncrementCounters ARR_UNCORE_CKX::n21162005_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MAX_X_F1_2;
+			Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b21162006_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MAX_X_F1_3;
+            IncrementCounters ARR_UNCORE_CKX::n21162006_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MAX_X_F1_3;
+			Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97212003_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MAX_X_F1_4;
+            IncrementCounters ARR_UNCORE_CKX::n97212003_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MAX_X_F1_4;
+			Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b21192003_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MAX_X_F1_5;
+            IncrementCounters ARR_UNCORE_CKX::n21192003_fail_ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MAX_X_F1_5;
+			Return 0;
+        }
+    }
+	        FlowItem ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SET_BYPASS_REPAIR_B0 ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SET_BYPASS_REPAIR_B0 @EDC
+        {        
+                Result -2
+            {
+                Property PassFail = "Fail";
+                SetBin b99212006_fail_ARR_UNCORE_CKX_ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SET_BYPASS_REPAIR_B0_n2;
+                Return -2;
+            }
+                Result -1
+            {
+                Property PassFail = "Fail";
+                SetBin b98212006_fail_ARR_UNCORE_CKX_ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SET_BYPASS_REPAIR_B0_n1;
+                Return -1;
+            }
+            
+                Result 0
+            {
+                Property PassFail = "Pass";
+				#IncrementCounters ARR_UNCORE_CKX::p21162000_pass_ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SET_BYPASS_REPAIR_B0_0;
+				##EDC## SetBin b21162000_fail_ARR_UNCORE_CKX_ALL_UNCORE_AUX_E_BEGINCPUPKG_X_X_X_X_X_SET_BYPASS_REPAIR_B0_0;
+			Return 1;
+            }
+                Result 1
+            {
+                Property PassFail = "Pass";
+			GoTo NOM_REPAIR;
+            }
+                Result 2
+            {
+                Property PassFail = "Pass";
+			GoTo ALL_UNCORE_SB_K_BEGINCPUPKG_X_VNNAON_MIN_X_F1;
+            }
+
+        }
+
+    
+}
+
+Flow ARR_UNCORE_CKX_LTTCCPUPKG
+{
+	FlowItem ALL_UNCORE_SB_K_LTTCCPUPKG_X_VNNAON_MIN_X_F1 ALL_UNCORE_SB_K_LTTCCPUPKG_X_VNNAON_MIN_X_F1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99942001_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_LTTCCPUPKG_X_VNNAON_MIN_X_F1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98942001_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_LTTCCPUPKG_X_VNNAON_MIN_X_F1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b94212003_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_LTTCCPUPKG_X_VNNAON_MIN_X_F1_0;
+            IncrementCounters ARR_UNCORE_CKX::n94212003_fail_ALL_UNCORE_SB_K_LTTCCPUPKG_X_VNNAON_MIN_X_F1_0;
+			Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b94212004_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_LTTCCPUPKG_X_VNNAON_MIN_X_F1_2;
+            IncrementCounters ARR_UNCORE_CKX::n94212004_fail_ALL_UNCORE_SB_K_LTTCCPUPKG_X_VNNAON_MIN_X_F1_2;
+			Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b94212005_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_LTTCCPUPKG_X_VNNAON_MIN_X_F1_3;
+            IncrementCounters ARR_UNCORE_CKX::n94212005_fail_ALL_UNCORE_SB_K_LTTCCPUPKG_X_VNNAON_MIN_X_F1_3;
+			Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97942001_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_LTTCCPUPKG_X_VNNAON_MIN_X_F1_4;
+            IncrementCounters ARR_UNCORE_CKX::n97942001_fail_ALL_UNCORE_SB_K_LTTCCPUPKG_X_VNNAON_MIN_X_F1_4;
+			Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b94192001_fail_ARR_UNCORE_CKX_ALL_UNCORE_SB_K_LTTCCPUPKG_X_VNNAON_MIN_X_F1_5;
+            IncrementCounters ARR_UNCORE_CKX::n94192001_fail_ALL_UNCORE_SB_K_LTTCCPUPKG_X_VNNAON_MIN_X_F1_5;
+			Return 0;
+        }
+    }
+}

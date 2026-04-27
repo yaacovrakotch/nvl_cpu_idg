@@ -1,0 +1,137 @@
+Version 1.0;
+
+SpecificationSet  cpu_clk_override_distmin_lvl (max_lvl,min_lvl,nom_lvl,vmax_atom_1200mV_lvl,vmax_core_1200mV_lvl,vmax_uncore_1200mV_lvl) Inherits __main__::SBF_BFUNC
+{
+Voltage p_vccvnnaon_spec = 0.825V,0.675V,0.77V,1.2V,1.2V,1.2V;
+Voltage p_vccio_spec = 1.32V,1.15V,1.25V,1.2V,1.2V,1.2V;
+Voltage p_vcc1p8a_spec = 1.89V,1.67V,1.80V,1.2V,1.2V,1.2V;
+Voltage p_vccia_spec = 0.65V;
+Voltage p_vccr_spec = 0.65V;
+Voltage p_vccatom0_spec = 0.65V;
+Voltage p_vccatom1_spec = 0.65V;
+Voltage p_vccatom2_spec = 0.65V;
+Voltage p_vccatom3_spec = 0.65V;
+Voltage p_vcccore0_spec = 0.65V;
+Voltage p_vcccore1_spec = 0.65V;
+Voltage p_vcccore2_spec = 0.65V;
+Voltage p_vcccore3_spec = 0.65V;
+}
+
+SpecificationSet  cpu_clk_override_distnom_lvl (max_lvl,min_lvl,nom_lvl,vmax_atom_1200mV_lvl,vmax_core_1200mV_lvl,vmax_uncore_1200mV_lvl) Inherits __main__::SBF_BFUNC
+{
+Voltage p_vccvnnaon_spec = 0.825V,0.675V,0.77V,1.2V,1.2V,1.2V;
+Voltage p_vccio_spec = 1.32V,1.15V,1.25V,1.2V,1.2V,1.2V;
+Voltage p_vcc1p8a_spec = 1.89V,1.67V,1.80V,1.2V,1.2V,1.2V;
+Voltage p_vccia_spec = 0.685V;
+Voltage p_vccr_spec = 0.675V;
+Voltage p_vccatom0_spec = 0.675V;
+Voltage p_vccatom1_spec = 0.675V;
+Voltage p_vccatom2_spec = 0.675V;
+Voltage p_vccatom3_spec = 0.675V;
+Voltage p_vcccore0_spec = 0.675V;
+Voltage p_vcccore1_spec = 0.675V;
+Voltage p_vcccore2_spec = 0.675V;
+Voltage p_vcccore3_spec = 0.675V;
+}
+
+SpecificationSet  cpu_clk_override_distmax_lvl (max_lvl,min_lvl,nom_lvl,vmax_atom_1200mV_lvl,vmax_core_1200mV_lvl,vmax_uncore_1200mV_lvl) Inherits __main__::SBF_BFUNC
+{
+Voltage p_vccvnnaon_spec = 0.825V,0.675V,0.77V,1.2V,1.2V,1.2V;
+Voltage p_vccio_spec = 1.32V,1.15V,1.25V,1.2V,1.2V,1.2V;
+Voltage p_vcc1p8a_spec = 1.89V,1.67V,1.80V,1.2V,1.2V,1.2V;
+Voltage p_vccia_spec = 0.96V;
+Voltage p_vccr_spec = 0.95V;
+Voltage p_vccatom0_spec = 0.95V;
+Voltage p_vccatom1_spec = 0.95V;
+Voltage p_vccatom2_spec = 0.95V;
+Voltage p_vccatom3_spec = 0.95V;
+Voltage p_vcccore0_spec = 0.95V;
+Voltage p_vcccore1_spec = 0.95V;
+Voltage p_vcccore2_spec = 0.95V;
+Voltage p_vcccore3_spec = 0.95V;
+
+}
+SpecificationSet  cpu_clk_override_dcadistmax_lvl (max_lvl,min_lvl,nom_lvl,vmax_atom_1200mV_lvl,vmax_core_1200mV_lvl,vmax_uncore_1200mV_lvl) Inherits __main__::SBF_BFUNC
+{
+Voltage p_vccvnnaon_spec = 0.825V,0.675V,0.77V,1.2V,1.2V,1.2V;
+Voltage p_vccio_spec = 1.32V,1.15V,1.25V,1.2V,1.2V,1.2V;
+Voltage p_vcc1p8a_spec = 1.89V,1.67V,1.80V,1.2V,1.2V,1.2V;
+Voltage p_vccia_spec = 0.96V;
+Voltage p_vccr_spec = 0.95V;
+Voltage p_vccatom0_spec = 0.95V;
+Voltage p_vccatom1_spec = 0.95V;
+Voltage p_vccatom2_spec = 0.95V;
+Voltage p_vccatom3_spec = 0.95V;
+Voltage p_vcccore0_spec = 0.95V;
+Voltage p_vcccore1_spec = 0.95V;
+Voltage p_vcccore2_spec = 0.95V;
+Voltage p_vcccore3_spec = 0.95V;
+}
+
+TestConditionGroup cpu_clk_override_distmin_lvl_tcg
+{
+	SpecificationSet = cpu_clk_override_distmin_lvl;
+	Level = __main__::SBF;
+}
+
+TestConditionGroup cpu_clk_override_distnom_lvl_tcg
+{
+	SpecificationSet = cpu_clk_override_distnom_lvl;
+	Level = __main__::SBF;
+}
+
+TestConditionGroup cpu_clk_override_distmax_lvl_tcg
+{
+	SpecificationSet = cpu_clk_override_distmax_lvl;
+	Level = __main__::SBF;
+}
+TestConditionGroup cpu_clk_override_dcadistmax_lvl_tcg
+{
+	SpecificationSet = cpu_clk_override_dcadistmax_lvl;
+	Level = __main__::SBF;
+}
+TestCondition cpu_clk_override_distnom_sharednom_lvl
+{
+	TestConditionGroup  = cpu_clk_override_distnom_lvl_tcg;
+	Selector = nom_lvl;
+}
+
+TestCondition cpu_clk_override_distmax_sharedmax_lvl
+{
+	TestConditionGroup  = cpu_clk_override_distmax_lvl_tcg;
+	Selector = max_lvl;
+}
+
+TestCondition cpu_clk_override_dcadistmax_sharedmax_lvl
+{
+	TestConditionGroup  = cpu_clk_override_dcadistmax_lvl_tcg;
+	Selector = max_lvl;
+}
+
+TestCondition cpu_clk_override_dcadistmax_sharednom_lvl
+{
+	TestConditionGroup  = cpu_clk_override_dcadistmax_lvl_tcg;
+	Selector = nom_lvl;
+}
+TestCondition cpu_clk_override_dcadistmax_sharedmin_lvl
+{
+	TestConditionGroup  = cpu_clk_override_dcadistmax_lvl_tcg;
+	Selector = min_lvl;
+}
+TestCondition cpu_clk_override_distmin_sharedmin_lvl
+{
+	TestConditionGroup  = cpu_clk_override_distmin_lvl_tcg;
+	Selector = min_lvl;
+}
+
+TestCondition cpu_clk_override_distnom_sharedmin_lvl
+{
+	TestConditionGroup  = cpu_clk_override_distnom_lvl_tcg;
+	Selector = min_lvl;
+}
+
+TestCondition cpu_clk_override_distmax_sharedmin_lvl
+{
+	TestConditionGroup  = cpu_clk_override_distmax_lvl_tcg;
+	Selector = min_lvl;
+}

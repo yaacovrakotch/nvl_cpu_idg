@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HDMTSTRecipe>
+  <TestProgram>
+    <RuncardFile>{TPSyncName}</RuncardFile>
+    <TPSynchType>{TPSyncName}</TPSynchType>
+  </TestProgram>
+  <SkipDICheckForOperations>6248,6249,5248,5249,7820,5820,7827,5827,7821,7822,7823,7824,7825,7826,7828,7872,5821,5822,5823,5824,5825,5826,5828,6274,6275,5274,5275,6208,5208</SkipDICheckForOperations>
+  <UseTrueVarName>true</UseTrueVarName>
+  <LotAttributeUserVars>
+    <LotAttribute MESAttribute="1832" Name="SC_FLEXBOMHRI" Type="STRING" EngrValue="000000000000" AbortIfEmpty="True" />
+    <LotAttribute MESAttribute="1473" Name="SC_FLEXBOMRECIPE" Type="STRING" EngrValue="000000000000" AbortIfEmpty="True" />
+	<LotAttribute MESAttribute="6658" Name="TP_FUSE_ENABLED" Type="STRING" EngrValue="1"  AbortIfEmpty="FALSE" />
+  </LotAttributeUserVars>
+  <CustomUserVars>
+    <UserVar Name="SC-DCP-INFO" Value="M:\RFC\DCP\ANN_PCS_DCPr0.xml" />
+	<UserVar Name="SC_ULAT_FILE" Value="J:\ult_download" />
+    <UserVar Name="SC_ULAT_MODE" Value="PROD" />
+    <UserVar Name="SC_ULAT_TYPE" Value="LOT" />
+    <UserVar Name="SC_TEMPERATURE" Value="{TC_TEMP1}" />
+    <UserVar Name="SC_CURRENT_PROCESS_STEP" Value="{TC_PROCESS_NAME1}" />
+    <UserVar Name="SC_CURRENT_PROCESS_TYPE" Value="{TC_PROCESS_NAME1}" />
+    <UserVar Name="SC_FUSE_ENABLED" Value="1" />
+	<UserVar Name="SC_PUP_FILE_PATH" Value="J:\ult_download" />
+	<UserVar Name="SC_MPS" Value="1"></UserVar>
+  </CustomUserVars>
+  <Flags>
+    <LoadULT>{BG_ULT}</LoadULT>
+    <ULTStackPayLoad>true</ULTStackPayLoad>
+    <ULTGetDFFSubDataEnable>true</ULTGetDFFSubDataEnable>
+    <AutoLoadScGlobals>True</AutoLoadScGlobals>
+    <EngineeringOptimizedInit>False</EngineeringOptimizedInit>
+    <ULTSelectiveDownloadEnable>{BG_ULT}</ULTSelectiveDownloadEnable>
+    <ULTSelectiveDownloadInputFilePath>
+    </ULTSelectiveDownloadInputFilePath>
+    <ADPMProduct>False</ADPMProduct>
+    <NoULTUnitAutoAbort>{BG_ULT}</NoULTUnitAutoAbort>
+  </Flags>
+  <MES>
+    <SplitQuantity>10</SplitQuantity>
+    <BinSplitEnabled>False</BinSplitEnabled>
+    <MoveoutMismatch>
+      <Allowance>10</Allowance>
+      <Percentage>False</Percentage>
+    </MoveoutMismatch>
+  </MES>
+  <FACT>
+    <GenerateLRF>{TC_GENERATELRF}</GenerateLRF>
+    <FACTMode>LotLevel</FACTMode>
+    <FACTProcessStep>CLASSHOT</FACTProcessStep>
+    <TwoStepFACT>FALSE</TwoStepFACT>
+    <FactRulesFilePath>{FuseRootDir}\fact\fact_rules_sfp.xml</FactRulesFilePath>
+    <FRFPath>{FuseRootDir}\fact\fact_rules_sfp.xml</FRFPath>
+    <LRFDownloadFolderPath>J:\fact_download</LRFDownloadFolderPath>
+  </FACT>
+</HDMTSTRecipe>

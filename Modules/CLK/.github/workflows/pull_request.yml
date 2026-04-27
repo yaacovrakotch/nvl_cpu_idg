@@ -1,0 +1,20 @@
+name: Pull Request Validation
+
+on:
+  pull_request:
+    branches: [ main, main/* ]
+    types:
+    - opened
+    - edited 
+    - synchronize
+    - reopened
+    - ready_for_review
+  pull_request_review:
+    branches:
+    - main
+    types:
+    - submitted
+
+jobs:
+  call-workflow:
+    uses: intel-restricted/applications.manufacturing.ate-test.torch.client.mtl.class.sharedatv-dbg/.github/workflows/module_pull_request.yml@v1

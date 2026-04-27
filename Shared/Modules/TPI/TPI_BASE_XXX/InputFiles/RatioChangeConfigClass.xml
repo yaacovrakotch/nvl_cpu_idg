@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Setup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="UF_RatioChange.xsd">
+	<domain_fuse_groups>
+		<domain>
+			<name>IA</name>
+			<registers>HVM:IA_P0_RATIO,HVM:IA_P1_RATIO,HVM:IA_PN_RATIO</registers>
+		</domain>
+		<domain>
+			<name>IAX2</name>
+			<registers>HVM:IA_P0_RATIO,HVM:IA_P1_RATIO,HVM:IA_PN_RATIO</registers>
+		</domain>
+		<domain>
+			<name>IAX3</name>
+			<registers>HVM:IA_P0_RATIO,HVM:IA_P1_RATIO,HVM:IA_PN_RATIO</registers>
+		</domain>
+		<domain>
+			<name>CLM</name>
+			<registers>HVM:RING_P0_RATIO,HVM:RING_P1_RATIO,HVM:RING_PN_RATIO</registers>
+		</domain>
+		<domain>
+			<name>KTI</name>
+			<registers>HVM:QPI_PLL_RATIO</registers>
+		</domain>
+		<domain>
+			<name>PCIE</name>
+			<registers>HVM:PCIE_PLL_RATIO</registers>
+		</domain>
+		<domain>
+			<name>DDRD</name>
+			<registers>HVM:MC_PLL_RATIO</registers>
+		</domain>
+	</domain_fuse_groups>
+
+ <!-- This is the one that all modules besides cache will use (if you don't need to change wait cycles (IDXI/STI) -->
+    <configuration>
+        <configuration_name>Default</configuration_name>
+        <reset_pattern>HVM:*c90*</reset_pattern>
+    </configuration>
+<!-- This is the one that you'll use if you need to change wait cycles (IDXI/STI) !-->
+</Setup>

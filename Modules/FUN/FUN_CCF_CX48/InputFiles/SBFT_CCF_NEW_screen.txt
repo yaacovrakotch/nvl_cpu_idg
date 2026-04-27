@@ -1,0 +1,30 @@
+START_SCREEN:FUN_CCF_SCREEN
+ 
+#RunOn	: TestName  		: DataType  : ParamType 	: Param1												       	 	: Oper.		: ParamType 	: Param2		: TmpStore	: OnTrue    	: OnFalse
+EXEC    : GetCore0          : STRING   : EXPRESSION : ExecCallback('CopyTracker', '--tracker=CR --gsds=G.U.S.CORESTATUS')	: 	- 		: - 			: - 			: - 		: CheckFull 	: CheckFull
+EXEC    : CheckFull          : STRING   : SHAREDSTORAGE : G.U.S.CORESTATUS													: 	== 		: LITERAL 		: "0000" 		: - 		: SetFull0123	: UnSetFull0123
+EXEC  	: SetFull0123      	: INT      : GLOBAL		: "FUN_CCF::FUN_CCF_SPECS.BYPASS_DCM0123"                                				:	SET	 	: LITERAL		: "-1"   	 	: -	        : SetFull0		: 0
+EXEC  	: SetFull0 	      	: INT      : GLOBAL		: "FUN_CCF::FUN_CCF_SPECS.BYPASS_DCM0"                                					:	SET	 	: LITERAL		: "1"   	 	: -	        : SetFull1		: 0
+EXEC  	: SetFull1 	      	: INT      : GLOBAL		: "FUN_CCF::FUN_CCF_SPECS.BYPASS_DCM1"                                					:	SET	 	: LITERAL		: "1"   	 	: -	        : SetFull2		: 0
+EXEC  	: SetFull2	      	: INT      : GLOBAL		: "FUN_CCF::FUN_CCF_SPECS.BYPASS_DCM2"                                					:	SET	 	: LITERAL		: "1"   	 	: -	        : SetFull3		: 0
+EXEC  	: SetFull3 	      	: INT      : GLOBAL		: "FUN_CCF::FUN_CCF_SPECS.BYPASS_DCM3"                                					:	SET	 	: LITERAL		: "1"   	 	: -	        :   1 			: 0
+
+EXEC  	: UnSetFull0123    	: INT      : GLOBAL		: "FUN_CCF::FUN_CCF_SPECS.BYPASS_DCM0123"                                				:	SET	 	: LITERAL		: "1"   	 	: -	        : GetCore0A		: 0
+
+EXEC    : GetCore0A         : STRING   : EXPRESSION : "Substring([G.U.S.CORESTATUS], 3, 1)"               							:	==		: LITERAL 		: "1" 			: - 		: Test0a    	: Test0b
+EXEC  	: Test0a 	      	: INT      : GLOBAL		: "FUN_CCF::FUN_CCF_SPECS.BYPASS_DCM0"                                					:	SET	 	: LITERAL		: "1"   	 	: -	        : GetCore1A		: 0
+EXEC  	: Test0b 	        : INT      : GLOBAL		: "FUN_CCF::FUN_CCF_SPECS.BYPASS_DCM0"                          						:	SET	 	: LITERAL		: "-1"    		: -	        : GetCore1A		: 0
+
+EXEC    : GetCore1A         : STRING   : EXPRESSION : "Substring([G.U.S.CORESTATUS], 2, 1)"              							:	==		: LITERAL 		: "1" 			: - 		: Test1a    	: Test1b
+EXEC  	: Test1a 	      	: INT      : GLOBAL		: "FUN_CCF::FUN_CCF_SPECS.BYPASS_DCM1"                                					:	SET	 	: LITERAL		: "1"   	 	: -	        : GetCore2A 	: 0
+EXEC  	: Test1b 	        : INT      : GLOBAL		: "FUN_CCF::FUN_CCF_SPECS.BYPASS_DCM1"                           						:	SET	 	: LITERAL		: "-1"    		: -	        : GetCore2A 	: 0
+
+EXEC    : GetCore2A         : STRING   : EXPRESSION : "Substring([G.U.S.CORESTATUS], 1, 1)"               							:	==		: LITERAL 		: "1" 			: - 		: Test2a    	: Test2b
+EXEC  	: Test2a 	      	: INT      : GLOBAL		: "FUN_CCF::FUN_CCF_SPECS.BYPASS_DCM2"                                					:	SET	 	: LITERAL		: "1"   	 	: -	        : GetCore3A		: 0
+EXEC  	: Test2b 	        : INT      : GLOBAL		: "FUN_CCF::FUN_CCF_SPECS.BYPASS_DCM2"                           						:	SET	 	: LITERAL		: "-1"    		: -	        : GetCore3A		: 0
+
+EXEC    : GetCore3A         : STRING   : EXPRESSION : "Substring([G.U.S.CORESTATUS], 0, 1)"               							:	==		: LITERAL 		: "1" 			: - 		: Test3a    	: Test3b
+EXEC  	: Test3a 	      	: INT      : GLOBAL		: "FUN_CCF::FUN_CCF_SPECS.BYPASS_DCM3"                                					:	SET	 	: LITERAL		: "1"   	 	: -	        : 	1			: 0
+EXEC  	: Test3b 	        : INT      : GLOBAL		: "FUN_CCF::FUN_CCF_SPECS.BYPASS_DCM3"                           						:	SET	 	: LITERAL		: "-1"    		: -	        :   1 			: 0
+ 
+END_SCREEN

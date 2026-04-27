@@ -1,0 +1,58 @@
+Version 1.0;
+
+UserVars `TestPlanName`
+{
+    String MIN_DATA = "SDC";
+    String NOM_DATA = "SDC";
+    String MAX_DATA = "SDC";
+    Integer SampleBypass = -1;
+}
+
+SelectorRuleCollection SampleRate
+{
+    SelectorRule VMIN_HVM(sampled, notsampled)
+    {
+        sampled => `TestPlanName`.MIN_DATA == "ALLSAMPLED";
+        notsampled;
+    }
+    SelectorRule VMIN_BBS(sampled, notsampled)
+    {
+        sampled => `TestPlanName`.MIN_DATA == "ALLSAMPLED" || `TestPlanName`.MIN_DATA == "HVM";
+        notsampled;
+    }
+    SelectorRule VMIN_SDC(sampled, notsampled)
+    {
+        sampled => `TestPlanName`.MIN_DATA == "ALLSAMPLED" || `TestPlanName`.MIN_DATA == "HVM" || `TestPlanName`.MIN_DATA == "BBS";
+        notsampled;
+    }
+    SelectorRule VNOM_HVM(sampled, notsampled)
+    {
+        sampled => `TestPlanName`.NOM_DATA == "ALLSAMPLED";
+        notsampled;
+    }
+    SelectorRule VNOM_BBS(sampled, notsampled)
+    {
+        sampled => `TestPlanName`.NOM_DATA == "ALLSAMPLED" || `TestPlanName`.NOM_DATA == "HVM";
+        notsampled;
+    }
+    SelectorRule VNOM_SDC(sampled, notsampled)
+    {
+        sampled => `TestPlanName`.NOM_DATA == "ALLSAMPLED" || `TestPlanName`.NOM_DATA == "HVM" || `TestPlanName`.NOM_DATA == "BBS";
+        notsampled;
+    }
+    SelectorRule VMAX_HVM(sampled, notsampled)
+    {
+        sampled => `TestPlanName`.MAX_DATA == "ALLSAMPLED";
+        notsampled;
+    }
+    SelectorRule VMAX_BBS(sampled, notsampled)
+    {
+        sampled => `TestPlanName`.MAX_DATA == "ALLSAMPLED" || `TestPlanName`.MAX_DATA == "HVM";
+        notsampled;
+    }
+    SelectorRule VMAX_SDC(sampled, notsampled)
+    {
+        sampled => `TestPlanName`.MAX_DATA == "ALLSAMPLED" || `TestPlanName`.MAX_DATA == "HVM" || `TestPlanName`.MAX_DATA == "BBS";
+        notsampled;
+    }
+}

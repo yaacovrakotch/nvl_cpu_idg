@@ -1,0 +1,1425 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan TPI_DIERCVRY_CXX;
+
+Import "TPI_DIERCVRY_CXX.usrv";
+
+# Test Counter Definition
+
+Counters
+{
+    n93102000_fail_CTRL_X_RUNCALLBACK_K_ENDCPUPKG_X_X_X_X_PRINTTOITUFF_CORE_0,
+    n93102001_fail_CTRL_X_RUNCALLBACK_K_ENDCPUPKG_X_X_X_X_PRINTTOITUFF_SLICE_0,
+    n93102002_fail_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_ARW_CORE0FLOW_0,
+    n93102003_fail_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_ARW_CORECHECK_0,
+    n93102004_fail_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_PNC_CORECHECK_0,
+    n93102005_fail_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_PNC_COREFLOW_0,
+    n93102006_fail_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_SLICECHECK_0,
+    n93102007_fail_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_SLICEFLOW_0,
+    n93102008_fail_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_ARW_CORE0FLOW_0,
+    n93102009_fail_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_ARW_CORECHECKFIN_0,
+    n93102010_fail_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_CRFININITCHK_0,
+    n93102011_fail_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_CRFININITCHK_2,
+    n93102012_fail_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_PNC_CORECHECKFIN_0,
+    n93102013_fail_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_PNC_COREFLOW_0,
+    n93102014_fail_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLCFININITCHK_0,
+    n93102015_fail_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLCFININITCHK_2,
+    n93102016_fail_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLICECHECKFIN_0,
+    n93102017_fail_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLICEFLOW_0,
+    n93102018_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE0TOTRACKER_0,
+    n93102019_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE0TOTRACKER_2,
+    n93102020_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE0TOTRACKERGSDS_0,
+    n93102021_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE0TOTRACKERGSDS_2,
+    n93102022_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE1TOTRACKER_0,
+    n93102023_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE1TOTRACKER_2,
+    n93102024_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE1TOTRACKERGSDS_0,
+    n93102025_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE1TOTRACKERGSDS_2,
+    n93102026_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_REVERSEDFF_0,
+    n93102027_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_REVERSEDFF_3,
+    n93102028_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_REVERSEDFF2CDIE_0,
+    n93102029_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_REVERSEDFF2CDIE_3,
+    n93102030_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICE0TOTRACKER_0,
+    n93102031_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICE0TOTRACKER_2,
+    n93102032_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICE1TOTRACKER_0,
+    n93102033_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICE1TOTRACKER_2,
+    n93102034_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICETOTRACKERGSDS_0,
+    n93102035_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICETOTRACKERGSDS_2,
+    n93102036_fail_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOCORE0_0,
+    n93102037_fail_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOCORE0_2,
+    n93102038_fail_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOCORE1_0,
+    n93102039_fail_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOCORE1_2,
+    n93102040_fail_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOSLICE0_0,
+    n93102041_fail_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOSLICE0_2,
+    n93102042_fail_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOSLICE1_0,
+    n93102043_fail_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOSLICE1_2
+} # End of Test Counter Definition
+
+CSharpTest DieRecoveryBase CTRL_X_PRIMEDIERECOVERY_K_INIT_X_X_X_X_X
+{
+    AllowDefeatures = TPI_DIERCVRY_CXX_Rules.RecoveryBypass("False","True","True","False","False");
+    EnablePreTestCheck = "False";
+    LogLevel = "Disabled";
+    RulesFile = __shared__::TpRule.If_S28_S52_HX28_P16C_S16C_DS28C_U8C("./Modules/TPI/TPI_DIERCVRY_CXX/InputFiles/DieRecovery_Rules_S28C.json","./Modules/TPI/TPI_DIERCVRY_CXX/InputFiles/DieRecovery_Rules_S52C.json","./Modules/TPI/TPI_DIERCVRY_CXX/InputFiles/DieRecovery_Rules_HX28C.json","./Modules/TPI/TPI_DIERCVRY_CXX/InputFiles/DieRecovery_Rules_P16C.json","./Modules/TPI/TPI_DIERCVRY_CXX/InputFiles/DieRecovery_Rules_S16C.json","./Modules/TPI/TPI_DIERCVRY_CXX/InputFiles/DieRecovery_Rules_S28C.json","./Modules/TPI/TPI_DIERCVRY_CXX/InputFiles/DieRecovery_Rules_U8C.json","./Modules/TPI/TPI_DIERCVRY_CXX/InputFiles/DieRecovery_Rules_H16C.json");
+    SKUFile = __shared__::TpRule.If_S28_S52_HX28_P16C_S16C_DS28C_U8C("./Shared/Modules/YBS/YBS_UPSS_XXX/InputFiles_JF/MODULE/IA_ATOM_Recovery_28C.xml","./Shared/Modules/YBS/YBS_UPSS_XXX/InputFiles_JF/MODULE/IA_ATOM_Recovery_52C.xml","./Shared/Modules/YBS/YBS_UPSS_XXX/InputFiles_PG/MB/MODULE/IA_ATOM_Recovery_28C.xml","./Shared/Modules/YBS/YBS_UPSS_XXX/InputFiles_BA/MODULE/IA_ATOM_Recovery_16C.xml","./Shared/Modules/YBS/YBS_UPSS_XXX/InputFiles_PG/DT/MODULE/IA_ATOM_Recovery_16C.xml","./Shared/Modules/YBS/YBS_UPSS_XXX/InputFiles_PG/DT/MODULE/IA_ATOM_Recovery_28C.xml","./Modules/TPI/TPI_DIERCVRY_CXX/InputFiles/IA_ATOM_Recovery_8C.xml","./Shared/Modules/YBS/YBS_UPSS_XXX/InputFiles_IDC/NVL_H16C/MODULE/IA_ATOM_Recovery_16C.xml");
+    SaveHistory = "True";
+    TrackerFile = __shared__::TpRule.If_48("./Modules/TPI/TPI_DIERCVRY_CXX/InputFiles/DieRecoveryTrackers_NVL_C48.json", __shared__::TpRule.If_C40("./Modules/TPI/TPI_DIERCVRY_CXX/InputFiles/DieRecoveryTrackers_NVL_C40.json","./Modules/TPI/TPI_DIERCVRY_CXX/InputFiles/DieRecoveryTrackers_NVL.json"));
+}
+
+CSharpTest ScreenTC DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_REVERSEDFF
+{
+    BypassPort = __shared__::TpRule.If_48_40(1,-1);
+    PostInstance = "PrintToItuff(--body_type strgval --body_data G.I.S.REVERTCOREREC)";
+    ScreenTestSet = "SetDFF2GSDS";
+    ScreenTestsFile = "./InputFiles/TPI_DIERCVRY_CXX_ScreenTest.txt";
+}
+
+CSharpTest ScreenTC DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_REVERSEDFF2CDIE
+{
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(-1,1);
+    PostInstance = __shared__::TpRule.If_CLASS_NVL_S52C("PrintToItuff(--body_type strgval --body_data G.I.S.REVERTCOREREC1)","PrintToItuff(--body_type strgval --body_data G.I.S.REVERTCOREREC)");
+    ScreenTestSet = __shared__::TpRule.If_CLASS_NVL_S52C("SetDFF2GSDS_2CDIE","SetDFF2GSDS");
+    ScreenTestsFile = "./InputFiles/TPI_DIERCVRY_CXX_ScreenTest.txt";
+}
+
+CSharpTest RunCallback DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE0TOTRACKER
+{
+    Callback = "WriteTracker";
+    Parameters = __shared__::TpRule.If_48_40(TPI_DIERCVRY_CXX::BEG_CORE0TOTRACKER.C48_40_Tracker,TPI_DIERCVRY_CXX::BEG_CORE0TOTRACKER.C816_Tracker);
+    PostInstance = __shared__::TpRule.If_48_40("CopyTracker(--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR3,CR2,CR1,CR0 --gsds G.I.S.CRINIT)","CopyTracker(--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR --gsds G.I.S.CRINIT)");
+    ResultPort = "[R]=='PASS'?1:0";
+}
+
+CSharpTest RunCallback DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE1TOTRACKER
+{
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(-1,1);
+    Callback = "WriteTracker";
+    Parameters = TPI_DIERCVRY_CXX_Rules.RecoveryRule("--tracker ACRM3_B,ACRM2_B,ACRM1_B,ACRM0_B,CR_B --dff "+__shared__::DFFVars.DIEID_CPU1+":SORT:COREREC","--tracker ACRM3_B,ACRM2_B,ACRM1_B,ACRM0_B,CR_B --dff "+__shared__::DFFVars.DIEID_CPU1+":SORT:COREREC","--tracker ACRM3_B,ACRM2_B,ACRM1_B,ACRM0_B,CR_B --dff "+__shared__::DFFVars.DIEID_CPU1+":RC_S1:COREREC","--tracker ACRM3_B,ACRM2_B,ACRM1_B,ACRM0_B,CR_B --dff "+__shared__::DFFVars.DIEID_CPU1+":PBIC_DAB:COREREC");
+    PostInstance = "CopyTracker(--tracker ACRM3_B,ACRM2_B,ACRM1_B,ACRM0_B,CR_B,ACRM3,ACRM2,ACRM1,ACRM0,CR --gsds G.I.S.CRINIT)";
+    ResultPort = "[R]=='PASS'?1:0";
+}
+
+CSharpTest RunCallback DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE0TOTRACKERGSDS
+{
+    BypassPort = __shared__::TpRule.If_48_40(1,-1);
+    Callback = "WriteTracker";
+    Parameters = TPI_DIERCVRY_CXX_Rules.RecoveryRule("--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR --gsds G.I.S.REVERTCOREREC","--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR --gsds G.I.S.REVERTCOREREC","--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR --dff "+__shared__::DFFVars.DIEID_CPU+":RC_S1:COREREC","--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR --dff "+__shared__::DFFVars.DIEID_CPU+":PBIC_DAB:COREREC");
+    PostInstance = "CopyTracker(--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR --gsds G.I.S.CRINIT)";
+    ResultPort = "[R]=='PASS'?1:0";
+}
+
+CSharpTest RunCallback DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE1TOTRACKERGSDS
+{
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(-1,1);
+    Callback = "WriteTracker";
+    Parameters = TPI_DIERCVRY_CXX_Rules.RecoveryRule("--tracker ACRM3_B,ACRM2_B,ACRM1_B,ACRM0_B,CR_B --gsds G.I.S.REVERTCOREREC1","--tracker ACRM3_B,ACRM2_B,ACRM1_B,ACRM0_B,CR_B --gsds G.I.S.REVERTCOREREC1","--tracker ACRM3_B,ACRM2_B,ACRM1_B,ACRM0_B,CR_B --dff "+__shared__::DFFVars.DIEID_CPU1+":RC_S1:COREREC","--tracker ACRM3_B,ACRM2_B,ACRM1_B,ACRM0_B,CR_B --dff "+__shared__::DFFVars.DIEID_CPU1+":PBIC_DAB:COREREC");
+    PostInstance = "CopyTracker(--tracker ACRM3_B,ACRM2_B,ACRM1_B,ACRM0_B,CR_B,ACRM3,ACRM2,ACRM1,ACRM0,CR --gsds G.I.S.CRINIT)";
+    ResultPort = "[R]=='PASS'?1:0";
+}
+
+CSharpTest RunCallback DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICE0TOTRACKER
+{
+    Callback = "WriteTracker";
+    Parameters = __shared__::TpRule.If_S28_S52_HX28_P16C_S16C_DS28C_U8C(TPI_DIERCVRY_CXX::BEG_SLICE0TOTRACKER.S28C_Tracker,TPI_DIERCVRY_CXX::BEG_SLICE0TOTRACKER.S52C_Tracker,TPI_DIERCVRY_CXX::BEG_SLICE0TOTRACKER.HX28C_Tracker,TPI_DIERCVRY_CXX::BEG_SLICE0TOTRACKER.P16C_Tracker,TPI_DIERCVRY_CXX::BEG_SLICE0TOTRACKER.S16C_Tracker,TPI_DIERCVRY_CXX::BEG_SLICE0TOTRACKER.DNLS28C_Tracker,TPI_DIERCVRY_CXX::BEG_SLICE0TOTRACKER.U8C_Tracker,TPI_DIERCVRY_CXX::BEG_SLICE0TOTRACKER.H16C_Tracker);
+    ResultPort = "[R]=='PASS'?1:0";
+}
+
+CSharpTest RunCallback DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICE1TOTRACKER
+{
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(-1,1);
+    Callback = "WriteTracker";
+    Parameters = TPI_DIERCVRY_CXX_Rules.RecoveryRule("--tracker SLC11_B,SLC10_B,SLC9_B,SLC8_B,SLC7_B,SLC6_B,SLC5_B,SLC4_B,SLC3_B,SLC2_B,SLC1_B,SLC0_B --dff "+__shared__::DFFVars.DIEID_CPU1+":SORT:SLICEREC  --rule CLASS_NVL_S52C_12C","--tracker SLC11_B,SLC10_B,SLC9_B,SLC8_B,SLC7_B,SLC6_B,SLC5_B,SLC4_B,SLC3_B,SLC2_B,SLC1_B,SLC0_B --dff "+__shared__::DFFVars.DIEID_CPU1+":SORT:SLICEREC  --rule CLASS_NVL_S52C_12C","--tracker SLC11_B,SLC10_B,SLC9_B,SLC8_B,SLC7_B,SLC6_B,SLC5_B,SLC4_B,SLC3_B,SLC2_B,SLC1_B,SLC0_B --dff "+__shared__::DFFVars.DIEID_CPU1+":RC_S1:SLICEREC  --rule CLASS_NVL_S52C_12C","--tracker SLC11_B,SLC10_B,SLC9_B,SLC8_B,SLC7_B,SLC6_B,SLC5_B,SLC4_B,SLC3_B,SLC2_B,SLC1_B,SLC0_B --dff "+__shared__::DFFVars.DIEID_CPU1+":PBIC_DAB:SLICEREC  --rule CLASS_NVL_S52C_12C");
+    ResultPort = "[R]=='PASS'?1:0";
+}
+
+CSharpTest RunCallback DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICETOTRACKERGSDS
+{
+    Callback = "CopyTracker";
+    Parameters = __shared__::TpRule.If_S28_S52_HX28_P16C_S16C_DS28C_U8C(TPI_DIERCVRY_CXX::BEG_SLICETOTRACKERGSDS.S28C_Tracker,TPI_DIERCVRY_CXX::BEG_SLICETOTRACKERGSDS.S52C_Tracker,TPI_DIERCVRY_CXX::BEG_SLICETOTRACKERGSDS.HX28C_Tracker,TPI_DIERCVRY_CXX::BEG_SLICETOTRACKERGSDS.P16C_Tracker,TPI_DIERCVRY_CXX::BEG_SLICETOTRACKERGSDS.S16C_Tracker,TPI_DIERCVRY_CXX::BEG_SLICETOTRACKERGSDS.DNLS28C_Tracker,TPI_DIERCVRY_CXX::BEG_SLICETOTRACKERGSDS.U8C_Tracker,TPI_DIERCVRY_CXX::BEG_SLICETOTRACKERGSDS.H16C_Tracker);
+}
+
+CSharpTest RunCallback DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_PNC_CORECHECK
+{
+    Callback = "RunRule";
+    Parameters = __shared__::TpRule.If_S28_S52_HX28_P16C_S16C_DS28C_U8C(TPI_DIERCVRY_CXX::CR_RULE.S28C_CR_Rule,TPI_DIERCVRY_CXX::CR_RULE.S52C_CR_Rule,TPI_DIERCVRY_CXX::CR_RULE.HX28C_CR_Rule,TPI_DIERCVRY_CXX::CR_RULE.P16C_CR_Rule,TPI_DIERCVRY_CXX::CR_RULE.S16C_CR_Rule,TPI_DIERCVRY_CXX::CR_RULE.DNLS28C_CR_Rule,TPI_DIERCVRY_CXX::CR_RULE.U8C_CR_Rule,TPI_DIERCVRY_CXX::CR_RULE.H16C_CR_Rule);
+    ResultPort = "[R]=='PASS'?1:0";
+}
+
+MultiTrialTest DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_PNC_COREFLOW
+{
+    TrialVariable CPU_TRIALS::FlowDomain.CORE;
+    TrialVariableExitAction "Continue";
+    CSharpTrialTest RunCallback "DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_PNC_COREFLOW_" + __shared__::FlowMatrix.bin
+    {
+        Callback = "RunRule";
+        TrialParam Parameters = __shared__::TpRule.If_S28_S52_HX28_P16C_S16C_DS28C_U8C("--tracker CR --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR_B,CR --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR3,CR2,CR1,CR0 --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR3,CR2,CR1,CR0 --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR3,CR2,CR1,CR0 --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR3,CR2,CR1,CR0 --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C");
+        ResultPort = "[R]=='PASS'?1:0";
+        TrialResult -2
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return -2;
+        }
+        TrialResult -1
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return -1;
+        }
+        TrialResult 0
+        {
+            PassFail Fail;
+            TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
+            Return 0;
+        }
+        TrialResult 1
+        {
+            PassFail Pass;
+            TrialAction "Exit";
+            Return 1;
+        }
+    }
+}
+
+CSharpTest RunCallback DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_SLICECHECK
+{
+    Callback = "RunRule";
+    Parameters = __shared__::TpRule.If_S28_S52_HX28_P16C_S16C_DS28C_U8C(TPI_DIERCVRY_CXX::SLC_RULE.S28C_SLC_Rule,TPI_DIERCVRY_CXX::SLC_RULE.S52C_SLC_Rule,TPI_DIERCVRY_CXX::SLC_RULE.HX28C_SLC_Rule,TPI_DIERCVRY_CXX::SLC_RULE.P16C_SLC_Rule,TPI_DIERCVRY_CXX::SLC_RULE.S16C_SLC_Rule,TPI_DIERCVRY_CXX::SLC_RULE.DNLS28C_SLC_Rule,TPI_DIERCVRY_CXX::SLC_RULE.U8C_SLC_Rule,TPI_DIERCVRY_CXX::SLC_RULE.H16C_SLC_Rule);
+    ResultPort = "[R]=='PASS'?1:0";
+}
+
+MultiTrialTest DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_SLICEFLOW
+{
+    TrialVariable CPU_TRIALS::FlowDomain.RING;
+    TrialVariableExitAction "Continue";
+    CSharpTrialTest RunCallback "DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_SLICEFLOW_" + __shared__::FlowMatrix.bin
+    {
+        Callback = "RunRule";
+        TrialParam Parameters = __shared__::TpRule.If_S28_S52_HX28_P16C_S16C_DS28C_U8C("--tracker CR --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR_B,CR --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR3,CR2,CR1,CR0 --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR3,CR2,CR1,CR0 --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR3,CR2,CR1,CR0 --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR3,CR2,CR1,CR0 --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C");
+        ResultPort = "[R]=='PASS'?1:0";
+        TrialResult -2
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return -2;
+        }
+        TrialResult -1
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return -1;
+        }
+        TrialResult 0
+        {
+            PassFail Fail;
+            TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
+            Return 0;
+        }
+        TrialResult 1
+        {
+            PassFail Pass;
+            TrialAction "Exit";
+            Return 1;
+        }
+    }
+}
+
+CSharpTest RunCallback DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_ARW_CORECHECK
+{
+    Callback = "RunRule";
+    Parameters = __shared__::TpRule.If_S28_S52_HX28_P16C_S16C_DS28C_U8C(TPI_DIERCVRY_CXX::ACRM_RULE.S28C_ACRM_Rule,TPI_DIERCVRY_CXX::ACRM_RULE.S52C_ACRM_Rule,TPI_DIERCVRY_CXX::ACRM_RULE.HX28C_ACRM_Rule,TPI_DIERCVRY_CXX::ACRM_RULE.P16C_ACRM_Rule,TPI_DIERCVRY_CXX::ACRM_RULE.S16C_ACRM_Rule,TPI_DIERCVRY_CXX::ACRM_RULE.DNLS28C_ACRM_Rule,TPI_DIERCVRY_CXX::ACRM_RULE.U8C_ACRM_Rule,TPI_DIERCVRY_CXX::ACRM_RULE.H16C_ACRM_Rule);
+    ResultPort = "[R]=='PASS'?1:0";
+}
+
+MultiTrialTest DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_ARW_CORE0FLOW
+{
+    TrialVariable CPU_TRIALS::FlowDomain.ATOM;
+    TrialVariableExitAction "Continue";
+    CSharpTrialTest RunCallback "DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_ARW_CORE0FLOW_" + __shared__::FlowMatrix.bin
+    {
+        Callback = "RunRule";
+        TrialParam Parameters = __shared__::TpRule.If_CLASS_NVL_S52C("--tracker ACRM3_B,ACRM2_B,ACRM1_B,ACRM0_B,ACRM3,ACRM2,ACRM1,ACRM0 --rule " +__shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.ATOMC_CORE_SELECT + "A","--tracker ACRM3,ACRM2,ACRM1,ACRM0 --rule " +__shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.ATOMC_CORE_SELECT + "A");
+        ResultPort = "[R]=='PASS'?1:0";
+        TrialResult -2
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return -2;
+        }
+        TrialResult -1
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return -1;
+        }
+        TrialResult 0
+        {
+            PassFail Fail;
+            TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
+            Return 0;
+        }
+        TrialResult 1
+        {
+            PassFail Pass;
+            TrialAction "Exit";
+            Return 1;
+        }
+    }
+}
+
+CSharpTest RunCallback DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_PNC_CORECHECKFIN
+{
+    Callback = "RunRule";
+    Parameters = __shared__::TpRule.If_S28_S52_HX28_P16C_S16C_DS28C_U8C(TPI_DIERCVRY_CXX::CR_RULE.S28C_CR_Rule,TPI_DIERCVRY_CXX::CR_RULE.S52C_CR_Rule,TPI_DIERCVRY_CXX::CR_RULE.HX28C_CR_Rule,TPI_DIERCVRY_CXX::CR_RULE.P16C_CR_Rule,TPI_DIERCVRY_CXX::CR_RULE.S16C_CR_Rule,TPI_DIERCVRY_CXX::CR_RULE.DNLS28C_CR_Rule,TPI_DIERCVRY_CXX::CR_RULE.U8C_CR_Rule,TPI_DIERCVRY_CXX::CR_RULE.H16C_CR_Rule);
+    PostInstance = "LogTrackerHistory()";
+    ResultPort = "[R]=='PASS'?1:0";
+}
+
+MultiTrialTest DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_PNC_COREFLOW
+{
+    TrialVariable CPU_TRIALS::FlowDomain.CORE;
+    TrialVariableExitAction "Continue";
+    CSharpTrialTest RunCallback "DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_PNC_COREFLOW_" + __shared__::FlowMatrix.bin
+    {
+        Callback = "RunRule";
+        TrialParam Parameters = __shared__::TpRule.If_S28_S52_HX28_P16C_S16C_DS28C_U8C("--tracker CR --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR_B,CR --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR3,CR2,CR1,CR0 --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR3,CR2,CR1,CR0 --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR3,CR2,CR1,CR0 --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR3,CR2,CR1,CR0 --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C");
+        ResultPort = "[R]=='PASS'?1:0";
+        TrialResult -2
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return -2;
+        }
+        TrialResult -1
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return -1;
+        }
+        TrialResult 0
+        {
+            PassFail Fail;
+            TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
+            Return 0;
+        }
+        TrialResult 1
+        {
+            PassFail Pass;
+            TrialAction "Exit";
+            Return 1;
+        }
+    }
+}
+
+CSharpTest RunCallback DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLICECHECKFIN
+{
+    Callback = "RunRule";
+    Parameters = __shared__::TpRule.If_S28_S52_HX28_P16C_S16C_DS28C_U8C(TPI_DIERCVRY_CXX::SLC_RULE.S28C_SLC_Rule,TPI_DIERCVRY_CXX::SLC_RULE.S52C_SLC_Rule,TPI_DIERCVRY_CXX::SLC_RULE.HX28C_SLC_Rule,TPI_DIERCVRY_CXX::SLC_RULE.P16C_SLC_Rule,TPI_DIERCVRY_CXX::SLC_RULE.S16C_SLC_Rule,TPI_DIERCVRY_CXX::SLC_RULE.DNLS28C_SLC_Rule,TPI_DIERCVRY_CXX::SLC_RULE.U8C_SLC_Rule,TPI_DIERCVRY_CXX::SLC_RULE.H16C_SLC_Rule);
+    ResultPort = "[R]=='PASS'?1:0";
+}
+
+MultiTrialTest DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLICEFLOW
+{
+    TrialVariable CPU_TRIALS::FlowDomain.RING;
+    TrialVariableExitAction "Continue";
+    CSharpTrialTest RunCallback "DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLICEFLOW_" + __shared__::FlowMatrix.bin
+    {
+        Callback = "RunRule";
+        TrialParam Parameters = __shared__::TpRule.If_S28_S52_HX28_P16C_S16C_DS28C_U8C("--tracker CR --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR_B,CR --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR3,CR2,CR1,CR0 --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR3,CR2,CR1,CR0 --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR3,CR2,CR1,CR0 --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C","--tracker CR3,CR2,CR1,CR0 --rule " + __shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.BIGCORE_CORE_SELECT + "C");
+        ResultPort = "[R]=='PASS'?1:0";
+        TrialResult -2
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return -2;
+        }
+        TrialResult -1
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return -1;
+        }
+        TrialResult 0
+        {
+            PassFail Fail;
+            TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
+            Return 0;
+        }
+        TrialResult 1
+        {
+            PassFail Pass;
+            TrialAction "Exit";
+            Return 1;
+        }
+    }
+}
+
+CSharpTest RunCallback DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_ARW_CORECHECKFIN
+{
+    Callback = "RunRule";
+    Parameters = __shared__::TpRule.If_S28_S52_HX28_P16C_S16C_DS28C_U8C(TPI_DIERCVRY_CXX::ACRM_RULE.S28C_ACRM_Rule,TPI_DIERCVRY_CXX::ACRM_RULE.S52C_ACRM_Rule,TPI_DIERCVRY_CXX::ACRM_RULE.HX28C_ACRM_Rule,TPI_DIERCVRY_CXX::ACRM_RULE.P16C_ACRM_Rule,TPI_DIERCVRY_CXX::ACRM_RULE.S16C_ACRM_Rule,TPI_DIERCVRY_CXX::ACRM_RULE.DNLS28C_ACRM_Rule,TPI_DIERCVRY_CXX::ACRM_RULE.U8C_ACRM_Rule,TPI_DIERCVRY_CXX::ACRM_RULE.H16C_ACRM_Rule);
+    ResultPort = "[R]=='PASS'?1:0";
+}
+
+MultiTrialTest DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_ARW_CORE0FLOW
+{
+    TrialVariable CPU_TRIALS::FlowDomain.ATOM;
+    TrialVariableExitAction "Continue";
+    CSharpTrialTest RunCallback "DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_ARW_CORE0FLOW_" + __shared__::FlowMatrix.bin
+    {
+        Callback = "RunRule";
+        TrialParam Parameters = __shared__::TpRule.If_CLASS_NVL_S52C("--tracker ACRM3_B,ACRM2_B,ACRM1_B,ACRM0_B,ACRM3,ACRM2,ACRM1,ACRM0 --rule " +__shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.ATOMC_CORE_SELECT + "A","--tracker ACRM3,ACRM2,ACRM1,ACRM0 --rule " +__shared__::FlowMatrix.BomGroupName + "_" + __shared__::FlowMatrix.ATOMC_CORE_SELECT + "A");
+        ResultPort = "[R]=='PASS'?1:0";
+        TrialResult -2
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return -2;
+        }
+        TrialResult -1
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return -1;
+        }
+        TrialResult 0
+        {
+            PassFail Fail;
+            TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
+            Return 0;
+        }
+        TrialResult 1
+        {
+            PassFail Pass;
+            TrialAction "Exit";
+            Return 1;
+        }
+    }
+}
+
+CSharpTest AuxiliaryTC DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_CRFININITCHK
+{
+    BypassPort = TPI_DIERCVRY_CXX_Rules.RecoveryBypass(-1,1,1,-1,-1);
+    DataType = "String";
+    Expression = "[G.I.S.CRINIT] == [G.I.S.CRFIN]";
+    PreInstance = __shared__::TpRule.If_S28_S52_HX28_P16C_S16C_DS28C_U8C(TPI_DIERCVRY_CXX::CRFININITCHK.S28C_ACRMCR_FININIT,TPI_DIERCVRY_CXX::CRFININITCHK.S52C_ACRMCR_FININIT,TPI_DIERCVRY_CXX::CRFININITCHK.HX28C_ACRMCR_FININIT,TPI_DIERCVRY_CXX::CRFININITCHK.P16C_ACRMCR_FININIT,TPI_DIERCVRY_CXX::CRFININITCHK.S16C_ACRMCR_FININIT,TPI_DIERCVRY_CXX::CRFININITCHK.DNLS28C_ACRMCR_FININIT,TPI_DIERCVRY_CXX::CRFININITCHK.U8C_ACRMCR_FININIT,TPI_DIERCVRY_CXX::CRFININITCHK.H16C_ACRMCR_FININIT);
+    ResultPort = "[R]=='True'?1:2";
+}
+
+CSharpTest AuxiliaryTC DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLCFININITCHK
+{
+    BypassPort = TPI_DIERCVRY_CXX_Rules.RecoveryBypass(-1,1,1,-1,-1);
+    DataType = "String";
+    Expression = "[G.I.S.SLCINIT] == [G.I.S.SLCFIN]";
+    PreInstance = __shared__::TpRule.If_S28_S52_HX28_P16C_S16C_DS28C_U8C(TPI_DIERCVRY_CXX::SLCFININITCHK.S28C_SLC_FININIT,TPI_DIERCVRY_CXX::SLCFININITCHK.S52C_SLC_FININIT,TPI_DIERCVRY_CXX::SLCFININITCHK.HX28C_SLC_FININIT,TPI_DIERCVRY_CXX::SLCFININITCHK.P16C_SLC_FININIT,TPI_DIERCVRY_CXX::SLCFININITCHK.S16C_SLC_FININIT,TPI_DIERCVRY_CXX::SLCFININITCHK.DNLS28C_SLC_FININIT,TPI_DIERCVRY_CXX::SLCFININITCHK.U8C_SLC_FININIT,TPI_DIERCVRY_CXX::SLCFININITCHK.H16C_SLC_FININIT);
+    ResultPort = "[R]=='True'?1:2";
+}
+
+CSharpTest RunCallback DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOCORE1
+{
+    BypassPort = __shared__::TpRule.If_S28_S52_HX28_P16C_S16C_DS28C_U8C(1,TPI_DIERCVRY_CXX_Rules.Tracker_Bypass(-1,-1,1),1,1,1,1,1,1);
+    Callback = "CopyTracker";
+    Parameters = "--tracker ACRM3_B,ACRM2_B,ACRM1_B,ACRM0_B,CR_B --dff "+__shared__::DFFVars.DIEID_CPU1+":COREREC";
+}
+
+CSharpTest RunCallback DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOSLICE1
+{
+    BypassPort = __shared__::TpRule.If_S28_S52_HX28_P16C_S16C_DS28C_U8C(1,TPI_DIERCVRY_CXX_Rules.Tracker_Bypass(-1,-1,1),1,1,1,1,1,1);
+    Callback = "CopyTracker";
+    Parameters = "--tracker SLC11_B,SLC10_B,SLC9_B,SLC8_B,SLC7_B,SLC6_B,SLC5_B,SLC4_B,SLC3_B,SLC2_B,SLC1_B,SLC0_B --dff "+__shared__::DFFVars.DIEID_CPU1+":SLICEREC";
+}
+
+CSharpTest RunCallback DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOCORE0
+{
+    BypassPort = TPI_DIERCVRY_CXX_Rules.Tracker_Bypass(-1,-1,1);
+    Callback = "CopyTracker";
+    Parameters = __shared__::TpRule.If_48_40("--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR3,CR2,CR1,CR0 --dff "+__shared__::DFFVars.DIEID_CPU+":COREREC","--tracker ACRM3,ACRM2,ACRM1,ACRM0,CR --dff "+__shared__::DFFVars.DIEID_CPU+":COREREC");
+}
+
+CSharpTest RunCallback DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOSLICE0
+{
+    BypassPort = TPI_DIERCVRY_CXX_Rules.Tracker_Bypass(-1,-1,1);
+    Callback = "CopyTracker";
+    Parameters = "--tracker SLC11,SLC10,SLC9,SLC8,SLC7,SLC6,SLC5,SLC4,SLC3,SLC2,SLC1,SLC0 --dff "+__shared__::DFFVars.DIEID_CPU+":SLICEREC";
+    PostInstance = "Call(LogTrackerHistory()|LogVminForwardTableToItuff())";
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_ENDCPUPKG_X_X_X_X_PRINTTOITUFF_SLICE
+{
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.I.S.SLCITUFF --tname_suf _SLICEREC_String";
+    PreInstance = __shared__::TpRule.If_S28_S52_HX28_P16C_S16C_DS28C_U8C(TPI_DIERCVRY_CXX::PRINTTOITUFF_SLICE.S28C_SLC_ITUFF,TPI_DIERCVRY_CXX::PRINTTOITUFF_SLICE.S52C_SLC_ITUFF,TPI_DIERCVRY_CXX::PRINTTOITUFF_SLICE.HX28C_SLC_ITUFF,TPI_DIERCVRY_CXX::PRINTTOITUFF_SLICE.P16C_SLC_ITUFF,TPI_DIERCVRY_CXX::PRINTTOITUFF_SLICE.S16C_SLC_ITUFF,TPI_DIERCVRY_CXX::PRINTTOITUFF_SLICE.DNLS28C_SLC_ITUFF,TPI_DIERCVRY_CXX::PRINTTOITUFF_SLICE.U8C_SLC_ITUFF,TPI_DIERCVRY_CXX::PRINTTOITUFF_SLICE.H16C_SLC_ITUFF);
+}
+
+CSharpTest RunCallback CTRL_X_RUNCALLBACK_K_ENDCPUPKG_X_X_X_X_PRINTTOITUFF_CORE
+{
+    Callback = "PrintToItuff";
+    Parameters = "--body_type strgval --body_data G.I.S.COREITUFF --tname_suf _COREREC_String";
+    PreInstance = __shared__::TpRule.If_S28_S52_HX28_P16C_S16C_DS28C_U8C(TPI_DIERCVRY_CXX::PRINTTOITUFF_CORE.S28C_ACRMCR_ITUFF,TPI_DIERCVRY_CXX::PRINTTOITUFF_CORE.S52C_ACRMCR_ITUFF,TPI_DIERCVRY_CXX::PRINTTOITUFF_CORE.HX28C_ACRMCR_ITUFF,TPI_DIERCVRY_CXX::PRINTTOITUFF_CORE.P16C_ACRMCR_ITUFF,TPI_DIERCVRY_CXX::PRINTTOITUFF_CORE.S16C_ACRMCR_ITUFF,TPI_DIERCVRY_CXX::PRINTTOITUFF_CORE.DNLS28C_ACRMCR_ITUFF,TPI_DIERCVRY_CXX::PRINTTOITUFF_CORE.U8C_ACRMCR_ITUFF,TPI_DIERCVRY_CXX::PRINTTOITUFF_CORE.H16C_ACRMCR_ITUFF);
+}
+
+Flow TPI_DIERCVRY_CXX_INIT
+{
+    FlowItem CTRL_X_PRIMEDIERECOVERY_K_INIT_X_X_X_X_X CTRL_X_PRIMEDIERECOVERY_K_INIT_X_X_X_X_X
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932126_fail_TPI_DIERCVRY_CXX_CTRL_X_PRIMEDIERECOVERY_K_INIT_X_X_X_X_X_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932126_fail_TPI_DIERCVRY_CXX_CTRL_X_PRIMEDIERECOVERY_K_INIT_X_X_X_X_X_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow TPI_DIERCVRY_CXX_BEGINCPU
+{
+    FlowItem DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_REVERSEDFF DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_REVERSEDFF
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932199_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_REVERSEDFF_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932199_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_REVERSEDFF_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102026_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_REVERSEDFF_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102026_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_REVERSEDFF_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE0TOTRACKER;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE0TOTRACKERGSDS;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b93102027_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_REVERSEDFF_3;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102027_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_REVERSEDFF_3;
+            Return 0;
+        }
+    }
+    
+    FlowItem DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_REVERSEDFF2CDIE DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_REVERSEDFF2CDIE
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932200_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_REVERSEDFF2CDIE_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932200_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_REVERSEDFF2CDIE_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102028_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_REVERSEDFF2CDIE_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102028_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_REVERSEDFF2CDIE_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE1TOTRACKER;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE1TOTRACKERGSDS;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b93102029_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_REVERSEDFF2CDIE_3;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102029_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_REVERSEDFF2CDIE_3;
+            Return 0;
+        }
+    }
+    
+    FlowItem DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE0TOTRACKER DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE0TOTRACKER
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932195_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE0TOTRACKER_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932195_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE0TOTRACKER_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102018_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE0TOTRACKER_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102018_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE0TOTRACKER_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_REVERSEDFF2CDIE;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b93102019_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE0TOTRACKER_2;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102019_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE0TOTRACKER_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE1TOTRACKER DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE1TOTRACKER
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932197_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE1TOTRACKER_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932197_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE1TOTRACKER_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102022_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE1TOTRACKER_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102022_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE1TOTRACKER_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICE0TOTRACKER;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b93102023_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE1TOTRACKER_2;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102023_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE1TOTRACKER_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE0TOTRACKERGSDS DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE0TOTRACKERGSDS
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932196_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE0TOTRACKERGSDS_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932196_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE0TOTRACKERGSDS_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102020_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE0TOTRACKERGSDS_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102020_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE0TOTRACKERGSDS_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_REVERSEDFF2CDIE;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b93102021_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE0TOTRACKERGSDS_2;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102021_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE0TOTRACKERGSDS_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE1TOTRACKERGSDS DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE1TOTRACKERGSDS
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932198_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE1TOTRACKERGSDS_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932198_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE1TOTRACKERGSDS_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102024_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE1TOTRACKERGSDS_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102024_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE1TOTRACKERGSDS_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICE0TOTRACKER;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b93102025_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE1TOTRACKERGSDS_2;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102025_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_CORE1TOTRACKERGSDS_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICE0TOTRACKER DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICE0TOTRACKER
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932201_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICE0TOTRACKER_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932201_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICE0TOTRACKER_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102030_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICE0TOTRACKER_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102030_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICE0TOTRACKER_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICE1TOTRACKER;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b93102031_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICE0TOTRACKER_2;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102031_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICE0TOTRACKER_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICE1TOTRACKER DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICE1TOTRACKER
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932202_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICE1TOTRACKER_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932202_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICE1TOTRACKER_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102032_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICE1TOTRACKER_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102032_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICE1TOTRACKER_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICETOTRACKERGSDS;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b93102033_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICE1TOTRACKER_2;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102033_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICE1TOTRACKER_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICETOTRACKERGSDS DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICETOTRACKERGSDS
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932203_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICETOTRACKERGSDS_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932203_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICETOTRACKERGSDS_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102034_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICETOTRACKERGSDS_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102034_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICETOTRACKERGSDS_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_PNC_CORECHECK;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b93102035_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICETOTRACKERGSDS_2;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102035_fail_DIERCVRY_X_FUNC_K_BEGINCPU_X_X_X_X_SLICETOTRACKERGSDS_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_PNC_CORECHECK DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_PNC_CORECHECK
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932183_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_PNC_CORECHECK_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932183_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_PNC_CORECHECK_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102004_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_PNC_CORECHECK_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102004_fail_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_PNC_CORECHECK_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_PNC_COREFLOW;
+        }
+    }
+    
+    FlowItem DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_PNC_COREFLOW DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_PNC_COREFLOW
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932184_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_PNC_COREFLOW_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932184_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_PNC_COREFLOW_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102005_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_PNC_COREFLOW_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102005_fail_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_PNC_COREFLOW_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_SLICECHECK;
+        }
+    }
+    
+    FlowItem DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_SLICECHECK DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_SLICECHECK
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932185_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_SLICECHECK_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932185_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_SLICECHECK_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102006_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_SLICECHECK_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102006_fail_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_SLICECHECK_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_SLICEFLOW;
+        }
+    }
+    
+    FlowItem DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_SLICEFLOW DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_SLICEFLOW
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932186_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_SLICEFLOW_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932186_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_SLICEFLOW_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102007_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_SLICEFLOW_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102007_fail_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_SLICEFLOW_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_ARW_CORECHECK;
+        }
+    }
+    
+    FlowItem DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_ARW_CORECHECK DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_ARW_CORECHECK
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932182_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_ARW_CORECHECK_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932182_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_ARW_CORECHECK_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102003_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_ARW_CORECHECK_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102003_fail_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_ARW_CORECHECK_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_ARW_CORE0FLOW;
+        }
+    }
+    
+    FlowItem DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_ARW_CORE0FLOW DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_ARW_CORE0FLOW
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932181_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_ARW_CORE0FLOW_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932181_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_ARW_CORE0FLOW_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102002_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_ARW_CORE0FLOW_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102002_fail_DIERCVRY_X_AUX_K_BEGINCPU_X_X_X_X_ARW_CORE0FLOW_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow TPI_DIERCVRY_CXX_ENDCPUPKG
+{
+    FlowItem DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_PNC_CORECHECKFIN DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_PNC_CORECHECKFIN
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932190_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_PNC_CORECHECKFIN_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932190_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_PNC_CORECHECKFIN_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102012_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_PNC_CORECHECKFIN_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102012_fail_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_PNC_CORECHECKFIN_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_PNC_COREFLOW;
+        }
+    }
+    
+    FlowItem DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_PNC_COREFLOW DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_PNC_COREFLOW
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932191_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_PNC_COREFLOW_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932191_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_PNC_COREFLOW_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102013_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_PNC_COREFLOW_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102013_fail_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_PNC_COREFLOW_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLICECHECKFIN;
+        }
+    }
+    
+    FlowItem DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLICECHECKFIN DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLICECHECKFIN
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932193_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLICECHECKFIN_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932193_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLICECHECKFIN_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102016_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLICECHECKFIN_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102016_fail_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLICECHECKFIN_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLICEFLOW;
+        }
+    }
+    
+    FlowItem DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLICEFLOW DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLICEFLOW
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932194_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLICEFLOW_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932194_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLICEFLOW_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102017_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLICEFLOW_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102017_fail_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLICEFLOW_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_ARW_CORECHECKFIN;
+        }
+    }
+    
+    FlowItem DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_ARW_CORECHECKFIN DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_ARW_CORECHECKFIN
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932188_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_ARW_CORECHECKFIN_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932188_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_ARW_CORECHECKFIN_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102009_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_ARW_CORECHECKFIN_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102009_fail_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_ARW_CORECHECKFIN_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_ARW_CORE0FLOW;
+        }
+    }
+    
+    FlowItem DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_ARW_CORE0FLOW DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_ARW_CORE0FLOW
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932187_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_ARW_CORE0FLOW_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932187_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_ARW_CORE0FLOW_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102008_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_ARW_CORE0FLOW_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102008_fail_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_ARW_CORE0FLOW_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_CRFININITCHK;
+        }
+    }
+    
+    FlowItem DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_CRFININITCHK DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_CRFININITCHK
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932189_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_CRFININITCHK_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932189_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_CRFININITCHK_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102010_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_CRFININITCHK_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102010_fail_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_CRFININITCHK_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLCFININITCHK;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b93102011_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_CRFININITCHK_2;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102011_fail_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_CRFININITCHK_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLCFININITCHK DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLCFININITCHK
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932192_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLCFININITCHK_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932192_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLCFININITCHK_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102014_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLCFININITCHK_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102014_fail_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLCFININITCHK_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOCORE1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b93102015_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLCFININITCHK_2;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102015_fail_DIERCVRY_X_AUX_K_ENDCPUPKG_X_X_X_X_SLCFININITCHK_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOCORE1 DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOCORE1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932205_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOCORE1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932205_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOCORE1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102038_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOCORE1_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102038_fail_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOCORE1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOSLICE1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b93102039_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOCORE1_2;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102039_fail_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOCORE1_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOSLICE1 DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOSLICE1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932207_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOSLICE1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932207_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOSLICE1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102042_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOSLICE1_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102042_fail_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOSLICE1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOCORE0;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b93102043_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOSLICE1_2;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102043_fail_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOSLICE1_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOCORE0 DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOCORE0
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932204_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOCORE0_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932204_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOCORE0_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102036_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOCORE0_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102036_fail_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOCORE0_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOSLICE0;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b93102037_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOCORE0_2;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102037_fail_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOCORE0_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOSLICE0 DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOSLICE0
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932206_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOSLICE0_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932206_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOSLICE0_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102040_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOSLICE0_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102040_fail_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOSLICE0_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_ENDCPUPKG_X_X_X_X_PRINTTOITUFF_SLICE;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b93102041_fail_TPI_DIERCVRY_CXX_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOSLICE0_2;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102041_fail_DIERCVRY_X_FUNC_K_ENDCPUPKG_X_X_X_X_TRACKERTOSLICE0_2;
+            Return 0;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_ENDCPUPKG_X_X_X_X_PRINTTOITUFF_SLICE CTRL_X_RUNCALLBACK_K_ENDCPUPKG_X_X_X_X_PRINTTOITUFF_SLICE
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932129_fail_TPI_DIERCVRY_CXX_CTRL_X_RUNCALLBACK_K_ENDCPUPKG_X_X_X_X_PRINTTOITUFF_SLICE_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932129_fail_TPI_DIERCVRY_CXX_CTRL_X_RUNCALLBACK_K_ENDCPUPKG_X_X_X_X_PRINTTOITUFF_SLICE_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102001_fail_TPI_DIERCVRY_CXX_CTRL_X_RUNCALLBACK_K_ENDCPUPKG_X_X_X_X_PRINTTOITUFF_SLICE_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102001_fail_CTRL_X_RUNCALLBACK_K_ENDCPUPKG_X_X_X_X_PRINTTOITUFF_SLICE_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_RUNCALLBACK_K_ENDCPUPKG_X_X_X_X_PRINTTOITUFF_CORE;
+        }
+    }
+    
+    FlowItem CTRL_X_RUNCALLBACK_K_ENDCPUPKG_X_X_X_X_PRINTTOITUFF_CORE CTRL_X_RUNCALLBACK_K_ENDCPUPKG_X_X_X_X_PRINTTOITUFF_CORE
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932128_fail_TPI_DIERCVRY_CXX_CTRL_X_RUNCALLBACK_K_ENDCPUPKG_X_X_X_X_PRINTTOITUFF_CORE_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932128_fail_TPI_DIERCVRY_CXX_CTRL_X_RUNCALLBACK_K_ENDCPUPKG_X_X_X_X_PRINTTOITUFF_CORE_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93102000_fail_TPI_DIERCVRY_CXX_CTRL_X_RUNCALLBACK_K_ENDCPUPKG_X_X_X_X_PRINTTOITUFF_CORE_0;
+            IncrementCounters TPI_DIERCVRY_CXX::n93102000_fail_CTRL_X_RUNCALLBACK_K_ENDCPUPKG_X_X_X_X_PRINTTOITUFF_CORE_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}

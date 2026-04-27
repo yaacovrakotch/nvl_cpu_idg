@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ModuleConfiguration>
+	<Patterns>
+		<!--The PORRoot section is used to declare production plists used by the module.
+				PORRoot can be declared per BomGroup or decorated with the IP name if, in Itradut TP,  IP plists are used by package module.
+				<PORRoot IP="" BomGroup="" Path="" Rev="" Patch="">-->
+		<PORRoot BomGroup="CLASS_NVL_S52C" Path="I:\hdmxpats\nvl_cpu\MCfun\" Rev="RevTC52XA0.4" Patch="p0">
+			<PlistFiles>
+				<PlistFile>iafunc_core_hptp800_allplist.plist</PlistFile>
+			</PlistFiles>
+			<!--<AlephFiles>
+				<AlephFile></AlephFile>
+			</AlephFiles>-->
+		</PORRoot>
+
+		<!--The ENGRoot section is used to declare engineering plists used by the module.
+			  IP attribute can be used for ENGRoot: <ENGRoot IP="" Path="">-->
+		<!--<ENGRoot Path="" >
+			<PlistFiles>
+			  <PlistFile> </PlistFile>
+			  <PlistFile BomGroup=""> </PlistFile>
+			</PlistFiles>
+		  </ENGRoot>-->
+
+	</Patterns>
+
+	<!--The AlephFiles section is used to declare Aleph json files which are used by the module. 
+		  Alpeh files must reside inside the repository. -->
+	<AlephFiles>
+		<AlephFile BomGroup="CLASS_NVL_S52C">InputFiles/FUN_CORE_Generic.patmod.json</AlephFile>
+		<AlephFile BomGroup="CLASS_NVL_S52C">InputFiles/Debug_Counter_MLCDRG.patmod.json</AlephFile>
+		<AlephFile BomGroup="CLASS_NVL_S52C">InputFiles/Debug_Counter_SLCDRG.patmod.json</AlephFile>
+		<AlephFile BomGroup="CLASS_NVL_S52C">InputFiles/DRG_VVAR_MLCDRG.patmod.json</AlephFile>
+		<AlephFile BomGroup="CLASS_NVL_S52C">InputFiles/Wait_Time.patmod.json</AlephFile>
+		<AlephFile BomGroup="CLASS_NVL_S52C">InputFiles/FUN_CORE_SLC_mask.patmod.json</AlephFile>
+		<AlephFile BomGroup="CLASS_NVL_S52C">InputFiles/FUN_CORE_DRV_MASK.PatConfigSetpoints.json</AlephFile>
+		<AlephFile BomGroup="CLASS_NVL_S52C">InputFiles/FUN_CORE_DRV_MASK.patmod.json</AlephFile>
+		<AlephFile BomGroup="CLASS_NVL_S52C">InputFiles/merged_allplist_PatConfigSetpoints.json</AlephFile>
+		<AlephFile BomGroup="CLASS_NVL_S52C">InputFiles/merged_allplist_IPC_patmod.json</AlephFile>
+		<AlephFile BomGroup="CLASS_NVL_S52C">InputFiles/match_mode.PatConfigSetpoints.json</AlephFile>
+		<AlephFile BomGroup="CLASS_NVL_S52C">InputFiles/match_mode.patmod.json</AlephFile>
+		<AlephFile BomGroup="CLASS_NVL_S52C">InputFiles/RAGN.patmod.json</AlephFile>
+		<AlephFile BomGroup="CLASS_NVL_S52C">InputFiles/FUN_CORE_MP_patConfigSetPoints.json</AlephFile>
+		<AlephFile BomGroup="CLASS_NVL_S52C">InputFiles/FUN_CORE_MP_patmod.json</AlephFile>
+	</AlephFiles>
+
+	<!--The IPName is used for modules in IntraDut test program to declare the IP it belongs to.
+		  For package level modules do not add the <IPName> element at all-->
+	<IPName>IPC</IPName>
+
+
+</ModuleConfiguration>

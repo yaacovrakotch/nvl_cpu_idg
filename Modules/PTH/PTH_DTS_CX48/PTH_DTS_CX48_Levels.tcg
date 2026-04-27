@@ -1,0 +1,40 @@
+Version 1.0;
+
+
+SpecificationSet dummy_PARAMS (nom)
+{
+	
+}
+
+TestConditionGroup dummy_TCG
+{
+	SpecificationSet = dummy_PARAMS;
+	Level = PTH_DTS_CX48::dummy;
+}
+
+TestCondition dummy
+{
+	TestConditionGroup  = dummy_TCG;
+	Selector = nom;
+}
+
+
+SpecificationSet  cpu_pth_dts_x_viewana_pkg_lvl_BFUNC (nom_lvl)
+{
+	
+}
+
+TestConditionGroup cpu_pth_dts_x_viewana_pkg_lvl_TCG
+{
+	SpecificationSet = cpu_pth_dts_x_viewana_pkg_lvl_BFUNC;
+	Level = PTH_DTS_CX48::cpu_pth_dts_x_viewana_pkg_lvl;
+}
+
+TestCondition cpu_pth_dts_x_viewana_pkg_lvl_nom_lvl
+{
+	TestConditionGroup  = cpu_pth_dts_x_viewana_pkg_lvl_TCG;
+	Selector = nom_lvl;
+}
+
+
+

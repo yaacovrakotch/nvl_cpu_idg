@@ -1,0 +1,335 @@
+Version 1.0;
+
+####SPECIFICATION SETS####
+
+SpecificationSet dummy_PARAMS (nom)
+{
+}
+
+SpecificationSet DLVR_Measure_PARAMS (nom)
+{
+}
+
+SpecificationSet DLVR_VBUMP_VCCIA_VBUMP (force_0V,force_1400mV,force_1300mV,force_1200mV,force_1100mV,force_1000mV,force_900mV,force_800mV,force_700mV,force_600mV)
+{
+	Voltage p_vbump_val_ia = 0V,1400mV,1300mV,1200mV,1100mV,1000mV,900mV,800mV,700mV,600mV;
+}
+
+#SpecificationSet dlvr_vccia_1p5 (max,min,nom) Inherits __main__::cpu_all_bf_x_x_pkg_lvl_BFUNC
+#{
+#	Voltage p_vccia_spec = 1.5V;
+#}
+
+
+SpecificationSet  DLVR_VCCIA_0P6V (max, min, nom) Inherits __main__::cpu_all_bf_x_x_pkg_lvl_BFUNC
+{
+ Voltage p_vccia_spec = 0.6V;
+}
+SpecificationSet  DLVR_VCCIA_1P0V (max, min, nom) Inherits __main__::cpu_all_bf_x_x_pkg_lvl_BFUNC
+{
+ Voltage p_vccia_spec = 1.0V;
+}
+SpecificationSet  DLVR_VCCIA_1P025V (max, min, nom) Inherits __main__::cpu_all_bf_x_x_pkg_lvl_BFUNC
+{
+ Voltage p_vccia_spec = 1.025V;
+}
+SpecificationSet  DLVR_VCCIA_1P1V (max, min, nom) Inherits __main__::cpu_all_bf_x_x_pkg_lvl_BFUNC
+{
+ Voltage p_vccia_spec = 1.1V;
+}
+SpecificationSet  DLVR_VCCIA_1P2V (max, min, nom) Inherits __main__::cpu_all_bf_x_x_pkg_lvl_BFUNC
+{
+ Voltage p_vccia_spec = 1.2V;
+}
+SpecificationSet  DLVR_VCCIA_1P3V (max, min, nom) Inherits __main__::cpu_all_bf_x_x_pkg_lvl_BFUNC
+{
+ Voltage p_vccia_spec = 1.3V;
+}
+SpecificationSet  DLVR_VCCIA_1P325V (max, min, nom) Inherits __main__::cpu_all_bf_x_x_pkg_lvl_BFUNC
+{
+ Voltage p_vccia_spec = 1.325V;
+}
+SpecificationSet  DLVR_VCCIA_1P4V (max, min, nom) Inherits __main__::cpu_all_bf_x_x_pkg_lvl_BFUNC
+{
+ Voltage p_vccia_spec = 1.4V;
+}
+
+####TEST CONDITION GROUPS####
+
+TestConditionGroup dummy_TCG
+{
+	SpecificationSet = dummy_PARAMS;
+	Level = PTH_DLVR_CK48::dummy;
+}
+
+TestConditionGroup DLVR_Measure_TCG
+{
+	SpecificationSet = DLVR_Measure_PARAMS;
+	Level = PTH_DLVR_CK48::DLVR_Measure;
+}
+
+TestConditionGroup DLVR_Measure_HX_TCG
+{
+	SpecificationSet = DLVR_Measure_PARAMS;
+	Level = PTH_DLVR_CK48::DLVR_Measure_HX;
+}
+
+TestConditionGroup DLVR_VBUMP_VCCIA_TCG
+{
+	SpecificationSet = DLVR_VBUMP_VCCIA_VBUMP;
+	Level = PTH_DLVR_CK48::DLVR_VBUMP_VCCIA;
+}
+
+#TestConditionGroup cpu_all_bf_x_x_pkg_lvl_dlvr_lvl_shared_vccia_1p5_TCG
+#{
+#	SpecificationSet = dlvr_vccia_1p5;
+#	Level = __main__::cpu_all_bf_x_x_pkg_lvl;
+#}
+
+TestConditionGroup DLVR_VCCIA_0P6V_TCG
+{
+	SpecificationSet = DLVR_VCCIA_0P6V;
+	Level = __main__::cpu_all_bf_x_x_pkg_lvl;
+}
+TestConditionGroup DLVR_VCCIA_1P0V_TCG
+{
+	SpecificationSet = DLVR_VCCIA_1P0V;
+	Level = __main__::cpu_all_bf_x_x_pkg_lvl;
+}
+TestConditionGroup DLVR_VCCIA_1P025V_TCG
+{
+	SpecificationSet = DLVR_VCCIA_1P025V;
+	Level = __main__::cpu_all_bf_x_x_pkg_lvl;
+}
+TestConditionGroup DLVR_VCCIA_1P1V_TCG
+{
+	SpecificationSet = DLVR_VCCIA_1P1V;
+	Level = __main__::cpu_all_bf_x_x_pkg_lvl;
+}
+TestConditionGroup DLVR_VCCIA_1P2V_TCG
+{
+	SpecificationSet = DLVR_VCCIA_1P2V;
+	Level = __main__::cpu_all_bf_x_x_pkg_lvl;
+}
+TestConditionGroup DLVR_VCCIA_1P3V_TCG
+{
+	SpecificationSet = DLVR_VCCIA_1P3V;
+	Level = __main__::cpu_all_bf_x_x_pkg_lvl;
+}
+TestConditionGroup DLVR_VCCIA_1P325V_TCG
+{
+	SpecificationSet = DLVR_VCCIA_1P325V;
+	Level = __main__::cpu_all_bf_x_x_pkg_lvl;
+}
+TestConditionGroup DLVR_VCCIA_1P4V_TCG
+{
+	SpecificationSet = DLVR_VCCIA_1P4V;
+	Level = __main__::cpu_all_bf_x_x_pkg_lvl;
+}
+
+####TEST CONDITIONS####
+
+TestCondition dummy
+{
+	TestConditionGroup = dummy_TCG;
+	Selector = nom;
+}
+
+TestCondition DLVR_Measure
+{
+	TestConditionGroup = DLVR_Measure_TCG;
+	Selector = nom;
+}
+
+TestCondition DLVR_Measure_HX
+{
+	TestConditionGroup = DLVR_Measure_HX_TCG;
+	Selector = nom;
+}
+
+TestCondition DLVR_VBUMP_VCCIA_force_0V
+{
+	TestConditionGroup = DLVR_VBUMP_VCCIA_TCG;
+	Selector = force_0V;
+}
+TestCondition DLVR_VBUMP_VCCIA_force_1400mV
+{
+	TestConditionGroup = DLVR_VBUMP_VCCIA_TCG;
+	Selector = force_1400mV;
+}
+
+TestCondition DLVR_VBUMP_VCCIA_force_1300mV
+{
+	TestConditionGroup = DLVR_VBUMP_VCCIA_TCG;
+	Selector = force_1300mV;
+}
+
+TestCondition DLVR_VBUMP_VCCIA_force_1200mV
+{
+	TestConditionGroup = DLVR_VBUMP_VCCIA_TCG;
+	Selector = force_1200mV;
+}
+
+TestCondition DLVR_VBUMP_VCCIA_force_1100mV
+{
+	TestConditionGroup = DLVR_VBUMP_VCCIA_TCG;
+	Selector = force_1100mV;
+}
+
+TestCondition DLVR_VBUMP_VCCIA_force_1000mV
+{
+	TestConditionGroup = DLVR_VBUMP_VCCIA_TCG;
+	Selector = force_1000mV;
+}
+
+TestCondition DLVR_VBUMP_VCCIA_force_900mV
+{
+	TestConditionGroup = DLVR_VBUMP_VCCIA_TCG;
+	Selector = force_900mV;
+}
+
+TestCondition DLVR_VBUMP_VCCIA_force_800mV
+{
+	TestConditionGroup = DLVR_VBUMP_VCCIA_TCG;
+	Selector = force_800mV;
+}
+
+TestCondition DLVR_VBUMP_VCCIA_force_700mV
+{
+	TestConditionGroup = DLVR_VBUMP_VCCIA_TCG;
+	Selector = force_700mV;
+}
+
+TestCondition DLVR_VBUMP_VCCIA_force_600mV
+{
+	TestConditionGroup = DLVR_VBUMP_VCCIA_TCG;
+	Selector = force_600mV;
+}
+
+#TestCondition PKG_DLVR_NOM_VCCIA_1P5
+#{
+#	TestConditionGroup  = cpu_all_bf_x_x_pkg_lvl_dlvr_lvl_shared_vccia_1p5_TCG;
+#	Selector = nom;
+#}
+
+
+TestCondition DLVR_VCCIA_0P6V_MIN
+{
+	TestConditionGroup  = DLVR_VCCIA_0P6V_TCG;
+	Selector = min;
+}
+TestCondition DLVR_VCCIA_0P6V_NOM
+{
+	TestConditionGroup  = DLVR_VCCIA_0P6V_TCG;
+	Selector = nom;
+}
+TestCondition DLVR_VCCIA_0P6V_MAX
+{
+	TestConditionGroup  = DLVR_VCCIA_0P6V_TCG;
+	Selector = max;
+}
+TestCondition DLVR_VCCIA_1P0V_MIN
+{
+	TestConditionGroup  = DLVR_VCCIA_1P0V_TCG;
+	Selector = min;
+}
+TestCondition DLVR_VCCIA_1P0V_NOM
+{
+	TestConditionGroup  = DLVR_VCCIA_1P0V_TCG;
+	Selector = nom;
+}
+TestCondition DLVR_VCCIA_1P0V_MAX
+{
+	TestConditionGroup  = DLVR_VCCIA_1P0V_TCG;
+	Selector = max;
+}
+TestCondition DLVR_VCCIA_1P025V_MIN
+{
+	TestConditionGroup  = DLVR_VCCIA_1P025V_TCG;
+	Selector = min;
+}
+TestCondition DLVR_VCCIA_1P025V_NOM
+{
+	TestConditionGroup  = DLVR_VCCIA_1P025V_TCG;
+	Selector = nom;
+}
+TestCondition DLVR_VCCIA_1P025V_MAX
+{
+	TestConditionGroup  = DLVR_VCCIA_1P025V_TCG;
+	Selector = max;
+}
+TestCondition DLVR_VCCIA_1P1V_MIN
+{
+	TestConditionGroup  = DLVR_VCCIA_1P1V_TCG;
+	Selector = min;
+}
+TestCondition DLVR_VCCIA_1P1V_NOM
+{
+	TestConditionGroup  = DLVR_VCCIA_1P1V_TCG;
+	Selector = nom;
+}
+TestCondition DLVR_VCCIA_1P1V_MAX
+{
+	TestConditionGroup  = DLVR_VCCIA_1P1V_TCG;
+	Selector = max;
+}
+TestCondition DLVR_VCCIA_1P2V_MIN
+{
+	TestConditionGroup  = DLVR_VCCIA_1P2V_TCG;
+	Selector = min;
+}
+TestCondition DLVR_VCCIA_1P2V_NOM
+{
+	TestConditionGroup  = DLVR_VCCIA_1P2V_TCG;
+	Selector = nom;
+}
+TestCondition DLVR_VCCIA_1P2V_MAX
+{
+	TestConditionGroup  = DLVR_VCCIA_1P2V_TCG;
+	Selector = max;
+}
+TestCondition DLVR_VCCIA_1P3V_MIN
+{
+	TestConditionGroup  = DLVR_VCCIA_1P3V_TCG;
+	Selector = min;
+}
+TestCondition DLVR_VCCIA_1P3V_NOM
+{
+	TestConditionGroup  = DLVR_VCCIA_1P3V_TCG;
+	Selector = nom;
+}
+TestCondition DLVR_VCCIA_1P3V_MAX
+{
+	TestConditionGroup  = DLVR_VCCIA_1P3V_TCG;
+	Selector = max;
+}
+TestCondition DLVR_VCCIA_1P325V_MIN
+{
+	TestConditionGroup  = DLVR_VCCIA_1P325V_TCG;
+	Selector = min;
+}
+TestCondition DLVR_VCCIA_1P325V_NOM
+{
+	TestConditionGroup  = DLVR_VCCIA_1P325V_TCG;
+	Selector = nom;
+}
+TestCondition DLVR_VCCIA_1P325V_MAX
+{
+	TestConditionGroup  = DLVR_VCCIA_1P325V_TCG;
+	Selector = max;
+}
+TestCondition DLVR_VCCIA_1P4V_MIN
+{
+	TestConditionGroup  = DLVR_VCCIA_1P4V_TCG;
+	Selector = min;
+}
+TestCondition DLVR_VCCIA_1P4V_NOM
+{
+	TestConditionGroup  = DLVR_VCCIA_1P4V_TCG;
+	Selector = nom;
+}
+TestCondition DLVR_VCCIA_1P4V_MAX
+{
+	TestConditionGroup  = DLVR_VCCIA_1P4V_TCG;
+	Selector = max;
+}

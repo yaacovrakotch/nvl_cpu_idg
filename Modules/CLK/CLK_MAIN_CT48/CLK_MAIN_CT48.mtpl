@@ -1,0 +1,1624 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan CLK_MAIN_CXXXSDT;
+
+Import "CLK_MAIN_CT48.usrv";
+Import "CLK_MAIN_CT48_Levels.tcg";
+
+#Test Counter Definition
+Counters
+{
+	n28193616_fail_FUSECHECK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_BBS_3,
+	n28193617_fail_FVCURVE_PLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_3,
+	n28193618_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM_3,
+	n28193619_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_3,
+	n28193620_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM_3,
+	n28193621_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_3,
+	n28193622_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM_3,
+	n28193623_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_3,
+	n28193624_fail_OPENLOOP_FLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_3,
+	n28353612_fail_FUSECHECK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_BBS_2,
+	n28353613_fail_FVCURVE_PLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_2,
+	n28353614_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM_2,
+	n28353615_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_2,
+	n28353616_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM_2,
+	n28353617_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_2,
+	n28353618_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM_2,
+	n28353619_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_2,
+	n28353620_fail_OPENLOOP_FLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_2,
+	n28414112_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM_4,
+	n28414113_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_4,
+	n28414114_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM_4,
+	n28414115_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_4,
+	n28414116_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM_4,
+	n28414117_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_4,
+	n28424212_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM_5,
+	n28424213_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_5,
+	n28424214_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM_5,
+	n28424215_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_5,
+	n28424216_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM_5,
+	n28424217_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_5,
+	n28434306_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_6,
+	n28434307_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_6,
+	n28434308_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_6,
+	n28444406_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_7,
+	n28444407_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_7,
+	n28444408_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_7,
+	n28454506_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_8,
+	n28454507_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_8,
+	n28454508_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_8,
+	n28464606_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_9,
+	n28464607_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_9,
+	n28464608_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_9,
+	n28474706_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_10,
+	n28474707_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_10,
+	n28474708_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_10,
+	n28484806_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_11,
+	n28484807_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_11,
+	n28484808_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_11,
+	n28494906_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_12,
+	n28494907_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_12,
+	n28494908_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_12,
+	n28505006_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_13,
+	n28505007_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_13,
+	n28505008_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_13,
+	n28515106_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_14,
+	n28515107_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_14,
+	n28515108_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_14,
+	n28525206_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_15,
+	n28525207_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_15,
+	n28525208_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_15,
+	n28533507_fail_FUSECHECK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_BBS_4,
+	n28533508_fail_FUSECHECK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_BBS_5,
+	n28533509_fail_FVCURVE_PLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_4,
+	n28533510_fail_OPENLOOP_FLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_4,
+	n28533571_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_BBS_1,
+	n28533572_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_BBS_2,
+	n28533573_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_HVM_1,
+	n28533574_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_HVM_2,
+	n28533575_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_SDC_1,
+	n28533576_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_SDC_2,
+	n28533577_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_BBS_1,
+	n28533578_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_BBS_2,
+	n28533579_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_HVM_1,
+	n28533580_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_HVM_2,
+	n28533581_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_SDC_1,
+	n28533582_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_SDC_2,
+	n28533583_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_BBS_1,
+	n28533584_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_BBS_2,
+	n28533585_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_HVM_1,
+	n28533586_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_HVM_2,
+	n28533587_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_SDC_1,
+	n28533588_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_SDC_2,
+	n90283762_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_BBS_0,
+	n90283763_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_HVM_0,
+	n90283764_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_SDC_0,
+	n90283765_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_BBS_0,
+	n90283766_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_HVM_0,
+	n90283767_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_SDC_0,
+	n90283768_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_BBS_0,
+	n90283769_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_HVM_0,
+	n90283770_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_SDC_0,
+	n90283771_fail_FUSECHECK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_BBS_0,
+	n90283772_fail_FVCURVE_PLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_0,
+	n90283773_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM_0,
+	n90283774_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_0,
+	n90283775_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM_0,
+	n90283776_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_0,
+	n90283777_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM_0,
+	n90283778_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_0,
+	n90283779_fail_OPENLOOP_FLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_0,
+	n90283780_fail_SETUP_X_SCREEN_K_SDTBEGIN_X_X_MAX_X_X_X_0,
+	n90283781_fail_SETUP_X_SCREEN_K_SDTBEGIN_X_X_MIN_X_X_X_0,
+	n90283782_fail_SETUP_X_SCREEN_K_SDTBEGIN_X_X_NOM_X_X_X_0,
+	n98283750_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_BBS_n1,
+	n98283751_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_HVM_n1,
+	n98283752_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_SDC_n1,
+	n98283753_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_BBS_n1,
+	n98283754_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_HVM_n1,
+	n98283755_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_SDC_n1,
+	n98283756_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_BBS_n1,
+	n98283757_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_HVM_n1,
+	n98283758_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_SDC_n1,
+	n98283759_fail_FUSECHECK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_BBS_n1,
+	n98283760_fail_FVCURVE_PLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_n1,
+	n98283761_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM_n1,
+	n98283762_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_n1,
+	n98283763_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM_n1,
+	n98283764_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_n1,
+	n98283765_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM_n1,
+	n98283766_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_n1,
+	n98283767_fail_OPENLOOP_FLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_n1,
+	n98283768_fail_SETUP_X_SCREEN_K_SDTBEGIN_X_X_MAX_X_X_X_n1,
+	n98283769_fail_SETUP_X_SCREEN_K_SDTBEGIN_X_X_MIN_X_X_X_n1,
+	n98283770_fail_SETUP_X_SCREEN_K_SDTBEGIN_X_X_NOM_X_X_X_n1,
+	n99283750_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_BBS_n2,
+	n99283751_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_HVM_n2,
+	n99283752_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_SDC_n2,
+	n99283753_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_BBS_n2,
+	n99283754_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_HVM_n2,
+	n99283755_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_SDC_n2,
+	n99283756_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_BBS_n2,
+	n99283757_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_HVM_n2,
+	n99283758_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_SDC_n2,
+	n99283759_fail_FUSECHECK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_BBS_n2,
+	n99283760_fail_FVCURVE_PLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_n2,
+	n99283761_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM_n2,
+	n99283762_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_n2,
+	n99283763_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM_n2,
+	n99283764_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_n2,
+	n99283765_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM_n2,
+	n99283766_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_n2,
+	n99283767_fail_OPENLOOP_FLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_n2,
+	n99283768_fail_SETUP_X_SCREEN_K_SDTBEGIN_X_X_MAX_X_X_X_n2,
+	n99283769_fail_SETUP_X_SCREEN_K_SDTBEGIN_X_X_MIN_X_X_X_n2,
+	n99283770_fail_SETUP_X_SCREEN_K_SDTBEGIN_X_X_NOM_X_X_X_n2
+}
+
+CSharpTest DDGFunctionalTC FUSECHECK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_BBS
+{
+	Patlist = "clk_cpu_x_fusecheck_list";
+	LevelsTc = "CLK_MAIN_CXXXSDT::cpu_clk_override_distnom_sharedmin_lvl";
+	TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	FailuresToCapturePerPattern = 1;
+	FailuresToCaptureTotal = 1;
+	MaxFailuresPerPatternToItuff = 1;
+	MaxFailuresToItuff = 1;
+	BypassPort = -1;
+}
+CSharpTest CsioCmemTC LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM
+{
+	Patlist = "clk_cpu_x_lock40_list";
+	PlistConfigurationFile = GetEnvironmentVariable("MCCLK_PATMODIFY_PATH")+"/clk_cpu_x_lock40_list.plist.json";
+	PrePlist = "";
+	IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.SDT_C48.json";
+	LimitsConfigurationFile = "./InputFiles/clk.nvlcpu_n48t0.limits.csv";
+	PlistConfigSet = "clk_cpu_x_lock40_list";
+	FunctionCall = "Ljpll_4p0_Lock";
+	EdcEnable = CLK_MAIN_CXXXSDT::CLK_MAIN_CXXXSDT.MIN_DATA;
+	KillDecode = "ENABLED";
+	CtvCapturePins = "CPU_TDO";
+	LevelsTc = "CLK_MAIN_CXXXSDT::cpu_clk_override_distmin_sharedmin_lvl";
+	TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	BypassPort = -1;
+}
+CSharpTest CsioCmemTC LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM
+{
+	Patlist = "clk_cpu_x_lock38_list";
+	PlistConfigurationFile = GetEnvironmentVariable("MCCLK_PATMODIFY_PATH")+"/clk_cpu_x_lock38_list.plist.json";
+	PrePlist = "";
+	IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.SDT_C48.json";
+	LimitsConfigurationFile = "./InputFiles/clk.nvlcpu_n48t0.limits.csv";
+	PlistConfigSet = "clk_cpu_x_lock38_list";
+	FunctionCall = "Ljpll_4p0_Lock";
+	EdcEnable = CLK_MAIN_CXXXSDT::CLK_MAIN_CXXXSDT.MIN_DATA;
+	KillDecode = "ENABLED";
+	CtvCapturePins = "CPU_TDO";
+	LevelsTc = "CLK_MAIN_CXXXSDT::cpu_clk_override_distmin_sharedmin_lvl";
+	TimingsTc = "BASE::cpu_fun_timing_mts96_tstprtclk48_tck96_hvmclk96";
+	BypassPort = -1;
+}
+CSharpTest AuxiliaryTC SETUP_X_SCREEN_K_SDTBEGIN_X_X_MIN_X_X_X
+{
+	Expression = "IsMatch([D.WFR.SORT.SCSAMP],'1')?1:(IsMatch([CLK_MAIN_CXXXSDT::CLK_MAIN_CXXXSDT.MIN_DATA],'DISABLED')?2:-1)";
+	DataType = "Integer";
+	Storage = "UserVar";
+	ResultToken = "CLK_MAIN_CXXXSDT::CLK_MAIN_CXXXSDT.SampleBypass";
+	BypassPort = -1;
+}
+CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_BBS
+{
+	SamplingRateValue = CLK_MAIN_CXXXSDT::SampleRate.VMIN_BBS("100","1");
+	WaferSampleRateValue = "1";
+	ShouldFirstBeSampled = "True";
+	BypassPort = CLK_MAIN_CXXXSDT::CLK_MAIN_CXXXSDT.SampleBypass;
+}
+CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_HVM
+{
+	SamplingRateValue = CLK_MAIN_CXXXSDT::SampleRate.VMIN_HVM("100","1");
+	WaferSampleRateValue = "1";
+	ShouldFirstBeSampled = "True";
+	BypassPort = CLK_MAIN_CXXXSDT::CLK_MAIN_CXXXSDT.SampleBypass;
+}
+CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_SDC
+{
+	SamplingRateValue = CLK_MAIN_CXXXSDT::SampleRate.VMIN_SDC("100","1");
+	WaferSampleRateValue = "1";
+	ShouldFirstBeSampled = "True";
+	BypassPort = CLK_MAIN_CXXXSDT::CLK_MAIN_CXXXSDT.SampleBypass;
+}
+CSharpTest CsioCmemTC LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM
+{
+	Patlist = "clk_cpu_x_lock40_list";
+	PlistConfigurationFile = GetEnvironmentVariable("MCCLK_PATMODIFY_PATH")+"/clk_cpu_x_lock40_list.plist.json";
+	PrePlist = "";
+	IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.SDT_C48.json";
+	LimitsConfigurationFile = "./InputFiles/clk.nvlcpu_n48t0.limits.csv";
+	PlistConfigSet = "clk_cpu_x_lock40_list";
+	FunctionCall = "Ljpll_4p0_Lock";
+	EdcEnable = CLK_MAIN_CXXXSDT::CLK_MAIN_CXXXSDT.NOM_DATA;
+	KillDecode = "ENABLED";
+	CtvCapturePins = "CPU_TDO";
+	LevelsTc = "CLK_MAIN_CXXXSDT::cpu_clk_override_distnom_sharednom_lvl";
+	TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	BypassPort = -1;
+}
+CSharpTest CsioCmemTC LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM
+{
+	Patlist = "clk_cpu_x_lock38_list";
+	PlistConfigurationFile = GetEnvironmentVariable("MCCLK_PATMODIFY_PATH")+"/clk_cpu_x_lock38_list.plist.json";
+	PrePlist = "";
+	IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.SDT_C48.json";
+	LimitsConfigurationFile = "./InputFiles/clk.nvlcpu_n48t0.limits.csv";
+	PlistConfigSet = "clk_cpu_x_lock38_list";
+	FunctionCall = "Ljpll_4p0_Lock";
+	EdcEnable = CLK_MAIN_CXXXSDT::CLK_MAIN_CXXXSDT.NOM_DATA;
+	KillDecode = "ENABLED";
+	CtvCapturePins = "CPU_TDO";
+	LevelsTc = "CLK_MAIN_CXXXSDT::cpu_clk_override_distnom_sharednom_lvl";
+	TimingsTc = "BASE::cpu_fun_timing_mts96_tstprtclk48_tck96_hvmclk96";
+	BypassPort = -1;
+}
+CSharpTest CsioCmemTC FVCURVE_PLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC
+{
+	Patlist = "clk_cpu_x_fvcurve_list";
+	PlistConfigurationFile = GetEnvironmentVariable("MCCLK_PATMODIFY_PATH")+"/clk_cpu_x_fvcurve_list.plist.json";
+	PrePlist = "";
+	IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.SDT_C48.json";
+	LimitsConfigurationFile = "./InputFiles/clk.nvlcpu_n48t0.limits.csv";
+	PlistConfigSet = "clk_cpu_x_fvcurve_list";
+	FunctionCall = "Ljpll_4p0_FvCurve";
+	EdcEnable = CLK_MAIN_CXXXSDT::CLK_MAIN_CXXXSDT.NOM_DATA;
+	KillDecode = "DISABLED";
+	CtvCapturePins = "CPU_TDO";
+	LevelsTc = "CLK_MAIN_CXXXSDT::cpu_clk_override_distnom_sharednom_lvl";
+	TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	PreInstance = "ReadSpecSet(--levels CLK_MAIN_CXXXSDT::cpu_clk_override_distnom_sharednom_lvl --name p_vccvnnaon_spec --gsds G.U.D.clk_cpu_vnnaon --print)";
+	BypassPort = -1;
+}
+CSharpTest CsioCmemTC OPENLOOP_FLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC
+{
+	Patlist = "clk_cpu_x_openloop_list";
+	PlistConfigurationFile = GetEnvironmentVariable("MCCLK_PATMODIFY_PATH")+"/clk_cpu_x_openloop_list.plist.json";
+	PrePlist = "";
+	IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.SDT_C48.json";
+	LimitsConfigurationFile = "./InputFiles/clk.nvlcpu_n48t0.limits.csv";
+	PlistConfigSet = "clk_cpu_x_openloop_list";
+	FunctionCall = "Ljpll_4p0_DcoOpenLoop";
+	EdcEnable = CLK_MAIN_CXXXSDT::CLK_MAIN_CXXXSDT.NOM_DATA;
+	KillDecode = "DISABLED";
+	CtvCapturePins = "CPU_TDO";
+	LevelsTc = "CLK_MAIN_CXXXSDT::cpu_clk_override_distnom_sharednom_lvl";
+	TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	BypassPort = -1;
+}
+CSharpTest AuxiliaryTC SETUP_X_SCREEN_K_SDTBEGIN_X_X_NOM_X_X_X
+{
+	Expression = "IsMatch([D.WFR.SORT.SCSAMP],'1')?1:(IsMatch([CLK_MAIN_CXXXSDT::CLK_MAIN_CXXXSDT.NOM_DATA],'DISABLED')?2:-1)";
+	DataType = "Integer";
+	Storage = "UserVar";
+	ResultToken = "CLK_MAIN_CXXXSDT::CLK_MAIN_CXXXSDT.SampleBypass";
+	BypassPort = -1;
+}
+CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_BBS
+{
+	SamplingRateValue = CLK_MAIN_CXXXSDT::SampleRate.VNOM_BBS("100","1");
+	WaferSampleRateValue = "1";
+	ShouldFirstBeSampled = "True";
+	BypassPort = CLK_MAIN_CXXXSDT::CLK_MAIN_CXXXSDT.SampleBypass;
+}
+CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_HVM
+{
+	SamplingRateValue = CLK_MAIN_CXXXSDT::SampleRate.VNOM_HVM("100","1");
+	WaferSampleRateValue = "1";
+	ShouldFirstBeSampled = "True";
+	BypassPort = CLK_MAIN_CXXXSDT::CLK_MAIN_CXXXSDT.SampleBypass;
+}
+CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_SDC
+{
+	SamplingRateValue = CLK_MAIN_CXXXSDT::SampleRate.VNOM_SDC("100","1");
+	WaferSampleRateValue = "1";
+	ShouldFirstBeSampled = "True";
+	BypassPort = CLK_MAIN_CXXXSDT::CLK_MAIN_CXXXSDT.SampleBypass;
+}
+CSharpTest CsioCmemTC LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM
+{
+	Patlist = "clk_cpu_x_lock40_list";
+	PlistConfigurationFile = GetEnvironmentVariable("MCCLK_PATMODIFY_PATH")+"/clk_cpu_x_lock40_list.plist.json";
+	PrePlist = "";
+	IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.SDT_C48.json";
+	LimitsConfigurationFile = "./InputFiles/clk.nvlcpu_n48t0.limits.csv";
+	PlistConfigSet = "clk_cpu_x_lock40_list";
+	FunctionCall = "Ljpll_4p0_Lock";
+	EdcEnable = CLK_MAIN_CXXXSDT::CLK_MAIN_CXXXSDT.MAX_DATA;
+	KillDecode = "ENABLED";
+	CtvCapturePins = "CPU_TDO";
+	LevelsTc = "CLK_MAIN_CXXXSDT::cpu_clk_override_distmax_sharedmax_lvl";
+	TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	BypassPort = -1;
+}
+CSharpTest CsioCmemTC LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM
+{
+	Patlist = "clk_cpu_x_lock38_list";
+	PlistConfigurationFile = GetEnvironmentVariable("MCCLK_PATMODIFY_PATH")+"/clk_cpu_x_lock38_list.plist.json";
+	PrePlist = "";
+	IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.SDT_C48.json";
+	LimitsConfigurationFile = "./InputFiles/clk.nvlcpu_n48t0.limits.csv";
+	PlistConfigSet = "clk_cpu_x_lock38_list";
+	FunctionCall = "Ljpll_4p0_Lock";
+	EdcEnable = CLK_MAIN_CXXXSDT::CLK_MAIN_CXXXSDT.MAX_DATA;
+	KillDecode = "ENABLED";
+	CtvCapturePins = "CPU_TDO";
+	LevelsTc = "CLK_MAIN_CXXXSDT::cpu_clk_override_distmax_sharedmax_lvl";
+	TimingsTc = "BASE::cpu_fun_timing_mts96_tstprtclk48_tck96_hvmclk96";
+	BypassPort = -1;
+}
+CSharpTest AuxiliaryTC SETUP_X_SCREEN_K_SDTBEGIN_X_X_MAX_X_X_X
+{
+	Expression = "IsMatch([D.WFR.SORT.SCSAMP],'1')?1:(IsMatch([CLK_MAIN_CXXXSDT::CLK_MAIN_CXXXSDT.MAX_DATA],'DISABLED')?2:-1)";
+	DataType = "Integer";
+	Storage = "UserVar";
+	ResultToken = "CLK_MAIN_CXXXSDT::CLK_MAIN_CXXXSDT.SampleBypass";
+	BypassPort = -1;
+}
+CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_BBS
+{
+	SamplingRateValue = CLK_MAIN_CXXXSDT::SampleRate.VMAX_BBS("100","1");
+	WaferSampleRateValue = "1";
+	ShouldFirstBeSampled = "True";
+	BypassPort = CLK_MAIN_CXXXSDT::CLK_MAIN_CXXXSDT.SampleBypass;
+}
+CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_HVM
+{
+	SamplingRateValue = CLK_MAIN_CXXXSDT::SampleRate.VMAX_HVM("100","1");
+	WaferSampleRateValue = "1";
+	ShouldFirstBeSampled = "True";
+	BypassPort = CLK_MAIN_CXXXSDT::CLK_MAIN_CXXXSDT.SampleBypass;
+}
+CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_SDC
+{
+	SamplingRateValue = CLK_MAIN_CXXXSDT::SampleRate.VMAX_SDC("100","1");
+	WaferSampleRateValue = "1";
+	ShouldFirstBeSampled = "True";
+	BypassPort = CLK_MAIN_CXXXSDT::CLK_MAIN_CXXXSDT.SampleBypass;
+}
+
+Flow SDTBEGIN_MIN_BBS
+{
+	FlowItem FUSECHECK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_BBS FUSECHECK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_BBS @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n99283759_fail_FUSECHECK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_BBS_n2;
+			SetBin b99283759_fail_CLK_MAIN_CXXXSDT_FUSECHECK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_BBS_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n98283759_fail_FUSECHECK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_BBS_n1;
+			SetBin b98283759_fail_CLK_MAIN_CXXXSDT_FUSECHECK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_BBS_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n90283771_fail_FUSECHECK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_BBS_0;
+			Return 1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28353612_fail_FUSECHECK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_BBS_2;
+			Return 1;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28193616_fail_FUSECHECK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_BBS_3;
+			Return 1;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28533507_fail_FUSECHECK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_BBS_4;
+			Return 1;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28533508_fail_FUSECHECK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_BBS_5;
+			Return 1;
+		}
+	}
+}
+Flow SDTBEGIN_MIN_HVM
+{
+	FlowItem LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n99283764_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_n2;
+			SetBin b99283764_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n98283764_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_n1;
+			SetBin b98283764_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n90283776_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_0;
+			SetBin b90283776_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_0;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28353617_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_2;
+			SetBin b28353617_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_2;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28193621_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_3;
+			SetBin b28193621_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_3;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28414115_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_4;
+			SetBin b28414115_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_4;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28424215_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_5;
+			SetBin b28424215_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_5;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM;
+		}
+		Result 6
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28434307_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_6;
+			SetBin b28434307_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_6;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM;
+		}
+		Result 7
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28444407_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_7;
+			SetBin b28444407_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_7;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM;
+		}
+		Result 8
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28454507_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_8;
+			SetBin b28454507_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_8;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM;
+		}
+		Result 9
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28464607_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_9;
+			SetBin b28464607_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_9;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM;
+		}
+		Result 10
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28474707_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_10;
+			SetBin b28474707_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_10;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM;
+		}
+		Result 11
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28484807_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_11;
+			SetBin b28484807_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_11;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM;
+		}
+		Result 12
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28494907_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_12;
+			SetBin b28494907_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_12;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM;
+		}
+		Result 13
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28505007_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_13;
+			SetBin b28505007_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_13;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM;
+		}
+		Result 14
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28515107_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_14;
+			SetBin b28515107_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_14;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM;
+		}
+		Result 15
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28525207_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_15;
+			SetBin b28525207_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_40_HVM_15;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM;
+		}
+	}
+	FlowItem LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n99283763_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM_n2;
+			SetBin b99283763_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n98283763_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM_n1;
+			SetBin b98283763_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n90283775_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM_0;
+			SetBin b90283775_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM_0;
+			Return 1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28353616_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM_2;
+			SetBin b28353616_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM_2;
+			Return 1;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28193620_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM_3;
+			SetBin b28193620_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM_3;
+			Return 1;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28414114_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM_4;
+			SetBin b28414114_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM_4;
+			Return 1;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28424214_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM_5;
+			SetBin b28424214_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MIN_X_38_HVM_5;
+			Return 1;
+		}
+	}
+}
+Flow CLK_MAIN_CXXXSDT_SDTBEGIN_MIN @SDTBEGIN_SubFlow
+{
+	FlowItem SETUP_X_SCREEN_K_SDTBEGIN_X_X_MIN_X_X_X SETUP_X_SCREEN_K_SDTBEGIN_X_X_MIN_X_X_X
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n99283769_fail_SETUP_X_SCREEN_K_SDTBEGIN_X_X_MIN_X_X_X_n2;
+			SetBin b99283769_fail_CLK_MAIN_CXXXSDT_SETUP_X_SCREEN_K_SDTBEGIN_X_X_MIN_X_X_X_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n98283769_fail_SETUP_X_SCREEN_K_SDTBEGIN_X_X_MIN_X_X_X_n1;
+			SetBin b98283769_fail_CLK_MAIN_CXXXSDT_SETUP_X_SCREEN_K_SDTBEGIN_X_X_MIN_X_X_X_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n90283781_fail_SETUP_X_SCREEN_K_SDTBEGIN_X_X_MIN_X_X_X_0;
+			SetBin b90283781_fail_CLK_MAIN_CXXXSDT_SETUP_X_SCREEN_K_SDTBEGIN_X_X_MIN_X_X_X_0;
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_BBS;
+		}
+	}
+	FlowItem FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_BBS FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_BBS @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n99283753_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_BBS_n2;
+			SetBin b99283753_fail_CLK_MAIN_CXXXSDT_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_BBS_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n98283753_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_BBS_n1;
+			SetBin b98283753_fail_CLK_MAIN_CXXXSDT_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_BBS_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n90283765_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_BBS_0;
+			GoTo SDTBEGIN_MIN_BBS;
+		}
+		Result 1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28533577_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_BBS_1;
+			GoTo SDTBEGIN_MIN_BBS;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28533578_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_BBS_2;
+			GoTo FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_HVM;
+		}
+	}
+	FlowItem SDTBEGIN_MIN_BBS SDTBEGIN_MIN_BBS
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_HVM;
+		}
+	}
+	FlowItem FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_HVM FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_HVM @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n99283754_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_HVM_n2;
+			SetBin b99283754_fail_CLK_MAIN_CXXXSDT_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_HVM_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n98283754_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_HVM_n1;
+			SetBin b98283754_fail_CLK_MAIN_CXXXSDT_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_HVM_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n90283766_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_HVM_0;
+			GoTo SDTBEGIN_MIN_HVM;
+		}
+		Result 1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28533579_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_HVM_1;
+			GoTo SDTBEGIN_MIN_HVM;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28533580_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_HVM_2;
+			GoTo FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_SDC;
+		}
+	}
+	FlowItem SDTBEGIN_MIN_HVM SDTBEGIN_MIN_HVM
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_SDC;
+		}
+	}
+	FlowItem FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_SDC FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_SDC @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n99283755_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_SDC_n2;
+			SetBin b99283755_fail_CLK_MAIN_CXXXSDT_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_SDC_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n98283755_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_SDC_n1;
+			SetBin b98283755_fail_CLK_MAIN_CXXXSDT_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_SDC_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n90283767_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_SDC_0;
+			Return 1;
+		}
+		Result 1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28533581_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_SDC_1;
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28533582_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MIN_X_X_SDC_2;
+			Return 1;
+		}
+	}
+}
+Flow SDTBEGIN_NOM_HVM
+{
+	FlowItem LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n99283766_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_n2;
+			SetBin b99283766_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n98283766_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_n1;
+			SetBin b98283766_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n90283778_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_0;
+			SetBin b90283778_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_0;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28353619_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_2;
+			SetBin b28353619_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_2;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28193623_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_3;
+			SetBin b28193623_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_3;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28414117_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_4;
+			SetBin b28414117_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_4;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28424217_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_5;
+			SetBin b28424217_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_5;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM;
+		}
+		Result 6
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28434308_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_6;
+			SetBin b28434308_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_6;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM;
+		}
+		Result 7
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28444408_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_7;
+			SetBin b28444408_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_7;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM;
+		}
+		Result 8
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28454508_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_8;
+			SetBin b28454508_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_8;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM;
+		}
+		Result 9
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28464608_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_9;
+			SetBin b28464608_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_9;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM;
+		}
+		Result 10
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28474708_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_10;
+			SetBin b28474708_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_10;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM;
+		}
+		Result 11
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28484808_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_11;
+			SetBin b28484808_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_11;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM;
+		}
+		Result 12
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28494908_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_12;
+			SetBin b28494908_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_12;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM;
+		}
+		Result 13
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28505008_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_13;
+			SetBin b28505008_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_13;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM;
+		}
+		Result 14
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28515108_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_14;
+			SetBin b28515108_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_14;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM;
+		}
+		Result 15
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28525208_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_15;
+			SetBin b28525208_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_40_HVM_15;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM;
+		}
+	}
+	FlowItem LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n99283765_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM_n2;
+			SetBin b99283765_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n98283765_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM_n1;
+			SetBin b98283765_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n90283777_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM_0;
+			SetBin b90283777_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM_0;
+			Return 1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28353618_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM_2;
+			SetBin b28353618_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM_2;
+			Return 1;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28193622_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM_3;
+			SetBin b28193622_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM_3;
+			Return 1;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28414116_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM_4;
+			SetBin b28414116_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM_4;
+			Return 1;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28424216_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM_5;
+			SetBin b28424216_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_NOM_X_38_HVM_5;
+			Return 1;
+		}
+	}
+}
+Flow SDTBEGIN_NOM_SDC
+{
+	FlowItem FVCURVE_PLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC FVCURVE_PLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n99283760_fail_FVCURVE_PLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_n2;
+			SetBin b99283760_fail_CLK_MAIN_CXXXSDT_FVCURVE_PLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n98283760_fail_FVCURVE_PLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_n1;
+			SetBin b98283760_fail_CLK_MAIN_CXXXSDT_FVCURVE_PLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n90283772_fail_FVCURVE_PLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_0;
+			GoTo OPENLOOP_FLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo OPENLOOP_FLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28353613_fail_FVCURVE_PLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_2;
+			GoTo OPENLOOP_FLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28193617_fail_FVCURVE_PLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_3;
+			GoTo OPENLOOP_FLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28533509_fail_FVCURVE_PLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_4;
+			GoTo OPENLOOP_FLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC;
+		}
+	}
+	FlowItem OPENLOOP_FLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC OPENLOOP_FLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n99283767_fail_OPENLOOP_FLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_n2;
+			SetBin b99283767_fail_CLK_MAIN_CXXXSDT_OPENLOOP_FLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n98283767_fail_OPENLOOP_FLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_n1;
+			SetBin b98283767_fail_CLK_MAIN_CXXXSDT_OPENLOOP_FLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n90283779_fail_OPENLOOP_FLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_0;
+			Return 1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28353620_fail_OPENLOOP_FLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_2;
+			Return 1;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28193624_fail_OPENLOOP_FLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_3;
+			Return 1;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28533510_fail_OPENLOOP_FLL_CMEM_E_SDTBEGIN_TAP_X_NOM_X_40_SDC_4;
+			Return 1;
+		}
+	}
+}
+Flow CLK_MAIN_CXXXSDT_SDTBEGIN_NOM @SDTBEGIN_SubFlow
+{
+	FlowItem SETUP_X_SCREEN_K_SDTBEGIN_X_X_NOM_X_X_X SETUP_X_SCREEN_K_SDTBEGIN_X_X_NOM_X_X_X
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n99283770_fail_SETUP_X_SCREEN_K_SDTBEGIN_X_X_NOM_X_X_X_n2;
+			SetBin b99283770_fail_CLK_MAIN_CXXXSDT_SETUP_X_SCREEN_K_SDTBEGIN_X_X_NOM_X_X_X_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n98283770_fail_SETUP_X_SCREEN_K_SDTBEGIN_X_X_NOM_X_X_X_n1;
+			SetBin b98283770_fail_CLK_MAIN_CXXXSDT_SETUP_X_SCREEN_K_SDTBEGIN_X_X_NOM_X_X_X_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n90283782_fail_SETUP_X_SCREEN_K_SDTBEGIN_X_X_NOM_X_X_X_0;
+			SetBin b90283782_fail_CLK_MAIN_CXXXSDT_SETUP_X_SCREEN_K_SDTBEGIN_X_X_NOM_X_X_X_0;
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_BBS;
+		}
+	}
+	FlowItem FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_BBS FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_BBS @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n99283756_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_BBS_n2;
+			SetBin b99283756_fail_CLK_MAIN_CXXXSDT_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_BBS_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n98283756_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_BBS_n1;
+			SetBin b98283756_fail_CLK_MAIN_CXXXSDT_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_BBS_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n90283768_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_BBS_0;
+			GoTo FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_HVM;
+		}
+		Result 1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28533583_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_BBS_1;
+			GoTo FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_HVM;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28533584_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_BBS_2;
+			GoTo FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_HVM;
+		}
+	}
+	FlowItem FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_HVM FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_HVM @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n99283757_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_HVM_n2;
+			SetBin b99283757_fail_CLK_MAIN_CXXXSDT_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_HVM_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n98283757_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_HVM_n1;
+			SetBin b98283757_fail_CLK_MAIN_CXXXSDT_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_HVM_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n90283769_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_HVM_0;
+			GoTo SDTBEGIN_NOM_HVM;
+		}
+		Result 1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28533585_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_HVM_1;
+			GoTo SDTBEGIN_NOM_HVM;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28533586_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_HVM_2;
+			GoTo FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_SDC;
+		}
+	}
+	FlowItem SDTBEGIN_NOM_HVM SDTBEGIN_NOM_HVM
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_SDC;
+		}
+	}
+	FlowItem FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_SDC FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_SDC @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n99283758_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_SDC_n2;
+			SetBin b99283758_fail_CLK_MAIN_CXXXSDT_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_SDC_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n98283758_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_SDC_n1;
+			SetBin b98283758_fail_CLK_MAIN_CXXXSDT_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_SDC_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n90283770_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_SDC_0;
+			GoTo SDTBEGIN_NOM_SDC;
+		}
+		Result 1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28533587_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_SDC_1;
+			GoTo SDTBEGIN_NOM_SDC;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28533588_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_NOM_X_X_SDC_2;
+			Return 1;
+		}
+	}
+	FlowItem SDTBEGIN_NOM_SDC SDTBEGIN_NOM_SDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+	}
+}
+Flow SDTBEGIN_MAX_HVM
+{
+	FlowItem LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n99283762_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_n2;
+			SetBin b99283762_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n98283762_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_n1;
+			SetBin b98283762_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n90283774_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_0;
+			SetBin b90283774_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_0;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28353615_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_2;
+			SetBin b28353615_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_2;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28193619_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_3;
+			SetBin b28193619_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_3;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28414113_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_4;
+			SetBin b28414113_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_4;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28424213_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_5;
+			SetBin b28424213_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_5;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM;
+		}
+		Result 6
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28434306_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_6;
+			SetBin b28434306_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_6;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM;
+		}
+		Result 7
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28444406_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_7;
+			SetBin b28444406_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_7;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM;
+		}
+		Result 8
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28454506_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_8;
+			SetBin b28454506_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_8;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM;
+		}
+		Result 9
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28464606_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_9;
+			SetBin b28464606_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_9;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM;
+		}
+		Result 10
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28474706_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_10;
+			SetBin b28474706_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_10;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM;
+		}
+		Result 11
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28484806_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_11;
+			SetBin b28484806_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_11;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM;
+		}
+		Result 12
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28494906_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_12;
+			SetBin b28494906_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_12;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM;
+		}
+		Result 13
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28505006_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_13;
+			SetBin b28505006_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_13;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM;
+		}
+		Result 14
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28515106_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_14;
+			SetBin b28515106_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_14;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM;
+		}
+		Result 15
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28525206_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_15;
+			SetBin b28525206_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_40_HVM_15;
+			GoTo LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM;
+		}
+	}
+	FlowItem LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n99283761_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM_n2;
+			SetBin b99283761_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n98283761_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM_n1;
+			SetBin b98283761_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n90283773_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM_0;
+			SetBin b90283773_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM_0;
+			Return 1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28353614_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM_2;
+			SetBin b28353614_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM_2;
+			Return 1;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28193618_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM_3;
+			SetBin b28193618_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM_3;
+			Return 1;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28414112_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM_4;
+			SetBin b28414112_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM_4;
+			Return 1;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28424212_fail_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM_5;
+			SetBin b28424212_fail_CLK_MAIN_CXXXSDT_LOCK_X_CMEM_K_SDTBEGIN_TAP_X_MAX_X_38_HVM_5;
+			Return 1;
+		}
+	}
+}
+Flow CLK_MAIN_CXXXSDT_SDTBEGIN_MAX @SDTBEGIN_SubFlow
+{
+	FlowItem SETUP_X_SCREEN_K_SDTBEGIN_X_X_MAX_X_X_X SETUP_X_SCREEN_K_SDTBEGIN_X_X_MAX_X_X_X
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n99283768_fail_SETUP_X_SCREEN_K_SDTBEGIN_X_X_MAX_X_X_X_n2;
+			SetBin b99283768_fail_CLK_MAIN_CXXXSDT_SETUP_X_SCREEN_K_SDTBEGIN_X_X_MAX_X_X_X_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n98283768_fail_SETUP_X_SCREEN_K_SDTBEGIN_X_X_MAX_X_X_X_n1;
+			SetBin b98283768_fail_CLK_MAIN_CXXXSDT_SETUP_X_SCREEN_K_SDTBEGIN_X_X_MAX_X_X_X_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n90283780_fail_SETUP_X_SCREEN_K_SDTBEGIN_X_X_MAX_X_X_X_0;
+			SetBin b90283780_fail_CLK_MAIN_CXXXSDT_SETUP_X_SCREEN_K_SDTBEGIN_X_X_MAX_X_X_X_0;
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_BBS;
+		}
+	}
+	FlowItem FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_BBS FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_BBS @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n99283750_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_BBS_n2;
+			SetBin b99283750_fail_CLK_MAIN_CXXXSDT_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_BBS_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n98283750_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_BBS_n1;
+			SetBin b98283750_fail_CLK_MAIN_CXXXSDT_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_BBS_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n90283762_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_BBS_0;
+			GoTo FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_HVM;
+		}
+		Result 1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28533571_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_BBS_1;
+			GoTo FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_HVM;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28533572_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_BBS_2;
+			GoTo FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_HVM;
+		}
+	}
+	FlowItem FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_HVM FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_HVM @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n99283751_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_HVM_n2;
+			SetBin b99283751_fail_CLK_MAIN_CXXXSDT_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_HVM_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n98283751_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_HVM_n1;
+			SetBin b98283751_fail_CLK_MAIN_CXXXSDT_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_HVM_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n90283763_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_HVM_0;
+			GoTo SDTBEGIN_MAX_HVM;
+		}
+		Result 1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28533573_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_HVM_1;
+			GoTo SDTBEGIN_MAX_HVM;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28533574_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_HVM_2;
+			GoTo FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_SDC;
+		}
+	}
+	FlowItem SDTBEGIN_MAX_HVM SDTBEGIN_MAX_HVM
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_SDC;
+		}
+	}
+	FlowItem FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_SDC FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_SDC @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n99283752_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_SDC_n2;
+			SetBin b99283752_fail_CLK_MAIN_CXXXSDT_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_SDC_n2;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n98283752_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_SDC_n1;
+			SetBin b98283752_fail_CLK_MAIN_CXXXSDT_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_SDC_n1;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n90283764_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_SDC_0;
+			Return 1;
+		}
+		Result 1
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28533575_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_SDC_1;
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters CLK_MAIN_CXXXSDT::n28533576_fail_FORK_X_SAMPLE_K_SDTBEGIN_X_X_MAX_X_X_SDC_2;
+			Return 1;
+		}
+	}
+}

@@ -1,0 +1,153 @@
+Version 1.0;
+
+SpecificationSet  hptp_timing_cal_BFUNC (max, min, nom) Inherits CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC
+{
+	
+#cpu_all_tstprt_i_data
+#	{
+#		FixedDriveState = "Off";
+#		IOH = p_ioh_common_param; 
+#		IOL = p_iol_common_param;
+#		PinModeSel = "Digital";
+#		TermMode = c_cpu_all_1_tstprt_i_data_term_mode;
+#		TermVRef = c_cpu_all_1_tstprt_i_data_term_vref;       
+#		VIH = c_cpu_all_1_tstprt_i_data_vih;
+#		VIL = c_cpu_all_1_tstprt_i_data_vil;
+#		VOX = c_cpu_all_1_tstprt_i_data_vox;
+#	}
+#	{
+#		FixedDriveState = "Off";
+#		IOH = p_ioh_common_param; 0
+#		IOL = p_iol_common_param; 1
+#		PinModeSel = "Digital";    sort
+#		TermMode = "Off";
+#		TermVRef = 0;
+#		VIH = c_vih_rx_vccdft_hptp_calc_timcal; c_dfxphy_rx_cm (0.8/2) +p_vcchptp_spec(0.8)/2+p_vih_rx_offset 0;
+#		VIL = c_vil_rx_vccdft_hptp_calc_timcal; c_dfxphy_rx_cm - p_vcchptp_spec/2+p_vil_rx_offset 0;
+#		VOX = c_vox_rx_vccdft_hptp_calc_timcal; p_vcc2vox_rx_ratio_param 0.5*p_vcchptp_spec 0.8 +p_voh_rx_offset 0;
+#	}
+Current  p_ioh_common_param =0,0,0;
+Current  p_iol_common_param = 1mA,1mA,1mA;
+String  c_cpu_all_tstprt_i_data_term_mode ="Off","Off","Off";
+Voltage  c_cpu_all_tstprt_i_data_term_vref =0,0,0;
+Voltage  c_cpu_all_tstprt_i_data_vih =0.8,0.8, 0.8;
+Voltage  c_cpu_all_tstprt_i_data_vil =0,0, 0;
+Voltage  c_cpu_all_tstprt_i_data_vox =  0.4, 0.4, 0.4;
+
+#S52C
+String  c_cpu_all_1_tstprt_i_data_term_mode ="Off","Off","Off";
+Voltage  c_cpu_all_1_tstprt_i_data_term_vref =0,0,0;
+Voltage  c_cpu_all_1_tstprt_i_data_vih =0.8,0.8, 0.8;
+Voltage  c_cpu_all_1_tstprt_i_data_vil =0,0, 0;
+Voltage  c_cpu_all_1_tstprt_i_data_vox =  0.4, 0.4, 0.4;
+
+#cpu_all_tstprt_o_data
+#	{
+#		FixedDriveState = "Off";
+#		IOH = p_ioh_common_param; 
+#		IOL = p_iol_common_param;
+#		PinModeSel = "Digital";
+#		TermMode = c_cpu_all_1_tstprt_o_data_term_mode;
+#		TermVRef = c_cpu_all_1_tstprt_o_data_term_vref;    cbf
+#		VIH = c_cpu_all_1_tstprt_o_data_vih;
+#		VIL = c_cpu_all_1_tstprt_o_data_vil;
+#		VOX = c_cpu_all_1_tstprt_o_data_vox;
+#	}
+#	{
+#		FixedDriveState = "Off";
+#		IOH = p_ioh_common_param;
+#		IOL = p_iol_common_param;
+#		PinModeSel = "Digital";
+#		TermMode = "TermVRef";
+#		TermVRef = 0;
+#		VIH = c_vih_tx_vccdft_hptp_calc_timcal;     p_vcc2vih_ratio_param 1*p_vcchptp_spec 0.8+p_vih_tx_offset 0;
+#		VIL = c_vil_tx_vccdft_hptp_calc_timcal;     p_vcc2vil_ratio_param 0*p_vcchptp_spec 0.8+p_vil_tx_offset 0;
+#		VOX = c_vox_tx_vccdft_hptp_calc_timcal;     p_vcc2vox_tx_ratio_param 0.25*p_vcchptp_spec 0.8+p_voh_tx_offset 0;
+#	}
+String  c_cpu_all_tstprt_o_data_term_mode ="TermVRef","TermVRef","TermVRef";
+Voltage  c_cpu_all_tstprt_o_data_term_vref =0,0,0;
+Voltage  c_cpu_all_tstprt_o_data_vih =0.8, 0.8, 0.8;
+Voltage  c_cpu_all_tstprt_o_data_vil =0, 0, 0;
+Voltage  c_cpu_all_tstprt_o_data_vox =0.2, 0.2, 0.2;
+
+#S52C
+String  c_cpu_all_1_tstprt_o_data_term_mode ="TermVRef","TermVRef","TermVRef";
+Voltage  c_cpu_all_1_tstprt_o_data_term_vref =0,0,0;
+Voltage  c_cpu_all_1_tstprt_o_data_vih =0.8, 0.8, 0.8;
+Voltage  c_cpu_all_1_tstprt_o_data_vil =0, 0, 0;
+Voltage  c_cpu_all_1_tstprt_o_data_vox =0.2, 0.2, 0.2;
+
+#CPU_TSTPRT_I_CK_EC
+#	{
+#		FixedDriveState = "Off";
+#		PinModeSel = "Digital";
+#		VIH = c_cpu_all_1_tstprt_i_ck_ec_vih;
+#		VIL = c_cpu_all_1_tstprt_i_ck_ec_vil;
+#		VOX = c_cpu_all_1_tstprt_i_ck_ec_vox;
+#	}
+#	{
+#		FixedDriveState = "Off";
+#		PinModeSel = "Digital";
+#		VIH = c_vih_vccdft_hptp_testclk_calc_timcal;    p_vcc2vih_testclk_ratio_param 1*p_vcchptp_spec 0.8+p_vih_testclk_offset 0;
+#		VIL = c_vil_vccdft_hptp_testclk_calc_timcal;    p_vcc2vil_testclk_ratio_param 0*p_vcchptp_spec 0.8+p_vil_testclk_offset 0;
+#		VOX = c_vox_vccdft_hptp_testclk_calc_timcal;    p_vcc2vox_testclk_ratio_param 0.5*p_vcchptp_spec 0.8+p_voh_testclk_offset 0;
+#	}
+Voltage  c_cpu_all_tstprt_i_ck_ec_vih =0.8, 0.8, 0.8;
+Voltage  c_cpu_all_tstprt_i_ck_ec_vil =0, 0, 0;
+Voltage  c_cpu_all_tstprt_i_ck_ec_vox =0.4, 0.4, 0.4;
+
+#S52C
+Voltage  c_cpu_all_1_tstprt_i_ck_ec_vih =0.8, 0.8, 0.8;
+Voltage  c_cpu_all_1_tstprt_i_ck_ec_vil =0, 0, 0;
+Voltage  c_cpu_all_1_tstprt_i_ck_ec_vox =0.4, 0.4, 0.4;
+
+#CPU_TSTPRT_I_CK
+#	{
+#		FixedDriveState = "Off";
+#		PinModeSel = "Digital";
+#		TermMode = "Off";
+#		VIH = c_cpu_all_1_tstprt_o_ck_vih;
+#		VIL = c_cpu_all_1_tstprt_i_ck_vil;
+#		VOX = c_cpu_all_1_tstprt_o_ck_vox;
+#	}
+#	{
+#		FixedDriveState = "Off";
+#		PinModeSel = "Digital";
+#		TermMode = "Off";
+#		VIH = c_vih_vccdft_hptp_testclk_calc_timcal;
+#		VIL = c_vil_vccdft_hptp_testclk_calc_timcal;
+#		VOX = c_vox_vccdft_hptp_testclk_calc_timcal;
+#	}
+Voltage  c_cpu_all_tstprt_i_ck_vih =0.8, 0.8, 0.8;
+Voltage  c_cpu_all_tstprt_i_ck_vil =0, 0, 0;
+Voltage  c_cpu_all_tstprt_i_ck_vox =0.4, 0.4, 0.4;
+
+#S52C
+Voltage  c_cpu_all_1_tstprt_i_ck_vih =0.8, 0.8, 0.8;
+Voltage  c_cpu_all_1_tstprt_i_ck_vil =0, 0, 0;
+Voltage  c_cpu_all_1_tstprt_i_ck_vox =0.4, 0.4, 0.4;
+}
+
+TestConditionGroup hptp_timing_cal_TCG
+{
+	SpecificationSet = hptp_timing_cal_BFUNC;
+	Level = CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl;
+}
+
+TestCondition hptp_timing_cal_nom_lvl
+{
+	TestConditionGroup = hptp_timing_cal_TCG;
+	Selector = nom;
+}
+
+TestCondition hptp_timing_cal_min_lvl
+{
+	TestConditionGroup = hptp_timing_cal_TCG;
+	Selector = min;
+}
+
+TestCondition hptp_timing_cal_max_lvl
+{
+	TestConditionGroup = hptp_timing_cal_TCG;
+	Selector = max;
+}

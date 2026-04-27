@@ -1,0 +1,288 @@
+Version 1.0;
+
+
+Levels RlyBits_default_cfg_lvl
+{
+    
+    PCD_TMUXCBIT0         { DefaultState = "OutputLo"; Direction    = "Output"; LogicalValue = 0; }
+    PCD_TMUXCBIT1         { DefaultState = "OutputLo"; Direction    = "Output"; LogicalValue = 0; }
+    PCD_TMUXCBIT2         { DefaultState = "OutputLo"; Direction    = "Output"; LogicalValue = 0; }
+    CPU_VLOADMUXCBIT0     { DefaultState = "OutputHi"; Direction    = "Output"; LogicalValue = 1; }
+	CPU_VLOADMUXCBIT1     { DefaultState = "OutputHi"; Direction    = "Output"; LogicalValue = 1; }
+	CPU_VLOADMUXCBIT2     { DefaultState = "OutputHi"; Direction    = "Output"; LogicalValue = 1; }
+	CPU_VLOADMUXCBIT3     { DefaultState = "OutputHi"; Direction    = "Output"; LogicalValue = 1; }
+	CPU_VLOADMUXCBIT4     { DefaultState = "OutputHi"; Direction    = "Output"; LogicalValue = 1; }
+    CLKCHIP_RLY_OUTPUT_EN { DefaultState = "OutputHi"; Direction    = "Output"; LogicalValue = 1; }
+
+}
+Levels all_tpi_xiucontinuity_x_x_pkg_level
+{
+
+	ALL_HC
+	{
+		FreeDriveTime = 1mS;
+		IClampHi = 500mA;
+		IClampLo = -500mA;
+		IRange = "IR500mA";
+		OPMode = "VSIM";
+		PowerSequence = TRUE;
+		VForce = 0.05V;
+		VSlewStepRatio = 120;
+	}
+	SequenceBreak 0mS;
+	ALL_HC
+	{
+		PreMeasurementDelay = 5mS;
+		SamplingCount = 1;
+		SamplingMode = "Trace";
+		SamplingRatio = 1;
+		StartMeasurement = TRUE;
+	}
+	SequenceBreak 0mS;
+	VCCIA
+	{
+		FreeDriveTime = 1mS;
+		IClampHi = 2A;
+		IClampLo = -10A;
+		IRange = "IR19A_DEGANG";
+		OPMode = "VSIM";
+		PowerSequence = TRUE;
+		VForce = 0.2V;
+		VSlewStepRatio = 120;
+	}
+	SequenceBreak 0mS;
+	VCCIA
+	{
+		PreMeasurementDelay = 5mS;
+		SamplingCount = 1;
+		SamplingMode = "Trace";
+		SamplingRatio = 1;
+		StartMeasurement = TRUE;
+	}
+	SequenceBreak 0mS;
+	VCCSA
+	{
+		FreeDriveTime = 1mS;
+		IClampHi = 2A;
+		IClampLo = -10A;
+		IRange = "IR19A_DEGANG";
+		OPMode = "VSIM";
+		PowerSequence = TRUE;
+		VForce = 0.2V;
+		VSlewStepRatio = 120;
+	}
+	SequenceBreak 0mS;
+	VCCSA
+	{
+		PreMeasurementDelay = 5mS;
+		SamplingCount = 1;
+		SamplingMode = "Trace";
+		SamplingRatio = 1;
+		StartMeasurement = TRUE;
+	}
+	SequenceBreak 0mS;
+	ALL_LC
+	{
+		FreeDriveTime = 1mS;
+		IClampHi = 500mA;
+		IClampLo = -500mA;
+		IRange = "IR500mA";
+		OPMode = "VSIM";
+		PowerSequence = TRUE;
+		VForce = 0.05V;
+	}
+	SequenceBreak 0mS;
+	ALL_LC
+	{
+		PreMeasurementDelay = 5mS;
+		SamplingCount = 1;
+		SamplingMode = "Trace";
+		SamplingRatio = 1;
+		StartMeasurement = TRUE;
+	}
+	SequenceBreak 0mS;
+	DDR_TERM
+	{
+		FreeDriveTime = 1mS;
+		IClampHi = 500mA;
+		IClampLo = -500mA;
+		IRange = "IR500mA";
+		OPMode = "VSIM";
+		PowerSequence = TRUE;
+		VForce = 0.05V;
+	}
+	SequenceBreak 0mS;
+	DDR_TERM
+	{
+		PreMeasurementDelay = 5mS;
+		SamplingCount = 1;
+		SamplingMode = "Trace";
+		SamplingRatio = 1;
+		StartMeasurement = TRUE;
+	}
+	SequenceBreak 0mS;
+	ALL_VLC
+	{
+		FreeDriveCurrentHi = 256mA;
+		FreeDriveCurrentLo = -256mA;
+		FreeDriveTime = 1mS;
+		IClampHi = 256mA;
+		IClampLo = -256mA;
+		IRange = "IR256mA";
+		OPMode = "VSIM";
+		PowerSequence = TRUE;
+		VForce = 0.05V;
+	}
+	SequenceBreak 0mS;
+	ALL_VLC
+	{
+		PreMeasurementDelay = 5mS;
+		SamplingCount = 1;
+		SamplingMode = "Trace";
+		SamplingRatio = 1;
+		StartMeasurement = TRUE;
+	}
+	SequenceBreak 0mS;
+
+}
+
+Levels all_tpi_xiuleakage_x_s28c_hvm_level
+
+{
+    pkg_dpin_nvl_s28c_hvm_leakage
+	{
+		IClampHi = 6.52uA;
+		IClampLo = -6.52uA;
+		IRange = "IR10uA";
+		OPMode = "VSIM";
+		PinModeSel = "PMU";
+		VForce = 0.5V;
+	}
+	SequenceBreak 0mS;
+	pkg_dpin_nvl_s28c_hvm_leakage
+	{
+		PreMeasurementDelay = 1mS;
+		SamplingCount = 1;
+		SamplingMode = "Trace";
+		SamplingRatio = 1;
+		StartMeasurement = TRUE;
+	}
+	SequenceBreak 0mS;
+}
+Levels all_tpi_xiuleakage_x_s52c_hvm_level
+{
+	pkg_dpin_nvl_s52c_hvm_leakage
+{
+		IClampHi = 6.52uA;
+		IClampLo = -6.52uA;
+		IRange = "IR10uA";
+		OPMode = "VSIM";
+		PinModeSel = "PMU";
+		VForce = 0.5V;
+	}
+	SequenceBreak 0mS;
+	pkg_dpin_nvl_s52c_hvm_leakage
+	{
+		PreMeasurementDelay = 1mS;
+		SamplingCount = 1;
+		SamplingMode = "Trace";
+		SamplingRatio = 1;
+		StartMeasurement = TRUE;
+	}
+	SequenceBreak 0mS;
+}
+
+Levels all_tpi_xiuleakage_x_hx28c_hvm_level
+{
+	pkg_dpin_nvl_hx28c_hvm_leakage
+	{
+		IClampHi = 6.52uA;
+		IClampLo = -6.52uA;
+		IRange = "IR10uA";
+		OPMode = "VSIM";
+		PinModeSel = "PMU";
+		VForce = 0.5V;
+	}
+	SequenceBreak 0mS;
+	pkg_dpin_nvl_hx28c_hvm_leakage
+	{
+		PreMeasurementDelay = 1mS;
+		SamplingCount = 1;
+		SamplingMode = "Trace";
+		SamplingRatio = 1;
+		StartMeasurement = TRUE;
+	}
+	SequenceBreak 0mS;
+}
+
+Levels all_tpi_xiuleakage_x_s28c_dbg_level
+
+{
+    pkg_dpin_nvl_s28c_dbg_leakage
+	{
+		IClampHi = 6.52uA;
+		IClampLo = -6.52uA;
+		IRange = "IR10uA";
+		OPMode = "VSIM";
+		PinModeSel = "PMU";
+		VForce = 0.5V;
+	}
+	SequenceBreak 0mS;
+	pkg_dpin_nvl_s28c_dbg_leakage
+	{
+		PreMeasurementDelay = 1mS;
+		SamplingCount = 1;
+		SamplingMode = "Trace";
+		SamplingRatio = 1;
+		StartMeasurement = TRUE;
+	}
+	SequenceBreak 0mS;
+}
+
+Levels all_tpi_xiuleakage_x_s52c_dbg_level
+
+{
+    pkg_dpin_nvl_s52c_dbg_leakage
+	{
+		IClampHi = 6.52uA;
+		IClampLo = -6.52uA;
+		IRange = "IR10uA";
+		OPMode = "VSIM";
+		PinModeSel = "PMU";
+		VForce = 0.5V;
+	}
+	SequenceBreak 0mS;
+	pkg_dpin_nvl_s52c_dbg_leakage
+	{
+		PreMeasurementDelay = 1mS;
+		SamplingCount = 1;
+		SamplingMode = "Trace";
+		SamplingRatio = 1;
+		StartMeasurement = TRUE;
+	}
+	SequenceBreak 0mS;
+}
+
+Levels all_tpi_xiuleakage_x_hx28c_dbg_level
+{
+	pkg_dpin_nvl_hx28c_dbg_leakage
+	{
+		IClampHi = 6.52uA;
+		IClampLo = -6.52uA;
+		IRange = "IR10uA";
+		OPMode = "VSIM";
+		PinModeSel = "PMU";
+		VForce = 0.5V;
+	}
+	SequenceBreak 0mS;
+	pkg_dpin_nvl_hx28c_dbg_leakage
+	{
+		PreMeasurementDelay = 1mS;
+		SamplingCount = 1;
+		SamplingMode = "Trace";
+		SamplingRatio = 1;
+		StartMeasurement = TRUE;
+	}
+	SequenceBreak 0mS;
+}
+

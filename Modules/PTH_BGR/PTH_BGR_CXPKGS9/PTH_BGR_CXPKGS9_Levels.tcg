@@ -1,0 +1,200 @@
+Version 1.0;
+
+####SpecificationSet####
+
+SpecificationSet dummy_PARAMS (nom)
+{
+}
+
+SpecificationSet cpu_pth_bgr_x_viewana_cal_ch0_pkg_lvl_bgrVIEWANA (force_0V,force_1000mV,force_200mV,force_300mV,force_400mV,force_500mV,force_600mV,force_700mV,force_800mV,force_900mV)
+{
+	Voltage p_viewana_vbump_val = 0V,1000mV,200mV,300mV,400mV,500mV,600mV,700mV,800mV,900mV;
+}
+
+SpecificationSet cpu_pth_bgr_x_viewana_cal_ch1_pkg_lvl_bgrVIEWANA (force_0V,force_1000mV,force_200mV,force_300mV,force_400mV,force_500mV,force_600mV,force_700mV,force_800mV,force_900mV)
+{
+	Voltage p_viewana_vbump_val = 0V,1000mV,200mV,300mV,400mV,500mV,600mV,700mV,800mV,900mV;
+}
+
+SpecificationSet cpu_pth_bgr_x_viewana_pkg_lvl_BFUNC (nom_lvl)
+{
+}
+SpecificationSet BFUNC_nom_lv_0P8V (max,min,nom) Inherits CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC
+{
+	Voltage p_cpu0_ext_bgref_trim_ana = 0.8V;
+	Voltage p_cpu1_ext_bgref_trim_ana = 0.8V;	
+}
+
+
+
+####TestConditionGroup####
+
+TestConditionGroup dummy_TCG
+{
+	SpecificationSet = dummy_PARAMS;
+	Level = PTH_BGR_CXPKGS9::dummy;
+}
+
+TestConditionGroup cpu_pth_bgr_x_viewana_cal_ch0_pkg_lvl_TCG
+{
+	SpecificationSet = cpu_pth_bgr_x_viewana_cal_ch0_pkg_lvl_bgrVIEWANA;
+	Level = PTH_BGR_CXPKGS9::cpu_pth_bgr_x_viewana_cal_ch0_pkg_lvl;
+}
+
+TestConditionGroup cpu_pth_bgr_x_viewana_cal_ch1_pkg_lvl_TCG
+{
+	SpecificationSet = cpu_pth_bgr_x_viewana_cal_ch1_pkg_lvl_bgrVIEWANA;
+	Level = PTH_BGR_CXPKGS9::cpu_pth_bgr_x_viewana_cal_ch1_pkg_lvl;
+}
+
+TestConditionGroup cpu_pth_bgr_x_viewana_pkg_lvl_TCG
+{
+	SpecificationSet = cpu_pth_bgr_x_viewana_pkg_lvl_BFUNC;
+	Level = PTH_BGR_CXPKGS9::cpu_pth_bgr_x_viewana_pkg_lvl;
+}
+
+TestConditionGroup bf_lvl_PARAMS_nom_lvl_0P8V_TCG
+{
+	SpecificationSet = BFUNC_nom_lv_0P8V;
+	Level = CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl;
+}
+
+####TestCondition####
+
+TestCondition dummy
+{
+	TestConditionGroup = dummy_TCG;
+	Selector = nom;
+}
+
+TestCondition cpu_pth_bgr_x_viewana_cal_ch0_pkg_lvl_force_0V
+{
+	TestConditionGroup = cpu_pth_bgr_x_viewana_cal_ch0_pkg_lvl_TCG;
+	Selector = force_0V;
+}
+
+TestCondition cpu_pth_bgr_x_viewana_cal_ch0_pkg_lvl_force_1000mV
+{
+	TestConditionGroup = cpu_pth_bgr_x_viewana_cal_ch0_pkg_lvl_TCG;
+	Selector = force_1000mV;
+}
+
+TestCondition cpu_pth_bgr_x_viewana_cal_ch0_pkg_lvl_force_200mV
+{
+	TestConditionGroup = cpu_pth_bgr_x_viewana_cal_ch0_pkg_lvl_TCG;
+	Selector = force_200mV;
+}
+
+TestCondition cpu_pth_bgr_x_viewana_cal_ch0_pkg_lvl_force_300mV
+{
+	TestConditionGroup = cpu_pth_bgr_x_viewana_cal_ch0_pkg_lvl_TCG;
+	Selector = force_300mV;
+}
+
+TestCondition cpu_pth_bgr_x_viewana_cal_ch0_pkg_lvl_force_400mV
+{
+	TestConditionGroup = cpu_pth_bgr_x_viewana_cal_ch0_pkg_lvl_TCG;
+	Selector = force_400mV;
+}
+
+TestCondition cpu_pth_bgr_x_viewana_cal_ch0_pkg_lvl_force_500mV
+{
+	TestConditionGroup = cpu_pth_bgr_x_viewana_cal_ch0_pkg_lvl_TCG;
+	Selector = force_500mV;
+}
+
+TestCondition cpu_pth_bgr_x_viewana_cal_ch0_pkg_lvl_force_600mV
+{
+	TestConditionGroup = cpu_pth_bgr_x_viewana_cal_ch0_pkg_lvl_TCG;
+	Selector = force_600mV;
+}
+
+TestCondition cpu_pth_bgr_x_viewana_cal_ch0_pkg_lvl_force_700mV
+{
+	TestConditionGroup = cpu_pth_bgr_x_viewana_cal_ch0_pkg_lvl_TCG;
+	Selector = force_700mV;
+}
+
+TestCondition cpu_pth_bgr_x_viewana_cal_ch0_pkg_lvl_force_800mV
+{
+	TestConditionGroup = cpu_pth_bgr_x_viewana_cal_ch0_pkg_lvl_TCG;
+	Selector = force_800mV;
+}
+
+TestCondition cpu_pth_bgr_x_viewana_cal_ch0_pkg_lvl_force_900mV
+{
+	TestConditionGroup = cpu_pth_bgr_x_viewana_cal_ch0_pkg_lvl_TCG;
+	Selector = force_900mV;
+}
+
+TestCondition cpu_pth_bgr_x_viewana_cal_ch1_pkg_lvl_force_0V
+{
+	TestConditionGroup = cpu_pth_bgr_x_viewana_cal_ch1_pkg_lvl_TCG;
+	Selector = force_0V;
+}
+
+TestCondition cpu_pth_bgr_x_viewana_cal_ch1_pkg_lvl_force_1000mV
+{
+	TestConditionGroup = cpu_pth_bgr_x_viewana_cal_ch1_pkg_lvl_TCG;
+	Selector = force_1000mV;
+}
+
+TestCondition cpu_pth_bgr_x_viewana_cal_ch1_pkg_lvl_force_200mV
+{
+	TestConditionGroup = cpu_pth_bgr_x_viewana_cal_ch1_pkg_lvl_TCG;
+	Selector = force_200mV;
+}
+
+TestCondition cpu_pth_bgr_x_viewana_cal_ch1_pkg_lvl_force_300mV
+{
+	TestConditionGroup = cpu_pth_bgr_x_viewana_cal_ch1_pkg_lvl_TCG;
+	Selector = force_300mV;
+}
+
+TestCondition cpu_pth_bgr_x_viewana_cal_ch1_pkg_lvl_force_400mV
+{
+	TestConditionGroup = cpu_pth_bgr_x_viewana_cal_ch1_pkg_lvl_TCG;
+	Selector = force_400mV;
+}
+
+TestCondition cpu_pth_bgr_x_viewana_cal_ch1_pkg_lvl_force_500mV
+{
+	TestConditionGroup = cpu_pth_bgr_x_viewana_cal_ch1_pkg_lvl_TCG;
+	Selector = force_500mV;
+}
+
+TestCondition cpu_pth_bgr_x_viewana_cal_ch1_pkg_lvl_force_600mV
+{
+	TestConditionGroup = cpu_pth_bgr_x_viewana_cal_ch1_pkg_lvl_TCG;
+	Selector = force_600mV;
+}
+
+TestCondition cpu_pth_bgr_x_viewana_cal_ch1_pkg_lvl_force_700mV
+{
+	TestConditionGroup = cpu_pth_bgr_x_viewana_cal_ch1_pkg_lvl_TCG;
+	Selector = force_700mV;
+}
+
+TestCondition cpu_pth_bgr_x_viewana_cal_ch1_pkg_lvl_force_800mV
+{
+	TestConditionGroup = cpu_pth_bgr_x_viewana_cal_ch1_pkg_lvl_TCG;
+	Selector = force_800mV;
+}
+
+TestCondition cpu_pth_bgr_x_viewana_cal_ch1_pkg_lvl_force_900mV
+{
+	TestConditionGroup = cpu_pth_bgr_x_viewana_cal_ch1_pkg_lvl_TCG;
+	Selector = force_900mV;
+}
+
+TestCondition cpu_pth_bgr_x_viewana_pkg_lvl_nom_lvl
+{
+	TestConditionGroup = cpu_pth_bgr_x_viewana_pkg_lvl_TCG;
+	Selector = nom_lvl;
+}
+TestCondition bf_lvl_nom_lvl_0P8V
+{
+	TestConditionGroup  = bf_lvl_PARAMS_nom_lvl_0P8V_TCG;
+	Selector = nom;
+}
+
