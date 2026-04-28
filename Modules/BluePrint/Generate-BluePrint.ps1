@@ -10,7 +10,7 @@
       - notes:          module-specific notes appended to the prompt file
 
     Algorithm:
-      1. Restore _orig.mtpl as the generation baseline (or create it on first run).
+      1. Restore .mtpl_orig as the generation baseline (or create it on first run).
       2. Parse the .mtpl into preamble (header + Counters), test blocks, and flow blocks.
       3. Apply symbol replacements (literal find/replace from config).
       4. Normalise blocks (BaseNumbers, SetBin, IncrementCounters + config-defined patterns) for dedup.
@@ -65,7 +65,7 @@ Write-Host "Output : $OutputDir"
 
 #region ── restore original mtpl ──────────────────────────────────────────────
 $moduleDir = Split-Path $InputMtpl
-$origMtpl  = Join-Path $moduleDir "${moduleName}_orig.mtpl"
+$origMtpl  = Join-Path $moduleDir "${moduleName}.mtpl_orig"
 if (Test-Path $origMtpl) {
     Copy-Item -Path $origMtpl -Destination $InputMtpl -Force
     Write-Host "Restored: $InputMtpl from $origMtpl"
@@ -237,7 +237,26 @@ Write-Host "  Flow blocks:  $($flowBlocks.Count)"
 
 #region ── apply symbol replacements ──────────────────────────────────────────
 function Apply-Replacements {
-    param([string]$Text, [hashtable[]]$Pairs)
+    param([string]$Text, [hashtable[]]$Pairs, [switch]$ProtectBinCounterLines)
+    if ($ProtectBinCounterLines) {
+        # For flow blocks: skip symbolization of SetBin and IncrementCounters lines
+        # because their bin/counter names contain unique numbers that must match
+        # the preamble Counters block exactly.
+        $lines = $Text -split "`n"
+        $result = [System.Text.StringBuilder]::new()
+        foreach ($line in $lines) {
+            if ($line -match '^\s*(SetBin|IncrementCounters)\s+') {
+                [void]$result.AppendLine($line)
+            } else {
+                $replaced = $line
+                foreach ($p in $Pairs) {
+                    $replaced = $replaced.Replace($p.Find, $p.Replace)
+                }
+                [void]$result.AppendLine($replaced)
+            }
+        }
+        return $result.ToString().TrimEnd("`r", "`n")
+    }
     $result = $Text
     foreach ($p in $Pairs) {
         $result = $result.Replace($p.Find, $p.Replace)
@@ -329,7 +348,7 @@ Write-Host "  Compression:            $([math]::Round(100.0 * $dupRemoved / [mat
 Write-Host "Symbolizing and deduplicating flows..."
 
 $processedFlows = foreach ($block in $flowBlocks) {
-    $symbolized = Apply-Replacements -Text $block.RawText -Pairs $allReplacements
+    $symbolized = Apply-Replacements -Text $block.RawText -Pairs $allReplacements -ProtectBinCounterLines
     $normalized = Normalize-ForDedup -Text $symbolized -NormRules $normPatterns
     [PSCustomObject]@{
         Block          = $block
@@ -567,6 +586,145 @@ $bpLineCount = [IO.File]::ReadAllLines($bpFile).Count
 Write-Host "  Final BP lines: $bpLineCount"
 #endregion
 
+#region ── trial expansion validation ─────────────────────────────────────────
+# Do a trial expansion of the BP using first symbol values and compare every
+# param value against the original.  Any test block that produces a param value
+# not present in the original gets reverted to its unsymbolized (original) text.
+Write-Host ""
+Write-Host "Trial expansion validation..."
+
+# Build original param value index: ParamName -> set of values
+$origLines   = [IO.File]::ReadAllLines($origMtpl)
+$origPV      = @{}
+foreach ($l in $origLines) {
+    if ($l -match '^\s*(\w+)\s*=\s*"([^"]*)"') {
+        $pN = $Matches[1]; $pV = $Matches[2]
+        if (-not $origPV.ContainsKey($pN)) { $origPV[$pN] = @{} }
+        $origPV[$pN][$pV] = $true
+    }
+}
+
+# Build trial expansion map (first value for each symbol)
+$trialMap = [System.Collections.Generic.List[System.Collections.Generic.KeyValuePair[string,string]]]::new()
+foreach ($sym in $config.symbols) {
+    $vals = @($sym.values)
+    $cleanVal = ($vals[0] -replace '\s*\(.*\)', '').Trim()
+    $trialMap.Add([System.Collections.Generic.KeyValuePair[string,string]]::new('\' + $sym.name + '\', $cleanVal))
+    $lower = $sym.name.ToLower()
+    $trialMap.Add([System.Collections.Generic.KeyValuePair[string,string]]::new('\' + $lower + '\', $cleanVal.ToLower()))
+    $numMatch = [regex]::Match($cleanVal, '\d+')
+    if ($numMatch.Success) {
+        $trialMap.Add([System.Collections.Generic.KeyValuePair[string,string]]::new('\' + $sym.name + '_NUM\', $numMatch.Value))
+        $trialMap.Add([System.Collections.Generic.KeyValuePair[string,string]]::new('\' + $lower + '_num\', $numMatch.Value))
+    }
+}
+
+function Expand-Trial {
+    param([string]$Text, $Map)
+    $r = $Text
+    foreach ($kv in $Map) { $r = $r.Replace($kv.Key, $kv.Value) }
+    return $r
+}
+
+# Read the BP and parse test blocks to validate each
+$bpLines = [IO.File]::ReadAllLines($bpFile)
+$bpContent = $bpLines -join "`n"
+
+# Parse test blocks from BP (same parsing as before)
+$bpTestBlocks = [System.Collections.Generic.List[PSCustomObject]]::new()
+$bi = 0
+while ($bi -lt $bpLines.Count) {
+    if ($bpLines[$bi] -match '^\s*(CSharpTest|MultiTrialTest)\s+(\S+)\s+(.+)$') {
+        $blockStart = $bi
+        $depth = 0; $opened = $false
+        while ($bi -lt $bpLines.Count) {
+            $depth += ([regex]::Matches($bpLines[$bi], '\{')).Count
+            $depth -= ([regex]::Matches($bpLines[$bi], '\}')).Count
+            if ($depth -gt 0) { $opened = $true }
+            $bi++
+            if ($opened -and $depth -le 0) { break }
+        }
+        $bpTestBlocks.Add([PSCustomObject]@{
+            StartLine = $blockStart
+            EndLine   = $bi - 1
+            Name      = $Matches[3].Trim()
+        })
+    } else {
+        $bi++
+    }
+}
+
+# For each BP test block, trial-expand and check param values
+$revertCount = 0
+$revertedNames = @()
+foreach ($tb in $bpTestBlocks) {
+    $blockText = ($bpLines[$tb.StartLine..$tb.EndLine]) -join "`n"
+    $expanded  = Expand-Trial -Text $blockText -Map $trialMap
+    $badParams = @()
+    foreach ($line in ($expanded -split "`n")) {
+        if ($line -match '^\s*(\w+)\s*=\s*"([^"]*)"') {
+            $pN = $Matches[1]; $pV = $Matches[2]
+            if ($origPV.ContainsKey($pN) -and -not $origPV[$pN].ContainsKey($pV)) {
+                $badParams += "$pN=`"$pV`""
+            }
+        }
+    }
+    if ($badParams.Count -gt 0) {
+        # Find the original block: try expanded name first, then search all originals
+        $expandedName = Expand-Trial -Text $tb.Name -Map $trialMap
+        $origBlock = $null
+        foreach ($ob in $testBlocks) {
+            if ($ob.InstanceName -eq $expandedName) {
+                $origBlock = $ob; break
+            }
+        }
+        # Fallback: search all processed entries by matching the symbolized instance name
+        if (-not $origBlock) {
+            foreach ($p in $processed) {
+                foreach ($sLine in ($p.SymbolizedText -split "`n")) {
+                    if ($sLine -match '^\s*(?:CSharpTest|MultiTrialTest)\s+\S+\s+(.+)$') {
+                        if ($Matches[1].Trim() -eq $tb.Name) {
+                            $origBlock = $p.Block; break
+                        }
+                        break  # only check the first test declaration line
+                    }
+                }
+                if ($origBlock) { break }
+            }
+        }
+        if ($origBlock) {
+            Write-Host "  Reverting '$($tb.Name)' -> original '$($origBlock.InstanceName)' (bad: $($badParams -join ', '))"
+            for ($ri = $tb.StartLine; $ri -le $tb.EndLine; $ri++) {
+                $bpLines[$ri] = $null
+            }
+            $bpLines[$tb.StartLine] = $origBlock.RawText
+            $revertCount++
+            $revertedNames += $tb.Name
+        } else {
+            Write-Host "  WARNING: could not find original block for '$expandedName' to revert"
+        }
+    }
+}
+
+if ($revertCount -gt 0) {
+    # Rebuild: filter out nulls and re-split any multi-line entries
+    $newBp = [System.Collections.Generic.List[string]]::new()
+    foreach ($line in $bpLines) {
+        if ($null -ne $line) {
+            foreach ($subLine in ($line -split "`n")) {
+                $newBp.Add($subLine)
+            }
+        }
+    }
+    [IO.File]::WriteAllLines($bpFile, $newBp.ToArray())
+    Write-Host "  Reverted $revertCount test block(s) to original (unsymbolized)."
+    $bpLineCount = [IO.File]::ReadAllLines($bpFile).Count
+    Write-Host "  Updated BP lines: $bpLineCount"
+} else {
+    Write-Host "  OK - all test blocks produce valid param values."
+}
+#endregion
+
 #region ── emit Prompt file ───────────────────────────────────────────────────
 $pr = [System.Text.StringBuilder]::new()
 
@@ -698,6 +856,107 @@ foreach ($note in $moduleNotes) {
 
 $pr.ToString() | Set-Content -Path $promptFile -Encoding UTF8 -NoNewline
 Write-Host "Prompt:    $promptFile"
+#endregion
+
+#region ── extract paramValues from original and update symbols.json ───────────
+Write-Host ""
+Write-Host "Extracting parameter values from original for validation..."
+
+$origLines = [IO.File]::ReadAllLines($origMtpl)
+$paramValues = [ordered]@{}
+
+foreach ($l in $origLines) {
+    if ($l -match '^\s*(\w+)\s*=\s*"([^"]*)"') {
+        $pName = $Matches[1]
+        $pVal  = $Matches[2]
+        if (-not $paramValues.Contains($pName)) {
+            $paramValues[$pName] = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
+        }
+        [void]$paramValues[$pName].Add($pVal)
+    }
+}
+
+# Load existing symbols.json, add/update paramValues section
+$symbolsJsonPath = Join-Path $OutputDir 'symbols.json'
+if (Test-Path $symbolsJsonPath) {
+    $symbolsJson = Get-Content -Raw $symbolsJsonPath | ConvertFrom-Json
+} else {
+    throw "symbols.json not found at $symbolsJsonPath"
+}
+
+# Build paramValues as a PSCustomObject with sorted arrays
+$pvObj = [ordered]@{}
+foreach ($entry in $paramValues.GetEnumerator()) {
+    $pvObj[$entry.Key] = @($entry.Value | Sort-Object)
+}
+
+# Add or replace the paramValues property
+if ($symbolsJson.PSObject.Properties['paramValues']) {
+    $symbolsJson.PSObject.Properties.Remove('paramValues')
+}
+$symbolsJson | Add-Member -NotePropertyName 'paramValues' -NotePropertyValue ([PSCustomObject]$pvObj)
+
+# Write back symbols.json (formatted)
+$symbolsJson | ConvertTo-Json -Depth 10 | Set-Content -Path $symbolsJsonPath -Encoding UTF8
+Write-Host "  Updated symbols.json with paramValues ($($paramValues.Count) parameters, $($paramValues.Values | ForEach-Object { $_.Count } | Measure-Object -Sum | Select-Object -ExpandProperty Sum) unique values)"
+#endregion
+
+#region ── generate combinations table ────────────────────────────────────────
+# For each test block in the original, detect which symbol values are present
+# and produce a CSV table showing the actual combinations that exist.
+Write-Host ""
+Write-Host "Generating combinations table..."
+
+$comboFile = Join-Path $OutputDir "$moduleName.combinations.csv"
+$symNames  = @($config.symbols | ForEach-Object { $_.name })
+
+# Build a lookup: for each symbol, its possible values (cleaned)
+$symValMap = [ordered]@{}
+foreach ($sym in $config.symbols) {
+    $symValMap[$sym.name] = @($sym.values | ForEach-Object { ($_ -replace '\s*\(.*\)', '').Trim() })
+}
+
+$rows = [System.Collections.Generic.List[PSCustomObject]]::new()
+foreach ($block in $testBlocks) {
+    $row = [ordered]@{ TestInstance = $block.InstanceName; TestType = $block.TestType; Template = $block.TemplateName }
+    foreach ($sName in $symNames) {
+        $found = ''
+        foreach ($sVal in $symValMap[$sName]) {
+            # Check the instance name first (case-sensitive), then the full body
+            if ($block.InstanceName.Contains($sVal) -or $block.InstanceName.Contains($sVal.ToLower())) {
+                $found = $sVal; break
+            }
+        }
+        if (-not $found) {
+            # Check block body
+            foreach ($sVal in $symValMap[$sName]) {
+                if ($block.RawText.Contains($sVal) -or $block.RawText.Contains($sVal.ToLower())) {
+                    $found = $sVal; break
+                }
+            }
+        }
+        $row[$sName] = $found
+    }
+    $rows.Add([PSCustomObject]$row)
+}
+
+# Write CSV
+$header = @('TestInstance', 'TestType', 'Template') + $symNames
+$csvLines = [System.Collections.Generic.List[string]]::new()
+$csvLines.Add($header -join ',')
+foreach ($r in $rows) {
+    $vals = foreach ($h in $header) { $r.$h }
+    $csvLines.Add($vals -join ',')
+}
+[IO.File]::WriteAllLines($comboFile, $csvLines.ToArray())
+Write-Host "  Written: $comboFile ($($rows.Count) rows, $($symNames.Count) symbols)"
+
+# Summary: unique combinations per symbol
+foreach ($sName in $symNames) {
+    $uniq = ($rows | ForEach-Object { $_.$sName } | Where-Object { $_ } | Sort-Object -Unique) -join ', '
+    $count = ($rows | ForEach-Object { $_.$sName } | Where-Object { $_ } | Sort-Object -Unique).Count
+    Write-Host "    $sName [$count]: $uniq"
+}
 #endregion
 
 Write-Host ""
