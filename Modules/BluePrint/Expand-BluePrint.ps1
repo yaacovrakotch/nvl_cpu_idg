@@ -118,6 +118,7 @@ $bpLines = [IO.File]::ReadAllLines($InputBp)
 $output  = [System.Collections.Generic.List[string]]::new()
 
 $currentCombo = $null
+$currentBaseNumbersMap = $null
 $testCount  = 0
 $flowCount  = 0
 $comboCount = 0
@@ -135,15 +136,77 @@ while ($i -lt $bpLines.Count) {
             if ($kv.Count -eq 2) { $combo[$kv[0].Trim()] = $kv[1].Trim() }
         }
         $currentCombo = $combo
+        $currentBaseNumbersMap = $null
         $comboCount++
         # Don't emit the BP_COMBO comment to the output
         $i++
         continue
     }
 
+    # Check for BP_BASENUMBERS annotation (follows BP_COMBO for compressed blocks)
+    if ($line -match '^# BP_BASENUMBERS:\s*(.+)$') {
+        $bnStr = $Matches[1].Trim()
+        $bnMap = [ordered]@{}
+        foreach ($entry in ($bnStr -split '\s*;;\s*')) {
+            $parts = $entry -split '\|', 2
+            if ($parts.Count -eq 2) { $bnMap[$parts[0].Trim()] = $parts[1].Trim() }
+        }
+        $currentBaseNumbersMap = $bnMap
+        # Don't emit to output
+        $i++
+        continue
+    }
+
     # Check for test block start
     if ($line -match '^\s*(CSharpTest|MultiTrialTest)\s+') {
-        # Collect the entire test block
+        if ($currentCombo -and $currentCombo.Count -gt 0 -and $currentBaseNumbersMap -and $currentBaseNumbersMap.Count -gt 0) {
+            # Compressed block: expand once per combo in the BaseNumbers map
+            $blockLines = [System.Collections.Generic.List[string]]::new()
+            $depth = 0; $opened = $false
+            while ($i -lt $bpLines.Count) {
+                $blockLines.Add($bpLines[$i])
+                $depth += ([regex]::Matches($bpLines[$i], '\{')).Count
+                $depth -= ([regex]::Matches($bpLines[$i], '\}')).Count
+                if ($depth -gt 0) { $opened = $true }
+                $i++
+                if ($opened -and $depth -le 0) { break }
+            }
+            $blockTemplate = $blockLines -join "`n"
+
+            foreach ($bnEntry in $currentBaseNumbersMap.GetEnumerator()) {
+                $comboKeyStr = $bnEntry.Key
+                $baseNum = $bnEntry.Value
+                # Parse the combo key back into a hashtable
+                $expandCombo = @{}
+                foreach ($part in ($comboKeyStr -split ',\s*')) {
+                    $kv = $part -split '=', 2
+                    if ($kv.Count -eq 2) { $expandCombo[$kv[0].Trim()] = $kv[1].Trim() }
+                }
+                $map = Build-ReplacementMap -Combo $expandCombo -AllSymbolNames $symbolNames
+                $expanded = Apply-ReplacementMap -Text $blockTemplate -Map $map
+                # Restore BaseNumbers for this combo (skip if no BaseNumbers in original)
+                if ($baseNum) {
+                    $expanded = $expanded -replace '(\bBaseNumbers\s*=\s*")\d+(")', "`${1}${baseNum}`${2}"
+                }
+
+                # Check for remaining unresolved symbols
+                $remaining = [regex]::Matches($expanded, '\\[A-Za-z_]+\\')
+                if ($remaining.Count -gt 0) {
+                    $unresolved = ($remaining | ForEach-Object { $_.Value } | Sort-Object -Unique) -join ', '
+                    Write-Warning "Unresolved symbols in expanded block: $unresolved"
+                }
+
+                foreach ($bl in ($expanded -split "`n")) {
+                    $output.Add($bl)
+                }
+                $testCount++
+            }
+            $currentCombo = $null
+            $currentBaseNumbersMap = $null
+            continue
+        }
+
+        # Non-compressed block: single expansion
         $blockLines = [System.Collections.Generic.List[string]]::new()
         $depth = 0; $opened = $false
         while ($i -lt $bpLines.Count) {

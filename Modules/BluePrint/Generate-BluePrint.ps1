@@ -337,14 +337,113 @@ foreach ($block in $testBlocks) {
     })
 }
 
-Write-Host "  Test blocks:      $($processedTests.Count) (all kept, no dedup)"
+Write-Host "  Test blocks:      $($processedTests.Count) (before BaseNumbers compression)"
+#endregion
+
+#region ── BaseNumbers compression ────────────────────────────────────────────
+# Normalize BaseNumbers to a default ("0") and merge blocks that become identical.
+# Each merged group records the BaseNumbers per combo for later restoration.
+$defaultBaseNum = "0"
+$compressions = [System.Collections.Generic.List[PSCustomObject]]::new()
+
+# Build normalized text for each block (BaseNumbers -> default)
+foreach ($pt in $processedTests) {
+    $normalized = $pt.SymbolizedText -replace '(\bBaseNumbers\s*=\s*")(\d+)(")', "`${1}${defaultBaseNum}`${3}"
+    $pt | Add-Member -NotePropertyName 'NormalizedText' -NotePropertyValue $normalized -Force
+    # Extract this block's original BaseNumbers
+    $bnMatch = [regex]::Match($pt.SymbolizedText, '\bBaseNumbers\s*=\s*"(\d+)"')
+    $bn = if ($bnMatch.Success) { $bnMatch.Groups[1].Value } else { $null }
+    $pt | Add-Member -NotePropertyName 'BaseNumbers' -NotePropertyValue $bn -Force
+}
+
+# Group by NormalizedText — blocks with identical symbolized text except BaseNumbers
+$groups = [ordered]@{}
+foreach ($pt in $processedTests) {
+    $key = $pt.NormalizedText
+    if (-not $groups.Contains($key)) { $groups[$key] = [System.Collections.Generic.List[PSCustomObject]]::new() }
+    $groups[$key].Add($pt)
+}
+
+# Build final list: one representative per group, with BaseNumbers mapping
+# Only compress if ALL blocks in the group have UNIQUE combo keys (otherwise
+# we can't restore individual BaseNumbers during expansion).
+$mergedTests = [System.Collections.Generic.List[PSCustomObject]]::new()
+$skippedCompressions = 0
+foreach ($entry in $groups.GetEnumerator()) {
+    $group = $entry.Value
+    $representative = $group[0]
+
+    if ($group.Count -eq 1) {
+        # Single block — no compression, but still record BaseNumbers for restoration
+        $singleBnMap = [ordered]@{}
+        $singleComboKey = ($representative.Combo.GetEnumerator() | ForEach-Object { "$($_.Key)=$($_.Value)" }) -join ', '
+        if ($representative.BaseNumbers) { $singleBnMap[$singleComboKey] = $representative.BaseNumbers }
+        $mergedTests.Add([PSCustomObject]@{
+            SymbolizedText = $representative.NormalizedText
+            Combo          = $representative.Combo
+            BaseNumbersMap = $singleBnMap
+            OriginalBlocks = $group
+            Block          = $representative.Block
+        })
+        continue
+    }
+
+    # Build BaseNumbers map: comboKey -> BaseNumbers
+    $bnMap = [ordered]@{}
+    $hasDuplicateKeys = $false
+    foreach ($pt in $group) {
+        $comboKey = ($pt.Combo.GetEnumerator() | ForEach-Object { "$($_.Key)=$($_.Value)" }) -join ', '
+        if ($bnMap.Contains($comboKey)) {
+            $hasDuplicateKeys = $true
+            break
+        }
+        $bnMap[$comboKey] = if ($pt.BaseNumbers) { $pt.BaseNumbers } else { "" }
+    }
+
+    if ($hasDuplicateKeys) {
+        # Combo keys not unique — can't restore BaseNumbers per block during expansion.
+        # Keep all blocks separate (no compression for this group).
+        $skippedCompressions++
+        foreach ($pt in $group) {
+            $singleBnMap = [ordered]@{}
+            $singleComboKey = ($pt.Combo.GetEnumerator() | ForEach-Object { "$($_.Key)=$($_.Value)" }) -join ', '
+            if ($pt.BaseNumbers) { $singleBnMap[$singleComboKey] = $pt.BaseNumbers }
+            $mergedTests.Add([PSCustomObject]@{
+                SymbolizedText = $pt.NormalizedText
+                Combo          = $pt.Combo
+                BaseNumbersMap = $singleBnMap
+                OriginalBlocks = [System.Collections.Generic.List[PSCustomObject]]::new()
+                Block          = $pt.Block
+            })
+            $mergedTests[-1].OriginalBlocks.Add($pt)
+        }
+    } else {
+        # All combo keys unique — safe to compress
+        $mergedTests.Add([PSCustomObject]@{
+            SymbolizedText = $representative.NormalizedText
+            Combo          = $representative.Combo
+            BaseNumbersMap = $bnMap
+            OriginalBlocks = $group
+            Block          = $representative.Block
+        })
+        $compressions.Add([PSCustomObject]@{
+            RepresentativeName = $representative.Block.InstanceName
+            MergedCount        = $group.Count
+            MergedInstances    = @($group | ForEach-Object { $_.Block.InstanceName })
+            BaseNumbersMap     = $bnMap
+        })
+    }
+}
+
+$mergedCount = $processedTests.Count - $mergedTests.Count
+Write-Host "  After BaseNumbers compression: $($mergedTests.Count) blocks ($mergedCount merged away, $skippedCompressions groups skipped due to duplicate combo keys)"
 #endregion
 
 #region ── emit BluePrint file ────────────────────────────────────────────────
 # Flow blocks are kept verbatim - they reference items across multiple symbol
 # combinations and cannot be safely symbolized for per-block expansion.
 
-Write-Host "Emitting BluePrint (all blocks, no dedup)..."
+Write-Host "Emitting BluePrint (with BaseNumbers compression)..."
 
 $sb = [System.Text.StringBuilder]::new()
 
@@ -352,12 +451,22 @@ $sb = [System.Text.StringBuilder]::new()
 [void]$sb.AppendLine(($preambleLines -join "`n"))
 [void]$sb.AppendLine("")
 
-# Emit all test blocks with combo annotations
-foreach ($pt in $processedTests) {
-    $comboStr = ($pt.Combo.GetEnumerator() | ForEach-Object { "$($_.Key)=$($_.Value)" }) -join ', '
+# Emit merged test blocks with combo + BaseNumbers annotations
+foreach ($mt in $mergedTests) {
+    $comboStr = ($mt.Combo.GetEnumerator() | ForEach-Object { "$($_.Key)=$($_.Value)" }) -join ', '
     [void]$sb.AppendLine("")
     [void]$sb.AppendLine("# BP_COMBO: $comboStr")
-    [void]$sb.AppendLine($pt.SymbolizedText)
+    # Emit BaseNumbers mapping for all blocks that have a BaseNumbers value
+    # Multi-entry: compressed group (multiple originals expand from one template)
+    # Single-entry: non-compressed block (restores BaseNumbers from default "0")
+    if ($mt.BaseNumbersMap.Count -gt 0) {
+        $bnParts = @()
+        foreach ($bnEntry in $mt.BaseNumbersMap.GetEnumerator()) {
+            $bnParts += "$($bnEntry.Key)|$($bnEntry.Value)"
+        }
+        [void]$sb.AppendLine("# BP_BASENUMBERS: $($bnParts -join ' ;; ')")
+    }
+    [void]$sb.AppendLine($mt.SymbolizedText)
 }
 
 # Emit all flow blocks verbatim
@@ -375,7 +484,7 @@ $sb.ToString() | Set-Content -Path $bpFile -Encoding UTF8 -NoNewline
 $bpLineCount = [IO.File]::ReadAllLines($bpFile).Count
 Write-Host "`nBluePrint: $bpFile"
 Write-Host "  BP lines:     $bpLineCount (from $($rawLines.Count) original)"
-Write-Host "  Test blocks:  $($processedTests.Count)"
+Write-Host "  Test blocks:  $($mergedTests.Count) (from $($processedTests.Count) original, $mergedCount compressed)"
 Write-Host "  Flow blocks:  $($flowBlocks.Count)"
 #endregion
 
@@ -475,6 +584,7 @@ while ($bi -lt $bpLines.Count) {
 }
 
 # For each BP test block, trial-expand using its combo and check param values
+# Skip BaseNumbers during validation since it's been normalized to default
 $revertCount = 0
 foreach ($tb in $bpTestBlocks) {
     if (-not $tb.Combo -or $tb.Combo.Count -eq 0) { continue }
@@ -487,31 +597,65 @@ foreach ($tb in $bpTestBlocks) {
     foreach ($line in ($expanded -split "`n")) {
         if ($line -match '^\s*(\w+)\s*=\s*"([^"]*)"') {
             $pN = $Matches[1]; $pV = $Matches[2]
+            if ($pN -eq 'BaseNumbers') { continue }  # skip — normalized to default
             if ($origPV.ContainsKey($pN) -and -not $origPV[$pN].ContainsKey($pV)) {
                 $badParams += "$pN=`"$pV`""
             }
         }
     }
     if ($badParams.Count -gt 0) {
-        # Revert: find original block by instance name
+        # Revert: find the merged-test entry and expand back into original blocks
         $expandedName = Expand-Trial -Text $tb.Name -Map $comboMap
-        $origBlock = $null
-        foreach ($ob in $testBlocks) {
-            if ($ob.InstanceName -eq $expandedName) {
-                $origBlock = $ob; break
+        # Find ALL original blocks that were merged into this BP entry
+        $matchedMerge = $null
+        foreach ($mt in $mergedTests) {
+            foreach ($ob in $mt.OriginalBlocks) {
+                if ($ob.Block.InstanceName -eq $expandedName) {
+                    $matchedMerge = $mt; break
+                }
             }
+            if ($matchedMerge) { break }
         }
-        if ($origBlock) {
-            Write-Host "  Reverting '$($tb.Name)' -> original '$($origBlock.InstanceName)' (bad: $($badParams -join ', '))"
-            # Clear the BP_COMBO annotation line
+        if ($matchedMerge) {
+            Write-Host "  Reverting '$($tb.Name)' -> $($matchedMerge.OriginalBlocks.Count) original(s) (bad: $($badParams[0]))"
+            # Clear the BP_COMBO and BP_BASENUMBERS annotation lines
             if ($tb.ComboLine -ge 0) { $bpLines[$tb.ComboLine] = $null }
+            # Also clear BP_BASENUMBERS line if present (between combo and block start)
+            for ($ci = $tb.ComboLine + 1; $ci -lt $tb.StartLine; $ci++) {
+                if ($bpLines[$ci] -match '^# BP_BASENUMBERS:') { $bpLines[$ci] = $null }
+            }
             for ($ri = $tb.StartLine; $ri -le $tb.EndLine; $ri++) {
                 $bpLines[$ri] = $null
             }
-            $bpLines[$tb.StartLine] = $origBlock.RawText
+            # Emit all original blocks from the merged group
+            $revertSb = [System.Text.StringBuilder]::new()
+            foreach ($ob in $matchedMerge.OriginalBlocks) {
+                [void]$revertSb.AppendLine($ob.Block.RawText)
+            }
+            $bpLines[$tb.StartLine] = $revertSb.ToString().TrimEnd()
             $revertCount++
         } else {
-            Write-Host "  WARNING: could not find original block for '$expandedName' to revert"
+            # Fallback: try single original block match
+            $origBlock = $null
+            foreach ($ob in $testBlocks) {
+                if ($ob.InstanceName -eq $expandedName) {
+                    $origBlock = $ob; break
+                }
+            }
+            if ($origBlock) {
+                Write-Host "  Reverting '$($tb.Name)' -> original '$($origBlock.InstanceName)' (bad: $($badParams -join ', '))"
+                if ($tb.ComboLine -ge 0) { $bpLines[$tb.ComboLine] = $null }
+                for ($ci = $tb.ComboLine + 1; $ci -lt $tb.StartLine; $ci++) {
+                    if ($bpLines[$ci] -match '^# BP_BASENUMBERS:') { $bpLines[$ci] = $null }
+                }
+                for ($ri = $tb.StartLine; $ri -le $tb.EndLine; $ri++) {
+                    $bpLines[$ri] = $null
+                }
+                $bpLines[$tb.StartLine] = $origBlock.RawText
+                $revertCount++
+            } else {
+                Write-Host "  WARNING: could not find original block for '$expandedName' to revert"
+            }
         }
     }
 }
@@ -574,7 +718,9 @@ foreach ($sym in $symbolDefs.GetEnumerator()) {
 [void]$pr.AppendLine("- Counters section is kept verbatim from the original file.")
 [void]$pr.AppendLine("- Flow blocks are kept verbatim (not symbolized).")
 [void]$pr.AppendLine("- Each test block has a # BP_COMBO annotation for per-block expansion.")
-[void]$pr.AppendLine("- BaseNumbers are unique per instance; kept verbatim.")
+[void]$pr.AppendLine("- BaseNumbers are normalized to '$defaultBaseNum' in the BP.")
+[void]$pr.AppendLine("- Compressed blocks have # BP_BASENUMBERS annotations with combo->value maps.")
+[void]$pr.AppendLine("- See $moduleName.compressions.log for compression details.")
 foreach ($note in $moduleNotes) {
     [void]$pr.AppendLine("- $note")
 }
@@ -686,6 +832,66 @@ foreach ($sName in $symNames) {
     $count = ($rows | ForEach-Object { $_.$sName } | Where-Object { $_ } | Sort-Object -Unique).Count
     Write-Host "    $sName [$count]: $uniq"
 }
+#endregion
+
+#region ── compression report ─────────────────────────────────────────────────
+$reportFile = Join-Path $OutputDir "$moduleName.compressions.log"
+$rpt = [System.Text.StringBuilder]::new()
+[void]$rpt.AppendLine("=" * 80)
+[void]$rpt.AppendLine("BLUEPRINT COMPRESSION REPORT")
+[void]$rpt.AppendLine("Module:    $moduleName")
+[void]$rpt.AppendLine("Generated: $(Get-Date -Format 'yyyy-MM-dd HH:mm')")
+[void]$rpt.AppendLine("=" * 80)
+[void]$rpt.AppendLine("")
+[void]$rpt.AppendLine("Original test blocks:  $($processedTests.Count)")
+[void]$rpt.AppendLine("After compression:     $($mergedTests.Count)")
+[void]$rpt.AppendLine("Blocks merged away:    $mergedCount")
+[void]$rpt.AppendLine("Compression groups:    $($compressions.Count)")
+[void]$rpt.AppendLine("Reverted blocks:       $revertCount")
+[void]$rpt.AppendLine("")
+
+if ($compressions.Count -gt 0) {
+    [void]$rpt.AppendLine("-" * 80)
+    [void]$rpt.AppendLine("COMPRESSION DETAILS")
+    [void]$rpt.AppendLine("-" * 80)
+    $groupNum = 0
+    foreach ($c in $compressions) {
+        $groupNum++
+        [void]$rpt.AppendLine("")
+        [void]$rpt.AppendLine("Group ${groupNum}: $($c.MergedCount) instances merged")
+        [void]$rpt.AppendLine("  Representative: $($c.RepresentativeName)")
+        [void]$rpt.AppendLine("  Merged instances:")
+        foreach ($inst in $c.MergedInstances) {
+            $bn = ''
+            foreach ($bnEntry in $c.BaseNumbersMap.GetEnumerator()) {
+                if ($bnEntry.Key -match [regex]::Escape($inst) -or $c.MergedInstances.Count -le 5) {
+                    # show all for small groups
+                }
+            }
+            [void]$rpt.AppendLine("    - $inst")
+        }
+        [void]$rpt.AppendLine("  BaseNumbers mapping:")
+        foreach ($bnEntry in $c.BaseNumbersMap.GetEnumerator()) {
+            [void]$rpt.AppendLine("    [$($bnEntry.Key)] -> BaseNumbers=$($bnEntry.Value)")
+        }
+    }
+} else {
+    [void]$rpt.AppendLine("No compressions were performed.")
+}
+
+[void]$rpt.AppendLine("")
+[void]$rpt.AppendLine("-" * 80)
+[void]$rpt.AppendLine("REVERTED BLOCKS (kept as original, not symbolized)")
+[void]$rpt.AppendLine("-" * 80)
+if ($revertCount -gt 0) {
+    [void]$rpt.AppendLine("$revertCount block(s) were reverted due to invalid param values after trial expansion.")
+    [void]$rpt.AppendLine("These blocks appear in the BP without # BP_COMBO annotations.")
+} else {
+    [void]$rpt.AppendLine("No blocks were reverted.")
+}
+
+$rpt.ToString() | Set-Content -Path $reportFile -Encoding UTF8 -NoNewline
+Write-Host "Report:    $reportFile"
 #endregion
 
 Write-Host ""
