@@ -1,0 +1,273 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan QNR_CARV_CXX;
+
+Import "QNR_CARV_CXX.usrv";
+
+
+
+# BP_BUCKET: B1 tests=1
+CSharpTest PrimePauseTestMethod CTRL_X_PAUSE_X_CPUIPFF_X_X_X_X_PAUSE
+{
+    BypassPort = 1;
+    ExitPort = 1;
+    SleepTime = 1;
+}
+
+# BP_BUCKET: B2 tests=1
+CSharpTest PrimeScanSPOFITestMethod CTRL_X_SCANFI_X_CPUIPFF_X_X_X_X_SPOFI
+{
+    # NOCLEAN
+    Patlist = "IP_CPU::scn_cdie_begcpupkgf1_nonccf_atspeed_mio200_edt_classhvm_list";
+    LevelsTc = "BASE::cpu_all_bf_x_x_pkg_lvl_max_lvl";
+    TimingsTc = "IP_CPU::SCN_UNCORE_C68C::cpu_testport_timing_tclk100_sclk200_cclk400";
+    BypassPort = 1;
+    PerPatternFailCaptureCount = 25000;
+    TotalFailCaptureCount = 50000;
+}
+
+# BP_BUCKET: B3 tests=1
+CSharpTest VminTC CTRL_X_EAP_X_CPUIPFF_X_X_X_X_EAP
+{
+    # NOCLEAN
+    Patlist = "IP_PCH_BASE::NotAPlist";
+    LevelsTc = "IP_PCH_BASE::gcd_all_bf_x_x_ippch_lvl_max_lvl";
+    TimingsTc = "IP_PCH_BASE::gcd_dftring_perpin_timing_tclk100_dclk400_cclk400";
+    BypassPort = 1;
+    EndVoltageLimits = "";
+    ExecutionMode = "SearchWithScoreboard";
+    MaxFailsNum = 1000;
+    StartVoltages = "";
+    StepSize = 0.01;
+    TestMode = "Scoreboard";
+    VoltageTargets = "";
+}
+
+# BP_BUCKET: B4 tests=1
+CSharpTest DDGFunctionalTC CTRL_X_FUNC_X_CPUIPFF_X_X_X_X_FUNC
+{
+    # NOCLEAN
+    Patlist = "IP_PCH_BASE::NotAPlist";
+    LevelsTc = "IP_PCH_BASE::gcd_all_bf_x_x_ippch_lvl_max_lvl";
+    TimingsTc = "IP_PCH_BASE::gcd_dftring_perpin_timing_tclk100_dclk400_cclk400";
+    BypassPort = 1;
+    FailuresToCapturePerPattern = 2;
+    FailuresToCaptureTotal = 1000;
+    MaxFailuresPerPatternToItuff = 2;
+    MaxFailuresToItuff = 1000;
+}
+
+# BP_BUCKET: B5 tests=1
+CSharpTest DDGShmooTC CTRL_X_SHMOO_X_CPUIPFF_X_X_X_X_SHMOO
+{
+    # NOCLEAN
+    Patlist = "IP_PCH_BASE::NotAPlist";
+    LevelsTc = "IP_PCH_BASE::gcd_all_bf_x_x_ippch_lvl_max_lvl";
+    TimingsTc = "IP_PCH_BASE::gcd_dftring_perpin_timing_tclk100_dclk400_cclk400";
+    BypassPort = 1;
+    XAxisParam = "p_mtd_per";
+    XAxisParamType = "UserDefined";
+    XAxisRange = "9E-9:.5E-9:5";
+    XAxisType = "SpecSetVariable";
+    YAxisParamType = "UserDefined";
+    YAxisRange = "0.45:0.05:15";
+}
+
+# BP_BUCKET: B6 tests=1
+CSharpTest DedcLoadConfigTC CTRL_X_CALLBACK_K_INIT_X_X_X_X_CONTROL_ARV
+{
+    ConfigFile = "./InputFiles/NVL_ARV.json";
+    CoreAware = "DISABLE";
+    Mode = QNR_CARV_CXX_Rules.CTRL_X_CALLBACK_K_INIT_X_X_X_X_CONTROL_ARV_Mode("ENABLE", "DISABLE");
+    Scope = "GLOBAL";
+}
+
+
+
+# BP_FLOW_BUCKET: F1 flows=1
+Flow QNR_CARV_CXX_CPUIPFF
+{
+    FlowItem CTRL_X_PAUSE_X_CPUIPFF_X_X_X_X_PAUSE CTRL_X_PAUSE_X_CPUIPFF_X_X_X_X_PAUSE @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 5
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+    FlowItem CTRL_X_SCANFI_X_CPUIPFF_X_X_X_X_SPOFI CTRL_X_SCANFI_X_CPUIPFF_X_X_X_X_SPOFI @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo CTRL_X_EAP_X_CPUIPFF_X_X_X_X_EAP;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_EAP_X_CPUIPFF_X_X_X_X_EAP;
+        }
+    }
+    
+    FlowItem CTRL_X_EAP_X_CPUIPFF_X_X_X_X_EAP CTRL_X_EAP_X_CPUIPFF_X_X_X_X_EAP @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo CTRL_X_FUNC_X_CPUIPFF_X_X_X_X_FUNC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_FUNC_X_CPUIPFF_X_X_X_X_FUNC;
+        }
+    }
+    
+    FlowItem CTRL_X_FUNC_X_CPUIPFF_X_X_X_X_FUNC CTRL_X_FUNC_X_CPUIPFF_X_X_X_X_FUNC @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo CTRL_X_SHMOO_X_CPUIPFF_X_X_X_X_SHMOO;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_SHMOO_X_CPUIPFF_X_X_X_X_SHMOO;
+        }
+    }
+    
+    FlowItem CTRL_X_SHMOO_X_CPUIPFF_X_X_X_X_SHMOO CTRL_X_SHMOO_X_CPUIPFF_X_X_X_X_SHMOO @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+# BP_FLOW_BUCKET: F2 flows=1
+Flow QNR_CARV_CXX_INIT
+{
+    FlowItem CTRL_X_CALLBACK_K_INIT_X_X_X_X_CONTROL_ARV CTRL_X_CALLBACK_K_INIT_X_X_X_X_CONTROL_ARV
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}

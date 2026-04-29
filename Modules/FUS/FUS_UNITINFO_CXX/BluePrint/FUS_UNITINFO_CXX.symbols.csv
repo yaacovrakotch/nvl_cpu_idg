@@ -1,0 +1,80 @@
+# Bucket B1  type=CSharpTest  template=ScreenTC  tests=1
+InstanceName
+FUSE_X_SCREENTC_K_INIT_X_X_X_X_CHECK_BOMGROUP
+
+# Bucket B2  type=CSharpTest  template=FleISeedGetUnitKeys  tests=1
+InstanceName
+FUSE_X_ISEED_K_STARTCPUNOM_X_X_X_X_SECURITY_GET
+
+# Bucket B3  type=CSharpTest  template=PrimeFunctionalTestMethod  tests=1
+InstanceName
+FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_UINFO_FUNC
+
+# Bucket B4  type=CSharpTest  template=ScreenTC  tests=2
+InstanceName,B4_INSTANCE_P1,ScreenTestSet_P1
+FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_UNLOCK_SETUP,UNLOCK,LEG
+FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_RED_UNLOCK_SETUP,RED_UNLOCK,RED
+
+# Bucket B5  type=CSharpTest  template=PrimePatConfigTestMethod  tests=3
+InstanceName,B5_INSTANCE_P1,SetPoint_P1
+FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_LEGACY_SETUP_EXE_X1,INIT_X_X_X_X_LEGACY_SETUP_EXE,LGULCDIE
+FUSE_X_FUSECONFIG_K_STARTCPUNOM_X_X_X_X_LEGACY_UNLOCK_X1,STARTCPUNOM_X_X_X_X_LEGACY_UNLOCK,LGULCDIE
+FUSE_X_FUSECONFIG_K_STARTCPUNOM_X_X_X_X_RED_UNLOCK_X1,STARTCPUNOM_X_X_X_X_RED_UNLOCK,RDULCDIE
+
+# Bucket B6  type=CSharpTest  template=PrimeCtvDecoderTestMethod  tests=2
+InstanceName,B6_INSTANCE_P1
+FUSE_X_CTVDECODER_K_STARTCPUNOM_X_X_X_X_TAP_STATUS,STATUS
+FUSE_X_CTVDECODER_K_STARTCPUNOM_X_X_X_X_TAP_STATUS_POSTUNLOCK,STATUS_POSTUNLOCK
+
+# Bucket B7  type=CSharpTest  template=PrimeFuseReadMaskUltDecodeTestMethod  tests=2
+InstanceName,B7_INSTANCE_P1
+FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_EFUSEREAD,EFUSEREAD
+FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_MAIN_FUSE_READ,MAIN_FUSE_READ
+
+# Bucket B8  type=CSharpTest  template=ScreenTC  tests=3
+InstanceName,B8_INSTANCE_P1,ScreenTestSet
+FUSE_X_SCREENTC_K_INIT_X_X_X_X_UNLOCK_SETUP,INIT_X_X_X_X_UNLOCK_SETUP,LEG_KEY_split_by_32bits_MsbToLsb
+FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_UNIT_INFO_DECODE,STARTCPUNOM_X_X_X_X_UNIT_INFO_DECODE,STATUS_SET_PIC8_PrimeCtvDecoderTestMethod
+FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_UNIT_INFO_DECODE_POSTUNLOCK,STARTCPUNOM_X_X_X_X_UNIT_INFO_DECODE_POSTUNLOCK,UNLOCK_SET_PIC8_PrimeCtvDecoderTestMethod
+
+# Bucket B9  type=CSharpTest  template=FleISeedGetLotKeys  tests=2
+InstanceName,B9_INSTANCE_P1
+FUSE_X_ISEED_K_INIT_X_X_X_X_GETSD,GETSD
+FUSE_X_ISEED_K_INIT_X_X_X_X_GETSD_PCDH,GETSD_PCDH
+
+# Bucket F1  type=Flow  flows=1
+FlowName
+FUSE_CONFIG_PREP
+
+# Bucket F2  type=Flow  flows=1
+FlowName
+FUS_UNITINFO_CXX_INIT
+
+# Bucket F3  type=Flow  flows=1
+FlowName
+PRE_UNLOCK
+
+# Bucket F4  type=Flow  flows=1
+FlowName
+CHECK_DIE_STATUS
+
+# Bucket F5  type=Flow  flows=1
+FlowName
+RED_UNLOCK
+
+# Bucket F6  type=Flow  flows=1
+FlowName
+LEGACY_UNLOCK
+
+# Bucket F7  type=Flow  flows=1
+FlowName
+POST_UNLOCK
+
+# Bucket F8  type=Flow  flows=1
+FlowName
+FAIL_FLOW
+
+# Bucket F9  type=Flow  flows=1
+FlowName
+FUS_UNITINFO_CXX_STARTCPUNOM
+

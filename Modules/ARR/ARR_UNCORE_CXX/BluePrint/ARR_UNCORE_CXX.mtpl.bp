@@ -1,0 +1,453 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan ARR_UNCORE_CXX;
+
+Import "ARR_UNCORE_CXX.usrv";
+Import "ARR_UNCORE_CXX_Timing.tcg";
+Import "ARR_UNCORE_CXX_Level.tcg";
+
+# Test Counter Definition
+
+Counters
+{
+    n20312005_fail_XSA_UNCORE_RASTER_E_BEGINCPUNOM_X_X_NOM_X_X_0,
+    n20312006_fail_XSA_UNCORE_RASTER_E_BEGINCPUNOM_X_X_NOM_X_X_2,
+    n20312007_fail_XSA_UNCORE_RASTER_E_BEGINCPUNOM_X_X_NOM_X_X_3,
+    n20312008_fail_XSA_UNCORE_RASTER_E_BEGINCPUNOM_X_X_NOM_X_X_4,
+    n20312009_fail_XSA_UNCORE_RASTER_E_BEGINCPUNOM_X_X_NOM_X_X_5,
+    n21052003_fail_ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM_0,
+    n21052004_fail_ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM_2,
+    n21052005_fail_ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM_3,
+    n21062003_fail_ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION_0,
+    n21062004_fail_ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION_2,
+    n21062005_fail_ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION_3,
+    n21072003_fail_ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX_0,
+    n21072004_fail_ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX_2,
+    n21072005_fail_ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX_3,
+    n21192001_fail_ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM_5,
+    n21192009_fail_ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX_5,
+    n21192011_fail_ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION_5,
+    n60002025_fail_XSA_UNCORE_RUNCALLBACK_E_BEGINCPUNOM_X_X_X_X_RASTER_0,
+    n60202037_fail_XSA_UNCORE_RUNCALLBACK_E_BEGINCPUNOM_X_X_X_X_RASTER_5,
+    n60202038_fail_XSA_UNCORE_RUNCALLBACK_E_BEGINCPUNOM_X_X_X_X_RASTER_6,
+    n60202039_fail_XSA_UNCORE_RUNCALLBACK_E_BEGINCPUNOM_X_X_X_X_RASTER_7,
+    n60202040_fail_XSA_UNCORE_RUNCALLBACK_E_BEGINCPUNOM_X_X_X_X_RASTER_8,
+    n60202041_fail_XSA_UNCORE_RUNCALLBACK_E_BEGINCPUNOM_X_X_X_X_RASTER_9,
+    n97212001_fail_ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM_4,
+    n97212009_fail_ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX_4,
+    n97212011_fail_ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION_4
+} # End of Test Counter Definition
+
+
+# BP_BUCKET: B1 tests=2
+CSharpTest VminTC ALL_UNCORE_SB_K_\B1_INSTANCE_P1\_X_VNNAON_X_X_F1_\B1_INSTANCE_P2\
+{
+    Patlist = "IPC::arr_cdie_\Patlist_P1\_x_class_hptp_list";
+    LevelsTc = "IPC::ARR_UNCORE_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_\LevelsTc_P1\_lvl";
+    TimingsTc = ARR_UNCORE_CXX_Specs.timingRules;
+    BaseNumbers = "__BNUM__";
+    BypassPort = 1;
+    EndVoltageLimits = "0.\EndVoltageLimits\";
+    ForwardingMode = "None";
+    RecoveryMode = "NoRecovery";
+    ExecutionMode = "SearchWithScoreboard";
+    FeatureSwitchSettings = ARR_UNCORE_CXX_Specs.FeatureSwitch_Uncore;
+    FivrCondition = ARR_UNCORE_CXX_Specs.FivrConditionNom;
+    MaxRepetitionCount = 1;
+    PatternNameCounterIndexes = ARR_UNCORE_CXX_Specs.PatternMap;
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPreInstance = PSPRE.CLR_F1+","+"MCdrv:corefreq:"+ __shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:ringfreq_0:"+ __shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz,MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F1_FREQ+"GHz";
+    SetPointsPostInstance = PSPOST.CLR_F1;
+    StartVoltages = "0.\StartVoltages\";
+    StepSize = 0.02;
+    TestMode = "Scoreboard";
+    VoltageTargets = ARR_UNCORE_CXX_Specs.UNCORE_VoltageTarget;
+}
+
+# BP_BUCKET: B2 tests=1
+CSharpTest VminTC ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION
+{
+    Patlist = ARR_UNCORE_CXX_Rules.TPRules(ARR_UNCORE_CXX_Specs.reset_s28c,ARR_UNCORE_CXX_Specs.reset_s28c,ARR_UNCORE_CXX_Specs.reset_s28c,ARR_UNCORE_CXX_Specs.reset_48,ARR_UNCORE_CXX_Specs.reset_48,ARR_UNCORE_CXX_Specs.reset_48,ARR_UNCORE_CXX_Specs.reset_s28c,ARR_UNCORE_CXX_Specs.reset_s28c);
+    LevelsTc = "IPC::ARR_UNCORE_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_nom_lvl";
+    TimingsTc = ARR_UNCORE_CXX_Specs.timingRules;
+    BaseNumbers = "__BNUM__";
+    BypassPort = 1;
+    EndVoltageLimits = "0.77";
+    ForwardingMode = "None";
+    RecoveryMode = "NoRecovery";
+    ExecutionMode = "SearchWithScoreboard";
+    FeatureSwitchSettings = ARR_UNCORE_CXX_Specs.FeatureSwitch_Uncore;
+    FivrCondition = ARR_UNCORE_CXX_Specs.FivrConditionNom;
+    MaxRepetitionCount = 1;
+    PatternNameCounterIndexes = ARR_UNCORE_CXX_Specs.PatternMap;
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPreInstance = PSPRE.CLR_F1+","+"MCdrv:corefreq:"+ __shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:ringfreq_0:"+ __shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz,MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F1_FREQ+"GHz";
+    SetPointsPostInstance = PSPOST.CLR_F1;
+    StartVoltages = "0.77";
+    StepSize = 0.02;
+    TestMode = "Scoreboard";
+    VoltageTargets = ARR_UNCORE_CXX_Specs.UNCORE_VoltageTarget;
+}
+
+# BP_BUCKET: B3 tests=1
+CSharpTest DDGShmooTC ARR_UNCORE_SHMOO_E_BEGINCPUNOM_X_X_X_X_SHMOO_FOR_DEDC
+{
+    Patlist = "IPC::arr_cdie_endcpumax_mbist_uncore_all_all_vnnaon_ks_vmax_x_class_hptp_list";    
+    LevelsTc = "IPC::ARR_UNCORE_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_nom_lvl";
+    TimingsTc = ARR_UNCORE_CXX_Specs.timingRules;
+    BypassPort = 1;
+    LogLevel = "Enabled";
+    PrintFormat = "ShmooHub";
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPreInstance = "";
+    VoltageConverter = "--dlvrpins VCCIA --expressions CCF --fivrcondition NOM_CCF_CORE";
+    XAxisType = "SpecSetVariable";
+    XAxisParam = "p_all_mts";
+    XAxisParamType = "UserDefined";
+    XAxisRange = "700e6:50e6:6";
+    YAxisParam = "CCF";
+    YAxisParamType = "UserDefined";
+    YAxisRange = "0.9:-0.05:12";
+    YAxisType = "FIVR";
+}
+
+# BP_BUCKET: B4 tests=1
+CSharpTest RunCallback XSA_UNCORE_RUNCALLBACK_E_BEGINCPUNOM_X_X_X_X_RASTER
+{
+    BypassPort = ARR_UNCORE_CXX_Specs.RASTER_ENABLE;
+	Callback = "JsonRun";
+    Parameters = ARR_UNCORE_CXX_Rules.TPRules(ARR_UNCORE_CXX_Specs.jsonraster_others,ARR_UNCORE_CXX_Specs.jsonraster_others,ARR_UNCORE_CXX_Specs.jsonraster_others,ARR_UNCORE_CXX_Specs.jsonraster_s16c,ARR_UNCORE_CXX_Specs.jsonraster_s16c,ARR_UNCORE_CXX_Specs.jsonraster_s16c,ARR_UNCORE_CXX_Specs.jsonraster_others,ARR_UNCORE_CXX_Specs.jsonraster_others);
+}
+
+# BP_BUCKET: B5 tests=1
+CSharpTest MbistRasterRepairTC XSA_UNCORE_RASTER_E_BEGINCPUNOM_X_X_NOM_X_X
+
+{
+	LevelsTc =  "IPC::CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+    TimingsTc = ARR_UNCORE_CXX_Specs.timingRulesRaster;
+	#Patlist = "arr_cdie_begincpunom_mbist_core_raster_pnc_exe_dcm0_s0_raster_autoinc_class_tap_list";
+	Patlist = "arr_cdie_begincpunom_mbist_uncore_raster_unc_dmu_c1_vnnaon_raster_autoinc_class_tap_list";
+    BypassPort = ARR_UNCORE_CXX_Specs.RASTER_ENABLE;
+	CtvCapturePins = "CPU_TDO";
+	EnableRepair = "FALSE";
+	FailuresToCapturePerPattern = 0;
+	FailuresToCaptureTotal = 0;
+	MaxFailuresPerPatternToItuff = 0;
+	MaxFailuresToItuff = 0;
+    RasterOffHry = "";
+	RasterInputFile = ARR_UNCORE_CXX_Rules.TPRules(ARR_UNCORE_CXX_Specs.RASTER_LIST_816,ARR_UNCORE_CXX_Specs.RASTER_LIST_816,ARR_UNCORE_CXX_Specs.RASTER_LIST_816,ARR_UNCORE_CXX_Specs.RASTER_LIST_48,ARR_UNCORE_CXX_Specs.RASTER_LIST_48,ARR_UNCORE_CXX_Specs.RASTER_LIST_48,ARR_UNCORE_CXX_Specs.RASTER_LIST_816,ARR_UNCORE_CXX_Specs.RASTER_LIST_others);
+	RepairInputFile = ARR_UNCORE_CXX_Rules.TPRules(ARR_UNCORE_CXX_Specs.RASTER_LIST_816,ARR_UNCORE_CXX_Specs.RASTER_LIST_816,ARR_UNCORE_CXX_Specs.RASTER_LIST_816,ARR_UNCORE_CXX_Specs.RASTER_LIST_48,ARR_UNCORE_CXX_Specs.RASTER_LIST_48,ARR_UNCORE_CXX_Specs.RASTER_LIST_48,ARR_UNCORE_CXX_Specs.RASTER_LIST_816,ARR_UNCORE_CXX_Specs.RASTER_LIST_others);
+	SkipPriority = "";
+    SetPointsPreInstance = PSPRE.CLR_F1+","+"MCdrv:corefreq:"+ __shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:ringfreq_0:"+ __shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz";
+    SetPointsPostInstance = PSPOST.CLR_F1;
+	FivrConditionPlistParamName = "Patlist";
+	SetPointsPlistParamName = "Patlist";
+
+}
+
+
+
+# BP_FLOW_BUCKET: F1 flows=1
+Flow ALL_RASTER
+{    FlowItem XSA_UNCORE_RUNCALLBACK_E_BEGINCPUNOM_X_X_X_X_RASTER XSA_UNCORE_RUNCALLBACK_E_BEGINCPUNOM_X_X_X_X_RASTER @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+		Result 2
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 3
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 4
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			Return 1;
+		}
+		Result 6
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			Return 1;
+		}
+		Result 7
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			Return 1;
+		}
+		Result 8
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			Return 1;
+		}
+		Result 9
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			Return 1;
+		}
+	}
+
+    FlowItem XSA_UNCORE_RASTER_E_BEGINCPUNOM_X_X_NOM_X_X XSA_UNCORE_RASTER_E_BEGINCPUNOM_X_X_NOM_X_X @EDC
+	{
+	Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			Return 1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			Return 1;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			Return 1;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			Return 1;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			Return 1;
+		}
+	}
+}
+
+# BP_FLOW_BUCKET: F2 flows=1
+Flow ARR_UNCORE_CXX_BEGINCPUNOM
+{
+    FlowItem ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+			Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo ALL_RASTER;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+			Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+			Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+			Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+			Return 0;
+        }
+    }
+	
+    	FlowItem ARR_UNCORE_SHMOO_E_BEGINCPUNOM_X_X_X_X_SHMOO_FOR_DEDC ARR_UNCORE_SHMOO_E_BEGINCPUNOM_X_X_X_X_SHMOO_FOR_DEDC @EDC
+        {
+       		Result -2
+        	{
+           		Property PassFail = "Fail";
+            		SetBin __BIN__;
+            		Return -2;
+        	}
+        	Result -1
+        	{
+            		Property PassFail = "Fail";
+            		SetBin __BIN__;
+            		Return -1;
+        	}
+        	Result 0
+        	{
+            		Property PassFail = "Fail";
+            		Return 1;
+        	}
+        	Result 1
+        	{
+            		Property PassFail = "Pass";
+            		Return 1;
+        	}
+            Result 2
+        	{
+            		Property PassFail = "Pass";
+            		Return 1;
+        	}
+   	 }
+
+    FlowItem ALL_RASTER ALL_RASTER
+	{
+		Result -2 
+		{ 
+			Property PassFail = "Fail";
+			Return -2;
+		}
+		Result -1 
+		{ 
+			Property PassFail = "Fail";
+			Return -1; 
+		}
+		Result 0 
+		{ 
+			Property PassFail = "Fail";
+			Return 1;
+		}
+		Result 1 
+		{ 
+			Property PassFail = "Pass";
+			Return 1; 
+		}
+	}
+}
+
+# BP_FLOW_BUCKET: F3 flows=2
+Flow ARR_UNCORE_CXX_ENDCPU\F3_FLOWNAME\
+{
+    FlowItem ALL_UNCORE_SB_K_ENDCPU\F3_L2T1\ ALL_UNCORE_SB_K_ENDCPU\F3_L2T2\ @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 1;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 1;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 1;
+        }
+    }
+    
+}

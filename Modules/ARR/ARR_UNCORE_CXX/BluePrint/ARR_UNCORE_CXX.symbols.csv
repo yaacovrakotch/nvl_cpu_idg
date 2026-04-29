@@ -1,0 +1,34 @@
+# Bucket B1  type=CSharpTest  template=VminTC  tests=2
+InstanceName,B1_INSTANCE_P1,B1_INSTANCE_P2,Patlist_P1,LevelsTc_P1,EndVoltageLimits,StartVoltages
+ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM,BEGINCPUNOM,NOM,begincpunom_mbist_uncore_all_all_vnnaon_ks,nom,77,77
+ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX,ENDCPUMAX,MAX,endcpumax_mbist_uncore_all_all_vnnaon_ks_vmax,max,825,825
+
+# Bucket B2  type=CSharpTest  template=VminTC  tests=1
+InstanceName
+ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION
+
+# Bucket B3  type=CSharpTest  template=DDGShmooTC  tests=1
+InstanceName
+ARR_UNCORE_SHMOO_E_BEGINCPUNOM_X_X_X_X_SHMOO_FOR_DEDC
+
+# Bucket B4  type=CSharpTest  template=RunCallback  tests=1
+InstanceName
+XSA_UNCORE_RUNCALLBACK_E_BEGINCPUNOM_X_X_X_X_RASTER
+
+# Bucket B5  type=CSharpTest  template=MbistRasterRepairTC  tests=1
+InstanceName
+XSA_UNCORE_RASTER_E_BEGINCPUNOM_X_X_NOM_X_X
+
+# Bucket F1  type=Flow  flows=1
+FlowName
+ALL_RASTER
+
+# Bucket F2  type=Flow  flows=1
+FlowName
+ARR_UNCORE_CXX_BEGINCPUNOM
+
+# Bucket F3  type=Flow  flows=2
+FlowName,F3_FLOWNAME,F3_L2T1,F3_L2T2
+ARR_UNCORE_CXX_ENDCPUNOM,NOM,NOM_X_VNNAON_X_X_X_RETENTION,NOM_X_VNNAON_X_X_X_RETENTION
+ARR_UNCORE_CXX_ENDCPUMAX,MAX,MAX_X_VNNAON_X_X_F1_MAX,MAX_X_VNNAON_X_X_F1_MAX
+

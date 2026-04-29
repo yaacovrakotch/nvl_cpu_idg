@@ -1,0 +1,69 @@
+# Bucket B1  type=CSharpTest  template=PrimePatConfigTestMethod  tests=1
+InstanceName
+CLK_X_PATMOD_K_INIT_X_X_X_X_CPU
+
+# Bucket B2  type=CSharpTest  template=DDGFunctionalTC  tests=1
+InstanceName
+RESETCHECK_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_BBS
+
+# Bucket B3  type=CSharpTest  template=CsioCmemTC  tests=8
+InstanceName,B3_INSTANCE_P1,B3_INSTANCE_P2,B3_INSTANCE_P3,Patlist_P1,PlistConfigurationFile_P1,PlistConfigSet_P1,FunctionCall,LevelsTc_P1,BypassPort
+CONFIGREAD_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_BBS,CONFIGREAD,E,BBS,configread,configread,configread,Generic_RegRead,distnom,-
+STATUSREAD_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_BBS,STATUSREAD,E,BBS,statusread,statusread,statusread,Generic_RegRead,distnom,-
+IREFTRIM_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM,IREFTRIM,K,HVM,ireftrim,ireftrim,ireftrim,Ljpll_4p0_IrefTrimConverge,distmax,-
+DCATRIM_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM,DCATRIM,K,HVM,dcatrim,dcatrim,dcatrim,Ljpll_4p0_DcaTrim,dcadistmax,-
+AFSTRIM_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM,AFSTRIM,K,HVM,afstrim,afstrim,afstrim,Ljpll_4p0_AfsTrim,distnom,-
+IREFTRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC,IREFTRIM,E,SDC,ireftrim,ireftrim,ireftrim,Ljpll_4p0_IrefTrimConverge,distmax,
+DCATRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC,DCATRIM,E,SDC,dcatrim,dcatrim,dcatrim,Ljpll_4p0_DcaTrim,dcadistmax,
+AFSTRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC,AFSTRIM,E,SDC,afstrim,afstrim,afstrim,Ljpll_4p0_AfsTrim,distnom,
+
+# Bucket B4  type=CSharpTest  template=CsioCmemTC  tests=3
+InstanceName,B4_INSTANCE_P1,B4_INSTANCE_P2,B4_INSTANCE_P3,Patlist_P1,PlistConfigurationFile_P1,PlistConfigSet_P1,FunctionCall_P1,PreInstance_P1,BypassPort
+VREFTRIM_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM,VREFTRIM,K,HVM,vreftrim,vreftrim,vreftrim,VrefTrim,vreftrim_vnnaon --print)),-
+VCCPLL_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM,VCCPLL,K,HVM,vccpll,vccpll,vccpll,VccPll,vnnaon --print)),-
+VREFTRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC,VREFTRIM,E,SDC,vreftrim,vreftrim,vreftrim,VrefTrim,vreftrim_vnnaon --print)),
+
+# Bucket B5  type=CSharpTest  template=PrimePauseTestMethod  tests=4
+InstanceName,B5_INSTANCE_P1,SetPointsPreInstance_P1,SetPointsPreInstance_P2
+VREFTRIM_X_PATCFG_K_BEGIN_X_X_X_X_X_HVM,VREFTRIM,cpu:vrefpat,cpu:vreffuse
+IREFTRIM_X_PATCFG_K_BEGIN_X_X_X_X_X_HVM,IREFTRIM,cpu:irefpat,cpu:ireffuse
+DCATRIM_X_PATCFG_K_BEGIN_X_X_X_X_X_HVM,DCATRIM,cpu:dcapat,cpu:dcafuse
+AFSTRIM_X_PATCFG_K_BEGIN_X_X_X_X_X_HVM,AFSTRIM,cpu:afspat,cpu:afsfuse
+
+# Bucket B6  type=CSharpTest  template=PrimePauseTestMethod  tests=1
+InstanceName
+RECIPE_X_PATCFG_E_BEGIN_X_X_X_X_X_X_PATMOD
+
+# Bucket B7  type=CSharpTest  template=PrimeSampleRateTestMethod  tests=4
+InstanceName,B7_INSTANCE_P1,B7_INSTANCE_P2,SamplingRateValue_P1,BypassPort
+SETUP_X_SAMPLE_K_BEGIN_X_X_MIN_X_X_X,SETUP,X,CXXX::CLK_BASE_CXXX.SortClassCorrelationRate,-1
+FORK_X_SAMPLE_K_BEGIN_X_X_MIN_X_X_BBS,FORK,BBS,"CXXX::SampleRate.VMIN_BBS(""100"",""1"")",CLK_BASE_CXXX::CLK_BASE_CXXX.SampleBypass
+FORK_X_SAMPLE_K_BEGIN_X_X_MIN_X_X_HVM,FORK,HVM,"CXXX::SampleRate.VMIN_HVM(""100"",""1"")",CLK_BASE_CXXX::CLK_BASE_CXXX.SampleBypass
+FORK_X_SAMPLE_K_BEGIN_X_X_MIN_X_X_SDC,FORK,SDC,"CXXX::SampleRate.VMIN_SDC(""100"",""1"")",CLK_BASE_CXXX::CLK_BASE_CXXX.SampleBypass
+
+# Bucket B8  type=CSharpTest  template=AuxiliaryTC  tests=3
+InstanceName,B8_INSTANCE_P1,Expression,DataType,Storage,ResultToken
+SETUP_X_SCREEN_K_BEGIN_X_X_MIN_X_X_X_DFFSET1,X_DFFSET1,1,String,DFF,SCSAMP
+SETUP_X_SCREEN_K_BEGIN_X_X_MIN_X_X_X_DFFSET0,X_DFFSET0,0,String,DFF,SCSAMP
+SETUP_X_SCREEN_K_BEGIN_X_X_MIN_X_X_X,X,"IsMatch([D.WFR.SORT.SCSAMP],'1')?1:(IsMatch([CLK_BASE_CXXX::CLK_BASE_CXXX.MIN_DATA],'DISABLED')?2:-1)",Integer,UserVar,CLK_BASE_CXXX::CLK_BASE_CXXX.SampleBypass
+
+# Bucket F1  type=Flow  flows=1
+FlowName
+CLK_BASE_CXXX_INIT
+
+# Bucket F2  type=Flow  flows=1
+FlowName
+BEGIN_MIN_BBS
+
+# Bucket F3  type=Flow  flows=1
+FlowName
+BEGIN_MIN_HVM
+
+# Bucket F4  type=Flow  flows=1
+FlowName
+BEGIN_MIN_SDC
+
+# Bucket F5  type=Flow  flows=1
+FlowName
+CLK_BASE_CXXX_BEGIN_MIN
+

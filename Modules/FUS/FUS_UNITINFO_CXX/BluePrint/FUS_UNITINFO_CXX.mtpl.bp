@@ -1,0 +1,990 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan FUS_UNITINFO_CXX;
+
+Import "FUS_UNITINFO_CXX.usrv";
+
+# Test Counter Definition
+
+Counters
+{
+    n31412000_fail_FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_EFUSEREAD_0,
+    n31412001_fail_FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_EFUSEREAD_2,
+    n31412002_fail_FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_EFUSEREAD_3,
+    n31412003_fail_FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_MAIN_FUSE_READ_0,
+    n31412004_fail_FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_MAIN_FUSE_READ_2,
+    n31412005_fail_FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_MAIN_FUSE_READ_3,
+    n31472004_fail_FUSE_X_FUSECONFIG_K_STARTCPUNOM_X_X_X_X_LEGACY_UNLOCK_X1_0,
+    n31472007_fail_FUSE_X_FUSECONFIG_K_STARTCPUNOM_X_X_X_X_RED_UNLOCK_X1_0,
+    n31482000_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_UNLOCK_SETUP_0,
+    n31482001_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_UNLOCK_SETUP_2,
+    n31482002_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_UNLOCK_SETUP_3,
+    n31482003_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_UNLOCK_SETUP_4,
+    n31482004_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_UNIT_INFO_DECODE_0,
+    n31482005_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_UNIT_INFO_DECODE_2,
+    n31482006_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_UNIT_INFO_DECODE_4,
+    n31482007_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_UNIT_INFO_DECODE_6,
+    n31482008_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_RED_UNLOCK_SETUP_0,
+    n31482009_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_UNIT_INFO_DECODE_POSTUNLOCK_0,
+    n31482010_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_UNIT_INFO_DECODE_POSTUNLOCK_2,
+    n31482011_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_UNIT_INFO_DECODE_POSTUNLOCK_6,
+    n31482012_fail_FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_RED_UNLOCK_SETUP_2,
+    n31492000_fail_FUSE_X_CTVDECODER_K_STARTCPUNOM_X_X_X_X_TAP_STATUS_0,
+    n31492001_fail_FUSE_X_CTVDECODER_K_STARTCPUNOM_X_X_X_X_TAP_STATUS_2,
+    n31492002_fail_FUSE_X_CTVDECODER_K_STARTCPUNOM_X_X_X_X_TAP_STATUS_3,
+    n31492003_fail_FUSE_X_CTVDECODER_K_STARTCPUNOM_X_X_X_X_TAP_STATUS_POSTUNLOCK_0,
+    n31492004_fail_FUSE_X_CTVDECODER_K_STARTCPUNOM_X_X_X_X_TAP_STATUS_POSTUNLOCK_2,
+    n31492005_fail_FUSE_X_CTVDECODER_K_STARTCPUNOM_X_X_X_X_TAP_STATUS_POSTUNLOCK_3,
+    n92022001_fail_FUSE_X_ISEED_K_STARTCPUNOM_X_X_X_X_SECURITY_GET_0,
+    n92022002_fail_FUSE_X_ISEED_K_STARTCPUNOM_X_X_X_X_SECURITY_GET_2
+} # End of Test Counter Definition
+
+
+# BP_BUCKET: B1 tests=1
+CSharpTest ScreenTC FUSE_X_SCREENTC_K_INIT_X_X_X_X_CHECK_BOMGROUP
+{
+    BypassPort = -1;
+    ScreenTestSet = "Check_BOMGROUP";
+    ScreenTestsFile = "./InputFiles/ISEED.screen.json";
+}
+
+# BP_BUCKET: B2 tests=1
+CSharpTest FleISeedGetUnitKeys FUSE_X_ISEED_K_STARTCPUNOM_X_X_X_X_SECURITY_GET
+{
+    BypassPort = -1;
+    DieId = "Pkg";
+    KeysTypeId = __shared__::TpRule.If_MICP("1600,1599,4604","1600,4604");
+    QueryMode = "ENG";
+}
+
+# BP_BUCKET: B3 tests=1
+CSharpTest PrimeFunctionalTestMethod FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_UINFO_FUNC
+{
+    Patlist = "IPC::cpu_dfxagg_read_hvm_status_csr";
+    LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+    TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+}
+
+# BP_BUCKET: B4 tests=2
+CSharpTest ScreenTC FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_\B4_INSTANCE_P1\_SETUP
+{
+    ScreenTestSet = "\ScreenTestSet_P1\_KEY_split_by_32bits_MsbToLsb";
+    ScreenTestsFile = __shared__::TpRule.If_MICP("./InputFiles/UNITINFO_C2X.screen.json","./InputFiles/UNITINFO_C1X.screen.json");
+}
+
+# BP_BUCKET: B5 tests=3
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_\B5_INSTANCE_P1\_X1
+{
+    BypassPort = -1;
+    ConfigurationFile = __shared__::TpRule.If_MICP("./InputFiles/UNITINFO_C2X.patConfigSetpoints.json","./InputFiles/UNITINFO_C1X.patConfigSetpoints.json");
+    SetPoint = "\SetPoint_P1\_RATIO1_splitby32_MsbToLsb";
+}
+
+# BP_BUCKET: B6 tests=2
+CSharpTest PrimeCtvDecoderTestMethod FUSE_X_CTVDECODER_K_STARTCPUNOM_X_X_X_X_TAP_\B6_INSTANCE_P1\
+{
+    Patlist = "IPC::cpu_dfxagg_read_hvm_status_csr";
+    LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+    TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+    ConfigurationFile = __shared__::TpRule.If_MICP("./InputFiles/UNITINFO_C2X_PIC8_PrimeCtvDecoderTestMethod.csv","./InputFiles/UNITINFO_C1X_PIC8_PrimeCtvDecoderTestMethod.csv");
+    CtvCapturePins = __shared__::TpRule.If_MICP("IPC::CPU_TDO, IPC::CPU1_TDO", "IPC::CPU_TDO");
+}
+
+# BP_BUCKET: B7 tests=2
+CSharpTest PrimeFuseReadMaskUltDecodeTestMethod FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_\B7_INSTANCE_P1\
+{
+    Patlist = "IPC::cpu_fuse_read_hvm_x";
+    LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+    TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+    ConfigName = "CPU_ULTReadFlow";
+    ConfigurationFile = FUS_UNITINFO_CXX_Rules.FUSEREAD_CfgFile("./InputFiles/UNITINFO_CXX.fuseReadMask.json","./InputFiles/UNITINFO_CXX.fuseReadMask_N2P.json","./InputFiles/UNITINFO_CXX.fuseReadMask_BLLC.json");
+    DieIdNames = __shared__::TpRule.If_MICP("U1.U5,U1.U6","U1.U5");
+    FailingMaskName = "";
+    FuseGroupToDatalog = "ULT";
+    PackageEfuse = __shared__::TpRule.If_MICP("ALLOW_NO_PKG","");
+    PassingMaskName = "ULT_UnitInfo";
+    RegisterName = __shared__::TpRule.If_MICP("CPU0,CPU1","CPU0");
+}
+
+# BP_BUCKET: B8 tests=3
+CSharpTest ScreenTC FUSE_X_SCREENTC_K_\B8_INSTANCE_P1\
+{
+    BypassPort = -1;
+    ScreenTestSet = "\ScreenTestSet\";
+    ScreenTestsFile = __shared__::TpRule.If_MICP("./InputFiles/UNITINFO_C2X.screen.json","./InputFiles/UNITINFO_C1X.screen.json");
+}
+
+# BP_BUCKET: B9 tests=2
+CSharpTest FleISeedGetLotKeys FUSE_X_ISEED_K_INIT_X_X_X_X_\B9_INSTANCE_P1\
+{
+    BypassPort = __shared__::DieIndic.DieCombo(1,1,1,1,1,1,1,1,1,1,1,-1,1,1,1,1);
+    KeysTypeId = __shared__::TpRule.If_MICP("1600,1599","1600");
+    MaxQueryAttempts = 1;
+    QueryMode = "ENG";
+    ReQuerySleep = 1;
+}
+
+
+
+# BP_FLOW_BUCKET: F1 flows=1
+Flow FUSE_CONFIG_PREP
+{
+    FlowItem FUSE_X_SCREENTC_K_INIT_X_X_X_X_CHECK_BOMGROUP FUSE_X_SCREENTC_K_INIT_X_X_X_X_CHECK_BOMGROUP
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_ISEED_K_INIT_X_X_X_X_GETSD;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_ISEED_K_INIT_X_X_X_X_GETSD;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_ISEED_K_INIT_X_X_X_X_GETSD_PCDH;
+        }
+    }
+    
+    FlowItem FUSE_X_ISEED_K_INIT_X_X_X_X_GETSD FUSE_X_ISEED_K_INIT_X_X_X_X_GETSD
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_SCREENTC_K_INIT_X_X_X_X_UNLOCK_SETUP;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_ISEED_K_INIT_X_X_X_X_GETSD_PCDH FUSE_X_ISEED_K_INIT_X_X_X_X_GETSD_PCDH
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_SCREENTC_K_INIT_X_X_X_X_UNLOCK_SETUP;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_SCREENTC_K_INIT_X_X_X_X_UNLOCK_SETUP FUSE_X_SCREENTC_K_INIT_X_X_X_X_UNLOCK_SETUP
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_LEGACY_SETUP_EXE_X1;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_LEGACY_SETUP_EXE_X1 FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_LEGACY_SETUP_EXE_X1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+# BP_FLOW_BUCKET: F2 flows=1
+Flow FUS_UNITINFO_CXX_INIT
+{
+    FlowItem FUSE_CONFIG_PREP FUSE_CONFIG_PREP
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+# BP_FLOW_BUCKET: F3 flows=1
+Flow PRE_UNLOCK
+{
+    FlowItem FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_UNLOCK_SETUP FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_UNLOCK_SETUP
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSECONFIG_K_STARTCPUNOM_X_X_X_X_LEGACY_UNLOCK_X1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSECONFIG_K_STARTCPUNOM_X_X_X_X_LEGACY_UNLOCK_X1 FUSE_X_FUSECONFIG_K_STARTCPUNOM_X_X_X_X_LEGACY_UNLOCK_X1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+# BP_FLOW_BUCKET: F4 flows=1
+Flow CHECK_DIE_STATUS
+{
+    FlowItem FUSE_X_CTVDECODER_K_STARTCPUNOM_X_X_X_X_TAP_STATUS FUSE_X_CTVDECODER_K_STARTCPUNOM_X_X_X_X_TAP_STATUS
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_UNIT_INFO_DECODE;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 2;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 2;
+        }
+    }
+    
+    FlowItem FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_UNIT_INFO_DECODE FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_UNIT_INFO_DECODE
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 2;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 3;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 2;
+        }
+        Result 6
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+    }
+    
+}
+
+# BP_FLOW_BUCKET: F5 flows=1
+Flow RED_UNLOCK
+{
+    FlowItem FUSE_X_ISEED_K_STARTCPUNOM_X_X_X_X_SECURITY_GET FUSE_X_ISEED_K_STARTCPUNOM_X_X_X_X_SECURITY_GET
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_RED_UNLOCK_SETUP;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_RED_UNLOCK_SETUP FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_RED_UNLOCK_SETUP
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSECONFIG_K_STARTCPUNOM_X_X_X_X_RED_UNLOCK_X1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSECONFIG_K_STARTCPUNOM_X_X_X_X_RED_UNLOCK_X1 FUSE_X_FUSECONFIG_K_STARTCPUNOM_X_X_X_X_RED_UNLOCK_X1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_EFUSEREAD;
+        }
+    }
+    
+    FlowItem FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_EFUSEREAD FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_EFUSEREAD
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 2;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+    }
+    
+}
+
+# BP_FLOW_BUCKET: F6 flows=1
+Flow LEGACY_UNLOCK
+{
+    FlowItem FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_MAIN_FUSE_READ FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_MAIN_FUSE_READ
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 2;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+    }
+    
+}
+
+# BP_FLOW_BUCKET: F7 flows=1
+Flow POST_UNLOCK
+{
+    FlowItem FUSE_X_CTVDECODER_K_STARTCPUNOM_X_X_X_X_TAP_STATUS_POSTUNLOCK FUSE_X_CTVDECODER_K_STARTCPUNOM_X_X_X_X_TAP_STATUS_POSTUNLOCK
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_UNIT_INFO_DECODE_POSTUNLOCK;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_UNIT_INFO_DECODE_POSTUNLOCK FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_UNIT_INFO_DECODE_POSTUNLOCK
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+        Result 6
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+    }
+    
+}
+
+# BP_FLOW_BUCKET: F8 flows=1
+Flow FAIL_FLOW
+{
+    FlowItem FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_UINFO_FUNC FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_UINFO_FUNC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+    }
+    
+}
+
+# BP_FLOW_BUCKET: F9 flows=1
+Flow FUS_UNITINFO_CXX_STARTCPUNOM
+{
+    FlowItem PRE_UNLOCK PRE_UNLOCK
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CHECK_DIE_STATUS;
+        }
+    }
+    
+    FlowItem CHECK_DIE_STATUS CHECK_DIE_STATUS
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo RED_UNLOCK;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo FAIL_FLOW;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            GoTo LEGACY_UNLOCK;
+        }
+    }
+    
+    FlowItem RED_UNLOCK RED_UNLOCK
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo POST_UNLOCK;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo FAIL_FLOW;
+        }
+    }
+    
+    FlowItem LEGACY_UNLOCK LEGACY_UNLOCK
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo POST_UNLOCK;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            GoTo FAIL_FLOW;
+        }
+    }
+    
+    FlowItem POST_UNLOCK POST_UNLOCK
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo FAIL_FLOW;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+    FlowItem FAIL_FLOW FAIL_FLOW
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 0;
+        }
+    }
+    
+}

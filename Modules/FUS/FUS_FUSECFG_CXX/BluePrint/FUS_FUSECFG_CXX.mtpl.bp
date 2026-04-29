@@ -1,0 +1,444 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan FUS_FUSECFG_CXX;
+
+Import "FUS_FUSECFG_CXX.usrv";
+
+# Test Counter Definition
+
+Counters
+{
+    n31462000_fail_FUSE_X_UF_K_STARTCPUNOM_X_X_X_X_SET_HCS_FDS_0,
+    n31462001_fail_FUSE_X_UF_K_STARTCPUNOM_X_X_X_X_SET_HCS_FDS_2,
+    n31462002_fail_FUSE_X_UF_K_STARTCPUNOM_X_X_X_X_SET_HCS_FDS_3,
+    n31462003_fail_FUSE_X_UF_K_STARTCPUNOM_X_X_X_X_SET_HCS_FDS_CPU1_0,
+    n31462004_fail_FUSE_X_UF_K_STARTCPUNOM_X_X_X_X_SET_HCS_FDS_CPU1_2,
+    n31462005_fail_FUSE_X_UF_K_STARTCPUNOM_X_X_X_X_SET_HCS_FDS_CPU1_3,
+    n31472000_fail_FUSE_X_FUSECONFIG_K_STARTCPUNOM_X_X_X_X_CLEAR_PERUNIT_RESET_X1_0,
+    n31472003_fail_FUSE_X_FUSECONFIG_K_STARTCPUNOM_X_X_X_X_CLEAR_PERUNIT_VFDM_0,
+    n31472015_fail_FUSE_X_FUSECONFIG_K_STARTCPUNOM_X_X_X_X_CLEAR_PERUNIT_VFDM_CPU1_0
+} # End of Test Counter Definition
+
+
+# BP_BUCKET: B1 tests=1
+CSharpTest ScreenTC FUSE_X_SCREENTC_K_INIT_X_X_X_X_SETPOINT_SETUP
+{
+    BypassPort = -1;
+    ScreenTestSet = "SetPoint_Setup";
+    ScreenTestsFile = "./InputFiles/FUSECFG_CXX.screen.json";
+}
+
+# BP_BUCKET: B2 tests=2
+CSharpTest PrimeVirtualFuseExportToSharedStorageTestMethod FUSE_X_UF_K_STARTCPUNOM_X_X_X_X_SET_HCS_\B2_INSTANCE_P1\
+{
+    BypassPort = \BypassPort\;
+    FdsSharedStorageKey = "\FdsSharedStorageKey_P1\_FUSE_EMB_VFDM_FDS_BINARY";
+    FuseDataGap = "\FuseDataGap_P1\_Heap_Data_Gap.VF_Heap_Data_Gap";
+    FuseDescriptorGap = "\FuseDescriptorGap_P1\_Heap_Descriptor_Gap.VF_Heap_Descriptor_Gap";
+    HcsSharedStorageKey = "\HcsSharedStorageKey_P1\_FUSE_EMB_VFDM_HCS_BINARY";
+    Namespace = "\Namespace\";
+    Tags = "";
+}
+
+# BP_BUCKET: B3 tests=4
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_\B3_INSTANCE_P1\_X1
+{
+    BypassPort = -1;
+    ConfigurationFile = __shared__::TpRule.If_MICP("./InputFiles/FUS_FUSECFG_C2X.SetPoints.json","./InputFiles/FUS_FUSECFG_C1X.SetPoints.json");
+    RegEx = "[gdx].......C........_.._......._............._...C................*";
+    SetPoint = IPC::FUS_FUSECFG_CXX::FUS_FUSECFG_\SetPoint_P1\_SETPOINT;
+}
+
+# BP_BUCKET: B4 tests=2
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_STARTCPUNOM_X_X_X_X_CLEAR_PERUNIT_\B4_INSTANCE_P1\
+{
+    BypassPort = \BypassPort\;
+    ConfigurationFile = GetEnvironmentVariable("FUSE_ROOT_DIR_CPU")+"./CSP/array_repair_perunit.PatConfigSetpoints.json";
+    RegEx = "[gdx].......C........_.._......._............._...C............._...................._........._fuseoverride_MC.*(arr|fun|fun.*|scn)";
+    SetPoint = "\SetPoint_P1\_APPLY_VFDM";
+}
+
+
+
+# BP_FLOW_BUCKET: F1 flows=1
+Flow FUS_FUSECFG_CXX_INIT
+{
+    FlowItem FUSE_X_SCREENTC_K_INIT_X_X_X_X_SETPOINT_SETUP FUSE_X_SCREENTC_K_INIT_X_X_X_X_SETPOINT_SETUP
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DIRECT_FUSES;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 6
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 7
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 8
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 9
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 10
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+    }
+    
+    FlowItem DIRECT_FUSES DIRECT_FUSES
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo VIRTUAL_FUSES;
+        }
+    }
+    
+    FlowItem VIRTUAL_FUSES VIRTUAL_FUSES
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo RESET_FUSES;
+        }
+    }
+    
+    FlowItem RESET_FUSES RESET_FUSES
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+# BP_FLOW_BUCKET: F2 flows=1
+Flow VFDM
+{
+    FlowItem FUSE_X_UF_K_STARTCPUNOM_X_X_X_X_SET_HCS_FDS FUSE_X_UF_K_STARTCPUNOM_X_X_X_X_SET_HCS_FDS
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_UF_K_STARTCPUNOM_X_X_X_X_SET_HCS_FDS_CPU1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_UF_K_STARTCPUNOM_X_X_X_X_SET_HCS_FDS_CPU1 FUSE_X_UF_K_STARTCPUNOM_X_X_X_X_SET_HCS_FDS_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+    }
+    
+}
+
+# BP_FLOW_BUCKET: F3 flows=1
+Flow FUS_FUSECFG_CXX_STARTCPUNOM
+{
+    FlowItem VFDM VFDM
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSECONFIG_K_STARTCPUNOM_X_X_X_X_CLEAR_PERUNIT_RESET_X1;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSECONFIG_K_STARTCPUNOM_X_X_X_X_CLEAR_PERUNIT_RESET_X1 FUSE_X_FUSECONFIG_K_STARTCPUNOM_X_X_X_X_CLEAR_PERUNIT_RESET_X1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSECONFIG_K_STARTCPUNOM_X_X_X_X_CLEAR_PERUNIT_VFDM;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSECONFIG_K_STARTCPUNOM_X_X_X_X_CLEAR_PERUNIT_VFDM FUSE_X_FUSECONFIG_K_STARTCPUNOM_X_X_X_X_CLEAR_PERUNIT_VFDM
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSECONFIG_K_STARTCPUNOM_X_X_X_X_CLEAR_PERUNIT_VFDM_CPU1;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSECONFIG_K_STARTCPUNOM_X_X_X_X_CLEAR_PERUNIT_VFDM_CPU1 FUSE_X_FUSECONFIG_K_STARTCPUNOM_X_X_X_X_CLEAR_PERUNIT_VFDM_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+# BP_FLOW_BUCKET: F4 flows=3
+Flow \F4_FLOWNAME\_FUSES
+{
+    FlowItem FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_\F4_L2T1\_ALL_EXE_X1 FUSE_X_FUSECONFIG_K_INIT_X_X_X_X_FRV_\F4_L2T2\_ALL_EXE_X1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}

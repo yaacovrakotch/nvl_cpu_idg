@@ -1,0 +1,1111 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan PTH_BGR_CJ816P;
+
+Import "PTH_BGR_CJ816P.usrv";
+Import "PTH_BGR_CJ816P_Levels.tcg";
+
+#Test Counter Definition
+Counters
+{
+	n29010100_fail_BGR_X_ANAFUNCAP_K_BEGIN_X_X_X_X_BGTAPRW_0,
+	n29010101_fail_BGR_X_ANAFUNCAP_K_BEGIN_X_X_X_X_BGTAPRW_2,
+	n29010102_fail_BGR_X_ANAFUNCAP_K_BEGIN_X_X_X_X_BGTAPRW_3,
+	n29010103_fail_BGR_X_ANAFUNCAP_K_BEGIN_X_X_X_X_BGTAPRW_4,
+	n29010104_fail_BGR_X_ANAFUNCAP_K_BEGIN_X_X_X_X_BGTAPRW_5,
+	n29020200_fail_BGR_X_CTVDEC_E_BEGIN_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_0,
+	n29020201_fail_BGR_X_CTVDEC_E_BEGIN_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_2,
+	n29020202_fail_BGR_X_CTVDEC_E_BEGIN_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_3,
+	n29020203_fail_BGR_X_CTVDEC_E_BEGIN_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_4,
+	n29020204_fail_BGR_X_CTVDEC_E_BEGIN_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_5,
+	n29020205_fail_BGR_X_CTVDEC_E_BEGIN_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_6,
+	n29030328_fail_BGR_X_SCREEN_K_BEGIN_X_X_X_X_BGR_TEMPCO_CALC_0,
+	n29030329_fail_BGR_X_SCREEN_K_BEGIN_X_X_X_X_BGR_TEMPCO_CALC_2,
+	n29040424_fail_BGR_X_ANADC_K_BEGIN_X_X_X_X_BGR_ANAPRB_POST_0,
+	n29040425_fail_BGR_X_ANADC_K_BEGIN_X_X_X_X_BGR_ANAPRB_POST_2,
+	n29040426_fail_BGR_X_ANADC_K_BEGIN_X_X_X_X_BGR_ANAPRB_POST_3,
+	n29040427_fail_BGR_X_ANADC_K_BEGIN_X_X_X_X_BGR_ANAPRB_POST_4,
+	n29040428_fail_BGR_X_ANADC_K_BEGIN_X_X_X_X_BGR_ANAPRB_POST_5,
+	n29050504_fail_BGR_X_CTVDEC_E_SDTBEGIN_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_0,
+	n29050505_fail_BGR_X_CTVDEC_E_SDTBEGIN_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_2,
+	n29050506_fail_BGR_X_CTVDEC_E_SDTBEGIN_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_3,
+	n29050507_fail_BGR_X_CTVDEC_E_SDTBEGIN_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_4,
+	n29050508_fail_BGR_X_CTVDEC_E_SDTBEGIN_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_5,
+	n29050509_fail_BGR_X_CTVDEC_E_SDTBEGIN_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_6,
+	n29060604_fail_BGR_X_SCREEN_K_SDTBEGIN_X_X_X_X_BGR_TEMPCO_CALC_0,
+	n29060605_fail_BGR_X_SCREEN_K_SDTBEGIN_X_X_X_X_BGR_TEMPCO_CALC_2,
+	n29070708_fail_BGR_X_ANADC_K_SDTBEGIN_X_X_X_X_BGR_ANAPRB_POST_0,
+	n29070709_fail_BGR_X_ANADC_K_SDTBEGIN_X_X_X_X_BGR_ANAPRB_POST_2,
+	n29070710_fail_BGR_X_ANADC_K_SDTBEGIN_X_X_X_X_BGR_ANAPRB_POST_3,
+	n29070711_fail_BGR_X_ANADC_K_SDTBEGIN_X_X_X_X_BGR_ANAPRB_POST_4,
+	n29070712_fail_BGR_X_ANADC_K_SDTBEGIN_X_X_X_X_BGR_ANAPRB_POST_5,
+	n29080810_fail_BGR_X_CTVDEC_E_COLDFINAL_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_0,
+	n29080811_fail_BGR_X_CTVDEC_E_COLDFINAL_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_2,
+	n29080812_fail_BGR_X_CTVDEC_E_COLDFINAL_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_3,
+	n29080813_fail_BGR_X_CTVDEC_E_COLDFINAL_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_4,
+	n29080814_fail_BGR_X_CTVDEC_E_COLDFINAL_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_5,
+	n29080815_fail_BGR_X_CTVDEC_E_COLDFINAL_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP_6,
+	n29090920_fail_BGR_X_SCREEN_K_COLDFINAL_X_X_X_X_BGR_TEMPCO_CALC_0,
+	n29090921_fail_BGR_X_SCREEN_K_COLDFINAL_X_X_X_X_BGR_TEMPCO_CALC_2,
+	n29101010_fail_BGR_X_ANADC_K_COLDFINAL_X_X_X_X_BGR_ANAPRB_POST_0,
+	n29101011_fail_BGR_X_ANADC_K_COLDFINAL_X_X_X_X_BGR_ANAPRB_POST_2,
+	n29101012_fail_BGR_X_ANADC_K_COLDFINAL_X_X_X_X_BGR_ANAPRB_POST_3,
+	n29101013_fail_BGR_X_ANADC_K_COLDFINAL_X_X_X_X_BGR_ANAPRB_POST_4,
+	n29101014_fail_BGR_X_ANADC_K_COLDFINAL_X_X_X_X_BGR_ANAPRB_POST_5,
+	n29111100_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_ANAPRB_CAL_CH0_0,
+	n29111101_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_ANAPRB_CAL_CH0_2,
+	n29111102_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_ANAPRB_CAL_CH0_3,
+	n29111103_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_ANAPRB_CAL_CH0_4,
+	n29111104_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_ANAPRB_CAL_CH0_5,
+	n29121200_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_ANAPRB_CAL_CH1_0,
+	n29121201_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_ANAPRB_CAL_CH1_2,
+	n29121202_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_ANAPRB_CAL_CH1_3,
+	n29121203_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_ANAPRB_CAL_CH1_4,
+	n29121204_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_ANAPRB_CAL_CH1_5,
+	n29131300_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH0_0,
+	n29131301_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH0_2,
+	n29131302_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH0_3,
+	n29131303_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH0_4,
+	n29131304_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH0_5,
+	n29141400_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH1_0,
+	n29141401_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH1_2,
+	n29141402_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH1_3,
+	n29141403_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH1_4,
+	n29141404_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH1_5,
+	n29151500_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_BGR_ANAPRB_PRE_0,
+	n29151501_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_BGR_ANAPRB_PRE_2,
+	n29151502_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_BGR_ANAPRB_PRE_3,
+	n29151503_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_BGR_ANAPRB_PRE_4,
+	n29151504_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_BGR_ANAPRB_PRE_5,
+	n29161600_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_0,
+	n29161601_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_2,
+	n29161602_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_3,
+	n29161603_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_4,
+	n29161604_fail_BGR_X_ANADC_E_BEGIN_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_5,
+	n29171700_fail_BGR_X_PATCONFIG_E_BEGIN_X_X_X_X_BGR_TRIM_TEMPCO_CALC_FUSE_0,
+	n29212110_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_ANAPRB_CAL_CH0_0,
+	n29212111_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_ANAPRB_CAL_CH0_2,
+	n29212112_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_ANAPRB_CAL_CH0_3,
+	n29212113_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_ANAPRB_CAL_CH0_4,
+	n29212114_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_ANAPRB_CAL_CH0_5,
+	n29222210_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_ANAPRB_CAL_CH1_0,
+	n29222211_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_ANAPRB_CAL_CH1_2,
+	n29222212_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_ANAPRB_CAL_CH1_3,
+	n29222213_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_ANAPRB_CAL_CH1_4,
+	n29222214_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_ANAPRB_CAL_CH1_5,
+	n29232310_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH0_0,
+	n29232311_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH0_2,
+	n29232312_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH0_3,
+	n29232313_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH0_4,
+	n29232314_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH0_5,
+	n29242410_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH1_0,
+	n29242411_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH1_2,
+	n29242412_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH1_3,
+	n29242413_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH1_4,
+	n29242414_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH1_5,
+	n29252510_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_BGR_ANAPRB_PRE_0,
+	n29252511_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_BGR_ANAPRB_PRE_2,
+	n29252512_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_BGR_ANAPRB_PRE_3,
+	n29252513_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_BGR_ANAPRB_PRE_4,
+	n29252514_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_BGR_ANAPRB_PRE_5,
+	n29262610_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_0,
+	n29262611_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_2,
+	n29262612_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_3,
+	n29262613_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_4,
+	n29262614_fail_BGR_X_ANADC_E_SDTBEGIN_X_X_X_X_BGR_ANAPRB_CHARGEPUMP_5,
+	n29272702_fail_BGR_X_PATCONFIG_E_SDTBEGIN_X_X_X_X_BGR_TRIM_TEMPCO_CALC_FUSE_0,
+	n29303000_fail_BGR_X_GSDS2DFF_E_BEGIN_X_X_X_X_GSDS2DFFPR_0,
+	n29303001_fail_BGR_X_GSDS2DFF_E_BEGIN_X_X_X_X_GSDS2DFFPR_2,
+	n29303002_fail_BGR_X_GSDS2DFF_E_BEGIN_X_X_X_X_GSDS2DFFPR_3,
+	n29303003_fail_BGR_X_GSDS2DFF_E_BEGIN_X_X_X_X_GSDS2DFFPR_4,
+	n29313102_fail_BGR_X_PATCONFIG_E_COLDFINAL_X_X_X_X_BGR_TRIM_TEMPCO_CALC_FUSE_0,
+	n29333300_fail_BGR_X_SCREEN_E_BEGIN_X_X_X_X_BGR_PER_PART_FUSE_0,
+	n29333301_fail_BGR_X_SCREEN_E_BEGIN_X_X_X_X_BGR_PER_PART_FUSE_2
+}
+
+
+
+# BP_BUCKET: B1 tests=4
+CSharpTest AnalogDcTC BGR_X_ANADC_E_\B1_INSTANCE_P1\_X_X_X_X_ANAPRB_CAL_\B1_INSTANCE_P2\
+{
+	Patlist = "pth_cpu_x_bgr_anaprb_cal_\Patlist_P1\_list";
+	LevelsTc = "BASE::SBF_min_lvl";
+	TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	BypassPort = -1;
+	DataBaseFile = "./InputFiles/AnalogDC_ANAPRB_CAL_\DataBaseFile_P1\";
+	DatalogLevel = "PIN_DETAIL";
+	FlushLevels = "ENABLED";
+	MeasurementTypes = "V";
+	Pins = "CPU_OBS_\Pins_P1\";
+	PostInstance = "WriteUserVar(--uservar PTH_BGR_CJ816P::PTH_BGR_CJ816P.PROBECAL_\PostInstance_P1\_800MV --value G.U.D.ANAPRB_CAL_\PostInstance_P2\_800mV --type Double)";
+	TriggerMapName = "CPU_BGR_ANAPRB_CAL_\TriggerMapName_P1\_TriggerMap";
+}
+
+# BP_BUCKET: B2 tests=4
+CSharpTest AnalogDcTC BGR_X_ANADC_E_\B2_INSTANCE_P1\_X_X_X_X_ANAPRB_CAL_EXTBGREF_\B2_INSTANCE_P2\
+{
+	Patlist = "pth_cpu_x_bgr_anaprb_extbgref_cal_\Patlist_P1\_list";
+	LevelsTc = "PTH_BGR_CJ816P::bf_lvl_nom_lvl_0P8V";
+	TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	BypassPort = -1;
+	DataBaseFile = "./InputFiles/AnalogDC_ANAPRB_CAL_\DataBaseFile_P1\_extbg.json";
+	DatalogLevel = "PIN_DETAIL";
+	FlushLevels = "ENABLED";
+	MeasurementTypes = "V";
+	Pins = "CPU_OBS_\Pins_P1\";
+	TriggerMapName = "CPU_BGR_ANAPRB_TriggerMap";
+}
+
+# BP_BUCKET: B3 tests=7
+CSharpTest AnalogDcTC BGR_X_ANADC_\B3_INSTANCE_P1\_\B3_INSTANCE_P2\_X_X_X_X_BGR_ANAPRB_\B3_INSTANCE_P3\
+{
+	Patlist = "pth_cpu_x_bgr_anaprb_\Patlist_P1\_\Patlist_P2\_list";
+	LevelsTc = "BASE::SBF_min_lvl";
+	TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	BypassPort = -1;
+	DataBaseFile = "./InputFiles/AnalogDC_ANAPRB_\DataBaseFile_P1\";
+	DatalogLevel = "PIN_DETAIL";
+	FlushLevels = "ENABLED";
+	MeasurementTypes = "V,V";
+	Pins = "CPU_OBS_02,CPU_OBS_03";
+	TriggerMapName = "CPU_BGR_ANAPRB_TriggerMap";
+}
+
+# BP_BUCKET: B4 tests=3
+CSharpTest CtvDecoderSpm BGR_X_CTVDEC_E_\B4_INSTANCE_P1\_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP
+{
+	Patlist = "pth_cpu_x_bgr_bgtrim_tempco_sweep_list";
+	LevelsTc = "PTH_BGR_CJ816P::bf_lvl_nom_lvl_0P8V";
+	TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	BypassPort = -1;
+	ConfigurationFile = "./InputFiles/CTVDECODER_BG_TEMPCO_\ConfigurationFile_P1\";
+	CtvCapturePins = "CPU_TDO";
+}
+
+# BP_BUCKET: B5 tests=3
+CSharpTest PrimePatConfigTestMethod BGR_X_PATCONFIG_E_\B5_INSTANCE_P1\_X_X_X_X_BGR_TRIM_TEMPCO_CALC_FUSE
+{
+	BypassPort = -1;
+	ConfigurationFile = "./InputFiles/PatConfigTC_NVL_bgr_configset.json";
+	RegEx = "[gdx].......C........_.._......._............._...C.*";
+	SetPoint = "BGROFFSET_\SetPoint_P1\";
+}
+
+# BP_BUCKET: B6 tests=1
+CSharpTest DDGFunctionalTC BGR_X_ANAFUNCAP_K_BEGIN_X_X_X_X_BGTAPRW
+{
+	Patlist = "pth_cpu_x_bgr_taprw_check_list";
+	LevelsTc = "BASE::SBF_min_lvl";
+	TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	BypassPort = -1;
+}
+
+# BP_BUCKET: B7 tests=1
+CSharpTest PTHGetSetGsdsDffTC BGR_X_GSDS2DFF_E_BEGIN_X_X_X_X_GSDS2DFFPR
+{
+	BypassPort = -1;
+	ConfigurationFile = "./InputFiles/PTHGetSetGsdsDffTC_NVL_bgr_gsds2dff.json";
+	OPType = "GSDS2DFF";
+}
+
+# BP_BUCKET: B8 tests=4
+CSharpTest ScreenTC BGR_X_SCREEN_\B8_INSTANCE_P1\
+{
+	BypassPort = -1;
+	ScreenTestSet = "\ScreenTestSet\";
+	ScreenTestsFile = "./InputFiles/ScreenTC_NVL_bgr_\ScreenTestsFile_P1\";
+}
+
+
+
+# BP_FLOW_BUCKET: F1 flows=1
+Flow PTH_BGR_CJ816P_BEGIN @BEGIN_SubFlow
+{
+	FlowItem BGR_X_ANAFUNCAP_K_BEGIN_X_X_X_X_BGTAPRW BGR_X_ANAFUNCAP_K_BEGIN_X_X_X_X_BGTAPRW
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			SetBin __BIN__;
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_SCREEN_E_BEGIN_X_X_X_X_BGR_PER_PART_FUSE;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			SetBin __BIN__;
+			Return 0;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			SetBin __BIN__;
+			Return 0;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			SetBin __BIN__;
+			Return 0;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			SetBin __BIN__;
+			Return 0;
+		}
+	}
+	FlowItem BGR_X_SCREEN_E_BEGIN_X_X_X_X_BGR_PER_PART_FUSE BGR_X_SCREEN_E_BEGIN_X_X_X_X_BGR_PER_PART_FUSE @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo VIEWPIN_CAL;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo VIEWPIN_CAL;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo VIEWPIN_CAL;
+		}
+	}
+	FlowItem VIEWPIN_CAL VIEWPIN_CAL
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BANDGAP;
+		}
+	}
+	FlowItem BANDGAP BANDGAP
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_GSDS2DFF_E_BEGIN_X_X_X_X_GSDS2DFFPR;
+		}
+	}
+	FlowItem BGR_X_GSDS2DFF_E_BEGIN_X_X_X_X_GSDS2DFFPR BGR_X_GSDS2DFF_E_BEGIN_X_X_X_X_GSDS2DFFPR @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			Return 1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			Return 1;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			Return 1;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			Return 1;
+		}
+	}
+}
+
+# BP_FLOW_BUCKET: F2 flows=1
+Flow PTH_BGR_CJ816P_SDTBEGIN @SDTBEGIN_SubFlow
+{
+	FlowItem VIEWPIN_CAL_SDTBEGIN VIEWPIN_CAL_SDTBEGIN
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_SDTBEGIN;
+		}
+	}
+	FlowItem BGR_SDTBEGIN BGR_SDTBEGIN
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+	}
+}
+
+# BP_FLOW_BUCKET: F3 flows=1
+Flow PTH_BGR_CJ816P_COLDFINAL @COLDFINAL_SubFlow
+{
+	FlowItem BGR_X_CTVDEC_E_COLDFINAL_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP BGR_X_CTVDEC_E_COLDFINAL_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_SCREEN_K_COLDFINAL_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_SCREEN_K_COLDFINAL_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_SCREEN_K_COLDFINAL_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_SCREEN_K_COLDFINAL_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_SCREEN_K_COLDFINAL_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_SCREEN_K_COLDFINAL_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+		Result 6
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_SCREEN_K_COLDFINAL_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+	}
+	FlowItem BGR_X_SCREEN_K_COLDFINAL_X_X_X_X_BGR_TEMPCO_CALC BGR_X_SCREEN_K_COLDFINAL_X_X_X_X_BGR_TEMPCO_CALC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			SetBin __BIN__;
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_PATCONFIG_E_COLDFINAL_X_X_X_X_BGR_TRIM_TEMPCO_CALC_FUSE;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			SetBin __BIN__;
+			Return 0;
+		}
+	}
+	FlowItem BGR_X_PATCONFIG_E_COLDFINAL_X_X_X_X_BGR_TRIM_TEMPCO_CALC_FUSE BGR_X_PATCONFIG_E_COLDFINAL_X_X_X_X_BGR_TRIM_TEMPCO_CALC_FUSE @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_ANADC_K_COLDFINAL_X_X_X_X_BGR_ANAPRB_POST;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_ANADC_K_COLDFINAL_X_X_X_X_BGR_ANAPRB_POST;
+		}
+	}
+	FlowItem BGR_X_ANADC_K_COLDFINAL_X_X_X_X_BGR_ANAPRB_POST BGR_X_ANADC_K_COLDFINAL_X_X_X_X_BGR_ANAPRB_POST
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			SetBin __BIN__;
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			SetBin __BIN__;
+			Return 0;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			SetBin __BIN__;
+			Return 0;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			SetBin __BIN__;
+			Return 0;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			SetBin __BIN__;
+			Return 0;
+		}
+	}
+}
+
+# BP_FLOW_BUCKET: F4 flows=2
+Flow B\F4_FLOWNAME\
+{
+	FlowItem BGR_X_ANADC_E_\F4_L2T1\BEGIN_X_X_X_X_BGR_ANAPRB_PRE BGR_X_ANADC_E_\F4_L2T2\BEGIN_X_X_X_X_BGR_ANAPRB_PRE @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_ANADC_E_\F4_L20T1\BEGIN_X_X_X_X_BGR_ANAPRB_CHARGEPUMP;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_ANADC_E_\F4_L25T1\BEGIN_X_X_X_X_BGR_ANAPRB_CHARGEPUMP;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_ANADC_E_\F4_L31T1\BEGIN_X_X_X_X_BGR_ANAPRB_CHARGEPUMP;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_ANADC_E_\F4_L37T1\BEGIN_X_X_X_X_BGR_ANAPRB_CHARGEPUMP;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_ANADC_E_\F4_L43T1\BEGIN_X_X_X_X_BGR_ANAPRB_CHARGEPUMP;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_ANADC_E_\F4_L49T1\BEGIN_X_X_X_X_BGR_ANAPRB_CHARGEPUMP;
+		}
+	}
+	FlowItem BGR_X_ANADC_E_\F4_L52T1\BEGIN_X_X_X_X_BGR_ANAPRB_CHARGEPUMP BGR_X_ANADC_E_\F4_L52T2\BEGIN_X_X_X_X_BGR_ANAPRB_CHARGEPUMP @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_CTVDEC_E_\F4_L70T1\BEGIN_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_CTVDEC_E_\F4_L75T1\BEGIN_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_CTVDEC_E_\F4_L81T1\BEGIN_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_CTVDEC_E_\F4_L87T1\BEGIN_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_CTVDEC_E_\F4_L93T1\BEGIN_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_CTVDEC_E_\F4_L99T1\BEGIN_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP;
+		}
+	}
+	FlowItem BGR_X_CTVDEC_E_\F4_L102T1\BEGIN_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP BGR_X_CTVDEC_E_\F4_L102T2\BEGIN_X_X_X_X_BGR_TRIM_TEMPCO_SWEEP @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_SCREEN_K_\F4_L120T1\BEGIN_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_SCREEN_K_\F4_L125T1\BEGIN_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_SCREEN_K_\F4_L131T1\BEGIN_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_SCREEN_K_\F4_L137T1\BEGIN_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_SCREEN_K_\F4_L143T1\BEGIN_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_SCREEN_K_\F4_L149T1\BEGIN_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+		Result 6
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_SCREEN_K_\F4_L155T1\BEGIN_X_X_X_X_BGR_TEMPCO_CALC;
+		}
+	}
+	FlowItem BGR_X_SCREEN_K_\F4_L158T1\BEGIN_X_X_X_X_BGR_TEMPCO_CALC BGR_X_SCREEN_K_\F4_L158T2\BEGIN_X_X_X_X_BGR_TEMPCO_CALC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			SetBin __BIN__;
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_PATCONFIG_E_\F4_L182T1\BEGIN_X_X_X_X_BGR_TRIM_TEMPCO_CALC_FUSE;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			SetBin __BIN__;
+			Return 0;
+		}
+	}
+	FlowItem BGR_X_PATCONFIG_E_\F4_L192T1\BEGIN_X_X_X_X_BGR_TRIM_TEMPCO_CALC_FUSE BGR_X_PATCONFIG_E_\F4_L192T2\BEGIN_X_X_X_X_BGR_TRIM_TEMPCO_CALC_FUSE @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_ANADC_K_\F4_L210T1\BEGIN_X_X_X_X_BGR_ANAPRB_POST;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_ANADC_K_\F4_L215T1\BEGIN_X_X_X_X_BGR_ANAPRB_POST;
+		}
+	}
+	FlowItem BGR_X_ANADC_K_\F4_L218T1\BEGIN_X_X_X_X_BGR_ANAPRB_POST BGR_X_ANADC_K_\F4_L218T2\BEGIN_X_X_X_X_BGR_ANAPRB_POST
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			SetBin __BIN__;
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			SetBin __BIN__;
+			Return 0;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			SetBin __BIN__;
+			Return 0;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			SetBin __BIN__;
+			Return 0;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			SetBin __BIN__;
+			Return 0;
+		}
+	}
+}
+
+# BP_FLOW_BUCKET: F5 flows=2
+Flow VIEWPIN_CAL\F5_FLOWNAME\
+{
+	FlowItem BGR_X_ANADC_E_\F5_L2T1\BEGIN_X_X_X_X_ANAPRB_CAL_CH0 BGR_X_ANADC_E_\F5_L2T2\BEGIN_X_X_X_X_ANAPRB_CAL_CH0 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_ANADC_E_\F5_L20T1\BEGIN_X_X_X_X_ANAPRB_CAL_CH1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_ANADC_E_\F5_L25T1\BEGIN_X_X_X_X_ANAPRB_CAL_CH1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_ANADC_E_\F5_L31T1\BEGIN_X_X_X_X_ANAPRB_CAL_CH1;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_ANADC_E_\F5_L37T1\BEGIN_X_X_X_X_ANAPRB_CAL_CH1;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_ANADC_E_\F5_L43T1\BEGIN_X_X_X_X_ANAPRB_CAL_CH1;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_ANADC_E_\F5_L49T1\BEGIN_X_X_X_X_ANAPRB_CAL_CH1;
+		}
+	}
+	FlowItem BGR_X_ANADC_E_\F5_L52T1\BEGIN_X_X_X_X_ANAPRB_CAL_CH1 BGR_X_ANADC_E_\F5_L52T2\BEGIN_X_X_X_X_ANAPRB_CAL_CH1 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_ANADC_E_\F5_L70T1\BEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_ANADC_E_\F5_L75T1\BEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH0;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_ANADC_E_\F5_L81T1\BEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH0;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_ANADC_E_\F5_L87T1\BEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH0;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_ANADC_E_\F5_L93T1\BEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH0;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_ANADC_E_\F5_L99T1\BEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH0;
+		}
+	}
+	FlowItem BGR_X_ANADC_E_\F5_L102T1\BEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH0 BGR_X_ANADC_E_\F5_L102T2\BEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH0 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_ANADC_E_\F5_L120T1\BEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo BGR_X_ANADC_E_\F5_L125T1\BEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_ANADC_E_\F5_L131T1\BEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH1;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_ANADC_E_\F5_L137T1\BEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH1;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_ANADC_E_\F5_L143T1\BEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH1;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			GoTo BGR_X_ANADC_E_\F5_L149T1\BEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH1;
+		}
+	}
+	FlowItem BGR_X_ANADC_E_\F5_L152T1\BEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH1 BGR_X_ANADC_E_\F5_L152T2\BEGIN_X_X_X_X_ANAPRB_CAL_EXTBGREF_CH1 @EDC
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			Return 1;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			Return 1;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			Return 1;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			Return 1;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			IncrementCounters __CTR__;
+			Return 1;
+		}
+	}
+}

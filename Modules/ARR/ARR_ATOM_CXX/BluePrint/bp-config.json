@@ -1,6 +1,7 @@
 {
   "module": "ARR_ATOM_CXX",
   "description": "BluePrint config for ARR_ATOM_CXX. CXX is a cross-socket module with no _CPU1 dual-die variants. Has ECC-on (ECCON/ECCSBFDV) and low-operating-point (LO) test flows not present in CXPKGS9.",
+  "copyTargets": [],
 
   "symbols": [
     {
@@ -22,10 +23,7 @@
         {"find": "per_array_f7.json", "replace": "per_array_\\ecc_freq\\.json"},
         {"find": "AT_F5_FREQ", "replace": "AT_\\ECC_FREQ\\_FREQ"},
         {"find": "AT_F6_FREQ", "replace": "AT_\\ECC_FREQ\\_FREQ"},
-        {"find": "AT_F7_FREQ", "replace": "AT_\\ECC_FREQ\\_FREQ"},
-        {"find": "F5_VMIN_ECCON", "replace": "\\ECC_FREQ\\_VMIN_ECCON"},
-        {"find": "F6_VMIN_ECCON", "replace": "\\ECC_FREQ\\_VMIN_ECCON"},
-        {"find": "F7_VMIN_ECCON", "replace": "\\ECC_FREQ\\_VMIN_ECCON"}
+        {"find": "AT_F7_FREQ", "replace": "AT_\\ECC_FREQ\\_FREQ"}
       ]
     },
     {
@@ -125,10 +123,10 @@
         {"find": "SCBD_1_0_0_0", "replace": "SCBD_\\MODULE_INDEX_NUM\\_0_0_0"},
         {"find": "SCBD_2_0_0_0", "replace": "SCBD_\\MODULE_INDEX_NUM\\_0_0_0"},
         {"find": "SCBD_3_0_0_0", "replace": "SCBD_\\MODULE_INDEX_NUM\\_0_0_0"},
-        {"find": "\"module0\"", "replace": "\"\\MODULE_INDEX\\\""},
-        {"find": "\"module1\"", "replace": "\"\\MODULE_INDEX\\\""},
-        {"find": "\"module2\"", "replace": "\"\\MODULE_INDEX\\\""},
-        {"find": "\"module3\"", "replace": "\"\\MODULE_INDEX\\\""},
+        {"find": "\"module0\"", "replace": "\"module\\MODULE_INDEX_NUM\\\""},
+        {"find": "\"module1\"", "replace": "\"module\\MODULE_INDEX_NUM\\\""},
+        {"find": "\"module2\"", "replace": "\"module\\MODULE_INDEX_NUM\\\""},
+        {"find": "\"module3\"", "replace": "\"module\\MODULE_INDEX_NUM\\\""},
         {"find": "L2DATAMINM0", "replace": "L2DATA\\VOLTAGE_CORNER\\\\MODULE_INDEX\\"},
         {"find": "L2DATAMINM1", "replace": "L2DATA\\VOLTAGE_CORNER\\\\MODULE_INDEX\\"},
         {"find": "L2DATAMINM2", "replace": "L2DATA\\VOLTAGE_CORNER\\\\MODULE_INDEX\\"},

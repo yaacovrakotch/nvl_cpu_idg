@@ -1,0 +1,165 @@
+# Module Revision: lilinzha - 07/22/22 10:17:30 AM
+
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan PTH_VDAC_CXX;
+
+#CSharpTest Counter Definition
+Counters
+{
+    n2000_fail_DLVR_X_UF_K_INIT_X_X_X_X_0,
+    n2001_fail_DLVR_X_UF_K_INIT_X_X_X_X_CPU1_0
+}
+
+
+
+# BP_BUCKET: B1 tests=5
+CSharpTest CallbacksManager DLVR_X_UF_K_INIT_X_X_X_X_\B1_INSTANCE_P1\
+{
+	BypassPort = \BypassPort\;
+	LogLevel = "Disabled";
+	PreInstance = "VoltageConverter(--dlvrpins VCCIA --fivrcondition NOM --overrides \PreInstance\)";
+	SetPointsPreInstance = "DLVRPS:\SetPointsPreInstance\:PS1";
+	SetPointsPostInstance = "DLVRPS:\SetPointsPostInstance\:PS0";
+	SetPointsPlistMode = "Global";
+}
+
+
+
+# BP_FLOW_BUCKET: F1 flows=1
+Flow PTH_VDAC_CXX_INIT
+{
+	FlowItem DLVR_X_UF_K_INIT_X_X_X_X_816 DLVR_X_UF_K_INIT_X_X_X_X_816
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+                        IncrementCounters __CTR__;
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo DLVR_X_UF_K_INIT_X_X_X_X_CPU1;
+		}
+	}
+	FlowItem DLVR_X_UF_K_INIT_X_X_X_X_CPU1 DLVR_X_UF_K_INIT_X_X_X_X_CPU1
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+                        IncrementCounters __CTR__;
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo DLVR_X_UF_K_INIT_X_X_X_X_48;
+		}
+	}
+	FlowItem DLVR_X_UF_K_INIT_X_X_X_X_48 DLVR_X_UF_K_INIT_X_X_X_X_48
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+                        IncrementCounters __CTR__;
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo DLVR_X_UF_K_INIT_X_X_X_X_40;
+		}
+	}
+	FlowItem DLVR_X_UF_K_INIT_X_X_X_X_40 DLVR_X_UF_K_INIT_X_X_X_X_40
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+                        IncrementCounters __CTR__;
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			GoTo DLVR_X_UF_K_INIT_X_X_X_X_20;
+		}
+	}
+	FlowItem DLVR_X_UF_K_INIT_X_X_X_X_20 DLVR_X_UF_K_INIT_X_X_X_X_20
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			SetBin __BIN__;
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+                        IncrementCounters __CTR__;
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+		}
+	}
+
+}

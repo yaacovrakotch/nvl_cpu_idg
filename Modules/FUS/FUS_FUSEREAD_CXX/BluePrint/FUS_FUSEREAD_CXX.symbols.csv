@@ -1,0 +1,115 @@
+# Bucket B1  type=CSharpTest  template=PrimePatConfigTestMethod  tests=1
+InstanceName
+FUSE_X_PATCONFIG_K_INIT_X_X_X_X_READ_MARGIN_SETUP
+
+# Bucket B2  type=CSharpTest  template=AuxiliaryTC  tests=1
+InstanceName
+FUSE_X_AUX_K_STARTCPUNOM_X_X_X_X_LOCKSTATUS_CHECK
+
+# Bucket B3  type=CSharpTest  template=PrimePatConfigTestMethod  tests=1
+InstanceName
+FUSE_X_PATCONFIG_K_STARTCPUNOM_X_X_X_X_READ_MARGIN_SET
+
+# Bucket B4  type=CSharpTest  template=PrimeFuseReadMaskTestMethod  tests=1
+InstanceName
+FUSE_X_FUSEREAD_K_STARTCPUNOM_X_X_X_X_IR
+
+# Bucket B5  type=CSharpTest  template=FleCheckFuseStringStatusByDies  tests=1
+InstanceName
+FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_FUSE_STRING_VALID_CHECK
+
+# Bucket B6  type=CSharpTest  template=FleGetDieStatus  tests=1
+InstanceName
+FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_SOCKET_MODE_CHECK
+
+# Bucket B7  type=CSharpTest  template=FleISeedGetUnitKeys  tests=1
+InstanceName
+FUSE_X_ISEED_K_STARTCPUNOM_X_X_X_X_GET_HOST_KEY
+
+# Bucket B8  type=CSharpTest  template=PrimePatConfigTestMethod  tests=1
+InstanceName
+FUSE_X_PATCONFIG_K_STARTCPUNOM_X_X_X_X_SET_HASH
+
+# Bucket B9  type=CSharpTest  template=ScreenTC  tests=1
+InstanceName
+FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POPULATE_SSPEC
+
+# Bucket B10  type=CSharpTest  template=FleCheckFusedSspecFusing  tests=1
+InstanceName
+FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_FUSED_SSPEC
+
+# Bucket B11  type=CSharpTest  template=FlePrintSSPECToItuff  tests=1
+InstanceName
+FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_PRINT_SSPEC_TO_ITUFF
+
+# Bucket B12  type=CSharpTest  template=SFMCheckEccStatisticsStatus  tests=1
+InstanceName
+FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_CHECK_ECC_STATUS
+
+# Bucket B13  type=CSharpTest  template=PrimeFuseReadMaskUltDecodeTestMethod  tests=1
+InstanceName
+FUSE_X_ULTREAD_K_STARTCPUNOM_X_X_X_X_EFUSE_READ
+
+# Bucket B14  type=CSharpTest  template=ScreenTC  tests=1
+InstanceName
+FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_FUSE_EFUSE_COMPARE
+
+# Bucket B15  type=CSharpTest  template=SFMDffEfuseCheck  tests=2
+InstanceName,B15_INSTANCE_P1,BypassPort,DieIdName_P1
+FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_DFF_ULT_EFUSE_COMPARE,COMPARE,-1,CPU
+FUSE_X_FLE_K_STARTCPUNOM_X_X_X_X_DFF_ULT_EFUSE_COMPARE_CPU1,COMPARE_CPU1,"__shared__::TpRule.If_MICP(-1,1)",CPU1
+
+# Bucket B16  type=CSharpTest  template=PrimeFuseReadMarginSweepTestMethod  tests=2
+InstanceName,B16_INSTANCE_P1,BypassPort,ConfigName,RegisterName
+FUSE_X_ULTREAD_E_STARTCPUNOM_X_X_X_X_IR_MARGINS,MARGINS,-1,,CPU0
+FUSE_X_ULTREAD_E_STARTCPUNOM_X_X_X_X_IR_MARGINS_CPU1,MARGINS_CPU1,"__shared__::TpRule.If_MICP(-1,1)",_CPU1,CPU1
+
+# Bucket B17  type=CSharpTest  template=ScreenTC  tests=2
+InstanceName,B17_INSTANCE_P1,ScreenTestSet
+FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_ALL_IN_ONE_FORK_CPU,ALL_IN_ONE_FORK_CPU,AllInOneCheck
+FUSE_X_SCREENTC_K_STARTCPUNOM_X_X_X_X_POST_PROCESS_HOSTKEY_FOR_HASH_SETUP,POST_PROCESS_HOSTKEY_FOR_HASH_SETUP,HASH_SETUP_CPU
+
+# Bucket B18  type=CSharpTest  template=PrimeFunctionalTestMethod  tests=5
+InstanceName,B18_INSTANCE_P1,Patlist_P1,BypassPort
+FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_STROBE,K_STARTCPUNOM_X_X_X_X_READ_STROBE,dfxagg_read_hvm_status_csr,-1
+FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_READ_HASH,K_STARTCPUNOM_X_X_X_X_READ_HASH,fuse_hvm_hash,-1
+FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_BABYSTEPS_TESTS,E_STARTCPUNOM_X_X_X_X_BABYSTEPS_TESTS,fuse_debug_babystep_tap_access,-1
+FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_CANARY_READ_FUNC,K_STARTCPUNOM_X_X_X_X_CANARY_READ_FUNC,fuse_read_hvm_canary_func,"FUS_FUSEREAD_CXX_Rules.FUSE_X_FUNC_K_STARTCPUNOM_X_X_X_X_CANARY_READ_FUNC_BypassPort(1,1,1,-1)"
+FUSE_X_FUNC_E_STARTCPUNOM_X_X_X_X_FSM_BABYSTEPS_TESTS,E_STARTCPUNOM_X_X_X_X_FSM_BABYSTEPS_TESTS,fuse_read_babystep_fsm,-1
+
+# Bucket F1  type=Flow  flows=1
+FlowName
+FUS_FUSEREAD_CXX_INIT
+
+# Bucket F2  type=Flow  flows=1
+FlowName
+PREREAD
+
+# Bucket F3  type=Flow  flows=1
+FlowName
+FUNCTIONAL_TESTS
+
+# Bucket F4  type=Flow  flows=1
+FlowName
+FUSE_READ
+
+# Bucket F5  type=Flow  flows=1
+FlowName
+RETEST_EXEC
+
+# Bucket F6  type=Flow  flows=1
+FlowName
+QA_FUSED
+
+# Bucket F7  type=Flow  flows=1
+FlowName
+MARGINS_READ
+
+# Bucket F8  type=Flow  flows=1
+FlowName
+RESET_FAIL_FLOW
+
+# Bucket F9  type=Flow  flows=1
+FlowName
+FUS_FUSEREAD_CXX_STARTCPUNOM
+

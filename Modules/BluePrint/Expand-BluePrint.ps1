@@ -1,216 +1,179 @@
-﻿<#
+<#
 .SYNOPSIS
-    Expands a BluePrint (.mtpl.bp) by replacing symbols with per-block combo values.
+    Expands a v2 BluePrint (data-driven, per-bucket-table CSV) into a full .mtpl.
 
 .DESCRIPTION
-    Reads a .mtpl.bp file and its corresponding symbols.json.  Each test block
-    in the BP has a # BP_COMBO annotation specifying the symbol values for that
-    specific instance.  The expander uses those per-block values to replace
-    symbol placeholders, producing a valid .mtpl file with ALL original tests
-    and flows preserved.
+    Reads <module>.mtpl.bp + <module>.symbols.csv. The CSV is organised as
+    one tabular section per bucket:
+        # Bucket B1  type=CSharpTest  template=VminTC  tests=4
+        InstanceName,SLOT1,SLOT2
+        name_a,v1,v2
+        name_b,v3,v4
+        ...
+        <blank line>
+        # Bucket F1  type=Flow  flows=2
+        FlowName,SLOT1
+        ...
 
-    Flow blocks are kept verbatim (they were not symbolized during generation
-    because they reference items across multiple symbol combinations).
+    The BP marks compressed sections with:
+        # BP_BUCKET: B<id> tests=<n>      (for tests)
+        # BP_FLOW_BUCKET: F<id> flows=<n> (for flows)
 
-    Also handles derived symbol variants:
-      - Lowercase: \freq_corner\ -> lowercase of chosen value (e.g. "f1")
-      - _NUM suffix: \MODULE_INDEX_NUM\ -> numeric part of value (e.g. M0 -> 0)
-
-    Outputs:
-      1. <module>.mtpl.bp.val  in the BluePrint directory
-      2. <module>.mtpl         overwritten with the expanded content
-
+    For each bucket, the expander emits one block per CSV row, substituting
+    \SLOT\ placeholders with that row's slot values.
 .PARAMETER InputBp
-    Path to the .mtpl.bp file.
-
-.PARAMETER SymbolsFile
-    Path to symbols.json. Defaults to symbols.json next to the BP file.
-
-.EXAMPLE
-    .\Expand-BluePrint.ps1 -InputBp "..\ARR\ARR_ATOM_CXX\BluePrint\ARR_ATOM_CXX.mtpl.bp"
+    Path to <module>.mtpl.bp.
 #>
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory)]
-    [string]$InputBp,
-
-    [string]$SymbolsFile
+    [Parameter(Mandatory)] [string]$InputBp
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-#region â”€â”€ paths â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-$InputBp = (Resolve-Path $InputBp).Path
-$bpDir   = Split-Path $InputBp
-
-if (-not $SymbolsFile) {
-    $SymbolsFile = Join-Path $bpDir 'symbols.json'
-}
-$SymbolsFile = (Resolve-Path $SymbolsFile).Path
-
-# Derive module name: ARR_ATOM_CXX.mtpl.bp -> ARR_ATOM_CXX
+#region paths
+$InputBp    = (Resolve-Path $InputBp).Path
+$bpDir      = Split-Path $InputBp
 $bpFileName = [IO.Path]::GetFileName($InputBp)
 if ($bpFileName -notmatch '^(.+)\.mtpl\.bp$') {
-    throw "Input file must end with .mtpl.bp, got: $bpFileName"
+    throw "Input must end with .mtpl.bp, got: $bpFileName"
 }
-$moduleName = $Matches[1]
+$moduleName  = $Matches[1]
+$moduleDir   = Split-Path $bpDir
+$csvFile     = Join-Path $bpDir "$moduleName.symbols.csv"
+$binmapFile  = Join-Path $bpDir "$moduleName.binmap.json"
+$valFile     = Join-Path $bpDir "$moduleName.mtpl.bp.val"
+$origMtpl    = Join-Path $moduleDir "$moduleName.mtpl_orig"
+$targetMtpl  = Join-Path $moduleDir "$moduleName.mtpl"
 
-# Module directory is parent of BluePrint/
-$moduleDir = Split-Path $bpDir
+Write-Host "=== BluePrint Expander (v2 per-bucket CSV) ==="
+Write-Host "BP : $InputBp"
+Write-Host "CSV: $csvFile"
 
-$valFile   = Join-Path $bpDir "$moduleName.mtpl.bp.val"
-$origMtpl  = Join-Path $moduleDir "$moduleName.mtpl"
-
-Write-Host "=== BluePrint Expander ==="
-Write-Host "Module    : $moduleName"
-Write-Host "Input BP  : $InputBp"
-Write-Host "Symbols   : $SymbolsFile"
-Write-Host "Output val: $valFile"
+if (-not (Test-Path $csvFile)) {
+    throw "symbols.csv not found at $csvFile - run Generate-BluePrint first."
+}
 #endregion
 
-#region â”€â”€ load symbols â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-$config  = Get-Content -Raw $SymbolsFile | ConvertFrom-Json
-$symbols = $config.symbols
-
-# Collect symbol names for replacement map building
-$symbolNames = [System.Collections.Generic.List[string]]::new()
-foreach ($prop in $symbols.PSObject.Properties) {
-    $symbolNames.Add($prop.Name)
-}
-
-Write-Host ""
-Write-Host "Symbols: $($symbolNames -join ', ')"
-#endregion
-
-#region â”€â”€ build per-block replacement map function â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-function Build-ReplacementMap {
-    param([hashtable]$Combo, [System.Collections.Generic.List[string]]$AllSymbolNames)
-    $map = [System.Collections.Generic.List[System.Collections.Generic.KeyValuePair[string,string]]]::new()
-    foreach ($name in $AllSymbolNames) {
-        if (-not $Combo.ContainsKey($name)) { continue }
-        $val = $Combo[$name]
-        # Uppercase symbol: \FREQ_CORNER\ -> F1
-        $map.Add([System.Collections.Generic.KeyValuePair[string,string]]::new('\' + $name + '\', $val))
-        # Lowercase symbol: \freq_corner\ -> f1
-        $lower = $name.ToLower()
-        $map.Add([System.Collections.Generic.KeyValuePair[string,string]]::new('\' + $lower + '\', $val.ToLower()))
-        # _NUM variant: \MODULE_INDEX_NUM\ -> extract digits from value (M0 -> 0)
-        $numMatch = [regex]::Match($val, '\d+')
-        if ($numMatch.Success) {
-            $map.Add([System.Collections.Generic.KeyValuePair[string,string]]::new('\' + $name + '_NUM\', $numMatch.Value))
-            $map.Add([System.Collections.Generic.KeyValuePair[string,string]]::new('\' + $lower + '_num\', $numMatch.Value))
+#region parse symbols.csv (per-bucket tables)
+$bucketTables = [ordered]@{}
+$rawCsv = [IO.File]::ReadAllLines($csvFile)
+$ci = 0
+try {
+while ($ci -lt $rawCsv.Count) {
+    $line = $rawCsv[$ci]
+    if ($line -match '^\s*#\s*Bucket\s+(\S+)') {
+        $bid = $Matches[1]
+        $ci++
+        if ($ci -ge $rawCsv.Count) { throw "Bucket $bid has no header row" }
+        $hdrLine = $rawCsv[$ci]; $ci++
+        $hdrCols = $hdrLine.Split(',')
+        $slotNames = New-Object System.Collections.Generic.List[string]
+        if ($hdrCols.Count -gt 1) {
+            for ($h = 1; $h -lt $hdrCols.Count; $h++) { [void]$slotNames.Add($hdrCols[$h]) }
         }
+        $rows = [System.Collections.Generic.List[hashtable]]::new()
+        # Collect data lines for this bucket then parse them as a CSV chunk
+        # so quoted fields containing commas are handled correctly.
+        $dataLines = New-Object System.Collections.Generic.List[string]
+        while ($ci -lt $rawCsv.Count -and $rawCsv[$ci].Trim() -ne '' -and -not ($rawCsv[$ci] -match '^\s*#\s*Bucket')) {
+            [void]$dataLines.Add($rawCsv[$ci])
+            $ci++
+        }
+        if ($dataLines.Count -gt 0) {
+            $chunk = @($hdrLine) + $dataLines
+            $parsed = $chunk | ConvertFrom-Csv
+            foreach ($pr in $parsed) {
+                $name = $pr.($hdrCols[0])
+                $slots = @{}
+                foreach ($sn in $slotNames) { $slots[$sn] = $pr.$sn }
+                $rows.Add(@{ Name = $name; Slots = $slots })
+            }
+        }
+        $bucketTables[$bid] = $rows
+        continue
     }
-    return $map
+    $ci++
+}
+} catch {
+    Write-Host "CSV parse error at line $ci ('$($rawCsv[$ci])'): $_" -ForegroundColor Red
+    Write-Host "Stack: $($_.ScriptStackTrace)" -ForegroundColor Red
+    throw
+}
+Write-Host "  Buckets in CSV: $($bucketTables.Count)"
+#endregion
+
+#region load binmap (per-instance original bin/ctr/bnum values)
+$binmapTests = @{}
+$binmapFlows = @{}
+if (Test-Path $binmapFile) {
+    $bm = Get-Content $binmapFile -Raw | ConvertFrom-Json
+    if ($bm.PSObject.Properties.Name -contains 'tests' -and $bm.tests) {
+        foreach ($p in $bm.tests.PSObject.Properties) { $binmapTests[$p.Name] = @($p.Value) }
+    }
+    if ($bm.PSObject.Properties.Name -contains 'flows' -and $bm.flows) {
+        foreach ($p in $bm.flows.PSObject.Properties) { $binmapFlows[$p.Name] = @($p.Value) }
+    }
+    Write-Host "  Binmap loaded: tests=$($binmapTests.Count), flows=$($binmapFlows.Count)"
+} else {
+    Write-Host "  Binmap: not found (placeholders will remain in output)"
 }
 
-function Apply-ReplacementMap {
-    param([string]$Text, $Map)
-    $r = $Text
-    foreach ($kv in $Map) { $r = $r.Replace($kv.Key, $kv.Value) }
-    return $r
+function Restore-BinCtrPlaceholders {
+    # Walks $bodyLines and replaces __BIN__/__CTR__/__BNUM__ placeholders with
+    # the original values stored in $values (in body order).
+    param(
+        [System.Collections.Generic.List[string]]$BodyLines,
+        $Values
+    )
+    if (-not $Values -or $Values.Count -eq 0) { return $BodyLines }
+    $vi = 0
+    $out = [System.Collections.Generic.List[string]]::new()
+    foreach ($l in $BodyLines) {
+        $nl = $l
+        if ($nl -match '__BIN__') {
+            if ($vi -lt $Values.Count) { $nl = $nl.Replace('__BIN__', [string]$Values[$vi]); $vi++ }
+        } elseif ($nl -match '__CTR__') {
+            if ($vi -lt $Values.Count) { $nl = $nl.Replace('__CTR__', [string]$Values[$vi]); $vi++ }
+        } elseif ($nl -match '__BNUM__') {
+            if ($vi -lt $Values.Count) { $nl = $nl.Replace('__BNUM__', [string]$Values[$vi]); $vi++ }
+        }
+        [void]$out.Add($nl)
+    }
+    return $out
 }
 #endregion
 
-#region â”€â”€ expand BP per-block â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+#region read BP and expand
 $bpLines = [IO.File]::ReadAllLines($InputBp)
-$output  = [System.Collections.Generic.List[string]]::new()
+$out = [System.Collections.Generic.List[string]]::new()
 
-$currentCombo = $null
-$currentBaseNumbersMap = $null
-$testCount  = 0
-$flowCount  = 0
-$comboCount = 0
-
+$testCount = 0; $flowCount = 0; $bucketCount = 0; $flowBucketCount = 0
 $i = 0
 while ($i -lt $bpLines.Count) {
     $line = $bpLines[$i]
 
-    # Check for BP_COMBO annotation
-    if ($line -match '^# BP_COMBO:\s*(.+)$') {
-        $comboStr = $Matches[1].Trim()
-        $combo = @{}
-        foreach ($part in ($comboStr -split ',\s*')) {
-            $kv = $part -split '=', 2
-            if ($kv.Count -eq 2) { $combo[$kv[0].Trim()] = $kv[1].Trim() }
-        }
-        $currentCombo = $combo
-        $currentBaseNumbersMap = $null
-        $comboCount++
-        # Don't emit the BP_COMBO comment to the output
+    $marker = $null; $bid = $null
+    if ($line -match '^# BP_BUCKET:\s*(B\d+)')           { $marker = 'test'; $bid = $Matches[1] }
+    elseif ($line -match '^# BP_FLOW_BUCKET:\s*(F\d+)')  { $marker = 'flow'; $bid = $Matches[1] }
+
+    if ($marker) {
+        if ($marker -eq 'test') { $bucketCount++ } else { $flowBucketCount++ }
         $i++
-        continue
-    }
-
-    # Check for BP_BASENUMBERS annotation (follows BP_COMBO for compressed blocks)
-    if ($line -match '^# BP_BASENUMBERS:\s*(.+)$') {
-        $bnStr = $Matches[1].Trim()
-        $bnMap = [ordered]@{}
-        foreach ($entry in ($bnStr -split '\s*;;\s*')) {
-            $parts = $entry -split '\|', 2
-            if ($parts.Count -eq 2) { $bnMap[$parts[0].Trim()] = $parts[1].Trim() }
+        $blockCmts = [System.Collections.Generic.List[string]]::new()
+        while ($i -lt $bpLines.Count) {
+            $ln = $bpLines[$i]
+            if ($ln -match '^# BP_(BUCKET|FLOW_BUCKET):') { break }
+            if ($ln -match '^\s*(CSharpTest|MultiTrialTest|Flow)\s+') { break }
+            if ($ln.Trim() -eq '') { $i++; continue }
+            $blockCmts.Add($ln); $i++
         }
-        $currentBaseNumbersMap = $bnMap
-        # Don't emit to output
-        $i++
-        continue
-    }
-
-    # Check for test block start
-    if ($line -match '^\s*(CSharpTest|MultiTrialTest)\s+') {
-        if ($currentCombo -and $currentCombo.Count -gt 0 -and $currentBaseNumbersMap -and $currentBaseNumbersMap.Count -gt 0) {
-            # Compressed block: expand once per combo in the BaseNumbers map
-            $blockLines = [System.Collections.Generic.List[string]]::new()
-            $depth = 0; $opened = $false
-            while ($i -lt $bpLines.Count) {
-                $blockLines.Add($bpLines[$i])
-                $depth += ([regex]::Matches($bpLines[$i], '\{')).Count
-                $depth -= ([regex]::Matches($bpLines[$i], '\}')).Count
-                if ($depth -gt 0) { $opened = $true }
-                $i++
-                if ($opened -and $depth -le 0) { break }
-            }
-            $blockTemplate = $blockLines -join "`n"
-
-            foreach ($bnEntry in $currentBaseNumbersMap.GetEnumerator()) {
-                $comboKeyStr = $bnEntry.Key
-                $baseNum = $bnEntry.Value
-                # Parse the combo key back into a hashtable
-                $expandCombo = @{}
-                foreach ($part in ($comboKeyStr -split ',\s*')) {
-                    $kv = $part -split '=', 2
-                    if ($kv.Count -eq 2) { $expandCombo[$kv[0].Trim()] = $kv[1].Trim() }
-                }
-                $map = Build-ReplacementMap -Combo $expandCombo -AllSymbolNames $symbolNames
-                $expanded = Apply-ReplacementMap -Text $blockTemplate -Map $map
-                # Restore BaseNumbers for this combo (skip if no BaseNumbers in original)
-                if ($baseNum) {
-                    $expanded = $expanded -replace '(\bBaseNumbers\s*=\s*")\d+(")', "`${1}${baseNum}`${2}"
-                }
-
-                # Check for remaining unresolved symbols
-                $remaining = [regex]::Matches($expanded, '\\[A-Za-z_]+\\')
-                if ($remaining.Count -gt 0) {
-                    $unresolved = ($remaining | ForEach-Object { $_.Value } | Sort-Object -Unique) -join ', '
-                    Write-Warning "Unresolved symbols in expanded block: $unresolved"
-                }
-
-                foreach ($bl in ($expanded -split "`n")) {
-                    $output.Add($bl)
-                }
-                $testCount++
-            }
-            $currentCombo = $null
-            $currentBaseNumbersMap = $null
-            continue
-        }
-
-        # Non-compressed block: single expansion
-        $blockLines = [System.Collections.Generic.List[string]]::new()
+        if ($i -ge $bpLines.Count) { throw "Bucket $bid has no body" }
+        $body = [System.Collections.Generic.List[string]]::new()
         $depth = 0; $opened = $false
         while ($i -lt $bpLines.Count) {
-            $blockLines.Add($bpLines[$i])
+            $body.Add($bpLines[$i])
             $depth += ([regex]::Matches($bpLines[$i], '\{')).Count
             $depth -= ([regex]::Matches($bpLines[$i], '\}')).Count
             if ($depth -gt 0) { $opened = $true }
@@ -218,34 +181,38 @@ while ($i -lt $bpLines.Count) {
             if ($opened -and $depth -le 0) { break }
         }
 
-        $blockText = $blockLines -join "`n"
-
-        # If we have a combo, apply per-block replacement
-        if ($currentCombo -and $currentCombo.Count -gt 0) {
-            $map = Build-ReplacementMap -Combo $currentCombo -AllSymbolNames $symbolNames
-            $blockText = Apply-ReplacementMap -Text $blockText -Map $map
+        if (-not $bucketTables.Contains($bid)) {
+            throw "Bucket $bid referenced in BP but not in CSV"
         }
-
-        # Check for remaining unresolved symbols in this block
-        $remaining = [regex]::Matches($blockText, '\\[A-Za-z_]+\\')
-        if ($remaining.Count -gt 0) {
-            $unresolved = ($remaining | ForEach-Object { $_.Value } | Sort-Object -Unique) -join ', '
-            Write-Warning "Unresolved symbols in test block: $unresolved"
+        foreach ($row in $bucketTables[$bid]) {
+            foreach ($c in $blockCmts) { $out.Add($c) }
+            # Build expanded body for this instance, then restore real
+            # bin/counter/baseNumber values from the binmap so the emitted
+            # .mtpl is build-valid.
+            $expandedBody = [System.Collections.Generic.List[string]]::new()
+            foreach ($bl in $body) {
+                $expanded = $bl
+                foreach ($k in $row.Slots.Keys) {
+                    $expanded = $expanded.Replace("\$k\", $row.Slots[$k])
+                }
+                [void]$expandedBody.Add($expanded)
+            }
+            $valMap = if ($marker -eq 'test') { $binmapTests } else { $binmapFlows }
+            if ($valMap.ContainsKey($row.Name)) {
+                $expandedBody = Restore-BinCtrPlaceholders -BodyLines $expandedBody -Values $valMap[$row.Name]
+            }
+            foreach ($el in $expandedBody) { $out.Add($el) }
+            $out.Add('')
+            if ($marker -eq 'test') { $testCount++ } else { $flowCount++ }
         }
-
-        foreach ($bl in ($blockText -split "`n")) {
-            $output.Add($bl)
-        }
-        $currentCombo = $null
-        $testCount++
         continue
     }
 
-    # Check for flow block (kept verbatim)
-    if ($line -match '^\s*Flow\s+') {
+    # Non-bucketed Flow block (verbatim) — kept for safety
+    if ($line -match '^\s*Flow\s+\S') {
         $depth = 0; $opened = $false
         while ($i -lt $bpLines.Count) {
-            $output.Add($bpLines[$i])
+            $out.Add($bpLines[$i])
             $depth += ([regex]::Matches($bpLines[$i], '\{')).Count
             $depth -= ([regex]::Matches($bpLines[$i], '\}')).Count
             if ($depth -gt 0) { $opened = $true }
@@ -256,78 +223,104 @@ while ($i -lt $bpLines.Count) {
         continue
     }
 
-    # All other lines (preamble, comments, blank lines) pass through
-    # Skip group/instance comments from old format
-    if ($line -match '^# ==== (GROUP|FLOW GROUP)') { $i++; continue }
-    if ($line -match '^# (Instances|Flows):') { $i++; continue }
-
-    $output.Add($line)
+    $out.Add($line)
     $i++
 }
 
-# Write .bp.val
-[IO.File]::WriteAllLines($valFile, $output.ToArray())
-Write-Host ""
-Write-Host "Written: $valFile ($($output.Count) lines)"
-Write-Host "  Test blocks:  $testCount"
-Write-Host "  Flow blocks:  $flowCount"
-Write-Host "  Combos used:  $comboCount"
+[IO.File]::WriteAllLines($valFile, $out.ToArray())
+Write-Host "  Tests expanded: $testCount from $bucketCount test buckets"
+Write-Host "  Flows expanded: $flowCount from $flowBucketCount flow buckets"
+Write-Host "  Val written: $valFile"
 #endregion
 
-#region â”€â”€ validate parameter values against original â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-$symbolsData = Get-Content -Raw $SymbolsFile | ConvertFrom-Json
-if ($symbolsData.PSObject.Properties['paramValues']) {
-    Write-Host ""
-    Write-Host "Param value validation (vs original)..."
-    $pvRef = $symbolsData.paramValues
-    $expandedLines = [IO.File]::ReadAllLines($valFile)
-    $violations = [System.Collections.Generic.List[string]]::new()
-
-    foreach ($eline in $expandedLines) {
-        if ($eline -match '^\s*(\w+)\s*=\s*"([^"]*)"') {
-            $pName = $Matches[1]
-            $pVal  = $Matches[2]
-            if ($pvRef.PSObject.Properties[$pName]) {
-                $allowed = @($pvRef.$pName)
-                if ($pVal -notin $allowed) {
-                    $violations.Add("  $pName = `"$pVal`"")
-                }
+#region round-trip identity check vs mtpl_orig
+function Get-Blocks {
+    param([string]$Path)
+    $lines = [IO.File]::ReadAllLines($Path)
+    $tests = @{}; $flows = @{}
+    $i = 0
+    while ($i -lt $lines.Count) {
+        $ln = $lines[$i]
+        $kind = $null; $name = $null
+        if ($ln -match '^\s*CSharpTest\s+\S+\s+(\S+)')      { $kind = 'test'; $name = $Matches[1].Trim() }
+        elseif ($ln -match '^\s*MultiTrialTest\s+(\S+)\s*$'){ $kind = 'test'; $name = $Matches[1].Trim() }
+        elseif ($ln -match '^\s*Flow\s+(\S+)')              { $kind = 'flow'; $name = $Matches[1].Trim() }
+        if ($kind) {
+            $depth = 0; $opened = $false
+            $body = [System.Text.StringBuilder]::new()
+            while ($i -lt $lines.Count) {
+                $bl = $lines[$i]
+                [void]$body.AppendLine($bl)
+                $depth += ([regex]::Matches($lines[$i], '\{')).Count
+                $depth -= ([regex]::Matches($lines[$i], '\}')).Count
+                if ($depth -gt 0) { $opened = $true }
+                $i++
+                if ($opened -and $depth -le 0) { break }
             }
+            $bs = $body.ToString()
+            $bs = ($bs -split "`n" |
+                   Where-Object { $_ -notmatch '^\s*#\s*BP_' } |
+                   ForEach-Object { ($_.Trim()) }) -join "`n"
+            $bs = $bs -replace '\s+', ' '
+            if ($kind -eq 'test') { $tests[$name] = $bs } else { $flows[$name] = $bs }
+            continue
         }
+        $i++
     }
+    return @{ Tests = $tests; Flows = $flows }
+}
 
-    if ($violations.Count -gt 0) {
-        $uniqueViolations = $violations | Sort-Object -Unique
-        Write-Host "  VIOLATIONS: $($uniqueViolations.Count) param values not found in original:" -ForegroundColor Red
-        foreach ($v in $uniqueViolations) { Write-Host $v -ForegroundColor Red }
-        throw "Param value validation failed: $($uniqueViolations.Count) new value(s) not in original."
+if (Test-Path $origMtpl) {
+    Write-Host ""
+    Write-Host "Round-trip identity check vs mtpl_orig..."
+    $o = Get-Blocks -Path $origMtpl
+    $v = Get-Blocks -Path $valFile
+
+    $missingT = @($o.Tests.Keys | Where-Object { -not $v.Tests.ContainsKey($_) })
+    $diffT    = @($o.Tests.Keys | Where-Object { $v.Tests.ContainsKey($_) -and $v.Tests[$_] -ne $o.Tests[$_] })
+    $extraT   = @($v.Tests.Keys | Where-Object { -not $o.Tests.ContainsKey($_) })
+    $missingF = @($o.Flows.Keys | Where-Object { -not $v.Flows.ContainsKey($_) })
+    $diffF    = @($o.Flows.Keys | Where-Object { $v.Flows.ContainsKey($_) -and $v.Flows[$_] -ne $o.Flows[$_] })
+    $extraF   = @($v.Flows.Keys | Where-Object { -not $o.Flows.ContainsKey($_) })
+
+    Write-Host "  Tests: orig=$($o.Tests.Count), val=$($v.Tests.Count), missing=$($missingT.Count), diff=$($diffT.Count), extra=$($extraT.Count)"
+    Write-Host "  Flows: orig=$($o.Flows.Count), val=$($v.Flows.Count), missing=$($missingF.Count), diff=$($diffF.Count), extra=$($extraF.Count)"
+
+    $issue = ($missingT.Count + $diffT.Count + $extraT.Count + $missingF.Count + $diffF.Count + $extraF.Count) -gt 0
+    if ($issue) {
+        if ($missingT.Count -gt 0) { Write-Host "  Missing tests:" -ForegroundColor Red; foreach ($t in ($missingT | Select-Object -First 20)) { Write-Host "    - $t" -ForegroundColor Red }; if ($missingT.Count -gt 20) { Write-Host "    ...and $($missingT.Count - 20) more" -ForegroundColor Red } }
+        if ($diffT.Count    -gt 0) { Write-Host "  Body-diff tests:" -ForegroundColor Red; foreach ($t in ($diffT    | Select-Object -First 20)) { Write-Host "    - $t" -ForegroundColor Red }; if ($diffT.Count    -gt 20) { Write-Host "    ...and $($diffT.Count - 20) more" -ForegroundColor Red } }
+        if ($extraT.Count   -gt 0) { Write-Host "  Extra tests:"   -ForegroundColor Yellow; foreach ($t in ($extraT  | Select-Object -First 20)) { Write-Host "    - $t" -ForegroundColor Yellow }; if ($extraT.Count   -gt 20) { Write-Host "    ...and $($extraT.Count - 20) more" -ForegroundColor Yellow } }
+        if ($missingF.Count -gt 0) { Write-Host "  Missing flows:" -ForegroundColor Red; foreach ($f in $missingF) { Write-Host "    - $f" -ForegroundColor Red } }
+        if ($diffF.Count    -gt 0) { Write-Host "  Body-diff flows:" -ForegroundColor Red; foreach ($f in $diffF) { Write-Host "    - $f" -ForegroundColor Red } }
+        if ($extraF.Count   -gt 0) { Write-Host "  Extra flows:"   -ForegroundColor Yellow; foreach ($f in $extraF) { Write-Host "    - $f" -ForegroundColor Yellow } }
+        throw "Round-trip identity check failed."
     } else {
-        Write-Host "  OK - all param values match the original."
+        Write-Host "  OK - every test and flow in mtpl_orig is reproduced by the BP."
     }
 } else {
-    Write-Host ""
-    Write-Host "Param value validation: SKIPPED (no paramValues in symbols.json; re-run Generate first)"
+    Write-Host "Round-trip check: SKIPPED (no $moduleName.mtpl_orig found)"
 }
 #endregion
 
-#region â”€â”€ replace module .mtpl â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-Copy-Item -Path $valFile -Destination $origMtpl -Force
-Write-Host "Updated: $origMtpl"
+#region replace mtpl
+Copy-Item -Path $valFile -Destination $targetMtpl -Force
+Write-Host "Updated: $targetMtpl"
 #endregion
 
-#region â”€â”€ copy to sibling modules (copyTargets) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+#region copy to sibling modules (copyTargets)
 $bpConfigFile = Join-Path $bpDir 'bp-config.json'
 if (Test-Path $bpConfigFile) {
     $bpConfig = Get-Content -Raw $bpConfigFile | ConvertFrom-Json
     if ($bpConfig.PSObject.Properties['copyTargets'] -and $bpConfig.copyTargets.Count -gt 0) {
-        $arrDir = Split-Path $moduleDir   # parent folder containing sibling modules
+        $arrDir = Split-Path $moduleDir
         foreach ($target in $bpConfig.copyTargets) {
-            $targetMtpl = Join-Path (Join-Path $arrDir $target) "$target.mtpl"
-            if (Test-Path (Split-Path $targetMtpl)) {
-                Copy-Item -Path $valFile -Destination $targetMtpl -Force
-                Write-Host "Copied:  $targetMtpl (copyTarget)"
+            $tDir = Join-Path $arrDir $target
+            if (Test-Path $tDir) {
+                Copy-Item -Path $valFile -Destination (Join-Path $tDir "$target.mtpl") -Force
+                Write-Host "Copied:  $target.mtpl (copyTarget)"
             } else {
-                Write-Warning "copyTarget directory not found: $(Split-Path $targetMtpl) - skipping $target"
+                Write-Warning "copyTarget directory not found: $tDir - skipping $target"
             }
         }
     }
