@@ -496,7 +496,7 @@ CSharpTest PrimeShmooTestMethod HPTP_X_SHMOO_E_STARTCPUNOM_X_X_X_X_MARGIN_CHECK_
     Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
     LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
     TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     XAxisParam = "cpu_tstprt_\XAxisParam_P1\_\XAxisParam_P2\_mul";
     XAxisParamType = "TimingTestCondition";
     XAxisRange = __shared__::TpRule.If_HX28C_P16C_H16C("1.6:0.1:11",\XAxisRange_P1\,\XAxisRange_P1\,\XAxisRange_P1\);
@@ -522,7 +522,7 @@ CSharpTest PrimeHptpTimingCalibrationTestMethod HPTP_X_TIMCAL_E_STARTCPUNOM_X_X_
     Patlist = "cdie_hx_hptp_timing_cal_\Patlist_P1\";
     LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
     TimingsTc = "MIO_HPTP_CXPKGHX::cpu_hvm_timing_\TimingsTc_P1\";
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     CalTDRRegisterFieldSequence = "53,10,HPTP.IPC::CPU_TSTPRT_O_00.pin0.Right,HPTP.IPC::CPU_TSTPRT_O_00.pin0.Left,HPTP.IPC::CPU_TSTPRT_I_00.pin0.Left,53,10,HPTP.IPC::CPU_TSTPRT_O_00.pin0.Right,HPTP.IPC::CPU_TSTPRT_O_00.pin0.Left,HPTP.IPC::CPU_TSTPRT_I_00.pin0.Left";
     CalibrationMode = "TX_BASED";
     ExecutionMode = "TIMING_CALIBRATION";
@@ -549,7 +549,7 @@ CSharpTest PrimeHptpTimingCalibrationTestMethod HPTP_X_TIMCAL_E_STARTCPUNOM_X_X_
     Patlist = "cdie_hx_hptp_timing_\Patlist_P1\_list";
     LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
     TimingsTc = "MIO_HPTP_CXPKGHX::cpu_hvm_timing_\TimingsTc_P1\";
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     CalTDRRegisterFieldSequence = "53,10,HPTP.IPC::CPU_TSTPRT_O_00.pin0.Right,HPTP.IPC::CPU_TSTPRT_O_00.pin0.Left,HPTP.IPC::CPU_TSTPRT_I_00.pin0.Left,53,10,HPTP.IPC::CPU_TSTPRT_O_00.pin0.Right,HPTP.IPC::CPU_TSTPRT_O_00.pin0.Left,HPTP.IPC::CPU_TSTPRT_I_00.pin0.Left";
     CalibrationMode = "TX_BASED";
     ExecutionMode = "TIMING_CALIBRATION";
@@ -573,7 +573,7 @@ CSharpTest PrimeHptpTimingCalibrationTestMethod HPTP_X_TIMCAL_E_STARTCPUNOM_X_X_
 CSharpTest HPTPSetupScan HPTP_X_TIMOVER_E_STARTCPUNOM_X_X_X_X_\B7_INSTANCE_P1\_TIMOVRIDE
 {
     TimingsTc = "MIO_HPTP_CXPKGHX::cpu_hvm_timing_\TimingsTc_P1\";
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     ExecutionMode = "TIMING_OVERRIDE";
 }
 
@@ -583,7 +583,7 @@ CSharpTest PrimeHptpTimingCalibrationTestMethod HPTP_X_TIMCAL_E_STARTCPUNOM_X_X_
     Patlist = "cdie_hx_hptp_timing_cal_\Patlist_P1\";
     LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
     TimingsTc = "MIO_HPTP_CXPKGHX::cpu_hvm_timing_\TimingsTc_P1\";
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     CalTDRRegisterFieldSequence = "53,10,HPTP.IPC::CPU_TSTPRT_O_00.pin0.Right,HPTP.IPC::CPU_TSTPRT_O_00.pin0.Left,HPTP.IPC::CPU_TSTPRT_I_00.pin0.Left,53,10,HPTP.IPC::CPU_TSTPRT_O_00.pin0.Right,HPTP.IPC::CPU_TSTPRT_O_00.pin0.Left,HPTP.IPC::CPU_TSTPRT_I_00.pin0.Left";
     CalibrationMode = "RX_BASED";
     ExecutionMode = "TIMING_CALIBRATION";
@@ -640,7 +640,7 @@ CSharpTest PrimeAnalogMarginingTestMethod HPTP_X_RCOMP_K_STARTCPUNOM_X_X_X_X_\B1
 # BP_BUCKET: B12 tests=1
 CSharpTest PrimePatConfigTestMethod HPTP_X_PATMOD_E_STARTCPUNOM_X_X_X_X_PATMOD
 {
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     ConfigurationFile = "./InputFiles/HPTP_patmod_setting.json";
     SetPoint = "COMP_OVR";
 }
@@ -648,7 +648,7 @@ CSharpTest PrimePatConfigTestMethod HPTP_X_PATMOD_E_STARTCPUNOM_X_X_X_X_PATMOD
 # BP_BUCKET: B13 tests=1
 CSharpTest HPTPSetupScan HPTP_X_TIMOVER_E_STARTCPUNOM_X_X_X_X_SETUPSCAN
 {
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     ExecutionMode = "TERMSHIFTCODE_PATMOD";
     PatmodConfiguration = "FULLSPEED_LB_DEFAULT";
 }
@@ -659,7 +659,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_\B14_INST
     Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
     LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
     TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     FailuresToCapturePerPattern = 5;
     FailuresToCaptureTotal = 5;
     MaxFailuresPerPatternToItuff = 5;

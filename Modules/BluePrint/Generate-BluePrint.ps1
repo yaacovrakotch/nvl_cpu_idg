@@ -111,9 +111,12 @@ function Parse-BlockBody {
 }
 
 function Normalize-BinCounterLine {
-    # Replace per-instance bin / counter / baseNumber / BypassPort values with
-    # a single canonical token so blocks that differ only in those values can
-    # merge. Original values are restored at Expand time from the binmap.
+    # Replace per-instance bin / counter / baseNumber values with a single
+    # canonical token so blocks that differ only in those values can merge.
+    # Original values are restored at Expand time from the binmap.
+    # BypassPort is force-set to -1 (no placeholder, no restore).
+    # SetPointsPreInstance / SetPointsPostInstance values are replaced with
+    # the literal "DEFAULT" in the BP and restored from the binmap at Expand.
     param([string]$Line)
     $l = $Line
     if ($l -match '^(\s*(?:##EDC##\s*)?SetBin\s+).+?(\s*;\s*)$') {
@@ -126,7 +129,13 @@ function Normalize-BinCounterLine {
         return ($Matches[1] + '"__BNUM__"' + $Matches[2])
     }
     if ($l -match '^(\s*BypassPort\s*=\s*).+?(\s*;\s*)$') {
-        return ($Matches[1] + '__BYPASS__' + $Matches[2])
+        return ($Matches[1] + '-1' + $Matches[2])
+    }
+    if ($l -match '^(\s*SetPointsPreInstance\s*=\s*)"[^"]*"(\s*;\s*)$') {
+        return ($Matches[1] + '"DEFAULT"' + $Matches[2])
+    }
+    if ($l -match '^(\s*SetPointsPostInstance\s*=\s*)"[^"]*"(\s*;\s*)$') {
+        return ($Matches[1] + '"DEFAULT"' + $Matches[2])
     }
     return $l
 }
@@ -139,9 +148,11 @@ function Normalize-BodyLines {
 }
 
 function Extract-BinCtrValues {
-    # Return ordered list of original bin/ctr/bnum/bypass *values* (in body order),
+    # Return ordered list of original bin/ctr/bnum *values* (in body order),
     # i.e. exactly the values that Normalize-BinCounterLine replaced with
-    # __BIN__/__CTR__/__BNUM__/__BYPASS__ placeholders.
+    # __BIN__/__CTR__/__BNUM__ placeholders.
+    # BypassPort is hardcoded to -1; SetPointsPreInstance / SetPointsPostInstance
+    # are restored from a single global default (see $globalDefaults sidecar).
     param([System.Collections.Generic.List[string]]$Body)
     $out = [System.Collections.Generic.List[string]]::new()
     foreach ($l in $Body) {
@@ -151,11 +162,21 @@ function Extract-BinCtrValues {
             [void]$out.Add($Matches[1])
         } elseif ($l -match '^\s*BaseNumbers\s*=\s*"([^"]*)"\s*;\s*$') {
             [void]$out.Add($Matches[1])
-        } elseif ($l -match '^\s*BypassPort\s*=\s*(.+?)\s*;\s*$') {
-            [void]$out.Add($Matches[1])
         }
     }
     return $out
+}
+
+# Pick a single global default value for SetPointsPreInstance and
+# SetPointsPostInstance from the first occurrence in the source mtpl. The
+# BP file stores the literal "DEFAULT", and Expand restores all instances
+# to this single value.
+$globalDefaultPre  = $null
+$globalDefaultPost = $null
+foreach ($_l in $rawLines) {
+    if ($null -eq $globalDefaultPre  -and $_l -match '^\s*SetPointsPreInstance\s*=\s*"([^"]*)"\s*;\s*$')  { $globalDefaultPre  = $Matches[1] }
+    if ($null -eq $globalDefaultPost -and $_l -match '^\s*SetPointsPostInstance\s*=\s*"([^"]*)"\s*;\s*$') { $globalDefaultPost = $Matches[1] }
+    if ($null -ne $globalDefaultPre -and $null -ne $globalDefaultPost) { break }
 }
 
 # Per-instance original bin/ctr/bnum values (used to restore real values
@@ -1593,7 +1614,14 @@ Write-Host "  Log written: $logFile"
 # values during Expand so the emitted .mtpl is build-valid even though the
 # BP itself uses normalized __BIN__/__CTR__/__BNUM__ placeholders.
 $binmapFile = Join-Path $OutputDir "$moduleName.binmap.json"
-$binmap = @{ tests = $binmapTests; flows = $binmapFlows }
+$binmap = @{
+    tests    = $binmapTests
+    flows    = $binmapFlows
+    defaults = @{
+        SetPointsPreInstance  = $globalDefaultPre
+        SetPointsPostInstance = $globalDefaultPost
+    }
+}
 $binmap | ConvertTo-Json -Depth 4 -Compress | Set-Content -Path $binmapFile -Encoding UTF8
 Write-Host "  Binmap written: $binmapFile (tests=$($binmapTests.Count), flows=$($binmapFlows.Count))"
 #endregion

@@ -11,7 +11,7 @@ Import "QNR_CARV_CXX.usrv";
 # BP_BUCKET: B1 tests=1
 CSharpTest PrimePauseTestMethod CTRL_X_PAUSE_X_CPUIPFF_X_X_X_X_PAUSE
 {
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     ExitPort = 1;
     SleepTime = 1;
 }
@@ -23,7 +23,7 @@ CSharpTest PrimeScanSPOFITestMethod CTRL_X_SCANFI_X_CPUIPFF_X_X_X_X_SPOFI
     Patlist = "IP_CPU::scn_cdie_begcpupkgf1_nonccf_atspeed_mio200_edt_classhvm_list";
     LevelsTc = "BASE::cpu_all_bf_x_x_pkg_lvl_max_lvl";
     TimingsTc = "IP_CPU::SCN_UNCORE_C68C::cpu_testport_timing_tclk100_sclk200_cclk400";
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     PerPatternFailCaptureCount = 25000;
     TotalFailCaptureCount = 50000;
 }
@@ -35,7 +35,7 @@ CSharpTest VminTC CTRL_X_EAP_X_CPUIPFF_X_X_X_X_EAP
     Patlist = "IP_PCH_BASE::NotAPlist";
     LevelsTc = "IP_PCH_BASE::gcd_all_bf_x_x_ippch_lvl_max_lvl";
     TimingsTc = "IP_PCH_BASE::gcd_dftring_perpin_timing_tclk100_dclk400_cclk400";
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     EndVoltageLimits = "";
     ExecutionMode = "SearchWithScoreboard";
     MaxFailsNum = 1000;
@@ -52,7 +52,7 @@ CSharpTest DDGFunctionalTC CTRL_X_FUNC_X_CPUIPFF_X_X_X_X_FUNC
     Patlist = "IP_PCH_BASE::NotAPlist";
     LevelsTc = "IP_PCH_BASE::gcd_all_bf_x_x_ippch_lvl_max_lvl";
     TimingsTc = "IP_PCH_BASE::gcd_dftring_perpin_timing_tclk100_dclk400_cclk400";
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     FailuresToCapturePerPattern = 2;
     FailuresToCaptureTotal = 1000;
     MaxFailuresPerPatternToItuff = 2;
@@ -66,7 +66,7 @@ CSharpTest DDGShmooTC CTRL_X_SHMOO_X_CPUIPFF_X_X_X_X_SHMOO
     Patlist = "IP_PCH_BASE::NotAPlist";
     LevelsTc = "IP_PCH_BASE::gcd_all_bf_x_x_ippch_lvl_max_lvl";
     TimingsTc = "IP_PCH_BASE::gcd_dftring_perpin_timing_tclk100_dclk400_cclk400";
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     XAxisParam = "p_mtd_per";
     XAxisParamType = "UserDefined";
     XAxisRange = "9E-9:.5E-9:5";

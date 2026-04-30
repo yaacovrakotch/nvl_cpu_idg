@@ -126,8 +126,6 @@ Counters
 	n99283941_fail_RECIPE_X_PATCFG_E_BEGIN_X_X_X_X_X_X_PATMOD_n2
 }
 
-
-
 CSharpTest PrimePatConfigTestMethod CLK_X_PATMOD_K_INIT_X_X_X_X_CPU
 {
 	ConfigurationFile = "./InputFiles/clk.cpu.clklineitem.setpoints_C40.json";
@@ -135,8 +133,6 @@ CSharpTest PrimePatConfigTestMethod CLK_X_PATMOD_K_INIT_X_X_X_X_CPU
 	InstanceSummaryMode = "Enabled";
 	BypassPort = -1;
 }
-
-
 CSharpTest DDGFunctionalTC RESETCHECK_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_BBS
 {
 	Patlist = "clk_cpu_x_resetcheck_list";
@@ -148,8 +144,6 @@ CSharpTest DDGFunctionalTC RESETCHECK_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_BBS
 	TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
 	BypassPort = -1;
 }
-
-
 CSharpTest CsioCmemTC CONFIGREAD_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_BBS
 {
 	Patlist = "clk_cpu_x_configread_list";
@@ -166,7 +160,6 @@ CSharpTest CsioCmemTC CONFIGREAD_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_BBS
 	TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
 	BypassPort = -1;
 }
-
 CSharpTest CsioCmemTC STATUSREAD_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_BBS
 {
 	Patlist = "clk_cpu_x_statusread_list";
@@ -183,110 +176,6 @@ CSharpTest CsioCmemTC STATUSREAD_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_BBS
 	TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
 	BypassPort = -1;
 }
-
-CSharpTest CsioCmemTC IREFTRIM_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM
-{
-	Patlist = "clk_cpu_x_ireftrim_list";
-	PlistConfigurationFile = GetEnvironmentVariable("MCCLK_PATMODIFY_PATH")+"/clk_cpu_x_ireftrim_list.plist.json";
-	PrePlist = "";
-	IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.SDS_C40.json";
-	LimitsConfigurationFile = "./InputFiles/clk.nvlcpu_i40h0.limits.csv";
-	PlistConfigSet = "clk_cpu_x_ireftrim_list";
-	FunctionCall = "Ljpll_4p0_IrefTrimConverge";
-	EdcEnable = CLK_BASE_CXXX::CLK_BASE_CXXX.MIN_DATA;
-	KillDecode = "ENABLED";
-	CtvCapturePins = "CPU_TDO";
-	LevelsTc = "CLK_BASE_CXXX::cpu_clk_override_distmax_sharedmin_lvl";
-	TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
-	BypassPort = -1;
-}
-
-CSharpTest CsioCmemTC DCATRIM_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM
-{
-	Patlist = "clk_cpu_x_dcatrim_list";
-	PlistConfigurationFile = GetEnvironmentVariable("MCCLK_PATMODIFY_PATH")+"/clk_cpu_x_dcatrim_list.plist.json";
-	PrePlist = "";
-	IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.SDS_C40.json";
-	LimitsConfigurationFile = "./InputFiles/clk.nvlcpu_i40h0.limits.csv";
-	PlistConfigSet = "clk_cpu_x_dcatrim_list";
-	FunctionCall = "Ljpll_4p0_DcaTrim";
-	EdcEnable = CLK_BASE_CXXX::CLK_BASE_CXXX.MIN_DATA;
-	KillDecode = "ENABLED";
-	CtvCapturePins = "CPU_TDO";
-	LevelsTc = "CLK_BASE_CXXX::cpu_clk_override_dcadistmax_sharedmin_lvl";
-	TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
-	BypassPort = -1;
-}
-
-CSharpTest CsioCmemTC AFSTRIM_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM
-{
-	Patlist = "clk_cpu_x_afstrim_list";
-	PlistConfigurationFile = GetEnvironmentVariable("MCCLK_PATMODIFY_PATH")+"/clk_cpu_x_afstrim_list.plist.json";
-	PrePlist = "";
-	IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.SDS_C40.json";
-	LimitsConfigurationFile = "./InputFiles/clk.nvlcpu_i40h0.limits.csv";
-	PlistConfigSet = "clk_cpu_x_afstrim_list";
-	FunctionCall = "Ljpll_4p0_AfsTrim";
-	EdcEnable = CLK_BASE_CXXX::CLK_BASE_CXXX.MIN_DATA;
-	KillDecode = "ENABLED";
-	CtvCapturePins = "CPU_TDO";
-	LevelsTc = "CLK_BASE_CXXX::cpu_clk_override_distnom_sharedmin_lvl";
-	TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
-	BypassPort = -1;
-}
-
-CSharpTest CsioCmemTC IREFTRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC
-{
-	Patlist = "clk_cpu_x_ireftrim_list";
-	PlistConfigurationFile = GetEnvironmentVariable("MCCLK_PATMODIFY_PATH")+"/clk_cpu_x_ireftrim_list.plist.json";
-	PrePlist = "";
-	IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.SDS_C40.json";
-	LimitsConfigurationFile = "./InputFiles/clk.nvlcpu_i40h0.limits.csv";
-	PlistConfigSet = "clk_cpu_x_ireftrim_list";
-	FunctionCall = "Ljpll_4p0_IrefTrimConverge";
-	EdcEnable = CLK_BASE_CXXX::CLK_BASE_CXXX.MIN_DATA;
-	KillDecode = "ENABLED";
-	CtvCapturePins = "CPU_TDO";
-	LevelsTc = "CLK_BASE_CXXX::cpu_clk_override_distmax_sharedmin_lvl";
-	TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
-	BypassPort = 1;
-}
-
-CSharpTest CsioCmemTC DCATRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC
-{
-	Patlist = "clk_cpu_x_dcatrim_list";
-	PlistConfigurationFile = GetEnvironmentVariable("MCCLK_PATMODIFY_PATH")+"/clk_cpu_x_dcatrim_list.plist.json";
-	PrePlist = "";
-	IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.SDS_C40.json";
-	LimitsConfigurationFile = "./InputFiles/clk.nvlcpu_i40h0.limits.csv";
-	PlistConfigSet = "clk_cpu_x_dcatrim_list";
-	FunctionCall = "Ljpll_4p0_DcaTrim";
-	EdcEnable = CLK_BASE_CXXX::CLK_BASE_CXXX.MIN_DATA;
-	KillDecode = "ENABLED";
-	CtvCapturePins = "CPU_TDO";
-	LevelsTc = "CLK_BASE_CXXX::cpu_clk_override_dcadistmax_sharedmin_lvl";
-	TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
-	BypassPort = 1;
-}
-
-CSharpTest CsioCmemTC AFSTRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC
-{
-	Patlist = "clk_cpu_x_afstrim_list";
-	PlistConfigurationFile = GetEnvironmentVariable("MCCLK_PATMODIFY_PATH")+"/clk_cpu_x_afstrim_list.plist.json";
-	PrePlist = "";
-	IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.SDS_C40.json";
-	LimitsConfigurationFile = "./InputFiles/clk.nvlcpu_i40h0.limits.csv";
-	PlistConfigSet = "clk_cpu_x_afstrim_list";
-	FunctionCall = "Ljpll_4p0_AfsTrim";
-	EdcEnable = CLK_BASE_CXXX::CLK_BASE_CXXX.MIN_DATA;
-	KillDecode = "ENABLED";
-	CtvCapturePins = "CPU_TDO";
-	LevelsTc = "CLK_BASE_CXXX::cpu_clk_override_distnom_sharedmin_lvl";
-	TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
-	BypassPort = 1;
-}
-
-
 CSharpTest CsioCmemTC VREFTRIM_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM
 {
 	Patlist = "clk_cpu_x_vreftrim_list";
@@ -304,7 +193,13 @@ CSharpTest CsioCmemTC VREFTRIM_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM
 	PreInstance = "Call(ReadSpecSet(--levels CLK_BASE_CXXX::cpu_clk_override_distnom_sharedmin_lvl --name p_vccvnnaon_spec --gsds G.U.D.clk_cpu_vreftrim_vnnaon --print))";
 	BypassPort = -1;
 }
-
+CSharpTest PrimePauseTestMethod VREFTRIM_X_PATCFG_K_BEGIN_X_X_X_X_X_HVM
+{
+	SetPointsPlistMode = "Global";
+	SetPointsPreInstance = "clk_cpu:vrefpat_sort:cpu,clk_cpu:vreffuse_sort:cpu";
+	SleepTime = 1;
+	BypassPort = 1;
+}
 CSharpTest CsioCmemTC VCCPLL_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM
 {
 	Patlist = "clk_cpu_x_vccpll_list";
@@ -322,7 +217,75 @@ CSharpTest CsioCmemTC VCCPLL_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM
 	PreInstance = "Call(ReadSpecSet(--levels CLK_BASE_CXXX::cpu_clk_override_distnom_sharedmin_lvl --name p_vccvnnaon_spec --gsds G.U.D.clk_cpu_vnnaon --print))";
 	BypassPort = -1;
 }
-
+CSharpTest CsioCmemTC IREFTRIM_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM
+{
+	Patlist = "clk_cpu_x_ireftrim_list";
+	PlistConfigurationFile = GetEnvironmentVariable("MCCLK_PATMODIFY_PATH")+"/clk_cpu_x_ireftrim_list.plist.json";
+	PrePlist = "";
+	IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.SDS_C40.json";
+	LimitsConfigurationFile = "./InputFiles/clk.nvlcpu_i40h0.limits.csv";
+	PlistConfigSet = "clk_cpu_x_ireftrim_list";
+	FunctionCall = "Ljpll_4p0_IrefTrimConverge";
+	EdcEnable = CLK_BASE_CXXX::CLK_BASE_CXXX.MIN_DATA;
+	KillDecode = "ENABLED";
+	CtvCapturePins = "CPU_TDO";
+	LevelsTc = "CLK_BASE_CXXX::cpu_clk_override_distmax_sharedmin_lvl";
+	TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	BypassPort = -1;
+}
+CSharpTest PrimePauseTestMethod IREFTRIM_X_PATCFG_K_BEGIN_X_X_X_X_X_HVM
+{
+	SetPointsPlistMode = "Global";
+	SetPointsPreInstance = "clk_cpu:irefpat_sort:cpu,clk_cpu:ireffuse_sort:cpu";
+	SleepTime = 1;
+	BypassPort = 1;
+}
+CSharpTest CsioCmemTC DCATRIM_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM
+{
+	Patlist = "clk_cpu_x_dcatrim_list";
+	PlistConfigurationFile = GetEnvironmentVariable("MCCLK_PATMODIFY_PATH")+"/clk_cpu_x_dcatrim_list.plist.json";
+	PrePlist = "";
+	IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.SDS_C40.json";
+	LimitsConfigurationFile = "./InputFiles/clk.nvlcpu_i40h0.limits.csv";
+	PlistConfigSet = "clk_cpu_x_dcatrim_list";
+	FunctionCall = "Ljpll_4p0_DcaTrim";
+	EdcEnable = CLK_BASE_CXXX::CLK_BASE_CXXX.MIN_DATA;
+	KillDecode = "ENABLED";
+	CtvCapturePins = "CPU_TDO";
+	LevelsTc = "CLK_BASE_CXXX::cpu_clk_override_dcadistmax_sharedmin_lvl";
+	TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	BypassPort = -1;
+}
+CSharpTest PrimePauseTestMethod DCATRIM_X_PATCFG_K_BEGIN_X_X_X_X_X_HVM
+{
+	SetPointsPlistMode = "Global";
+	SetPointsPreInstance = "clk_cpu:dcapat_sort:cpu,clk_cpu:dcafuse_sort:cpu";
+	SleepTime = 1;
+	BypassPort = 1;
+}
+CSharpTest CsioCmemTC AFSTRIM_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM
+{
+	Patlist = "clk_cpu_x_afstrim_list";
+	PlistConfigurationFile = GetEnvironmentVariable("MCCLK_PATMODIFY_PATH")+"/clk_cpu_x_afstrim_list.plist.json";
+	PrePlist = "";
+	IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.SDS_C40.json";
+	LimitsConfigurationFile = "./InputFiles/clk.nvlcpu_i40h0.limits.csv";
+	PlistConfigSet = "clk_cpu_x_afstrim_list";
+	FunctionCall = "Ljpll_4p0_AfsTrim";
+	EdcEnable = CLK_BASE_CXXX::CLK_BASE_CXXX.MIN_DATA;
+	KillDecode = "ENABLED";
+	CtvCapturePins = "CPU_TDO";
+	LevelsTc = "CLK_BASE_CXXX::cpu_clk_override_distnom_sharedmin_lvl";
+	TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+	BypassPort = -1;
+}
+CSharpTest PrimePauseTestMethod AFSTRIM_X_PATCFG_K_BEGIN_X_X_X_X_X_HVM
+{
+	SetPointsPlistMode = "Global";
+	SetPointsPreInstance = "clk_cpu:afspat_sort:cpu,clk_cpu:afsfuse_sort:cpu";
+	SleepTime = 1;
+	BypassPort = 1;
+}
 CSharpTest CsioCmemTC VREFTRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC
 {
 	Patlist = "clk_cpu_x_vreftrim_list";
@@ -340,49 +303,60 @@ CSharpTest CsioCmemTC VREFTRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC
 	PreInstance = "Call(ReadSpecSet(--levels CLK_BASE_CXXX::cpu_clk_override_distnom_sharedmin_lvl --name p_vccvnnaon_spec --gsds G.U.D.clk_cpu_vreftrim_vnnaon --print))";
 	BypassPort = 1;
 }
-
-
-CSharpTest PrimePauseTestMethod VREFTRIM_X_PATCFG_K_BEGIN_X_X_X_X_X_HVM
+CSharpTest CsioCmemTC IREFTRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC
 {
-	SetPointsPlistMode = "Global";
-	SetPointsPreInstance = "clk_cpu:vrefpat_sort:cpu,clk_cpu:vreffuse_sort:cpu";
-	SleepTime = 1;
+	Patlist = "clk_cpu_x_ireftrim_list";
+	PlistConfigurationFile = GetEnvironmentVariable("MCCLK_PATMODIFY_PATH")+"/clk_cpu_x_ireftrim_list.plist.json";
+	PrePlist = "";
+	IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.SDS_C40.json";
+	LimitsConfigurationFile = "./InputFiles/clk.nvlcpu_i40h0.limits.csv";
+	PlistConfigSet = "clk_cpu_x_ireftrim_list";
+	FunctionCall = "Ljpll_4p0_IrefTrimConverge";
+	EdcEnable = CLK_BASE_CXXX::CLK_BASE_CXXX.MIN_DATA;
+	KillDecode = "ENABLED";
+	CtvCapturePins = "CPU_TDO";
+	LevelsTc = "CLK_BASE_CXXX::cpu_clk_override_distmax_sharedmin_lvl";
+	TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
 	BypassPort = 1;
 }
-
-CSharpTest PrimePauseTestMethod IREFTRIM_X_PATCFG_K_BEGIN_X_X_X_X_X_HVM
+CSharpTest CsioCmemTC DCATRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC
 {
-	SetPointsPlistMode = "Global";
-	SetPointsPreInstance = "clk_cpu:irefpat_sort:cpu,clk_cpu:ireffuse_sort:cpu";
-	SleepTime = 1;
+	Patlist = "clk_cpu_x_dcatrim_list";
+	PlistConfigurationFile = GetEnvironmentVariable("MCCLK_PATMODIFY_PATH")+"/clk_cpu_x_dcatrim_list.plist.json";
+	PrePlist = "";
+	IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.SDS_C40.json";
+	LimitsConfigurationFile = "./InputFiles/clk.nvlcpu_i40h0.limits.csv";
+	PlistConfigSet = "clk_cpu_x_dcatrim_list";
+	FunctionCall = "Ljpll_4p0_DcaTrim";
+	EdcEnable = CLK_BASE_CXXX::CLK_BASE_CXXX.MIN_DATA;
+	KillDecode = "ENABLED";
+	CtvCapturePins = "CPU_TDO";
+	LevelsTc = "CLK_BASE_CXXX::cpu_clk_override_dcadistmax_sharedmin_lvl";
+	TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
 	BypassPort = 1;
 }
-
-CSharpTest PrimePauseTestMethod DCATRIM_X_PATCFG_K_BEGIN_X_X_X_X_X_HVM
+CSharpTest CsioCmemTC AFSTRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC
 {
-	SetPointsPlistMode = "Global";
-	SetPointsPreInstance = "clk_cpu:dcapat_sort:cpu,clk_cpu:dcafuse_sort:cpu";
-	SleepTime = 1;
+	Patlist = "clk_cpu_x_afstrim_list";
+	PlistConfigurationFile = GetEnvironmentVariable("MCCLK_PATMODIFY_PATH")+"/clk_cpu_x_afstrim_list.plist.json";
+	PrePlist = "";
+	IpConfigurationFile = "./InputFiles/clk.cpu.ip_map.SDS_C40.json";
+	LimitsConfigurationFile = "./InputFiles/clk.nvlcpu_i40h0.limits.csv";
+	PlistConfigSet = "clk_cpu_x_afstrim_list";
+	FunctionCall = "Ljpll_4p0_AfsTrim";
+	EdcEnable = CLK_BASE_CXXX::CLK_BASE_CXXX.MIN_DATA;
+	KillDecode = "ENABLED";
+	CtvCapturePins = "CPU_TDO";
+	LevelsTc = "CLK_BASE_CXXX::cpu_clk_override_distnom_sharedmin_lvl";
+	TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
 	BypassPort = 1;
 }
-
-CSharpTest PrimePauseTestMethod AFSTRIM_X_PATCFG_K_BEGIN_X_X_X_X_X_HVM
-{
-	SetPointsPlistMode = "Global";
-	SetPointsPreInstance = "clk_cpu:afspat_sort:cpu,clk_cpu:afsfuse_sort:cpu";
-	SleepTime = 1;
-	BypassPort = 1;
-}
-
-
 CSharpTest PrimePauseTestMethod RECIPE_X_PATCFG_E_BEGIN_X_X_X_X_X_X_PATMOD
 {
 	SetPointsPlistMode = "Global";
 	SetPointsPreInstance = "clk_nvlcpu:ringdyn:PORSTART,clk_nvlcpu:pnc0dyn:PORSTART,clk_nvlcpu:pnc1dyn:PORSTART";
 	SleepTime = 1;
 }
-
-
 CSharpTest PrimeSampleRateTestMethod SETUP_X_SAMPLE_K_BEGIN_X_X_MIN_X_X_X
 {
 	SamplingRateValue = CLK_BASE_CXXX::CLK_BASE_CXXX.SortClassCorrelationRate;
@@ -390,32 +364,6 @@ CSharpTest PrimeSampleRateTestMethod SETUP_X_SAMPLE_K_BEGIN_X_X_MIN_X_X_X
 	ShouldFirstBeSampled = "True";
 	BypassPort = -1;
 }
-
-CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_BEGIN_X_X_MIN_X_X_BBS
-{
-	SamplingRateValue = CLK_BASE_CXXX::SampleRate.VMIN_BBS("100","1");
-	WaferSampleRateValue = "1";
-	ShouldFirstBeSampled = "True";
-	BypassPort = CLK_BASE_CXXX::CLK_BASE_CXXX.SampleBypass;
-}
-
-CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_BEGIN_X_X_MIN_X_X_HVM
-{
-	SamplingRateValue = CLK_BASE_CXXX::SampleRate.VMIN_HVM("100","1");
-	WaferSampleRateValue = "1";
-	ShouldFirstBeSampled = "True";
-	BypassPort = CLK_BASE_CXXX::CLK_BASE_CXXX.SampleBypass;
-}
-
-CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_BEGIN_X_X_MIN_X_X_SDC
-{
-	SamplingRateValue = CLK_BASE_CXXX::SampleRate.VMIN_SDC("100","1");
-	WaferSampleRateValue = "1";
-	ShouldFirstBeSampled = "True";
-	BypassPort = CLK_BASE_CXXX::CLK_BASE_CXXX.SampleBypass;
-}
-
-
 CSharpTest AuxiliaryTC SETUP_X_SCREEN_K_BEGIN_X_X_MIN_X_X_X_DFFSET1
 {
 	Expression = "1";
@@ -424,7 +372,6 @@ CSharpTest AuxiliaryTC SETUP_X_SCREEN_K_BEGIN_X_X_MIN_X_X_X_DFFSET1
 	ResultToken = "SCSAMP";
 	BypassPort = -1;
 }
-
 CSharpTest AuxiliaryTC SETUP_X_SCREEN_K_BEGIN_X_X_MIN_X_X_X_DFFSET0
 {
 	Expression = "0";
@@ -433,7 +380,6 @@ CSharpTest AuxiliaryTC SETUP_X_SCREEN_K_BEGIN_X_X_MIN_X_X_X_DFFSET0
 	ResultToken = "SCSAMP";
 	BypassPort = -1;
 }
-
 CSharpTest AuxiliaryTC SETUP_X_SCREEN_K_BEGIN_X_X_MIN_X_X_X
 {
 	Expression = "IsMatch([D.WFR.SORT.SCSAMP],'1')?1:(IsMatch([CLK_BASE_CXXX::CLK_BASE_CXXX.MIN_DATA],'DISABLED')?2:-1)";
@@ -442,9 +388,27 @@ CSharpTest AuxiliaryTC SETUP_X_SCREEN_K_BEGIN_X_X_MIN_X_X_X
 	ResultToken = "CLK_BASE_CXXX::CLK_BASE_CXXX.SampleBypass";
 	BypassPort = -1;
 }
-
-
-
+CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_BEGIN_X_X_MIN_X_X_BBS
+{
+	SamplingRateValue = CLK_BASE_CXXX::SampleRate.VMIN_BBS("100","1");
+	WaferSampleRateValue = "1";
+	ShouldFirstBeSampled = "True";
+	BypassPort = CLK_BASE_CXXX::CLK_BASE_CXXX.SampleBypass;
+}
+CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_BEGIN_X_X_MIN_X_X_HVM
+{
+	SamplingRateValue = CLK_BASE_CXXX::SampleRate.VMIN_HVM("100","1");
+	WaferSampleRateValue = "1";
+	ShouldFirstBeSampled = "True";
+	BypassPort = CLK_BASE_CXXX::CLK_BASE_CXXX.SampleBypass;
+}
+CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_BEGIN_X_X_MIN_X_X_SDC
+{
+	SamplingRateValue = CLK_BASE_CXXX::SampleRate.VMIN_SDC("100","1");
+	WaferSampleRateValue = "1";
+	ShouldFirstBeSampled = "True";
+	BypassPort = CLK_BASE_CXXX::CLK_BASE_CXXX.SampleBypass;
+}
 
 Flow CLK_BASE_CXXX_INIT @INIT
 {
@@ -477,8 +441,6 @@ Flow CLK_BASE_CXXX_INIT @INIT
 		}
 	}
 }
-
-
 Flow BEGIN_MIN_BBS
 {
 	FlowItem RESETCHECK_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_BBS RESETCHECK_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_BBS @EDC
@@ -590,8 +552,6 @@ Flow BEGIN_MIN_BBS
 		}
 	}
 }
-
-
 Flow BEGIN_MIN_HVM
 {
 	FlowItem VREFTRIM_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM VREFTRIM_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM
@@ -1037,8 +997,6 @@ Flow BEGIN_MIN_HVM
 		}
 	}
 }
-
-
 Flow BEGIN_MIN_SDC
 {
 	FlowItem VREFTRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC VREFTRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC @EDC
@@ -1226,8 +1184,6 @@ Flow BEGIN_MIN_SDC
 		}
 	}
 }
-
-
 Flow CLK_BASE_CXXX_BEGIN_MIN @BEGIN_SubFlow
 {
 	FlowItem RECIPE_X_PATCFG_E_BEGIN_X_X_X_X_X_X_PATMOD RECIPE_X_PATCFG_E_BEGIN_X_X_X_X_X_X_PATMOD @EDC
@@ -1575,4 +1531,3 @@ Flow CLK_BASE_CXXX_BEGIN_MIN @BEGIN_SubFlow
 		}
 	}
 }
-

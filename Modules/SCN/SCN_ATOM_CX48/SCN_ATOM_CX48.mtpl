@@ -150,7 +150,6 @@ Counters
     n97942780_fail_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC_4
 } # End of Test Counter Definition
 
-
 CSharpTest PrimePatConfigTestMethod CTRL_X_PATMOD_K_INIT_X_X_X_X_GLOBAL_INIT
 {
     BypassPort = -1;
@@ -160,6 +159,19 @@ CSharpTest PrimePatConfigTestMethod CTRL_X_PATMOD_K_INIT_X_X_X_X_GLOBAL_INIT
     TelemetryLevel = "None";
 }
 
+CSharpTest RunCallback CTRL_X_UF_E_INIT_X_X_X_X_PINMAP_SCN_PRIME_DIERECOVERY_OCC
+{
+    BypassPort = -1;
+    Callback = "LoadPinMapFile";
+    Parameters = "--decoder FailDataDecoder --file ./Modules/SCN/SCN_ATOM_CX48/InputFiles/N2P48_DieRecoveryPinMaps_OCC_NVL_SCANATOM.json";
+}
+
+CSharpTest RunCallback CTRL_X_UF_E_INIT_X_X_X_X_PINMAP_SCN_PRIME_DIERECOVERY
+{
+    BypassPort = -1;
+    Callback = "LoadPinMapFile";
+    Parameters = "--decoder AnyFailSingleSliceDecoder --file ./Modules/SCN/SCN_ATOM_CX48/InputFiles/N2P48_DieRecoveryPinMaps_IO_NVL_SCNATOM.json";
+}
 
 CSharpTest RunCallback CTRL_X_UF_E_INIT_X_X_X_X_SCN_PRIME_APEX
 {
@@ -167,7 +179,6 @@ CSharpTest RunCallback CTRL_X_UF_E_INIT_X_X_X_X_SCN_PRIME_APEX
     Callback = "ReadFrequencyPatConfigFile";
     Parameters = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/SCN/SCN_ATOM_CX48/InputFiles/N2P48_ApexTC_Input_Config.json";
 }
-
 
 CSharpTest VminTC CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M0
 {
@@ -204,6 +215,19 @@ CSharpTest VminTC CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M0
     TestMode = "Scoreboard";
     VoltageConverter = "--dlvrpins VCCIA --expressions " + DROPOUT.AT_F1;
     VoltageTargets = "ATOM0";
+}
+
+CSharpTest PrimeScanSPOFITestMethod STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M0
+{
+    # NOCLEAN
+    # PATLIST_NOCLEAN : Due to needing this plist for PO shmoo
+    # TCG_NOCLEAN : Due to needing it
+    Patlist = "scn_arw_begincpu_hptp1600_4r4t_edt_stuckat_m0_classhvm_list";
+    LevelsTc = "SCN_ATOM_CX48::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNATOM_OVERRIDE_nom";
+    TimingsTc = __shared__::TpRule.If_C48_DS_AX_M("SCN_ATOM_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_SCNATOM48DS","SCN_ATOM_CX48::cpu_fun_timing_mts1500_tstprtclk750_tck93p75_SCNATOM48","SCN_ATOM_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_SCNATOM48M","SCN_ATOM_CX48::cpu_fun_timing_mts1500_tstprtclk750_tck93p75_SCNATOM48");
+    BypassPort = 1;
+    PerPatternFailCaptureCount = 100000;
+    TotalFailCaptureCount = 100000;
 }
 
 CSharpTest VminTC CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M1
@@ -243,20 +267,6 @@ CSharpTest VminTC CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M1
     VoltageTargets = "ATOM1";
 }
 
-
-CSharpTest PrimeScanSPOFITestMethod STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M0
-{
-    # NOCLEAN
-    # PATLIST_NOCLEAN : Due to needing this plist for PO shmoo
-    # TCG_NOCLEAN : Due to needing it
-    Patlist = "scn_arw_begincpu_hptp1600_4r4t_edt_stuckat_m0_classhvm_list";
-    LevelsTc = "SCN_ATOM_CX48::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNATOM_OVERRIDE_nom";
-    TimingsTc = __shared__::TpRule.If_C48_DS_AX_M("SCN_ATOM_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_SCNATOM48DS","SCN_ATOM_CX48::cpu_fun_timing_mts1500_tstprtclk750_tck93p75_SCNATOM48","SCN_ATOM_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_SCNATOM48M","SCN_ATOM_CX48::cpu_fun_timing_mts1500_tstprtclk750_tck93p75_SCNATOM48");
-    BypassPort = 1;
-    PerPatternFailCaptureCount = 100000;
-    TotalFailCaptureCount = 100000;
-}
-
 CSharpTest PrimeScanSPOFITestMethod STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M1
 {
     # NOCLEAN
@@ -269,7 +279,6 @@ CSharpTest PrimeScanSPOFITestMethod STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M1
     PerPatternFailCaptureCount = 100000;
     TotalFailCaptureCount = 100000;
 }
-
 
 CSharpTest DDGShmooTC CHAIN_ATOM_SHMOO_E_BEGINCPU_X_X_NOM_X_M0
 {
@@ -366,7 +375,6 @@ CSharpTest DDGShmooTC STUCKAT_ATOM_SHMOO_E_BEGINCPU_X_X_NOM_X_OCC
     YAxisRange = "1.2:-0.1:10";
     YAxisType = "FIVR";
 }
-
 
 CSharpTest DDGShmooTC ATSPEED_ATOM_SHMOO_E_BEGINCPU_X_X_NOM_X_F1XAT_OCC
 {
@@ -600,7 +608,6 @@ CSharpTest DDGShmooTC ATSPEED_ATOM_SHMOO_E_BEGINCPU_X_X_NOM_X_F7XAT_OCC
     YAxisType = "FIVR";
 }
 
-
 CSharpTest VminTC STUCKAT_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_OCC
 {
     Patlist = "scn_arw_begincpu_hptp1600_12r4t_edt_stuckat_occ_classhvm_list";
@@ -634,7 +641,6 @@ CSharpTest VminTC STUCKAT_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_OCC
     VoltageConverter = "--dlvrpins VCCIA --expressions " + DROPOUT.AT_F1;
     VoltageTargets = "ATOM1,ATOM0";
 }
-
 
 MultiTrialTest ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M0
 {
@@ -734,7 +740,6 @@ MultiTrialTest ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M0
     }
 }
 
-
 MultiTrialTest ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M1
 {
     # KILL ATSPEED F1XAT
@@ -832,7 +837,6 @@ MultiTrialTest ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M1
         }
     }
 }
-
 
 MultiTrialTest ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_OCC
 {
@@ -932,7 +936,6 @@ MultiTrialTest ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_OCC
     }
 }
 
-
 MultiTrialTest ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M0
 {
     # KILL ATSPEED F2XAT
@@ -1030,7 +1033,6 @@ MultiTrialTest ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M0
         }
     }
 }
-
 
 MultiTrialTest ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M1
 {
@@ -1130,7 +1132,6 @@ MultiTrialTest ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M1
     }
 }
 
-
 MultiTrialTest ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_OCC
 {
     # KILL ATSPEED F2XAT
@@ -1228,7 +1229,6 @@ MultiTrialTest ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_OCC
         }
     }
 }
-
 
 MultiTrialTest ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M0
 {
@@ -1328,7 +1328,6 @@ MultiTrialTest ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M0
     }
 }
 
-
 MultiTrialTest ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M1
 {
     # KILL ATSPEED F3XAT
@@ -1426,7 +1425,6 @@ MultiTrialTest ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M1
         }
     }
 }
-
 
 MultiTrialTest ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_OCC
 {
@@ -1526,7 +1524,6 @@ MultiTrialTest ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_OCC
     }
 }
 
-
 MultiTrialTest ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M0
 {
     # KILL ATSPEED LTTCCPUMAX
@@ -1620,7 +1617,6 @@ MultiTrialTest ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M0
         }
     }
 }
-
 
 MultiTrialTest ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M1
 {
@@ -1716,7 +1712,6 @@ MultiTrialTest ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M1
     }
 }
 
-
 MultiTrialTest ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC
 {
     # KILL ATSPEED LTTCCPUMAX
@@ -1809,7 +1804,6 @@ MultiTrialTest ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC
         }
     }
 }
-
 
 MultiTrialTest ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M0
 {
@@ -1909,7 +1903,6 @@ MultiTrialTest ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M0
     }
 }
 
-
 MultiTrialTest ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M1
 {
     # KILL ATSPEED F4XATLO
@@ -2007,7 +2000,6 @@ MultiTrialTest ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M1
         }
     }
 }
-
 
 MultiTrialTest ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_OCC
 {
@@ -2107,7 +2099,6 @@ MultiTrialTest ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_OCC
     }
 }
 
-
 CSharpTest ApexTC ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_M0_APEX
 {
     Patlist = "scn_arw_vmaxf5xat_hptp1600_4r4t_edt_atspeed_m0_classhvm_list";
@@ -2132,32 +2123,6 @@ CSharpTest ApexTC ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_M0_APEX
     Targets = "SATOM0";
     VoltageConverter = "--overrides ATOM0:"+__shared__::FlowMatrixSingular.AT_VMAX_VALUE+" --dlvrpins VCCIA --expressions " + DROPOUT.AT_F5;
 }
-
-CSharpTest ApexTC ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_M1_APEX
-{
-    Patlist = "scn_arw_vmaxf5xat_hptp1600_4r4t_edt_atspeed_m1_classhvm_list";
-    LevelsTc = "SCN_ATOM_CX48::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNATOM_OVERRIDE_nom";
-    TimingsTc = __shared__::TpRule.If_C48_DS_AX_M("SCN_ATOM_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_SCNATOM48DS","SCN_ATOM_CX48::cpu_fun_timing_mts1500_tstprtclk750_tck93p75_SCNATOM48","SCN_ATOM_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_SCNATOM48M","SCN_ATOM_CX48::cpu_fun_timing_mts1500_tstprtclk750_tck93p75_SCNATOM48");
-    BypassPort = 1;
-    DtsConfiguration = "ALL_CDIE_C48_N2P_NONE_CORE";
-    End = __shared__::FlowMatrixSingular.APEX_ATOM_MIN;
-    ExportTokens = __shared__::APEX_Tokens.ATToken;
-    FivrCondition = "NOM";
-    FivrConditionPlistParamName = "Patlist";
-    ForwardingMode = "Input";
-    InitialMaskBits = "0";
-    PatternNameCounterIndexes = "1,2,3,4,5,6,7";
-    PinMap = "ATOM1_SCAN";
-    RecoveryOptions = "";
-    RecoveryTracking = "ACRM1";
-    SetPointsPostInstance = "CDIE_ATOM:nblctrl_cdie_atom_l2:nblon";
-    SetPointsPreInstance = PSPRE.AT_F5+","+"MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F5_FREQ+"GHz";
-    Start = __shared__::FlowMatrixSingular.APEX_ATOM_MAX;
-    StepSize = toInteger(3);
-    Targets = "SATOM1";
-    VoltageConverter = "--overrides ATOM1:"+__shared__::FlowMatrixSingular.AT_VMAX_VALUE+" --dlvrpins VCCIA --expressions " + DROPOUT.AT_F5;
-}
-
 
 MultiTrialTest ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_M0
 {
@@ -2256,6 +2221,30 @@ MultiTrialTest ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_M0
     }
 }
 
+CSharpTest ApexTC ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_M1_APEX
+{
+    Patlist = "scn_arw_vmaxf5xat_hptp1600_4r4t_edt_atspeed_m1_classhvm_list";
+    LevelsTc = "SCN_ATOM_CX48::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNATOM_OVERRIDE_nom";
+    TimingsTc = __shared__::TpRule.If_C48_DS_AX_M("SCN_ATOM_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_SCNATOM48DS","SCN_ATOM_CX48::cpu_fun_timing_mts1500_tstprtclk750_tck93p75_SCNATOM48","SCN_ATOM_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_SCNATOM48M","SCN_ATOM_CX48::cpu_fun_timing_mts1500_tstprtclk750_tck93p75_SCNATOM48");
+    BypassPort = 1;
+    DtsConfiguration = "ALL_CDIE_C48_N2P_NONE_CORE";
+    End = __shared__::FlowMatrixSingular.APEX_ATOM_MIN;
+    ExportTokens = __shared__::APEX_Tokens.ATToken;
+    FivrCondition = "NOM";
+    FivrConditionPlistParamName = "Patlist";
+    ForwardingMode = "Input";
+    InitialMaskBits = "0";
+    PatternNameCounterIndexes = "1,2,3,4,5,6,7";
+    PinMap = "ATOM1_SCAN";
+    RecoveryOptions = "";
+    RecoveryTracking = "ACRM1";
+    SetPointsPostInstance = "CDIE_ATOM:nblctrl_cdie_atom_l2:nblon";
+    SetPointsPreInstance = PSPRE.AT_F5+","+"MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F5_FREQ+"GHz";
+    Start = __shared__::FlowMatrixSingular.APEX_ATOM_MAX;
+    StepSize = toInteger(3);
+    Targets = "SATOM1";
+    VoltageConverter = "--overrides ATOM1:"+__shared__::FlowMatrixSingular.AT_VMAX_VALUE+" --dlvrpins VCCIA --expressions " + DROPOUT.AT_F5;
+}
 
 MultiTrialTest ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_M1
 {
@@ -2354,7 +2343,6 @@ MultiTrialTest ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_M1
     }
 }
 
-
 CSharpTest ApexTC ATSPEED_ATOM_APEX_K_F5XATLO_X_AT_F5_X_APEX_OCC
 {
     Patlist = "scn_arw_vmaxf5xat_hptp1600_12r4t_edt_atspeed_occ_classhvm_list";
@@ -2377,7 +2365,6 @@ CSharpTest ApexTC ATSPEED_ATOM_APEX_K_F5XATLO_X_AT_F5_X_APEX_OCC
     Targets = "SATOM1,SATOM0";
     VoltageConverter = "--overrides ATOM1:"+__shared__::FlowMatrixSingular.AT_VMAX_VALUE+",ATOM0:"+__shared__::FlowMatrixSingular.AT_VMAX_VALUE+ " --dlvrpins VCCIA --expressions " + DROPOUT.AT_F5;
 }
-
 
 MultiTrialTest ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC
 {
@@ -2474,7 +2461,6 @@ MultiTrialTest ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC
     }
 }
 
-
 CSharpTest VminTC STUCKAT_ATOM_SB_K_VMAXXAT_X_AT_MAX_X_F1_OCC
 {
     Patlist = "scn_arw_vmaxf1xat_hptp1600_12r4t_edt_stuckat_occ_classhvm_list";
@@ -2518,51 +2504,6 @@ CSharpTest VminTC STUCKAT_ATOM_SB_K_VMAXXAT_X_AT_MAX_X_F1_OCC
     VoltageTargets = "ATOM1,ATOM0";
     VoltagesOffset = "GBVars.VoltageOffset";
 }
-
-CSharpTest VminTC STUCKAT_ATOM_SB_K_VMAXXATLO_X_AT_MAX_X_F1_OCC
-{
-    Patlist = "scn_arw_vmaxf1xatlo_hptp1600_12r4t_edt_stuckat_occ_classhvm_list";
-    LevelsTc = "SCN_ATOM_CX48::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNATOM_OVERRIDE_nom";
-    TimingsTc = __shared__::TpRule.If_C48_DS_AX_M("SCN_ATOM_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_SCNATOM48DS","SCN_ATOM_CX48::cpu_fun_timing_mts1500_tstprtclk750_tck93p75_SCNATOM48","SCN_ATOM_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_SCNATOM48M","SCN_ATOM_CX48::cpu_fun_timing_mts1500_tstprtclk750_tck93p75_SCNATOM48");
-    BaseNumbers = "13374";
-    BypassPort = -1;
-    CornerIdentifiers = "";
-    DtsConfiguration = "";
-    EndVoltageLimits = __shared__::FlowMatrixSingular.AT_VMAX_VALUE;
-    ExecutionMode = "SearchWithScoreboard";
-    FailCaptureCount = toInteger(999);
-    FeatureSwitchSettings = "fivr_mode_on,disable_masked_targets,print_per_target_increments,print_scoreboard_counters";
-    FivrCondition = "NOM";
-    FlowIndex = __shared__::FlowMatrixSingular.FlowIndex;
-    FlowIndexCallbackName = "";
-    ForwardingMode = "Input";
-    InitialMaskBits = "";
-    LogLevel = "Disabled";
-    MaskPins = "";
-    MaxFailsNum = toInteger(__shared__::Specs.VMX_MAX_FAILS);
-    PatternNameCounterIndexes = "1,2,3,4,5,6,7";
-    PinMap = "NVL_SCN_ATOM";
-    PostInstance = "";
-    PreInstance = "";
-    RecoveryMode = "RecoveryPort";
-    RecoveryOptions = __shared__::Recovery_Single.F1F4_recovery_opt_AT;
-    RecoveryTrackingIncoming = "ACRM1,ACRM0";
-    RecoveryTrackingOutgoing = "ACRM1,ACRM0";
-    ScoreboardEdgeTicks = toInteger(__shared__::Specs.VMX_EDGE_TICK);
-    SetPointsPlistMode = "Local";
-    SetPointsPlistParamName = "Patlist";
-    SetPointsPostInstance = PSPOST.AT_F1+","+"CDIE_ATOM:nblctrl_cdie_atom_l2:nblon";
-    SetPointsPreInstance = SCN_ATOM_CX48_Specs.N2P48_PreInst_F1_VMAX;
-    StartVoltages = __shared__::FlowMatrixSingular.AT_VMAX_VALUE;
-    StartVoltagesForRetry = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesForRetryF1 , "");
-    StartVoltagesOffset = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesOffsetF1 , "");
-    StepSize = toDouble(__shared__::FlowMatrixSingular.AT_SEARCH_RESOLUTION);
-    TestMode = "MultiVmin";
-    VoltageConverter = "--dlvrpins VCCIA --expressions " + DROPOUT.AT_F1;
-    VoltageTargets = "ATOM1,ATOM0";
-    VoltagesOffset = "GBVars.VoltageOffset";
-}
-
 
 MultiTrialTest ATSPEED_ATOM_SB_K_VMAXXAT_X_AT_MAX_X_F5_FREQ_OCC
 {
@@ -2656,6 +2597,49 @@ MultiTrialTest ATSPEED_ATOM_SB_K_VMAXXAT_X_AT_MAX_X_F5_FREQ_OCC
     }
 }
 
+CSharpTest VminTC STUCKAT_ATOM_SB_K_VMAXXATLO_X_AT_MAX_X_F1_OCC
+{
+    Patlist = "scn_arw_vmaxf1xatlo_hptp1600_12r4t_edt_stuckat_occ_classhvm_list";
+    LevelsTc = "SCN_ATOM_CX48::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNATOM_OVERRIDE_nom";
+    TimingsTc = __shared__::TpRule.If_C48_DS_AX_M("SCN_ATOM_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_SCNATOM48DS","SCN_ATOM_CX48::cpu_fun_timing_mts1500_tstprtclk750_tck93p75_SCNATOM48","SCN_ATOM_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_SCNATOM48M","SCN_ATOM_CX48::cpu_fun_timing_mts1500_tstprtclk750_tck93p75_SCNATOM48");
+    BaseNumbers = "13374";
+    BypassPort = -1;
+    CornerIdentifiers = "";
+    DtsConfiguration = "";
+    EndVoltageLimits = __shared__::FlowMatrixSingular.AT_VMAX_VALUE;
+    ExecutionMode = "SearchWithScoreboard";
+    FailCaptureCount = toInteger(999);
+    FeatureSwitchSettings = "fivr_mode_on,disable_masked_targets,print_per_target_increments,print_scoreboard_counters";
+    FivrCondition = "NOM";
+    FlowIndex = __shared__::FlowMatrixSingular.FlowIndex;
+    FlowIndexCallbackName = "";
+    ForwardingMode = "Input";
+    InitialMaskBits = "";
+    LogLevel = "Disabled";
+    MaskPins = "";
+    MaxFailsNum = toInteger(__shared__::Specs.VMX_MAX_FAILS);
+    PatternNameCounterIndexes = "1,2,3,4,5,6,7";
+    PinMap = "NVL_SCN_ATOM";
+    PostInstance = "";
+    PreInstance = "";
+    RecoveryMode = "RecoveryPort";
+    RecoveryOptions = __shared__::Recovery_Single.F1F4_recovery_opt_AT;
+    RecoveryTrackingIncoming = "ACRM1,ACRM0";
+    RecoveryTrackingOutgoing = "ACRM1,ACRM0";
+    ScoreboardEdgeTicks = toInteger(__shared__::Specs.VMX_EDGE_TICK);
+    SetPointsPlistMode = "Local";
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPostInstance = PSPOST.AT_F1+","+"CDIE_ATOM:nblctrl_cdie_atom_l2:nblon";
+    SetPointsPreInstance = SCN_ATOM_CX48_Specs.N2P48_PreInst_F1_VMAX;
+    StartVoltages = __shared__::FlowMatrixSingular.AT_VMAX_VALUE;
+    StartVoltagesForRetry = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesForRetryF1 , "");
+    StartVoltagesOffset = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesOffsetF1 , "");
+    StepSize = toDouble(__shared__::FlowMatrixSingular.AT_SEARCH_RESOLUTION);
+    TestMode = "MultiVmin";
+    VoltageConverter = "--dlvrpins VCCIA --expressions " + DROPOUT.AT_F1;
+    VoltageTargets = "ATOM1,ATOM0";
+    VoltagesOffset = "GBVars.VoltageOffset";
+}
 
 MultiTrialTest ATSPEED_ATOM_SB_K_VMAXXATLO_X_AT_MAX_X_F5_FREQ_OCC
 {
@@ -2748,7 +2732,6 @@ MultiTrialTest ATSPEED_ATOM_SB_K_VMAXXATLO_X_AT_MAX_X_F5_FREQ_OCC
         }
     }
 }
-
 
 MultiTrialTest ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_OCC
 {
@@ -2848,7 +2831,6 @@ MultiTrialTest ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_OCC
     }
 }
 
-
 CSharpTest VminTC ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH
 {
     Patlist = "scn_arw_fminxat_hptp1600_12r4t_edt_atspeed_occ_classhvm_list";
@@ -2891,7 +2873,6 @@ CSharpTest VminTC ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH
     VoltageTargets = "ATOM1,ATOM0";
     VoltagesOffset = "GBVars.VoltageOffset";
 }
-
 
 MultiTrialTest ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_M0
 {
@@ -2991,7 +2972,6 @@ MultiTrialTest ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_M0
     }
 }
 
-
 MultiTrialTest ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_M1
 {
     # KILL ATSPEED FMINXAT
@@ -3089,24 +3069,6 @@ MultiTrialTest ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_M1
         }
     }
 }
-
-
-CSharpTest RunCallback CTRL_X_UF_E_INIT_X_X_X_X_PINMAP_SCN_PRIME_DIERECOVERY_OCC
-{
-    BypassPort = -1;
-    Callback = "LoadPinMapFile";
-    Parameters = "--decoder FailDataDecoder --file ./Modules/SCN/SCN_ATOM_CX48/InputFiles/N2P48_DieRecoveryPinMaps_OCC_NVL_SCANATOM.json";
-}
-
-CSharpTest RunCallback CTRL_X_UF_E_INIT_X_X_X_X_PINMAP_SCN_PRIME_DIERECOVERY
-{
-    BypassPort = -1;
-    Callback = "LoadPinMapFile";
-    Parameters = "--decoder AnyFailSingleSliceDecoder --file ./Modules/SCN/SCN_ATOM_CX48/InputFiles/N2P48_DieRecoveryPinMaps_IO_NVL_SCNATOM.json";
-}
-
-
-
 
 Flow SCN_ATOM_CX48_INIT
 {
@@ -3224,6 +3186,191 @@ Flow SCN_ATOM_CX48_INIT
     
 }
 
+Flow BEGINCPU_M0
+{
+    FlowItem CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M0 CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M0
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99412782_fail_SCN_ATOM_CX48_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M0_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98412782_fail_SCN_ATOM_CX48_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M0_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b41242778_fail_SCN_ATOM_CX48_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M0_0;
+            IncrementCounters SCN_ATOM_CX48::n41242778_fail_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M0_0;
+            GoTo STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 0;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b41242779_fail_SCN_ATOM_CX48_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M0_2;
+            IncrementCounters SCN_ATOM_CX48::n41242779_fail_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M0_2;
+            GoTo STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M0;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97412778_fail_SCN_ATOM_CX48_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M0_4;
+            IncrementCounters SCN_ATOM_CX48::n97412778_fail_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M0_4;
+            GoTo STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b41192778_fail_SCN_ATOM_CX48_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M0_5;
+            IncrementCounters SCN_ATOM_CX48::n41192778_fail_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M0_5;
+            GoTo STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M0;
+        }
+    }
+    
+    FlowItem STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M0 STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M0 @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99422778_fail_SCN_ATOM_CX48_STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M0_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98422778_fail_SCN_ATOM_CX48_STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M0_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b42202778_fail_SCN_ATOM_CX48_STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M0_0;
+            IncrementCounters SCN_ATOM_CX48::n42202778_fail_STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M0_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 0;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b42202779_fail_SCN_ATOM_CX48_STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M0_2;
+            IncrementCounters SCN_ATOM_CX48::n42202779_fail_STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M0_2;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow BEGINCPU_M1
+{
+    FlowItem CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M1 CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99412784_fail_SCN_ATOM_CX48_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98412784_fail_SCN_ATOM_CX48_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b41262778_fail_SCN_ATOM_CX48_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M1_0;
+            IncrementCounters SCN_ATOM_CX48::n41262778_fail_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M1_0;
+            GoTo STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 0;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b41262779_fail_SCN_ATOM_CX48_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M1_2;
+            IncrementCounters SCN_ATOM_CX48::n41262779_fail_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M1_2;
+            GoTo STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M1;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97412779_fail_SCN_ATOM_CX48_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M1_4;
+            IncrementCounters SCN_ATOM_CX48::n97412779_fail_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M1_4;
+            GoTo STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M1;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b41192779_fail_SCN_ATOM_CX48_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M1_5;
+            IncrementCounters SCN_ATOM_CX48::n41192779_fail_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M1_5;
+            GoTo STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M1;
+        }
+    }
+    
+    FlowItem STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M1 STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M1 @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99422779_fail_SCN_ATOM_CX48_STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98422779_fail_SCN_ATOM_CX48_STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b42212778_fail_SCN_ATOM_CX48_STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M1_0;
+            IncrementCounters SCN_ATOM_CX48::n42212778_fail_STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 0;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b42212779_fail_SCN_ATOM_CX48_STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M1_2;
+            IncrementCounters SCN_ATOM_CX48::n42212779_fail_STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M1_2;
+            Return 0;
+        }
+    }
+    
+}
 
 Flow CHAIN_SHMOO
 {
@@ -3290,7 +3437,6 @@ Flow CHAIN_SHMOO
     }
     
 }
-
 
 Flow SHMOO
 {
@@ -3599,7 +3745,6 @@ Flow SHMOO
     
 }
 
-
 Flow SCN_ATOM_CX48_BEGINCPU
 {
     FlowItem STUCKAT_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_OCC STUCKAT_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_OCC
@@ -3730,82 +3875,27 @@ Flow SCN_ATOM_CX48_BEGINCPU
     
 }
 
-
-Flow SCN_ATOM_CX48_F5XATLO
+Flow F1XAT_M0
 {
-    FlowItem ATSPEED_ATOM_APEX_K_F5XATLO_X_AT_F5_X_APEX_OCC ATSPEED_ATOM_APEX_K_F5XATLO_X_AT_F5_X_APEX_OCC @EDC
+    FlowItem ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M0 ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M0
     {
         Result -2
         {
             Property PassFail = "Fail";
-            SetBin b99472828_fail_SCN_ATOM_CX48_ATSPEED_ATOM_APEX_K_F5XATLO_X_AT_F5_X_APEX_OCC_n2;
+            SetBin b99472791_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M0_n2;
             Return -2;
         }
         Result -1
         {
             Property PassFail = "Fail";
-            SetBin b98472828_fail_SCN_ATOM_CX48_ATSPEED_ATOM_APEX_K_F5XATLO_X_AT_F5_X_APEX_OCC_n1;
+            SetBin b98472791_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M0_n1;
             Return -1;
         }
         Result 0
         {
             Property PassFail = "Fail";
-            ##EDC## SetBin b47202824_fail_SCN_ATOM_CX48_ATSPEED_ATOM_APEX_K_F5XATLO_X_AT_F5_X_APEX_OCC_0;
-            IncrementCounters SCN_ATOM_CX48::n47202824_fail_ATSPEED_ATOM_APEX_K_F5XATLO_X_AT_F5_X_APEX_OCC_0;
-            GoTo ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            GoTo ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC;
-        }
-        Result 2
-        {
-            Property PassFail = "Fail";
-            ##EDC## SetBin b47202825_fail_SCN_ATOM_CX48_ATSPEED_ATOM_APEX_K_F5XATLO_X_AT_F5_X_APEX_OCC_2;
-            IncrementCounters SCN_ATOM_CX48::n47202825_fail_ATSPEED_ATOM_APEX_K_F5XATLO_X_AT_F5_X_APEX_OCC_2;
-            GoTo ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC;
-        }
-        Result 3
-        {
-            Property PassFail = "Pass";
-            GoTo ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC;
-        }
-        Result 4
-        {
-            Property PassFail = "Fail";
-            ##EDC## SetBin b97472814_fail_SCN_ATOM_CX48_ATSPEED_ATOM_APEX_K_F5XATLO_X_AT_F5_X_APEX_OCC_4;
-            IncrementCounters SCN_ATOM_CX48::n97472814_fail_ATSPEED_ATOM_APEX_K_F5XATLO_X_AT_F5_X_APEX_OCC_4;
-            GoTo ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC;
-        }
-        Result 5
-        {
-            Property PassFail = "Fail";
-            ##EDC## SetBin b47192814_fail_SCN_ATOM_CX48_ATSPEED_ATOM_APEX_K_F5XATLO_X_AT_F5_X_APEX_OCC_5;
-            IncrementCounters SCN_ATOM_CX48::n47192814_fail_ATSPEED_ATOM_APEX_K_F5XATLO_X_AT_F5_X_APEX_OCC_5;
-            GoTo ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC;
-        }
-    }
-    
-    FlowItem ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            SetBin b99472812_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC_n2;
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            SetBin b98472812_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC_n1;
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            SetBin b47202794_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC_0;
-            IncrementCounters SCN_ATOM_CX48::n47202794_fail_ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC_0;
+            SetBin b47202778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M0_0;
+            IncrementCounters SCN_ATOM_CX48::n47202778_fail_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M0_0;
             Return 0;
         }
         Result 1
@@ -3816,8 +3906,8 @@ Flow SCN_ATOM_CX48_F5XATLO
         Result 2
         {
             Property PassFail = "Fail";
-            SetBin b47202795_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC_2;
-            IncrementCounters SCN_ATOM_CX48::n47202795_fail_ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC_2;
+            SetBin b47202779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M0_2;
+            IncrementCounters SCN_ATOM_CX48::n47202779_fail_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M0_2;
             Return 0;
         }
         Result 3
@@ -3828,20 +3918,136 @@ Flow SCN_ATOM_CX48_F5XATLO
         Result 4
         {
             Property PassFail = "Fail";
-            SetBin b97472799_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC_4;
-            IncrementCounters SCN_ATOM_CX48::n97472799_fail_ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC_4;
+            SetBin b97472778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M0_4;
+            IncrementCounters SCN_ATOM_CX48::n97472778_fail_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M0_4;
             Return 0;
         }
         Result 5
         {
             Property PassFail = "Fail";
-            SetBin b47192799_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC_5;
-            IncrementCounters SCN_ATOM_CX48::n47192799_fail_ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC_5;
+            SetBin b47192778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M0_5;
+            IncrementCounters SCN_ATOM_CX48::n47192778_fail_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M0_5;
             Return 0;
         }
     }
     
-    FlowItem F5XATLO_M0 F5XATLO_M0
+}
+
+Flow F1XAT_M1
+{
+    FlowItem ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M1 ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99472792_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98472792_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b47212778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M1_0;
+            IncrementCounters SCN_ATOM_CX48::n47212778_fail_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b47212779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M1_2;
+            IncrementCounters SCN_ATOM_CX48::n47212779_fail_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M1_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97472779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M1_4;
+            IncrementCounters SCN_ATOM_CX48::n97472779_fail_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M1_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b47192779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M1_5;
+            IncrementCounters SCN_ATOM_CX48::n47192779_fail_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M1_5;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow SCN_ATOM_CX48_F1XAT
+{
+    FlowItem ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_OCC ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_OCC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99472793_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_OCC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98472793_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_OCC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b47222778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_OCC_0;
+            IncrementCounters SCN_ATOM_CX48::n47222778_fail_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_OCC_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b47222779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_OCC_2;
+            IncrementCounters SCN_ATOM_CX48::n47222779_fail_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_OCC_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97472780_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_OCC_4;
+            IncrementCounters SCN_ATOM_CX48::n97472780_fail_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_OCC_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b47192780_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_OCC_5;
+            IncrementCounters SCN_ATOM_CX48::n47192780_fail_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_OCC_5;
+            Return 0;
+        }
+    }
+    
+    FlowItem F1XAT_M0 F1XAT_M0
     {
         Result -2
         {
@@ -3861,11 +4067,11 @@ Flow SCN_ATOM_CX48_F5XATLO
         Result 1
         {
             Property PassFail = "Pass";
-            GoTo F5XATLO_M1;
+            GoTo F1XAT_M1;
         }
     }
     
-    FlowItem F5XATLO_M1 F5XATLO_M1
+    FlowItem F1XAT_M1 F1XAT_M1
     {
         Result -2
         {
@@ -3891,29 +4097,28 @@ Flow SCN_ATOM_CX48_F5XATLO
     
 }
 
-
-Flow FMINXAT_OCC
+Flow F2XAT_M0
 {
-    FlowItem ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_OCC ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_OCC
+    FlowItem ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M0 ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M0
     {
         Result -2
         {
             Property PassFail = "Fail";
-            SetBin b99472820_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_OCC_n2;
+            SetBin b99472794_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M0_n2;
             Return -2;
         }
         Result -1
         {
             Property PassFail = "Fail";
-            SetBin b98472820_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_OCC_n1;
+            SetBin b98472794_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M0_n1;
             Return -1;
         }
         Result 0
         {
             Property PassFail = "Fail";
-            SetBin b47202808_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_OCC_0;
-            IncrementCounters SCN_ATOM_CX48::n47202808_fail_ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_OCC_0;
-            GoTo ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH;
+            SetBin b47232778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M0_0;
+            IncrementCounters SCN_ATOM_CX48::n47232778_fail_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M0_0;
+            Return 0;
         }
         Result 1
         {
@@ -3923,9 +4128,9 @@ Flow FMINXAT_OCC
         Result 2
         {
             Property PassFail = "Fail";
-            SetBin b47202809_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_OCC_2;
-            IncrementCounters SCN_ATOM_CX48::n47202809_fail_ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_OCC_2;
-            GoTo ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH;
+            SetBin b47232779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M0_2;
+            IncrementCounters SCN_ATOM_CX48::n47232779_fail_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M0_2;
+            Return 0;
         }
         Result 3
         {
@@ -3935,79 +4140,160 @@ Flow FMINXAT_OCC
         Result 4
         {
             Property PassFail = "Fail";
-            SetBin b97472806_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_OCC_4;
-            IncrementCounters SCN_ATOM_CX48::n97472806_fail_ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_OCC_4;
-            GoTo ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH;
+            SetBin b97472781_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M0_4;
+            IncrementCounters SCN_ATOM_CX48::n97472781_fail_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M0_4;
+            Return 0;
         }
         Result 5
         {
             Property PassFail = "Fail";
-            SetBin b47192806_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_OCC_5;
-            IncrementCounters SCN_ATOM_CX48::n47192806_fail_ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_OCC_5;
-            GoTo ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH;
+            SetBin b47192781_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M0_5;
+            IncrementCounters SCN_ATOM_CX48::n47192781_fail_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M0_5;
+            Return 0;
         }
     }
     
-    FlowItem ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH @EDC
+}
+
+Flow F2XAT_M1
+{
+    FlowItem ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M1 ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M1
     {
         Result -2
         {
             Property PassFail = "Fail";
-            SetBin b99472821_fail_SCN_ATOM_CX48_ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH_n2;
+            SetBin b99472795_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M1_n2;
             Return -2;
         }
         Result -1
         {
             Property PassFail = "Fail";
-            SetBin b98472821_fail_SCN_ATOM_CX48_ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH_n1;
+            SetBin b98472795_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M1_n1;
             Return -1;
         }
         Result 0
         {
             Property PassFail = "Fail";
-            ##EDC## SetBin b47202810_fail_SCN_ATOM_CX48_ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH_0;
-            IncrementCounters SCN_ATOM_CX48::n47202810_fail_ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH_0;
+            SetBin b47242778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M1_0;
+            IncrementCounters SCN_ATOM_CX48::n47242778_fail_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M1_0;
             Return 0;
         }
         Result 1
         {
             Property PassFail = "Pass";
-            Return 0;
+            Return 1;
         }
         Result 2
         {
             Property PassFail = "Fail";
-            ##EDC## SetBin b47202811_fail_SCN_ATOM_CX48_ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH_2;
-            IncrementCounters SCN_ATOM_CX48::n47202811_fail_ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH_2;
+            SetBin b47242779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M1_2;
+            IncrementCounters SCN_ATOM_CX48::n47242779_fail_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M1_2;
             Return 0;
         }
         Result 3
         {
             Property PassFail = "Pass";
-            Return 0;
+            Return 1;
         }
         Result 4
         {
             Property PassFail = "Fail";
-            ##EDC## SetBin b97472807_fail_SCN_ATOM_CX48_ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH_4;
-            IncrementCounters SCN_ATOM_CX48::n97472807_fail_ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH_4;
+            SetBin b97472782_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M1_4;
+            IncrementCounters SCN_ATOM_CX48::n97472782_fail_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M1_4;
             Return 0;
         }
         Result 5
         {
             Property PassFail = "Fail";
-            ##EDC## SetBin b47192807_fail_SCN_ATOM_CX48_ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH_5;
-            IncrementCounters SCN_ATOM_CX48::n47192807_fail_ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH_5;
+            SetBin b47192782_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M1_5;
+            IncrementCounters SCN_ATOM_CX48::n47192782_fail_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M1_5;
             Return 0;
         }
     }
     
 }
 
-
-Flow SCN_ATOM_CX48_FMINXAT
+Flow SCN_ATOM_CX48_F2XAT
 {
-    FlowItem FMINXAT_OCC FMINXAT_OCC
+    FlowItem ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_OCC ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_OCC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99472796_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_OCC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98472796_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_OCC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b47252778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_OCC_0;
+            IncrementCounters SCN_ATOM_CX48::n47252778_fail_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_OCC_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b47252779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_OCC_2;
+            IncrementCounters SCN_ATOM_CX48::n47252779_fail_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_OCC_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97472783_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_OCC_4;
+            IncrementCounters SCN_ATOM_CX48::n97472783_fail_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_OCC_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b47192783_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_OCC_5;
+            IncrementCounters SCN_ATOM_CX48::n47192783_fail_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_OCC_5;
+            Return 0;
+        }
+    }
+    
+    FlowItem F2XAT_M0 F2XAT_M0
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo F2XAT_M1;
+        }
+    }
+    
+    FlowItem F2XAT_M1 F2XAT_M1
     {
         Result -2
         {
@@ -4031,31 +4317,181 @@ Flow SCN_ATOM_CX48_FMINXAT
         }
     }
     
-    FlowItem FMINXAT_M0 FMINXAT_M0
+}
+
+Flow F3XAT_M0
+{
+    FlowItem ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M0 ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M0
     {
         Result -2
         {
             Property PassFail = "Fail";
+            SetBin b99472797_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M0_n2;
             Return -2;
         }
         Result -1
         {
             Property PassFail = "Fail";
+            SetBin b98472797_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M0_n1;
             Return -1;
         }
         Result 0
         {
             Property PassFail = "Fail";
-            GoTo FMINXAT_M1;
+            SetBin b47262778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M0_0;
+            IncrementCounters SCN_ATOM_CX48::n47262778_fail_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M0_0;
+            Return 0;
         }
         Result 1
         {
             Property PassFail = "Pass";
-            GoTo FMINXAT_M1;
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b47262779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M0_2;
+            IncrementCounters SCN_ATOM_CX48::n47262779_fail_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M0_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97472784_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M0_4;
+            IncrementCounters SCN_ATOM_CX48::n97472784_fail_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M0_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b47192784_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M0_5;
+            IncrementCounters SCN_ATOM_CX48::n47192784_fail_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M0_5;
+            Return 0;
         }
     }
     
-    FlowItem FMINXAT_M1 FMINXAT_M1
+}
+
+Flow F3XAT_M1
+{
+    FlowItem ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M1 ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99472798_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98472798_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b47272778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M1_0;
+            IncrementCounters SCN_ATOM_CX48::n47272778_fail_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b47272779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M1_2;
+            IncrementCounters SCN_ATOM_CX48::n47272779_fail_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M1_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97472785_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M1_4;
+            IncrementCounters SCN_ATOM_CX48::n97472785_fail_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M1_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b47192785_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M1_5;
+            IncrementCounters SCN_ATOM_CX48::n47192785_fail_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M1_5;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow SCN_ATOM_CX48_F3XAT
+{
+    FlowItem ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_OCC ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_OCC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99472799_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_OCC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98472799_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_OCC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b47282778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_OCC_0;
+            IncrementCounters SCN_ATOM_CX48::n47282778_fail_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_OCC_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b47282779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_OCC_2;
+            IncrementCounters SCN_ATOM_CX48::n47282779_fail_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_OCC_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97472786_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_OCC_4;
+            IncrementCounters SCN_ATOM_CX48::n97472786_fail_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_OCC_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b47192786_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_OCC_5;
+            IncrementCounters SCN_ATOM_CX48::n47192786_fail_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_OCC_5;
+            Return 0;
+        }
+    }
+    
+    FlowItem F3XAT_M0 F3XAT_M0
     {
         Result -2
         {
@@ -4070,7 +4506,31 @@ Flow SCN_ATOM_CX48_FMINXAT
         Result 0
         {
             Property PassFail = "Fail";
-            Return 1;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo F3XAT_M1;
+        }
+    }
+    
+    FlowItem F3XAT_M1 F3XAT_M1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
         }
         Result 1
         {
@@ -4081,6 +4541,449 @@ Flow SCN_ATOM_CX48_FMINXAT
     
 }
 
+Flow LTTCCPUMAX_M0
+{
+    FlowItem ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M0 ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M0
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99942778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M0_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98942778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M0_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b94472778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M0_0;
+            IncrementCounters SCN_ATOM_CX48::n94472778_fail_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M0_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b94472779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M0_2;
+            IncrementCounters SCN_ATOM_CX48::n94472779_fail_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M0_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97942778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M0_4;
+            IncrementCounters SCN_ATOM_CX48::n97942778_fail_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M0_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b94192778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M0_5;
+            IncrementCounters SCN_ATOM_CX48::n94192778_fail_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M0_5;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow LTTCCPUMAX_M1
+{
+    FlowItem ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M1 ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99942779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98942779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b94472780_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M1_0;
+            IncrementCounters SCN_ATOM_CX48::n94472780_fail_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b94472781_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M1_2;
+            IncrementCounters SCN_ATOM_CX48::n94472781_fail_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M1_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97942779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M1_4;
+            IncrementCounters SCN_ATOM_CX48::n97942779_fail_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M1_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b94192779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M1_5;
+            IncrementCounters SCN_ATOM_CX48::n94192779_fail_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M1_5;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow SCN_ATOM_CX48_LTTCCPUMAX
+{
+    FlowItem ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99942780_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98942780_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b94472782_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC_0;
+            IncrementCounters SCN_ATOM_CX48::n94472782_fail_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b94472783_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC_2;
+            IncrementCounters SCN_ATOM_CX48::n94472783_fail_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97942780_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC_4;
+            IncrementCounters SCN_ATOM_CX48::n97942780_fail_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b94192780_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC_5;
+            IncrementCounters SCN_ATOM_CX48::n94192780_fail_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC_5;
+            Return 0;
+        }
+    }
+    
+    FlowItem LTTCCPUMAX_M0 LTTCCPUMAX_M0
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo LTTCCPUMAX_M1;
+        }
+    }
+    
+    FlowItem LTTCCPUMAX_M1 LTTCCPUMAX_M1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow F4XATLO_M0
+{
+    FlowItem ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M0 ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M0
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99472810_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M0_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98472810_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M0_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b47202790_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M0_0;
+            IncrementCounters SCN_ATOM_CX48::n47202790_fail_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M0_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b47202791_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M0_2;
+            IncrementCounters SCN_ATOM_CX48::n47202791_fail_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M0_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97472797_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M0_4;
+            IncrementCounters SCN_ATOM_CX48::n97472797_fail_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M0_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b47192797_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M0_5;
+            IncrementCounters SCN_ATOM_CX48::n47192797_fail_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M0_5;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow F4XATLO_M1
+{
+    FlowItem ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M1 ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99472811_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98472811_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b47202792_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M1_0;
+            IncrementCounters SCN_ATOM_CX48::n47202792_fail_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b47202793_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M1_2;
+            IncrementCounters SCN_ATOM_CX48::n47202793_fail_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M1_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97472798_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M1_4;
+            IncrementCounters SCN_ATOM_CX48::n97472798_fail_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M1_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b47192798_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M1_5;
+            IncrementCounters SCN_ATOM_CX48::n47192798_fail_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M1_5;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow SCN_ATOM_CX48_F4XATLO
+{
+    FlowItem ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_OCC ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_OCC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99472809_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_OCC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98472809_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_OCC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b47202788_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_OCC_0;
+            IncrementCounters SCN_ATOM_CX48::n47202788_fail_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_OCC_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b47202789_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_OCC_2;
+            IncrementCounters SCN_ATOM_CX48::n47202789_fail_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_OCC_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97472796_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_OCC_4;
+            IncrementCounters SCN_ATOM_CX48::n97472796_fail_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_OCC_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b47192796_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_OCC_5;
+            IncrementCounters SCN_ATOM_CX48::n47192796_fail_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_OCC_5;
+            Return 0;
+        }
+    }
+    
+    FlowItem F4XATLO_M0 F4XATLO_M0
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo F4XATLO_M1;
+        }
+    }
+    
+    FlowItem F4XATLO_M1 F4XATLO_M1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
 
 Flow F5XATLO_M0
 {
@@ -4306,28 +5209,81 @@ Flow F5XATLO_M1
     
 }
 
-
-Flow F1XAT_M0
+Flow SCN_ATOM_CX48_F5XATLO
 {
-    FlowItem ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M0 ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M0
+    FlowItem ATSPEED_ATOM_APEX_K_F5XATLO_X_AT_F5_X_APEX_OCC ATSPEED_ATOM_APEX_K_F5XATLO_X_AT_F5_X_APEX_OCC @EDC
     {
         Result -2
         {
             Property PassFail = "Fail";
-            SetBin b99472791_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M0_n2;
+            SetBin b99472828_fail_SCN_ATOM_CX48_ATSPEED_ATOM_APEX_K_F5XATLO_X_AT_F5_X_APEX_OCC_n2;
             Return -2;
         }
         Result -1
         {
             Property PassFail = "Fail";
-            SetBin b98472791_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M0_n1;
+            SetBin b98472828_fail_SCN_ATOM_CX48_ATSPEED_ATOM_APEX_K_F5XATLO_X_AT_F5_X_APEX_OCC_n1;
             Return -1;
         }
         Result 0
         {
             Property PassFail = "Fail";
-            SetBin b47202778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M0_0;
-            IncrementCounters SCN_ATOM_CX48::n47202778_fail_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M0_0;
+            ##EDC## SetBin b47202824_fail_SCN_ATOM_CX48_ATSPEED_ATOM_APEX_K_F5XATLO_X_AT_F5_X_APEX_OCC_0;
+            IncrementCounters SCN_ATOM_CX48::n47202824_fail_ATSPEED_ATOM_APEX_K_F5XATLO_X_AT_F5_X_APEX_OCC_0;
+            GoTo ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b47202825_fail_SCN_ATOM_CX48_ATSPEED_ATOM_APEX_K_F5XATLO_X_AT_F5_X_APEX_OCC_2;
+            IncrementCounters SCN_ATOM_CX48::n47202825_fail_ATSPEED_ATOM_APEX_K_F5XATLO_X_AT_F5_X_APEX_OCC_2;
+            GoTo ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            GoTo ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b97472814_fail_SCN_ATOM_CX48_ATSPEED_ATOM_APEX_K_F5XATLO_X_AT_F5_X_APEX_OCC_4;
+            IncrementCounters SCN_ATOM_CX48::n97472814_fail_ATSPEED_ATOM_APEX_K_F5XATLO_X_AT_F5_X_APEX_OCC_4;
+            GoTo ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b47192814_fail_SCN_ATOM_CX48_ATSPEED_ATOM_APEX_K_F5XATLO_X_AT_F5_X_APEX_OCC_5;
+            IncrementCounters SCN_ATOM_CX48::n47192814_fail_ATSPEED_ATOM_APEX_K_F5XATLO_X_AT_F5_X_APEX_OCC_5;
+            GoTo ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC;
+        }
+    }
+    
+    FlowItem ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99472812_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98472812_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b47202794_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC_0;
+            IncrementCounters SCN_ATOM_CX48::n47202794_fail_ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC_0;
             Return 0;
         }
         Result 1
@@ -4338,8 +5294,8 @@ Flow F1XAT_M0
         Result 2
         {
             Property PassFail = "Fail";
-            SetBin b47202779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M0_2;
-            IncrementCounters SCN_ATOM_CX48::n47202779_fail_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M0_2;
+            SetBin b47202795_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC_2;
+            IncrementCounters SCN_ATOM_CX48::n47202795_fail_ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC_2;
             Return 0;
         }
         Result 3
@@ -4350,538 +5306,64 @@ Flow F1XAT_M0
         Result 4
         {
             Property PassFail = "Fail";
-            SetBin b97472778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M0_4;
-            IncrementCounters SCN_ATOM_CX48::n97472778_fail_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M0_4;
+            SetBin b97472799_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC_4;
+            IncrementCounters SCN_ATOM_CX48::n97472799_fail_ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC_4;
             Return 0;
         }
         Result 5
         {
             Property PassFail = "Fail";
-            SetBin b47192778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M0_5;
-            IncrementCounters SCN_ATOM_CX48::n47192778_fail_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M0_5;
+            SetBin b47192799_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC_5;
+            IncrementCounters SCN_ATOM_CX48::n47192799_fail_ATSPEED_ATOM_VMIN_K_F5XATLO_X_AT_F5_X_FREQ_OCC_5;
             Return 0;
         }
     }
     
-}
-
-Flow F1XAT_M1
-{
-    FlowItem ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M1 ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M1
+    FlowItem F5XATLO_M0 F5XATLO_M0
     {
         Result -2
         {
             Property PassFail = "Fail";
-            SetBin b99472792_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M1_n2;
             Return -2;
         }
         Result -1
         {
             Property PassFail = "Fail";
-            SetBin b98472792_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M1_n1;
             Return -1;
         }
         Result 0
         {
             Property PassFail = "Fail";
-            SetBin b47212778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M1_0;
-            IncrementCounters SCN_ATOM_CX48::n47212778_fail_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M1_0;
             Return 0;
         }
         Result 1
         {
             Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 2
-        {
-            Property PassFail = "Fail";
-            SetBin b47212779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M1_2;
-            IncrementCounters SCN_ATOM_CX48::n47212779_fail_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M1_2;
-            Return 0;
-        }
-        Result 3
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 4
-        {
-            Property PassFail = "Fail";
-            SetBin b97472779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M1_4;
-            IncrementCounters SCN_ATOM_CX48::n97472779_fail_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M1_4;
-            Return 0;
-        }
-        Result 5
-        {
-            Property PassFail = "Fail";
-            SetBin b47192779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M1_5;
-            IncrementCounters SCN_ATOM_CX48::n47192779_fail_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_M1_5;
-            Return 0;
+            GoTo F5XATLO_M1;
         }
     }
     
-}
-
-Flow F2XAT_M0
-{
-    FlowItem ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M0 ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M0
+    FlowItem F5XATLO_M1 F5XATLO_M1
     {
         Result -2
         {
             Property PassFail = "Fail";
-            SetBin b99472794_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M0_n2;
             Return -2;
         }
         Result -1
         {
             Property PassFail = "Fail";
-            SetBin b98472794_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M0_n1;
             Return -1;
         }
         Result 0
         {
             Property PassFail = "Fail";
-            SetBin b47232778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M0_0;
-            IncrementCounters SCN_ATOM_CX48::n47232778_fail_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M0_0;
             Return 0;
         }
         Result 1
         {
             Property PassFail = "Pass";
             Return 1;
-        }
-        Result 2
-        {
-            Property PassFail = "Fail";
-            SetBin b47232779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M0_2;
-            IncrementCounters SCN_ATOM_CX48::n47232779_fail_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M0_2;
-            Return 0;
-        }
-        Result 3
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 4
-        {
-            Property PassFail = "Fail";
-            SetBin b97472781_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M0_4;
-            IncrementCounters SCN_ATOM_CX48::n97472781_fail_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M0_4;
-            Return 0;
-        }
-        Result 5
-        {
-            Property PassFail = "Fail";
-            SetBin b47192781_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M0_5;
-            IncrementCounters SCN_ATOM_CX48::n47192781_fail_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M0_5;
-            Return 0;
-        }
-    }
-    
-}
-
-Flow F2XAT_M1
-{
-    FlowItem ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M1 ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M1
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            SetBin b99472795_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M1_n2;
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            SetBin b98472795_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M1_n1;
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            SetBin b47242778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M1_0;
-            IncrementCounters SCN_ATOM_CX48::n47242778_fail_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M1_0;
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 2
-        {
-            Property PassFail = "Fail";
-            SetBin b47242779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M1_2;
-            IncrementCounters SCN_ATOM_CX48::n47242779_fail_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M1_2;
-            Return 0;
-        }
-        Result 3
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 4
-        {
-            Property PassFail = "Fail";
-            SetBin b97472782_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M1_4;
-            IncrementCounters SCN_ATOM_CX48::n97472782_fail_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M1_4;
-            Return 0;
-        }
-        Result 5
-        {
-            Property PassFail = "Fail";
-            SetBin b47192782_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M1_5;
-            IncrementCounters SCN_ATOM_CX48::n47192782_fail_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_M1_5;
-            Return 0;
-        }
-    }
-    
-}
-
-Flow F3XAT_M0
-{
-    FlowItem ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M0 ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M0
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            SetBin b99472797_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M0_n2;
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            SetBin b98472797_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M0_n1;
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            SetBin b47262778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M0_0;
-            IncrementCounters SCN_ATOM_CX48::n47262778_fail_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M0_0;
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 2
-        {
-            Property PassFail = "Fail";
-            SetBin b47262779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M0_2;
-            IncrementCounters SCN_ATOM_CX48::n47262779_fail_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M0_2;
-            Return 0;
-        }
-        Result 3
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 4
-        {
-            Property PassFail = "Fail";
-            SetBin b97472784_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M0_4;
-            IncrementCounters SCN_ATOM_CX48::n97472784_fail_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M0_4;
-            Return 0;
-        }
-        Result 5
-        {
-            Property PassFail = "Fail";
-            SetBin b47192784_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M0_5;
-            IncrementCounters SCN_ATOM_CX48::n47192784_fail_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M0_5;
-            Return 0;
-        }
-    }
-    
-}
-
-Flow F3XAT_M1
-{
-    FlowItem ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M1 ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M1
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            SetBin b99472798_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M1_n2;
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            SetBin b98472798_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M1_n1;
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            SetBin b47272778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M1_0;
-            IncrementCounters SCN_ATOM_CX48::n47272778_fail_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M1_0;
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 2
-        {
-            Property PassFail = "Fail";
-            SetBin b47272779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M1_2;
-            IncrementCounters SCN_ATOM_CX48::n47272779_fail_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M1_2;
-            Return 0;
-        }
-        Result 3
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 4
-        {
-            Property PassFail = "Fail";
-            SetBin b97472785_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M1_4;
-            IncrementCounters SCN_ATOM_CX48::n97472785_fail_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M1_4;
-            Return 0;
-        }
-        Result 5
-        {
-            Property PassFail = "Fail";
-            SetBin b47192785_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M1_5;
-            IncrementCounters SCN_ATOM_CX48::n47192785_fail_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_M1_5;
-            Return 0;
-        }
-    }
-    
-}
-
-Flow LTTCCPUMAX_M0
-{
-    FlowItem ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M0 ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M0
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            SetBin b99942778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M0_n2;
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            SetBin b98942778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M0_n1;
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            SetBin b94472778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M0_0;
-            IncrementCounters SCN_ATOM_CX48::n94472778_fail_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M0_0;
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 2
-        {
-            Property PassFail = "Fail";
-            SetBin b94472779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M0_2;
-            IncrementCounters SCN_ATOM_CX48::n94472779_fail_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M0_2;
-            Return 0;
-        }
-        Result 3
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 4
-        {
-            Property PassFail = "Fail";
-            SetBin b97942778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M0_4;
-            IncrementCounters SCN_ATOM_CX48::n97942778_fail_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M0_4;
-            Return 0;
-        }
-        Result 5
-        {
-            Property PassFail = "Fail";
-            SetBin b94192778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M0_5;
-            IncrementCounters SCN_ATOM_CX48::n94192778_fail_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M0_5;
-            Return 0;
-        }
-    }
-    
-}
-
-Flow LTTCCPUMAX_M1
-{
-    FlowItem ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M1 ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M1
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            SetBin b99942779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M1_n2;
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            SetBin b98942779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M1_n1;
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            SetBin b94472780_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M1_0;
-            IncrementCounters SCN_ATOM_CX48::n94472780_fail_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M1_0;
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 2
-        {
-            Property PassFail = "Fail";
-            SetBin b94472781_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M1_2;
-            IncrementCounters SCN_ATOM_CX48::n94472781_fail_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M1_2;
-            Return 0;
-        }
-        Result 3
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 4
-        {
-            Property PassFail = "Fail";
-            SetBin b97942779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M1_4;
-            IncrementCounters SCN_ATOM_CX48::n97942779_fail_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M1_4;
-            Return 0;
-        }
-        Result 5
-        {
-            Property PassFail = "Fail";
-            SetBin b94192779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M1_5;
-            IncrementCounters SCN_ATOM_CX48::n94192779_fail_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_M1_5;
-            Return 0;
-        }
-    }
-    
-}
-
-Flow F4XATLO_M0
-{
-    FlowItem ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M0 ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M0
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            SetBin b99472810_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M0_n2;
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            SetBin b98472810_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M0_n1;
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            SetBin b47202790_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M0_0;
-            IncrementCounters SCN_ATOM_CX48::n47202790_fail_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M0_0;
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 2
-        {
-            Property PassFail = "Fail";
-            SetBin b47202791_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M0_2;
-            IncrementCounters SCN_ATOM_CX48::n47202791_fail_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M0_2;
-            Return 0;
-        }
-        Result 3
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 4
-        {
-            Property PassFail = "Fail";
-            SetBin b97472797_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M0_4;
-            IncrementCounters SCN_ATOM_CX48::n97472797_fail_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M0_4;
-            Return 0;
-        }
-        Result 5
-        {
-            Property PassFail = "Fail";
-            SetBin b47192797_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M0_5;
-            IncrementCounters SCN_ATOM_CX48::n47192797_fail_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M0_5;
-            Return 0;
-        }
-    }
-    
-}
-
-Flow F4XATLO_M1
-{
-    FlowItem ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M1 ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M1
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            SetBin b99472811_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M1_n2;
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            SetBin b98472811_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M1_n1;
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            SetBin b47202792_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M1_0;
-            IncrementCounters SCN_ATOM_CX48::n47202792_fail_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M1_0;
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 2
-        {
-            Property PassFail = "Fail";
-            SetBin b47202793_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M1_2;
-            IncrementCounters SCN_ATOM_CX48::n47202793_fail_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M1_2;
-            Return 0;
-        }
-        Result 3
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 4
-        {
-            Property PassFail = "Fail";
-            SetBin b97472798_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M1_4;
-            IncrementCounters SCN_ATOM_CX48::n97472798_fail_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M1_4;
-            Return 0;
-        }
-        Result 5
-        {
-            Property PassFail = "Fail";
-            SetBin b47192798_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M1_5;
-            IncrementCounters SCN_ATOM_CX48::n47192798_fail_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_M1_5;
-            Return 0;
         }
     }
     
@@ -5003,6 +5485,58 @@ Flow VMAXXAT_F5
     
 }
 
+Flow SCN_ATOM_CX48_VMAXXAT
+{
+    FlowItem VMAXXAT_F1 VMAXXAT_F1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo VMAXXAT_F5;
+        }
+    }
+    
+    FlowItem VMAXXAT_F5 VMAXXAT_F5
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
 Flow VMAXXATLO_F1
 {
     FlowItem STUCKAT_ATOM_SB_K_VMAXXATLO_X_AT_MAX_X_F1_OCC STUCKAT_ATOM_SB_K_VMAXXATLO_X_AT_MAX_X_F1_OCC
@@ -5119,777 +5653,6 @@ Flow VMAXXATLO_F5
     
 }
 
-
-Flow SCN_ATOM_CX48_F1XAT
-{
-    FlowItem ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_OCC ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_OCC
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            SetBin b99472793_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_OCC_n2;
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            SetBin b98472793_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_OCC_n1;
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            SetBin b47222778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_OCC_0;
-            IncrementCounters SCN_ATOM_CX48::n47222778_fail_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_OCC_0;
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 2
-        {
-            Property PassFail = "Fail";
-            SetBin b47222779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_OCC_2;
-            IncrementCounters SCN_ATOM_CX48::n47222779_fail_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_OCC_2;
-            Return 0;
-        }
-        Result 3
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 4
-        {
-            Property PassFail = "Fail";
-            SetBin b97472780_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_OCC_4;
-            IncrementCounters SCN_ATOM_CX48::n97472780_fail_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_OCC_4;
-            Return 0;
-        }
-        Result 5
-        {
-            Property PassFail = "Fail";
-            SetBin b47192780_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_OCC_5;
-            IncrementCounters SCN_ATOM_CX48::n47192780_fail_ATSPEED_ATOM_VMIN_K_F1XAT_X_AT_F1_X_FREQ_OCC_5;
-            Return 0;
-        }
-    }
-    
-    FlowItem F1XAT_M0 F1XAT_M0
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            GoTo F1XAT_M1;
-        }
-    }
-    
-    FlowItem F1XAT_M1 F1XAT_M1
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-    }
-    
-}
-
-Flow SCN_ATOM_CX48_F2XAT
-{
-    FlowItem ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_OCC ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_OCC
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            SetBin b99472796_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_OCC_n2;
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            SetBin b98472796_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_OCC_n1;
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            SetBin b47252778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_OCC_0;
-            IncrementCounters SCN_ATOM_CX48::n47252778_fail_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_OCC_0;
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 2
-        {
-            Property PassFail = "Fail";
-            SetBin b47252779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_OCC_2;
-            IncrementCounters SCN_ATOM_CX48::n47252779_fail_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_OCC_2;
-            Return 0;
-        }
-        Result 3
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 4
-        {
-            Property PassFail = "Fail";
-            SetBin b97472783_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_OCC_4;
-            IncrementCounters SCN_ATOM_CX48::n97472783_fail_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_OCC_4;
-            Return 0;
-        }
-        Result 5
-        {
-            Property PassFail = "Fail";
-            SetBin b47192783_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_OCC_5;
-            IncrementCounters SCN_ATOM_CX48::n47192783_fail_ATSPEED_ATOM_VMIN_K_F2XAT_X_AT_F2_X_FREQ_OCC_5;
-            Return 0;
-        }
-    }
-    
-    FlowItem F2XAT_M0 F2XAT_M0
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            GoTo F2XAT_M1;
-        }
-    }
-    
-    FlowItem F2XAT_M1 F2XAT_M1
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-    }
-    
-}
-
-Flow SCN_ATOM_CX48_F3XAT
-{
-    FlowItem ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_OCC ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_OCC
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            SetBin b99472799_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_OCC_n2;
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            SetBin b98472799_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_OCC_n1;
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            SetBin b47282778_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_OCC_0;
-            IncrementCounters SCN_ATOM_CX48::n47282778_fail_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_OCC_0;
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 2
-        {
-            Property PassFail = "Fail";
-            SetBin b47282779_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_OCC_2;
-            IncrementCounters SCN_ATOM_CX48::n47282779_fail_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_OCC_2;
-            Return 0;
-        }
-        Result 3
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 4
-        {
-            Property PassFail = "Fail";
-            SetBin b97472786_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_OCC_4;
-            IncrementCounters SCN_ATOM_CX48::n97472786_fail_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_OCC_4;
-            Return 0;
-        }
-        Result 5
-        {
-            Property PassFail = "Fail";
-            SetBin b47192786_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_OCC_5;
-            IncrementCounters SCN_ATOM_CX48::n47192786_fail_ATSPEED_ATOM_VMIN_K_F3XAT_X_AT_F3_X_FREQ_OCC_5;
-            Return 0;
-        }
-    }
-    
-    FlowItem F3XAT_M0 F3XAT_M0
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            GoTo F3XAT_M1;
-        }
-    }
-    
-    FlowItem F3XAT_M1 F3XAT_M1
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-    }
-    
-}
-
-Flow SCN_ATOM_CX48_LTTCCPUMAX
-{
-    FlowItem ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            SetBin b99942780_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC_n2;
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            SetBin b98942780_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC_n1;
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            SetBin b94472782_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC_0;
-            IncrementCounters SCN_ATOM_CX48::n94472782_fail_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC_0;
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 2
-        {
-            Property PassFail = "Fail";
-            SetBin b94472783_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC_2;
-            IncrementCounters SCN_ATOM_CX48::n94472783_fail_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC_2;
-            Return 0;
-        }
-        Result 3
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 4
-        {
-            Property PassFail = "Fail";
-            SetBin b97942780_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC_4;
-            IncrementCounters SCN_ATOM_CX48::n97942780_fail_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC_4;
-            Return 0;
-        }
-        Result 5
-        {
-            Property PassFail = "Fail";
-            SetBin b94192780_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC_5;
-            IncrementCounters SCN_ATOM_CX48::n94192780_fail_ATSPEED_ATOM_VMIN_K_LTTCCPUMAX_X_AT_F5_X_FREQ_OCC_5;
-            Return 0;
-        }
-    }
-    
-    FlowItem LTTCCPUMAX_M0 LTTCCPUMAX_M0
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            GoTo LTTCCPUMAX_M1;
-        }
-    }
-    
-    FlowItem LTTCCPUMAX_M1 LTTCCPUMAX_M1
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-    }
-    
-}
-
-Flow SCN_ATOM_CX48_F4XATLO
-{
-    FlowItem ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_OCC ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_OCC
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            SetBin b99472809_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_OCC_n2;
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            SetBin b98472809_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_OCC_n1;
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            SetBin b47202788_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_OCC_0;
-            IncrementCounters SCN_ATOM_CX48::n47202788_fail_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_OCC_0;
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 2
-        {
-            Property PassFail = "Fail";
-            SetBin b47202789_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_OCC_2;
-            IncrementCounters SCN_ATOM_CX48::n47202789_fail_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_OCC_2;
-            Return 0;
-        }
-        Result 3
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 4
-        {
-            Property PassFail = "Fail";
-            SetBin b97472796_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_OCC_4;
-            IncrementCounters SCN_ATOM_CX48::n97472796_fail_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_OCC_4;
-            Return 0;
-        }
-        Result 5
-        {
-            Property PassFail = "Fail";
-            SetBin b47192796_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_OCC_5;
-            IncrementCounters SCN_ATOM_CX48::n47192796_fail_ATSPEED_ATOM_VMIN_K_F4XATLO_X_AT_F4_X_FREQ_OCC_5;
-            Return 0;
-        }
-    }
-    
-    FlowItem F4XATLO_M0 F4XATLO_M0
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            GoTo F4XATLO_M1;
-        }
-    }
-    
-    FlowItem F4XATLO_M1 F4XATLO_M1
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-    }
-    
-}
-
-
-Flow BEGINCPU_M0
-{
-    FlowItem CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M0 CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M0
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            SetBin b99412782_fail_SCN_ATOM_CX48_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M0_n2;
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            SetBin b98412782_fail_SCN_ATOM_CX48_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M0_n1;
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            SetBin b41242778_fail_SCN_ATOM_CX48_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M0_0;
-            IncrementCounters SCN_ATOM_CX48::n41242778_fail_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M0_0;
-            GoTo STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 0;
-        }
-        Result 2
-        {
-            Property PassFail = "Fail";
-            SetBin b41242779_fail_SCN_ATOM_CX48_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M0_2;
-            IncrementCounters SCN_ATOM_CX48::n41242779_fail_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M0_2;
-            GoTo STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M0;
-        }
-        Result 3
-        {
-            Property PassFail = "Pass";
-            Return 0;
-        }
-        Result 4
-        {
-            Property PassFail = "Fail";
-            SetBin b97412778_fail_SCN_ATOM_CX48_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M0_4;
-            IncrementCounters SCN_ATOM_CX48::n97412778_fail_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M0_4;
-            GoTo STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M0;
-        }
-        Result 5
-        {
-            Property PassFail = "Fail";
-            SetBin b41192778_fail_SCN_ATOM_CX48_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M0_5;
-            IncrementCounters SCN_ATOM_CX48::n41192778_fail_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M0_5;
-            GoTo STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M0;
-        }
-    }
-    
-    FlowItem STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M0 STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M0 @EDC
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            SetBin b99422778_fail_SCN_ATOM_CX48_STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M0_n2;
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            SetBin b98422778_fail_SCN_ATOM_CX48_STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M0_n1;
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            ##EDC## SetBin b42202778_fail_SCN_ATOM_CX48_STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M0_0;
-            IncrementCounters SCN_ATOM_CX48::n42202778_fail_STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M0_0;
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 0;
-        }
-        Result 2
-        {
-            Property PassFail = "Fail";
-            ##EDC## SetBin b42202779_fail_SCN_ATOM_CX48_STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M0_2;
-            IncrementCounters SCN_ATOM_CX48::n42202779_fail_STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M0_2;
-            Return 0;
-        }
-    }
-    
-}
-
-Flow BEGINCPU_M1
-{
-    FlowItem CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M1 CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M1
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            SetBin b99412784_fail_SCN_ATOM_CX48_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M1_n2;
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            SetBin b98412784_fail_SCN_ATOM_CX48_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M1_n1;
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            SetBin b41262778_fail_SCN_ATOM_CX48_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M1_0;
-            IncrementCounters SCN_ATOM_CX48::n41262778_fail_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M1_0;
-            GoTo STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M1;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 0;
-        }
-        Result 2
-        {
-            Property PassFail = "Fail";
-            SetBin b41262779_fail_SCN_ATOM_CX48_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M1_2;
-            IncrementCounters SCN_ATOM_CX48::n41262779_fail_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M1_2;
-            GoTo STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M1;
-        }
-        Result 3
-        {
-            Property PassFail = "Pass";
-            Return 0;
-        }
-        Result 4
-        {
-            Property PassFail = "Fail";
-            SetBin b97412779_fail_SCN_ATOM_CX48_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M1_4;
-            IncrementCounters SCN_ATOM_CX48::n97412779_fail_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M1_4;
-            GoTo STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M1;
-        }
-        Result 5
-        {
-            Property PassFail = "Fail";
-            SetBin b41192779_fail_SCN_ATOM_CX48_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M1_5;
-            IncrementCounters SCN_ATOM_CX48::n41192779_fail_CHAIN_ATOM_SB_K_BEGINCPU_X_AT_NOM_X_F1_M1_5;
-            GoTo STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M1;
-        }
-    }
-    
-    FlowItem STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M1 STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M1 @EDC
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            SetBin b99422779_fail_SCN_ATOM_CX48_STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M1_n2;
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            SetBin b98422779_fail_SCN_ATOM_CX48_STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M1_n1;
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            ##EDC## SetBin b42212778_fail_SCN_ATOM_CX48_STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M1_0;
-            IncrementCounters SCN_ATOM_CX48::n42212778_fail_STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M1_0;
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 0;
-        }
-        Result 2
-        {
-            Property PassFail = "Fail";
-            ##EDC## SetBin b42212779_fail_SCN_ATOM_CX48_STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M1_2;
-            IncrementCounters SCN_ATOM_CX48::n42212779_fail_STUCKAT_ATOM_SPOFI_K_BEGINCPU_X_X_NOM_LFM_M1_2;
-            Return 0;
-        }
-    }
-    
-}
-
-
-Flow SCN_ATOM_CX48_VMAXXAT
-{
-    FlowItem VMAXXAT_F1 VMAXXAT_F1
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            GoTo VMAXXAT_F5;
-        }
-    }
-    
-    FlowItem VMAXXAT_F5 VMAXXAT_F5
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-    }
-    
-}
-
 Flow SCN_ATOM_CX48_VMAXXATLO
 {
     FlowItem VMAXXATLO_F1 VMAXXATLO_F1
@@ -5942,6 +5705,117 @@ Flow SCN_ATOM_CX48_VMAXXATLO
     
 }
 
+Flow FMINXAT_OCC
+{
+    FlowItem ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_OCC ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_OCC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99472820_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_OCC_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98472820_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_OCC_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b47202808_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_OCC_0;
+            IncrementCounters SCN_ATOM_CX48::n47202808_fail_ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_OCC_0;
+            GoTo ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b47202809_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_OCC_2;
+            IncrementCounters SCN_ATOM_CX48::n47202809_fail_ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_OCC_2;
+            GoTo ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97472806_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_OCC_4;
+            IncrementCounters SCN_ATOM_CX48::n97472806_fail_ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_OCC_4;
+            GoTo ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b47192806_fail_SCN_ATOM_CX48_ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_OCC_5;
+            IncrementCounters SCN_ATOM_CX48::n47192806_fail_ATSPEED_ATOM_VMIN_K_FMINXAT_X_AT_FMIN_X_FREQ_OCC_5;
+            GoTo ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH;
+        }
+    }
+    
+    FlowItem ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99472821_fail_SCN_ATOM_CX48_ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98472821_fail_SCN_ATOM_CX48_ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b47202810_fail_SCN_ATOM_CX48_ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH_0;
+            IncrementCounters SCN_ATOM_CX48::n47202810_fail_ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 0;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b47202811_fail_SCN_ATOM_CX48_ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH_2;
+            IncrementCounters SCN_ATOM_CX48::n47202811_fail_ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b97472807_fail_SCN_ATOM_CX48_ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH_4;
+            IncrementCounters SCN_ATOM_CX48::n97472807_fail_ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b47192807_fail_SCN_ATOM_CX48_ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH_5;
+            IncrementCounters SCN_ATOM_CX48::n47192807_fail_ATSPEED_ATOM_SB_K_FMINXAT_X_AT_NOM_X_OCC_FF_SEARCH_5;
+            Return 0;
+        }
+    }
+    
+}
 
 Flow FMINXAT_M0
 {
@@ -6059,3 +5933,78 @@ Flow FMINXAT_M1
     
 }
 
+Flow SCN_ATOM_CX48_FMINXAT
+{
+    FlowItem FMINXAT_OCC FMINXAT_OCC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+    FlowItem FMINXAT_M0 FMINXAT_M0
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo FMINXAT_M1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FMINXAT_M1;
+        }
+    }
+    
+    FlowItem FMINXAT_M1 FMINXAT_M1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}

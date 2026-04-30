@@ -40,13 +40,36 @@ Counters
     n97212011_fail_ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION_4
 } # End of Test Counter Definition
 
-
 CSharpTest VminTC ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM
 {
     Patlist = "IPC::arr_cdie_begincpunom_mbist_uncore_all_all_vnnaon_ks_x_class_hptp_list";
     LevelsTc = "IPC::ARR_UNCORE_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_nom_lvl";
     TimingsTc = ARR_UNCORE_CXX_Specs.timingRules;
     BaseNumbers = "12403";
+    BypassPort = 1;
+    EndVoltageLimits = "0.77";
+    ForwardingMode = "None";
+    RecoveryMode = "NoRecovery";
+    ExecutionMode = "SearchWithScoreboard";
+    FeatureSwitchSettings = ARR_UNCORE_CXX_Specs.FeatureSwitch_Uncore;
+    FivrCondition = ARR_UNCORE_CXX_Specs.FivrConditionNom;
+    MaxRepetitionCount = 1;
+    PatternNameCounterIndexes = ARR_UNCORE_CXX_Specs.PatternMap;
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPreInstance = PSPRE.CLR_F1+","+"MCdrv:corefreq:"+ __shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:ringfreq_0:"+ __shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz,MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F1_FREQ+"GHz";
+    SetPointsPostInstance = PSPOST.CLR_F1;
+    StartVoltages = "0.77";
+    StepSize = 0.02;
+    TestMode = "Scoreboard";
+    VoltageTargets = ARR_UNCORE_CXX_Specs.UNCORE_VoltageTarget;
+}
+
+CSharpTest VminTC ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION
+{
+    Patlist = ARR_UNCORE_CXX_Rules.TPRules(ARR_UNCORE_CXX_Specs.reset_s28c,ARR_UNCORE_CXX_Specs.reset_s28c,ARR_UNCORE_CXX_Specs.reset_s28c,ARR_UNCORE_CXX_Specs.reset_48,ARR_UNCORE_CXX_Specs.reset_48,ARR_UNCORE_CXX_Specs.reset_48,ARR_UNCORE_CXX_Specs.reset_s28c,ARR_UNCORE_CXX_Specs.reset_s28c);
+    LevelsTc = "IPC::ARR_UNCORE_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_nom_lvl";
+    TimingsTc = ARR_UNCORE_CXX_Specs.timingRules;
+    BaseNumbers = "12405";
     BypassPort = 1;
     EndVoltageLimits = "0.77";
     ForwardingMode = "None";
@@ -89,32 +112,6 @@ CSharpTest VminTC ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX
     VoltageTargets = ARR_UNCORE_CXX_Specs.UNCORE_VoltageTarget;
 }
 
-
-CSharpTest VminTC ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION
-{
-    Patlist = ARR_UNCORE_CXX_Rules.TPRules(ARR_UNCORE_CXX_Specs.reset_s28c,ARR_UNCORE_CXX_Specs.reset_s28c,ARR_UNCORE_CXX_Specs.reset_s28c,ARR_UNCORE_CXX_Specs.reset_48,ARR_UNCORE_CXX_Specs.reset_48,ARR_UNCORE_CXX_Specs.reset_48,ARR_UNCORE_CXX_Specs.reset_s28c,ARR_UNCORE_CXX_Specs.reset_s28c);
-    LevelsTc = "IPC::ARR_UNCORE_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_nom_lvl";
-    TimingsTc = ARR_UNCORE_CXX_Specs.timingRules;
-    BaseNumbers = "12405";
-    BypassPort = 1;
-    EndVoltageLimits = "0.77";
-    ForwardingMode = "None";
-    RecoveryMode = "NoRecovery";
-    ExecutionMode = "SearchWithScoreboard";
-    FeatureSwitchSettings = ARR_UNCORE_CXX_Specs.FeatureSwitch_Uncore;
-    FivrCondition = ARR_UNCORE_CXX_Specs.FivrConditionNom;
-    MaxRepetitionCount = 1;
-    PatternNameCounterIndexes = ARR_UNCORE_CXX_Specs.PatternMap;
-    SetPointsPlistParamName = "Patlist";
-    SetPointsPreInstance = PSPRE.CLR_F1+","+"MCdrv:corefreq:"+ __shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:ringfreq_0:"+ __shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz,MCdrv:atomfreq_0:"+__shared__::FlowMatrixSingular.AT_F1_FREQ+"GHz";
-    SetPointsPostInstance = PSPOST.CLR_F1;
-    StartVoltages = "0.77";
-    StepSize = 0.02;
-    TestMode = "Scoreboard";
-    VoltageTargets = ARR_UNCORE_CXX_Specs.UNCORE_VoltageTarget;
-}
-
-
 CSharpTest DDGShmooTC ARR_UNCORE_SHMOO_E_BEGINCPUNOM_X_X_X_X_SHMOO_FOR_DEDC
 {
     Patlist = "IPC::arr_cdie_endcpumax_mbist_uncore_all_all_vnnaon_ks_vmax_x_class_hptp_list";    
@@ -136,14 +133,12 @@ CSharpTest DDGShmooTC ARR_UNCORE_SHMOO_E_BEGINCPUNOM_X_X_X_X_SHMOO_FOR_DEDC
     YAxisType = "FIVR";
 }
 
-
 CSharpTest RunCallback XSA_UNCORE_RUNCALLBACK_E_BEGINCPUNOM_X_X_X_X_RASTER
 {
     BypassPort = ARR_UNCORE_CXX_Specs.RASTER_ENABLE;
 	Callback = "JsonRun";
     Parameters = ARR_UNCORE_CXX_Rules.TPRules(ARR_UNCORE_CXX_Specs.jsonraster_others,ARR_UNCORE_CXX_Specs.jsonraster_others,ARR_UNCORE_CXX_Specs.jsonraster_others,ARR_UNCORE_CXX_Specs.jsonraster_s16c,ARR_UNCORE_CXX_Specs.jsonraster_s16c,ARR_UNCORE_CXX_Specs.jsonraster_s16c,ARR_UNCORE_CXX_Specs.jsonraster_others,ARR_UNCORE_CXX_Specs.jsonraster_others);
 }
-
 
 CSharpTest MbistRasterRepairTC XSA_UNCORE_RASTER_E_BEGINCPUNOM_X_X_NOM_X_X
 
@@ -169,9 +164,6 @@ CSharpTest MbistRasterRepairTC XSA_UNCORE_RASTER_E_BEGINCPUNOM_X_X_NOM_X_X
 	SetPointsPlistParamName = "Patlist";
 
 }
-
-
-
 
 Flow ALL_RASTER
 {    FlowItem XSA_UNCORE_RUNCALLBACK_E_BEGINCPUNOM_X_X_X_X_RASTER XSA_UNCORE_RUNCALLBACK_E_BEGINCPUNOM_X_X_X_X_RASTER @EDC
@@ -299,7 +291,6 @@ Flow ALL_RASTER
 	}
 }
 
-
 Flow ARR_UNCORE_CXX_BEGINCPUNOM
 {
     FlowItem ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM
@@ -413,7 +404,6 @@ Flow ARR_UNCORE_CXX_BEGINCPUNOM
 		}
 	}
 }
-
 
 Flow ARR_UNCORE_CXX_ENDCPUNOM
 {
@@ -534,4 +524,3 @@ Flow ARR_UNCORE_CXX_ENDCPUMAX
     }
     
 }
-

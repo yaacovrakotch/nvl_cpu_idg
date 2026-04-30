@@ -116,6 +116,8 @@ Write-Host "  Buckets in CSV: $($bucketTables.Count)"
 #region load binmap (per-instance original bin/ctr/bnum values)
 $binmapTests = @{}
 $binmapFlows = @{}
+$globalDefaultPre  = $null
+$globalDefaultPost = $null
 if (Test-Path $binmapFile) {
     $bm = Get-Content $binmapFile -Raw | ConvertFrom-Json
     if ($bm.PSObject.Properties.Name -contains 'tests' -and $bm.tests) {
@@ -124,14 +126,24 @@ if (Test-Path $binmapFile) {
     if ($bm.PSObject.Properties.Name -contains 'flows' -and $bm.flows) {
         foreach ($p in $bm.flows.PSObject.Properties) { $binmapFlows[$p.Name] = @($p.Value) }
     }
-    Write-Host "  Binmap loaded: tests=$($binmapTests.Count), flows=$($binmapFlows.Count)"
+    if ($bm.PSObject.Properties.Name -contains 'defaults' -and $bm.defaults) {
+        if ($bm.defaults.PSObject.Properties.Name -contains 'SetPointsPreInstance')  { $globalDefaultPre  = [string]$bm.defaults.SetPointsPreInstance }
+        if ($bm.defaults.PSObject.Properties.Name -contains 'SetPointsPostInstance') { $globalDefaultPost = [string]$bm.defaults.SetPointsPostInstance }
+    }
+    Write-Host "  Binmap loaded: tests=$($binmapTests.Count), flows=$($binmapFlows.Count), defaults Pre=$globalDefaultPre Post=$globalDefaultPost"
 } else {
     Write-Host "  Binmap: not found (placeholders will remain in output)"
 }
 
 function Restore-BinCtrPlaceholders {
-    # Walks $bodyLines and replaces __BIN__/__CTR__/__BNUM__/__BYPASS__
-    # placeholders with the original values stored in $values (in body order).
+    # Walks $bodyLines and restores per-instance values stored in $values
+    # (in body order). Restores:
+    #   SetBin __BIN__                       -> original bin value
+    #   IncrementCounters __CTR__            -> original counter value
+    #   BaseNumbers "__BNUM__"               -> original baseNumber value
+    # BypassPort is hardcoded to -1 in the BP, no restoration needed.
+    # SetPointsPreInstance / SetPointsPostInstance "DEFAULT" are restored
+    # from a single global default applied to every instance in Restore-Defaults.
     param(
         [System.Collections.Generic.List[string]]$BodyLines,
         $Values
@@ -147,8 +159,27 @@ function Restore-BinCtrPlaceholders {
             if ($vi -lt $Values.Count) { $nl = $nl.Replace('__CTR__', [string]$Values[$vi]); $vi++ }
         } elseif ($nl -match '__BNUM__') {
             if ($vi -lt $Values.Count) { $nl = $nl.Replace('__BNUM__', [string]$Values[$vi]); $vi++ }
-        } elseif ($nl -match '__BYPASS__') {
-            if ($vi -lt $Values.Count) { $nl = $nl.Replace('__BYPASS__', [string]$Values[$vi]); $vi++ }
+        }
+        [void]$out.Add($nl)
+    }
+    return $out
+}
+
+function Restore-Defaults {
+    # Replaces literal SetPointsPreInstance / SetPointsPostInstance "DEFAULT"
+    # values with the single global default value for the module.
+    param(
+        [System.Collections.Generic.List[string]]$BodyLines,
+        [string]$PreVal,
+        [string]$PostVal
+    )
+    $out = [System.Collections.Generic.List[string]]::new()
+    foreach ($l in $BodyLines) {
+        $nl = $l
+        if ($PreVal -ne $null -and $nl -match '^(\s*SetPointsPreInstance\s*=\s*)"DEFAULT"(\s*;\s*)$') {
+            $nl = $Matches[1] + '"' + $PreVal + '"' + $Matches[2]
+        } elseif ($PostVal -ne $null -and $nl -match '^(\s*SetPointsPostInstance\s*=\s*)"DEFAULT"(\s*;\s*)$') {
+            $nl = $Matches[1] + '"' + $PostVal + '"' + $Matches[2]
         }
         [void]$out.Add($nl)
     }
@@ -212,6 +243,7 @@ while ($i -lt $bpLines.Count) {
             if ($valMap.ContainsKey($row.Name)) {
                 $expandedBody = Restore-BinCtrPlaceholders -BodyLines $expandedBody -Values $valMap[$row.Name]
             }
+            $expandedBody = Restore-Defaults -BodyLines $expandedBody -PreVal $globalDefaultPre -PostVal $globalDefaultPost
             foreach ($el in $expandedBody) { $out.Add($el) }
             $out.Add('')
             if ($marker -eq 'test') { $testCount++ } else { $flowCount++ }

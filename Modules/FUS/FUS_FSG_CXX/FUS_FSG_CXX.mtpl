@@ -21,7 +21,6 @@ Counters
     n31562007_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_5
 } # End of Test Counter Definition
 
-
 CSharpTest FleGeneratePerDieFuseStringByDies FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CHECK
 {
     BypassPort = 1;
@@ -29,13 +28,11 @@ CSharpTest FleGeneratePerDieFuseStringByDies FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X
     Registers = __shared__::TpRule.If_MICP("CPU0,CPU1","CPU0");
 }
 
-
 CSharpTest FleGeneratePerDieFuseString FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG
 {
     DataLog = "On";
     Register = "CPU0";
 }
-
 
 CSharpTest FleGeneratePerDieFuseString FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CPU1
 {
@@ -44,16 +41,12 @@ CSharpTest FleGeneratePerDieFuseString FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_H
     Register = "CPU1";
 }
 
-
 CSharpTest FleGetDieStatusByDies FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS
 {
     BypassPort = -1;
     FuseStateUservar = "Which_Socket.FuseState";
     Registers = __shared__::TpRule.If_MICP("CPU0,CPU1","CPU0");
 }
-
-
-
 
 Flow FUS_FSG_CXX_FACTFUSBUILDCPUNOM
 {
@@ -217,4 +210,3 @@ Flow FUS_FSG_CXX_FACTFUSBUILDCPUNOM
     }
     
 }
-

@@ -511,7 +511,7 @@ Counters
 # BP_BUCKET: B1 tests=2
 CSharpTest FleGetDieStatusByDies FUSE_X_FLE_K_\B1_INSTANCE_P1\_X_X_X_X_GET_FUSE_STRING_STATUS
 {
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     FuseStateUservar = "Which_Socket.FuseState";
     Registers = __shared__::TpRule.If_MICP("CPU0,CPU1","CPU0");
 }
@@ -519,7 +519,7 @@ CSharpTest FleGetDieStatusByDies FUSE_X_FLE_K_\B1_INSTANCE_P1\_X_X_X_X_GET_FUSE_
 # BP_BUCKET: B2 tests=2
 CSharpTest FleCheckFusedSspecFusing FUSE_X_FLE_K_\B2_INSTANCE_P1\_X_X_X_X_CHECK_FUSED_SSPEC
 {
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     FuseReadTokenName = "FUS_FUSEREAD_CXX::FUS_FUSEREAD_CXX.FuseReadOutputStr_CPU0";
     OutputFuseStringLocation = "SharedStorage";
     Register = "CPU0";
@@ -537,7 +537,7 @@ CSharpTest FleUpdateSpecialAlgInFuseString FUSE_X_FLE_K_\B3_INSTANCE_P1\_X_X_X_X
 CSharpTest FleUpdateSpecialAlgInFuseString FUSE_X_FLE_K_\B4_INSTANCE_P1\_X_X_X_X_HIP_HASH_CPU1
 {
     AlgorithmName = "CPU1_HIP_HASH";
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     Register = "CPU1";
 }
 
@@ -547,7 +547,7 @@ CSharpTest PrimeFuseBurnMaskTestMethod FUSE_X_FUSEBURN_K_FACTFUSBURNCPUNOM_X_X_X
     Patlist = __shared__::TpRule.If_18AP("IPC::cpu_fuse_write_hvm_data_mm","IPC::cpu_fuse_write_hvm_all_mm");
     LevelsTc = "CPU_IP_BASE::cpu1_all_bf_x_x_ipc_lvl_nom";
     TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     ConfigName = "FuseBurnFlow_CPU1";
     ConfigurationFile = FUS_FUSEBURN_CXX_Rules.FUSEBURN_CfgFile("./InputFiles/FUSEBURN_C2X.fuseMask.json","./InputFiles/FUSEBURN_C2X.fuseMask_BLLC.json","./InputFiles/FUSEBURN_C1X.fuseMask_BLLC.json","./InputFiles/FUSEBURN_C1X.fuseMask.json");
     LogLevel = "Disabled";
@@ -565,7 +565,7 @@ CSharpTest PrimeCtvDecoderTestMethod FUSE_X_CTVDECODER_K_FACTFUSBURNCPUNOM_X_X_X
     Patlist = __shared__::TpRule.If_18AP("IPC::cpu_fuse_read_hvm_ecc_statictics","IPC::cpu_fuse_shim_debug_status");
     LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
     TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     ConfigurationFile = __shared__::TpRule.If_MICP("./InputFiles/FUSEBURN_C2X_ECC_Check.csv","./InputFiles/FUSEBURN_CXX_QUAL_ECC_CHK.csv");
     CtvCapturePins = __shared__::TpRule.If_MICP("IPC::CPU_TDO, IPC::CPU1_TDO","IPC::CPU_TDO");
     PostInstance = "PrintToItuff(--body_type mrslt --body_data G.U.D.Fuse_Voltage_VCCFPRGx_Prog_0_CPU0 --tname_suf _PRINT_VOLTAGE_NOM)";
@@ -577,7 +577,7 @@ CSharpTest PrimeFuseReadMaskTestMethod FUSE_X_FUSEREAD_\B7_INSTANCE_P1\_\B7_INST
     Patlist = "\Patlist_P1\_fuse_read_\Patlist_P2\_x";
     LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
     TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     ConfigName = "\ConfigName\";
     ConfigurationFile = FUS_FUSEBURN_CXX_Rules.FUSEREAD_CfgFile("./InputFiles/FUSEBURN_C2X.fuseRead.json","./InputFiles/FUSEBURN_C2X.fuseRead_BLLC.json","./InputFiles/FUSEBURN_C1X.fuseRead_BLLC.json","./InputFiles/FUSEBURN_C1X.fuseRead.json");
     FuseGroupToDatalog = "";
@@ -592,7 +592,7 @@ CSharpTest PrimeCtvDecoderTestMethod FUSE_X_CTVDECODER_K_FACTFUSBURNCPUNOM_X_X_X
     Patlist = __shared__::TpRule.If_18AP("IPC::cpu_fuse_read_hvm_ecc_statictics","IPC::cpu_fuse_shim_debug_\Patlist_P1\;
     LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
     TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     ConfigurationFile = __shared__::TpRule.If_MICP("./InputFiles/FUSEBURN_C2X_ECC_Check.csv","./InputFiles/FUSEBURN_CXX_QUAL_ECC_\ConfigurationFile_P1\;
     CtvCapturePins = __shared__::TpRule.If_MICP("IPC::CPU_TDO, IPC::CPU1_TDO","IPC::CPU_TDO");
 }
@@ -600,7 +600,7 @@ CSharpTest PrimeCtvDecoderTestMethod FUSE_X_CTVDECODER_K_FACTFUSBURNCPUNOM_X_X_X
 # BP_BUCKET: B9 tests=2
 CSharpTest FleGenerateFuseRepairString FUSE_X_FLE_K_\B9_INSTANCE_P1\_X_X_X_X_REPAIR_FLE_FSG
 {
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     FuseChassis = "CH4";
     FuseReadTokenName = "FUS_FUSEBURN_CXX::FUS_FUSEBURN_CXX.FuseReadOutputStr_CPU0";
     OutputFuseStringLocation = "Uservar";
@@ -612,7 +612,7 @@ CSharpTest FleGenerateFuseRepairString FUSE_X_FLE_K_\B9_INSTANCE_P1\_X_X_X_X_REP
 CSharpTest FleGenerateFuseRepairString FUSE_X_FLE_K_\B10_INSTANCE_P1\_X_X_X_X_REPAIR_FLE_FSG_CPU1
 {
     # NOCLEAN
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     FuseChassis = "CH4";
     FuseReadTokenName = "FUS_FUSEBURN_CXX::FUS_FUSEBURN_CXX.FuseReadOutputStr_CPU1";
     OutputFuseStringLocation = "Uservar";
@@ -627,13 +627,13 @@ CSharpTest PrimeFunctionalTestMethod FUSE_X_FUNC_K_\B11_INSTANCE_P1\_X_X_X_X_REP
     Patlist = "IPC::cpu_fuse_read_hvm_ecc_status";
     LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
     TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
 }
 
 # BP_BUCKET: B12 tests=4
 CSharpTest FleCompareFuseString FUSE_X_FLE_K_\B12_INSTANCE_P1\_X_X_X_X_\B12_INSTANCE_P2\_RAP_FLECOMPARE_CPU1
 {
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     Category = "\Category_P1\_CAT";
     FuseReadTokenName = "FUS_FUSEBURN_CXX::FUS_FUSEBURN_\FuseReadTokenName_P1\_CPU1";
     OutputFuseStringLocation = "Uservar";
@@ -646,7 +646,7 @@ CSharpTest PrimeFunctionalTestMethod FUSE_X_FUNC_\B13_INSTANCE_P1\_\B13_INSTANCE
     Patlist = "IPC::cpu_fuse_\Patlist_P1\";
     LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
     TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
 }
 
 # BP_BUCKET: B14 tests=4
@@ -655,7 +655,7 @@ CSharpTest PrimeCtvDecoderTestMethod FUSE_X_CTVDECODER_K_\B14_INSTANCE_P1\_X_X_X
     Patlist = "IPC::cpu_\Patlist_P1\_read_hvm_\Patlist_P2\_\Patlist_P3\";
     LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
     TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     ConfigurationFile = \ConfigurationFile\.csv");
     CtvCapturePins = __shared__::TpRule.If_MICP("IPC::CPU_TDO, IPC::CPU1_TDO","IPC::CPU_TDO");
 }
@@ -663,14 +663,14 @@ CSharpTest PrimeCtvDecoderTestMethod FUSE_X_CTVDECODER_K_\B14_INSTANCE_P1\_X_X_X
 # BP_BUCKET: B15 tests=2
 CSharpTest FleGenerateLockoutBitsFuseStringByDies FUSE_X_FLE_K_\B15_INSTANCE_P1\_X_X_X_X_LOCKBIT_FSG
 {
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     Registers = __shared__::TpRule.If_MICP("CPU0,CPU1","CPU0");
 }
 
 # BP_BUCKET: B16 tests=2
 CSharpTest FleGenerateLockoutBitsFuseString FUSE_X_FLE_K_\B16_INSTANCE_P1\_X_X_X_X_LOCKBIT_FSG_CPU1
 {
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     Register = "CPU1";
 }
 
@@ -680,7 +680,7 @@ CSharpTest PrimeFuseReadMaskUltDecodeTestMethod FUSE_X_ULTREAD_K_\B17_INSTANCE_P
     Patlist = "IPC::cpu_dfxagg_read_hvm_efuse";
     LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
     TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     ConfigName = "CXX_EFUSEReadFlow";
     ConfigurationFile = __shared__::TpRule.If_MICP("./InputFiles/FUSEBURN_C2X.fuseRead.json","./InputFiles/FUSEBURN_C1X.fuseRead.json");
     DieIdNames = __shared__::TpRule.If_MICP("U1.U5,U1.U6", "U1.U5");
@@ -703,7 +703,7 @@ CSharpTest FleComputeFuseHashSignatureByDies FUSE_X_FLE_K_\B18_INSTANCE_P1\_X_X_
 # BP_BUCKET: B19 tests=2
 CSharpTest FleComputeFuseHashSignature FUSE_X_FLE_K_\B19_INSTANCE_P1\_X_X_X_X_SECURITY_KEY_HASHGEN_CPU1
 {
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     FuseReadTokenName = "FUS_FUSEBURN_CXX::FUS_FUSEBURN_CXX.FuseReadLockBitsString_CPU1";
     OutputFuseStringLocation = "Uservar";
     Register = "CPU1";
@@ -712,7 +712,7 @@ CSharpTest FleComputeFuseHashSignature FUSE_X_FLE_K_\B19_INSTANCE_P1\_X_X_X_X_SE
 # BP_BUCKET: B20 tests=2
 CSharpTest RunCallback FUSE_X_RUNCALLBACK_K_\B20_INSTANCE_P1\_X_X_X_X_POST_FUSE_CONFIRM
 {
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     Callback = "WriteSharedStorage";
     Parameters = "--token G.U.S.CLASSFUSED_CPU0 --value 1";
 }
@@ -720,7 +720,7 @@ CSharpTest RunCallback FUSE_X_RUNCALLBACK_K_\B20_INSTANCE_P1\_X_X_X_X_POST_FUSE_
 # BP_BUCKET: B21 tests=4
 CSharpTest SFMDffEfuseCheck FUSE_X_FLE_K_\B21_INSTANCE_P1\
 {
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     DffFormat = "Desegregation";
     DieIdName = __shared__::DFFVars.DIEID_\DieIdName_P1\;
     UserVarCollection = "FUSEUFGL";
@@ -729,7 +729,7 @@ CSharpTest SFMDffEfuseCheck FUSE_X_FLE_K_\B21_INSTANCE_P1\
 # BP_BUCKET: B22 tests=2
 CSharpTest AuxiliaryTC FUSE_X_AUX_K_FACTFUSBURNCPUNOM_X_X_X_X_IF_\B22_INSTANCE_P1\
 {
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     DataType = "String";
     Expression = "IsMatch([_UserVars.IF_18AP], 'YES')";
     ResultPort = "[R]?1:2";
@@ -751,7 +751,7 @@ CSharpTest PrimeFuseReadMaskTestMethod FUSE_X_FUSEREAD_K_\B24_INSTANCE_P1\
     Patlist = "IPC::cpu_fuse_read_hvm_x";
     LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
     TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     ConfigName = "FusingFlowDataRAP";
     ConfigurationFile = FUS_FUSEBURN_CXX_Rules.FUSEREAD_CfgFile("./InputFiles/FUSEBURN_C2X.fuseRead.json","./InputFiles/FUSEBURN_C2X.fuseRead_BLLC.json","./InputFiles/FUSEBURN_C1X.fuseRead_BLLC.json","./InputFiles/FUSEBURN_C1X.fuseRead.json");
     FailingMaskName = "mask_open_socket";
@@ -770,7 +770,7 @@ CSharpTest ScreenTC FUSE_X_SCREENTC_K_\B25_INSTANCE_P1\
 # BP_BUCKET: B26 tests=7
 CSharpTest PrimePatConfigTestMethod FUSE_X_PATCONFIG_K_\B26_INSTANCE_P1\
 {
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     ConfigurationFile = __shared__::TpRule.If_\ConfigurationFile_P1\_C1X.PatConfigSetpoints.json");
     SetPoint = "\SetPoint\";
 }
@@ -781,7 +781,7 @@ CSharpTest PrimeFuseBurnMaskTestMethod FUSE_X_FUSEBURN_K_\B27_INSTANCE_P1\
     Patlist = "IPC::cpu_fuse_write_\Patlist_P1\";
     LevelsTc = "CPU_IP_BASE::cpu1_all_bf_x_x_ipc_lvl_nom";
     TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     ConfigName = "\ConfigName_P1\_CPU1";
     ConfigurationFile = FUS_FUSEBURN_CXX_Rules.FUSEBURN_CfgFile("./InputFiles/FUSEBURN_C2X.fuseMask.json","./InputFiles/FUSEBURN_C2X.fuseMask_BLLC.json","./InputFiles/FUSEBURN_C1X.fuseMask_BLLC.json","./InputFiles/FUSEBURN_C1X.fuseMask.json");
     LogLevel = "Disabled";
@@ -796,7 +796,7 @@ CSharpTest PrimeFuseBurnMaskTestMethod FUSE_X_FUSEBURN_K_\B27_INSTANCE_P1\
 # BP_BUCKET: B28 tests=4
 CSharpTest FleGeneratePerDieFuseString FUSE_X_FLE_K_\B28_INSTANCE_P1\
 {
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     DataLog = "On";
     Register = "\Register\";
 }
@@ -804,7 +804,7 @@ CSharpTest FleGeneratePerDieFuseString FUSE_X_FLE_K_\B28_INSTANCE_P1\
 # BP_BUCKET: B29 tests=9
 CSharpTest FleCompareFuseStringByDies FUSE_X_FLE_K_\B29_INSTANCE_P1\
 {
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     Category = "\Category_P1\_CAT";
     FuseReadTokenNames = __shared__::TpRule.If_MICP("FUS_FUSEBURN_CXX::FUS_FUSEBURN_\FuseReadTokenNames_P1\_CPU0,FUS_FUSEBURN_CXX::FUS_FUSEBURN_\FuseReadTokenNames_P1\_CPU1","FUS_FUSEBURN_CXX::FUS_FUSEBURN_\FuseReadTokenNames_P1\_CPU0");
     OutputFuseStringLocation = "SharedStorage";
@@ -817,7 +817,7 @@ CSharpTest PrimeFuseBurnMaskTestMethod FUSE_X_FUSEBURN_\B30_INSTANCE_P1\
     Patlist = __shared__::TpRule.If_\Patlist_P1\_fuse_write_\Patlist_P2\_\Patlist_P3\_\Patlist_P4\,"IPC::cpu_fuse_write_\Patlist_P2\_\Patlist_P6\_mm");
     LevelsTc = __shared__::TpRule.If_MICP("CPU_IP_BASE::cpu0_all_bf_x_x_ipc_lvl_nom","CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom");
     TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     ConfigName = "\ConfigName\";
     ConfigurationFile = FUS_FUSEBURN_CXX_Rules.FUSEBURN_CfgFile("./InputFiles/FUSEBURN_C2X.fuseMask.json","./InputFiles/FUSEBURN_C2X.fuseMask_BLLC.json","./InputFiles/FUSEBURN_C1X.fuseMask_BLLC.json","./InputFiles/FUSEBURN_C1X.fuseMask.json");
     LogLevel = "Disabled";
@@ -842,7 +842,7 @@ CSharpTest PrimeFuseBurnMaskTestMethod FUSE_X_FUSEBURN_K_\B32_INSTANCE_P1\
     Patlist = "IPC::cpu_fuse_write_\Patlist_P1\";
     LevelsTc = __shared__::TpRule.If_MICP("CPU_IP_BASE::cpu0_all_bf_x_x_ipc_lvl_nom","CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom");
     TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     ConfigName = "\ConfigName\";
     ConfigurationFile = FUS_FUSEBURN_CXX_Rules.FUSEBURN_CfgFile("./InputFiles/FUSEBURN_C2X.fuseMask.json","./InputFiles/FUSEBURN_C2X.fuseMask_BLLC.json","./InputFiles/FUSEBURN_C1X.fuseMask_BLLC.json","./InputFiles/FUSEBURN_C1X.fuseMask.json");
     LogLevel = "Disabled";
@@ -857,7 +857,7 @@ CSharpTest PrimeFuseBurnMaskTestMethod FUSE_X_FUSEBURN_K_\B32_INSTANCE_P1\
 # BP_BUCKET: B33 tests=3
 CSharpTest ScreenTC FUSE_X_SCREENTC_K_\B33_INSTANCE_P1\
 {
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     ScreenTestSet = "\ScreenTestSet\";
     ScreenTestsFile = __shared__::TpRule.If_MICP("./InputFiles/FUSEBURN_C2X.screen.json","./InputFiles/FUSEBURN_C1X.screen.json");
 }
@@ -865,7 +865,7 @@ CSharpTest ScreenTC FUSE_X_SCREENTC_K_\B33_INSTANCE_P1\
 # BP_BUCKET: B34 tests=4
 CSharpTest FleISeedSetUnitKeys FUSE_X_ISEED_K_\B34_INSTANCE_P1\
 {
-    BypassPort = __BYPASS__;
+    BypassPort = -1;
     DieIds =  __shared__::TpRule.If_MICP("U1.U5,U1.U6","U1.U5");
     KeysTypeId = __shared__::TpRule.If_MICP("1600,1599","1600");
 }

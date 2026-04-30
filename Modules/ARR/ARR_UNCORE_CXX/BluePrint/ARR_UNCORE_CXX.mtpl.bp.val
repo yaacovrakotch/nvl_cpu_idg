@@ -47,7 +47,7 @@ CSharpTest VminTC ALL_UNCORE_SB_K_BEGINCPUNOM_X_VNNAON_X_X_F1_NOM
     LevelsTc = "IPC::ARR_UNCORE_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_nom_lvl";
     TimingsTc = ARR_UNCORE_CXX_Specs.timingRules;
     BaseNumbers = "12403";
-    BypassPort = 1;
+    BypassPort = -1;
     EndVoltageLimits = "0.77";
     ForwardingMode = "None";
     RecoveryMode = "NoRecovery";
@@ -71,7 +71,7 @@ CSharpTest VminTC ALL_UNCORE_SB_K_ENDCPUMAX_X_VNNAON_X_X_F1_MAX
     LevelsTc = "IPC::ARR_UNCORE_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_max_lvl";
     TimingsTc = ARR_UNCORE_CXX_Specs.timingRules;
     BaseNumbers = "12404";
-    BypassPort = 1;
+    BypassPort = -1;
     EndVoltageLimits = "0.825";
     ForwardingMode = "None";
     RecoveryMode = "NoRecovery";
@@ -96,7 +96,7 @@ CSharpTest VminTC ALL_UNCORE_SB_K_ENDCPUNOM_X_VNNAON_X_X_X_RETENTION
     LevelsTc = "IPC::ARR_UNCORE_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_nom_lvl";
     TimingsTc = ARR_UNCORE_CXX_Specs.timingRules;
     BaseNumbers = "12405";
-    BypassPort = 1;
+    BypassPort = -1;
     EndVoltageLimits = "0.77";
     ForwardingMode = "None";
     RecoveryMode = "NoRecovery";
@@ -120,7 +120,7 @@ CSharpTest DDGShmooTC ARR_UNCORE_SHMOO_E_BEGINCPUNOM_X_X_X_X_SHMOO_FOR_DEDC
     Patlist = "IPC::arr_cdie_endcpumax_mbist_uncore_all_all_vnnaon_ks_vmax_x_class_hptp_list";    
     LevelsTc = "IPC::ARR_UNCORE_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_nom_lvl";
     TimingsTc = ARR_UNCORE_CXX_Specs.timingRules;
-    BypassPort = 1;
+    BypassPort = -1;
     LogLevel = "Enabled";
     PrintFormat = "ShmooHub";
     SetPointsPlistParamName = "Patlist";
@@ -139,7 +139,7 @@ CSharpTest DDGShmooTC ARR_UNCORE_SHMOO_E_BEGINCPUNOM_X_X_X_X_SHMOO_FOR_DEDC
 
 CSharpTest RunCallback XSA_UNCORE_RUNCALLBACK_E_BEGINCPUNOM_X_X_X_X_RASTER
 {
-    BypassPort = ARR_UNCORE_CXX_Specs.RASTER_ENABLE;
+    BypassPort = -1;
 	Callback = "JsonRun";
     Parameters = ARR_UNCORE_CXX_Rules.TPRules(ARR_UNCORE_CXX_Specs.jsonraster_others,ARR_UNCORE_CXX_Specs.jsonraster_others,ARR_UNCORE_CXX_Specs.jsonraster_others,ARR_UNCORE_CXX_Specs.jsonraster_s16c,ARR_UNCORE_CXX_Specs.jsonraster_s16c,ARR_UNCORE_CXX_Specs.jsonraster_s16c,ARR_UNCORE_CXX_Specs.jsonraster_others,ARR_UNCORE_CXX_Specs.jsonraster_others);
 }
@@ -152,7 +152,7 @@ CSharpTest MbistRasterRepairTC XSA_UNCORE_RASTER_E_BEGINCPUNOM_X_X_NOM_X_X
     TimingsTc = ARR_UNCORE_CXX_Specs.timingRulesRaster;
 	#Patlist = "arr_cdie_begincpunom_mbist_core_raster_pnc_exe_dcm0_s0_raster_autoinc_class_tap_list";
 	Patlist = "arr_cdie_begincpunom_mbist_uncore_raster_unc_dmu_c1_vnnaon_raster_autoinc_class_tap_list";
-    BypassPort = ARR_UNCORE_CXX_Specs.RASTER_ENABLE;
+    BypassPort = -1;
 	CtvCapturePins = "CPU_TDO";
 	EnableRepair = "FALSE";
 	FailuresToCapturePerPattern = 0;

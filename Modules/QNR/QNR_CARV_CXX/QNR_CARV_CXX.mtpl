@@ -6,15 +6,12 @@ TestPlan QNR_CARV_CXX;
 
 Import "QNR_CARV_CXX.usrv";
 
-
-
 CSharpTest PrimePauseTestMethod CTRL_X_PAUSE_X_CPUIPFF_X_X_X_X_PAUSE
 {
     BypassPort = 1;
     ExitPort = 1;
     SleepTime = 1;
 }
-
 
 CSharpTest PrimeScanSPOFITestMethod CTRL_X_SCANFI_X_CPUIPFF_X_X_X_X_SPOFI
 {
@@ -26,7 +23,6 @@ CSharpTest PrimeScanSPOFITestMethod CTRL_X_SCANFI_X_CPUIPFF_X_X_X_X_SPOFI
     PerPatternFailCaptureCount = 25000;
     TotalFailCaptureCount = 50000;
 }
-
 
 CSharpTest VminTC CTRL_X_EAP_X_CPUIPFF_X_X_X_X_EAP
 {
@@ -44,7 +40,6 @@ CSharpTest VminTC CTRL_X_EAP_X_CPUIPFF_X_X_X_X_EAP
     VoltageTargets = "";
 }
 
-
 CSharpTest DDGFunctionalTC CTRL_X_FUNC_X_CPUIPFF_X_X_X_X_FUNC
 {
     # NOCLEAN
@@ -57,7 +52,6 @@ CSharpTest DDGFunctionalTC CTRL_X_FUNC_X_CPUIPFF_X_X_X_X_FUNC
     MaxFailuresPerPatternToItuff = 2;
     MaxFailuresToItuff = 1000;
 }
-
 
 CSharpTest DDGShmooTC CTRL_X_SHMOO_X_CPUIPFF_X_X_X_X_SHMOO
 {
@@ -74,7 +68,6 @@ CSharpTest DDGShmooTC CTRL_X_SHMOO_X_CPUIPFF_X_X_X_X_SHMOO
     YAxisRange = "0.45:0.05:15";
 }
 
-
 CSharpTest DedcLoadConfigTC CTRL_X_CALLBACK_K_INIT_X_X_X_X_CONTROL_ARV
 {
     ConfigFile = "./InputFiles/NVL_ARV.json";
@@ -82,9 +75,6 @@ CSharpTest DedcLoadConfigTC CTRL_X_CALLBACK_K_INIT_X_X_X_X_CONTROL_ARV
     Mode = QNR_CARV_CXX_Rules.CTRL_X_CALLBACK_K_INIT_X_X_X_X_CONTROL_ARV_Mode("ENABLE", "DISABLE");
     Scope = "GLOBAL";
 }
-
-
-
 
 Flow QNR_CARV_CXX_CPUIPFF
 {
@@ -240,7 +230,6 @@ Flow QNR_CARV_CXX_CPUIPFF
     
 }
 
-
 Flow QNR_CARV_CXX_INIT
 {
     FlowItem CTRL_X_CALLBACK_K_INIT_X_X_X_X_CONTROL_ARV CTRL_X_CALLBACK_K_INIT_X_X_X_X_CONTROL_ARV
@@ -270,4 +259,3 @@ Flow QNR_CARV_CXX_INIT
     }
     
 }
-
