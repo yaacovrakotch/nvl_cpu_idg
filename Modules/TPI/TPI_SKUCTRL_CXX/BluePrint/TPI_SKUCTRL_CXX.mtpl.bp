@@ -1,0 +1,131 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan TPI_SKUCTRL_CXX;
+
+
+# Test Counter Definition
+
+Counters
+{
+    n93612000_fail_CTRL_X_X_K_ATOM_X_X_X_X_SETPASSFREQ_0,
+    n93612001_fail_CTRL_X_X_K_CORE_X_X_X_X_SETPASSFREQ_0,
+    n93612002_fail_CTRL_X_X_K_RING_X_X_X_X_SETPASSFREQ_0
+} # End of Test Counter Definition
+
+
+# BP_BUCKET: B1 tests=3
+CSharpTest SkuManager CTRL_X_X_K_\B1_INSTANCE_P1\_X_X_X_X_SETPASSFREQ
+{
+    BypassPort = -1;
+    Domain = "\Domain\";
+    Mode = "SetPassFreq";
+    CurrentOptype = "__shared__::DFFVars.WRITE_OPTYPE";
+}
+
+
+
+# BP_FLOW_BUCKET: F1 flows=1
+Flow TPI_SKUCTRL_CXX_F5XCR
+{
+    FlowItem CTRL_X_X_K_CORE_X_X_X_X_SETPASSFREQ CTRL_X_X_K_CORE_X_X_X_X_SETPASSFREQ
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_X_K_RING_X_X_X_X_SETPASSFREQ;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+    FlowItem CTRL_X_X_K_RING_X_X_X_X_SETPASSFREQ CTRL_X_X_K_RING_X_X_X_X_SETPASSFREQ
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_X_K_ATOM_X_X_X_X_SETPASSFREQ;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+    FlowItem CTRL_X_X_K_ATOM_X_X_X_X_SETPASSFREQ CTRL_X_X_K_ATOM_X_X_X_X_SETPASSFREQ
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin __BIN__;
+            IncrementCounters __CTR__;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}

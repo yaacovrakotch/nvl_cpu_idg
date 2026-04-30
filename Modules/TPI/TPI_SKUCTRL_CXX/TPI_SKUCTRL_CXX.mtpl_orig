@@ -1,0 +1,142 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan TPI_SKUCTRL_CXX;
+
+
+# Test Counter Definition
+
+Counters
+{
+    n93612000_fail_CTRL_X_X_K_ATOM_X_X_X_X_SETPASSFREQ_0,
+    n93612001_fail_CTRL_X_X_K_CORE_X_X_X_X_SETPASSFREQ_0,
+    n93612002_fail_CTRL_X_X_K_RING_X_X_X_X_SETPASSFREQ_0
+} # End of Test Counter Definition
+
+CSharpTest SkuManager CTRL_X_X_K_CORE_X_X_X_X_SETPASSFREQ
+{
+    BypassPort = -1;
+    Domain = "CORE";
+    Mode = "SetPassFreq";
+    CurrentOptype = "__shared__::DFFVars.WRITE_OPTYPE";
+}
+
+CSharpTest SkuManager CTRL_X_X_K_RING_X_X_X_X_SETPASSFREQ
+{
+    BypassPort = -1;
+    Domain = "RING";
+    Mode = "SetPassFreq";
+    CurrentOptype = "__shared__::DFFVars.WRITE_OPTYPE";
+}
+
+CSharpTest SkuManager CTRL_X_X_K_ATOM_X_X_X_X_SETPASSFREQ
+{
+    BypassPort = -1;
+    Domain = "ATOM";
+    Mode = "SetPassFreq";
+    CurrentOptype = "__shared__::DFFVars.WRITE_OPTYPE";
+}
+
+Flow TPI_SKUCTRL_CXX_F5XCR
+{
+    FlowItem CTRL_X_X_K_CORE_X_X_X_X_SETPASSFREQ CTRL_X_X_K_CORE_X_X_X_X_SETPASSFREQ
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932179_fail_TPI_SKUCTRL_CXX_CTRL_X_X_K_CORE_X_X_X_X_SETPASSFREQ_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932179_fail_TPI_SKUCTRL_CXX_CTRL_X_X_K_CORE_X_X_X_X_SETPASSFREQ_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93612001_fail_TPI_SKUCTRL_CXX_CTRL_X_X_K_CORE_X_X_X_X_SETPASSFREQ_0;
+            IncrementCounters TPI_SKUCTRL_CXX::n93612001_fail_CTRL_X_X_K_CORE_X_X_X_X_SETPASSFREQ_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_X_K_RING_X_X_X_X_SETPASSFREQ;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+    FlowItem CTRL_X_X_K_RING_X_X_X_X_SETPASSFREQ CTRL_X_X_K_RING_X_X_X_X_SETPASSFREQ
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932180_fail_TPI_SKUCTRL_CXX_CTRL_X_X_K_RING_X_X_X_X_SETPASSFREQ_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932180_fail_TPI_SKUCTRL_CXX_CTRL_X_X_K_RING_X_X_X_X_SETPASSFREQ_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93612002_fail_TPI_SKUCTRL_CXX_CTRL_X_X_K_RING_X_X_X_X_SETPASSFREQ_0;
+            IncrementCounters TPI_SKUCTRL_CXX::n93612002_fail_CTRL_X_X_K_RING_X_X_X_X_SETPASSFREQ_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CTRL_X_X_K_ATOM_X_X_X_X_SETPASSFREQ;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+    FlowItem CTRL_X_X_K_ATOM_X_X_X_X_SETPASSFREQ CTRL_X_X_K_ATOM_X_X_X_X_SETPASSFREQ
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99932178_fail_TPI_SKUCTRL_CXX_CTRL_X_X_K_ATOM_X_X_X_X_SETPASSFREQ_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98932178_fail_TPI_SKUCTRL_CXX_CTRL_X_X_K_ATOM_X_X_X_X_SETPASSFREQ_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b93612000_fail_TPI_SKUCTRL_CXX_CTRL_X_X_K_ATOM_X_X_X_X_SETPASSFREQ_0;
+            IncrementCounters TPI_SKUCTRL_CXX::n93612000_fail_CTRL_X_X_K_ATOM_X_X_X_X_SETPASSFREQ_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}

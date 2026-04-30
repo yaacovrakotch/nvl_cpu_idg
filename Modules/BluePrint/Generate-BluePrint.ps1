@@ -111,9 +111,9 @@ function Parse-BlockBody {
 }
 
 function Normalize-BinCounterLine {
-    # Replace per-instance bin / counter / baseNumber values with a single
-    # canonical token so blocks that differ only in those values can merge.
-    # Returns the normalized line.
+    # Replace per-instance bin / counter / baseNumber / BypassPort values with
+    # a single canonical token so blocks that differ only in those values can
+    # merge. Original values are restored at Expand time from the binmap.
     param([string]$Line)
     $l = $Line
     if ($l -match '^(\s*(?:##EDC##\s*)?SetBin\s+).+?(\s*;\s*)$') {
@@ -124,6 +124,9 @@ function Normalize-BinCounterLine {
     }
     if ($l -match '^(\s*BaseNumbers\s*=\s*)"[^"]*"(\s*;\s*)$') {
         return ($Matches[1] + '"__BNUM__"' + $Matches[2])
+    }
+    if ($l -match '^(\s*BypassPort\s*=\s*).+?(\s*;\s*)$') {
+        return ($Matches[1] + '__BYPASS__' + $Matches[2])
     }
     return $l
 }
@@ -136,9 +139,9 @@ function Normalize-BodyLines {
 }
 
 function Extract-BinCtrValues {
-    # Return ordered list of original bin/ctr/bnum *values* (in body order),
+    # Return ordered list of original bin/ctr/bnum/bypass *values* (in body order),
     # i.e. exactly the values that Normalize-BinCounterLine replaced with
-    # __BIN__/__CTR__/__BNUM__ placeholders.
+    # __BIN__/__CTR__/__BNUM__/__BYPASS__ placeholders.
     param([System.Collections.Generic.List[string]]$Body)
     $out = [System.Collections.Generic.List[string]]::new()
     foreach ($l in $Body) {
@@ -147,6 +150,8 @@ function Extract-BinCtrValues {
         } elseif ($l -match '^\s*(?:##EDC##\s*)?IncrementCounters\s+(.+?)\s*;\s*$') {
             [void]$out.Add($Matches[1])
         } elseif ($l -match '^\s*BaseNumbers\s*=\s*"([^"]*)"\s*;\s*$') {
+            [void]$out.Add($Matches[1])
+        } elseif ($l -match '^\s*BypassPort\s*=\s*(.+?)\s*;\s*$') {
             [void]$out.Add($Matches[1])
         }
     }
@@ -292,12 +297,16 @@ function Find-VocabName {
 function Get-StructureSignature {
     # Test bucket signature: TestType + Template + comment shape + body structure
     # (param-name list AND non-param body lines verbatim).
+    # NOTE: param ORDER is part of the signature — Expand emits one body per
+    # bucket using test 0's line layout, so tests with the same params in a
+    # different order cannot share a bucket without losing original line
+    # ordering. (BypassPort and BaseNumbers are normalized in Normalize-
+    # BinCounterLine, so their values do not differentiate tests; the order
+    # of those lines is preserved by per-test binmap restore at Expand.)
     param($Block)
     $params = Parse-Params -Lines $Block.BodyLines
     $paramKey = ($params | ForEach-Object { $_.Name }) -join '|'
     $cmtKey = ($Block.CommentLines | ForEach-Object { ($_ -replace '\s+', ' ').Trim() }) -join '||'
-    # Non-param body lines (comments inside body, blank lines, brace lines, etc.)
-    # — must match exactly across bucket members.
     $nonParam = [System.Collections.Generic.List[string]]::new()
     for ($i = 0; $i -lt $Block.BodyLines.Count; $i++) {
         $l = $Block.BodyLines[$i]
@@ -306,17 +315,12 @@ function Get-StructureSignature {
         } elseif ($l -match '^(\s*\w+\s*=\s*).+?\s*;\s*$') {
             $nonParam.Add("<PU:$($Matches[1])>")
         } elseif ($l -match '^\s*(CSharpTest|MultiTrialTest)\s+') {
-            # Header line - shape only (template name kept; instance name drop)
             $nonParam.Add('<H>')
         } else {
             $nonParam.Add(($l -replace '\s+', ' ').Trim())
         }
     }
     $structKey = $nonParam -join '||'
-    # Instance-name token-shape: sequence of separators ('_' / ',') in the
-    # instance name. Tests with the same body shape but different name shapes
-    # go to separate sub-buckets so Decompose-OnSeparators can produce one
-    # column per varying token.
     $nameShape = ''
     foreach ($ch in $Block.Name.ToCharArray()) {
         if ($ch -eq '_' -or $ch -eq ',') { $nameShape += $ch }
@@ -329,6 +333,35 @@ function CsvEscape {
     if ($null -eq $s) { return '' }
     if ($s -match '[",\r\n]') { return '"' + ($s -replace '"','""') + '"' }
     return $s
+}
+
+function Write-FileWithRetry {
+    # Writes text content to a file even if another process briefly holds a
+    # read lock (e.g. an editor with the file open). First tries direct write
+    # with retry; if that keeps failing, writes to <path>.new and tries to
+    # atomically replace the original via Move-Item with retry.
+    param([string]$Path, [string]$Content, [int]$Retries = 5)
+    for ($k = 1; $k -le $Retries; $k++) {
+        try {
+            [IO.File]::WriteAllText($Path, $Content)
+            return
+        } catch [IO.IOException] {
+            if ($k -eq $Retries) { break }
+            Start-Sleep -Milliseconds (200 * $k)
+        }
+    }
+    # Fallback: write to .new and try to swap.
+    $tmp = "$Path.new"
+    [IO.File]::WriteAllText($tmp, $Content)
+    for ($k = 1; $k -le $Retries; $k++) {
+        try {
+            Move-Item -LiteralPath $tmp -Destination $Path -Force -ErrorAction Stop
+            return
+        } catch {
+            if ($k -eq $Retries) { Write-Warning "Could not replace $Path (locked); wrote $tmp instead."; return }
+            Start-Sleep -Milliseconds (300 * $k)
+        }
+    }
 }
 
 function Decompose-OnSeparators {
@@ -1058,6 +1091,199 @@ foreach ($_fbi in $flowBucketInfos) { $totalFlowFields += $_fbi.Fields.Count }
 Write-Host "  Total varying flow fields across buckets: $totalFlowFields"
 #endregion
 
+#region phase-2 slot consolidation
+# After buckets are finalized, look for symbol relationships within each bucket
+# so we can deduce a smaller set of independent symbols. Two cases handled:
+#   1. FULL match  : two slots have identical SymValues across all rows.
+#                    The second slot becomes an alias of the first.
+#   2. SUBSTRING   : slot B's value at every row equals  <prefix>+slotA+<suffix>
+#                    with a constant prefix/suffix across all rows. Slot B can
+#                    be removed; its placeholder rewrites to <prefix>\A\<suffix>.
+#
+# Consolidations are stored per-bucket as a list of @{ Alias; Primary; Mode;
+# Prefix; Suffix } and applied at BP/CSV/log emit time.
+
+function Get-BucketSlotEntries {
+    # Returns list of @{ Name; Values; FieldName } for every slot in the bucket
+    # (composite fields are flattened into one entry per slot segment).
+    param([hashtable]$Info)
+    $out = New-Object System.Collections.Generic.List[hashtable]
+    foreach ($f in $Info.Fields) {
+        $fieldName = $f.Field
+        if ($f.ContainsKey('Segments') -and $null -ne $f.Segments) {
+            foreach ($s in $f.Segments) {
+                if ($s.Type -eq 'slot') {
+                    [void]$out.Add(@{ Name = $s.SlotName; Values = @($s.SymValues); FieldName = $fieldName })
+                }
+            }
+        } else {
+            [void]$out.Add(@{ Name = $f.SlotName; Values = @($f.SymValues); FieldName = $fieldName })
+        }
+    }
+    return $out
+}
+
+function Find-BucketConsolidations {
+    param([hashtable]$Info)
+    $slots = @(Get-BucketSlotEntries -Info $Info)
+    $absorbed = @{}
+    $cons = New-Object System.Collections.Generic.List[hashtable]
+    for ($a = 0; $a -lt $slots.Count; $a++) {
+        if ($absorbed.ContainsKey($slots[$a].Name)) { continue }
+        $av = $slots[$a].Values
+        if ($av.Count -eq 0) { continue }
+        for ($b = $a + 1; $b -lt $slots.Count; $b++) {
+            if ($absorbed.ContainsKey($slots[$b].Name)) { continue }
+            $bv = $slots[$b].Values
+            if ($bv.Count -ne $av.Count) { continue }
+            # 1) full match - safest, always valid.
+            $eq = $true
+            for ($i = 0; $i -lt $av.Count; $i++) {
+                if ($av[$i] -cne $bv[$i]) { $eq = $false; break }
+            }
+            if ($eq) {
+                [void]$cons.Add(@{ Alias = $slots[$b].Name; Primary = $slots[$a].Name; Mode = 'full'; Prefix = ''; Suffix = '' })
+                $absorbed[$slots[$b].Name] = $true
+                continue
+            }
+            # 2) substring match: bv[i] = pre + av[i] + suf with the SAME
+            # pre/suf at every row. Detected as a candidate; later validated
+            # by a per-bucket simulated round-trip and dropped if unsafe.
+            $pre = $null; $suf = $null
+            $valid = $true
+            for ($i = 0; $i -lt $av.Count; $i++) {
+                $a1 = [string]$av[$i]; $b1 = [string]$bv[$i]
+                if ([string]::IsNullOrEmpty($a1)) { $valid = $false; break }
+                $idx = $b1.IndexOf($a1)
+                if ($idx -lt 0) { $valid = $false; break }
+                $thisPre = $b1.Substring(0, $idx)
+                $thisSuf = $b1.Substring($idx + $a1.Length)
+                if ($null -eq $pre) { $pre = $thisPre; $suf = $thisSuf }
+                elseif ($pre -cne $thisPre -or $suf -cne $thisSuf) { $valid = $false; break }
+            }
+            if ($valid -and ($pre.Length -gt 0 -or $suf.Length -gt 0)) {
+                [void]$cons.Add(@{ Alias = $slots[$b].Name; Primary = $slots[$a].Name; Mode = 'substr'; Prefix = $pre; Suffix = $suf })
+                $absorbed[$slots[$b].Name] = $true
+            }
+        }
+    }
+    return $cons
+}
+
+function Test-BucketConsolidations {
+    # Simulates Generate's BP body emit + Expand's row substitution for every
+    # row in the bucket, using the supplied $cons list. Returns the subset of
+    # $cons that produces an EXACT match against the original test bodies.
+    # Any consolidation whose application breaks the round-trip is dropped.
+    param([hashtable]$Info, $Cons)
+    if (-not $Cons -or $Cons.Count -eq 0) { return @() }
+    $rep = $Info.Tests[0]
+    $absorbedNames = @{}
+    foreach ($c in $Cons) { $absorbedNames[$c.Alias] = $c }
+
+    # Build the BP-shape body for test 0: substitute every field with its
+    # placeholder form (\SlotName\) - mirrors the real BP emit logic.
+    $tmplBody = [System.Collections.Generic.List[string]]@($rep.BodyLines)
+    foreach ($f in $Info.Fields) {
+        $oldVal = Render-FieldValue -Field $f -TestIdx 0 -Mode 'sym'
+        $newVal = Render-FieldValue -Field $f -TestIdx 0 -Mode 'placeholder'
+        if ($f.Field -eq '__INSTANCE__') {
+            $tmplBody[0] = $tmplBody[0].Replace($oldVal, $newVal)
+        } else {
+            $li = $f.LineIdx
+            $isQuoted = $true
+            if ($f.ContainsKey('Quoted')) { $isQuoted = [bool]$f.Quoted }
+            if ($isQuoted) { $tmplBody[$li] = $tmplBody[$li].Replace("`"$oldVal`"", "`"$newVal`"") }
+            else           { $tmplBody[$li] = $tmplBody[$li].Replace($oldVal, $newVal) }
+        }
+    }
+
+    # Apply consolidation rewrites: \Alias\ -> [pre]\Primary\[suf]
+    $rewritten = [System.Collections.Generic.List[string]]@($tmplBody)
+    for ($bi = 0; $bi -lt $rewritten.Count; $bi++) {
+        foreach ($c in $Cons) {
+            $rewritten[$bi] = $rewritten[$bi].Replace("\$($c.Alias)\", "$($c.Prefix)\$($c.Primary)\$($c.Suffix)")
+        }
+    }
+
+    # Build the per-row slot tables (mirrors Get-BucketSlotEntries) - use these
+    # for simulated expansion. Drop slots that consolidations absorbed.
+    $slotEntries = New-Object System.Collections.Generic.List[hashtable]
+    foreach ($f in $Info.Fields) {
+        if ($f.ContainsKey('Segments') -and $null -ne $f.Segments) {
+            foreach ($s in $f.Segments) {
+                if ($s.Type -eq 'slot') { [void]$slotEntries.Add(@{ Name = $s.SlotName; Values = $s.SymValues }) }
+            }
+        } else {
+            [void]$slotEntries.Add(@{ Name = $f.SlotName; Values = $f.SymValues })
+        }
+    }
+
+    # Validate by simulating expansion for each row.
+    $okFlags = @{}
+    foreach ($c in $Cons) { $okFlags[$c.Alias] = $true }
+
+    for ($row = 0; $row -lt $Info.Tests.Count; $row++) {
+        # Build expected = the REAL test body (after BP-shape rewrite for that
+        # specific test - i.e. apply field substitutions for THIS row).
+        $expected = [System.Collections.Generic.List[string]]@($Info.Tests[$row].BodyLines)
+        # We compare against the simulated expansion of the consolidated
+        # template using row $row's values.
+        $simulated = [System.Collections.Generic.List[string]]@($rewritten)
+        for ($si = 0; $si -lt $simulated.Count; $si++) {
+            foreach ($e in $slotEntries) {
+                if ($absorbedNames.ContainsKey($e.Name)) { continue }
+                $simulated[$si] = $simulated[$si].Replace("\$($e.Name)\", [string]$e.Values[$row])
+            }
+        }
+        # Compare line-by-line. Any mismatch invalidates EVERY consolidation
+        # that touched a line whose simulated output differs (we are pessimistic
+        # and drop them all on this bucket - safer than guessing which one).
+        for ($li = 0; $li -lt [Math]::Min($expected.Count, $simulated.Count); $li++) {
+            if ($expected[$li] -cne $simulated[$li]) {
+                # Mark as failed and exit early - a single bad row invalidates
+                # the whole consolidation set for this bucket; reject and let
+                # the caller fall back to unconsolidated emission.
+                foreach ($c in $Cons) { $okFlags[$c.Alias] = $false }
+                break
+            }
+        }
+    }
+
+    return @($Cons | Where-Object { $okFlags[$_.Alias] })
+}
+
+# Build per-bucket consolidation map and a flat global summary.
+$consolidationsPerBucket = @{}
+$consolidationCount = 0
+$consolidationDroppedCount = 0
+$fullCount = 0
+$substrCount = 0
+foreach ($info in $bucketInfos) {
+    $candidates = @(Find-BucketConsolidations -Info $info)
+    if ($candidates.Count -eq 0) { continue }
+    $cons = @(Test-BucketConsolidations -Info $info -Cons $candidates)
+    $dropped = $candidates.Count - $cons.Count
+    $consolidationDroppedCount += $dropped
+    if ($cons.Count -gt 0) {
+        $consolidationsPerBucket["B$($info.BucketId)"] = $cons
+        $consolidationCount += $cons.Count
+        foreach ($c in $cons) {
+            if ($c.Mode -eq 'full') { $fullCount++ } else { $substrCount++ }
+        }
+    }
+}
+Write-Host "  Phase-2 slot consolidations across buckets: $consolidationCount (full=$fullCount, substr=$substrCount; dropped by self-verify=$consolidationDroppedCount)"
+
+function Get-AbsorbedSlots {
+    param([string]$BucketKey)
+    if (-not $consolidationsPerBucket.ContainsKey($BucketKey)) { return @{} }
+    $h = @{}
+    foreach ($c in $consolidationsPerBucket[$BucketKey]) { $h[$c.Alias] = $c }
+    return $h
+}
+#endregion
+
 #region emit BP file
 $sb = [System.Text.StringBuilder]::new()
 [void]$sb.AppendLine(($preambleLines -join "`n"))
@@ -1084,6 +1310,21 @@ foreach ($info in $bucketInfos) {
                 $body[$li] = $body[$li].Replace("`"$oldVal`"", "`"$newVal`"")
             } else {
                 $body[$li] = $body[$li].Replace($oldVal, $newVal)
+            }
+        }
+    }
+
+    # Phase-2 consolidations: rewrite \Alias\ -> [pre]\Primary\[suf] in body
+    $cons = $null
+    if ($consolidationsPerBucket.ContainsKey("B$($info.BucketId)")) {
+        $cons = $consolidationsPerBucket["B$($info.BucketId)"]
+    }
+    if ($cons) {
+        for ($bi = 0; $bi -lt $body.Count; $bi++) {
+            foreach ($c in $cons) {
+                $needle  = "\$($c.Alias)\"
+                $replace = "$($c.Prefix)\$($c.Primary)\$($c.Suffix)"
+                $body[$bi] = $body[$bi].Replace($needle, $replace)
             }
         }
     }
@@ -1178,6 +1419,11 @@ foreach ($info in $bucketInfos) {
             [void]$slotEntries.Add(@{ Name = $f.SlotName; SymValues = $f.SymValues })
         }
     }
+    # Drop slots that were absorbed by Phase-2 consolidation.
+    $absorbed = Get-AbsorbedSlots -BucketKey "B$($info.BucketId)"
+    if ($absorbed.Count -gt 0) {
+        $slotEntries = [System.Collections.Generic.List[hashtable]]@($slotEntries | Where-Object { -not $absorbed.ContainsKey($_.Name) })
+    }
     $hdr = @('InstanceName') + @($slotEntries | ForEach-Object { $_.Name })
     $csvLines.Add(($hdr | ForEach-Object { CsvEscape $_ }) -join ',')
     for ($ti = 0; $ti -lt $info.Tests.Count; $ti++) {
@@ -1201,7 +1447,7 @@ foreach ($info in $flowBucketInfos) {
     $csvLines.Add('')
 }
 
-[IO.File]::WriteAllLines($csvFile, $csvLines.ToArray())
+Write-FileWithRetry -Path $csvFile -Content (($csvLines.ToArray() -join "`r`n") + "`r`n")
 Write-Host "  CSV written: $csvFile ($($bucketInfos.Count) test buckets, $($flowBucketInfos.Count) flow buckets)"
 #endregion
 
@@ -1275,13 +1521,72 @@ function Render-BucketTable {
 foreach ($info in $bucketInfos) {
     $h = "Bucket B$($info.BucketId)  type=$($info.Tests[0].TestType)  template=$($info.Tests[0].Template)  tests=$($info.Tests.Count)  varyingFields=$($info.Fields.Count)"
     Render-BucketTable -Out $logSb -Hdr $h -Items $info.Tests -Fields $info.Fields -NameProp 'Name'
+    if ($consolidationsPerBucket.ContainsKey("B$($info.BucketId)")) {
+        [void]$logSb.AppendLine("  Phase-2 consolidations:")
+        foreach ($c in $consolidationsPerBucket["B$($info.BucketId)"]) {
+            if ($c.Mode -eq 'full') {
+                [void]$logSb.AppendLine("    \$($c.Alias)\ == \$($c.Primary)\  (full match - alias)")
+            } else {
+                [void]$logSb.AppendLine("    \$($c.Alias)\ == `"$($c.Prefix)`" + \$($c.Primary)\ + `"$($c.Suffix)`"  (substring)")
+            }
+        }
+        [void]$logSb.AppendLine('')
+    }
 }
 foreach ($info in $flowBucketInfos) {
     $h = "Bucket F$($info.BucketId)  type=Flow  flows=$($info.Flows.Count)  varyingFields=$($info.Fields.Count)"
     Render-BucketTable -Out $logSb -Hdr $h -Items $info.Flows -Fields $info.Fields -NameProp 'Name'
 }
 
-[IO.File]::WriteAllText($logFile, $logSb.ToString())
+# ---- Symbol rules summary: per slot-name across all buckets ----
+[void]$logSb.AppendLine(('=' * 80))
+[void]$logSb.AppendLine("SYMBOL RULES SUMMARY (per slot name across buckets)")
+[void]$logSb.AppendLine(('=' * 80))
+$symStats = @{}   # slotName -> list of @{ Bucket; UniqueValues }
+foreach ($info in $bucketInfos) {
+    $absorbed = Get-AbsorbedSlots -BucketKey "B$($info.BucketId)"
+    $slots = @(Get-BucketSlotEntries -Info $info)
+    foreach ($s in $slots) {
+        if ($absorbed.ContainsKey($s.Name)) { continue }
+        $uv = @($s.Values | Sort-Object -Unique)
+        if (-not $symStats.ContainsKey($s.Name)) { $symStats[$s.Name] = New-Object System.Collections.Generic.List[hashtable] }
+        [void]$symStats[$s.Name].Add(@{ Bucket = "B$($info.BucketId)"; UniqueValues = $uv })
+    }
+}
+foreach ($name in ($symStats.Keys | Sort-Object)) {
+    $entries = $symStats[$name]
+    $counts = @($entries | ForEach-Object { $_.UniqueValues.Count })
+    $minN = ($counts | Measure-Object -Minimum).Minimum
+    $maxN = ($counts | Measure-Object -Maximum).Maximum
+    # Find the most common value-set signature
+    $sigGroups = @{}
+    foreach ($e in $entries) {
+        $sig = ($e.UniqueValues -join ',')
+        if (-not $sigGroups.ContainsKey($sig)) { $sigGroups[$sig] = New-Object System.Collections.Generic.List[string] }
+        [void]$sigGroups[$sig].Add($e.Bucket)
+    }
+    $top = $sigGroups.GetEnumerator() | Sort-Object { -$_.Value.Count } | Select-Object -First 1
+    $topBuckets = $top.Value
+    $exceptionEntries = @($entries | Where-Object { ($_.UniqueValues -join ',') -ne $top.Key })
+    [void]$logSb.AppendLine("`n$name :")
+    [void]$logSb.AppendLine("  appears in $($entries.Count) bucket(s); distinct values per bucket: min=$minN max=$maxN")
+    $topVals = $top.Key
+    if ($topVals.Length -gt 80) { $topVals = $topVals.Substring(0, 79) + '~' }
+    [void]$logSb.AppendLine("  rule: $($topBuckets.Count)/$($entries.Count) buckets have value-set [$topVals]")
+    if ($exceptionEntries.Count -gt 0) {
+        $shownEx = 0
+        foreach ($e in $exceptionEntries) {
+            $shownEx++
+            if ($shownEx -gt 5) { [void]$logSb.AppendLine("    ...and $($exceptionEntries.Count - 5) more exceptions"); break }
+            $ev = ($e.UniqueValues -join ',')
+            if ($ev.Length -gt 80) { $ev = $ev.Substring(0, 79) + '~' }
+            [void]$logSb.AppendLine("    exception in $($e.Bucket): [$ev]")
+        }
+    }
+}
+[void]$logSb.AppendLine('')
+
+Write-FileWithRetry -Path $logFile -Content $logSb.ToString()
 Write-Host "  Log written: $logFile"
 
 # Sidecar: per-instance original bin/ctr/bnum values used to restore real

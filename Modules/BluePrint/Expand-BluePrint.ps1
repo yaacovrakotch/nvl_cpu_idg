@@ -51,6 +51,15 @@ Write-Host "=== BluePrint Expander (v2 per-bucket CSV) ==="
 Write-Host "BP : $InputBp"
 Write-Host "CSV: $csvFile"
 
+# Prefer .symbols.csv.new if it exists and is newer than .csv (the generator
+# writes there when something else holds an exclusive lock on the .csv).
+$csvNewFile = "$csvFile.new"
+if ((Test-Path $csvNewFile) -and (-not (Test-Path $csvFile) -or
+     (Get-Item $csvNewFile).LastWriteTime -gt (Get-Item $csvFile).LastWriteTime)) {
+    Write-Host "  Using $csvNewFile (newer than .csv)"
+    $csvFile = $csvNewFile
+}
+
 if (-not (Test-Path $csvFile)) {
     throw "symbols.csv not found at $csvFile - run Generate-BluePrint first."
 }
@@ -121,8 +130,8 @@ if (Test-Path $binmapFile) {
 }
 
 function Restore-BinCtrPlaceholders {
-    # Walks $bodyLines and replaces __BIN__/__CTR__/__BNUM__ placeholders with
-    # the original values stored in $values (in body order).
+    # Walks $bodyLines and replaces __BIN__/__CTR__/__BNUM__/__BYPASS__
+    # placeholders with the original values stored in $values (in body order).
     param(
         [System.Collections.Generic.List[string]]$BodyLines,
         $Values
@@ -138,6 +147,8 @@ function Restore-BinCtrPlaceholders {
             if ($vi -lt $Values.Count) { $nl = $nl.Replace('__CTR__', [string]$Values[$vi]); $vi++ }
         } elseif ($nl -match '__BNUM__') {
             if ($vi -lt $Values.Count) { $nl = $nl.Replace('__BNUM__', [string]$Values[$vi]); $vi++ }
+        } elseif ($nl -match '__BYPASS__') {
+            if ($vi -lt $Values.Count) { $nl = $nl.Replace('__BYPASS__', [string]$Values[$vi]); $vi++ }
         }
         [void]$out.Add($nl)
     }

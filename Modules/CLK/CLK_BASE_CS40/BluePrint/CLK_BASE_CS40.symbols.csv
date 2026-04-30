@@ -7,21 +7,21 @@ InstanceName
 RESETCHECK_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_BBS
 
 # Bucket B3  type=CSharpTest  template=CsioCmemTC  tests=8
-InstanceName,B3_INSTANCE_P1,B3_INSTANCE_P2,B3_INSTANCE_P3,Patlist_P1,PlistConfigurationFile_P1,PlistConfigSet_P1,FunctionCall,LevelsTc_P1,BypassPort
-CONFIGREAD_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_BBS,CONFIGREAD,E,BBS,configread,configread,configread,Generic_RegRead,distnom,-
-STATUSREAD_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_BBS,STATUSREAD,E,BBS,statusread,statusread,statusread,Generic_RegRead,distnom,-
-IREFTRIM_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM,IREFTRIM,K,HVM,ireftrim,ireftrim,ireftrim,Ljpll_4p0_IrefTrimConverge,distmax,-
-DCATRIM_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM,DCATRIM,K,HVM,dcatrim,dcatrim,dcatrim,Ljpll_4p0_DcaTrim,dcadistmax,-
-AFSTRIM_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM,AFSTRIM,K,HVM,afstrim,afstrim,afstrim,Ljpll_4p0_AfsTrim,distnom,-
-IREFTRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC,IREFTRIM,E,SDC,ireftrim,ireftrim,ireftrim,Ljpll_4p0_IrefTrimConverge,distmax,
-DCATRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC,DCATRIM,E,SDC,dcatrim,dcatrim,dcatrim,Ljpll_4p0_DcaTrim,dcadistmax,
-AFSTRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC,AFSTRIM,E,SDC,afstrim,afstrim,afstrim,Ljpll_4p0_AfsTrim,distnom,
+InstanceName,B3_INSTANCE_P1,B3_INSTANCE_P2,B3_INSTANCE_P3,Patlist_P1,FunctionCall,LevelsTc_P1
+CONFIGREAD_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_BBS,CONFIGREAD,E,BBS,configread,Generic_RegRead,distnom
+STATUSREAD_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_BBS,STATUSREAD,E,BBS,statusread,Generic_RegRead,distnom
+IREFTRIM_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM,IREFTRIM,K,HVM,ireftrim,Ljpll_4p0_IrefTrimConverge,distmax
+DCATRIM_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM,DCATRIM,K,HVM,dcatrim,Ljpll_4p0_DcaTrim,dcadistmax
+AFSTRIM_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM,AFSTRIM,K,HVM,afstrim,Ljpll_4p0_AfsTrim,distnom
+IREFTRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC,IREFTRIM,E,SDC,ireftrim,Ljpll_4p0_IrefTrimConverge,distmax
+DCATRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC,DCATRIM,E,SDC,dcatrim,Ljpll_4p0_DcaTrim,dcadistmax
+AFSTRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC,AFSTRIM,E,SDC,afstrim,Ljpll_4p0_AfsTrim,distnom
 
 # Bucket B4  type=CSharpTest  template=CsioCmemTC  tests=3
-InstanceName,B4_INSTANCE_P1,B4_INSTANCE_P2,B4_INSTANCE_P3,Patlist_P1,PlistConfigurationFile_P1,PlistConfigSet_P1,FunctionCall_P1,PreInstance_P1,BypassPort
-VREFTRIM_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM,VREFTRIM,K,HVM,vreftrim,vreftrim,vreftrim,VrefTrim,vreftrim_vnnaon --print)),-
-VCCPLL_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM,VCCPLL,K,HVM,vccpll,vccpll,vccpll,VccPll,vnnaon --print)),-
-VREFTRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC,VREFTRIM,E,SDC,vreftrim,vreftrim,vreftrim,VrefTrim,vreftrim_vnnaon --print)),
+InstanceName,B4_INSTANCE_P1,B4_INSTANCE_P2,B4_INSTANCE_P3,Patlist_P1,FunctionCall_P1,PreInstance_P1
+VREFTRIM_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM,VREFTRIM,K,HVM,vreftrim,VrefTrim,vreftrim_vnnaon --print))
+VCCPLL_X_CMEM_K_BEGIN_TAP_X_MIN_X_40_HVM,VCCPLL,K,HVM,vccpll,VccPll,vnnaon --print))
+VREFTRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC,VREFTRIM,E,SDC,vreftrim,VrefTrim,vreftrim_vnnaon --print))
 
 # Bucket B5  type=CSharpTest  template=PrimePauseTestMethod  tests=4
 InstanceName,B5_INSTANCE_P1,SetPointsPreInstance_P1,SetPointsPreInstance_P2
@@ -35,11 +35,11 @@ InstanceName
 RECIPE_X_PATCFG_E_BEGIN_X_X_X_X_X_X_PATMOD
 
 # Bucket B7  type=CSharpTest  template=PrimeSampleRateTestMethod  tests=4
-InstanceName,B7_INSTANCE_P1,B7_INSTANCE_P2,SamplingRateValue_P1,BypassPort
-SETUP_X_SAMPLE_K_BEGIN_X_X_MIN_X_X_X,SETUP,X,CXXX::CLK_BASE_CXXX.SortClassCorrelationRate,-1
-FORK_X_SAMPLE_K_BEGIN_X_X_MIN_X_X_BBS,FORK,BBS,"CXXX::SampleRate.VMIN_BBS(""100"",""1"")",CLK_BASE_CXXX::CLK_BASE_CXXX.SampleBypass
-FORK_X_SAMPLE_K_BEGIN_X_X_MIN_X_X_HVM,FORK,HVM,"CXXX::SampleRate.VMIN_HVM(""100"",""1"")",CLK_BASE_CXXX::CLK_BASE_CXXX.SampleBypass
-FORK_X_SAMPLE_K_BEGIN_X_X_MIN_X_X_SDC,FORK,SDC,"CXXX::SampleRate.VMIN_SDC(""100"",""1"")",CLK_BASE_CXXX::CLK_BASE_CXXX.SampleBypass
+InstanceName,B7_INSTANCE_P1,B7_INSTANCE_P2,SamplingRateValue_P1
+SETUP_X_SAMPLE_K_BEGIN_X_X_MIN_X_X_X,SETUP,X,CXXX::CLK_BASE_CXXX.SortClassCorrelationRate
+FORK_X_SAMPLE_K_BEGIN_X_X_MIN_X_X_BBS,FORK,BBS,"CXXX::SampleRate.VMIN_BBS(""100"",""1"")"
+FORK_X_SAMPLE_K_BEGIN_X_X_MIN_X_X_HVM,FORK,HVM,"CXXX::SampleRate.VMIN_HVM(""100"",""1"")"
+FORK_X_SAMPLE_K_BEGIN_X_X_MIN_X_X_SDC,FORK,SDC,"CXXX::SampleRate.VMIN_SDC(""100"",""1"")"
 
 # Bucket B8  type=CSharpTest  template=AuxiliaryTC  tests=3
 InstanceName,B8_INSTANCE_P1,Expression,DataType,Storage,ResultToken
