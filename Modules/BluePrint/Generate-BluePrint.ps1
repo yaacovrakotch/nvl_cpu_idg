@@ -46,6 +46,7 @@ $bpFile     = Join-Path $OutputDir "$moduleName.mtpl.bp"
 $csvFile    = Join-Path $OutputDir "$moduleName.symbols.csv"
 $logFile    = Join-Path $OutputDir "$moduleName.compressions.log"
 $promptFile = Join-Path $OutputDir "$moduleName.prompt.txt"
+$derivFile  = Join-Path $OutputDir "$moduleName.derivations.log"
 
 Write-Host "=== MTPL BluePrint Generator (v2 data-driven) ==="
 Write-Host "Module : $moduleName"
@@ -317,28 +318,41 @@ function Find-VocabName {
 
 function Get-StructureSignature {
     # Test bucket signature: TestType + Template + comment shape + body structure
-    # (param-name list AND non-param body lines verbatim).
-    # NOTE: param ORDER is part of the signature — Expand emits one body per
+    # (param-name list AND non-param body lines verbatim, EXCEPT Flow header /
+    # FlowItem identifier names which are abstracted so structurally identical
+    # flow blocks merge into a single bucket regardless of the test names they
+    # reference). Field decomposition then extracts the varying name parts.
+    # NOTE: param ORDER is part of the signature -- Expand emits one body per
     # bucket using test 0's line layout, so tests with the same params in a
     # different order cannot share a bucket without losing original line
-    # ordering. (BypassPort and BaseNumbers are normalized in Normalize-
-    # BinCounterLine, so their values do not differentiate tests; the order
-    # of those lines is preserved by per-test binmap restore at Expand.)
+    # ordering.
     param($Block)
     $params = Parse-Params -Lines $Block.BodyLines
     $paramKey = ($params | ForEach-Object { $_.Name }) -join '|'
     $cmtKey = ($Block.CommentLines | ForEach-Object { ($_ -replace '\s+', ' ').Trim() }) -join '||'
     $nonParam = [System.Collections.Generic.List[string]]::new()
     for ($i = 0; $i -lt $Block.BodyLines.Count; $i++) {
-        $l = $Block.BodyLines[$i]
-        if ($l -match '^(\s*\w+\s*=\s*)"[^"]*"\s*;?\s*$') {
+        # Aggressive whitespace normalization: collapse all runs of whitespace
+        # to a single space and trim, so number-of-spaces never affects the
+        # bucket signature. The actual emitted .bp body still uses test 0's
+        # verbatim line layout.
+        $l = (($Block.BodyLines[$i] -replace '\s+', ' ').Trim())
+        if ($l -match '^(\w+ = )"[^"]*" ?;?$') {
             $nonParam.Add("<PQ:$($Matches[1])>")
-        } elseif ($l -match '^(\s*\w+\s*=\s*).+?\s*;\s*$') {
+        } elseif ($l -match '^(\w+ = ).+? ?;$') {
             $nonParam.Add("<PU:$($Matches[1])>")
-        } elseif ($l -match '^\s*(CSharpTest|MultiTrialTest)\s+') {
+        } elseif ($l -match '^(CSharpTest|MultiTrialTest) ') {
             $nonParam.Add('<H>')
+        } elseif ($l -match '^(Flow|DUTFlow) \S+') {
+            $nonParam.Add('<FH>')
+        } elseif ($l -match '^(FlowItem|DUTFlowItem) \S+') {
+            # Strip identifier names; keep flag tokens (@EDC etc.) so flows
+            # with vs without flags do NOT merge.
+            $flags = ''
+            foreach ($m in [regex]::Matches($l, '@\w+')) { $flags += $m.Value }
+            $nonParam.Add("<FI$flags>")
         } else {
-            $nonParam.Add(($l -replace '\s+', ' ').Trim())
+            $nonParam.Add($l)
         }
     }
     $structKey = $nonParam -join '||'
@@ -349,10 +363,44 @@ function Get-StructureSignature {
     return "$($Block.TestType)|$($Block.Template)|$paramKey|$cmtKey|$structKey|$nameShape"
 }
 
+function Apply-MinMaxRescue {
+    # Post-decomposition rescue: when a field's symbol values are exactly the
+    # set {"IN","AX"} (in any per-row mix) and the prefix ends with the
+    # letter 'M', rotate the trailing 'M' from prefix into each symbol so the
+    # values become {"MIN","MAX"} -- much more meaningful in BP / symbols.csv.
+    param([hashtable]$Field)
+    if (-not $Field) { return }
+    if (-not $Field.ContainsKey('SymValues') -or $null -eq $Field.SymValues) { return }
+    $vals = @($Field.SymValues)
+    if ($vals.Count -eq 0) { return }
+    $uniq = @($vals | Sort-Object -Unique)
+    if ($uniq.Count -ne 2) { return }
+    if (-not (($uniq -contains 'IN') -and ($uniq -contains 'AX'))) { return }
+    if (-not $Field.ContainsKey('Prefix') -or $null -eq $Field.Prefix) { return }
+    if ($Field.Prefix.Length -lt 1 -or $Field.Prefix[$Field.Prefix.Length - 1] -ne 'M') { return }
+    $Field.Prefix = $Field.Prefix.Substring(0, $Field.Prefix.Length - 1)
+    $newVals = @($vals | ForEach-Object { 'M' + $_ })
+    $Field.SymValues = $newVals
+}
+
 function CsvEscape {
     param([string]$s)
     if ($null -eq $s) { return '' }
     if ($s -match '[",\r\n]') { return '"' + ($s -replace '"','""') + '"' }
+    return $s
+}
+
+function Compact-Whitespace {
+    # Collapse internal runs of spaces/tabs to a single space and strip
+    # trailing whitespace. Preserves at most ONE leading space when the line
+    # had any indentation, so visual nesting is still hinted at without
+    # carrying multi-space indent variations into the BP body.
+    param([string]$Line)
+    if ($null -eq $Line -or $Line.Length -eq 0) { return $Line }
+    $hadIndent = ($Line -match '^[ \t]')
+    $s = ($Line -replace '[ \t]+', ' ').TrimEnd()
+    if (-not $hadIndent -and $s.StartsWith(' ')) { $s = $s.Substring(1) }
+    if ($hadIndent -and -not $s.StartsWith(' ')) { $s = ' ' + $s }
     return $s
 }
 
@@ -616,6 +664,7 @@ function Build-Field {
     $field.Prefix    = $pre
     $field.Suffix    = $suf
     $field.SymValues = @($sv)
+    Apply-MinMaxRescue -Field $field
     return $field
 }
 
@@ -927,14 +976,16 @@ function Build-FlowBucketInfo {
             if ($s.Length -ge $p.Length) { $s = $s.Substring(1) } else { $p = $p.Substring(0, $p.Length - 1) }
         }
         $sv = $names | ForEach-Object { $_.Substring($p.Length, $_.Length - $p.Length - $s.Length) }
-        $info.Fields.Add(@{
+        $fnField = @{
             Field     = '__FLOWNAME__'
             LineIdx   = -1
             TokenIdx  = -1
             Prefix    = $p
             Suffix    = $s
             SymValues = @($sv)
-        })
+        }
+        Apply-MinMaxRescue -Field $fnField
+        $info.Fields.Add($fnField)
     }
 
     # Token-level analysis per body line index using flow 0 as template.
@@ -968,14 +1019,16 @@ function Build-FlowBucketInfo {
                 if ($suf.Length -ge $pre.Length) { $suf = $suf.Substring(1) } else { $pre = $pre.Substring(0, $pre.Length - 1) }
             }
             $sv = $arr | ForEach-Object { $_.Substring($pre.Length, $_.Length - $pre.Length - $suf.Length) }
-            $info.Fields.Add(@{
+            $tokField = @{
                 Field     = "L${li}T${tk}"
                 LineIdx   = $li
                 TokenIdx  = $tk
                 Prefix    = $pre
                 Suffix    = $suf
                 SymValues = @($sv)
-            })
+            }
+            Apply-MinMaxRescue -Field $tokField
+            $info.Fields.Add($tokField)
         }
     }
 
@@ -1307,7 +1360,7 @@ function Get-AbsorbedSlots {
 
 #region emit BP file
 $sb = [System.Text.StringBuilder]::new()
-[void]$sb.AppendLine(($preambleLines -join "`n"))
+foreach ($pl in $preambleLines) { [void]$sb.AppendLine((Compact-Whitespace -Line $pl)) }
 [void]$sb.AppendLine('')
 
 foreach ($info in $bucketInfos) {
@@ -1350,8 +1403,8 @@ foreach ($info in $bucketInfos) {
         }
     }
 
-    foreach ($c in $rep.CommentLines) { [void]$sb.AppendLine($c) }
-    foreach ($l in $body)             { [void]$sb.AppendLine($l) }
+    foreach ($c in $rep.CommentLines) { [void]$sb.AppendLine((Compact-Whitespace -Line $c)) }
+    foreach ($l in $body)             { [void]$sb.AppendLine((Compact-Whitespace -Line $l)) }
 }
 
 # Flow buckets � use same compress mechanism (one representative per bucket).
@@ -1404,8 +1457,8 @@ foreach ($info in $flowBucketInfos) {
         $body[[int]$li] = $line
     }
 
-    foreach ($c in $rep.CommentLines) { [void]$sb.AppendLine($c) }
-    foreach ($l in $body)             { [void]$sb.AppendLine($l) }
+    foreach ($c in $rep.CommentLines) { [void]$sb.AppendLine((Compact-Whitespace -Line $c)) }
+    foreach ($l in $body)             { [void]$sb.AppendLine((Compact-Whitespace -Line $l)) }
 }
 
 [IO.File]::WriteAllText($bpFile, $sb.ToString().TrimEnd() + "`r`n")
@@ -1470,6 +1523,225 @@ foreach ($info in $flowBucketInfos) {
 
 Write-FileWithRetry -Path $csvFile -Content (($csvLines.ToArray() -join "`r`n") + "`r`n")
 Write-Host "  CSV written: $csvFile ($($bucketInfos.Count) test buckets, $($flowBucketInfos.Count) flow buckets)"
+#endregion
+
+#region detect column derivations (analysis only)
+# For each bucket's column matrix (rows = tests/flows, cols = slot symbols),
+# look for columns whose values are deterministically derivable from other
+# columns. Detected forms:
+#   - identity:   T == S (column duplicate)
+#   - functional: T = f(S) — for every distinct value of S, T is constant
+#   - concat:     T = L0 + S1 + L1 + S2 + ... + Lk (ordered, with fixed
+#                 literal fillers across all rows)
+# Output: <module>.derivations.log
+function _TryConcatRule {
+    param(
+        [string[]] $TargetVals,
+        [string[]] $PickedNames,
+        [hashtable]$SourceVals
+    )
+    $nRows = $TargetVals.Length
+    $refLits = $null
+    for ($r = 0; $r -lt $nRows; $r++) {
+        $T = $TargetVals[$r]
+        $pos = 0
+        $lits = New-Object 'System.Collections.Generic.List[string]'
+        foreach ($n in $PickedNames) {
+            $sv = $SourceVals[$n][$r]
+            if ([string]::IsNullOrEmpty($sv)) { return $null }
+            $idx = $T.IndexOf($sv, $pos)
+            if ($idx -lt 0) { return $null }
+            [void]$lits.Add($T.Substring($pos, $idx - $pos))
+            $pos = $idx + $sv.Length
+        }
+        [void]$lits.Add($T.Substring($pos))
+        $arr = $lits.ToArray()
+        if ($null -eq $refLits) {
+            $refLits = $arr
+        } else {
+            if ($arr.Length -ne $refLits.Length) { return $null }
+            for ($i = 0; $i -lt $arr.Length; $i++) { if ($arr[$i] -cne $refLits[$i]) { return $null } }
+        }
+    }
+    return $refLits
+}
+
+function _Detect-ConcatRule {
+    param(
+        [string[]] $TargetVals,
+        [string[]] $SourceNames,
+        [hashtable]$SourceVals
+    )
+    $nSrc = $SourceNames.Length
+    $maxK = [Math]::Min(3, $nSrc)
+    $nRows = $TargetVals.Length
+    if ($nRows -lt 2 -or $nSrc -lt 1) { return $null }
+    $T0 = $TargetVals[0]
+    # Iterative DFS with row-0 prune: at each node, verify the partial pick
+    # can still match TargetVals[0] in left-to-right order. Only when a
+    # complete subset matches all rows with identical literal fillers do we
+    # accept it.
+    $stack = New-Object 'System.Collections.Generic.Stack[object]'
+    # Frame: @{ Picks=[int[]]; Used=[int[]]; Pos0=[int] }
+    $stack.Push(@{ Picks = @(); Used = (New-Object 'int[]' $nSrc); Pos0 = 0 })
+    while ($stack.Count -gt 0) {
+        $frame = $stack.Pop()
+        $picks = $frame.Picks
+        $used  = $frame.Used
+        $pos0  = $frame.Pos0
+        if ($picks.Length -gt 0) {
+            $names = @($picks | ForEach-Object { $SourceNames[$_] })
+            $lits = _TryConcatRule -TargetVals $TargetVals -PickedNames $names -SourceVals $SourceVals
+            if ($null -ne $lits) { return @{ Sources = $names; Literals = $lits } }
+        }
+        if ($picks.Length -lt $maxK) {
+            for ($i = $nSrc - 1; $i -ge 0; $i--) {
+                if ($used[$i]) { continue }
+                $sv0 = $SourceVals[$SourceNames[$i]][0]
+                if ([string]::IsNullOrEmpty($sv0)) { continue }
+                $idx = $T0.IndexOf($sv0, $pos0)
+                if ($idx -lt 0) { continue }
+                $newUsed = [int[]]::new($nSrc); [Array]::Copy($used, $newUsed, $nSrc); $newUsed[$i] = 1
+                $stack.Push(@{ Picks = ($picks + $i); Used = $newUsed; Pos0 = ($idx + $sv0.Length) })
+            }
+        }
+    }
+    return $null
+}
+
+function Detect-Derivations {
+    param([string]$BucketLabel,[string[]]$ColumnNames,[hashtable]$ColumnVals)
+    $rules = New-Object 'System.Collections.Generic.List[string]'
+    if ($ColumnNames.Length -lt 2) { return ,$rules }
+    $nRows = $ColumnVals[$ColumnNames[0]].Length
+    if ($nRows -lt 2) { return ,$rules }
+    foreach ($t in $ColumnNames) {
+        $tVals = $ColumnVals[$t]
+        $tDistinct = @($tVals | Select-Object -Unique).Count
+        if ($tDistinct -le 1) { continue }
+        $found = $false
+        # 1) Identity
+        foreach ($s in $ColumnNames) {
+            if ($s -eq $t) { continue }
+            $sVals = $ColumnVals[$s]
+            $eq = $true
+            for ($r = 0; $r -lt $nRows; $r++) { if ($sVals[$r] -cne $tVals[$r]) { $eq = $false; break } }
+            if ($eq) { [void]$rules.Add("$t = $s   (identical)"); $found = $true; break }
+        }
+        if ($found) { continue }
+        # 2) Functional map (single source)
+        foreach ($s in $ColumnNames) {
+            if ($s -eq $t) { continue }
+            $sVals = $ColumnVals[$s]
+            $sDistinct = @($sVals | Select-Object -Unique).Count
+            if ($tDistinct -gt $sDistinct) { continue }
+            $map = @{}
+            $isFn = $true
+            for ($r = 0; $r -lt $nRows; $r++) {
+                $sv = $sVals[$r]; $tv = $tVals[$r]
+                if ($map.ContainsKey($sv)) {
+                    if ($map[$sv] -cne $tv) { $isFn = $false; break }
+                } else { $map[$sv] = $tv }
+            }
+            if ($isFn -and $map.Count -ge 2 -and $map.Count -lt $nRows) {
+                $entries = @($map.Keys | Sort-Object | ForEach-Object { "$_->$($map[$_])" })
+                [void]$rules.Add("$t = f($s)   { $($entries -join '; ') }")
+                $found = $true
+                break
+            }
+        }
+        if ($found) { continue }
+        # 3) Concat detection
+        $sources = @($ColumnNames | Where-Object { $_ -ne $t })
+        $srcVals = @{}
+        foreach ($s in $sources) { $srcVals[$s] = $ColumnVals[$s] }
+        $rule = _Detect-ConcatRule -TargetVals $tVals -SourceNames $sources -SourceVals $srcVals
+        if ($null -ne $rule) {
+            $parts = New-Object 'System.Collections.Generic.List[string]'
+            $lits = $rule.Literals; $srcs = $rule.Sources
+            if ($lits[0] -ne '') { [void]$parts.Add('"' + $lits[0] + '"') }
+            for ($i = 0; $i -lt $srcs.Count; $i++) {
+                [void]$parts.Add($srcs[$i])
+                if ($i + 1 -lt $lits.Count -and $lits[$i + 1] -ne '') { [void]$parts.Add('"' + $lits[$i + 1] + '"') }
+            }
+            [void]$rules.Add("$t = $($parts -join ' + ')")
+        }
+    }
+    return ,$rules
+}
+
+$derivSb = [System.Text.StringBuilder]::new()
+[void]$derivSb.AppendLine("# Column derivations detected for $moduleName")
+[void]$derivSb.AppendLine("# Format: TARGET = <rule>")
+[void]$derivSb.AppendLine('')
+$totalRules = 0
+$bucketsWithRules = 0
+
+function _BucketColumns {
+    param($Info, [bool]$IsFlow)
+    $names = New-Object 'System.Collections.Generic.List[string]'
+    $vals  = @{}
+    if ($IsFlow) {
+        foreach ($f in $Info.Fields) {
+            $nm = $f.SlotName
+            if ($null -eq $nm) { continue }
+            [void]$names.Add($nm); $vals[$nm] = @($f.SymValues)
+        }
+    } else {
+        $absorbed = Get-AbsorbedSlots -BucketKey "B$($Info.BucketId)"
+        foreach ($f in $Info.Fields) {
+            if ($f.ContainsKey('Segments') -and $null -ne $f.Segments) {
+                foreach ($s in $f.Segments) {
+                    if ($s.Type -ne 'slot') { continue }
+                    $nm = $s.SlotName
+                    if ($null -eq $nm) { continue }
+                    if ($absorbed.ContainsKey($nm)) { continue }
+                    [void]$names.Add($nm); $vals[$nm] = @($s.SymValues)
+                }
+            } else {
+                $nm = $f.SlotName
+                if ($null -eq $nm) { continue }
+                if ($absorbed.ContainsKey($nm)) { continue }
+                [void]$names.Add($nm); $vals[$nm] = @($f.SymValues)
+            }
+        }
+    }
+    return @{ Names = $names.ToArray(); Vals = $vals }
+}
+
+foreach ($info in $bucketInfos) {
+    try {
+        $cols = _BucketColumns -Info $info -IsFlow $false
+        if ($cols.Names.Length -lt 2) { continue }
+        $rules = Detect-Derivations -BucketLabel "B$($info.BucketId)" -ColumnNames $cols.Names -ColumnVals $cols.Vals
+        if ($rules.Count -gt 0) {
+            $bucketsWithRules++; $totalRules += $rules.Count
+            [void]$derivSb.AppendLine("# Bucket B$($info.BucketId)  template=$($info.Tests[0].Template)  tests=$($info.Tests.Count)")
+            foreach ($r in $rules) { [void]$derivSb.AppendLine("  $r") }
+            [void]$derivSb.AppendLine('')
+        }
+    } catch {
+        Write-Host "  [derivations] Bucket B$($info.BucketId) skipped: $($_.Exception.Message) @ $($_.InvocationInfo.ScriptLineNumber)" -ForegroundColor Yellow
+    }
+}
+foreach ($info in $flowBucketInfos) {
+    try {
+        $cols = _BucketColumns -Info $info -IsFlow $true
+        if ($cols.Names.Length -lt 2) { continue }
+        $rules = Detect-Derivations -BucketLabel "F$($info.BucketId)" -ColumnNames $cols.Names -ColumnVals $cols.Vals
+        if ($rules.Count -gt 0) {
+            $bucketsWithRules++; $totalRules += $rules.Count
+            [void]$derivSb.AppendLine("# Bucket F$($info.BucketId)  type=Flow  flows=$($info.Flows.Count)")
+            foreach ($r in $rules) { [void]$derivSb.AppendLine("  $r") }
+            [void]$derivSb.AppendLine('')
+        }
+    } catch {
+        Write-Host "  [derivations] Bucket F$($info.BucketId) skipped: $($_.Exception.Message) @ $($_.InvocationInfo.ScriptLineNumber)" -ForegroundColor Yellow
+    }
+}
+
+Write-FileWithRetry -Path $derivFile -Content $derivSb.ToString()
+Write-Host "  Derivations: $totalRules rule(s) across $bucketsWithRules bucket(s)  -> $derivFile"
 #endregion
 
 #region emit compressions.log (human-readable per-bucket tables)
