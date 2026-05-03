@@ -3,7 +3,7 @@
     Expands a v2 BluePrint (data-driven, per-bucket-table CSV) into a full .mtpl.
 
 .DESCRIPTION
-    Reads <module>.mtpl.bp + <module>.symbols.csv. The CSV is organised as
+    Reads <module>_bp.mtpl + <module>.symbols.csv. The CSV is organised as
     one tabular section per bucket:
         # Bucket B1  type=CSharpTest  template=VminTC  tests=4
         InstanceName,SLOT1,SLOT2
@@ -22,7 +22,7 @@
     For each bucket, the expander emits one block per CSV row, substituting
     \SLOT\ placeholders with that row's slot values.
 .PARAMETER InputBp
-    Path to <module>.mtpl.bp.
+    Path to <module>_bp.mtpl.
 #>
 [CmdletBinding()]
 param(
@@ -36,14 +36,18 @@ $ErrorActionPreference = 'Stop'
 $InputBp    = (Resolve-Path $InputBp).Path
 $bpDir      = Split-Path $InputBp
 $bpFileName = [IO.Path]::GetFileName($InputBp)
-if ($bpFileName -notmatch '^(.+)\.mtpl\.bp$') {
-    throw "Input must end with .mtpl.bp, got: $bpFileName"
+if ($bpFileName -match '^(.+)_bp\.mtpl$') {
+    $moduleName = $Matches[1]
+} elseif ($bpFileName -match '^(.+)\.mtpl\.bp$') {
+    # Backwards compatibility with the legacy name.
+    $moduleName = $Matches[1]
+} else {
+    throw "Input must end with _bp.mtpl (or legacy .mtpl.bp), got: $bpFileName"
 }
-$moduleName  = $Matches[1]
 $moduleDir   = Split-Path $bpDir
 $csvFile     = Join-Path $bpDir "$moduleName.symbols.csv"
 $binmapFile  = Join-Path $bpDir "$moduleName.binmap.json"
-$valFile     = Join-Path $bpDir "$moduleName.mtpl.bp.val"
+$valFile     = Join-Path $bpDir "${moduleName}_bp.val.mtpl"
 $origMtpl    = Join-Path $moduleDir "$moduleName.mtpl_orig"
 $targetMtpl  = Join-Path $moduleDir "$moduleName.mtpl"
 

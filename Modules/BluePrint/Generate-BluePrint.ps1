@@ -14,7 +14,7 @@
     when the value set matches; otherwise an auto-name `B<id>_<field>` is used.
 
     Outputs:
-      <module>.mtpl.bp          - compressed test programme
+      <module>_bp.mtpl          - compressed test programme
       <module>.symbols.csv      - per-bucket per-test slot value table
       <module>.compressions.log - human-readable bucket tables
       <module>.prompt.txt       - expansion prompt
@@ -42,7 +42,7 @@ $moduleName = [IO.Path]::GetFileNameWithoutExtension($InputMtpl)
 if (-not $OutputDir) { $OutputDir = Join-Path (Split-Path $InputMtpl) 'BluePrint' }
 if (-not (Test-Path $OutputDir)) { New-Item -ItemType Directory $OutputDir -Force | Out-Null }
 
-$bpFile     = Join-Path $OutputDir "$moduleName.mtpl.bp"
+$bpFile     = Join-Path $OutputDir "${moduleName}_bp.mtpl"
 $csvFile    = Join-Path $OutputDir "$moduleName.symbols.csv"
 $logFile    = Join-Path $OutputDir "$moduleName.compressions.log"
 $promptFile = Join-Path $OutputDir "$moduleName.prompt.txt"
@@ -1906,7 +1906,7 @@ $pr = [System.Text.StringBuilder]::new()
 [void]$pr.AppendLine("Generated: $(Get-Date -Format 'yyyy-MM-dd HH:mm')")
 [void]$pr.AppendLine(('=' * 80))
 [void]$pr.AppendLine('')
-[void]$pr.AppendLine("The .mtpl.bp contains one representative block per bucket. Each block is")
+[void]$pr.AppendLine("The _bp.mtpl contains one representative block per bucket. Each block is")
 [void]$pr.AppendLine("preceded by:    # BP_BUCKET: B<id> tests=<count>")
 [void]$pr.AppendLine("Symbol values per test live in $moduleName.symbols.csv.")
 [void]$pr.AppendLine("Use Expand-BluePrint.ps1 to reconstruct the full .mtpl.")
