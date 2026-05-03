@@ -9,204 +9,212 @@ TestPlan FUS_FSG_CXX;
 
 Counters
 {
-    n31502000_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CHECK_0,
-    n31502001_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CHECK_2,
-    n31502002_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_0,
-    n31502003_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_2,
-    n31502004_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CPU1_0,
-    n31502005_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CPU1_2,
-    n31562004_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_0,
-    n31562005_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_2,
-    n31562006_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_4,
-    n31562007_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_5
+ n31502000_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CHECK_0,
+ n31502001_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CHECK_2,
+ n31502002_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_0,
+ n31502003_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_2,
+ n31502004_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CPU1_0,
+ n31502005_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CPU1_2,
+ n31562004_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_0,
+ n31562005_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_2,
+ n31562006_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_4,
+ n31562007_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_5
 } # End of Test Counter Definition
+
 
 CSharpTest FleGeneratePerDieFuseStringByDies FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CHECK
 {
-    BypassPort = 1;
-    DataLog = "On";
-    Registers = __shared__::TpRule.If_MICP("CPU0,CPU1","CPU0");
+ BypassPort = 1;
+ DataLog = "On";
+ Registers = __shared__::TpRule.If_MICP("CPU0,CPU1","CPU0");
 }
+
 
 CSharpTest FleGeneratePerDieFuseString FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG
 {
-    DataLog = "On";
-    Register = "CPU0";
+ DataLog = "On";
+ Register = "CPU0";
 }
+
 
 CSharpTest FleGeneratePerDieFuseString FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CPU1
 {
-    BypassPort = __shared__::TpRule.If_MICP(-1,1);
-    DataLog = "On";
-    Register = "CPU1";
+ BypassPort = __shared__::TpRule.If_MICP(-1,1);
+ DataLog = "On";
+ Register = "CPU1";
 }
+
 
 CSharpTest FleGetDieStatusByDies FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS
 {
-    BypassPort = -1;
-    FuseStateUservar = "Which_Socket.FuseState";
-    Registers = __shared__::TpRule.If_MICP("CPU0,CPU1","CPU0");
+ BypassPort = -1;
+ FuseStateUservar = "Which_Socket.FuseState";
+ Registers = __shared__::TpRule.If_MICP("CPU0,CPU1","CPU0");
 }
+
+
+
 
 Flow FUS_FSG_CXX_FACTFUSBUILDCPUNOM
 {
-    FlowItem FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CHECK FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CHECK
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            SetBin b99312030_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CHECK_n2;
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            SetBin b98312030_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CHECK_n1;
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            SetBin b31502000_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CHECK_0;
-            IncrementCounters FUS_FSG_CXX::n31502000_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CHECK_0;
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            GoTo FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG;
-        }
-        Result 2
-        {
-            Property PassFail = "Fail";
-            SetBin b31502001_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CHECK_2;
-            IncrementCounters FUS_FSG_CXX::n31502001_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CHECK_2;
-            Return 0;
-        }
-    }
-    
-    FlowItem FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            SetBin b99312028_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_n2;
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            SetBin b98312028_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_n1;
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            SetBin b31502002_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_0;
-            IncrementCounters FUS_FSG_CXX::n31502002_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_0;
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            GoTo FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CPU1;
-        }
-        Result 2
-        {
-            Property PassFail = "Fail";
-            SetBin b31502003_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_2;
-            IncrementCounters FUS_FSG_CXX::n31502003_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_2;
-            Return 0;
-        }
-    }
-    
-    FlowItem FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CPU1 FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CPU1
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            SetBin b99312031_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CPU1_n2;
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            SetBin b98312031_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CPU1_n1;
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            SetBin b31502004_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CPU1_0;
-            IncrementCounters FUS_FSG_CXX::n31502004_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CPU1_0;
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            GoTo FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS;
-        }
-        Result 2
-        {
-            Property PassFail = "Fail";
-            SetBin b31502005_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CPU1_2;
-            IncrementCounters FUS_FSG_CXX::n31502005_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CPU1_2;
-            Return 0;
-        }
-    }
-    
-    FlowItem FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            SetBin b99312264_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_n2;
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            SetBin b98312264_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_n1;
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            SetBin b31562004_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_0;
-            IncrementCounters FUS_FSG_CXX::n31562004_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_0;
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 2
-        {
-            Property PassFail = "Fail";
-            SetBin b31562005_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_2;
-            IncrementCounters FUS_FSG_CXX::n31562005_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_2;
-            Return 0;
-        }
-        Result 3
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-        Result 4
-        {
-            Property PassFail = "Fail";
-            SetBin b31562006_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_4;
-            IncrementCounters FUS_FSG_CXX::n31562006_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_4;
-            Return 0;
-        }
-        Result 5
-        {
-            Property PassFail = "Fail";
-            SetBin b31562007_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_5;
-            IncrementCounters FUS_FSG_CXX::n31562007_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_5;
-            Return 0;
-        }
-    }
-    
+ FlowItem FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CHECK FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CHECK
+ {
+ Result -2
+ {
+ Property PassFail = "Fail";
+ SetBin b99312030_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CHECK_n2;
+ Return -2;
+ }
+ Result -1
+ {
+ Property PassFail = "Fail";
+ SetBin b98312030_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CHECK_n1;
+ Return -1;
+ }
+ Result 0
+ {
+ Property PassFail = "Fail";
+ SetBin b31502000_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CHECK_0;
+ IncrementCounters FUS_FSG_CXX::n31502000_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CHECK_0;
+ Return 0;
+ }
+ Result 1
+ {
+ Property PassFail = "Pass";
+ GoTo FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG;
+ }
+ Result 2
+ {
+ Property PassFail = "Fail";
+ SetBin b31502001_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CHECK_2;
+ IncrementCounters FUS_FSG_CXX::n31502001_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CHECK_2;
+ Return 0;
+ }
+ }
+ 
+ FlowItem FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG
+ {
+ Result -2
+ {
+ Property PassFail = "Fail";
+ SetBin b99312028_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_n2;
+ Return -2;
+ }
+ Result -1
+ {
+ Property PassFail = "Fail";
+ SetBin b98312028_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_n1;
+ Return -1;
+ }
+ Result 0
+ {
+ Property PassFail = "Fail";
+ SetBin b31502002_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_0;
+ IncrementCounters FUS_FSG_CXX::n31502002_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_0;
+ Return 0;
+ }
+ Result 1
+ {
+ Property PassFail = "Pass";
+ GoTo FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CPU1;
+ }
+ Result 2
+ {
+ Property PassFail = "Fail";
+ SetBin b31502003_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_2;
+ IncrementCounters FUS_FSG_CXX::n31502003_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_2;
+ Return 0;
+ }
+ }
+ 
+ FlowItem FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CPU1 FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CPU1
+ {
+ Result -2
+ {
+ Property PassFail = "Fail";
+ SetBin b99312031_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CPU1_n2;
+ Return -2;
+ }
+ Result -1
+ {
+ Property PassFail = "Fail";
+ SetBin b98312031_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CPU1_n1;
+ Return -1;
+ }
+ Result 0
+ {
+ Property PassFail = "Fail";
+ SetBin b31502004_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CPU1_0;
+ IncrementCounters FUS_FSG_CXX::n31502004_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CPU1_0;
+ Return 0;
+ }
+ Result 1
+ {
+ Property PassFail = "Pass";
+ GoTo FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS;
+ }
+ Result 2
+ {
+ Property PassFail = "Fail";
+ SetBin b31502005_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CPU1_2;
+ IncrementCounters FUS_FSG_CXX::n31502005_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CPU1_2;
+ Return 0;
+ }
+ }
+ 
+ FlowItem FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS
+ {
+ Result -2
+ {
+ Property PassFail = "Fail";
+ SetBin b99312264_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_n2;
+ Return -2;
+ }
+ Result -1
+ {
+ Property PassFail = "Fail";
+ SetBin b98312264_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_n1;
+ Return -1;
+ }
+ Result 0
+ {
+ Property PassFail = "Fail";
+ SetBin b31562004_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_0;
+ IncrementCounters FUS_FSG_CXX::n31562004_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_0;
+ Return 0;
+ }
+ Result 1
+ {
+ Property PassFail = "Pass";
+ Return 1;
+ }
+ Result 2
+ {
+ Property PassFail = "Fail";
+ SetBin b31562005_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_2;
+ IncrementCounters FUS_FSG_CXX::n31562005_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_2;
+ Return 0;
+ }
+ Result 3
+ {
+ Property PassFail = "Pass";
+ Return 1;
+ }
+ Result 4
+ {
+ Property PassFail = "Fail";
+ SetBin b31562006_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_4;
+ IncrementCounters FUS_FSG_CXX::n31562006_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_4;
+ Return 0;
+ }
+ Result 5
+ {
+ Property PassFail = "Fail";
+ SetBin b31562007_fail_FUS_FSG_CXX_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_5;
+ IncrementCounters FUS_FSG_CXX::n31562007_fail_FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_GET_FUSE_STRING_STATUS_5;
+ Return 0;
+ }
+ }
+ 
 }
+

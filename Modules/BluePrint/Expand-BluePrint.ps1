@@ -38,11 +38,14 @@ $bpDir      = Split-Path $InputBp
 $bpFileName = [IO.Path]::GetFileName($InputBp)
 if ($bpFileName -match '^(.+)_bp\.mtpl$') {
     $moduleName = $Matches[1]
+} elseif ($bpFileName -match '^(.+)_bp\.bp$') {
+    # Backwards compatibility with the .bp extension.
+    $moduleName = $Matches[1]
 } elseif ($bpFileName -match '^(.+)\.mtpl\.bp$') {
     # Backwards compatibility with the legacy name.
     $moduleName = $Matches[1]
 } else {
-    throw "Input must end with _bp.mtpl (or legacy .mtpl.bp), got: $bpFileName"
+    throw "Input must end with _bp.mtpl (or legacy _bp.bp / .mtpl.bp), got: $bpFileName"
 }
 $moduleDir   = Split-Path $bpDir
 $csvFile     = Join-Path $bpDir "$moduleName.symbols.csv"
@@ -145,7 +148,7 @@ function Restore-BinCtrPlaceholders {
     #   SetBin __BIN__                       -> original bin value
     #   IncrementCounters __CTR__            -> original counter value
     #   BaseNumbers "__BNUM__"               -> original baseNumber value
-    # BypassPort is hardcoded to -1 in the BP, no restoration needed.
+    #   BypassPort = __BYPASS__              -> original BypassPort value (1 or -1)
     # SetPointsPreInstance / SetPointsPostInstance "DEFAULT" are restored
     # from a single global default applied to every instance in Restore-Defaults.
     param(
@@ -163,6 +166,8 @@ function Restore-BinCtrPlaceholders {
             if ($vi -lt $Values.Count) { $nl = $nl.Replace('__CTR__', [string]$Values[$vi]); $vi++ }
         } elseif ($nl -match '__BNUM__') {
             if ($vi -lt $Values.Count) { $nl = $nl.Replace('__BNUM__', [string]$Values[$vi]); $vi++ }
+        } elseif ($nl -match '__BYPASS__') {
+            if ($vi -lt $Values.Count) { $nl = $nl.Replace('__BYPASS__', [string]$Values[$vi]); $vi++ }
         }
         [void]$out.Add($nl)
     }
@@ -278,6 +283,12 @@ while ($i -lt $bpLines.Count) {
 Write-Host "  Tests expanded: $testCount from $bucketCount test buckets"
 Write-Host "  Flows expanded: $flowCount from $flowBucketCount flow buckets"
 Write-Host "  Val written: $valFile"
+
+# Write the fully expanded .mtpl for build (same content as val, just placed
+# at the module's .mtpl path so torch picks it up for compilation).
+[IO.File]::WriteAllLines($targetMtpl, $out.ToArray())
+Write-Host "  Build .mtpl written: $targetMtpl  (tests=$testCount, flows=$flowCount)"
+#endregion
 #endregion
 
 #region round-trip identity check vs mtpl_orig
@@ -322,7 +333,144 @@ if (Test-Path $origMtpl) {
     Write-Host "Round-trip identity check vs mtpl_orig..."
     $o = Get-Blocks -Path $origMtpl
     $v = Get-Blocks -Path $valFile
+    #region BP-vs-MTPL count parity + flow connectivity (new checks)
+    function Get-FlowConnectivity {
+        param([string]$Path)
+        # Parse flows + per-flow body so we can do reachability from roots.
+        $lines = [IO.File]::ReadAllLines($Path)
+        $flowDefs = New-Object 'System.Collections.Generic.List[string]'
+        $flowSet  = New-Object 'System.Collections.Generic.HashSet[string]'
+        $bodyMap  = @{}   # name -> list of body lines
+        $i = 0
+        while ($i -lt $lines.Count) {
+            $ln = $lines[$i]
+            if ($ln -match '^\s*(?:DUTFlow|Flow)\s+(\S+)') {
+                $name = $Matches[1]
+                [void]$flowDefs.Add($name); [void]$flowSet.Add($name)
+                $body = New-Object 'System.Collections.Generic.List[string]'
+                # Find opening brace (may be same line or next non-blank)
+                $j = $i + 1
+                while ($j -lt $lines.Count -and $lines[$j].Trim() -eq '') { $j++ }
+                if ($j -lt $lines.Count -and $lines[$j].Trim().StartsWith('{')) {
+                    $depth = 1; $j++
+                    while ($j -lt $lines.Count -and $depth -gt 0) {
+                        $bl = $lines[$j]
+                        $depth += ([regex]::Matches($bl, '\{').Count)
+                        $depth -= ([regex]::Matches($bl, '\}').Count)
+                        if ($depth -gt 0) { [void]$body.Add($bl) }
+                        $j++
+                    }
+                }
+                $bodyMap[$name] = $body
+                $i = $j; continue
+            }
+            $i++
+        }
+        # Per-flow outgoing FlowItem refs (only to other defined flows).
+        $edges = @{}
+        $referenced = New-Object 'System.Collections.Generic.HashSet[string]'
+        foreach ($name in $flowDefs) {
+            $outs = New-Object 'System.Collections.Generic.HashSet[string]'
+            foreach ($bl in $bodyMap[$name]) {
+                if ($bl -match '^\s*(?:DUTFlowItem|FlowItem)\s+(\S+)(?:\s+(\S+))?') {
+                    foreach ($t in @($Matches[1], $Matches[2])) {
+                        if ($t -and $flowSet.Contains($t) -and $t -ne $name) {
+                            [void]$outs.Add($t); [void]$referenced.Add($t)
+                        }
+                    }
+                }
+            }
+            $edges[$name] = $outs
+        }
+        # Roots = flows not referenced by anything (entry points).
+        $roots = New-Object 'System.Collections.Generic.List[string]'
+        foreach ($name in $flowDefs) {
+            if (-not $referenced.Contains($name)) { [void]$roots.Add($name) }
+        }
+        if ($flowDefs.Count -gt 0 -and -not $roots.Contains($flowDefs[0])) {
+            [void]$roots.Add($flowDefs[0])
+        }
+        # BFS reachability.
+        $reach = New-Object 'System.Collections.Generic.HashSet[string]'
+        $q = New-Object 'System.Collections.Generic.Queue[string]'
+        foreach ($r in $roots) { [void]$reach.Add($r); $q.Enqueue($r) }
+        while ($q.Count -gt 0) {
+            $c = $q.Dequeue()
+            foreach ($n in $edges[$c]) {
+                if (-not $reach.Contains($n)) { [void]$reach.Add($n); $q.Enqueue($n) }
+            }
+        }
+        return @{ Flows = $flowDefs; Refs = $referenced; Roots = $roots; Reachable = $reach; BodyMap = $bodyMap }
+    }
 
+    function Get-TestFlowCoverage {
+        # Returns test names that appear as CSharpTest/MultiTrialTest but are
+        # never referenced by any FlowItem/DUTFlowItem in any flow body.
+        param([string]$Path)
+        $lines = [IO.File]::ReadAllLines($Path)
+        $testNames = New-Object 'System.Collections.Generic.HashSet[string]'
+        $fiRefs    = New-Object 'System.Collections.Generic.HashSet[string]'
+        foreach ($ln in $lines) {
+            if ($ln -match '^\s*CSharpTest\s+\S+\s+(\S+)')       { [void]$testNames.Add($Matches[1].Trim()) }
+            elseif ($ln -match '^\s*MultiTrialTest\s+(\S+)\s*$') { [void]$testNames.Add($Matches[1].Trim()) }
+            elseif ($ln -match '^\s*(?:DUTFlowItem|FlowItem)\s+(\S+)(?:\s+(\S+))?') {
+                [void]$fiRefs.Add($Matches[1])
+                if ($Matches[2]) { [void]$fiRefs.Add($Matches[2]) }
+            }
+        }
+        $uncovered = New-Object 'System.Collections.Generic.List[string]'
+        foreach ($t in $testNames) {
+            if (-not $fiRefs.Contains($t)) { [void]$uncovered.Add($t) }
+        }
+        return @{ Total = $testNames.Count; Covered = ($testNames.Count - $uncovered.Count); Uncovered = $uncovered }
+    }
+    function Get-BpLogicalCounts {
+        param([string]$Path)
+        $tCount = 0; $fCount = 0
+        foreach ($ln in [IO.File]::ReadAllLines($Path)) {
+            if ($ln -match '^\s*#\s*BP_BUCKET\s*:\s*\S+\s+tests=(\d+)')      { $tCount += [int]$Matches[1] }
+            elseif ($ln -match '^\s*#\s*BP_FLOW_BUCKET\s*:\s*\S+\s+flows=(\d+)') { $fCount += [int]$Matches[1] }
+        }
+        return @{ Tests = $tCount; Flows = $fCount }
+    }
+    $bpCounts = Get-BpLogicalCounts -Path $InputBp
+    $valTests = $v.Tests.Count
+    $valFlows = $v.Flows.Count
+    Write-Host "  Count parity: BP-logical tests=$($bpCounts.Tests) val=$valTests | BP-logical flows=$($bpCounts.Flows) val=$valFlows"
+    $parityFail = $false
+    if ($bpCounts.Tests -ne $valTests) {
+        Write-Host "    Test count mismatch ($($bpCounts.Tests) vs $valTests)" -ForegroundColor Red; $parityFail = $true
+    }
+    if ($bpCounts.Flows -ne $valFlows) {
+        Write-Host "    Flow count mismatch ($($bpCounts.Flows) vs $valFlows)" -ForegroundColor Red; $parityFail = $true
+    }
+
+    $valConn = Get-FlowConnectivity -Path $valFile
+    $orphans = New-Object 'System.Collections.Generic.List[string]'
+    foreach ($fn in $valConn.Flows) {
+        if (-not $valConn.Reachable.Contains($fn)) { [void]$orphans.Add($fn) }
+    }
+    Write-Host "  Flow connectivity: defined=$($valConn.Flows.Count) roots=$($valConn.Roots.Count) reachable=$($valConn.Reachable.Count) orphan=$($orphans.Count)"
+    if ($orphans.Count -gt 0) {
+        foreach ($o2 in ($orphans | Select-Object -First 20)) { Write-Host "    orphan flow: $o2" -ForegroundColor Yellow }
+        if ($orphans.Count -gt 20) { Write-Host "    ...and $($orphans.Count - 20) more" -ForegroundColor Yellow }
+    }
+
+    # Check 2: every test must be referenced by at least one FlowItem.
+    $bpCov = Get-TestFlowCoverage -Path $InputBp
+    $valCov = Get-TestFlowCoverage -Path $valFile
+    Write-Host "  Test-flow coverage (bp):  total=$($bpCov.Total) covered=$($bpCov.Covered) uncovered=$($bpCov.Uncovered.Count)"
+    Write-Host "  Test-flow coverage (val): total=$($valCov.Total) covered=$($valCov.Covered) uncovered=$($valCov.Uncovered.Count)"
+    if ($bpCov.Uncovered.Count -gt 0) {
+        foreach ($t in ($bpCov.Uncovered | Select-Object -First 20)) { Write-Host "    bp uncovered test: $t" -ForegroundColor Yellow }
+        if ($bpCov.Uncovered.Count -gt 20) { Write-Host "    ...and $($bpCov.Uncovered.Count - 20) more" -ForegroundColor Yellow }
+    }
+    if ($valCov.Uncovered.Count -gt 0) {
+        foreach ($t in ($valCov.Uncovered | Select-Object -First 20)) { Write-Host "    val uncovered test: $t" -ForegroundColor Yellow }
+        if ($valCov.Uncovered.Count -gt 20) { Write-Host "    ...and $($valCov.Uncovered.Count - 20) more" -ForegroundColor Yellow }
+    }
+    if ($parityFail) { Write-Host "    [parity check WARNING - non-fatal]" -ForegroundColor Yellow }
+    #endregion
     $missingT = @($o.Tests.Keys | Where-Object { -not $v.Tests.ContainsKey($_) })
     $diffT    = @($o.Tests.Keys | Where-Object { $v.Tests.ContainsKey($_) -and $v.Tests[$_] -ne $o.Tests[$_] })
     $extraT   = @($v.Tests.Keys | Where-Object { -not $o.Tests.ContainsKey($_) })

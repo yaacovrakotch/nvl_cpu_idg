@@ -14,7 +14,7 @@
     when the value set matches; otherwise an auto-name `B<id>_<field>` is used.
 
     Outputs:
-      <module>_bp.mtpl          - compressed test programme
+      <module>_bp.mtpl           - compressed test programme (non-compilable; hidden during build)
       <module>.symbols.csv      - per-bucket per-test slot value table
       <module>.compressions.log - human-readable bucket tables
       <module>.prompt.txt       - expansion prompt
@@ -112,10 +112,9 @@ function Parse-BlockBody {
 }
 
 function Normalize-BinCounterLine {
-    # Replace per-instance bin / counter / baseNumber values with a single
-    # canonical token so blocks that differ only in those values can merge.
-    # Original values are restored at Expand time from the binmap.
-    # BypassPort is force-set to -1 (no placeholder, no restore).
+    # Replace per-instance bin / counter / baseNumber / BypassPort values with
+    # a single canonical token so blocks that differ only in those values can
+    # merge. Original values are restored at Expand time from the binmap.
     # SetPointsPreInstance / SetPointsPostInstance values are replaced with
     # the literal "DEFAULT" in the BP and restored from the binmap at Expand.
     param([string]$Line)
@@ -130,7 +129,7 @@ function Normalize-BinCounterLine {
         return ($Matches[1] + '"__BNUM__"' + $Matches[2])
     }
     if ($l -match '^(\s*BypassPort\s*=\s*).+?(\s*;\s*)$') {
-        return ($Matches[1] + '-1' + $Matches[2])
+        return ($Matches[1] + '__BYPASS__' + $Matches[2])
     }
     if ($l -match '^(\s*SetPointsPreInstance\s*=\s*)"[^"]*"(\s*;\s*)$') {
         return ($Matches[1] + '"DEFAULT"' + $Matches[2])
@@ -149,11 +148,11 @@ function Normalize-BodyLines {
 }
 
 function Extract-BinCtrValues {
-    # Return ordered list of original bin/ctr/bnum *values* (in body order),
+    # Return ordered list of original bin/ctr/bnum/bypass *values* (in body order),
     # i.e. exactly the values that Normalize-BinCounterLine replaced with
-    # __BIN__/__CTR__/__BNUM__ placeholders.
-    # BypassPort is hardcoded to -1; SetPointsPreInstance / SetPointsPostInstance
-    # are restored from a single global default (see $globalDefaults sidecar).
+    # __BIN__/__CTR__/__BNUM__/__BYPASS__ placeholders.
+    # SetPointsPreInstance / SetPointsPostInstance are restored from a single
+    # global default (see $globalDefaults sidecar).
     param([System.Collections.Generic.List[string]]$Body)
     $out = [System.Collections.Generic.List[string]]::new()
     foreach ($l in $Body) {
@@ -162,6 +161,8 @@ function Extract-BinCtrValues {
         } elseif ($l -match '^\s*(?:##EDC##\s*)?IncrementCounters\s+(.+?)\s*;\s*$') {
             [void]$out.Add($Matches[1])
         } elseif ($l -match '^\s*BaseNumbers\s*=\s*"([^"]*)"\s*;\s*$') {
+            [void]$out.Add($Matches[1])
+        } elseif ($l -match '^\s*BypassPort\s*=\s*(.+?)\s*;\s*$') {
             [void]$out.Add($Matches[1])
         }
     }
@@ -257,6 +258,76 @@ while ($i -lt $rawLines.Count) {
 
 Write-Host "  Test blocks: $($testBlocks.Count)"
 Write-Host "  Flow blocks: $($flowBlocks.Count)"
+
+# --- Drop pre-existing orphan flows. A flow is dropped only if it is NOT
+# reachable from any "root" flow, where a root is any flow that nothing else
+# refers to via FlowItem (= an entry point, possibly called from outside the
+# module). All flows reachable transitively from any root are kept.
+# A FlowItem line has the form:
+#     [DUT]FlowItem <instanceName> <referencedFlowOrTest> [@flags...]
+# Both tokens are treated as references (instanceName usually equals the
+# flow name in this codebase, and the 2nd token is the referenced flow/test).
+$flowNameSet = New-Object 'System.Collections.Generic.HashSet[string]'
+foreach ($fb in $flowBlocks) { [void]$flowNameSet.Add($fb.Name) }
+
+# Per-flow outgoing refs (only refs to other flows in this module).
+$flowEdges = @{}
+foreach ($fb in $flowBlocks) {
+    $outs = New-Object 'System.Collections.Generic.HashSet[string]'
+    foreach ($ln in $fb.BodyLines) {
+        if ($ln -match '^\s*(?:DUTFlowItem|FlowItem)\s+(\S+)(?:\s+(\S+))?') {
+            foreach ($t in @($Matches[1], $Matches[2])) {
+                if ($t -and $flowNameSet.Contains($t) -and $t -ne $fb.Name) {
+                    [void]$outs.Add($t)
+                }
+            }
+        }
+    }
+    $flowEdges[$fb.Name] = $outs
+}
+# Anyone referenced by some other flow.
+$referencedSet = New-Object 'System.Collections.Generic.HashSet[string]'
+foreach ($outs in $flowEdges.Values) { foreach ($t in $outs) { [void]$referencedSet.Add($t) } }
+# Roots = flows not referenced by anything (entry points / called externally).
+$roots = New-Object 'System.Collections.Generic.List[string]'
+foreach ($fb in $flowBlocks) {
+    if (-not $referencedSet.Contains($fb.Name)) { [void]$roots.Add($fb.Name) }
+}
+# Always keep the very first declared flow as a root, even if (theoretically)
+# something else also refers to it -- defensive fallback.
+if ($flowBlocks.Count -gt 0 -and -not $roots.Contains($flowBlocks[0].Name)) {
+    [void]$roots.Add($flowBlocks[0].Name)
+}
+# BFS from all roots to find every reachable flow.
+$reachable = New-Object 'System.Collections.Generic.HashSet[string]'
+$queue = New-Object 'System.Collections.Generic.Queue[string]'
+foreach ($r in $roots) { [void]$reachable.Add($r); $queue.Enqueue($r) }
+while ($queue.Count -gt 0) {
+    $cur = $queue.Dequeue()
+    if ($flowEdges.ContainsKey($cur)) {
+        foreach ($n in $flowEdges[$cur]) {
+            if (-not $reachable.Contains($n)) { [void]$reachable.Add($n); $queue.Enqueue($n) }
+        }
+    }
+}
+$keptFlows    = [System.Collections.Generic.List[PSCustomObject]]::new()
+$droppedFlows = [System.Collections.Generic.List[string]]::new()
+foreach ($fb in $flowBlocks) {
+    if ($reachable.Contains($fb.Name)) {
+        [void]$keptFlows.Add($fb)
+    } else {
+        [void]$droppedFlows.Add($fb.Name)
+    }
+}
+if ($droppedFlows.Count -gt 0) {
+    Write-Host "  Dropped $($droppedFlows.Count) orphan flow(s) (unreachable from any root in mtpl_orig):" -ForegroundColor Yellow
+    foreach ($n in ($droppedFlows | Select-Object -First 20)) { Write-Host "    - $n" -ForegroundColor Yellow }
+    if ($droppedFlows.Count -gt 20) { Write-Host "    ...and $($droppedFlows.Count - 20) more" -ForegroundColor Yellow }
+    $flowBlocks = $keptFlows
+    Write-Host "  Flow blocks (after orphan drop): $($flowBlocks.Count)"
+} else {
+    Write-Host "  Roots: $($roots.Count); all flows reachable (no orphans dropped)"
+}
 #endregion
 
 #region helper functions

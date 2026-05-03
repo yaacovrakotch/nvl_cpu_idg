@@ -249,7 +249,7 @@ CSharpTest CsioCmemTC IREFTRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC
  CtvCapturePins = "CPU_TDO";
  LevelsTc = "CLK_BASE_CXXX::cpu_clk_override_distmax_sharedmin_lvl";
  TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
- BypassPort = -1;
+ BypassPort = 1;
 }
 
 CSharpTest CsioCmemTC DCATRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC
@@ -266,7 +266,7 @@ CSharpTest CsioCmemTC DCATRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC
  CtvCapturePins = "CPU_TDO";
  LevelsTc = "CLK_BASE_CXXX::cpu_clk_override_dcadistmax_sharedmin_lvl";
  TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
- BypassPort = -1;
+ BypassPort = 1;
 }
 
 CSharpTest CsioCmemTC AFSTRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC
@@ -283,7 +283,7 @@ CSharpTest CsioCmemTC AFSTRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC
  CtvCapturePins = "CPU_TDO";
  LevelsTc = "CLK_BASE_CXXX::cpu_clk_override_distnom_sharedmin_lvl";
  TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
- BypassPort = -1;
+ BypassPort = 1;
 }
 
 
@@ -338,7 +338,7 @@ CSharpTest CsioCmemTC VREFTRIM_X_CMEM_E_BEGIN_TAP_X_MIN_X_40_SDC
  LevelsTc = "CLK_BASE_CXXX::cpu_clk_override_distnom_sharedmin_lvl";
  TimingsTc = "BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
  PreInstance = "Call(ReadSpecSet(--levels CLK_BASE_CXXX::cpu_clk_override_distnom_sharedmin_lvl --name p_vccvnnaon_spec --gsds G.U.D.clk_cpu_vreftrim_vnnaon --print))";
- BypassPort = -1;
+ BypassPort = 1;
 }
 
 
@@ -347,7 +347,7 @@ CSharpTest PrimePauseTestMethod VREFTRIM_X_PATCFG_K_BEGIN_X_X_X_X_X_HVM
  SetPointsPlistMode = "Global";
  SetPointsPreInstance = "clk_cpu:vrefpat_sort:cpu,clk_cpu:vreffuse_sort:cpu";
  SleepTime = 1;
- BypassPort = -1;
+ BypassPort = 1;
 }
 
 CSharpTest PrimePauseTestMethod IREFTRIM_X_PATCFG_K_BEGIN_X_X_X_X_X_HVM
@@ -355,7 +355,7 @@ CSharpTest PrimePauseTestMethod IREFTRIM_X_PATCFG_K_BEGIN_X_X_X_X_X_HVM
  SetPointsPlistMode = "Global";
  SetPointsPreInstance = "clk_cpu:vrefpat_sort:cpu,clk_cpu:vreffuse_sort:cpu";
  SleepTime = 1;
- BypassPort = -1;
+ BypassPort = 1;
 }
 
 CSharpTest PrimePauseTestMethod DCATRIM_X_PATCFG_K_BEGIN_X_X_X_X_X_HVM
@@ -363,7 +363,7 @@ CSharpTest PrimePauseTestMethod DCATRIM_X_PATCFG_K_BEGIN_X_X_X_X_X_HVM
  SetPointsPlistMode = "Global";
  SetPointsPreInstance = "clk_cpu:vrefpat_sort:cpu,clk_cpu:vreffuse_sort:cpu";
  SleepTime = 1;
- BypassPort = -1;
+ BypassPort = 1;
 }
 
 CSharpTest PrimePauseTestMethod AFSTRIM_X_PATCFG_K_BEGIN_X_X_X_X_X_HVM
@@ -371,7 +371,7 @@ CSharpTest PrimePauseTestMethod AFSTRIM_X_PATCFG_K_BEGIN_X_X_X_X_X_HVM
  SetPointsPlistMode = "Global";
  SetPointsPreInstance = "clk_cpu:vrefpat_sort:cpu,clk_cpu:vreffuse_sort:cpu";
  SleepTime = 1;
- BypassPort = -1;
+ BypassPort = 1;
 }
 
 
@@ -396,7 +396,7 @@ CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_BEGIN_X_X_MIN_X_X_BBS
  SamplingRateValue = CLK_BASE_CXXX::SampleRate.VMIN_BBS("100","1");
  WaferSampleRateValue = "1";
  ShouldFirstBeSampled = "True";
- BypassPort = -1;
+ BypassPort = CLK_BASE_CXXX::CLK_BASE_CXXX.SampleBypass;
 }
 
 CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_BEGIN_X_X_MIN_X_X_HVM
@@ -404,7 +404,7 @@ CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_BEGIN_X_X_MIN_X_X_HVM
  SamplingRateValue = CLK_BASE_CXXX::SampleRate.VMIN_HVM("100","1");
  WaferSampleRateValue = "1";
  ShouldFirstBeSampled = "True";
- BypassPort = -1;
+ BypassPort = CLK_BASE_CXXX::CLK_BASE_CXXX.SampleBypass;
 }
 
 CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_BEGIN_X_X_MIN_X_X_SDC
@@ -412,7 +412,7 @@ CSharpTest PrimeSampleRateTestMethod FORK_X_SAMPLE_K_BEGIN_X_X_MIN_X_X_SDC
  SamplingRateValue = CLK_BASE_CXXX::SampleRate.VMIN_SDC("100","1");
  WaferSampleRateValue = "1";
  ShouldFirstBeSampled = "True";
- BypassPort = -1;
+ BypassPort = CLK_BASE_CXXX::CLK_BASE_CXXX.SampleBypass;
 }
 
 

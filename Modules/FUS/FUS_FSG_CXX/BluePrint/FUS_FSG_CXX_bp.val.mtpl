@@ -24,7 +24,7 @@ Counters
 
 CSharpTest FleGeneratePerDieFuseStringByDies FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CHECK
 {
- BypassPort = -1;
+ BypassPort = 1;
  DataLog = "On";
  Registers = __shared__::TpRule.If_MICP("CPU0,CPU1","CPU0");
 }
@@ -39,7 +39,7 @@ CSharpTest FleGeneratePerDieFuseString FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_H
 
 CSharpTest FleGeneratePerDieFuseString FUSE_X_FLE_K_FACTFUSBUILDCPUNOM_X_X_X_X_HVM_FSG_CPU1
 {
- BypassPort = -1;
+ BypassPort = __shared__::TpRule.If_MICP(-1,1);
  DataLog = "On";
  Register = "CPU1";
 }

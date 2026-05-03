@@ -529,7 +529,7 @@ CSharpTest PrimeShmooTestMethod HPTP_X_SHMOO_E_STARTCPUNOM_X_X_X_X_MARGIN_CHECK_
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  XAxisParam = "cpu_tstprt_i_drv_mul";
  XAxisParamType = "TimingTestCondition";
  XAxisRange = __shared__::TpRule.If_HX28C_P16C_H16C("1.6:0.1:11","0.6:0.1:11","0.6:0.1:11","0.6:0.1:11");
@@ -540,7 +540,7 @@ CSharpTest PrimeShmooTestMethod HPTP_X_SHMOO_E_STARTCPUNOM_X_X_X_X_MARGIN_CHECK_
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  XAxisParam = "cpu_tstprt_o_stb_mul";
  XAxisParamType = "TimingTestCondition";
  XAxisRange = __shared__::TpRule.If_HX28C_P16C_H16C("1.6:0.1:11","0.7:0.1:11","0.7:0.1:11","0.7:0.1:11");
@@ -1093,21 +1093,21 @@ CSharpTest PrimeHptpTimingCalibrationTestMethod HPTP_X_TIMCAL_E_STARTCPUNOM_X_X_
 CSharpTest HPTPSetupScan HPTP_X_TIMOVER_E_STARTCPUNOM_X_X_X_X_1P5_TIMOVRIDE
 {
  TimingsTc = "MIO_HPTP_CXPKGHX::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_dyn";
- BypassPort = -1;
+ BypassPort = 1;
  ExecutionMode = "TIMING_OVERRIDE";
 }
 
 CSharpTest HPTPSetupScan HPTP_X_TIMOVER_E_STARTCPUNOM_X_X_X_X_800_TIMOVRIDE
 {
  TimingsTc = "MIO_HPTP_CXPKGHX::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_dyn";
- BypassPort = -1;
+ BypassPort = 1;
  ExecutionMode = "TIMING_OVERRIDE";
 }
 
 CSharpTest HPTPSetupScan HPTP_X_TIMOVER_E_STARTCPUNOM_X_X_X_X_400_TIMOVRIDE
 {
  TimingsTc = "MIO_HPTP_CXPKGHX::cpu_hvm_timing_mts400_tstprtclk200_tck50";
- BypassPort = -1;
+ BypassPort = 1;
  ExecutionMode = "TIMING_OVERRIDE";
 }
 
@@ -1252,7 +1252,7 @@ CSharpTest PrimeAnalogMarginingTestMethod HPTP_X_RCOMP_K_STARTCPUNOM_X_X_X_X_TXP
 
 CSharpTest PrimePatConfigTestMethod HPTP_X_PATMOD_E_STARTCPUNOM_X_X_X_X_PATMOD
 {
- BypassPort = -1;
+ BypassPort = 1;
  ConfigurationFile = "./InputFiles/HPTP_patmod_setting.json";
  SetPoint = "COMP_OVR";
 }
@@ -1260,7 +1260,7 @@ CSharpTest PrimePatConfigTestMethod HPTP_X_PATMOD_E_STARTCPUNOM_X_X_X_X_PATMOD
 
 CSharpTest HPTPSetupScan HPTP_X_TIMOVER_E_STARTCPUNOM_X_X_X_X_SETUPSCAN
 {
- BypassPort = -1;
+ BypassPort = 1;
  ExecutionMode = "TERMSHIFTCODE_PATMOD";
  PatmodConfiguration = "FULLSPEED_LB_DEFAULT";
 }
@@ -1271,7 +1271,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_1
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1285,7 +1285,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_1
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1299,7 +1299,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_1
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1313,7 +1313,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_1
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1327,7 +1327,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_1
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1341,7 +1341,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_1
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1355,7 +1355,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_1
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1369,7 +1369,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_1
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1383,7 +1383,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_1
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1397,7 +1397,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_1
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1411,7 +1411,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_1
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1425,7 +1425,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_1
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1439,7 +1439,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_1
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1453,7 +1453,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_1
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1467,7 +1467,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_1
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1481,7 +1481,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_1
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1495,7 +1495,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_1
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1509,7 +1509,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_1
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1523,7 +1523,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_1
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1537,7 +1537,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_1
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1551,7 +1551,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_1
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1565,7 +1565,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_1
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1579,7 +1579,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_1
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1593,7 +1593,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_1
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1607,7 +1607,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_8
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1621,7 +1621,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_8
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1635,7 +1635,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_8
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1649,7 +1649,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_8
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1663,7 +1663,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_8
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1677,7 +1677,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_8
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1691,7 +1691,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_8
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1705,7 +1705,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_SCN_UNC_8
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1719,7 +1719,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_PRE_SCN_U
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1733,7 +1733,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_PRE_SCN_U
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1747,7 +1747,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_PRE_SCN_U
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1761,7 +1761,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_PRE_SCN_U
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1775,7 +1775,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_PRE_SCN_U
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1789,7 +1789,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_PRE_SCN_U
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1803,7 +1803,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_PRE_SCN_U
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
@@ -1817,7 +1817,7 @@ CSharpTest PrimeFunctionalTestMethod HPTP_X_FUNC_E_STARTCPUNOM_X_X_X_X_PRE_SCN_U
  Patlist = "scn_hx_cdie_begin_chain_edt_classhvm_all_hptp_list";
  LevelsTc = "MIO_HPTP_CXPKGHX::hptp_timing_cal_nom_lvl";
  TimingsTc = __shared__::TpRule.If_HX28C_P16C_H16C("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX48::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
- BypassPort = -1;
+ BypassPort = MIO_HPTP_CXPKGHX_Rules.If_AHMT(1,-1);
  FailuresToCapturePerPattern = 5;
  FailuresToCaptureTotal = 5;
  MaxFailuresPerPatternToItuff = 5;
