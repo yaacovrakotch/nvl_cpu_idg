@@ -26,7 +26,12 @@
 #>
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory)] [string]$InputBp
+    [Parameter(Mandatory)] [string]$InputBp,
+    # Optional overrides used by Generate-BluePrintBlock.ps1 so a self-contained
+    # block dir (orig + bp + csv side-by-side) can be expanded without the
+    # default "<bpDir parent>" assumption.
+    [string]$OrigMtpl,
+    [string]$TargetMtpl
 )
 
 Set-StrictMode -Version Latest
@@ -51,20 +56,20 @@ $moduleDir   = Split-Path $bpDir
 $csvFile     = Join-Path $bpDir "$moduleName.symbols.csv"
 $binmapFile  = Join-Path $bpDir "$moduleName.binmap.json"
 $valFile     = Join-Path $bpDir "${moduleName}_bp.val.mtpl"
-$origMtpl    = Join-Path $moduleDir "$moduleName.mtpl_orig"
-$targetMtpl  = Join-Path $moduleDir "$moduleName.mtpl"
+if ($OrigMtpl)   { $origMtpl   = (Resolve-Path -LiteralPath $OrigMtpl   -ErrorAction SilentlyContinue).Path; if (-not $origMtpl) { $origMtpl = $OrigMtpl } } else { $origMtpl = Join-Path $moduleDir "$moduleName.mtpl_orig" }
+if ($TargetMtpl) { $targetMtpl = $TargetMtpl } else { $targetMtpl = Join-Path $moduleDir "$moduleName.mtpl" }
 
 Write-Host "=== BluePrint Expander (v2 per-bucket CSV) ==="
 Write-Host "BP : $InputBp"
 Write-Host "CSV: $csvFile"
 
-# Prefer .symbols.csv.new if it exists and is newer than .csv (the generator
-# writes there when something else holds an exclusive lock on the .csv).
+# BP and symbols.csv MUST be a coherent pair. The generator now refuses to
+# write a stale .new sidecar; if a leftover one is found, abort -- it would
+# silently mask a generation failure where the .csv on disk is out of date
+# relative to the just-written _bp.mtpl.
 $csvNewFile = "$csvFile.new"
-if ((Test-Path $csvNewFile) -and (-not (Test-Path $csvFile) -or
-     (Get-Item $csvNewFile).LastWriteTime -gt (Get-Item $csvFile).LastWriteTime)) {
-    Write-Host "  Using $csvNewFile (newer than .csv)"
-    $csvFile = $csvNewFile
+if (Test-Path $csvNewFile) {
+    throw "Stale '$csvNewFile' detected -- the previous Generate-BluePrint run could not write '$csvFile' (likely an editor lock). The on-disk .csv may not match the _bp.mtpl. Close any tools holding the file open, delete '$csvNewFile', and rerun the generator."
 }
 
 if (-not (Test-Path $csvFile)) {

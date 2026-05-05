@@ -29,7 +29,11 @@
 param(
     [Parameter(Mandatory)] [string]$InputMtpl,
     [Parameter(Mandatory)] [string]$ConfigFile,
-    [string]$OutputDir
+    [string]$OutputDir,
+    # When true (default) the BP file omits buckets that have no extracted
+    # symbols (no Fields and no consolidations) - i.e. verbatim emission only.
+    # Set to $false to keep every bucket (round-trip / Expand parity mode).
+    [bool]$SymbolizedOnly = $true
 )
 
 Set-StrictMode -Version Latest
@@ -44,6 +48,8 @@ if (-not (Test-Path $OutputDir)) { New-Item -ItemType Directory $OutputDir -Forc
 
 $bpFile     = Join-Path $OutputDir "${moduleName}_bp.mtpl"
 $csvFile    = Join-Path $OutputDir "$moduleName.symbols.csv"
+$pivotFile  = Join-Path $OutputDir "$moduleName.symbols.flow_pivot.csv"
+$pivotFullFile = Join-Path $OutputDir "$moduleName.symbols.flow_pivot.full.csv"
 $logFile    = Join-Path $OutputDir "$moduleName.compressions.log"
 $promptFile = Join-Path $OutputDir "$moduleName.prompt.txt"
 $derivFile  = Join-Path $OutputDir "$moduleName.derivations.log"
@@ -477,10 +483,10 @@ function Compact-Whitespace {
 
 function Write-FileWithRetry {
     # Writes text content to a file even if another process briefly holds a
-    # read lock (e.g. an editor with the file open). First tries direct write
-    # with retry; if that keeps failing, writes to <path>.new and tries to
-    # atomically replace the original via Move-Item with retry.
-    param([string]$Path, [string]$Content, [int]$Retries = 5)
+    # lock (e.g. an editor with the file open). Throws if the file cannot be
+    # written -- the BP and the symbols.csv MUST stay in sync, so a silent
+    # .new sidecar is not acceptable (the expander would read a stale file).
+    param([string]$Path, [string]$Content, [int]$Retries = 8)
     for ($k = 1; $k -le $Retries; $k++) {
         try {
             [IO.File]::WriteAllText($Path, $Content)
@@ -490,7 +496,7 @@ function Write-FileWithRetry {
             Start-Sleep -Milliseconds (200 * $k)
         }
     }
-    # Fallback: write to .new and try to swap.
+    # Last resort: write via .new + Move-Item (atomic on same volume).
     $tmp = "$Path.new"
     [IO.File]::WriteAllText($tmp, $Content)
     for ($k = 1; $k -le $Retries; $k++) {
@@ -498,7 +504,10 @@ function Write-FileWithRetry {
             Move-Item -LiteralPath $tmp -Destination $Path -Force -ErrorAction Stop
             return
         } catch {
-            if ($k -eq $Retries) { Write-Warning "Could not replace $Path (locked); wrote $tmp instead."; return }
+            if ($k -eq $Retries) {
+                try { Remove-Item -LiteralPath $tmp -Force -ErrorAction SilentlyContinue } catch {}
+                throw "Cannot write '$Path' -- the file is locked by another process (close any editor/viewer that has it open). BP and symbols.csv must be regenerated together; aborting to avoid stale-pair output."
+            }
             Start-Sleep -Milliseconds (300 * $k)
         }
     }
@@ -1123,6 +1132,218 @@ function Build-FlowBucketInfo {
     return $info
 }
 
+function Align-FlowBodiesNway {
+    # N-way line-level alignment via progressive pairwise LCS. Returns an
+    # ordered list of column hashtables: @{ Lines = @($l_0, ..., $l_{N-1}) }
+    # where $l_i is $null when flow i has no line at this column. Lines are
+    # compared by whitespace-collapsed text for LCS; the original (untouched)
+    # lines are stored in the result.
+    param($Flows)
+    $cols = New-Object System.Collections.Generic.List[hashtable]
+    if ($Flows.Count -eq 0) { return $cols }
+    foreach ($l in $Flows[0].BodyLines) { [void]$cols.Add(@{ Lines = @($l) }) }
+    if ($Flows.Count -eq 1) { return $cols }
+
+    # Shape-based equality: two lines are "alignable" iff their non-token
+    # skeleton matches (punctuation, whitespace, keywords-as-shape). All word
+    # and quoted tokens are replaced by placeholders so e.g.
+    #   `Flow ARR_ATOM_CXX_F1XAT` and `Flow ARR_ATOM_CXX_F2XAT`
+    # both collapse to `<W> <W>` and align into a single column. The per-token
+    # diff in Build-AlignedFlowBucketInfo then captures the per-flow values
+    # (and Find-VocabName promotes them to PMUX_INDEX etc.).
+    $normFn = {
+        param($l)
+        if ($null -eq $l) { return '' }
+        $s = ($l -replace '\s+', ' ').Trim()
+        $s = [regex]::Replace($s, '"[^"]*"', '<Q>')
+        $s = [regex]::Replace($s, '\b[A-Za-z_][A-Za-z0-9_]*\b', '<W>')
+        return $s
+    }
+
+    for ($fi = 1; $fi -lt $Flows.Count; $fi++) {
+        $cNorms = @()
+        foreach ($c in $cols) {
+            $rep = $null
+            foreach ($l in $c.Lines) { if ($null -ne $l) { $rep = $l; break } }
+            $cNorms += (& $normFn $rep)
+        }
+        $newLs = @($Flows[$fi].BodyLines)
+        $nNorms = @()
+        foreach ($l in $newLs) { $nNorms += (& $normFn $l) }
+
+        $m = $cNorms.Count; $n = $nNorms.Count
+        $dp = New-Object 'int[,]' ($m + 1), ($n + 1)
+        for ($ii = 1; $ii -le $m; $ii++) {
+            for ($jj = 1; $jj -le $n; $jj++) {
+                if ($cNorms[$ii - 1] -ceq $nNorms[$jj - 1]) {
+                    $dp[$ii, $jj] = $dp[($ii - 1), ($jj - 1)] + 1
+                } else {
+                    $a = $dp[($ii - 1), $jj]; $b = $dp[$ii, ($jj - 1)]
+                    $dp[$ii, $jj] = if ($a -ge $b) { $a } else { $b }
+                }
+            }
+        }
+        $rev = New-Object System.Collections.Generic.List[hashtable]
+        $ii = $m; $jj = $n
+        while ($ii -gt 0 -and $jj -gt 0) {
+            if ($cNorms[$ii - 1] -ceq $nNorms[$jj - 1]) {
+                [void]$rev.Add(@{ Lines = @($cols[$ii - 1].Lines + @($newLs[$jj - 1])) })
+                $ii--; $jj--
+            } elseif ($dp[($ii - 1), $jj] -ge $dp[$ii, ($jj - 1)]) {
+                [void]$rev.Add(@{ Lines = @($cols[$ii - 1].Lines + @($null)) })
+                $ii--
+            } else {
+                $nulls = @(); for ($k = 0; $k -lt $fi; $k++) { $nulls += , $null }
+                [void]$rev.Add(@{ Lines = @($nulls + @($newLs[$jj - 1])) })
+                $jj--
+            }
+        }
+        while ($ii -gt 0) {
+            [void]$rev.Add(@{ Lines = @($cols[$ii - 1].Lines + @($null)) })
+            $ii--
+        }
+        while ($jj -gt 0) {
+            $nulls = @(); for ($k = 0; $k -lt $fi; $k++) { $nulls += , $null }
+            [void]$rev.Add(@{ Lines = @($nulls + @($newLs[$jj - 1])) })
+            $jj--
+        }
+        $cols = New-Object System.Collections.Generic.List[hashtable]
+        for ($k = $rev.Count - 1; $k -ge 0; $k--) { [void]$cols.Add($rev[$k]) }
+    }
+    return $cols
+}
+
+function Build-AlignedFlowBucketInfo {
+    # Build a flow bucket info from N-way LCS-aligned columns. Differs from
+    # Build-FlowBucketInfo:
+    #   * Body length may differ across flows -- columns where some flows
+    #     have a $null line generate a Presence_<col> field (Y/N per flow).
+    #   * BP emit reads $info.SyntheticRep.BodyLines instead of Flows[0]; the
+    #     synthetic body has one entry per aligned column (first non-null).
+    param([int]$BucketId, $Flows, $Vocab)
+    $columns = Align-FlowBodiesNway -Flows $Flows
+
+    $synthBody = @()
+    foreach ($c in $columns) {
+        $rep = $null
+        foreach ($l in $c.Lines) { if ($null -ne $l) { $rep = $l; break } }
+        $synthBody += $rep
+    }
+
+    $rep0 = $Flows[0]
+    $synthRep = [PSCustomObject]@{
+        Name         = $rep0.Name
+        CommentLines = $rep0.CommentLines
+        BodyLines    = $synthBody
+        StartLine    = $rep0.StartLine
+        EndLine      = $rep0.EndLine
+    }
+
+    $info = @{
+        BucketId     = $BucketId
+        Flows        = $Flows
+        Fields       = [System.Collections.Generic.List[hashtable]]::new()
+        IsAligned    = $true
+        SyntheticRep = $synthRep
+        Columns      = $columns
+    }
+
+    $names = @($Flows | ForEach-Object { $_.Name })
+    if (@($names | Sort-Object -Unique).Count -gt 1) {
+        $p = Common-Prefix -Strs $names
+        $s = Common-Suffix -Strs $names
+        $minL = ($names | ForEach-Object { $_.Length } | Measure-Object -Minimum).Minimum
+        while ($p.Length + $s.Length -gt $minL) {
+            if ($s.Length -ge $p.Length) { $s = $s.Substring(1) } else { $p = $p.Substring(0, $p.Length - 1) }
+        }
+        $sv = $names | ForEach-Object { $_.Substring($p.Length, $_.Length - $p.Length - $s.Length) }
+        $fnField = @{
+            Field     = '__FLOWNAME__'
+            LineIdx   = -1
+            TokenIdx  = -1
+            Prefix    = $p
+            Suffix    = $s
+            SymValues = @($sv)
+        }
+        Apply-MinMaxRescue -Field $fnField
+        $info.Fields.Add($fnField)
+    }
+
+    for ($ci = 1; $ci -lt $columns.Count; $ci++) {
+        $col = $columns[$ci]
+        $allPresent = $true
+        foreach ($l in $col.Lines) { if ($null -eq $l) { $allPresent = $false; break } }
+
+        if (-not $allPresent) {
+            $sv = @($col.Lines | ForEach-Object { if ($null -eq $_) { 'N' } else { 'Y' } })
+            $info.Fields.Add(@{
+                Field      = "L${ci}_PRESENCE"
+                LineIdx    = $ci
+                TokenIdx   = -1
+                Prefix     = ''
+                Suffix     = ''
+                SymValues  = @($sv)
+                IsPresence = $true
+            })
+            continue
+        }
+
+        $repTokens = @(Tokenize-FlowLine -Line $col.Lines[0])
+        if ($repTokens.Count -eq 0) { continue }
+        for ($tk = 0; $tk -lt $repTokens.Count; $tk++) {
+            $t0 = $repTokens[$tk]
+            $values = New-Object System.Collections.Generic.List[string]
+            $ok = $true
+            foreach ($ll in $col.Lines) {
+                $tt = @(Tokenize-FlowLine -Line $ll)
+                if ($tk -ge $tt.Count) { $ok = $false; break }
+                $tx = $tt[$tk]
+                if ($tx.Kind -ne $t0.Kind) { $ok = $false; break }
+                $values.Add($tx.Text)
+            }
+            if (-not $ok) { continue }
+            $uniq = @($values | Sort-Object -Unique)
+            if ($uniq.Count -le 1) { continue }
+            $arr = $values.ToArray()
+            $pre = Common-Prefix -Strs $arr
+            $suf = Common-Suffix -Strs $arr
+            $minL = ($arr | ForEach-Object { $_.Length } | Measure-Object -Minimum).Minimum
+            while ($pre.Length + $suf.Length -gt $minL) {
+                if ($suf.Length -ge $pre.Length) { $suf = $suf.Substring(1) } else { $pre = $pre.Substring(0, $pre.Length - 1) }
+            }
+            $sv = $arr | ForEach-Object { $_.Substring($pre.Length, $_.Length - $pre.Length - $suf.Length) }
+            $tokField = @{
+                Field     = "L${ci}T${tk}"
+                LineIdx   = $ci
+                TokenIdx  = $tk
+                Prefix    = $pre
+                Suffix    = $suf
+                SymValues = @($sv)
+            }
+            Apply-MinMaxRescue -Field $tokField
+            $info.Fields.Add($tokField)
+        }
+    }
+
+    $usedSlots = @{}
+    foreach ($f in $info.Fields) {
+        $uv = @($f.SymValues | Sort-Object -Unique)
+        $vName = Find-VocabName -UniqueValues $uv -Vocab $Vocab
+        if ($vName -and -not $usedSlots.ContainsKey($vName)) {
+            $f.SlotName = $vName
+            $usedSlots[$vName] = $true
+        } else {
+            $base = if ($f.Field -eq '__FLOWNAME__') { 'FLOWNAME' } else { $f.Field }
+            $cand = "F$($info.BucketId)_$base"
+            $n = 1
+            while ($usedSlots.ContainsKey($cand)) { $n++; $cand = "F$($info.BucketId)_${base}_$n" }
+            $f.SlotName = $cand
+            $usedSlots[$cand] = $true
+        }
+    }
+    return $info
+}
+
 function Estimate-FlowBucketCost {
     param([hashtable]$Info)
     $rep = $Info.Flows[0]
@@ -1229,6 +1450,30 @@ if ($fMergeCount -gt 0) {
     }
     $flowBucketInfos = $renumbered
     Write-Host "  Optimization: merged $fMergeCount flow buckets (saved ~$fMergeSavings chars), final flow buckets=$($flowBucketInfos.Count)"
+}
+
+# ---- Force merge ALL remaining flow buckets into one aligned bucket --------
+# When the user explicitly nominates a set of flows for blueprint extraction,
+# they expect every flow to appear in the result -- even when the flows are
+# not structurally identical. This pass runs AFTER the cost-gated merge: if
+# more than one flow bucket survived, we N-way LCS-align all flows and rebuild
+# a single aligned bucket. Lines present in only some flows produce Presence
+# rows in the pivot CSV. Round-trip Expand is not meaningful for an aligned
+# bucket and is suppressed by SymbolizedOnly mode upstream.
+if ($flowBucketInfos.Count -gt 1) {
+    $allFlows = New-Object 'System.Collections.Generic.List[PSCustomObject]'
+    foreach ($b in $flowBucketInfos) {
+        foreach ($f in $b.Flows) { [void]$allFlows.Add($f) }
+    }
+    try {
+        $aligned = Build-AlignedFlowBucketInfo -BucketId 1 -Flows $allFlows -Vocab $vocab
+        $flowBucketInfos = New-Object System.Collections.Generic.List[hashtable]
+        [void]$flowBucketInfos.Add($aligned)
+        $presenceCt = @($aligned.Fields | Where-Object { $_.ContainsKey('IsPresence') -and $_.IsPresence }).Count
+        Write-Host "  Force-aligned $($allFlows.Count) flow(s) into 1 bucket via N-way LCS ($presenceCt presence row(s))"
+    } catch {
+        Write-Host "  WARNING: force-align failed ($_); leaving $($flowBucketInfos.Count) flow bucket(s)" -ForegroundColor Yellow
+    }
 }
 
 $totalFlowFields = 0
@@ -1431,11 +1676,20 @@ function Get-AbsorbedSlots {
 
 #region emit BP file
 $sb = [System.Text.StringBuilder]::new()
+$skippedTestBuckets = 0
+$skippedFlowBuckets = 0
 foreach ($pl in $preambleLines) { [void]$sb.AppendLine((Compact-Whitespace -Line $pl)) }
 [void]$sb.AppendLine('')
 
 foreach ($info in $bucketInfos) {
     $rep = $info.Tests[0]
+    $bk = "B$($info.BucketId)"
+    $hasCons = $consolidationsPerBucket.ContainsKey($bk) -and $consolidationsPerBucket[$bk].Count -gt 0
+    $hasFields = ($info.Fields.Count -gt 0)
+    if ($SymbolizedOnly -and -not $hasFields -and -not $hasCons) {
+        $skippedTestBuckets++
+        continue
+    }
     [void]$sb.AppendLine('')
     [void]$sb.AppendLine("# BP_BUCKET: B$($info.BucketId) tests=$($info.Tests.Count)")
 
@@ -1482,7 +1736,11 @@ foreach ($info in $bucketInfos) {
 [void]$sb.AppendLine('')
 [void]$sb.AppendLine('')
 foreach ($info in $flowBucketInfos) {
-    $rep = $info.Flows[0]
+    $rep = if ($info.ContainsKey('SyntheticRep') -and $info.SyntheticRep) { $info.SyntheticRep } else { $info.Flows[0] }
+    if ($SymbolizedOnly -and $info.Fields.Count -eq 0) {
+        $skippedFlowBuckets++
+        continue
+    }
     [void]$sb.AppendLine('')
     [void]$sb.AppendLine("# BP_FLOW_BUCKET: F$($info.BucketId) flows=$($info.Flows.Count)")
 
@@ -1504,6 +1762,7 @@ foreach ($info in $flowBucketInfos) {
     $byLineMap = @{}
     foreach ($f in $info.Fields) {
         if ($f.Field -eq '__FLOWNAME__') { continue }
+        if ($f.ContainsKey('IsPresence') -and $f.IsPresence) { continue }
         $li = [int]$f.LineIdx
         if (-not $byLineMap.ContainsKey($li)) { $byLineMap[$li] = New-Object System.Collections.Generic.List[hashtable] }
         [void]$byLineMap[$li].Add($f)
@@ -1535,6 +1794,9 @@ foreach ($info in $flowBucketInfos) {
 [IO.File]::WriteAllText($bpFile, $sb.ToString().TrimEnd() + "`r`n")
 $bpLineCount = [IO.File]::ReadAllLines($bpFile).Count
 Write-Host "  BP written: $bpFile ($bpLineCount lines, was $($rawLines.Count))"
+if ($SymbolizedOnly -and ($skippedTestBuckets -gt 0 -or $skippedFlowBuckets -gt 0)) {
+    Write-Host "  SymbolizedOnly: skipped $skippedTestBuckets verbatim test bucket(s), $skippedFlowBuckets verbatim flow bucket(s)"
+}
 #endregion
 
 #region emit symbols.csv (per-bucket tabular)
@@ -1594,6 +1856,637 @@ foreach ($info in $flowBucketInfos) {
 
 Write-FileWithRetry -Path $csvFile -Content (($csvLines.ToArray() -join "`r`n") + "`r`n")
 Write-Host "  CSV written: $csvFile ($($bucketInfos.Count) test buckets, $($flowBucketInfos.Count) flow buckets)"
+#endregion
+
+#region emit symbols.flow_pivot.csv (one row per Symbol, one column per flow)
+# For each symbol slot we collect its value(s) per flow.
+#   Flow-bucket symbols   : SymValues[i] is paired with info.Flows[i].Name.
+#   Test-bucket symbols   : value comes from each test instance; tests are
+#                           mapped to the flows that reference them via
+#                           FlowItem in the (kept) flowBlocks. If a flow has
+#                           multiple referenced tests with different values
+#                           for the same symbol, all unique values are joined
+#                           with ' ; '.
+# Column order = declaration order of flowBlocks in the (slice) source.
+
+# Build testName -> ordered list of flowName(s) that reference it.
+$testNameSet = New-Object 'System.Collections.Generic.HashSet[string]'
+foreach ($tb in $testBlocks) { [void]$testNameSet.Add($tb.Name) }
+$testToFlows = @{}
+foreach ($fb in $flowBlocks) {
+    foreach ($ln in $fb.BodyLines) {
+        if ($ln -match '^\s*(?:DUTFlowItem|FlowItem)\s+(\S+)(?:\s+(\S+))?') {
+            foreach ($t in @($Matches[1], $Matches[2])) {
+                if ($t -and $testNameSet.Contains($t)) {
+                    if (-not $testToFlows.ContainsKey($t)) {
+                        $testToFlows[$t] = New-Object 'System.Collections.Generic.List[string]'
+                    }
+                    if (-not $testToFlows[$t].Contains($fb.Name)) {
+                        [void]$testToFlows[$t].Add($fb.Name)
+                    }
+                }
+            }
+        }
+    }
+}
+
+# Flow column order: declaration order, only flows that appear in any flow bucket.
+$flowsInBuckets = New-Object 'System.Collections.Generic.HashSet[string]'
+foreach ($fbi in $flowBucketInfos) {
+    foreach ($fl in $fbi.Flows) { [void]$flowsInBuckets.Add($fl.Name) }
+}
+$flowCols = @($flowBlocks | Where-Object { $flowsInBuckets.Contains($_.Name) } | ForEach-Object { $_.Name })
+
+# symbol name -> @{ FlowName -> ordered unique list of values }
+$pivot = [ordered]@{}
+function Add-PivotValue {
+    param([string]$Sym, [string]$Flow, [string]$Val)
+    if ([string]::IsNullOrEmpty($Sym) -or [string]::IsNullOrEmpty($Flow)) { return }
+    if (-not $pivot.Contains($Sym)) { $pivot[$Sym] = @{} }
+    if (-not $pivot[$Sym].ContainsKey($Flow)) {
+        $pivot[$Sym][$Flow] = New-Object 'System.Collections.Generic.List[string]'
+    }
+    if (-not $pivot[$Sym][$Flow].Contains($Val)) { [void]$pivot[$Sym][$Flow].Add($Val) }
+}
+
+# Flow buckets: symbol value indexed directly by flow position.
+foreach ($info in $flowBucketInfos) {
+    foreach ($f in $info.Fields) {
+        for ($i = 0; $i -lt $info.Flows.Count; $i++) {
+            Add-PivotValue -Sym $f.SlotName -Flow $info.Flows[$i].Name -Val ([string]$f.SymValues[$i])
+        }
+    }
+}
+
+# Test buckets: per-test values, mapped to flow(s) via testToFlows.
+foreach ($info in $bucketInfos) {
+    # Expand composite fields into one entry per slot segment (mirrors CSV emit).
+    $entries = New-Object System.Collections.Generic.List[hashtable]
+    foreach ($f in $info.Fields) {
+        if ($f.ContainsKey('Segments') -and $null -ne $f.Segments) {
+            foreach ($s in $f.Segments) {
+                if ($s.Type -eq 'slot') { [void]$entries.Add(@{ Name = $s.SlotName; SymValues = $s.SymValues }) }
+            }
+        } else {
+            [void]$entries.Add(@{ Name = $f.SlotName; SymValues = $f.SymValues })
+        }
+    }
+    $absorbed = Get-AbsorbedSlots -BucketKey "B$($info.BucketId)"
+    if ($absorbed.Count -gt 0) {
+        $entries = [System.Collections.Generic.List[hashtable]]@($entries | Where-Object { -not $absorbed.ContainsKey($_.Name) })
+    }
+    for ($ti = 0; $ti -lt $info.Tests.Count; $ti++) {
+        $tname = $info.Tests[$ti].Name
+        if (-not $testToFlows.ContainsKey($tname)) { continue }
+        foreach ($flowName in $testToFlows[$tname]) {
+            foreach ($e in $entries) {
+                Add-PivotValue -Sym $e.Name -Flow $flowName -Val ([string]$e.SymValues[$ti])
+            }
+        }
+    }
+}
+
+# Emit pivot CSV.
+$pivotLines = [System.Collections.Generic.List[string]]::new()
+$header = @('Symbol') + @($flowCols | ForEach-Object { "$_-flow" })
+$pivotLines.Add(($header | ForEach-Object { CsvEscape $_ }) -join ',')
+foreach ($symName in $pivot.Keys) {
+    $row = @($symName)
+    foreach ($flowName in $flowCols) {
+        if ($pivot[$symName].ContainsKey($flowName)) {
+            $row += (($pivot[$symName][$flowName]) -join ' ; ')
+        } else {
+            $row += ''
+        }
+    }
+    $pivotLines.Add(($row | ForEach-Object { CsvEscape $_ }) -join ',')
+}
+Write-FileWithRetry -Path $pivotFile -Content (($pivotLines.ToArray() -join "`r`n") + "`r`n")
+Write-FileWithRetry -Path $pivotFullFile -Content (($pivotLines.ToArray() -join "`r`n") + "`r`n")
+Write-Host "  Pivot CSV written: $pivotFile ($($pivot.Count) symbols x $($flowCols.Count) flows)"
+Write-Host "  Pivot CSV (full, unreduced) written: $pivotFullFile"
+#endregion
+
+#region pivot reduction (cross-symbol templates + constant-across-flows drop)
+# Goal: minimize the pivot CSV by:
+#   (1) Cross-symbol template derivation. Detect when symbol D's per-flow
+#       value can be reproduced as a fixed string template T(B) using another
+#       symbol B's per-flow value -- e.g.
+#       F2_L3T1=PMUX_INDEX+"XAT_HITO_VCCIA_F"+PMUX_INDEX. When found, rewrite
+#       \D\ in BP to the template and drop D from pivot.
+#   (2) Constant filter. After (1), drop pivot rows whose populated cells all
+#       hold the same value (BP keeps the \X\ placeholder; the value is a
+#       global constant for this slice).
+#
+# Restriction: only single-value (1 value per cell) symbols participate in
+# (1) -- multi-value rows have no clean template.
+
+# Build a single-value map: { symbol -> @{ flow -> value } }.
+$symValueMap = [ordered]@{}
+foreach ($symName in $pivot.Keys) {
+    $vals = @{}
+    $singleValueOnly = $true
+    foreach ($flowName in $flowCols) {
+        if ($pivot[$symName].ContainsKey($flowName)) {
+            $vlist = $pivot[$symName][$flowName]
+            if ($vlist.Count -gt 1) { $singleValueOnly = $false; break }
+            $vals[$flowName] = [string]$vlist[0]
+        }
+    }
+    if ($singleValueOnly) { $symValueMap[$symName] = $vals }
+}
+
+# Sort by total length of values ascending (shortest = best basis candidate).
+$symsByLen = @($symValueMap.Keys | Sort-Object {
+    ($symValueMap[$_].Values | Measure-Object -Property Length -Sum).Sum
+})
+
+# Helper: extract basis value from a derived value given template parts.
+# Returns $null when extraction is ambiguous or fails. Handles parts.Count >= 2
+# with a non-empty inner separator (Parts[1..k-1]) for the multi-occurrence
+# case; the simple 2-part case always works when prefix/suffix match.
+function Try-InverseExtract {
+    param([string]$D, [string[]]$Parts)
+    if ($Parts.Count -lt 2) { return $null }
+    if ($null -eq $D) { return $null }
+    $p0 = [string]$Parts[0]
+    $pL = [string]$Parts[$Parts.Count - 1]
+    if (-not $D.StartsWith($p0)) { return $null }
+    if (-not $D.EndsWith($pL))   { return $null }
+    if ($D.Length -lt ($p0.Length + $pL.Length)) { return $null }
+    $mid = $D.Substring($p0.Length, $D.Length - $p0.Length - $pL.Length)
+    if ($Parts.Count -eq 2) { return $mid }
+    # mid = B + Parts[1] + B + Parts[2] + ... + Parts[k-1] + B
+    # Need an unambiguous inner separator; require all inner parts identical
+    # and non-empty so we can split mid.
+    $inner = [string]$Parts[1]
+    if ([string]::IsNullOrEmpty($inner)) { return $null }
+    for ($i = 2; $i -lt $Parts.Count - 1; $i++) {
+        if ([string]$Parts[$i] -cne $inner) { return $null }
+    }
+    $bs = [regex]::Split($mid, [regex]::Escape($inner))
+    if ($bs.Count -ne ($Parts.Count - 1)) { return $null }
+    $first = $bs[0]
+    foreach ($x in $bs) { if ($x -cne $first) { return $null } }
+    return $first
+}
+
+# Iteratively enrich symValueMap by forward + inverse template fills until
+# fixpoint (max 25 iterations as a hard guard). Each iteration:
+#   1) Re-derive every (basis, derived) template rule from the CURRENT map.
+#   2) Forward-fill: for each rule, set derived[f] = template(basis[f]) when
+#      derived[f] is missing and basis[f] exists.
+#   3) Inverse-fill: for each rule, set basis[f] from derived[f] when basis is
+#      missing and derived has the value (only when extraction is unambiguous).
+$enrichedFwd = 0
+$enrichedInv = 0
+for ($iter = 0; $iter -lt 25; $iter++) {
+    $rules = New-Object System.Collections.Generic.List[hashtable]
+    foreach ($basis in $symsByLen) {
+        $bMap = $symValueMap[$basis]
+        foreach ($derived in $symsByLen) {
+            if ($derived -eq $basis) { continue }
+            $dMap = $symValueMap[$derived]
+            $coFlows = @($dMap.Keys | Where-Object { $bMap.ContainsKey($_) })
+            if ($coFlows.Count -lt 2) { continue }
+            $parts = $null; $valid = $true
+            foreach ($f in $coFlows) {
+                $b = [string]$bMap[$f]
+                $d = [string]$dMap[$f]
+                if ([string]::IsNullOrEmpty($b)) { $valid = $false; break }
+                if ($d.IndexOf($b) -lt 0)        { $valid = $false; break }
+                $cur = [regex]::Split($d, [regex]::Escape($b))
+                if ($null -eq $parts) { $parts = $cur; continue }
+                if ($cur.Count -ne $parts.Count) { $valid = $false; break }
+                for ($pi = 0; $pi -lt $parts.Count; $pi++) {
+                    if ([string]$parts[$pi] -cne [string]$cur[$pi]) { $valid = $false; break }
+                }
+                if (-not $valid) { break }
+            }
+            if (-not $valid -or $parts.Count -lt 2) { continue }
+            [void]$rules.Add(@{ Basis = $basis; Derived = $derived; Parts = $parts })
+        }
+    }
+    $changed = $false
+    foreach ($r in $rules) {
+        $bMap = $symValueMap[$r.Basis]; $dMap = $symValueMap[$r.Derived]
+        # Forward
+        foreach ($f in @($bMap.Keys)) {
+            if (-not $dMap.ContainsKey($f)) {
+                $val = ($r.Parts) -join ([string]$bMap[$f])
+                $dMap[$f] = $val
+                $enrichedFwd++; $changed = $true
+            }
+        }
+        # Inverse
+        foreach ($f in @($dMap.Keys)) {
+            if (-not $bMap.ContainsKey($f)) {
+                $extracted = Try-InverseExtract -D ([string]$dMap[$f]) -Parts $r.Parts
+                if ($null -ne $extracted) {
+                    $bMap[$f] = $extracted
+                    $enrichedInv++; $changed = $true
+                }
+            }
+        }
+    }
+    if (-not $changed) { break }
+}
+if (($enrichedFwd + $enrichedInv) -gt 0) {
+    Write-Host "  Pivot enrichment: filled $enrichedFwd forward and $enrichedInv inverse cell(s) via template chains"
+    # Push enriched values back into the pivot so missing flow cells are no
+    # longer blank in the CSV output.
+    foreach ($symName in $symValueMap.Keys) {
+        $vals = $symValueMap[$symName]
+        if (-not $pivot.Contains($symName)) { $pivot[$symName] = @{} }
+        foreach ($f in $vals.Keys) {
+            if (-not $pivot[$symName].ContainsKey($f)) {
+                $pivot[$symName][$f] = New-Object 'System.Collections.Generic.List[string]'
+            }
+            if ($pivot[$symName][$f].Count -eq 0) {
+                [void]$pivot[$symName][$f].Add([string]$vals[$f])
+            }
+        }
+    }
+}
+
+$crossDerivations = [ordered]@{}
+$crossAbsorbed = @{}
+
+foreach ($basis in $symsByLen) {
+    if ($crossAbsorbed.ContainsKey($basis)) { continue }
+    if (-not $symValueMap.Contains($basis)) { continue }
+    foreach ($derived in $symsByLen) {
+        if ($derived -eq $basis) { continue }
+        if ($crossDerivations.Contains($derived)) { continue }
+        if ($crossAbsorbed.ContainsKey($derived)) { continue }
+        if (-not $symValueMap.Contains($derived)) { continue }
+
+        $bMap = $symValueMap[$basis]; $dMap = $symValueMap[$derived]
+        # Basis must cover every flow where derived has a value (so absorption
+        # produces the same BP content for every populated row).
+        $coFlows = @($dMap.Keys | Sort-Object)
+        if ($coFlows.Count -lt 2) { continue }
+        $missingInBasis = $false
+        foreach ($f in $coFlows) { if (-not $bMap.ContainsKey($f)) { $missingInBasis = $true; break } }
+        if ($missingInBasis) { continue }
+
+        $parts = $null
+        $valid = $true
+        foreach ($f in $coFlows) {
+            $b = [string]$bMap[$f]
+            $d = [string]$dMap[$f]
+            if ([string]::IsNullOrEmpty($b)) { $valid = $false; break }
+            if ($d.IndexOf($b) -lt 0)        { $valid = $false; break }
+            $cur = [regex]::Split($d, [regex]::Escape($b))
+            if ($null -eq $parts) { $parts = $cur; continue }
+            if ($cur.Count -ne $parts.Count) { $valid = $false; break }
+            for ($pi = 0; $pi -lt $parts.Count; $pi++) {
+                if ([string]$parts[$pi] -cne [string]$cur[$pi]) { $valid = $false; break }
+            }
+            if (-not $valid) { break }
+        }
+        if (-not $valid -or $parts.Count -lt 2) { continue }
+
+        $crossDerivations[$derived] = @{ Basis = $basis; Parts = $parts }
+        $crossAbsorbed[$derived] = $true
+    }
+}
+
+# Apply derivations to BP file (read -> replace -> write).
+if ($crossDerivations.Count -gt 0) {
+    $bpContent = [IO.File]::ReadAllText($bpFile)
+    foreach ($d in $crossDerivations.Keys) {
+        $info = $crossDerivations[$d]
+        $repl = $info.Parts -join "\$($info.Basis)\"
+        $bpContent = $bpContent.Replace("\$d\", $repl)
+        $pivot.Remove($d)
+    }
+    Write-FileWithRetry -Path $bpFile -Content $bpContent
+    Write-Host "  Pivot derivations: $($crossDerivations.Count) symbol(s) absorbed via cross-symbol templates (BP rewritten)"
+}
+
+# Multi-value pivot absorption is intentionally disabled: per-test aggregates
+# like B13_INSTANCE_P1 / B14_INSTANCE_P1 / ScreenTestSet are referenced by
+# the BP via \<slot>\ tokens, so every BP symbol must appear in the symbols
+# file. Joined-by-' ; ' multi-value cells are kept in the pivot row.
+$multiAbsorbed = 0
+
+# Multi-value template substitution (robust positional aligner). For each
+# multi-value pivot row, try every single-value symbol as basis. Tokenize
+# every value into alternating word / non-word segments via [regex]::Split
+# `(\W+)`, align segment-position-wise across flows, and substitute basis
+# only at positions where the variation matches the basis values exactly
+# (literal positions like trailing `_1` stay literal). If every value across
+# all flows reduces to the SAME templated string, replace the row's cells
+# with the templated form (one identical entry per flow).
+function _Try-PositionalTemplate {
+    param([string[]]$Vals, [string[]]$Basis)
+    # $Vals[i] is the value for flow i; $Basis[i] is that flow's basis value.
+    # Returns the templated string (with sentinel placeholders) iff every
+    # value reduces to the same template AND at least one position used basis.
+    if ($Vals.Length -ne $Basis.Length -or $Vals.Length -lt 2) { return $null }
+    # Tokenize on underscore + non-word characters (\W excludes _ in .NET regex).
+    $tokens = @()
+    $count = -1
+    foreach ($v in $Vals) {
+        $tk = [regex]::Split($v, '([_\W]+)')
+        if ($count -lt 0) { $count = $tk.Length }
+        elseif ($tk.Length -ne $count) { return $null }
+        $tokens += , $tk
+    }
+    $out = New-Object 'System.Collections.Generic.List[string]'
+    $usedBasis = $false
+    for ($p = 0; $p -lt $count; $p++) {
+        $atP = @()
+        for ($i = 0; $i -lt $Vals.Length; $i++) { $atP += $tokens[$i][$p] }
+        $first = $atP[0]
+        $allEq = $true
+        foreach ($t in $atP) { if ($t -cne $first) { $allEq = $false; break } }
+        if ($allEq) { [void]$out.Add($first); continue }
+        # Variation. Compute common prefix/suffix; the middle must equal basis.
+        $minL = ($atP | ForEach-Object { $_.Length } | Measure-Object -Minimum).Minimum
+        $pre = ''
+        for ($k = 0; $k -lt $minL; $k++) {
+            $c = $atP[0][$k]
+            $ok = $true
+            foreach ($t in $atP) { if ($t[$k] -cne $c) { $ok = $false; break } }
+            if (-not $ok) { break }
+            $pre += $c
+        }
+        $suf = ''
+        for ($k = 1; $k -le ($minL - $pre.Length); $k++) {
+            $c = $atP[0][$atP[0].Length - $k]
+            $ok = $true
+            foreach ($t in $atP) { if ($t[$t.Length - $k] -cne $c) { $ok = $false; break } }
+            if (-not $ok) { break }
+            $suf = $c + $suf
+        }
+        $matchesBasis = $true
+        for ($i = 0; $i -lt $Vals.Length; $i++) {
+            $mid = $atP[$i].Substring($pre.Length, $atP[$i].Length - $pre.Length - $suf.Length)
+            if ($mid -cne $Basis[$i]) { $matchesBasis = $false; break }
+        }
+        if (-not $matchesBasis) { return $null }
+        [void]$out.Add("$pre`u{0001}__BASIS__`u{0001}$suf")
+        $usedBasis = $true
+    }
+    if (-not $usedBasis) { return $null }
+    return -join $out
+}
+
+$multiTemplated = 0
+$exemptFromConstFilter = @{}
+foreach ($symName in @($pivot.Keys)) {
+    $perFlow = @{}
+    $hasMulti = $false
+    $valCount = -1
+    $consistentCount = $true
+    $orderedFlows = New-Object 'System.Collections.Generic.List[string]'
+    foreach ($flowName in $flowCols) {
+        if (-not $pivot[$symName].ContainsKey($flowName)) { continue }
+        $vs = @($pivot[$symName][$flowName])
+        if ($vs.Count -gt 1) { $hasMulti = $true }
+        if ($valCount -lt 0) { $valCount = $vs.Count }
+        elseif ($valCount -ne $vs.Count) { $consistentCount = $false; break }
+        $perFlow[$flowName] = $vs
+        [void]$orderedFlows.Add($flowName)
+    }
+    if (-not $hasMulti -or -not $consistentCount) { continue }
+    if ($orderedFlows.Count -lt 2) { continue }
+
+    foreach ($basis in $pivot.Keys) {
+        if ($basis -eq $symName) { continue }
+        $bArr = @()
+        $bOk = $true
+        foreach ($flowName in $orderedFlows) {
+            if (-not $pivot[$basis].ContainsKey($flowName)) { $bOk = $false; break }
+            $bv = @($pivot[$basis][$flowName])
+            if ($bv.Count -ne 1) { $bOk = $false; break }
+            $b1 = [string]$bv[0]
+            if ([string]::IsNullOrEmpty($b1)) { $bOk = $false; break }
+            $bArr += $b1
+        }
+        if (-not $bOk) { continue }
+        $distinctB = @($bArr | Sort-Object -Unique)
+        if ($distinctB.Count -lt $bArr.Length) { continue }
+
+        # For each value-position k, try positional template; collect templates.
+        $rendered = New-Object 'System.Collections.Generic.List[string]'
+        $allOk = $true
+        for ($k = 0; $k -lt $valCount; $k++) {
+            $valsAtK = @()
+            foreach ($flowName in $orderedFlows) { $valsAtK += [string]$perFlow[$flowName][$k] }
+            $tmpl = _Try-PositionalTemplate -Vals $valsAtK -Basis $bArr
+            if ($null -eq $tmpl) { $allOk = $false; break }
+            [void]$rendered.Add($tmpl.Replace("`u{0001}__BASIS__`u{0001}", "\$basis\"))
+        }
+        if (-not $allOk) { continue }
+
+        foreach ($flowName in $orderedFlows) {
+            $newList = New-Object 'System.Collections.Generic.List[string]'
+            foreach ($r in $rendered) { [void]$newList.Add($r) }
+            $pivot[$symName][$flowName] = $newList
+        }
+        $exemptFromConstFilter[$symName] = $true
+        $multiTemplated++
+        break
+    }
+}
+if ($multiTemplated -gt 0) {
+    Write-Host "  Pivot multi-value templating: $multiTemplated symbol(s) rewritten via positional basis substitution"
+}
+
+# Inline-constant absorption: any symbol whose populated flow columns all
+# produce the same (' ; '-joined) string is redundant in the symbols file.
+# Replace its \<sym>\ placeholder in the BP with the literal text and drop
+# the row. This applies to multi-value rows just rewritten by templating,
+# but also catches any single-value row that already happens to match.
+$inlinedConst = 0
+$bpInlineContent = $null
+foreach ($symName in @($pivot.Keys)) {
+    # Only inline single-value-per-flow symbols. Multi-value rows (per-test
+    # slots like B13_INSTANCE_P1) keep one placeholder in the BP that the
+    # expander iterates per row -- inlining a joined ' ; ' string would
+    # collapse all rows into one literal and break expansion.
+    $multiValue = $false
+    foreach ($flowName in $flowCols) {
+        if (-not $pivot[$symName].ContainsKey($flowName)) { continue }
+        if (@($pivot[$symName][$flowName]).Count -ne 1) { $multiValue = $true; break }
+    }
+    if ($multiValue) { continue }
+    $popVals = @($flowCols |
+        Where-Object { $pivot[$symName].ContainsKey($_) } |
+        ForEach-Object { ($pivot[$symName][$_]) -join ' ; ' })
+    if ($popVals.Count -lt 1) { continue }
+    $first = $popVals[0]
+    $allEq = $true
+    foreach ($v in $popVals) { if ($v -cne $first) { $allEq = $false; break } }
+    if (-not $allEq) { continue }
+    if (-not $exemptFromConstFilter.ContainsKey($symName)) { continue }
+    if ($null -eq $bpInlineContent) { $bpInlineContent = [IO.File]::ReadAllText($bpFile) }
+    $bpInlineContent = $bpInlineContent.Replace("\$symName\", $first)
+    [void]$exemptFromConstFilter.Remove($symName)
+    $pivot.Remove($symName)
+    $inlinedConst++
+}
+if ($inlinedConst -gt 0) {
+    Write-FileWithRetry -Path $bpFile -Content $bpInlineContent
+    Write-Host "  Pivot inline-constant: $inlinedConst symbol(s) inlined into BP and dropped from symbols"
+}
+
+# Constant-across-flows filter: drop the pivot row only when it's safe --
+# i.e. it's NOT a multi-value (per-test) symbol. Multi-value rows must stay
+# in the symbols file because their \<sym>\ placeholder in the BP expands
+# differently per test row, and the expander reads those values from this
+# file. Single-value constant rows would already have been inlined above
+# when exempt; any leftover single-value constants are also kept (the BP
+# still has a \<sym>\ placeholder for them).
+$constDropped = 0
+foreach ($symName in @($pivot.Keys)) {
+    if ($exemptFromConstFilter.ContainsKey($symName)) { continue }
+    # Skip multi-value symbols entirely -- never drop them from the pivot.
+    $multiValue = $false
+    foreach ($flowName in $flowCols) {
+        if (-not $pivot[$symName].ContainsKey($flowName)) { continue }
+        if (@($pivot[$symName][$flowName]).Count -ne 1) { $multiValue = $true; break }
+    }
+    if ($multiValue) { continue }
+    $popVals = @($flowCols |
+        Where-Object { $pivot[$symName].ContainsKey($_) } |
+        ForEach-Object { ($pivot[$symName][$_]) -join ' ; ' })
+    if ($popVals.Count -lt 2) { continue }
+    $first = $popVals[0]
+    $allEq = $true
+    foreach ($v in $popVals) { if ($v -cne $first) { $allEq = $false; break } }
+    if ($allEq) {
+        $pivot.Remove($symName)
+        $constDropped++
+    }
+}
+if ($constDropped -gt 0) {
+    Write-Host "  Pivot constant-filter: $constDropped symbol(s) dropped (constant across all populated flows)"
+}
+
+# Multi-value-constant inlining: any remaining row whose populated flow
+# columns all produce the same value list is not really a "symbol" -- it's
+# a per-row literal sequence. Emit it into the BP as a per-bucket
+# `# CONST: <name> = v0 ; v1 ; ...` annotation immediately after the
+# `# BP_BUCKET: ...` header of every bucket whose body references the
+# `\<name>\` placeholder. Then drop the row from the pivot. The downstream
+# expander can read these CONST lines as per-row literal columns.
+$multiConstInlined = 0
+$bpForConst = $null
+foreach ($symName in @($pivot.Keys)) {
+    $valLists = @()
+    foreach ($flowName in $flowCols) {
+        if (-not $pivot[$symName].ContainsKey($flowName)) { continue }
+        $valLists += ,(@($pivot[$symName][$flowName]))
+    }
+    if ($valLists.Count -lt 1) { continue }
+    # Need at least one multi-value entry (single-value constants have
+    # already been inlined above).
+    $isMulti = $false
+    foreach ($vl in $valLists) { if ($vl.Count -gt 1) { $isMulti = $true; break } }
+    if (-not $isMulti) { continue }
+    # All flow columns must produce the same value list.
+    $ref = $valLists[0]
+    $allSame = $true
+    for ($i = 1; $i -lt $valLists.Count; $i++) {
+        $cur = $valLists[$i]
+        if ($cur.Count -ne $ref.Count) { $allSame = $false; break }
+        for ($k = 0; $k -lt $ref.Count; $k++) {
+            if ([string]$cur[$k] -cne [string]$ref[$k]) { $allSame = $false; break }
+        }
+        if (-not $allSame) { break }
+    }
+    if (-not $allSame) { continue }
+
+    if ($null -eq $bpForConst) { $bpForConst = [IO.File]::ReadAllLines($bpFile) }
+    $needle = "\$symName\"
+    # Find every bucket header (test or flow) whose body references the
+    # placeholder, and inject a CONST line right after the header.
+    $newBp = New-Object 'System.Collections.Generic.List[string]'
+    $bucketStart = -1
+    $bucketUses = $false
+    for ($li = 0; $li -lt $bpForConst.Count; $li++) {
+        $bl = $bpForConst[$li]
+        $isHeader = ($bl -match '^# BP_BUCKET:' -or $bl -match '^# BP_FLOW_BUCKET:')
+        if ($isHeader) {
+            # Flush any pending header that needs a CONST insertion done now.
+            $bucketStart = $newBp.Count
+            $bucketUses = $false
+        } elseif ($bucketStart -ge 0 -and (-not $bucketUses) -and $bl.Contains($needle)) {
+            $bucketUses = $true
+            # Inject CONST line right after the bucket header (which is at
+            # $bucketStart in the new list).
+            $constLine = "# CONST: $symName = " + (($ref | ForEach-Object { [string]$_ }) -join ' ; ')
+            $newBp.Insert($bucketStart + 1, $constLine)
+        }
+        [void]$newBp.Add($bl)
+    }
+    $bpForConst = $newBp.ToArray()
+    $pivot.Remove($symName)
+    $multiConstInlined++
+}
+if ($multiConstInlined -gt 0) {
+    [IO.File]::WriteAllLines($bpFile, $bpForConst)
+    Write-Host "  Pivot multi-value-constant inline: $multiConstInlined symbol(s) inlined as # CONST: lines into BP and dropped from symbols"
+}
+
+# Re-emit the pivot CSV with the reduced row set.
+if ($crossDerivations.Count -gt 0 -or $constDropped -gt 0 -or $multiAbsorbed -gt 0 -or $multiTemplated -gt 0 -or $inlinedConst -gt 0 -or $multiConstInlined -gt 0) {
+    $pivotLines = [System.Collections.Generic.List[string]]::new()
+    $header = @('Symbol') + @($flowCols | ForEach-Object { "$_-flow" })
+    $pivotLines.Add(($header | ForEach-Object { CsvEscape $_ }) -join ',')
+    foreach ($symName in $pivot.Keys) {
+        $row = @($symName)
+        foreach ($flowName in $flowCols) {
+            if ($pivot[$symName].ContainsKey($flowName)) {
+                $row += (($pivot[$symName][$flowName]) -join ' ; ')
+            } else {
+                $row += ''
+            }
+        }
+        $pivotLines.Add(($row | ForEach-Object { CsvEscape $_ }) -join ',')
+    }
+    Write-FileWithRetry -Path $pivotFile -Content (($pivotLines.ToArray() -join "`r`n") + "`r`n")
+    Write-Host "  Pivot CSV (reduced) written: $pivotFile ($($pivot.Count) symbols)"
+
+    # The reduced pivot IS the symbols file: a single-table view, one row per
+    # BP symbol, one column per flow. Multi-value cells are joined by ' ; '.
+    # This guarantees every \<slot>\ token in the BP appears in the symbols
+    # file (no separate per-bucket sections to chase).
+    Write-FileWithRetry -Path $csvFile -Content (($pivotLines.ToArray() -join "`r`n") + "`r`n")
+    Write-Host "  Symbols CSV (single-table) re-written: $csvFile ($($pivot.Count) symbols)"
+}
+
+# Coherence check: every \<sym>\ placeholder in the final BP must be
+# resolvable from EITHER (a) a row in the symbols.csv pivot, OR (b) a
+# `# CONST: <sym> = ...` annotation inside one of the buckets that
+# references it. Reserved tokens like __BYPASS__ / __BIN__ are not symbols
+# and use a different delimiter; this check only inspects the \<name>\ form.
+$bpFinalLines = [IO.File]::ReadAllLines($bpFile)
+$bpFinal = $bpFinalLines -join "`n"
+$bpPlaceholders = [System.Collections.Generic.HashSet[string]]::new()
+foreach ($m in [regex]::Matches($bpFinal, '\\([A-Za-z_][A-Za-z0-9_]*)\\')) {
+    [void]$bpPlaceholders.Add($m.Groups[1].Value)
+}
+# Collect names with at least one CONST line in the BP.
+$constNames = [System.Collections.Generic.HashSet[string]]::new()
+foreach ($cl in $bpFinalLines) {
+    if ($cl -match '^#\s*CONST:\s*([A-Za-z_][A-Za-z0-9_]*)\s*=') {
+        [void]$constNames.Add($Matches[1])
+    }
+}
+$missing = New-Object 'System.Collections.Generic.List[string]'
+foreach ($p in $bpPlaceholders) {
+    if ($pivot.Contains($p)) { continue }
+    if ($constNames.Contains($p)) { continue }
+    [void]$missing.Add($p)
+}
+if ($missing.Count -gt 0) {
+    throw "BP/symbols coherence check failed -- the following \<sym>\ placeholders appear in $bpFile but are missing from both ${csvFile} and any bucket-local '# CONST:' annotation: $($missing -join ', '). Generator must emit a coherent pair."
+}
 #endregion
 
 #region detect column derivations (analysis only)
