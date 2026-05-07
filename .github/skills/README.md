@@ -179,6 +179,34 @@ Unlike custom instructions that primarily define coding guidelines, **Agent Skil
 
 ---
 
+### [test-instance-comparison](test-instance-comparison/SKILL.md)
+
+**Tool:** `compare_test_instances.ps1` (wraps `ApiSamples.TestInstanceComparison.exe`)
+**Purpose:** Extract and compare test instances and flows between one or two test programs using the Trace API. Walks `MainFlow.DeepSelect<TestInstance>()` so results reflect **true execution order**, not STPL/file/`.mtpl` listing order.
+
+**When to use:**
+- Comparing two test programs side-by-side (diff TPs)
+- Listing test instances in a specific flow or module
+- Determining the execution order of instances
+- Checking what changed between two TP versions (presence, ordering, parameters, EDC, bypass)
+- Analyzing flow-position changes for PatConfig / modification impact
+
+**Key Features:**
+- Three modes: `single`, `compare`, `mcp` (MCP server for AI integration)
+- Handles STPL → TPL resolution automatically
+- Case-insensitive substring matching on flow/module names
+- CSV output with template, parent flow, parameters, MTT status
+
+**Invoke with:**
+```powershell
+.\.github\skills\test-instance-comparison\compare_test_instances.ps1 `
+    -StplPath <stpl> -TplPath <tpl> -ModuleName <pattern> -OutputCsvPath <csv>
+```
+
+**Related Instructions:** see "Comparing Test Instances and Flows Between Test Programs" in [copilot-instructions.md](../copilot-instructions.md).
+
+---
+
 ## Creating a New Skill
 
 **Tip:** Type `/skills` in the Copilot chat input to quickly open the Configure Skills menu.

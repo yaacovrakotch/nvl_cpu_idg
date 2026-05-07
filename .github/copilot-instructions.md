@@ -146,3 +146,103 @@ Each module in `repo_root/Modules/<MODULE_NAME>/` may contain:
 ## Automation Integration
 
 The `build_modules.ps1` script is intended to be integrated into a larger automated workflow. Ensure that this script is designed to work seamlessly within the overall automation framework, facilitating efficient module building and deployment processes.
+
+
+## Comparing Test Instances and Flows Between Test Programs
+
+When the user asks to **compare two test programs**, **diff TPs**, **list test
+instances in a flow/module**, **check what changed between two TPs**, or
+**determine flow execution order**, use the [`test-instance-comparison`](skills/test-instance-comparison/SKILL.md)
+skill at `.github/skills/test-instance-comparison/`.
+
+The skill wraps `ApiSamples.TestInstanceComparison` (a .NET 9 tool built on the
+Trace API). It supports three modes: `single` (extract instances from one TP),
+`compare` (side-by-side diff of two TPs), and `mcp` (MCP server for AI
+integration).
+
+**Quick run (single TP):**
+```powershell
+.\.github\skills\test-instance-comparison\compare_test_instances.ps1 `
+    -StplPath "<stpl>" -TplPath "<tpl>" `
+    -ModuleName "<flow_or_module_substring>" `
+    -OutputCsvPath "<csv>"
+```
+
+**Quick run (compare two TPs):**
+```powershell
+.\.github\skills\test-instance-comparison\compare_test_instances.ps1 -Mode compare `
+    -StplPath  "<stpl1>" -TplPath  "<tpl1>" `
+    -StplPath2 "<stpl2>" -TplPath2 "<tpl2>" `
+    -ModuleName "<flow_or_module_substring>" `
+    -OutputCsvPath "<csv>"
+```
+
+See [skills/test-instance-comparison/SKILL.md](skills/test-instance-comparison/SKILL.md) for full parameter reference, MCP-mode tools, and build instructions.
+
+### Intra-module flow comparison & symbolization (`*_bp.flows_compare.csv`)
+
+When the user asks to **compare flows within a single module** (e.g. `F1XAT`
+vs `F2XAT` vs `F3XAT` inside `ARR_CORE_CXX.mtpl`), **collapse / symbolize a
+module's `.mtpl`**, or **generate a `_bp.mtpl`**, follow the mandatory rules
+in [instructions/flow-comparison.instructions.md](instructions/flow-comparison.instructions.md).
+
+Hard rules (summary — see linked file for full schema):
+- Use **only** `.tmp_arr_core_compare/symbolize_mtpl.py` (which calls
+  `compare_flows_v3.py`); do NOT create ad-hoc comparison scripts.
+- The `test-instance-comparison` skill above is the **only** sanctioned source
+  of test-instance / parameter / connectivity data for this pipeline.
+- Output **must** be `<MODULE>_bp.flows_compare.csv` with the canonical column
+  schema: `Entity, <flowN>…, DIFF, <flowN>_line…, Symbolized, <flowN>_symbols…`.
+  Alternative schemas (e.g. `NormalizedName,InF1,InF2,InF3,IdxF1…`) are not
+  acceptable.
+
+**Canonical commands (no substitutes):**
+
+| User asks for…                              | Run                                       |
+|---------------------------------------------|-------------------------------------------|
+| Generate BP / collapse mtpl / `_bp.mtpl`    | `python symbolize_mtpl.py all`            |
+| Comparison only / regen `flows_compare.csv` | `python symbolize_mtpl.py compare`        |
+| Regen BP from existing compare CSV          | `python symbolize_mtpl.py generate`       |
+| Full validation                             | `python symbolize_mtpl.py validate`       |
+
+`validate` runs all three checks — structural, symbol-consistency, and the
+build-error contract `errors(_bp.mtpl_expanded) ≤ errors(<MODULE>.mtpl_orig)`.
+None may be skipped or substituted.
+
+### CRITICAL — Execution order is NOT STPL listing order
+
+When any question involves **which test instance runs before another**, **what
+is the closest preceding instance of type X**, or **does instance A run before
+instance B**, **never use STPL module listing order, file system directory
+order, or `.mtpl` FlowItem order** — those do NOT reflect actual execution
+order.
+
+The only correct method is `testProgram.MainFlow.DeepSelect<TestInstance>()`
+from the Trace API (`Trace.Api.Common.TP`), which walks the `MainFlow` tree
+recursively in true DUTFlow chain order (e.g. LFMSA → LFMIA → [SF_LFM] →
+LFMRING, not the order modules appear in the STPL file).
+
+The `test-instance-comparison` skill above already does this correctly — prefer
+it over hand-rolled STPL parsing for any TP-order-sensitive analysis.
+
+For new C# tooling that needs flow order:
+
+```csharp
+using Trace.Api.Services.TestProgramParser.Interfaces; // ParseTestProgram is an extension method
+var parserFactory = new TestProgramParserFactory(driveMapping);
+// Basic alone leaves TestParameterMetadata null — must add UseDummyTemplates
+var flags = EnumTpParserFlag.Basic | EnumTpParserFlag.UseDummyTemplates;
+TestProgram tp = parserFactory.ParseTestProgram(stplPath, tplPath, flags);
+var ordered = tp.MainFlow.DeepSelect<TestInstance>().ToList();
+// list index IS execution position
+// Closest preceding match: ordered.Take(targetIdx).LastOrDefault(condition)
+```
+
+### Flow-position changes MUST be analyzed for modification impact
+
+When a comparison reveals **new / removed / reordered instances** or **bypass
+changes**, check whether any test instance moved before/after a PatConfig (or
+similar stateful) instance relative to the other version. If so, state which
+plist it uses, which PatConfig covers it, and whether the modification is now
+applied or not. Pattern modifications are **sticky per ConfigurationElement**
+and carry across units — flow-order changes therefore have real silicon impact.

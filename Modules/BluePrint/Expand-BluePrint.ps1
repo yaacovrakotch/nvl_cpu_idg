@@ -31,7 +31,15 @@ param(
     # block dir (orig + bp + csv side-by-side) can be expanded without the
     # default "<bpDir parent>" assumption.
     [string]$OrigMtpl,
-    [string]$TargetMtpl
+    [string]$TargetMtpl,
+    # When true, downgrades structural BP-side checks (count parity vs BP
+    # buckets, BP-side test/flow coverage, BP-side FlowItem resolution) to
+    # warnings. Used for the merged full-module round-trip where the BP
+    # contains both compressed buckets AND verbatim pass-through definitions
+    # from the original mtpl -- bucket counts no longer match val counts and
+    # any pre-existing dangling references in the original are present in
+    # the BP too. The val-vs-orig body-diff identity check stays strict.
+    [switch]$LenientChecks
 )
 
 Set-StrictMode -Version Latest
@@ -53,7 +61,19 @@ if ($bpFileName -match '^(.+)_bp\.mtpl$') {
     throw "Input must end with _bp.mtpl (or legacy _bp.bp / .mtpl.bp), got: $bpFileName"
 }
 $moduleDir   = Split-Path $bpDir
-$csvFile     = Join-Path $bpDir "$moduleName.symbols.csv"
+# Internal per-bucket multi-table CSV (consumed here). The user-facing
+# `<module>.symbols.csv` is the (reduced) pivot table written by the
+# generator -- it is NOT the format the expander reads.
+$csvFile     = Join-Path $bpDir "$moduleName.symbols.buckets.csv"
+# Backward compat: legacy generator wrote the per-bucket table to
+# `<module>.symbols.csv`. Detect by sniffing for a `# Bucket` header.
+if (-not (Test-Path $csvFile)) {
+    $legacy = Join-Path $bpDir "$moduleName.symbols.csv"
+    if (Test-Path $legacy) {
+        $first = (Get-Content $legacy -TotalCount 1)
+        if ($first -match '^\s*#\s*Bucket\s+') { $csvFile = $legacy }
+    }
+}
 $binmapFile  = Join-Path $bpDir "$moduleName.binmap.json"
 $valFile     = Join-Path $bpDir "${moduleName}_bp.val.mtpl"
 if ($OrigMtpl)   { $origMtpl   = (Resolve-Path -LiteralPath $OrigMtpl   -ErrorAction SilentlyContinue).Path; if (-not $origMtpl) { $origMtpl = $OrigMtpl } } else { $origMtpl = Join-Path $moduleDir "$moduleName.mtpl_orig" }
@@ -123,6 +143,28 @@ while ($ci -lt $rawCsv.Count) {
     throw
 }
 Write-Host "  Buckets in CSV: $($bucketTables.Count)"
+
+# Cross-bucket slot map: aligned buckets share a positional row axis (e.g.
+# F1=row 0, F2=row 1, F3=row 2). A test bucket's body may reference slots
+# defined in OTHER buckets (e.g. test bucket B3 referencing the flow-derived
+# slot `\B4_L32T4\`). Build a per-row-index slot lookup that merges every
+# bucket's r-th row, so the expander can resolve such cross-bucket
+# placeholders by row position. If multiple buckets define the same slot
+# name they should agree (that's the whole point of cross-bucket reuse).
+$rowAxisSlots = [System.Collections.Generic.List[hashtable]]::new()
+$maxRows = 0
+foreach ($b in $bucketTables.Keys) { if ($bucketTables[$b].Count -gt $maxRows) { $maxRows = $bucketTables[$b].Count } }
+for ($r = 0; $r -lt $maxRows; $r++) {
+    $merged = @{}
+    foreach ($b in $bucketTables.Keys) {
+        $rows = $bucketTables[$b]
+        if ($r -ge $rows.Count) { continue }
+        foreach ($k in $rows[$r].Slots.Keys) {
+            if (-not $merged.ContainsKey($k)) { $merged[$k] = $rows[$r].Slots[$k] }
+        }
+    }
+    [void]$rowAxisSlots.Add($merged)
+}
 #endregion
 
 #region load binmap (per-instance original bin/ctr/bnum values)
@@ -218,11 +260,21 @@ while ($i -lt $bpLines.Count) {
         if ($marker -eq 'test') { $bucketCount++ } else { $flowBucketCount++ }
         $i++
         $blockCmts = [System.Collections.Generic.List[string]]::new()
+        # `# CONST: <name> = v0 ; v1 ; ...` lines emitted by the generator
+        # carry per-row literal sequences for symbols that are constant
+        # across flows but vary per row in the bucket. They are stripped
+        # from the visible block-comment list (so they don't end up in the
+        # expanded mtpl) and indexed into $constMap[name] -> string[].
+        $constMap = @{}
         while ($i -lt $bpLines.Count) {
             $ln = $bpLines[$i]
             if ($ln -match '^# BP_(BUCKET|FLOW_BUCKET):') { break }
             if ($ln -match '^\s*(CSharpTest|MultiTrialTest|Flow)\s+') { break }
             if ($ln.Trim() -eq '') { $i++; continue }
+            if ($ln -match '^#\s*CONST:\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)$') {
+                $constMap[$Matches[1]] = ($Matches[2] -split '\s+;\s+')
+                $i++; continue
+            }
             $blockCmts.Add($ln); $i++
         }
         if ($i -ge $bpLines.Count) { throw "Bucket $bid has no body" }
@@ -240,6 +292,7 @@ while ($i -lt $bpLines.Count) {
         if (-not $bucketTables.Contains($bid)) {
             throw "Bucket $bid referenced in BP but not in CSV"
         }
+        $rowIdx = 0
         foreach ($row in $bucketTables[$bid]) {
             foreach ($c in $blockCmts) { $out.Add($c) }
             # Build expanded body for this instance, then restore real
@@ -251,6 +304,22 @@ while ($i -lt $bpLines.Count) {
                 foreach ($k in $row.Slots.Keys) {
                     $expanded = $expanded.Replace("\$k\", $row.Slots[$k])
                 }
+                # Resolve cross-bucket placeholders against the row-axis
+                # merged map (aligned buckets share positional rows).
+                if ($rowIdx -lt $rowAxisSlots.Count) {
+                    $axisMap = $rowAxisSlots[$rowIdx]
+                    foreach ($k in $axisMap.Keys) {
+                        if ($row.Slots.ContainsKey($k)) { continue }
+                        $expanded = $expanded.Replace("\$k\", $axisMap[$k])
+                    }
+                }
+                # Apply bucket-local CONST values (per-row literal sequences).
+                foreach ($cn in $constMap.Keys) {
+                    $vals = $constMap[$cn]
+                    if ($rowIdx -lt $vals.Count) {
+                        $expanded = $expanded.Replace("\$cn\", $vals[$rowIdx])
+                    }
+                }
                 [void]$expandedBody.Add($expanded)
             }
             $valMap = if ($marker -eq 'test') { $binmapTests } else { $binmapFlows }
@@ -261,6 +330,7 @@ while ($i -lt $bpLines.Count) {
             foreach ($el in $expandedBody) { $out.Add($el) }
             $out.Add('')
             if ($marker -eq 'test') { $testCount++ } else { $flowCount++ }
+            $rowIdx++
         }
         continue
     }
@@ -409,8 +479,12 @@ if (Test-Path $origMtpl) {
     }
 
     function Get-TestFlowCoverage {
-        # Returns test names that appear as CSharpTest/MultiTrialTest but are
-        # never referenced by any FlowItem/DUTFlowItem in any flow body.
+        # Strict literal-string check: every test definition must have its
+        # name appear verbatim as a FlowItem/DUTFlowItem ref. Templated test
+        # names (like ARR_..._F\PMUX_INDEX\XAT_..._COMBINED) are matched
+        # against templated FlowItem refs character-for-character (including
+        # the \placeholder\ tokens). This is the contract: generation MUST
+        # produce test defs whose names mirror the FlowItem ref names exactly.
         param([string]$Path)
         $lines = [IO.File]::ReadAllLines($Path)
         $testNames = New-Object 'System.Collections.Generic.HashSet[string]'
@@ -461,20 +535,101 @@ if (Test-Path $origMtpl) {
         if ($orphans.Count -gt 20) { Write-Host "    ...and $($orphans.Count - 20) more" -ForegroundColor Yellow }
     }
 
-    # Check 2: every test must be referenced by at least one FlowItem.
-    $bpCov = Get-TestFlowCoverage -Path $InputBp
+    # Check 2: every test definition in the BP must be referenced by at least
+    # one FlowItem in the BP (using EXACT-string match on the templated
+    # names). If a test is defined as `..._F1XAT_..._COMBINED` but the
+    # only FlowItem ref uses `..._F\PMUX_INDEX\XAT_..._COMBINED`, the names
+    # don't match -- this signals a generation bug where the test bucket
+    # kept a literal name that should have been templated to match the
+    # consolidated FlowItem ref.
+    $bpCov  = Get-TestFlowCoverage -Path $InputBp
     $valCov = Get-TestFlowCoverage -Path $valFile
     Write-Host "  Test-flow coverage (bp):  total=$($bpCov.Total) covered=$($bpCov.Covered) uncovered=$($bpCov.Uncovered.Count)"
     Write-Host "  Test-flow coverage (val): total=$($valCov.Total) covered=$($valCov.Covered) uncovered=$($valCov.Uncovered.Count)"
     if ($bpCov.Uncovered.Count -gt 0) {
-        foreach ($t in ($bpCov.Uncovered | Select-Object -First 20)) { Write-Host "    bp uncovered test: $t" -ForegroundColor Yellow }
-        if ($bpCov.Uncovered.Count -gt 20) { Write-Host "    ...and $($bpCov.Uncovered.Count - 20) more" -ForegroundColor Yellow }
+        foreach ($t in ($bpCov.Uncovered | Select-Object -First 20)) { Write-Host "    bp uncovered test: $t" -ForegroundColor Red }
+        if ($bpCov.Uncovered.Count -gt 20) { Write-Host "    ...and $($bpCov.Uncovered.Count - 20) more" -ForegroundColor Red }
+        if ($LenientChecks) {
+            Write-Host "    [BP coverage WARNING - non-fatal under -LenientChecks; merged-mode pass-through can include pre-existing orphan tests from the original mtpl]" -ForegroundColor Yellow
+        } else {
+            throw "BP test-flow coverage check failed: $($bpCov.Uncovered.Count) test definition(s) in the BP are not referenced by any FlowItem (exact-name match on templated names). Likely cause: test bucket emitted with a literal per-flow name while FlowItem refs use templated names -- generation must template the test definition the same way."
+        }
     }
     if ($valCov.Uncovered.Count -gt 0) {
-        foreach ($t in ($valCov.Uncovered | Select-Object -First 20)) { Write-Host "    val uncovered test: $t" -ForegroundColor Yellow }
-        if ($valCov.Uncovered.Count -gt 20) { Write-Host "    ...and $($valCov.Uncovered.Count - 20) more" -ForegroundColor Yellow }
+        # val-side uncovered would only happen if the orig also has stray
+        # tests; report and fail because expansion produced something the
+        # original flow refs cannot reach.
+        foreach ($t in ($valCov.Uncovered | Select-Object -First 20)) { Write-Host "    val uncovered test: $t" -ForegroundColor Red }
+        if ($valCov.Uncovered.Count -gt 20) { Write-Host "    ...and $($valCov.Uncovered.Count - 20) more" -ForegroundColor Red }
+        if ($LenientChecks) {
+            Write-Host "    [val coverage WARNING - non-fatal under -LenientChecks; pre-existing orphan tests in the original mtpl pass through verbatim]" -ForegroundColor Yellow
+        } else {
+            throw "Val test-flow coverage check failed: $($valCov.Uncovered.Count) test definition(s) in the expanded mtpl are not referenced by any FlowItem."
+        }
     }
     if ($parityFail) { Write-Host "    [parity check WARNING - non-fatal]" -ForegroundColor Yellow }
+
+    # Check 3: every FlowItem/DUTFlowItem reference must resolve to either a
+    # defined test (CSharpTest/MultiTrialTest) or a defined flow. Run on the
+    # expanded val file so that templated names like
+    # `FlowItem ARR_..._F\PMUX_INDEX\_X_SSA_L2DATA <bin>` are caught after
+    # full placeholder substitution.
+    function Get-UnresolvedFlowItemRefs {
+        param([string]$Path)
+        $lines = [IO.File]::ReadAllLines($Path)
+        $defs = New-Object 'System.Collections.Generic.HashSet[string]'
+        foreach ($ln in $lines) {
+            if ($ln -match '^\s*CSharpTest\s+\S+\s+(\S+)')       { [void]$defs.Add($Matches[1].Trim()) }
+            elseif ($ln -match '^\s*MultiTrialTest\s+(\S+)\s*$') { [void]$defs.Add($Matches[1].Trim()) }
+            elseif ($ln -match '^\s*Flow\s+(\S+)')               { [void]$defs.Add($Matches[1].Trim()) }
+        }
+        # Each unresolved entry: @{ Ref = <name>; Flow = <flowname>; Line = <text> }
+        $unresolved = New-Object 'System.Collections.Generic.List[hashtable]'
+        $currentFlow = ''
+        foreach ($ln in $lines) {
+            if ($ln -match '^\s*Flow\s+(\S+)') { $currentFlow = $Matches[1].Trim(); continue }
+            if ($ln -match '^\s*(?:DUTFlowItem|FlowItem)\s+(\S+)(?:\s+(\S+))?') {
+                $r1 = $Matches[1]
+                # Skip __BIN__/__BNUM__/__CTR__ sentinels and pure numbers.
+                if ($r1 -and $r1 -notmatch '^(__\w+__|-?\d+)$' -and -not $defs.Contains($r1)) {
+                    [void]$unresolved.Add(@{ Ref = $r1; Flow = $currentFlow; Line = $ln.Trim() })
+                }
+            }
+        }
+        return $unresolved
+    }
+    $unresolvedVal = @(Get-UnresolvedFlowItemRefs -Path $valFile)
+    Write-Host "  FlowItem resolution (val): unresolved=$($unresolvedVal.Count)"
+    if ($unresolvedVal.Count -gt 0) {
+        foreach ($u in ($unresolvedVal | Select-Object -First 20)) {
+            Write-Host "    unresolved FlowItem: $($u.Ref) (in flow $($u.Flow))" -ForegroundColor Red
+        }
+        if ($unresolvedVal.Count -gt 20) { Write-Host "    ...and $($unresolvedVal.Count - 20) more" -ForegroundColor Red }
+        if ($LenientChecks) {
+            Write-Host "    [val FlowItem-resolution WARNING - non-fatal under -LenientChecks]" -ForegroundColor Yellow
+        } else {
+            throw "FlowItem resolution check failed: $($unresolvedVal.Count) FlowItem reference(s) point to undefined test/flow names. Check the BP for templated refs that don't resolve in any per-row expansion."
+        }
+    }
+    # Same check on the BP itself: every FlowItem ref in the BP (which keeps
+    # templated names like F\PMUX_INDEX\XAT_..._SSA_L2DATA) must match a
+    # CSharpTest/MultiTrialTest/Flow definition with the EXACT same templated
+    # name. This catches BP authoring errors where a flow references a test
+    # whose definition was dropped or whose name was rewritten differently
+    # than the FlowItem ref.
+    $unresolvedBp = @(Get-UnresolvedFlowItemRefs -Path $InputBp)
+    Write-Host "  FlowItem resolution (bp):  unresolved=$($unresolvedBp.Count)"
+    if ($unresolvedBp.Count -gt 0) {
+        foreach ($u in ($unresolvedBp | Select-Object -First 20)) {
+            Write-Host "    unresolved FlowItem: $($u.Ref) (in flow $($u.Flow))" -ForegroundColor Red
+        }
+        if ($unresolvedBp.Count -gt 20) { Write-Host "    ...and $($unresolvedBp.Count - 20) more" -ForegroundColor Red }
+        if ($LenientChecks) {
+            Write-Host "    [BP FlowItem-resolution WARNING - non-fatal under -LenientChecks]" -ForegroundColor Yellow
+        } else {
+            throw "FlowItem resolution check failed on BP: $($unresolvedBp.Count) FlowItem reference(s) point to undefined test/flow names in the _bp.mtpl. Every templated FlowItem name must have a matching templated CSharpTest/MultiTrialTest/Flow definition with the same name."
+        }
+    }
     #endregion
     $missingT = @($o.Tests.Keys | Where-Object { -not $v.Tests.ContainsKey($_) })
     $diffT    = @($o.Tests.Keys | Where-Object { $v.Tests.ContainsKey($_) -and $v.Tests[$_] -ne $o.Tests[$_] })

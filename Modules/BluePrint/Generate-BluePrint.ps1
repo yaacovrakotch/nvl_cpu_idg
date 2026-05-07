@@ -47,9 +47,17 @@ if (-not $OutputDir) { $OutputDir = Join-Path (Split-Path $InputMtpl) 'BluePrint
 if (-not (Test-Path $OutputDir)) { New-Item -ItemType Directory $OutputDir -Force | Out-Null }
 
 $bpFile     = Join-Path $OutputDir "${moduleName}_bp.mtpl"
-$csvFile    = Join-Path $OutputDir "$moduleName.symbols.csv"
-$pivotFile  = Join-Path $OutputDir "$moduleName.symbols.flow_pivot.csv"
-$pivotFullFile = Join-Path $OutputDir "$moduleName.symbols.flow_pivot.full.csv"
+# Naming:
+#   $csvFile      = per-bucket multi-table CSV. Internal artifact consumed
+#                   by Expand-BluePrint to reconstruct test/flow definitions.
+#   $pivotFile    = USER-FACING symbols table. One row per Symbol, one
+#                   column per flow. Reduced (cross-symbol templates and
+#                   constant-across-flows rows are removed). This is the
+#                   `<module>.symbols.csv` the user reads.
+#   $pivotFullFile= unreduced pivot, kept alongside for forensics.
+$csvFile      = Join-Path $OutputDir "$moduleName.symbols.buckets.csv"
+$pivotFile    = Join-Path $OutputDir "$moduleName.symbols.csv"
+$pivotFullFile= Join-Path $OutputDir "$moduleName.symbols.flow_pivot.full.csv"
 $logFile    = Join-Path $OutputDir "$moduleName.compressions.log"
 $promptFile = Join-Path $OutputDir "$moduleName.prompt.txt"
 $derivFile  = Join-Path $OutputDir "$moduleName.derivations.log"
@@ -1344,6 +1352,167 @@ function Build-AlignedFlowBucketInfo {
     return $info
 }
 
+function Build-AlignedTestBucketInfo {
+    # Force-merge N tests (with possibly differing bodies) into one aligned
+    # test bucket via N-way LCS. Mirrors Build-AlignedFlowBucketInfo but for
+    # tests. Used when the user-requested flow set forces a templated FlowItem
+    # ref name -- the corresponding test definitions MUST share that templated
+    # name even if their bodies have differing parameters or line counts.
+    #
+    # Lines that are present in some tests but missing in others become
+    # whole-line presence fields: the synthetic BP body has just a
+    # `\<SlotName>\` placeholder on that line and SymValues holds the original
+    # line text for present rows / empty string for absent rows. The expander
+    # substitutes per-row -- absent rows yield a blank line which the
+    # round-trip comparison normalizes away.
+    param([int]$BucketId, $Tests, $Vocab)
+    $columns = Align-FlowBodiesNway -Flows $Tests
+
+    $synthBody = @()
+    foreach ($c in $columns) {
+        $rep = $null
+        foreach ($l in $c.Lines) { if ($null -ne $l) { $rep = $l; break } }
+        $synthBody += $rep
+    }
+
+    $rep0 = $Tests[0]
+    $synthRep = [PSCustomObject]@{
+        Name         = $rep0.Name
+        CommentLines = $rep0.CommentLines
+        BodyLines    = $synthBody
+        StartLine    = $rep0.StartLine
+        EndLine      = $rep0.EndLine
+        Template     = $rep0.Template
+        TestType     = $rep0.TestType
+    }
+
+    $info = @{
+        BucketId     = $BucketId
+        Tests        = $Tests
+        Fields       = [System.Collections.Generic.List[hashtable]]::new()
+        IsAligned    = $true
+        SyntheticRep = $synthRep
+        Columns      = $columns
+    }
+
+    # __INSTANCE__ name field
+    $names = @($Tests | ForEach-Object { $_.Name })
+    if (@($names | Sort-Object -Unique).Count -gt 1) {
+        $p = Common-Prefix -Strs $names
+        $s = Common-Suffix -Strs $names
+        $minL = ($names | ForEach-Object { $_.Length } | Measure-Object -Minimum).Minimum
+        while ($p.Length + $s.Length -gt $minL) {
+            if ($s.Length -ge $p.Length) { $s = $s.Substring(1) } else { $p = $p.Substring(0, $p.Length - 1) }
+        }
+        $sv = $names | ForEach-Object { $_.Substring($p.Length, $_.Length - $p.Length - $s.Length) }
+        $nField = @{
+            Field     = '__INSTANCE__'
+            LineIdx   = -1
+            TokenIdx  = -1
+            Prefix    = $p
+            Suffix    = $s
+            SymValues = @($sv)
+        }
+        Apply-MinMaxRescue -Field $nField
+        $info.Fields.Add($nField)
+    }
+
+    for ($ci = 1; $ci -lt $columns.Count; $ci++) {
+        $col = $columns[$ci]
+        $allPresent = $true
+        foreach ($l in $col.Lines) { if ($null -eq $l) { $allPresent = $false; break } }
+
+        if (-not $allPresent) {
+            # Whole-line presence field: SymValues hold original line text
+            # (trimmed) for present rows, empty string for absent rows.
+            $sv = @($col.Lines | ForEach-Object {
+                if ($null -eq $_) { '' } else { (($_ -replace '\s+', ' ').Trim()) }
+            })
+            $info.Fields.Add(@{
+                Field      = "L${ci}_LINE"
+                LineIdx    = $ci
+                TokenIdx   = -1
+                Prefix     = ''
+                Suffix     = ''
+                SymValues  = @($sv)
+                IsPresence = $true
+                Quoted     = $false
+            })
+            continue
+        }
+
+        $repTokens = @(Tokenize-FlowLine -Line $col.Lines[0])
+        if ($repTokens.Count -eq 0) { continue }
+        for ($tk = 0; $tk -lt $repTokens.Count; $tk++) {
+            $t0 = $repTokens[$tk]
+            $values = New-Object System.Collections.Generic.List[string]
+            $ok = $true
+            foreach ($ll in $col.Lines) {
+                $tt = @(Tokenize-FlowLine -Line $ll)
+                if ($tk -ge $tt.Count) { $ok = $false; break }
+                $tx = $tt[$tk]
+                if ($tx.Kind -ne $t0.Kind) { $ok = $false; break }
+                $values.Add($tx.Text)
+            }
+            if (-not $ok) { continue }
+            $uniq = @($values | Sort-Object -Unique)
+            if ($uniq.Count -le 1) { continue }
+            $arr = $values.ToArray()
+            $pre = Common-Prefix -Strs $arr
+            $suf = Common-Suffix -Strs $arr
+            $minL = ($arr | ForEach-Object { $_.Length } | Measure-Object -Minimum).Minimum
+            while ($pre.Length + $suf.Length -gt $minL) {
+                if ($suf.Length -ge $pre.Length) { $suf = $suf.Substring(1) } else { $pre = $pre.Substring(0, $pre.Length - 1) }
+            }
+            $sv = $arr | ForEach-Object { $_.Substring($pre.Length, $_.Length - $pre.Length - $suf.Length) }
+            $tokField = @{
+                Field     = "L${ci}T${tk}"
+                LineIdx   = $ci
+                TokenIdx  = $tk
+                Prefix    = $pre
+                Suffix    = $suf
+                SymValues = @($sv)
+                Quoted    = ($t0.Kind -eq 'quoted')
+            }
+            Apply-MinMaxRescue -Field $tokField
+            $info.Fields.Add($tokField)
+        }
+    }
+
+    $usedSlots = @{}
+    foreach ($f in $info.Fields) {
+        $uv = @($f.SymValues | Sort-Object -Unique)
+        # Skip vocab matching for presence fields (their values are line
+        # texts, not symbol-like tokens).
+        $vName = $null
+        if (-not ($f.ContainsKey('IsPresence') -and $f.IsPresence)) {
+            $vName = Find-VocabName -UniqueValues $uv -Vocab $Vocab
+        }
+        if ($vName -and -not $usedSlots.ContainsKey($vName)) {
+            $f.SlotName = $vName
+            $usedSlots[$vName] = $true
+        } else {
+            $base = if ($f.Field -eq '__INSTANCE__') { 'INSTANCE' } else { $f.Field }
+            $cand = "B$($info.BucketId)_$base"
+            $n = 1
+            while ($usedSlots.ContainsKey($cand)) { $n++; $cand = "B$($info.BucketId)_${base}_$n" }
+            $f.SlotName = $cand
+            $usedSlots[$cand] = $true
+        }
+    }
+
+    # Post-pass: rewrite synthetic body lines for presence fields so they
+    # contain just the placeholder. The expander substitutes per-row,
+    # producing the original line for present rows and a blank line (which
+    # is normalized away in round-trip diff) for absent rows.
+    foreach ($f in $info.Fields) {
+        if (-not ($f.ContainsKey('IsPresence') -and $f.IsPresence)) { continue }
+        $synthBody[$f.LineIdx] = "\$($f.SlotName)\"
+    }
+    $synthRep.BodyLines = $synthBody
+
+    return $info
+}
 function Estimate-FlowBucketCost {
     param([hashtable]$Info)
     $rep = $Info.Flows[0]
@@ -1479,6 +1648,133 @@ if ($flowBucketInfos.Count -gt 1) {
 $totalFlowFields = 0
 foreach ($_fbi in $flowBucketInfos) { $totalFlowFields += $_fbi.Fields.Count }
 Write-Host "  Total varying flow fields across buckets: $totalFlowFields"
+#endregion
+
+#region force-merge test buckets driven by flow FlowItem refs
+# When the user-requested flow set produces an aligned flow bucket whose
+# FlowItem refs vary across flows (and thus get templated to a single
+# `\<sym>\` token in the BP), the corresponding test definitions MUST share
+# the same templated name. If those tests ended up in N separate
+# single-instance buckets (because their bodies differ), force-merge them
+# here via N-way LCS so the test def name in BP literally equals the
+# templated FlowItem ref name.
+function _Force-MergeTestBuckets {
+    if ($flowBucketInfos.Count -eq 0) { return }
+    # Collect per-position [test-name-in-flow-0, ..., test-name-in-flow-{N-1}]
+    # tuples where the names vary across flows.
+    $groups = New-Object 'System.Collections.Generic.List[string[]]'
+    foreach ($fb in $flowBucketInfos) {
+        if (-not ($fb.ContainsKey('IsAligned') -and $fb.IsAligned)) { continue }
+        if (-not $fb.ContainsKey('Columns')) { continue }
+        foreach ($col in $fb.Columns) {
+            $perFlow = @()
+            $allFi = $true
+            foreach ($ln in $col.Lines) {
+                if ($null -eq $ln) { $perFlow += $null; continue }
+                if ($ln -match '^\s*(?:DUTFlowItem|FlowItem)\s+(\S+)') {
+                    $perFlow += $Matches[1]
+                } else { $allFi = $false; break }
+            }
+            if (-not $allFi) { continue }
+            # Only present-everywhere FlowItem columns are candidates here.
+            $hasNull = $false
+            foreach ($x in $perFlow) { if ($null -eq $x) { $hasNull = $true; break } }
+            if ($hasNull) { continue }
+            $uniq = @($perFlow | Sort-Object -Unique)
+            if ($uniq.Count -lt 2) { continue }
+            [void]$groups.Add([string[]]$perFlow)
+        }
+    }
+    if ($groups.Count -eq 0) { return }
+
+    # Build name->bucket index map for ALL buckets, plus per-bucket the
+    # PSCustomObject test instance keyed by name (so we can extract a
+    # subset of tests from a multi-instance bucket).
+    $nameToBidx = @{}
+    $nameToTest = @{}
+    for ($k = 0; $k -lt $bucketInfos.Count; $k++) {
+        $bi = $bucketInfos[$k]
+        foreach ($t in $bi.Tests) {
+            $nameToBidx[$t.Name] = $k
+            $nameToTest[$t.Name] = $t
+        }
+    }
+
+    # Track per-bucket which test names (by index into bucketInfos[k].Tests)
+    # are being extracted; used to rebuild remaining buckets after merges.
+    $extractedFromBucket = @{}  # bidx -> HashSet[string] of test names extracted
+
+    $newAligned = New-Object 'System.Collections.Generic.List[hashtable]'
+    $mergeCount = 0
+    foreach ($grp in $groups) {
+        $tests = New-Object 'System.Collections.Generic.List[PSCustomObject]'
+        $bidxs = New-Object 'System.Collections.Generic.List[int]'
+        $ok = $true
+        foreach ($n in $grp) {
+            if (-not $nameToTest.ContainsKey($n)) { $ok = $false; break }
+            [void]$tests.Add($nameToTest[$n])
+            [void]$bidxs.Add($nameToBidx[$n])
+        }
+        if (-not $ok) { continue }
+        # All tests must share TestType + Template so the merged BP block is
+        # valid.
+        $firstT = $tests[0]
+        $compat = $true
+        foreach ($t in $tests) {
+            if ($t.TestType -ne $firstT.TestType -or $t.Template -ne $firstT.Template) { $compat = $false; break }
+        }
+        if (-not $compat) { continue }
+        try {
+            $aligned = Build-AlignedTestBucketInfo -BucketId 0 -Tests $tests -Vocab $vocab
+            [void]$newAligned.Add($aligned)
+            for ($gi = 0; $gi -lt $grp.Count; $gi++) {
+                $bi = $bidxs[$gi]
+                if (-not $extractedFromBucket.ContainsKey($bi)) {
+                    $extractedFromBucket[$bi] = [System.Collections.Generic.HashSet[string]]::new()
+                }
+                [void]$extractedFromBucket[$bi].Add($grp[$gi])
+            }
+            $mergeCount++
+        } catch {
+            Write-Host "  WARNING: force-merge of test bucket group '$($grp -join ',')' failed ($_); leaving as separate buckets" -ForegroundColor Yellow
+        }
+    }
+
+    if ($mergeCount -gt 0) {
+        # Rebuild bucket list: for each existing bucket, drop tests that were
+        # extracted; if all tests were extracted, drop the bucket entirely.
+        # Then append the new aligned buckets.
+        $kept = New-Object 'System.Collections.Generic.List[hashtable]'
+        for ($k = 0; $k -lt $bucketInfos.Count; $k++) {
+            $bi = $bucketInfos[$k]
+            if ($extractedFromBucket.ContainsKey($k)) {
+                $extracted = $extractedFromBucket[$k]
+                $remaining = @($bi.Tests | Where-Object { -not $extracted.Contains($_.Name) })
+                if ($remaining.Count -eq 0) { continue }
+                # Rebuild a fresh non-aligned bucket from the remaining tests
+                # so its Fields reflect only the surviving rows.
+                $bi = Build-BucketInfo -BucketId 0 -Tests $remaining -Vocab $vocab
+            }
+            [void]$kept.Add($bi)
+        }
+        foreach ($mb in $newAligned) { [void]$kept.Add($mb) }
+        # Renumber so BucketId is contiguous; rebuild slot names that embed it.
+        $renumbered = New-Object 'System.Collections.Generic.List[hashtable]'
+        $nb = 0
+        foreach ($b in $kept) {
+            $nb++
+            if ($b.ContainsKey('IsAligned') -and $b.IsAligned) {
+                $rebuilt = Build-AlignedTestBucketInfo -BucketId $nb -Tests $b.Tests -Vocab $vocab
+            } else {
+                $rebuilt = Build-BucketInfo -BucketId $nb -Tests $b.Tests -Vocab $vocab
+            }
+            [void]$renumbered.Add($rebuilt)
+        }
+        $script:bucketInfos = $renumbered
+        Write-Host "  Force-merged $mergeCount group(s) of test instance(s) into aligned bucket(s); final test buckets=$($bucketInfos.Count)"
+    }
+}
+_Force-MergeTestBuckets
 #endregion
 
 #region phase-2 slot consolidation
@@ -1650,6 +1946,10 @@ $consolidationDroppedCount = 0
 $fullCount = 0
 $substrCount = 0
 foreach ($info in $bucketInfos) {
+    # Skip aligned (force-merged) buckets — their per-row differences are already
+    # captured directly in Fields/SymValues, so Phase-2 consolidation does not apply
+    # and the simulation pass does not handle synthetic placeholder bodies.
+    if ($info.ContainsKey('IsAligned') -and $info.IsAligned) { continue }
     $candidates = @(Find-BucketConsolidations -Info $info)
     if ($candidates.Count -eq 0) { continue }
     $cons = @(Test-BucketConsolidations -Info $info -Cons $candidates)
@@ -1682,7 +1982,7 @@ foreach ($pl in $preambleLines) { [void]$sb.AppendLine((Compact-Whitespace -Line
 [void]$sb.AppendLine('')
 
 foreach ($info in $bucketInfos) {
-    $rep = $info.Tests[0]
+    $rep = if ($info.ContainsKey('SyntheticRep') -and $info.SyntheticRep) { $info.SyntheticRep } else { $info.Tests[0] }
     $bk = "B$($info.BucketId)"
     $hasCons = $consolidationsPerBucket.ContainsKey($bk) -and $consolidationsPerBucket[$bk].Count -gt 0
     $hasFields = ($info.Fields.Count -gt 0)
@@ -1693,12 +1993,17 @@ foreach ($info in $bucketInfos) {
     [void]$sb.AppendLine('')
     [void]$sb.AppendLine("# BP_BUCKET: B$($info.BucketId) tests=$($info.Tests.Count)")
 
-    # Build modified body of representative test 0
+    # Build modified body of representative test 0 (or synthetic rep for
+    # aligned buckets, which already has \<sym>\ placeholders for whole-line
+    # presence fields).
     $body = [System.Collections.Generic.List[string]]@($rep.BodyLines)
 
     foreach ($f in $info.Fields) {
+        # Presence fields are already pre-substituted in the synthetic body.
+        if ($f.ContainsKey('IsPresence') -and $f.IsPresence) { continue }
         $oldVal = Render-FieldValue -Field $f -TestIdx 0 -Mode 'sym'
         $newVal = Render-FieldValue -Field $f -TestIdx 0 -Mode 'placeholder'
+        if ([string]::IsNullOrEmpty($oldVal)) { continue }
         if ($f.Field -eq '__INSTANCE__') {
             $body[0] = $body[0].Replace($oldVal, $newVal)
         } else {
@@ -2403,6 +2708,25 @@ foreach ($symName in @($pivot.Keys)) {
 
     if ($null -eq $bpForConst) { $bpForConst = [IO.File]::ReadAllLines($bpFile) }
     $needle = "\$symName\"
+    # Skip slots that participate in a test-definition name line (e.g.
+    # `CSharpTest <name>`, `MultiTrialTest <name>`, `Test <name>`). Inlining
+    # such a slot as a CONST line would template the test name with a list
+    # of literal strings while FlowItem refs in flow bodies use a different
+    # templating axis -- breaking strict test/flow name parity. The placeholder
+    # must remain in the test name so it textually matches the FlowItem ref.
+    $isTestNameSlot = $false
+    # Naming convention: Build-AlignedTestBucketInfo / Build-BucketInfo emit
+    # __INSTANCE__ field slots as `B<n>_INSTANCE` (optionally `_<k>` suffix
+    # on collision, or `_P<n>` when split into per-position variants).
+    if ($symName -match '^B\d+_INSTANCE(?:_|$)') { $isTestNameSlot = $true }
+    if (-not $isTestNameSlot) {
+        foreach ($bl in $bpForConst) {
+            if ($bl -match '^\s*(?:CSharpTest|MultiTrialTest|Test)\s+\S' -and $bl.Contains($needle)) {
+                $isTestNameSlot = $true; break
+            }
+        }
+    }
+    if ($isTestNameSlot) { continue }
     # Find every bucket header (test or flow) whose body references the
     # placeholder, and inject a CONST line right after the header.
     $newBp = New-Object 'System.Collections.Generic.List[string]'
@@ -2451,25 +2775,231 @@ if ($crossDerivations.Count -gt 0 -or $constDropped -gt 0 -or $multiAbsorbed -gt
     }
     Write-FileWithRetry -Path $pivotFile -Content (($pivotLines.ToArray() -join "`r`n") + "`r`n")
     Write-Host "  Pivot CSV (reduced) written: $pivotFile ($($pivot.Count) symbols)"
-
-    # The reduced pivot IS the symbols file: a single-table view, one row per
-    # BP symbol, one column per flow. Multi-value cells are joined by ' ; '.
-    # This guarantees every \<slot>\ token in the BP appears in the symbols
-    # file (no separate per-bucket sections to chase).
-    Write-FileWithRetry -Path $csvFile -Content (($pivotLines.ToArray() -join "`r`n") + "`r`n")
-    Write-Host "  Symbols CSV (single-table) re-written: $csvFile ($($pivot.Count) symbols)"
+    # IMPORTANT: do NOT overwrite the per-bucket .symbols.csv with the pivot
+    # view. The expander reads per-bucket sections (one row per test/flow
+    # instance, columns = slot symbols). The pivot is a separate human-facing
+    # summary in <module>.symbols.flow_pivot.csv.
 }
 
+#region per-bucket orphan-slot repair
+# After all BP-mutation steps (cross-derivations, single/multi inlining), it is
+# possible for a test bucket's body to reference \<NAME>\ placeholders that
+# don't appear as columns in that bucket's CSV section (e.g. PMUX_INDEX
+# leaked into a test bucket via cross-symbol derivation whose basis lived
+# only in a flow bucket). We back-derive per-row values for each orphan by
+# matching the BP body line template against the original test row's body
+# line, then re-emit the per-bucket CSV with the recovered columns appended.
+$repairedBp = [IO.File]::ReadAllLines($bpFile)
+# Build map: test bucket id -> @{ Body = [string[]]; Const = @{ name -> [string[]] } }
+$bpBucketBodies = @{}
+$bpBucketConsts = @{}
+$ri = 0
+while ($ri -lt $repairedBp.Count) {
+    if ($repairedBp[$ri] -match '^# BP_BUCKET:\s*B(\d+)') {
+        $rid = [int]$Matches[1]
+        $ri++
+        $consts = @{}
+        # Parse CONST: lines and skip other comments before def line
+        while ($ri -lt $repairedBp.Count -and $repairedBp[$ri] -notmatch '^\s*(CSharpTest|MultiTrialTest|Flow)\s+') {
+            if ($repairedBp[$ri] -match '^#\s*CONST:\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)$') {
+                $consts[$Matches[1]] = ($Matches[2] -split '\s+;\s+')
+            }
+            $ri++
+        }
+        $body = New-Object 'System.Collections.Generic.List[string]'
+        $depth = 0; $opened = $false
+        while ($ri -lt $repairedBp.Count) {
+            $bl = $repairedBp[$ri]
+            [void]$body.Add($bl)
+            $depth += ([regex]::Matches($bl, '\{')).Count
+            $depth -= ([regex]::Matches($bl, '\}')).Count
+            if ($depth -gt 0) { $opened = $true }
+            $ri++
+            if ($opened -and $depth -le 0) { break }
+        }
+        $bpBucketBodies[$rid] = $body
+        $bpBucketConsts[$rid] = $consts
+        continue
+    }
+    $ri++
+}
+
+# Collect per-bucket existing slot names from $bucketInfos / Phase-2 absorbed
+# (re-using the same logic as the CSV emit step above).
+function _Get-BucketSlotEntries {
+    param([hashtable]$Info)
+    $slotEntries = New-Object System.Collections.Generic.List[hashtable]
+    foreach ($f in $Info.Fields) {
+        if ($f.ContainsKey('Segments') -and $null -ne $f.Segments) {
+            foreach ($s in $f.Segments) {
+                if ($s.Type -eq 'slot') { [void]$slotEntries.Add(@{ Name = $s.SlotName; SymValues = $s.SymValues }) }
+            }
+        } else {
+            [void]$slotEntries.Add(@{ Name = $f.SlotName; SymValues = $f.SymValues })
+        }
+    }
+    $absorbed = Get-AbsorbedSlots -BucketKey "B$($Info.BucketId)"
+    if ($absorbed.Count -gt 0) {
+        $slotEntries = [System.Collections.Generic.List[hashtable]]@($slotEntries | Where-Object { -not $absorbed.ContainsKey($_.Name) })
+    }
+    # PowerShell can unwrap single-element lists when returning; comma forces
+    # the caller to receive the actual List<hashtable> instance (so .Add works).
+    return ,$slotEntries
+}
+
+# Repair each bucket. Returns extra entries (each: @{ Name; SymValues = [string[]] }).
+$bucketRepairExtras = @{}
+$totalRepairedSlots = 0
+foreach ($info in $bucketInfos) {
+    $bid = $info.BucketId
+    if (-not $bpBucketBodies.ContainsKey($bid)) { continue }
+    # Aligned (force-merged) buckets capture all per-row data directly in
+    # info.Fields. Their synthetic body line indices don't correspond to
+    # original test bodies' line indices, so the per-line back-derivation
+    # below cannot be applied. Cross-bucket placeholders that survive into
+    # the synthetic body (e.g. via cross-symbol absorption) are resolved
+    # globally by the expander against other buckets' CSV columns.
+    if ($info.ContainsKey('IsAligned') -and $info.IsAligned) { continue }
+    $bpBody = $bpBucketBodies[$bid]
+    $slotEntries = _Get-BucketSlotEntries -Info $info
+    $knownNames = [System.Collections.Generic.HashSet[string]]::new()
+    foreach ($e in $slotEntries) { [void]$knownNames.Add($e.Name) }
+
+    # Find orphan placeholder names in this bucket's BP body
+    $orphans = [System.Collections.Generic.HashSet[string]]::new()
+    foreach ($l in $bpBody) {
+        foreach ($m in [regex]::Matches($l, '\\([A-Za-z_][A-Za-z0-9_]*)\\')) {
+            $n = $m.Groups[1].Value
+            if (-not $knownNames.Contains($n)) { [void]$orphans.Add($n) }
+        }
+    }
+    if ($orphans.Count -eq 0) { continue }
+    $consts = @{}
+    if ($bpBucketConsts.ContainsKey($bid)) { $consts = $bpBucketConsts[$bid] }
+
+    $extras = New-Object System.Collections.Generic.List[hashtable]
+    foreach ($orphan in $orphans) {
+        $vals = New-Object 'System.Collections.Generic.List[string]'
+        $allOk = $true
+        for ($r = 0; $r -lt $info.Tests.Count; $r++) {
+            $found = $null
+            $origBody = $info.Tests[$r].BodyLines
+            for ($li = 0; $li -lt $bpBody.Count -and $li -lt $origBody.Count; $li++) {
+                $bp = $bpBody[$li]
+                if ($bp -notmatch ('\\' + [regex]::Escape($orphan) + '\\')) { continue }
+                # Normalize whitespace on both sides so the regex matches
+                # regardless of indent collapsing applied during BP emit.
+                $bpN   = (($bp                -replace '[ \t]+', ' ')).Trim()
+                $origN = (($origBody[$li]     -replace '[ \t]+', ' ')).Trim()
+                $orig  = $origN
+                # Tokenize BP line into [literal, placeholder, literal, ...]
+                $parts = [regex]::Split($bpN, '(\\[A-Za-z_][A-Za-z0-9_]*\\)')
+                $sb = New-Object System.Text.StringBuilder
+                $sawOrphan = $false
+                foreach ($p in $parts) {
+                    if ($p -match '^\\([A-Za-z_][A-Za-z0-9_]*)\\$') {
+                        $name = $Matches[1]
+                        if ($name -eq $orphan) {
+                            if ($sawOrphan) {
+                                # Subsequent occurrences must match the same captured value
+                                [void]$sb.Append('\k<v>')
+                            } else {
+                                [void]$sb.Append('(?<v>.+?)')
+                                $sawOrphan = $true
+                            }
+                        } elseif ($knownNames.Contains($name)) {
+                            $sv = $null
+                            foreach ($e in $slotEntries) { if ($e.Name -eq $name) { $sv = [string]$e.SymValues[$r]; break } }
+                            if ($null -eq $sv) { $sv = '' }
+                            [void]$sb.Append([regex]::Escape($sv))
+                        } elseif ($consts.ContainsKey($name) -and $r -lt $consts[$name].Count) {
+                            # Bucket-local CONST: fixed per-row literal sequence
+                            [void]$sb.Append([regex]::Escape([string]$consts[$name][$r]))
+                        } else {
+                            # Another orphan; ambiguous .+? fallback (best effort)
+                            [void]$sb.Append('.+?')
+                        }
+                    } else {
+                        [void]$sb.Append([regex]::Escape($p))
+                    }
+                }
+                $rx = '^' + $sb.ToString() + '$'
+                $m = [regex]::Match($orig, $rx)
+                if ($m.Success) { $found = $m.Groups['v'].Value; break }
+            }
+            if ($null -eq $found) { $allOk = $false; break }
+            [void]$vals.Add($found)
+        }
+        if (-not $allOk) {
+            throw "Orphan placeholder '\$orphan\' in BP bucket B$bid could not be back-derived from original test bodies. Generator state is incoherent."
+        }
+        [void]$extras.Add(@{ Name = $orphan; SymValues = $vals.ToArray() })
+        $totalRepairedSlots++
+    }
+    $bucketRepairExtras[$bid] = $extras
+}
+
+if ($totalRepairedSlots -gt 0) {
+    Write-Host "  Orphan-slot repair: recovered $totalRepairedSlots slot column(s) across $($bucketRepairExtras.Count) test bucket(s); re-emitting CSV"
+    # Re-emit per-bucket CSV with repair columns appended.
+    $csvLines = [System.Collections.Generic.List[string]]::new()
+    foreach ($info in $bucketInfos) {
+        $tmpl = $info.Tests[0].Template
+        $type = $info.Tests[0].TestType
+        $csvLines.Add("# Bucket B$($info.BucketId)  type=$type  template=$tmpl  tests=$($info.Tests.Count)")
+        $slotEntries = _Get-BucketSlotEntries -Info $info
+        if ($bucketRepairExtras.ContainsKey($info.BucketId)) {
+            foreach ($x in $bucketRepairExtras[$info.BucketId]) { [void]$slotEntries.Add($x) }
+        }
+        $hdr = @('InstanceName') + @($slotEntries | ForEach-Object { $_.Name })
+        $csvLines.Add(($hdr | ForEach-Object { CsvEscape $_ }) -join ',')
+        for ($ti = 0; $ti -lt $info.Tests.Count; $ti++) {
+            $row = @($info.Tests[$ti].Name)
+            foreach ($e in $slotEntries) { $row += $e.SymValues[$ti] }
+            $csvLines.Add(($row | ForEach-Object { CsvEscape $_ }) -join ',')
+        }
+        $csvLines.Add('')
+    }
+    foreach ($info in $flowBucketInfos) {
+        $csvLines.Add("# Bucket F$($info.BucketId)  type=Flow  flows=$($info.Flows.Count)")
+        $slots = @($info.Fields | ForEach-Object { $_.SlotName })
+        $hdr = @('FlowName') + $slots
+        $csvLines.Add(($hdr | ForEach-Object { CsvEscape $_ }) -join ',')
+        for ($fi = 0; $fi -lt $info.Flows.Count; $fi++) {
+            $row = @($info.Flows[$fi].Name)
+            foreach ($f in $info.Fields) { $row += $f.SymValues[$fi] }
+            $csvLines.Add(($row | ForEach-Object { CsvEscape $_ }) -join ',')
+        }
+        $csvLines.Add('')
+    }
+    Write-FileWithRetry -Path $csvFile -Content (($csvLines.ToArray() -join "`r`n") + "`r`n")
+}
+#endregion
+
 # Coherence check: every \<sym>\ placeholder in the final BP must be
-# resolvable from EITHER (a) a row in the symbols.csv pivot, OR (b) a
-# `# CONST: <sym> = ...` annotation inside one of the buckets that
-# references it. Reserved tokens like __BYPASS__ / __BIN__ are not symbols
-# and use a different delimiter; this check only inspects the \<name>\ form.
+# resolvable from EITHER (a) a column header in some `# Bucket` section of
+# the per-bucket symbols.csv, OR (b) a `# CONST: <sym> = ...` annotation
+# inside one of the BP buckets that references it. Reserved tokens like
+# __BYPASS__ / __BIN__ are not symbols and use a different delimiter.
 $bpFinalLines = [IO.File]::ReadAllLines($bpFile)
 $bpFinal = $bpFinalLines -join "`n"
 $bpPlaceholders = [System.Collections.Generic.HashSet[string]]::new()
 foreach ($m in [regex]::Matches($bpFinal, '\\([A-Za-z_][A-Za-z0-9_]*)\\')) {
     [void]$bpPlaceholders.Add($m.Groups[1].Value)
+}
+# Collect names defined as columns in any `# Bucket` section of the CSV.
+$csvSymbols = [System.Collections.Generic.HashSet[string]]::new()
+$csvLines = [IO.File]::ReadAllLines($csvFile)
+$ci = 0
+while ($ci -lt $csvLines.Count) {
+    if ($csvLines[$ci] -match '^\s*#\s*Bucket\s+\S+') {
+        $ci++
+        if ($ci -lt $csvLines.Count) {
+            $hdr = $csvLines[$ci].Split(',')
+            for ($h = 1; $h -lt $hdr.Count; $h++) { [void]$csvSymbols.Add($hdr[$h].Trim()) }
+        }
+    }
+    $ci++
 }
 # Collect names with at least one CONST line in the BP.
 $constNames = [System.Collections.Generic.HashSet[string]]::new()
@@ -2480,12 +3010,60 @@ foreach ($cl in $bpFinalLines) {
 }
 $missing = New-Object 'System.Collections.Generic.List[string]'
 foreach ($p in $bpPlaceholders) {
-    if ($pivot.Contains($p)) { continue }
+    if ($csvSymbols.Contains($p)) { continue }
     if ($constNames.Contains($p)) { continue }
     [void]$missing.Add($p)
 }
 if ($missing.Count -gt 0) {
     throw "BP/symbols coherence check failed -- the following \<sym>\ placeholders appear in $bpFile but are missing from both ${csvFile} and any bucket-local '# CONST:' annotation: $($missing -join ', '). Generator must emit a coherent pair."
+}
+
+# ---- Final pivot reconciliation: enforce bidirectional symbol coverage ----
+# Invariant requested by the user:
+#   (1) every \TOKEN\ placeholder in the final BP has exactly one row in
+#       <module>.symbols.csv (the pivot).
+#   (2) every Symbol row in the pivot is referenced by at least one
+#       \TOKEN\ placeholder in the final BP.
+# Reductions (cross-symbol templates, constant filters, multi-value-constant
+# inlining) operate independently on the pivot dict and the BP file and can
+# drift. The simplest robust fix is to re-derive the pivot from the
+# unreduced full pivot ($pivotFullFile), keeping ONLY rows whose Symbol name
+# appears as a `\Symbol\` placeholder in the final BP.
+if (Test-Path $pivotFullFile) {
+    $fullLines = [IO.File]::ReadAllLines($pivotFullFile)
+    if ($fullLines.Count -ge 1) {
+        $headerLine = $fullLines[0]
+        $newPivotLines = New-Object 'System.Collections.Generic.List[string]'
+        [void]$newPivotLines.Add($headerLine)
+        $kept = 0
+        for ($pi = 1; $pi -lt $fullLines.Count; $pi++) {
+            $row = $fullLines[$pi]
+            if ([string]::IsNullOrWhiteSpace($row)) { continue }
+            # First field = Symbol name. Handle CSV quoting just in case.
+            $first = ($row -split ',', 2)[0].Trim('"')
+            if ($bpPlaceholders.Contains($first)) {
+                [void]$newPivotLines.Add($row)
+                $kept++
+            }
+        }
+        # Detect BP placeholders missing from the full pivot -- this would
+        # mean a placeholder was injected into the BP without a corresponding
+        # source value (a generator bug). Treat as fatal so it surfaces.
+        $fullPivotNames = [System.Collections.Generic.HashSet[string]]::new()
+        for ($pi = 1; $pi -lt $fullLines.Count; $pi++) {
+            $first = ($fullLines[$pi] -split ',', 2)[0].Trim('"')
+            if ($first) { [void]$fullPivotNames.Add($first) }
+        }
+        $bpMissingFromPivot = New-Object 'System.Collections.Generic.List[string]'
+        foreach ($p in $bpPlaceholders) {
+            if (-not $fullPivotNames.Contains($p)) { [void]$bpMissingFromPivot.Add($p) }
+        }
+        if ($bpMissingFromPivot.Count -gt 0) {
+            throw "Pivot reconciliation: $($bpMissingFromPivot.Count) BP placeholder(s) have no source value in the full pivot ($pivotFullFile): $($bpMissingFromPivot -join ', ')"
+        }
+        Write-FileWithRetry -Path $pivotFile -Content (($newPivotLines.ToArray() -join "`r`n") + "`r`n")
+        Write-Host "  Pivot reconciled: kept $kept symbol(s) (one row per BP placeholder); dropped $(($fullPivotNames.Count) - $kept) symbol(s) not referenced in final BP"
+    }
 }
 #endregion
 
