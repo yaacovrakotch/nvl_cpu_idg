@@ -652,9 +652,9 @@ def main() -> int:
 
     line_cols = [f"{fn}_line" for fn in FLOWS]
     sym_cols = [f"{fn}_symbols" for fn in FLOWS]
-    fieldnames = ["Entity", *FLOWS, "DIFF", "Is_MTT", *line_cols, "Symbolized", *sym_cols]
+    fieldnames = ["Entity", *FLOWS, "DIFF", *line_cols, "Symbolized", *sym_cols]
 
-    def emit(entity: str, vals: list[str], lines_per_flow: list, force_symbolize: bool = False, is_mtt: bool = False):
+    def emit(entity: str, vals: list[str], lines_per_flow: list, force_symbolize: bool = False):
         status = diff_status(vals)
         counts[status] += 1
         if status == "DIFF":
@@ -673,7 +673,6 @@ def main() -> int:
         for fn, v in zip(FLOWS, vals):
             row[fn] = v
         row["DIFF"] = status
-        row["Is_MTT"] = "Yes" if is_mtt else "No"
         for col, ln in zip(line_cols, lines_per_flow):
             row[col] = ("" if ln is None else ln)
         row["Symbolized"] = template
@@ -692,21 +691,18 @@ def main() -> int:
 
     for key in ordered_keys:
         items = [flow_index[fn].get(key) for fn in FLOWS]
-        key_is_mtt = any(bool(it.get("is_mtt")) for it in items if it)
 
         # identity
         emit(
             key,
             [it["instance"] if it else "" for it in items],
             [it["flowItem_line"] if it else None for it in items],
-            is_mtt=key_is_mtt,
         )
         # edc — same line as FlowItem
         emit(
             f"{key}.edc",
             [it["edc"] if it else "" for it in items],
             [it["flowItem_line"] if it else None for it in items],
-            is_mtt=key_is_mtt,
         )
         # connectivity rows
         codes = []
@@ -731,7 +727,6 @@ def main() -> int:
                 f"{key}.connectivity.R{c}",
                 [it["connectivity"].get(c, "") if it else "" for it in items],
                 [it["connectivity_lines"].get(c) if it else None for it in items],
-                is_mtt=key_is_mtt,
             )
         # params
         param_names = []
@@ -757,7 +752,7 @@ def main() -> int:
                     continue
                 pl = param_lines.get(it["instance"], {}).get(p)
                 line_vals.append(pl)
-            emit(f"{key}.param.{p}", vals, line_vals, is_mtt=key_is_mtt)
+            emit(f"{key}.param.{p}", vals, line_vals)
 
     OUT_CSV.parent.mkdir(parents=True, exist_ok=True)
     with OUT_CSV.open("w", encoding="utf-8", newline="") as f:
