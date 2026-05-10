@@ -103,11 +103,13 @@ FLOWS = list(FLOW_DEFS.keys())
 NORMALIZE_RULES = [
     (re.compile(r"F[1-5]XAT(LO)?", re.IGNORECASE), "FXAT"),
     (re.compile(r"FMINXAT", re.IGNORECASE), "FXAT"),
+    (re.compile(r"F[1-5]XCCF(LO)?", re.IGNORECASE), "FXCCF"),
+    (re.compile(r"FMINXCCF", re.IGNORECASE), "FXCCF"),
     (re.compile(r"_F[1-5]_"), "_F_"),
     (re.compile(r"_FMIN_"), "_F_"),
     (re.compile(r"\d+(?:\.\d+)?\s*(?:GHz|MHz)", re.IGNORECASE), "FREQ"),
     (re.compile(r"hptp\d{3,5}", re.IGNORECASE), "hptpFREQ"),
-    (re.compile(r"_(?:800|1200|1600|2000|2400|2800|3000|3200|3600|4000|4100)_"), "_FREQ_"),
+    (re.compile(r"_(?:800|1200|1600|2000|2400|2800|3000|3200|3400|3600|4000|4100)_"), "_FREQ_"),
     # MTPL templated freq placeholder: `_F_X_` (after the F# collapse above).
     # Skill returns the resolved freq token (e.g. `_1200_`) which normalizes
     # to `_FREQ_`, so map the templated form to the same key for alignment.
@@ -249,7 +251,11 @@ def collect_subflows(lines, root_flow_name: str, max_depth: int = 5) -> list[str
 
 # -------- parse CSharpTest definitions for param line numbers --------
 
-TEST_RE = re.compile(r"^\s*CSharpTest\s+\S+\s+(\S+)\s*$")
+TEST_RE = re.compile(
+    r"^\s*(?!TestPlan\b|TestProgram\b)"
+    r"[A-Za-z_][A-Za-z_0-9]*Test\s+"
+    r"(?:\S+\s+(\S+)|(\S+))\s*$"
+)
 PARAM_RE = re.compile(r"^\s*([A-Za-z_][A-Za-z_0-9]*)\s*=\s*(.*)$")
 
 
@@ -262,7 +268,7 @@ def parse_test_param_lines(lines: list[str]) -> dict[str, dict[str, int]]:
         if not m:
             i += 1
             continue
-        name = m.group(1)
+        name = m.group(1) or m.group(2)
         j = i
         while j < len(lines) and "{" not in lines[j]:
             j += 1
