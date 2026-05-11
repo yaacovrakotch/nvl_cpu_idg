@@ -1,0 +1,282 @@
+﻿// ============================================================================
+// ARR_CCF_CXX BLUEPRINT (F1-F4 Flows)
+// ============================================================================
+// This is a minimized blueprint showing the pattern for F1-F4 corner flows.
+// Keep: F1 as representative example
+// Remove: F2, F3, F4 (repetitive - expand via input parameters)
+//
+// INPUT PARAMETERS:
+//   CORNERS = [F1, F2, F3, F4]
+//   FREQ = {F1: 1200, F2: 1500, F3: 2200, F3000}
+//   BaseNumbers = {
+//     F1: {LLCSRAM: 12334, CBOA: 12335, LLCRF: 12336},
+//     F2: {LLCSRAM: 12337, CBOA: 12338, LLCRF: 12340},
+//     F3: {LLCSRAM: 12341, CBOA: 12342, LLCRF: 12343},
+//     F4: {LLCSRAM: 12753, CBOA: 12755, LLCRF: 12754}
+//   }
+//
+// EXPANSION RULE:
+//   FOR each corner in CORNERS:
+//     Create flow ARR_CCF_CXX_F{corner}XCCF with 3 test instances
+//
+// SPECIAL CASES:
+//   - F1: EndVoltageLimits uses ARR_CCF_Rules.QA_HOT_Default(...)
+//   - F2-F4: EndVoltageLimits uses FlowMatrixSingular.CCF_HIGH_SEARCH_VALUE
+//   - F4: BaseNumbers use different range (1275x vs 1233x-1234x)
+// ============================================================================
+
+// ============================================================================
+// FLOW PATTERN (Keep F1 as representative)
+// Symbol: <corner> = F1 | F2 | F3 | F4
+// Symbol: <freq> = 1200 | 1500 | 2200 | 3000
+// ============================================================================
+
+Flow ARR_CCF_CXX_F1XCCF  // Pattern: ARR_CCF_CXX_F<corner>XCCF
+{
+    // ========================================================================
+    // TEST INSTANCE 1: SSA/LLCSRAM (Position 1 of 3)
+    // Pattern: SSA_CCF_VMIN_K_F<corner>XCCF_X_X_F<corner>_<freq>_LLCSRAM_MTT
+    // Special: Includes atomfreq in SetPointsPreInstance
+    // ========================================================================
+    FlowItem SSA_CCF_VMIN_K_F1XCCF_X_X_F1_1200_LLCSRAM_MTT_FI SSA_CCF_VMIN_K_F1XCCF_X_X_F1_1200_LLCSRAM_MTT
+    {
+        Result 1
+        {
+            GoTo 2;
+        }
+    }
+
+    // ========================================================================
+    // TEST INSTANCE 2: LSA/CBOA (Position 2 of 3)
+    // Pattern: LSA_CCF_VMIN_K_F<corner>XCCF_X_X_F<corner>_<freq>_CBOA_MTT
+    // Special: No atomfreq in SetPointsPreInstance
+    // ========================================================================
+    FlowItem LSA_CCF_VMIN_K_F1XCCF_X_X_F1_1200_CBOA_MTT_FI LSA_CCF_VMIN_K_F1XCCF_X_X_F1_1200_CBOA_MTT
+    {
+        Result 1
+        {
+            GoTo 3;
+        }
+    }
+
+    // ========================================================================
+    // TEST INSTANCE 3: LSA/LLCRF (Position 3 of 3)
+    // Pattern: LSA_CCF_VMIN_K_F<corner>XCCF_X_X_F<corner>_<freq>_LLCRF_MTT
+    // Special: No atomfreq in SetPointsPreInstance
+    // ========================================================================
+    FlowItem LSA_CCF_VMIN_K_F1XCCF_X_X_F1_1200_LLCRF_MTT_FI LSA_CCF_VMIN_K_F1XCCF_X_X_F1_1200_LLCRF_MTT
+    {
+        Result 1
+        {
+            Return 1;
+        }
+    }
+}
+
+// ============================================================================
+// TEST INSTANCE DEFINITIONS (Keep F1 as representative for each test type)
+// ============================================================================
+
+// ----------------------------------------------------------------------------
+// SSA/LLCSRAM Test Pattern
+// Pattern: SSA_CCF_VMIN_K_F<corner>XCCF_X_X_F<corner>_<freq>_LLCSRAM_MTT
+// ----------------------------------------------------------------------------
+MultiTrialTest VminTC SSA_CCF_VMIN_K_F1XCCF_X_X_F1_1200_LLCSRAM_MTT
+{
+    // === CONSTANT PARAMETERS (OK across all corners) ===
+    BypassPort = -1;
+    ExecutionMode = "SearchWithScoreboard";
+    TestMode = "SingleVmin";
+    VoltageTargets = "CCF";
+    RecoveryMode = "NoRecovery";
+    StepSize = toDouble(0.01);
+    FlowIndex = __shared__::FlowMatrix.FlowIndex;  // Note: NOT FlowMatrixSingular
+    
+    // Common settings
+    FeatureSwitchSettings = ARR_CCF_CXX_Specs.FeatureSwitchNonMTT;
+    FivrCondition = ARR_CCF_CXX_Specs.FivrConditionNom;
+    ForwardingMode = ARR_CCF_CXX_Specs.ForwardingMode_Kill;
+    LevelsTc = "IPC::ARR_CCF_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_min_lvl";
+    TimingsTc = ARR_CCF_CXX_Specs.timings_Rules;
+    DtsConfiguration = ARR_CCF_CXX_Specs.DTSConfig_Rules;
+    PatternNameCounterIndexes = ARR_CCF_CXX_Specs.PatternMap;
+    SetPointsPlistParamName = "Patlist";
+    FailCaptureCount = toInteger(1);
+    ScoreboardEdgeTicks = toInteger(__shared__::Specs.CHK_EDGE_TICK);
+    MaxFailsNum = toInteger(__shared__::Specs.CHK_MAX_FAILS);
+    LimitGuardband = toString(__shared__::GBVars.LimitGuardband);
+    StartVoltages = __shared__::FlowMatrixSingular.CR_LOW_SEARCH_VALUE;
+
+    // === VARIABLE PARAMETERS (DIFF across corners) ===
+    // Symbol: <corner> = F1 | F2 | F3 | F4
+    CornerIdentifiers = "CCF0@F1";  // Pattern: "CCF0@F<corner>"
+    
+    // Symbol: <base_number> = corner-specific mapping
+    BaseNumbers = "12334";  // F1: 12334, F2: 12337, F3: 12341, F4: 12753
+    
+    // Symbol: <corner>
+    Patlist = "IPC::arr_cdie_f1xccf_mbist_arr_ccf_x_lsa_vnnaon_ks_x_class_hptp_min_list";
+    // Pattern: arr_cdie_f<corner>xccf_mbist_arr_ccf_x_lsa_vnnaon_ks_x_class_hptp_min_list
+    
+    // SetPointsPreInstance pattern
+    // Symbol: <corner>, <ring_freq> = CCF_F<corner>_FREQ
+    // SPECIAL: SSA tests include atomfreq_0
+    SetPointsPreInstance = 
+        PSPRE.CLR_F1 + "," +  // Pattern: PSPRE.CLR_F<corner>
+        "MCdrv:corefreq:" + __shared__::FlowMatrixSingular.CR_F1_FREQ + "GHz," +  // Constant across corners
+        "MCdrv:ringfreq_0:" + __shared__::FlowMatrixSingular.CCF_F1_FREQ + "GHz," +  // Pattern: CCF_F<corner>_FREQ
+        "MCdrv:atomfreq_0:" + __shared__::FlowMatrixSingular.AT_F1_FREQ + "GHz";  // Constant across corners
+    
+    // Symbol: <corner>
+    SetPointsPostInstance = PSPOST.CLR_F1 + "," + ARR_CCF_CXX_Specs.nbl_on;  // Pattern: PSPOST.CLR_F<corner>
+    
+    // Symbol: <corner>
+    StartVoltagesForRetry = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(
+        __shared__::QNRUsrvShared.StartVoltagesForRetryF1, "");  // Pattern: StartVoltagesForRetryF<corner>
+    
+    // Symbol: <corner>
+    StartVoltagesOffset = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(
+        __shared__::QNRUsrvShared.StartVoltagesOffsetF1, "");  // Pattern: StartVoltagesOffsetF<corner>
+    
+    // VoltageConverter pattern
+    // Symbol: <corner>
+    VoltageConverter = "--dlvrpins VCCIA --expressions " + DROPOUT.CLR_F1;  // Pattern: DROPOUT.CLR_F<corner>
+    
+    // === SPECIAL CASE: EndVoltageLimits ===
+    // F1: Uses ARR_CCF_Rules.QA_HOT_Default(...)
+    // F2-F4: Use __shared__::FlowMatrixSingular.CCF_HIGH_SEARCH_VALUE
+    EndVoltageLimits = ARR_CCF_Rules.QA_HOT_Default(
+        __shared__::FlowMatrixSingular.CCF_HIGH_SEARCH_VALUE,
+        __shared__::FlowMatrixSingular.CR_LFM_VMIN_RAIN_KILL,
+        __shared__::FlowMatrixSingular.CCF_HIGH_SEARCH_VALUE
+    );  // F1 ONLY - F2-F4 use: __shared__::FlowMatrixSingular.CCF_HIGH_SEARCH_VALUE
+    
+    VminResult = "ARR_CCF_LLCSRAM_F1_VMIN";  // Pattern: ARR_CCF_LLCSRAM_F<corner>_VMIN
+}
+
+// ----------------------------------------------------------------------------
+// LSA/CBOA Test Pattern
+// Pattern: LSA_CCF_VMIN_K_F<corner>XCCF_X_X_F<corner>_<freq>_CBOA_MTT
+// ----------------------------------------------------------------------------
+MultiTrialTest VminTC LSA_CCF_VMIN_K_F1XCCF_X_X_F1_1200_CBOA_MTT
+{
+    // === CONSTANT PARAMETERS (same as SSA test above) ===
+    BypassPort = -1;
+    ExecutionMode = "SearchWithScoreboard";
+    TestMode = "SingleVmin";
+    VoltageTargets = "CCF";
+    RecoveryMode = "NoRecovery";
+    StepSize = toDouble(0.01);
+    FlowIndex = __shared__::FlowMatrix.FlowIndex;
+    
+    FeatureSwitchSettings = ARR_CCF_CXX_Specs.FeatureSwitchNonMTT;
+    FivrCondition = ARR_CCF_CXX_Specs.FivrConditionNom;
+    ForwardingMode = ARR_CCF_CXX_Specs.ForwardingMode_Kill;
+    LevelsTc = "IPC::ARR_CCF_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_min_lvl";
+    TimingsTc = ARR_CCF_CXX_Specs.timings_Rules;
+    DtsConfiguration = ARR_CCF_CXX_Specs.DTSConfig_Rules;
+    PatternNameCounterIndexes = ARR_CCF_CXX_Specs.PatternMap;
+    SetPointsPlistParamName = "Patlist";
+    FailCaptureCount = toInteger(1);
+    ScoreboardEdgeTicks = toInteger(__shared__::Specs.CHK_EDGE_TICK);
+    MaxFailsNum = toInteger(__shared__::Specs.CHK_MAX_FAILS);
+    LimitGuardband = toString(__shared__::GBVars.LimitGuardband);
+    StartVoltages = __shared__::FlowMatrixSingular.CR_LOW_SEARCH_VALUE;
+
+    // === VARIABLE PARAMETERS ===
+    CornerIdentifiers = "CCF0@F1";  // Pattern: "CCF0@F<corner>"
+    BaseNumbers = "12335";  // F1: 12335, F2: 12338, F3: 12342, F4: 12755
+    Patlist = "IPC::arr_cdie_f1xccf_mbist_arr_ccf_x_lsa_vnnaon_ks_x_class_hptp_min_list";
+    
+    // SPECIAL: LSA tests DO NOT include atomfreq_0
+    SetPointsPreInstance = 
+        PSPRE.CLR_F1 + "," +
+        "MCdrv:corefreq:" + __shared__::FlowMatrixSingular.CR_F1_FREQ + "GHz," +
+        "MCdrv:ringfreq_0:" + __shared__::FlowMatrixSingular.CCF_F1_FREQ + "GHz";  // No atomfreq for LSA
+    
+    SetPointsPostInstance = PSPOST.CLR_F1 + "," + ARR_CCF_CXX_Specs.nbl_on;
+    StartVoltagesForRetry = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(
+        __shared__::QNRUsrvShared.StartVoltagesForRetryF1, "");
+    StartVoltagesOffset = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(
+        __shared__::QNRUsrvShared.StartVoltagesOffsetF1, "");
+    VoltageConverter = "--dlvrpins VCCIA --expressions " + DROPOUT.CLR_F1;
+    
+    // === F1 SPECIAL CASE ===
+    EndVoltageLimits = ARR_CCF_Rules.QA_HOT_Default(
+        __shared__::FlowMatrixSingular.CCF_HIGH_SEARCH_VALUE,
+        __shared__::FlowMatrixSingular.CR_LFM_VMIN_RAIN_KILL,
+        __shared__::FlowMatrixSingular.CCF_HIGH_SEARCH_VALUE
+    );  // F1 ONLY
+    
+    VminResult = "ARR_CCF_CBOA_F1_VMIN";  // Pattern: ARR_CCF_CBOA_F<corner>_VMIN
+}
+
+// ----------------------------------------------------------------------------
+// LSA/LLCRF Test Pattern
+// Pattern: LSA_CCF_VMIN_K_F<corner>XCCF_X_X_F<corner>_<freq>_LLCRF_MTT
+// ----------------------------------------------------------------------------
+MultiTrialTest VminTC LSA_CCF_VMIN_K_F1XCCF_X_X_F1_1200_LLCRF_MTT
+{
+    // === CONSTANT PARAMETERS (same as above) ===
+    BypassPort = -1;
+    ExecutionMode = "SearchWithScoreboard";
+    TestMode = "SingleVmin";
+    VoltageTargets = "CCF";
+    RecoveryMode = "NoRecovery";
+    StepSize = toDouble(0.01);
+    FlowIndex = __shared__::FlowMatrix.FlowIndex;
+    
+    FeatureSwitchSettings = ARR_CCF_CXX_Specs.FeatureSwitchNonMTT;
+    FivrCondition = ARR_CCF_CXX_Specs.FivrConditionNom;
+    ForwardingMode = ARR_CCF_CXX_Specs.ForwardingMode_Kill;
+    LevelsTc = "IPC::ARR_CCF_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_min_lvl";
+    TimingsTc = ARR_CCF_CXX_Specs.timings_Rules;
+    DtsConfiguration = ARR_CCF_CXX_Specs.DTSConfig_Rules;
+    PatternNameCounterIndexes = ARR_CCF_CXX_Specs.PatternMap;
+    SetPointsPlistParamName = "Patlist";
+    FailCaptureCount = toInteger(1);
+    ScoreboardEdgeTicks = toInteger(__shared__::Specs.CHK_EDGE_TICK);
+    MaxFailsNum = toInteger(__shared__::Specs.CHK_MAX_FAILS);
+    LimitGuardband = toString(__shared__::GBVars.LimitGuardband);
+    StartVoltages = __shared__::FlowMatrixSingular.CR_LOW_SEARCH_VALUE;
+
+    // === VARIABLE PARAMETERS ===
+    CornerIdentifiers = "CCF0@F1";  // Pattern: "CCF0@F<corner>"
+    BaseNumbers = "12336";  // F1: 12336, F2: 12340, F3: 12343, F4: 12754
+    Patlist = "IPC::arr_cdie_f1xccf_mbist_arr_ccf_x_lsa_vnnaon_ks_x_class_hptp_min_list";
+    
+    // SPECIAL: LSA tests DO NOT include atomfreq_0
+    SetPointsPreInstance = 
+        PSPRE.CLR_F1 + "," +
+        "MCdrv:corefreq:" + __shared__::FlowMatrixSingular.CR_F1_FREQ + "GHz," +
+        "MCdrv:ringfreq_0:" + __shared__::FlowMatrixSingular.CCF_F1_FREQ + "GHz";  // No atomfreq for LSA
+    
+    SetPointsPostInstance = PSPOST.CLR_F1 + "," + ARR_CCF_CXX_Specs.nbl_on;
+    StartVoltagesForRetry = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(
+        __shared__::QNRUsrvShared.StartVoltagesForRetryF1, "");
+    StartVoltagesOffset = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(
+        __shared__::QNRUsrvShared.StartVoltagesOffsetF1, "");
+    VoltageConverter = "--dlvrpins VCCIA --expressions " + DROPOUT.CLR_F1;
+    
+    // === F1 SPECIAL CASE ===
+    EndVoltageLimits = ARR_CCF_Rules.QA_HOT_Default(
+        __shared__::FlowMatrixSingular.CCF_HIGH_SEARCH_VALUE,
+        __shared__::FlowMatrixSingular.CR_LFM_VMIN_RAIN_KILL,
+        __shared__::FlowMatrixSingular.CCF_HIGH_SEARCH_VALUE
+    );  // F1 ONLY
+    
+    VminResult = "ARR_CCF_LLCRF_F1_VMIN";  // Pattern: ARR_CCF_LLCRF_F<corner>_VMIN
+}
+
+// ============================================================================
+// END OF BLUEPRINT
+// ============================================================================
+// EXPANSION INSTRUCTIONS:
+// 1. Replace F1 with F2, F3, F4 to generate additional flows
+// 2. Replace 1200 with 1500, 2200, 3000 respectively
+// 3. Update BaseNumbers according to corner-specific mapping
+// 4. For F2-F4: Replace EndVoltageLimits with:
+//    EndVoltageLimits = __shared__::FlowMatrixSingular.CCF_HIGH_SEARCH_VALUE;
+// 5. Update all F1 references in parameter names to match corner
+//    (e.g., CLR_F1 → CLR_F2, CCF_F1_FREQ → CCF_F2_FREQ)
+// ============================================================================
