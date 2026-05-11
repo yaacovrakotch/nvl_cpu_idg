@@ -8,6 +8,14 @@ SelectorRuleCollection  ARR_CORE_CXX_Rules
 		HOT => contains(__shared__::LocationSets.CH_CHVM + "," + __shared__::LocationSets.CH_CRV + "," + __shared__::LocationSets.CHM_ENG,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.RCHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
 		Default;
 	}
+
+	SelectorRule If_HOT (CHOT, PHOT, DEFAULT)
+	{
+	    CHOT => contains(__shared__::LocationSets.CHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+	    PHOT => contains(__shared__::LocationSets.PHMHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+	    DEFAULT;
+	}
+	
 	SelectorRule RC_S1 (RC, Default)
 	{
 		RC => contains(__shared__::LocationSets.RC_S1,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
@@ -29,6 +37,21 @@ SelectorRuleCollection  ARR_CORE_CXX_Rules
 		yes => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_P16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S16C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_H16C";
 		no => GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_S52C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_NVL_HX28C" || GetEnvironmentVariable("BOMGROUP") == "CLASS_DNL_S28C";
 	}
+	SelectorRule DFF_write_or_not (DFF_WRITE,Default)
+	{
+		DFF_WRITE => contains(__shared__::LocationSets.PBIC_DAB,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.RCHOT,"[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		Default;
+	}
+	SelectorRule HVM_CSM_only(Yes, No)
+	{
+		Yes => contains(__shared__::LocationSets.CC_CHVM, "[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		No;
+	}
+	SelectorRule CSM_only (Yes, No)
+	{
+		Yes => contains(__shared__::LocationSets.CCOLD, "[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]") || contains(__shared__::LocationSets.RCCOLD, "[" + __shared__::SCVars.SC_LOCN + ":" + __shared__::SCVars.SC_CURRENT_PROCESS_TYPE + "]");
+		No;
+	}
 }
 
 UserVars ARR_CORE_CXX_Specs
@@ -40,8 +63,11 @@ UserVars ARR_CORE_CXX_Specs
 	Const String CORE_PMTM_RecoveryModeDownbin = "Disabled";
 	Const String CORE_PMTM_RecoveryConfigurationFile = ""; # WIP - GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "/Modules/ARR_CORE/InputFiles/CoreRecoveryMap.json"
 	Array<String> Apex_Multipass = ["1110","1101","1011","0111"];
+	Array<String> CR_FCT = ["CRFCT3@F1,CRFCT2@F1,CRFCT1@F1,CRFCT0@F1","CRFCT3@F1,CRFCT2@F1,CRFCT1@F1,CRFCT0@F1","CRFCT3@F1,CRFCT2@F1,CRFCT1@F1,CRFCT0@F1"];
+	Array<String> CR_C5 = ["F7","F6","F5"];
 	Const String FeatureSwitchNonMTT = "disable_masked_targets,fivr_mode_on";
 	Const String FeatureSwitchMTT = "disable_masked_targets,print_per_target_increments,print_scoreboard_counters,fivr_mode_on";
+	Const String FeatureSwitchMTT_FCT = "disable_masked_targets,print_per_target_increments,print_scoreboard_counters,fivr_mode_on,vmin_update_always,recovery_update_always";
 	Const String PatternMap = "9,10,11,12,13,14,15";
 	Const String Recovery_PinMap = ARR_CORE_CXX_Rules.TPRules("ARR_DCM_3,ARR_DCM_2,ARR_DCM_1,ARR_DCM_0","ARR_DCM_3,ARR_DCM_2,ARR_DCM_1,ARR_DCM_0","ARR_DCM_HX_3,ARR_DCM_HX_2,ARR_DCM_HX_1,ARR_DCM_HX_0","ARR_DCM_1,ARR_DCM_0","ARR_DCM_1,ARR_DCM_0","ARR_DCM_1,ARR_DCM_0","ARR_DCM_3,ARR_DCM_2,ARR_DCM_1,ARR_DCM_0","ARR_DCM_3,ARR_DCM_2,ARR_DCM_1,ARR_DCM_0");
 	Const String ForwardingMode_EDC = "Input";
@@ -52,13 +78,16 @@ UserVars ARR_CORE_CXX_Specs
 	Const String CORE_RecoveryMode_VMAX = "Default";
 	Const String Recovery_Options_Speedflow = "";
 	Const String RecoveryTracker_Incoming = "CR";
+	Const String RecoveryTracker_Incoming_FCT = "CRFCT";
 	Const String RecoveryTracker_Outgoing = "CR";
 	Const String RecoveryTracker_Outgoing_Speedflow = "CR";
+	Const String RecoveryTracker_Outgoing_Speedflow_FCT = "CRFCT";
 	Const String RecoveryTracker_Incoming_48 = "CR1,CR0";
 	Const String RecoveryTracker_Outgoing_48 = "CR1,CR0";
 	Const String RecoveryTracker_Outgoing_Speedflow_48 = "CR1,CR0";
 	Const String DTSConfig = "nvl_cpu816_all";
 	Const String dtsconfig_hx28c = "ALL_CDIE_S28C";
+	Const String dtsconfig_s28cn2p_C0 = "ALL_CDIE_C816_N2P";
 	Const String dtsconfig_s28cn2p = "ALL_CDIE_S28C_N2P";
 	Const String dtsconfig_s52c = "ALL_CDIE_S52C";
 	Const String dtsconfig_48c = "ALL_CDIE_C48_N2P_CORE";
@@ -81,15 +110,19 @@ UserVars ARR_CORE_CXX_Specs
 	Const String jsonraster_48 = "./Modules/ARR/ARR_CORE_CXX/InputFiles/48/T0/Raster.json";
 	Const String jsonraster_s16c = "./Modules/ARR/ARR_CORE_CXX/InputFiles/48/T0/Raster.json";
 	Const String HRY_LIST_816 = GetEnvironmentVariable("MCARR_PATMODIFY_PATH") + "\\NVLCPU_P\\HRY\\MBIST\\MIT_MBIST_HRY_list.json";
+	Const String HRY_LIST_816_C0 = GetEnvironmentVariable("MCARR_PATMODIFY_PATH") + "\\NVLCPU_R\\HRY\\MBIST\\MIT_MBIST_HRY_list.json";
 	Const String HRY_LIST_others = GetEnvironmentVariable("MCARR_PATMODIFY_PATH") + "\\NVLCPU_A\\HRY\\MBIST\\MIT_MBIST_HRY_list.json";
 	Const String HRY_LIST_48 = GetEnvironmentVariable("MCARR_PATMODIFY_PATH") + "\\NVLCPU_T\\HRY\\MBIST\\MIT_MBIST_HRY_list.json";
 	Const String RASTER_LIST_816 = GetEnvironmentVariable("MCARR_PATMODIFY_PATH") + "\\NVLCPU_P\\RASTER\\MBIST\\MBIST_RASTER_list.json";
 	Const String RASTER_LIST_others = GetEnvironmentVariable("MCARR_PATMODIFY_PATH") + "\\NVLCPU_P\\RASTER\\MBIST\\MBIST_RASTER_list.json";
 	Const String RASTER_LIST_48 = GetEnvironmentVariable("MCARR_PATMODIFY_PATH") + "\\NVLCPU_T\\RASTER\\MBIST\\MBIST_RASTER_list.json";
+	Const String nblcal_others = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "\\Modules\\ARR\\ARR_CORE_CXX\\InputFiles\\816\\B0\\NblCalSet.txt";
+	Const String nblcal_s16c = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "\\Modules\\ARR\\ARR_CORE_CXX\\InputFiles\\48\\T0\\NblCalSet.txt";
 	String raster_others = "./Modules/ARR/ARR_CORE_CXX/InputFiles/816/B0/Raster.json";
 	String raster_48 = "./Modules/ARR/ARR_CORE_CXX/InputFiles/48/T0/Raster.json";
 	String timing_s28c = "IPC::CPU_IP_BASE::cpu_hvm_timing_mts800_tstprtclk400_tck100";
 	String timing_dnls28c = "IPC::ARR_CORE_CXX::cpu_hvm_timing_mts800_tstprtclk400_tck100_dnls28c";
+	String timing_s28c_c0 = "IPC::ARR_CORE_CXX::cpu_hvm_timing_mts800_tstprtclk400_tck100_s28c_c0";
 	String timing_other = "IPC::ARR_CORE_CXX::cpu_fun_timing_mts800_tstprtclk400_tck100_pncarrmts800";
 	String hxb0_hvmtiming = "IPC::ARR_CORE_CXX::cpu_hvm_timing_mts800_tstprtclk400_tck100_hxb0";
 	String hxb0_800_hvmtiming = "IPC::ARR_CORE_CXX::cpu_hvm_timing_mts800_tstprtclk400_tck100_pncarrmts800_hxb0";
@@ -97,6 +130,7 @@ UserVars ARR_CORE_CXX_Specs
 	String timing_48 = "IPC::ARR_CORE_CXX::cpu_hvm_timing_mts800_tstprtclk400_tck100_pncarrmts800_T0";
 	String PMTM_timing = "IPC::CPU_IP_BASE::cpu_hvm_timing_mts800_tstprtclk400_tck100";
 	String PMTM_dnls28c_timing = "IPC::ARR_CORE_CXX::cpu_hvm_timing_mts800_tstprtclk400_tck100_dnls28c";
+	String PMTM_s28c_c0_timing = "IPC::ARR_CORE_CXX::cpu_hvm_timing_mts800_tstprtclk400_tck100_s28c_c0";
 	String PMTM_timing_48 = "IPC::CPU_IP_BASE::cpu_hvm_timing_mts800_tstprtclk400_tck100";
 	String MBISTRASTER_timing = "IPC::CPU_IP_BASE::cpu_hvm_timing_mts100_tstprtclk50_tck100";
 	String MBISTRASTER_dnls28c_hvmtiming = "IPC:::ARR_CORE_CXX::cpu_hvm_timing_mts100_tstprtclk50_tck100_dnls28c";
@@ -151,13 +185,14 @@ UserVars ARR_CORE_CXX_Specs
 	
 	Const String reset_s28c = "IPC::resetplb_8axx080808_phase2_all_MCarr_CA3P_hdmt2_hvm_list";
 	Const String reset_48 = "IPC::resetplb_8axx080808_phase2_all_MCarr_CA4P_hdmt2_hvm_list";
+	Const String reset_s28c_C0 = "IPC::resetplb_8axx080808_phase2_all_MCarr_CA4P_hdmt2_hvm_list";
 	
 	String RecoveryTracker_In_Rules = ARR_CORE_CXX_Rules.TPRules(ARR_CORE_CXX_Specs.RecoveryTracker_Incoming,ARR_CORE_CXX_Specs.RecoveryTracker_Incoming,ARR_CORE_CXX_Specs.RecoveryTracker_Incoming,ARR_CORE_CXX_Specs.RecoveryTracker_Incoming_48,ARR_CORE_CXX_Specs.RecoveryTracker_Incoming_48,ARR_CORE_CXX_Specs.RecoveryTracker_Incoming_48,ARR_CORE_CXX_Specs.RecoveryTracker_Incoming,ARR_CORE_CXX_Specs.RecoveryTracker_Incoming);
 	String RecoveryTracker_Out_Rules = ARR_CORE_CXX_Rules.TPRules(ARR_CORE_CXX_Specs.RecoveryTracker_Outgoing,ARR_CORE_CXX_Specs.RecoveryTracker_Outgoing,ARR_CORE_CXX_Specs.RecoveryTracker_Outgoing,ARR_CORE_CXX_Specs.RecoveryTracker_Outgoing_48,ARR_CORE_CXX_Specs.RecoveryTracker_Outgoing_48,ARR_CORE_CXX_Specs.RecoveryTracker_Outgoing_48,ARR_CORE_CXX_Specs.RecoveryTracker_Outgoing,ARR_CORE_CXX_Specs.RecoveryTracker_Outgoing);
 	String RecoveryTracker_OutSpeedflow_Rules = ARR_CORE_CXX_Rules.TPRules(ARR_CORE_CXX_Specs.RecoveryTracker_Outgoing_Speedflow,ARR_CORE_CXX_Specs.RecoveryTracker_Outgoing_Speedflow,ARR_CORE_CXX_Specs.RecoveryTracker_Outgoing_Speedflow,ARR_CORE_CXX_Specs.RecoveryTracker_Outgoing_Speedflow_48,ARR_CORE_CXX_Specs.RecoveryTracker_Outgoing_Speedflow_48,ARR_CORE_CXX_Specs.RecoveryTracker_Outgoing_Speedflow_48,ARR_CORE_CXX_Specs.RecoveryTracker_Outgoing_Speedflow,ARR_CORE_CXX_Specs.RecoveryTracker_Outgoing_Speedflow);
-	String dtsRules = ARR_CORE_CXX_Rules.TPRules(ARR_CORE_CXX_Specs.dtsconfig_s28cn2p,ARR_CORE_CXX_Specs.dtsconfig_s52c,ARR_CORE_CXX_Specs.dtsconfig_s28cn2p, ARR_CORE_CXX_Specs.dtsconfig_48c,ARR_CORE_CXX_Specs.dtsconfig_48c,ARR_CORE_CXX_Specs.dtsconfig_48c,ARR_CORE_CXX_Specs.dtsconfig_s28cn2p,ARR_CORE_CXX_Specs.dtsconfig_s52c);
+	String dtsRules = ARR_CORE_CXX_Rules.TPRules(ARR_CORE_CXX_Specs.dtsconfig_s28cn2p_C0,ARR_CORE_CXX_Specs.dtsconfig_s52c,ARR_CORE_CXX_Specs.dtsconfig_s28cn2p, ARR_CORE_CXX_Specs.dtsconfig_48c,ARR_CORE_CXX_Specs.dtsconfig_48c,ARR_CORE_CXX_Specs.dtsconfig_48c,ARR_CORE_CXX_Specs.dtsconfig_s28cn2p,ARR_CORE_CXX_Specs.dtsconfig_s52c);
 	String VoltageTargetRules = ARR_CORE_CXX_Rules.TPRules(ARR_CORE_CXX_Specs.CORE_NonPMUCS_VoltageTarget,ARR_CORE_CXX_Specs.CORE_NonPMUCS_VoltageTarget,ARR_CORE_CXX_Specs.CORE_NonPMUCS_VoltageTarget,ARR_CORE_CXX_Specs.CORE_NonPMUCS_VoltageTarget_48,ARR_CORE_CXX_Specs.CORE_NonPMUCS_VoltageTarget_48,ARR_CORE_CXX_Specs.CORE_NonPMUCS_VoltageTarget_48,ARR_CORE_CXX_Specs.CORE_NonPMUCS_VoltageTarget,ARR_CORE_CXX_Specs.CORE_NonPMUCS_VoltageTarget);
-	String HRY_Rules = ARR_CORE_CXX_Rules.TPRules(ARR_CORE_CXX_Specs.HRY_LIST_816,ARR_CORE_CXX_Specs.HRY_LIST_others,ARR_CORE_CXX_Specs.HRY_LIST_816,ARR_CORE_CXX_Specs.HRY_LIST_48,ARR_CORE_CXX_Specs.HRY_LIST_48,ARR_CORE_CXX_Specs.HRY_LIST_48,ARR_CORE_CXX_Specs.HRY_LIST_816,ARR_CORE_CXX_Specs.HRY_LIST_others);
+	String HRY_Rules = ARR_CORE_CXX_Rules.TPRules(ARR_CORE_CXX_Specs.HRY_LIST_816_C0,ARR_CORE_CXX_Specs.HRY_LIST_others,ARR_CORE_CXX_Specs.HRY_LIST_816,ARR_CORE_CXX_Specs.HRY_LIST_48,ARR_CORE_CXX_Specs.HRY_LIST_48,ARR_CORE_CXX_Specs.HRY_LIST_48,ARR_CORE_CXX_Specs.HRY_LIST_816,ARR_CORE_CXX_Specs.HRY_LIST_others);
 	String Raster_Rules = ARR_CORE_CXX_Rules.TPRules(ARR_CORE_CXX_Specs.RASTER_LIST_816,ARR_CORE_CXX_Specs.RASTER_LIST_816,ARR_CORE_CXX_Specs.RASTER_LIST_816,ARR_CORE_CXX_Specs.RASTER_LIST_48,ARR_CORE_CXX_Specs.RASTER_LIST_48,ARR_CORE_CXX_Specs.RASTER_LIST_48,ARR_CORE_CXX_Specs.RASTER_LIST_816,ARR_CORE_CXX_Specs.RASTER_LIST_others);
 	String timingRules = ARR_CORE_CXX_Rules.TPRules(ARR_CORE_CXX_Specs.timing_s28c,ARR_CORE_CXX_Specs.timing_other,ARR_CORE_CXX_Specs.hxb0_800_hvmtiming,ARR_CORE_CXX_Specs.timing_48,ARR_CORE_CXX_Specs.timing_48_S16,ARR_CORE_CXX_Specs.timing_48,ARR_CORE_CXX_Specs.timing_s28c,ARR_CORE_CXX_Specs.timing_other);
 	String timingRulesPMTM = ARR_CORE_CXX_Rules.TPRules(ARR_CORE_CXX_Specs.PMTM_timing,ARR_CORE_CXX_Specs.PMTM_timing,ARR_CORE_CXX_Specs.hxb0_800_hvmtiming,ARR_CORE_CXX_Specs.PMTM_timing_48,ARR_CORE_CXX_Specs.PMTM_timing_48,ARR_CORE_CXX_Specs.PMTM_timing_48,ARR_CORE_CXX_Specs.PMTM_timing,ARR_CORE_CXX_Specs.PMTM_timing);
@@ -165,7 +200,7 @@ UserVars ARR_CORE_CXX_Specs
 	String dffmapRules = ARR_CORE_CXX_Rules.TPRules(ARR_CORE_CXX_Specs.dffmap_s28c,ARR_CORE_CXX_Specs.dffmap_others,ARR_CORE_CXX_Specs.dffmap_s28c,ARR_CORE_CXX_Specs.dffmap_48,ARR_CORE_CXX_Specs.dffmap_48,ARR_CORE_CXX_Specs.dffmap_48,ARR_CORE_CXX_Specs.dffmap_s28c,ARR_CORE_CXX_Specs.dffmap_others);
 	String fmin_Rules = ARR_CORE_CXX_Rules.TPRules(ARR_CORE_CXX_Specs.fmin_resetovr_json_others,ARR_CORE_CXX_Specs.fmin_resetovr_json_others,ARR_CORE_CXX_Specs.fmin_resetovr_json_others,ARR_CORE_CXX_Specs.fmin_resetovr_json_48,ARR_CORE_CXX_Specs.fmin_resetovr_json_48,ARR_CORE_CXX_Specs.fmin_resetovr_json_48,ARR_CORE_CXX_Specs.fmin_resetovr_json_others,ARR_CORE_CXX_Specs.fmin_resetovr_json_others);
 	String vminresultRules = ARR_CORE_CXX_Rules.TPRules(ARR_CORE_CXX_Specs.vminresult_others,ARR_CORE_CXX_Specs.vminresult_others,ARR_CORE_CXX_Specs.vminresult_others,ARR_CORE_CXX_Specs.vminresult_48,ARR_CORE_CXX_Specs.vminresult_48,ARR_CORE_CXX_Specs.vminresult_48,ARR_CORE_CXX_Specs.vminresult_others,ARR_CORE_CXX_Specs.vminresult_others);
-	String resetRules = ARR_CORE_CXX_Rules.TPRules(ARR_CORE_CXX_Specs.reset_s28c,ARR_CORE_CXX_Specs.reset_s28c,ARR_CORE_CXX_Specs.reset_s28c,ARR_CORE_CXX_Specs.reset_48,ARR_CORE_CXX_Specs.reset_48,ARR_CORE_CXX_Specs.reset_48,ARR_CORE_CXX_Specs.reset_s28c,ARR_CORE_CXX_Specs.reset_s28c);
+	String resetRules = ARR_CORE_CXX_Rules.TPRules(ARR_CORE_CXX_Specs.reset_s28c_C0,ARR_CORE_CXX_Specs.reset_s28c,ARR_CORE_CXX_Specs.reset_s28c,ARR_CORE_CXX_Specs.reset_48,ARR_CORE_CXX_Specs.reset_48,ARR_CORE_CXX_Specs.reset_48,ARR_CORE_CXX_Specs.reset_s28c,ARR_CORE_CXX_Specs.reset_s28c);
 	String VoltageConverterRailRules = ARR_CORE_CXX_Rules.TPRules(ARR_CORE_CXX_Specs.VoltageConverter_rail,ARR_CORE_CXX_Specs.VoltageConverter_rail,ARR_CORE_CXX_Specs.VoltageConverter_rail,ARR_CORE_CXX_Specs.VoltageConverter_rail_48,ARR_CORE_CXX_Specs.VoltageConverter_rail_48,ARR_CORE_CXX_Specs.VoltageConverter_rail_48,ARR_CORE_CXX_Specs.VoltageConverter_rail,ARR_CORE_CXX_Specs.VoltageConverter_rail);
 
 	
@@ -175,7 +210,10 @@ UserVars ARR_CORE_CXX_ThermalVars
 {
 	String thermal85_10000_Classhot = "ApplyControlSetpoint(--setpoint 85 --uei IPC::UEISLAVE_IPC --index 33 --diode IPC::CPU_TDAU0 --time 10000 --tolerance 8)";
 	String thermal100_10000_Classhot = "ApplyControlSetpoint(--setpoint 100 --uei IPC::UEISLAVE_IPC --index 3 --diode IPC::CPU_TDAU0 --time 10000 --tolerance 8)";
-	String thermal75_6000_Classhot = "ApplyControlSetpoint(--setpoint 75 --uei IPC::UEISLAVE_IPC --index 33 --diode IPC::CPU_TDAU0 --time 6000 --tolerance 4)";
+	String thermal70_6000_Classhot = "ApplyControlSetpoint(--setpoint 70 --uei IPC::UEISLAVE_IPC --index 30 --diode IPC::CPU_TDAU0 --time 6000 --tolerance 4)";
+	String thermal75_6000_Classhot = "ApplyControlSetpoint(--setpoint 75 --uei IPC::UEISLAVE_IPC --index 31 --diode IPC::CPU_TDAU0 --time 6000 --tolerance 4)";
+	String thermal80_6000_Classhot = "ApplyControlSetpoint(--setpoint 80 --uei IPC::UEISLAVE_IPC --index 32 --diode IPC::CPU_TDAU0 --time 6000 --tolerance 4)";
 	String thermal85_6000_Classhot = "ApplyControlSetpoint(--setpoint 85 --uei IPC::UEISLAVE_IPC --index 33 --diode IPC::CPU_TDAU0 --time 6000 --tolerance 4)";
+	String thermal90_6000_Classhot = "ApplyControlSetpoint(--setpoint 90 --uei IPC::UEISLAVE_IPC --index 34 --diode IPC::CPU_TDAU0 --time 6000 --tolerance 10)";
 	String thermal100_6000_Classhot = "ApplyControlSetpoint(--setpoint 100 --uei IPC::UEISLAVE_IPC --index 3 --diode IPC::CPU_TDAU0 --time 6000 --tolerance 10)";
 }
