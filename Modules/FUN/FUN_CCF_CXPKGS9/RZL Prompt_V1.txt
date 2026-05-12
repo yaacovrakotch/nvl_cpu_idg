@@ -1,0 +1,31 @@
+Prompt:
+The below prompt and BluePrint need to create MTPL file for each BOM.   \BOM\ is a symbol , the options are : C
+
+Below commnads are relevant for \TEMPLATE\ = VminTC based on VminTC from BluePrint:
+
+Foreach \SINGLEFLOW\ and \MULTIFLOW\ create VminTC instance per \CONTENT\ at the same order in the \CONTENT\ column ,  
+
+Create Unique basenumber for each instance
+Create unique full bin (8 digits) following these rules - Port0,2,3  start with 45 next 2 digits won't be 19, Port 4 starts with 9745, Port 5 Starts with 4519
+Disable MTT downflow If \PURPOSE\ is not 'VMIN'
+
+
+paremeter CornerIdentifiers -  If \PURPOSE\ is not 'VMIN' set to "".
+parameter ForwardingMode - If \PURPOSE\ is not 'VMIN' set to "".
+Parameter RecoveryMode -   If \PURPOSE\ is not 'VMIN' set to "NoRecovery"
+Parameter RecoveryOptions - If \PURPOSE\ is not 'VMIN' set to "".
+Parameter RecoveryTrackingOutgoing - If \PURPOSE\ is not 'VMIN' set to "".
+
+If \SINGLEFLOW\ is 'FMINXCR' The tests should replace these paramters with these values:
+Parameter TimingsTc = FUN_CCF_\BOM\::cpu_fun_timing_mts400_tstprtclk200_tck50_i_drv_mul_fmin_fun_CCF;
+Parameter CornerIdentifiers = FUN_CCF_\BOM\_Specs.CornersForFmin
+Parameter EndVoltageLimits = __shared__::FlowMatrixSingular.CR_LFM_VMIN_RAIN_KILL;
+Parameter ForwardingMode = "Input"
+Parameter LimitGuardband = toString(__shared__::GBVars.FminLimitGuardband);
+Parameter PreInstance = FUN_CCF_\BOM\_SPECS.UncoreConfigPreinstance;
+Parameter RecoveryMode = "NoRecovery"
+Parameter RecoveryOptions = ""
+RecoveryTrackingIncoming = FUN_CCF_\BOM\_SPECS.FC_Recovery_Tracking;
+RecoveryTrackingOutgoing = FUN_CCF_\BOM\_SPECS.FC_Recovery_Tracking;
+Parameter SetPointsPostInstance = PSPOST.CLR_FMIN+","+"CORE:nblctrl_core_l2:nblon,"+FUN_CCF_\BOM\_SPECS.MCfunCCF_FMIN_DRVMASK;
+Parameter SetPointsPreInstance = PSPRE.CLR_FMIN+","+"MCdrv:"+FUN_CCF_\BOM\_SPECS.corefreq+":"+ __shared__::FlowMatrixSingular.CR_FMIN+"GHz,MCdrv:"+FUN_CCF_\BOM\_SPECS.ringfreq+":"+ __shared__::FlowMatrixSingular.CCF_FMIN+"GHz,CORE:nblctrl_core_l2:nbloff,MCdrv:R1_SET,"+FUN_CCF_\BOM\_SPECS.MCfunCCF_FMIN_DRVMASK;
