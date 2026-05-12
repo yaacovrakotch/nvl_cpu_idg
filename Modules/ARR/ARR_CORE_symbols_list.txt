@@ -1,0 +1,26 @@
+Parameter,Values
+SF = [F1XCR, F2XCR, F3XCR, F4XCR]
+SFTOP = [F5XCR]
+CORNER = [F1, F2, F3, F4]
+CORNERTOP = [F5]
+FlowMatrix = [C1, C2, C3, C4]
+FlowMatrixTOP = [C5]
+Domain = [CR]
+Module = [CORE]
+Type = [Vmin]
+RunMode = [K]
+IP = [ROM, XSA]
+NOMIP = [ROM, MEURSINT, XSA]
+EndVoltageLimits = [For F1  and FMIN the EndVoltageLimits sould be EndVoltageLimits = __shared__::FlowMatrixSingular.\Domain\_LFM_\Type\_RAIN_KILL;, 
+	 				 for other frequncy it should be  EndVoltageLimits = __shared__::FlowMatrixSingular.CR_HIGH_SEARCH_VALUE;]
+BaseNumber = [should be numbers from 12100 and up.]
+###Only relevent to S52 product - bypass it
+SPLITCORE = [C0C1, C2C3]
+MaskPins = [For SPLIT CORE C0C1 Need to add MaskPins = "CPU_TSTPRT_O_06,CPU_TSTPRT_O_07", For Split CORE C2C3 Need to add MaskPins = "CPU_TSTPRT_O_04,CPU_TSTPRT_O_05";]
+Plist = [if IP = XSA --> Plist is Patlist = "IPC::arr_cdie_\sf\_mbist_core_all_all_all_limiter_\corner\_class_hptp_list_master"; ,if IP = ROM --> Plist is Patlist = "IPC::arr_cdie_begincpunom_mbist_core_pnc_msidmsrom_all_rom_vcccore_ks_x_class_hptp_dg_list";]
+NOMPlist = [if NOMIP = ROM "IPC::arr_cdie_begincpunom_mbist_core_pnc_msid_all_rom_vcccore_ks_x_class_hptp_list";, if NOMIP = XSA plist is "IPC::arr_cdie_begincpunom_mbist_core_all_all_all_ks_x_class_hptp_list";, if NOMIP = MEURSINT plist is "IPC::arr_cdie_begincpunom_mbist_core_pnc_meu_rsint_all_lsa_vcccore_ks_x_class_hptp_list";  ]
+
+###Comments:
+# if I use CORNER it should be capital letters. if I use corner symbol it should be low letters
+
+
