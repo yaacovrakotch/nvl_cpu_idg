@@ -529,7 +529,7 @@ MultiTrialTest \ARR_TYPE\_CCF_VMIN_K_\FREQ\XCCF_X_X_\FREQ\_1200_\CONTENT\_MTT
  StepSize = toDouble(__shared__::FlowMatrixSingular.CR_SEARCH_RESOLUTION);
  TestMode = "SingleVmin";
  VoltageTargets = "CCF";
- VoltageConverter = ARR_CCF_CXX_Specs.VoltageConverter_\CONTENT\ + DROPOUT.CLR_\FREQ\;
+ VoltageConverter = ARR_CCF_CXX_Specs.VoltageConverter_\CONVERTER\ + DROPOUT.CLR_\FREQ\;
  VminResult = "ARR_CCF_\CONTENT\_\FREQ\_VMIN";
  TrialResult -2
  {
@@ -844,66 +844,6 @@ MultiTrialTest SSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCSRAM_MTT
  }
 }
 
-CSharpTest ApexTC LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_CBOA_APEX_FMAX
-{
- Patlist = "IPC::arr_cdie_f5xccf_mbist_ccf_all_cboa_lsa_vccring_limiter_f5_class_hptp_list_master";
- LevelsTc = "IPC::ARR_CCF_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_max_lvl";
- TimingsTc = ARR_CCF_CXX_Specs.timings_Rules;
- BypassPort = 1;
- End = __shared__::FlowMatrixSingular.APEX_CCF_MIN;
- ExportTokens = __shared__::APEX_Tokens.CCFToken;
- FivrCondition = ARR_CCF_CXX_Specs.FivrConditionNom;
- FivrConditionPlistParamName = "Patlist";
- ForwardingMode = "None";
- PatternNameCounterIndexes = ARR_CCF_CXX_Specs.PatternMap;
- SetPointsPostInstance = PSPOST.CLR_F5+ "," + ARR_CCF_CXX_Specs.nbl_on;
- SetPointsPreInstance = PSPRE.CLR_F5+","+"MCdrv:"+ARR_CCF_CXX_Specs.corefreq+":"+ __shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:"+ARR_CCF_CXX_Specs.ringfreq+":"+ __shared__::FlowMatrixSingular.CCF_F5_FREQ+"GHz," + ARR_CCF_CXX_Specs.nbl_off;
- Start = __shared__::FlowMatrixSingular.APEX_CCF_MAX;
- StepSize = toInteger(3);
- Targets = "CCF";
- VoltageConverter = ARR_CCF_CXX_Specs.VoltageConverter_rail + DROPOUT.CLR_F5 + " --overrides CCF:"+__shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
-}
-
-CSharpTest ApexTC LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_LLCRF_APEX_FMAX
-{
- Patlist = "IPC::arr_cdie_f5xccf_mbist_ccf_all_llc_lsa_vccring_limiter_f5_class_hptp_list_master";
- LevelsTc = "IPC::ARR_CCF_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_max_lvl";
- TimingsTc = ARR_CCF_CXX_Specs.timings_Rules;
- BypassPort = 1;
- End = __shared__::FlowMatrixSingular.APEX_CCF_MIN;
- ExportTokens = __shared__::APEX_Tokens.CCFToken;
- FivrCondition = ARR_CCF_CXX_Specs.FivrConditionNom;
- FivrConditionPlistParamName = "Patlist";
- ForwardingMode = "None";
- PatternNameCounterIndexes = ARR_CCF_CXX_Specs.PatternMap;
- SetPointsPostInstance = PSPOST.CLR_F5+ "," + ARR_CCF_CXX_Specs.nbl_on;
- SetPointsPreInstance = PSPRE.CLR_F5+","+"MCdrv:"+ARR_CCF_CXX_Specs.corefreq+":"+ __shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:"+ARR_CCF_CXX_Specs.ringfreq+":"+ __shared__::FlowMatrixSingular.CCF_F5_FREQ+"GHz," + ARR_CCF_CXX_Specs.nbl_off;
- Start = __shared__::FlowMatrixSingular.APEX_CCF_MAX;
- StepSize = toInteger(3);
- Targets = "CCF";
- VoltageConverter = ARR_CCF_CXX_Specs.VoltageConverter_rail + DROPOUT.CLR_F5 + " --overrides CCF:"+__shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
-}
-
-CSharpTest ApexTC SSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_LLCSRAM_APEX_FMAX
-{
- Patlist = "IPC::arr_cdie_f5xccf_mbist_ccf_all_llc_ssa_vccring_limiter_f5_class_hptp_list_master";
- LevelsTc = "IPC::ARR_CCF_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_max_lvl";
- TimingsTc = ARR_CCF_CXX_Specs.timings_Rules;
- BypassPort = 1;
- End = __shared__::FlowMatrixSingular.APEX_CCF_MIN;
- ExportTokens = __shared__::APEX_Tokens.CCFToken;
- FivrCondition = ARR_CCF_CXX_Specs.FivrConditionNom;
- FivrConditionPlistParamName = "Patlist";
- ForwardingMode = "None";
- PatternNameCounterIndexes = ARR_CCF_CXX_Specs.PatternMap;
- SetPointsPostInstance = PSPOST.CLR_F5+ "," + ARR_CCF_CXX_Specs.nbl_on;
- SetPointsPreInstance = PSPRE.CLR_F5+","+"MCdrv:"+ARR_CCF_CXX_Specs.corefreq+":"+ __shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:"+ARR_CCF_CXX_Specs.ringfreq+":"+ __shared__::FlowMatrixSingular.CCF_F5_FREQ+"GHz," + ARR_CCF_CXX_Specs.nbl_off;
- Start = __shared__::FlowMatrixSingular.APEX_CCF_MAX;
- StepSize = toInteger(3);
- Targets = "CCF";
- VoltageConverter = ARR_CCF_CXX_Specs.VoltageConverter_LLCSRAM + DROPOUT.CLR_F5 + " --overrides CCF:"+__shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
-}
-
 
 MultiTrialTest LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_CBOA_MTT
 {
@@ -1166,11 +1106,11 @@ MultiTrialTest SSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCSRAM_MTT
 }
 
 
-MultiTrialTest LSA_CCF_SB_K_FMINXCCF_X_X_X_X_CBOA_MTT
+MultiTrialTest \ARR_TYPE\_CCF_SB_K_FMINXCCF_X_X_X_X_\CONTENT\_MTT
 {
  TrialVariable CPU_TRIALS::FlowDomain.RING;
  TrialVariableExitAction "Continue";
- CSharpTrialTest VminTC "LSA_CCF_SB_K_FMINXCCF_X_X_X_" + __shared__::CustomFlowMatrixSpecs.CCF_F1_FREQ_MHz + "_CBOA"
+ CSharpTrialTest VminTC "\ARR_TYPE\_CCF_SB_K_FMINXCCF_X_X_X_" + __shared__::CustomFlowMatrixSpecs.CCF_F1_FREQ_MHz + "_\CONTENT\"
  {
  Patlist = "IPC::arr_cdie_fminxccf_mbist_ccf_all_cboa_lsa_vccring_limiter_fmin_class_hptp_list";
  LevelsTc = "IPC::ARR_CCF_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_min_lvl";
@@ -1200,178 +1140,6 @@ MultiTrialTest LSA_CCF_SB_K_FMINXCCF_X_X_X_X_CBOA_MTT
  TestMode = "SingleVmin";
  VoltageTargets = "CCF";
  VoltageConverter = ARR_CCF_CXX_Specs.VoltageConverter_rail + DROPOUT.CLR_FMIN;
- TrialResult -2
- {
- PassFail Fail;
- TrialAction "Exit";
- Return -2;
- }
- TrialResult -1
- {
- PassFail Fail;
- TrialAction "Exit";
- Return -1;
- }
- TrialResult 0
- {
- PassFail Fail;
- TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
- Return 0;
- }
- TrialResult 1
- {
- PassFail Pass;
- TrialAction "Exit";
- Return 1;
- }
- TrialResult 2
- {
- PassFail Fail;
- TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
- Return 2;
- }
- TrialResult 3
- {
- PassFail Fail;
- TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
- Return 3;
- }
- TrialResult 4
- {
- PassFail Fail;
- TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
- Return 4;
- }
- TrialResult 5
- {
- PassFail Fail;
- TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
- Return 5;
- }
- }
-}
-
-
-MultiTrialTest LSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLCRF_MTT
-{
- TrialVariable CPU_TRIALS::FlowDomain.RING;
- TrialVariableExitAction "Continue";
- CSharpTrialTest VminTC "LSA_CCF_SB_K_FMINXCCF_X_X_X_" + __shared__::CustomFlowMatrixSpecs.CCF_F1_FREQ_MHz + "_LLCRF"
- {
- Patlist = "IPC::arr_cdie_fminxccf_mbist_ccf_all_llc_lsa_vccring_limiter_fmin_class_hptp_list";
- LevelsTc = "IPC::ARR_CCF_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_min_lvl";
- TimingsTc = ARR_CCF_CXX_Specs.timings_Rules;
- BaseNumbers = "12348";
- BypassPort = -1;
- CornerIdentifiers = "CCF0@F1";
- EndVoltageLimits = __shared__::FlowMatrixSingular.CR_LFM_VMIN_RAIN_KILL;
- ExecutionMode = "SearchWithScoreboard";
- FeatureSwitchSettings = ARR_CCF_CXX_Specs.FeatureSwitchNonMTT;
- FivrCondition = ARR_CCF_CXX_Specs.FivrConditionNom;
- FailCaptureCount = toInteger(1);
- TrialParam FlowIndex = __shared__::FlowMatrix.FlowIndex;
- ForwardingMode = ARR_CCF_CXX_Specs.ForwardingMode_EDC;
- LimitGuardband = toString(__shared__::GBVars.FminLimitGuardband);
- PatternNameCounterIndexes = ARR_CCF_CXX_Specs.PatternMap;
- RecoveryMode = "NoRecovery";
- ScoreboardEdgeTicks = toInteger(__shared__::Specs.CHK_EDGE_TICK);
- MaxFailsNum = toInteger(__shared__::Specs.CHK_MAX_FAILS);
- SetPointsPlistParamName = "Patlist";
- SetPointsPostInstance = PSPOST.CLR_FMIN+ "," + ARR_CCF_CXX_Specs.nbl_on;
- SetPointsPreInstance = PSPRE.CLR_FMIN+","+"MCdrv:corefreq:"+ __shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:ringfreq_0:"+ __shared__::FlowMatrixSingular.CCF_FMIN+"GHz";
- StartVoltages = __shared__::FlowMatrixSingular.CR_LOW_SEARCH_VALUE;
- StartVoltagesForRetry = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesForRetry , "");
- StartVoltagesOffset = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesOffset , "");
- StepSize = toDouble(__shared__::FlowMatrixSingular.CR_SEARCH_RESOLUTION);
- TestMode = "SingleVmin";
- VoltageTargets = "CCF";
- VoltageConverter = ARR_CCF_CXX_Specs.VoltageConverter_rail + DROPOUT.CLR_FMIN;
- TrialResult -2
- {
- PassFail Fail;
- TrialAction "Exit";
- Return -2;
- }
- TrialResult -1
- {
- PassFail Fail;
- TrialAction "Exit";
- Return -1;
- }
- TrialResult 0
- {
- PassFail Fail;
- TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
- Return 0;
- }
- TrialResult 1
- {
- PassFail Pass;
- TrialAction "Exit";
- Return 1;
- }
- TrialResult 2
- {
- PassFail Fail;
- TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
- Return 2;
- }
- TrialResult 3
- {
- PassFail Fail;
- TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
- Return 3;
- }
- TrialResult 4
- {
- PassFail Fail;
- TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
- Return 4;
- }
- TrialResult 5
- {
- PassFail Fail;
- TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
- Return 5;
- }
- }
-}
-
-
-MultiTrialTest SSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLSRAM_MTT
-{
- TrialVariable CPU_TRIALS::FlowDomain.RING;
- TrialVariableExitAction "Continue";
- CSharpTrialTest VminTC "SSA_CCF_SB_K_FMINXCCF_X_X_X_" + __shared__::CustomFlowMatrixSpecs.CCF_F1_FREQ_MHz + "_LLCSRAM"
- {
- Patlist = "IPC::arr_cdie_fminxccf_mbist_ccf_all_llc_ssa_vccring_limiter_fmin_class_hptp_list";
- LevelsTc = "IPC::ARR_CCF_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_min_lvl";
- TimingsTc = ARR_CCF_CXX_Specs.timings_Rules;
- BaseNumbers = "12349";
- BypassPort = -1;
- CornerIdentifiers = "CCF0@F1";
- EndVoltageLimits = __shared__::FlowMatrixSingular.CR_LFM_VMIN_RAIN_KILL;
- ExecutionMode = "SearchWithScoreboard";
- FeatureSwitchSettings = ARR_CCF_CXX_Specs.FeatureSwitchNonMTT;
- FivrCondition = ARR_CCF_CXX_Specs.FivrConditionNom;
- FailCaptureCount = toInteger(1);
- TrialParam FlowIndex = __shared__::FlowMatrix.FlowIndex;
- ForwardingMode = ARR_CCF_CXX_Specs.ForwardingMode_EDC;
- LimitGuardband = toString(__shared__::GBVars.FminLimitGuardband);
- PatternNameCounterIndexes = ARR_CCF_CXX_Specs.PatternMap;
- RecoveryMode = "NoRecovery";
- ScoreboardEdgeTicks = toInteger(__shared__::Specs.CHK_EDGE_TICK);
- MaxFailsNum = toInteger(__shared__::Specs.CHK_MAX_FAILS);
- SetPointsPlistParamName = "Patlist";
- SetPointsPostInstance = PSPOST.CLR_FMIN+ "," + ARR_CCF_CXX_Specs.nbl_on;
- SetPointsPreInstance = PSPRE.CLR_FMIN+","+"MCdrv:corefreq:"+ __shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:ringfreq_0:"+ __shared__::FlowMatrixSingular.CCF_FMIN+"GHz";
- StartVoltages = __shared__::FlowMatrixSingular.CR_LOW_SEARCH_VALUE;
- StartVoltagesForRetry = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesForRetry , "");
- StartVoltagesOffset = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesOffset , "");
- StepSize = toDouble(__shared__::FlowMatrixSingular.CR_SEARCH_RESOLUTION);
- TestMode = "SingleVmin";
- VoltageTargets = "CCF";
- VoltageConverter = ARR_CCF_CXX_Specs.VoltageConverter_LLCSRAM + DROPOUT.CLR_FMIN;
  TrialResult -2
  {
  PassFail Fail;
@@ -1460,7 +1228,7 @@ CSharpTest VminTC SSA_CCF_SB_K_ENDCPU_X_VNNAON_NOM_1200_LLCSRAM_PMUX
 }
 
 
-CSharpTest VminTC LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_CBOA
+CSharpTest VminTC \ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_1200_\CONTENT\
 {
  Patlist = "IPC::arr_cdie_vmaxxccf_mbist_ccf_cboa_all_lsa_vccring_ks_vmax_lfm_x_class_hptp_list";
  LevelsTc = "IPC::ARR_CCF_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_max_lvl";
@@ -1486,62 +1254,6 @@ CSharpTest VminTC LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_CBOA
  TestMode = "Scoreboard";
  VoltageTargets = "CCF";
  VoltageConverter = "--overrides CCF:"+__shared__::FlowMatrixSingular.CCF_VMAX_VALUE+" --ituff";
-}
-
-CSharpTest VminTC LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCRF
-{
- Patlist = "IPC::arr_cdie_vmaxxccf_mbist_ccf_llcrf_all_lsa_vccring_ks_vmax_lfm_x_class_hptp_list";
- LevelsTc = "IPC::ARR_CCF_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_max_lvl";
- TimingsTc = ARR_CCF_CXX_Specs.timings_Rules;
- BaseNumbers = "12354";
- BypassPort = -1;
- EndVoltageLimits = __shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
- ExecutionMode = "SearchWithScoreboard";
- FeatureSwitchSettings = ARR_CCF_CXX_Specs.FeatureSwitchNonMTT;
- FivrCondition = ARR_CCF_CXX_Specs.FivrConditionNom;
- FlowIndex = __shared__::FlowMatrixSingular.FlowIndex;
- ForwardingMode = ARR_CCF_CXX_Specs.ForwardingMode_Kill;
- LimitGuardband = toString(__shared__::GBVars.LimitGuardband);
- PatternNameCounterIndexes = ARR_CCF_CXX_Specs.PatternMap;
- RecoveryMode = "NoRecovery";
- #ScoreboardEdgeTicks = toInteger(0);
- MaxFailsNum = toInteger(__shared__:: Specs.VMX_MAX_FAILS);
- SetPointsPlistParamName = "Patlist";
- SetPointsPostInstance = PSPOST.CLR_F1 + "," + ARR_CCF_CXX_Specs.nbl_on;
- SetPointsPreInstance = PSPRE.CLR_F1+","+"MCdrv:corefreq:"+ __shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:ringfreq_0:"+ __shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz," + ARR_CCF_CXX_Specs.nbl_off;
- StartVoltages = __shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
- StepSize = toDouble(0.01);
- TestMode = "Scoreboard";
- VoltageTargets = "CCF";
- VoltageConverter = "--overrides CCF:"+__shared__::FlowMatrixSingular.CCF_VMAX_VALUE+" --ituff";
-}
-
-CSharpTest VminTC SSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCSRAM
-{
- Patlist = "IPC::arr_cdie_vmaxxccf_mbist_ccf_llcsram_all_ssa_vccring_ks_vmax_lfm_x_class_hptp_list";
- LevelsTc = "IPC::ARR_CCF_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_max_lvl";
- TimingsTc = ARR_CCF_CXX_Specs.timings_Rules;
- BaseNumbers = "12355";
- BypassPort = -1;
- EndVoltageLimits = __shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
- ExecutionMode = "SearchWithScoreboard";
- FeatureSwitchSettings = ARR_CCF_CXX_Specs.FeatureSwitchNonMTT;
- FivrCondition = ARR_CCF_CXX_Specs.FivrConditionNom;
- FlowIndex = __shared__::FlowMatrixSingular.FlowIndex;
- ForwardingMode = ARR_CCF_CXX_Specs.ForwardingMode_Kill;
- LimitGuardband = toString(__shared__::GBVars.LimitGuardband);
- PatternNameCounterIndexes = ARR_CCF_CXX_Specs.PatternMap;
- RecoveryMode = "NoRecovery";
- #ScoreboardEdgeTicks = toInteger(0);
- MaxFailsNum = toInteger(__shared__:: Specs.VMX_MAX_FAILS);
- SetPointsPlistParamName = "Patlist";
- SetPointsPostInstance = PSPOST.CLR_F1 + "," + ARR_CCF_CXX_Specs.nbl_on;
- SetPointsPreInstance = PSPRE.CLR_F1+","+"MCdrv:corefreq:"+ __shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:ringfreq_0:"+ __shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz," + ARR_CCF_CXX_Specs.nbl_off;
- StartVoltages = __shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
- StepSize = toDouble(0.01);
- TestMode = "Scoreboard";
- VoltageTargets = "CCF";
- VoltageConverter = "--overrides CCF:"+__shared__::FlowMatrixSingular.CCF_VMAX_VALUE+" --railconfigurations CDIE_CCF_POWERMUX CDIE_CCF_NBLCTRL --dlvrpins VCCIA --expressions CCF_PS3 --ituff";
 }
 
 CSharpTest VminTC LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_CBOA
@@ -1629,11 +1341,11 @@ CSharpTest VminTC SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCSRAM
 }
 
 
-MultiTrialTest LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_CBOA_MTT
+MultiTrialTest \ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_3600_\CONTENT\_MTT
 {
  TrialVariable CPU_TRIALS::FlowDomain.RING_TOP;
  TrialVariableExitAction "Continue";
- CSharpTrialTest VminTC "LSA_CCF_SB_K_VMAXXCCF_X_X_" + __shared__::Corners.CCF_C5 + "_" + __shared__::FreqInMHZ.CCF_C5 + "_CBOA"
+ CSharpTrialTest VminTC "\ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_" + __shared__::Corners.CCF_C5 + "_" + __shared__::FreqInMHZ.CCF_C5 + "_\CONTENT\"
  {
  #TrialParam CornerIdentifiers = __shared__::CornerIdentifiers.CCF_C5;
  Patlist = "IPC::arr_cdie_vmaxxccf_mbist_ccf_cboa_all_lsa_vccring_ks_vmax_tfm_x_class_hptp_list";
@@ -1662,178 +1374,6 @@ MultiTrialTest LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_CBOA_MTT
  TestMode = "Scoreboard";
  VoltageTargets = "CCF";
  VoltageConverter = "--overrides CCF:"+__shared__::FlowMatrixSingular.CCF_VMAX_VALUE+" --ituff";
- TrialResult -2
- 
- {
- PassFail Fail;
- TrialAction "Exit";
- Return -2;
- }
- TrialResult -1
- {
- PassFail Fail;
- TrialAction "Exit";
- Return -1;
- }
- TrialResult 0
- {
- PassFail Fail;
- TrialAction "Exit";
- Return 0;
- }
- TrialResult 1
- {
- PassFail Pass;
- TrialAction "Exit";
- Return 1;
- }
- TrialResult 2
- {
- PassFail Fail;
- TrialAction "Exit";
- Return 0;
- }
- TrialResult 3
- {
- PassFail Fail;
- TrialAction "Exit";
- Return 0;
- }
- TrialResult 4
- {
- PassFail Fail;
- TrialAction "Exit";
- Return 0;
- }
- TrialResult 5
- {
- PassFail Fail;
- TrialAction "Exit";
- Return 0;
- }
- }
-}
-
-
-MultiTrialTest LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCRF_MTT
-{
- TrialVariable CPU_TRIALS::FlowDomain.RING_TOP;
- TrialVariableExitAction "Continue";
- CSharpTrialTest VminTC "LSA_CCF_SB_K_VMAXXCCF_X_X_" + __shared__::Corners.CCF_C5 + "_" + __shared__::FreqInMHZ.CCF_C5 + "_LLCRF"
- {
- #TrialParam CornerIdentifiers = __shared__::CornerIdentifiers.CCF_C5;
- Patlist = "IPC::arr_cdie_vmaxxccf_mbist_ccf_llcrf_all_lsa_vccring_ks_vmax_tfm_x_class_hptp_list";
- LevelsTc = "IPC::ARR_CCF_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_max_lvl";
- TimingsTc = ARR_CCF_CXX_Specs.timings_Rules;
- BaseNumbers = "12357";
- BypassPort = -1;
- EndVoltageLimits = __shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
- ExecutionMode = "SearchWithScoreboard";
- FeatureSwitchSettings = ARR_CCF_CXX_Specs.FeatureSwitchNonMTT;
- FivrCondition = ARR_CCF_CXX_Specs.FivrConditionNom;
- FlowIndex = __shared__::FlowMatrixSingular.FlowIndex;
- ForwardingMode = ARR_CCF_CXX_Specs.ForwardingMode_Kill;
- LimitGuardband = toString(__shared__::GBVars.LimitGuardband);
- PatternNameCounterIndexes = ARR_CCF_CXX_Specs.PatternMap;
- RecoveryMode = "NoRecovery";
- #ScoreboardEdgeTicks = toInteger(0);
- MaxFailsNum = toInteger(__shared__:: Specs.VMX_MAX_FAILS);
- SetPointsPlistParamName = "Patlist";
- SetPointsPostInstance = PSPOST.CLR_F5 + "," + ARR_CCF_CXX_Specs.nbl_on;
- TrialParam SetPointsPreInstance = PSPRE.CLR_F5+","+"MCdrv:"+ARR_CCF_CXX_Specs.corefreq+":"+ __shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:"+ARR_CCF_CXX_Specs.ringfreq+":"+ __shared__::FreqValues.CCF_C5+"GHz," + ARR_CCF_CXX_Specs.nbl_off;
- StartVoltages = __shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
- StepSize = toDouble(0.01);
- #StartVoltagesForRetry = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesForRetry , "");
- StartVoltagesOffset = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesOffset , "");
- TestMode = "Scoreboard";
- VoltageTargets = "CCF";
- VoltageConverter = "--overrides CCF:"+__shared__::FlowMatrixSingular.CCF_VMAX_VALUE+" --ituff";
- TrialResult -2
- 
- {
- PassFail Fail;
- TrialAction "Exit";
- Return -2;
- }
- TrialResult -1
- {
- PassFail Fail;
- TrialAction "Exit";
- Return -1;
- }
- TrialResult 0
- {
- PassFail Fail;
- TrialAction "Exit";
- Return 0;
- }
- TrialResult 1
- {
- PassFail Pass;
- TrialAction "Exit";
- Return 1;
- }
- TrialResult 2
- {
- PassFail Fail;
- TrialAction "Exit";
- Return 0;
- }
- TrialResult 3
- {
- PassFail Fail;
- TrialAction "Exit";
- Return 0;
- }
- TrialResult 4
- {
- PassFail Fail;
- TrialAction "Exit";
- Return 0;
- }
- TrialResult 5
- {
- PassFail Fail;
- TrialAction "Exit";
- Return 0;
- }
- }
-}
-
-
-MultiTrialTest SSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCSRAM_MTT
-{
- TrialVariable CPU_TRIALS::FlowDomain.RING_TOP;
- TrialVariableExitAction "Continue";
- CSharpTrialTest VminTC "SSA_CCF_SB_K_VMAXXCCF_X_X_" + __shared__::Corners.CCF_C5 + "_" + __shared__::FreqInMHZ.CCF_C5 + "_LLCSRAM"
- {
- #TrialParam CornerIdentifiers = __shared__::CornerIdentifiers.CCF_C5;
- Patlist = "IPC::arr_cdie_vmaxxccf_mbist_ccf_llcsram_all_ssa_vccring_ks_vmax_tfm_x_class_hptp_list";
- LevelsTc = "IPC::ARR_CCF_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_max_lvl";
- TimingsTc = ARR_CCF_CXX_Specs.timings_Rules;
- BaseNumbers = "12358";
- BypassPort = -1;
- EndVoltageLimits = __shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
- ExecutionMode = "SearchWithScoreboard";
- FeatureSwitchSettings = ARR_CCF_CXX_Specs.FeatureSwitchNonMTT;
- FivrCondition = ARR_CCF_CXX_Specs.FivrConditionNom;
- FlowIndex = __shared__::FlowMatrixSingular.FlowIndex;
- ForwardingMode = ARR_CCF_CXX_Specs.ForwardingMode_Kill;
- LimitGuardband = toString(__shared__::GBVars.LimitGuardband);
- PatternNameCounterIndexes = ARR_CCF_CXX_Specs.PatternMap;
- RecoveryMode = "NoRecovery";
- #ScoreboardEdgeTicks = toInteger(0);
- MaxFailsNum = toInteger(__shared__:: Specs.VMX_MAX_FAILS);
- SetPointsPlistParamName = "Patlist";
- SetPointsPostInstance = PSPOST.CLR_F5 + "," + ARR_CCF_CXX_Specs.nbl_on;
- TrialParam SetPointsPreInstance = PSPRE.CLR_F5+","+"MCdrv:"+ARR_CCF_CXX_Specs.corefreq+":"+ __shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:"+ARR_CCF_CXX_Specs.ringfreq+":"+ __shared__::FreqValues.CCF_C5+"GHz," + ARR_CCF_CXX_Specs.nbl_off;
- StartVoltages = __shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
- StepSize = toDouble(0.01);
- #StartVoltagesForRetry = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesForRetry , "");
- StartVoltagesOffset = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesOffset , "");
- TestMode = "Scoreboard";
- VoltageTargets = "CCF";
- VoltageConverter = "--overrides CCF:"+__shared__::FlowMatrixSingular.CCF_VMAX_VALUE+" --railconfigurations CDIE_CCF_POWERMUX CDIE_CCF_NBLCTRL --dlvrpins VCCIA --expressions CCF_PS1 --ituff";
  TrialResult -2
  
  {
@@ -2262,97 +1802,6 @@ CSharpTest VminTC SSA_CCF_SB_K_BEGINCPUNOM_X_X_NOM_1200_LLCSRAM_FF
  StepSize = toDouble(0.01);
  TestMode = "Scoreboard";
  VoltageTargets = "CCF";
-}
-
-
-CSharpTest VminTC LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_CBOA_FMIN_FF_SEARCH
-{
- Patlist = "IPC::arr_cdie_fminxccf_mbist_ccf_all_cboa_lsa_vccring_limiter_fmin_class_hptp_list";
- LevelsTc = "IPC::ARR_CCF_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_min_lvl";
- TimingsTc = ARR_CCF_CXX_Specs.timings_Rules;
- BaseNumbers = "12350";
- BypassPort = -1;
- EndVoltageLimits = __shared__::FlowMatrixSingular.CR_LFM_VMIN_RAIN_KILL;
- ExecutionMode = "SearchWithScoreboard";
- FeatureSwitchSettings = ARR_CCF_CXX_Specs.FeatureSwitchNonMTT;
- FivrCondition = ARR_CCF_CXX_Specs.FivrConditionNom;
- FailCaptureCount = toInteger(1);
- ForwardingMode = ARR_CCF_CXX_Specs.ForwardingMode_EDC;
- #LimitGuardband = toString(__shared__::GBVars.FminLimitGuardband);
- LimitGuardband = toString(__shared__::TpRule.If_QRE("",toString(__shared__::GBVars.FminLimitGuardband)));
- PatternNameCounterIndexes = ARR_CCF_CXX_Specs.PatternMap;
- RecoveryMode = "NoRecovery";
- ScoreboardEdgeTicks = toInteger(0);
- SetPointsPlistParamName = "Patlist";
- SetPointsPostInstance = PSPOST.CLR_FMIN;
- SetPointsPreInstance = PSPRE.CLR_FMIN+","+"MCdrv:corefreq:"+ __shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:ringfreq_0:"+ __shared__::FlowMatrixSingular.CCF_FMIN+"GHz";
- StartVoltages = __shared__::FlowMatrixSingular.CR_LOW_SEARCH_VALUE;
- StartVoltagesForRetry = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesForRetry , "");
- StartVoltagesOffset = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesOffset , "");
- StepSize = toDouble(__shared__::FlowMatrixSingular.CR_SEARCH_RESOLUTION);
- TestMode = "SingleVmin";
- VoltageTargets = "CCF";
- VoltageConverter = ARR_CCF_CXX_Specs.VoltageConverter_rail + DROPOUT.CLR_FMIN;
-}
-
-CSharpTest VminTC LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLCRF_FMIN_FF_SEARCH
-{
- Patlist = "IPC::arr_cdie_fminxccf_mbist_ccf_all_llc_lsa_vccring_limiter_fmin_class_hptp_list";
- LevelsTc = "IPC::ARR_CCF_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_min_lvl";
- TimingsTc = ARR_CCF_CXX_Specs.timings_Rules;
- BaseNumbers = "12351";
- BypassPort = -1;
- EndVoltageLimits = __shared__::FlowMatrixSingular.CR_LFM_VMIN_RAIN_KILL;
- ExecutionMode = "SearchWithScoreboard";
- FeatureSwitchSettings = ARR_CCF_CXX_Specs.FeatureSwitchNonMTT;
- FivrCondition = ARR_CCF_CXX_Specs.FivrConditionNom;
- FailCaptureCount = toInteger(1);
- ForwardingMode = ARR_CCF_CXX_Specs.ForwardingMode_EDC;
- #LimitGuardband = toString(__shared__::GBVars.FminLimitGuardband);
- LimitGuardband = toString(__shared__::TpRule.If_QRE("",toString(__shared__::GBVars.FminLimitGuardband)));
- PatternNameCounterIndexes = ARR_CCF_CXX_Specs.PatternMap;
- RecoveryMode = "NoRecovery";
- ScoreboardEdgeTicks = toInteger(0);
- SetPointsPlistParamName = "Patlist";
- SetPointsPostInstance = PSPOST.CLR_FMIN;
- SetPointsPreInstance = PSPRE.CLR_FMIN+","+"MCdrv:corefreq:"+ __shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:ringfreq_0:"+ __shared__::FlowMatrixSingular.CCF_FMIN+"GHz";
- StartVoltages = __shared__::FlowMatrixSingular.CR_LOW_SEARCH_VALUE;
- StartVoltagesForRetry = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesForRetry , "");
- StartVoltagesOffset = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesOffset , "");
- StepSize = toDouble(__shared__::FlowMatrixSingular.CR_SEARCH_RESOLUTION);
- TestMode = "SingleVmin";
- VoltageTargets = "CCF";
- VoltageConverter = ARR_CCF_CXX_Specs.VoltageConverter_rail + DROPOUT.CLR_FMIN;
-}
-
-CSharpTest VminTC SSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLSRAM_FMIN_FF_SEARCH
-{
- Patlist = "IPC::arr_cdie_fminxccf_mbist_ccf_all_llc_ssa_vccring_limiter_fmin_class_hptp_list";
- LevelsTc = "IPC::ARR_CCF_CXX::arr_cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_ARR_MBIST_min_lvl";
- TimingsTc = ARR_CCF_CXX_Specs.timings_Rules;
- BaseNumbers = "12352";
- BypassPort = -1;
- EndVoltageLimits = __shared__::FlowMatrixSingular.CR_LFM_VMIN_RAIN_KILL;
- ExecutionMode = "SearchWithScoreboard";
- FeatureSwitchSettings = ARR_CCF_CXX_Specs.FeatureSwitchNonMTT;
- FivrCondition = ARR_CCF_CXX_Specs.FivrConditionNom;
- FailCaptureCount = toInteger(1);
- ForwardingMode = ARR_CCF_CXX_Specs.ForwardingMode_EDC;
- #LimitGuardband = toString(__shared__::GBVars.FminLimitGuardband);
- LimitGuardband = toString(__shared__::TpRule.If_QRE("",toString(__shared__::GBVars.FminLimitGuardband)));
- PatternNameCounterIndexes = ARR_CCF_CXX_Specs.PatternMap;
- RecoveryMode = "NoRecovery";
- ScoreboardEdgeTicks = toInteger(0);
- SetPointsPlistParamName = "Patlist";
- SetPointsPostInstance = PSPOST.CLR_FMIN;
- SetPointsPreInstance = PSPRE.CLR_FMIN+","+"MCdrv:corefreq:"+ __shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:ringfreq_0:"+ __shared__::FlowMatrixSingular.CCF_FMIN+"GHz";
- StartVoltages = __shared__::FlowMatrixSingular.CR_LOW_SEARCH_VALUE;
- StartVoltagesForRetry = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesForRetry , "");
- StartVoltagesOffset = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesOffset , "");
- StepSize = toDouble(__shared__::FlowMatrixSingular.CR_SEARCH_RESOLUTION);
- TestMode = "SingleVmin";
- VoltageTargets = "CCF";
- VoltageConverter = ARR_CCF_CXX_Specs.VoltageConverter_LLCSRAM + DROPOUT.CLR_FMIN;
 }
 
 
@@ -4724,505 +4173,29 @@ Flow ARR_CCF_CXX_BEGINCPUNOM
 }
 
 
-Flow ARR_CCF_CXX_F4XCCFLO
-{
- FlowItem SSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCSRAM_MTT SSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCSRAM_MTT
- {
- Result -2
- {
- Property PassFail = "Fail";
- SetBin b99623227_fail_ARR_CCF_CXX_SSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCSRAM_MTT_n2;
- Return -2;
- }
- Result -1
- {
- Property PassFail = "Fail";
- SetBin b98623227_fail_ARR_CCF_CXX_SSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCSRAM_MTT_n1;
- Return -1;
- }
- Result 0
- {
- Property PassFail = "Fail";
- SetBin b62393003_fail_ARR_CCF_CXX_SSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCSRAM_MTT_0;
- IncrementCounters ARR_CCF_CXX::n62393003_fail_SSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCSRAM_MTT_0;
- Return 0;
- }
- Result 1
- {
- Property PassFail = "Pass";
- GoTo LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_CBOA_MTT;
- }
- Result 2
- {
- Property PassFail = "Fail";
- SetBin b62393004_fail_ARR_CCF_CXX_SSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCSRAM_MTT_2;
- IncrementCounters ARR_CCF_CXX::n62393004_fail_SSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCSRAM_MTT_2;
- Return 0;
- }
- Result 3
- {
- Property PassFail = "Fail";
- SetBin b62393005_fail_ARR_CCF_CXX_SSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCSRAM_MTT_3;
- IncrementCounters ARR_CCF_CXX::n62393005_fail_SSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCSRAM_MTT_3;
- Return 0;
- }
- Result 4
- {
- Property PassFail = "Fail";
- SetBin b97623020_fail_ARR_CCF_CXX_SSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCSRAM_MTT_4;
- IncrementCounters ARR_CCF_CXX::n97623020_fail_SSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCSRAM_MTT_4;
- Return 0;
- }
- Result 5
- {
- Property PassFail = "Fail";
- SetBin b62193032_fail_ARR_CCF_CXX_SSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCSRAM_MTT_5;
- IncrementCounters ARR_CCF_CXX::n62193032_fail_SSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCSRAM_MTT_5;
- Return 0;
- }
- }
- FlowItem LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_CBOA_MTT LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_CBOA_MTT
- {
- Result -2
- {
- Property PassFail = "Fail";
- SetBin b99213081_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_CBOA_MTT_n2;
- Return -2;
- }
- Result -1
- {
- Property PassFail = "Fail";
- SetBin b98213081_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_CBOA_MTT_n1;
- Return -1;
- }
- Result 0
- {
- Property PassFail = "Fail";
- SetBin b21333003_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_CBOA_MTT_0;
- IncrementCounters ARR_CCF_CXX::n21333003_fail_LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_CBOA_MTT_0;
- Return 0;
- }
- Result 1
- {
- Property PassFail = "Pass";
- GoTo LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCRF_MTT;
- }
- Result 2
- {
- Property PassFail = "Fail";
- SetBin b21333004_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_CBOA_MTT_2;
- IncrementCounters ARR_CCF_CXX::n21333004_fail_LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_CBOA_MTT_2;
- Return 0;
- }
- Result 3
- {
- Property PassFail = "Fail";
- SetBin b21333005_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_CBOA_MTT_3;
- IncrementCounters ARR_CCF_CXX::n21333005_fail_LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_CBOA_MTT_3;
- Return 0;
- }
- Result 4
- {
- Property PassFail = "Fail";
- SetBin b97213047_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_CBOA_MTT_4;
- IncrementCounters ARR_CCF_CXX::n97213047_fail_LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_CBOA_MTT_4;
- Return 0;
- }
- Result 5
- {
- Property PassFail = "Fail";
- SetBin b21193047_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_CBOA_MTT_5;
- IncrementCounters ARR_CCF_CXX::n21193047_fail_LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_CBOA_MTT_5;
- Return 0;
- }
- }
- 
- FlowItem LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCRF_MTT LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCRF_MTT
- {
- Result -2
- {
- Property PassFail = "Fail";
- SetBin b99213083_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCRF_MTT_n2;
- Return -2;
- }
- Result -1
- {
- Property PassFail = "Fail";
- SetBin b98213083_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCRF_MTT_n1;
- Return -1;
- }
- Result 0
- {
- Property PassFail = "Fail";
- SetBin b21343003_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCRF_MTT_0;
- IncrementCounters ARR_CCF_CXX::n21343003_fail_LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCRF_MTT_0;
- Return 0;
- }
- Result 1
- {
- Property PassFail = "Pass";
- Return 1;
- }
- Result 2
- {
- Property PassFail = "Fail";
- SetBin b21343004_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCRF_MTT_2;
- IncrementCounters ARR_CCF_CXX::n21343004_fail_LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCRF_MTT_2;
- Return 0;
- }
- Result 3
- {
- Property PassFail = "Fail";
- SetBin b21343005_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCRF_MTT_3;
- IncrementCounters ARR_CCF_CXX::n21343005_fail_LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCRF_MTT_3;
- Return 0;
- }
- Result 4
- {
- Property PassFail = "Fail";
- SetBin b97213049_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCRF_MTT_4;
- IncrementCounters ARR_CCF_CXX::n97213049_fail_LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCRF_MTT_4;
- Return 0;
- }
- Result 5
- {
- Property PassFail = "Fail";
- SetBin b21193049_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCRF_MTT_5;
- IncrementCounters ARR_CCF_CXX::n21193049_fail_LSA_CCF_VMIN_K_F4XCCFLO_X_X_F4_3000_LLCRF_MTT_5;
- Return 0;
- }
- }
-}
-
-Flow ARR_CCF_CXX_F5XCCFLO
-{
- 
- FlowItem SSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCSRAM_MTT SSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCSRAM_MTT
- {
- Result -2
- {
- Property PassFail = "Fail";
- SetBin b99623229_fail_ARR_CCF_CXX_SSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCSRAM_MTT_n2;
- Return -2;
- }
- Result -1
- {
- Property PassFail = "Fail";
- SetBin b98623229_fail_ARR_CCF_CXX_SSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCSRAM_MTT_n1;
- Return -1;
- }
- Result 0
- {
- Property PassFail = "Fail";
- SetBin b62403003_fail_ARR_CCF_CXX_SSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCSRAM_MTT_0;
- IncrementCounters ARR_CCF_CXX::n62403003_fail_SSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCSRAM_MTT_0;
- Return 0;
- }
- Result 1
- {
- Property PassFail = "Pass";
- GoTo LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_CBOA_MTT;
- }
- Result 2
- {
- Property PassFail = "Fail";
- SetBin b62403004_fail_ARR_CCF_CXX_SSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCSRAM_MTT_2;
- IncrementCounters ARR_CCF_CXX::n62403004_fail_SSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCSRAM_MTT_2;
- Return 0;
- }
- Result 3
- {
- Property PassFail = "Fail";
- SetBin b62403005_fail_ARR_CCF_CXX_SSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCSRAM_MTT_3;
- IncrementCounters ARR_CCF_CXX::n62403005_fail_SSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCSRAM_MTT_3;
- Return 0;
- }
- Result 4
- {
- Property PassFail = "Fail";
- SetBin b97623022_fail_ARR_CCF_CXX_SSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCSRAM_MTT_4;
- IncrementCounters ARR_CCF_CXX::n97623022_fail_SSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCSRAM_MTT_4;
- Return 0;
- }
- Result 5
- {
- Property PassFail = "Fail";
- SetBin b62193034_fail_ARR_CCF_CXX_SSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCSRAM_MTT_5;
- IncrementCounters ARR_CCF_CXX::n62193034_fail_SSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCSRAM_MTT_5;
- Return 0;
- }
- }
- FlowItem ARR_CCF_FMAXLO ARR_CCF_FMAXLO
- {
- Result -2
- {
- Property PassFail = "Fail";
- Return -2;
- }
- Result -1
- {
- Property PassFail = "Fail";
- Return -1;
- }
- Result 0
- {
- Property PassFail = "Fail";
- Return 1;
- }
- Result 1
- {
- Property PassFail = "Pass";
- Return 1;
- }
- }
- 
- FlowItem LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_CBOA_MTT LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_CBOA_MTT
- {
- Result -2
- {
- Property PassFail = "Fail";
- SetBin b99213085_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_CBOA_MTT_n2;
- Return -2;
- }
- Result -1
- {
- Property PassFail = "Fail";
- SetBin b98213085_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_CBOA_MTT_n1;
- Return -1;
- }
- Result 0
- {
- Property PassFail = "Fail";
- SetBin b21353003_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_CBOA_MTT_0;
- IncrementCounters ARR_CCF_CXX::n21353003_fail_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_CBOA_MTT_0;
- Return 0;
- }
- Result 1
- {
- Property PassFail = "Pass";
- GoTo LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCRF_MTT;
- }
- Result 2
- {
- Property PassFail = "Fail";
- SetBin b21353004_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_CBOA_MTT_2;
- IncrementCounters ARR_CCF_CXX::n21353004_fail_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_CBOA_MTT_2;
- Return 0;
- }
- Result 3
- {
- Property PassFail = "Fail";
- SetBin b21353005_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_CBOA_MTT_3;
- IncrementCounters ARR_CCF_CXX::n21353005_fail_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_CBOA_MTT_3;
- Return 0;
- }
- Result 4
- {
- Property PassFail = "Fail";
- SetBin b97213051_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_CBOA_MTT_4;
- IncrementCounters ARR_CCF_CXX::n97213051_fail_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_CBOA_MTT_4;
- Return 0;
- }
- Result 5
- {
- Property PassFail = "Fail";
- SetBin b21193051_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_CBOA_MTT_5;
- IncrementCounters ARR_CCF_CXX::n21193051_fail_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_CBOA_MTT_5;
- Return 0;
- }
- }
- 
- FlowItem LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCRF_MTT LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCRF_MTT
- {
- Result -2
- {
- Property PassFail = "Fail";
- SetBin b99213087_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCRF_MTT_n2;
- Return -2;
- }
- Result -1
- {
- Property PassFail = "Fail";
- SetBin b98213087_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCRF_MTT_n1;
- Return -1;
- }
- Result 0
- {
- Property PassFail = "Fail";
- SetBin b21363003_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCRF_MTT_0;
- IncrementCounters ARR_CCF_CXX::n21363003_fail_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCRF_MTT_0;
- Return 0;
- }
- Result 1
- {
- Property PassFail = "Pass";
- GoTo ARR_CCF_FMAXLO;
- }
- Result 2
- {
- Property PassFail = "Fail";
- SetBin b21363004_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCRF_MTT_2;
- IncrementCounters ARR_CCF_CXX::n21363004_fail_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCRF_MTT_2;
- Return 0;
- }
- Result 3
- {
- Property PassFail = "Fail";
- SetBin b21363005_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCRF_MTT_3;
- IncrementCounters ARR_CCF_CXX::n21363005_fail_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCRF_MTT_3;
- Return 0;
- }
- Result 4
- {
- Property PassFail = "Fail";
- SetBin b97213053_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCRF_MTT_4;
- IncrementCounters ARR_CCF_CXX::n97213053_fail_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_LLCRF_MTT_4;
- Return 0;
- }
- Result 5
- {
- Property PassFail = "Fail";
- SetBin b21193028_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_CBOA_MTT_5;
- IncrementCounters ARR_CCF_CXX::n21193028_fail_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_3600_CBOA_MTT_5;
- Return 0;
- }
- }
-}
 
 
 Flow ARR_CCF_CXX_FMINXCCF
 {
- FlowItem LSA_CCF_SB_K_FMINXCCF_X_X_X_X_CBOA_MTT LSA_CCF_SB_K_FMINXCCF_X_X_X_X_CBOA_MTT
+ FlowItem \ARR_TYPE\_CCF_SB_K_FMINXCCF_X_X_X_X_\CONTENT\_MTT \ARR_TYPE\_CCF_SB_K_FMINXCCF_X_X_X_X_\CONTENT\_MTT
  {
  Result -2
  {
  Property PassFail = "Fail";
- SetBin b99212057_fail_ARR_CCF_CXX_LSA_CCF_SB_K_FMINXCCF_X_X_X_X_CBOA_MTT_n2;
+ SetBin b99212057_fail_ARR_CCF_CXX_\ARR_TYPE\_CCF_SB_K_FMINXCCF_X_X_X_X_\CONTENT\_MTT_n2;
  Return -2;
  }
  Result -1
  {
  Property PassFail = "Fail";
- SetBin b98212057_fail_ARR_CCF_CXX_LSA_CCF_SB_K_FMINXCCF_X_X_X_X_CBOA_MTT_n1;
+ SetBin b98212057_fail_ARR_CCF_CXX_\ARR_TYPE\_CCF_SB_K_FMINXCCF_X_X_X_X_\CONTENT\_MTT_n1;
  Return -1;
  }
  Result 0
  {
  Property PassFail = "Fail";
- SetBin b21462003_fail_ARR_CCF_CXX_LSA_CCF_SB_K_FMINXCCF_X_X_X_X_CBOA_MTT_0;
- IncrementCounters ARR_CCF_CXX::n21462003_fail_LSA_CCF_SB_K_FMINXCCF_X_X_X_X_CBOA_MTT_0;
- Return 0;
- }
- Result 1
- {
- Property PassFail = "Pass";
- GoTo LSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLCRF_MTT;
- }
- Result 2
- {
- Property PassFail = "Fail";
- SetBin b21462004_fail_ARR_CCF_CXX_LSA_CCF_SB_K_FMINXCCF_X_X_X_X_CBOA_MTT_2;
- IncrementCounters ARR_CCF_CXX::n21462004_fail_LSA_CCF_SB_K_FMINXCCF_X_X_X_X_CBOA_MTT_2;
- Return 0;
- }
- Result 3
- {
- Property PassFail = "Fail";
- SetBin b21462005_fail_ARR_CCF_CXX_LSA_CCF_SB_K_FMINXCCF_X_X_X_X_CBOA_MTT_3;
- IncrementCounters ARR_CCF_CXX::n21462005_fail_LSA_CCF_SB_K_FMINXCCF_X_X_X_X_CBOA_MTT_3;
- Return 0;
- }
- Result 4
- {
- Property PassFail = "Fail";
- SetBin b97212023_fail_ARR_CCF_CXX_LSA_CCF_SB_K_FMINXCCF_X_X_X_X_CBOA_MTT_4;
- IncrementCounters ARR_CCF_CXX::n97212023_fail_LSA_CCF_SB_K_FMINXCCF_X_X_X_X_CBOA_MTT_4;
- Return 0;
- }
- Result 5
- {
- Property PassFail = "Fail";
- SetBin b21192023_fail_ARR_CCF_CXX_LSA_CCF_SB_K_FMINXCCF_X_X_X_X_CBOA_MTT_5;
- IncrementCounters ARR_CCF_CXX::n21192023_fail_LSA_CCF_SB_K_FMINXCCF_X_X_X_X_CBOA_MTT_5;
- Return 0;
- }
- }
- 
- FlowItem LSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLCRF_MTT LSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLCRF_MTT
- {
- Result -2
- {
- Property PassFail = "Fail";
- SetBin b99212059_fail_ARR_CCF_CXX_LSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLCRF_MTT_n2;
- Return -2;
- }
- Result -1
- {
- Property PassFail = "Fail";
- SetBin b98212059_fail_ARR_CCF_CXX_LSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLCRF_MTT_n1;
- Return -1;
- }
- Result 0
- {
- Property PassFail = "Fail";
- SetBin b21472003_fail_ARR_CCF_CXX_LSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLCRF_MTT_0;
- IncrementCounters ARR_CCF_CXX::n21472003_fail_LSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLCRF_MTT_0;
- Return 0;
- }
- Result 1
- {
- Property PassFail = "Pass";
- GoTo SSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLSRAM_MTT;
- }
- Result 2
- {
- Property PassFail = "Fail";
- SetBin b21472004_fail_ARR_CCF_CXX_LSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLCRF_MTT_2;
- IncrementCounters ARR_CCF_CXX::n21472004_fail_LSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLCRF_MTT_2;
- Return 0;
- }
- Result 3
- {
- Property PassFail = "Fail";
- SetBin b21472005_fail_ARR_CCF_CXX_LSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLCRF_MTT_3;
- IncrementCounters ARR_CCF_CXX::n21472005_fail_LSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLCRF_MTT_3;
- Return 0;
- }
- Result 4
- {
- Property PassFail = "Fail";
- SetBin b97212025_fail_ARR_CCF_CXX_LSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLCRF_MTT_4;
- IncrementCounters ARR_CCF_CXX::n97212025_fail_LSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLCRF_MTT_4;
- Return 0;
- }
- Result 5
- {
- Property PassFail = "Fail";
- SetBin b21192025_fail_ARR_CCF_CXX_LSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLCRF_MTT_5;
- IncrementCounters ARR_CCF_CXX::n21192025_fail_LSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLCRF_MTT_5;
- Return 0;
- }
- }
- 
- FlowItem SSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLSRAM_MTT SSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLSRAM_MTT
- {
- Result -2
- {
- Property PassFail = "Fail";
- SetBin b99622214_fail_ARR_CCF_CXX_SSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLSRAM_MTT_n2;
- Return -2;
- }
- Result -1
- {
- Property PassFail = "Fail";
- SetBin b98622214_fail_ARR_CCF_CXX_SSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLSRAM_MTT_n1;
- Return -1;
- }
- Result 0
- {
- Property PassFail = "Fail";
- SetBin b62412003_fail_ARR_CCF_CXX_SSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLSRAM_MTT_0;
- IncrementCounters ARR_CCF_CXX::n62412003_fail_SSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLSRAM_MTT_0;
+ SetBin b21462003_fail_ARR_CCF_CXX_\ARR_TYPE\_CCF_SB_K_FMINXCCF_X_X_X_X_\CONTENT\_MTT_0;
+ IncrementCounters ARR_CCF_CXX::n21462003_fail_\ARR_TYPE\_CCF_SB_K_FMINXCCF_X_X_X_X_\CONTENT\_MTT_0;
  Return 0;
  }
  Result 1
@@ -5233,197 +4206,30 @@ Flow ARR_CCF_CXX_FMINXCCF
  Result 2
  {
  Property PassFail = "Fail";
- SetBin b62412004_fail_ARR_CCF_CXX_SSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLSRAM_MTT_2;
- IncrementCounters ARR_CCF_CXX::n62412004_fail_SSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLSRAM_MTT_2;
+ SetBin b21462004_fail_ARR_CCF_CXX_\ARR_TYPE\_CCF_SB_K_FMINXCCF_X_X_X_X_\CONTENT\_MTT_2;
+ IncrementCounters ARR_CCF_CXX::n21462004_fail_\ARR_TYPE\_CCF_SB_K_FMINXCCF_X_X_X_X_\CONTENT\_MTT_2;
  Return 0;
  }
  Result 3
  {
  Property PassFail = "Fail";
- SetBin b62412005_fail_ARR_CCF_CXX_SSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLSRAM_MTT_3;
- IncrementCounters ARR_CCF_CXX::n62412005_fail_SSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLSRAM_MTT_3;
+ SetBin b21462005_fail_ARR_CCF_CXX_\ARR_TYPE\_CCF_SB_K_FMINXCCF_X_X_X_X_\CONTENT\_MTT_3;
+ IncrementCounters ARR_CCF_CXX::n21462005_fail_\ARR_TYPE\_CCF_SB_K_FMINXCCF_X_X_X_X_\CONTENT\_MTT_3;
  Return 0;
  }
  Result 4
  {
  Property PassFail = "Fail";
- SetBin b97622007_fail_ARR_CCF_CXX_SSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLSRAM_MTT_4;
- IncrementCounters ARR_CCF_CXX::n97622007_fail_SSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLSRAM_MTT_4;
+ SetBin b97212023_fail_ARR_CCF_CXX_\ARR_TYPE\_CCF_SB_K_FMINXCCF_X_X_X_X_\CONTENT\_MTT_4;
+ IncrementCounters ARR_CCF_CXX::n97212023_fail_\ARR_TYPE\_CCF_SB_K_FMINXCCF_X_X_X_X_\CONTENT\_MTT_4;
  Return 0;
  }
  Result 5
  {
  Property PassFail = "Fail";
- SetBin b62192019_fail_ARR_CCF_CXX_SSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLSRAM_MTT_5;
- IncrementCounters ARR_CCF_CXX::n62192019_fail_SSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLSRAM_MTT_5;
+ SetBin b21192023_fail_ARR_CCF_CXX_\ARR_TYPE\_CCF_SB_K_FMINXCCF_X_X_X_X_\CONTENT\_MTT_5;
+ IncrementCounters ARR_CCF_CXX::n21192023_fail_\ARR_TYPE\_CCF_SB_K_FMINXCCF_X_X_X_X_\CONTENT\_MTT_5;
  Return 0;
- }
- }
- FlowItem LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_CBOA_FMIN_FF_SEARCH LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_CBOA_FMIN_FF_SEARCH @EDC
- {
- Result -2
- {
- Property PassFail = "Fail";
- SetBin b99212089_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_CBOA_FMIN_FF_SEARCH_n2;
- Return -2;
- }
- Result -1
- {
- Property PassFail = "Fail";
- SetBin b98212089_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_CBOA_FMIN_FF_SEARCH_n1;
- Return -1;
- }
- Result 0
- {
- Property PassFail = "Fail";
- ##EDC## SetBin b21252027_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_CBOA_FMIN_FF_SEARCH_0;
- IncrementCounters ARR_CCF_CXX::n21252027_fail_LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_CBOA_FMIN_FF_SEARCH_0;
- GoTo LSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLCRF_MTT;
- }
- Result 1
- {
- Property PassFail = "Pass";
- GoTo LSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLCRF_MTT;
- }
- Result 2
- {
- Property PassFail = "Fail";
- ##EDC## SetBin b21252028_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_CBOA_FMIN_FF_SEARCH_2;
- IncrementCounters ARR_CCF_CXX::n21252028_fail_LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_CBOA_FMIN_FF_SEARCH_2;
- GoTo LSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLCRF_MTT;
- }
- Result 3
- {
- Property PassFail = "Fail";
- ##EDC## SetBin b21252029_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_CBOA_FMIN_FF_SEARCH_3;
- IncrementCounters ARR_CCF_CXX::n21252029_fail_LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_CBOA_FMIN_FF_SEARCH_3;
- GoTo LSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLCRF_MTT;
- }
- Result 4
- {
- Property PassFail = "Fail";
- ##EDC## SetBin b97212055_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_CBOA_FMIN_FF_SEARCH_4;
- IncrementCounters ARR_CCF_CXX::n97212055_fail_LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_CBOA_FMIN_FF_SEARCH_4;
- GoTo LSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLCRF_MTT;
- }
- Result 5
- {
- Property PassFail = "Fail";
- ##EDC## SetBin b21192055_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_CBOA_FMIN_FF_SEARCH_5;
- IncrementCounters ARR_CCF_CXX::n21192055_fail_LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_CBOA_FMIN_FF_SEARCH_5;
- GoTo LSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLCRF_MTT;
- }
- }
- 
- FlowItem LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLCRF_FMIN_FF_SEARCH LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLCRF_FMIN_FF_SEARCH @EDC
- {
- Result -2
- {
- Property PassFail = "Fail";
- SetBin b99212091_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLCRF_FMIN_FF_SEARCH_n2;
- Return -2;
- }
- Result -1
- {
- Property PassFail = "Fail";
- SetBin b98212091_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLCRF_FMIN_FF_SEARCH_n1;
- Return -1;
- }
- Result 0
- {
- Property PassFail = "Fail";
- ##EDC## SetBin b21252033_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLCRF_FMIN_FF_SEARCH_0;
- IncrementCounters ARR_CCF_CXX::n21252033_fail_LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLCRF_FMIN_FF_SEARCH_0;
- GoTo SSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLSRAM_MTT;
- }
- Result 1
- {
- Property PassFail = "Pass";
- GoTo SSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLSRAM_MTT;
- }
- Result 2
- {
- Property PassFail = "Fail";
- ##EDC## SetBin b21252034_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLCRF_FMIN_FF_SEARCH_2;
- IncrementCounters ARR_CCF_CXX::n21252034_fail_LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLCRF_FMIN_FF_SEARCH_2;
- GoTo SSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLSRAM_MTT;
- }
- Result 3
- {
- Property PassFail = "Fail";
- ##EDC## SetBin b21252035_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLCRF_FMIN_FF_SEARCH_3;
- IncrementCounters ARR_CCF_CXX::n21252035_fail_LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLCRF_FMIN_FF_SEARCH_3;
- GoTo SSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLSRAM_MTT;
- }
- Result 4
- {
- Property PassFail = "Fail";
- ##EDC## SetBin b97212057_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLCRF_FMIN_FF_SEARCH_4;
- IncrementCounters ARR_CCF_CXX::n97212057_fail_LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLCRF_FMIN_FF_SEARCH_4;
- GoTo SSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLSRAM_MTT;
- }
- Result 5
- {
- Property PassFail = "Fail";
- ##EDC## SetBin b21192057_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLCRF_FMIN_FF_SEARCH_5;
- IncrementCounters ARR_CCF_CXX::n21192057_fail_LSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLCRF_FMIN_FF_SEARCH_5;
- GoTo SSA_CCF_SB_K_FMINXCCF_X_X_X_X_LLSRAM_MTT;
- }
- }
- 
- FlowItem SSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLSRAM_FMIN_FF_SEARCH SSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLSRAM_FMIN_FF_SEARCH @EDC
- {
- Result -2
- {
- Property PassFail = "Fail";
- SetBin b99622233_fail_ARR_CCF_CXX_SSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLSRAM_FMIN_FF_SEARCH_n2;
- Return -2;
- }
- Result -1
- {
- Property PassFail = "Fail";
- SetBin b98622233_fail_ARR_CCF_CXX_SSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLSRAM_FMIN_FF_SEARCH_n1;
- Return -1;
- }
- Result 0
- {
- Property PassFail = "Fail";
- ##EDC## SetBin b62422003_fail_ARR_CCF_CXX_SSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLSRAM_FMIN_FF_SEARCH_0;
- IncrementCounters ARR_CCF_CXX::n62422003_fail_SSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLSRAM_FMIN_FF_SEARCH_0;
- Return 1;
- }
- Result 1
- {
- Property PassFail = "Pass";
- Return 1;
- }
- Result 2
- {
- Property PassFail = "Fail";
- ##EDC## SetBin b62422004_fail_ARR_CCF_CXX_SSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLSRAM_FMIN_FF_SEARCH_2;
- IncrementCounters ARR_CCF_CXX::n62422004_fail_SSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLSRAM_FMIN_FF_SEARCH_2;
- Return 1;
- }
- Result 3
- {
- Property PassFail = "Fail";
- ##EDC## SetBin b62422005_fail_ARR_CCF_CXX_SSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLSRAM_FMIN_FF_SEARCH_3;
- IncrementCounters ARR_CCF_CXX::n62422005_fail_SSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLSRAM_FMIN_FF_SEARCH_3;
- Return 1;
- }
- Result 4
- {
- Property PassFail = "Fail";
- ##EDC## SetBin b97622024_fail_ARR_CCF_CXX_SSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLSRAM_FMIN_FF_SEARCH_4;
- IncrementCounters ARR_CCF_CXX::n97622024_fail_SSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLSRAM_FMIN_FF_SEARCH_4;
- Return 1;
- }
- Result 5
- {
- Property PassFail = "Fail";
- ##EDC## SetBin b62192036_fail_ARR_CCF_CXX_SSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLSRAM_FMIN_FF_SEARCH_5;
- IncrementCounters ARR_CCF_CXX::n62192036_fail_SSA_CCF_VMIN_K_FMINXCCF_X_X_X_X_LLSRAM_FMIN_FF_SEARCH_5;
- Return 1;
  }
  }
  
@@ -8245,826 +7051,126 @@ Flow BEGINMAX_BIRA_RAS_REP
 
 }
 
-Flow ARR_CCF_FMAXLO
-{
- FlowItem LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_CBOA_APEX_FMAX LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_CBOA_APEX_FMAX @EDC
- {
- Result -2
- {
- Property PassFail = "Fail";
- SetBin b99623131_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_CBOA_APEX_FMAX_n2;
- Return -2;
- }
- Result -1
- {
- Property PassFail = "Fail";
- SetBin b98623131_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_CBOA_APEX_FMAX_n1;
- Return -1;
- }
- Result 0
- {
- Property PassFail = "Fail";
- GoTo LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_LLCRF_APEX_FMAX;
- }
- Result 1
- {
- Property PassFail = "Pass";
- GoTo LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_LLCRF_APEX_FMAX;
- }
- Result 2
- {
- Property PassFail = "Fail";
- GoTo LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_LLCRF_APEX_FMAX;
- }
- Result 3
- {
- Property PassFail = "Fail";
- GoTo LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_LLCRF_APEX_FMAX;
- }
- Result 4
- {
- Property PassFail = "Fail";
- GoTo LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_LLCRF_APEX_FMAX;
- }
- Result 5
- {
- Property PassFail = "Fail";
- GoTo LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_LLCRF_APEX_FMAX;
- }
- }
- 
- FlowItem LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_LLCRF_APEX_FMAX LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_LLCRF_APEX_FMAX @EDC
- {
- Result -2
- {
- Property PassFail = "Fail";
- SetBin b99623133_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_LLCRF_APEX_FMAX_n2;
- Return -2;
- }
- Result -1
- {
- Property PassFail = "Fail";
- SetBin b98623133_fail_ARR_CCF_CXX_LSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_LLCRF_APEX_FMAX_n1;
- Return -1;
- }
- Result 0
- {
- Property PassFail = "Fail";
- GoTo SSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_LLCSRAM_APEX_FMAX;
- }
- Result 1
- {
- Property PassFail = "Pass";
- GoTo SSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_LLCSRAM_APEX_FMAX;
- }
- Result 2
- {
- Property PassFail = "Fail";
- GoTo SSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_LLCSRAM_APEX_FMAX;
- }
- Result 3
- {
- Property PassFail = "Fail";
- GoTo SSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_LLCSRAM_APEX_FMAX;
- }
- Result 4
- {
- Property PassFail = "Fail";
- GoTo SSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_LLCSRAM_APEX_FMAX;
- }
- Result 5
- {
- Property PassFail = "Fail";
- GoTo SSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_LLCSRAM_APEX_FMAX;
- }
- }
- 
- FlowItem SSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_LLCSRAM_APEX_FMAX SSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_LLCSRAM_APEX_FMAX @EDC
- {
- Result -2
- {
- Property PassFail = "Fail";
- SetBin b99623231_fail_ARR_CCF_CXX_SSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_LLCSRAM_APEX_FMAX_n2;
- Return -2;
- }
- Result -1
- {
- Property PassFail = "Fail";
- SetBin b98623231_fail_ARR_CCF_CXX_SSA_CCF_VMIN_K_F5XCCFLO_X_X_F5_X_LLCSRAM_APEX_FMAX_n1;
- Return -1;
- }
- Result 0
- {
- Property PassFail = "Fail";
- Return 1;
- }
- Result 1
- {
- Property PassFail = "Pass";
- Return 1;
- }
- Result 2
- {
- Property PassFail = "Fail";
- Return 1;
- }
- Result 3
- {
- Property PassFail = "Fail";
- Return 1;
- }
- Result 4
- {
- Property PassFail = "Fail";
- Return 1;
- }
- Result 5
- {
- Property PassFail = "Fail";
- Return 1;
- }
- }
- 
-}
+
 
 
 Flow ARR_CCF_CXX_VMAXXCCF
 {
- FlowItem LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_CBOA LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_CBOA
+ FlowItem \ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_1200_\CONTENT\ \ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_1200_\CONTENT\
  {
  Result -2
  {
  Property PassFail = "Fail";
- SetBin b99212061_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_CBOA_n2;
+ SetBin b99212061_fail_ARR_CCF_CXX_\ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_1200_\CONTENT\_n2;
  Return -2;
  }
  Result -1
  {
  Property PassFail = "Fail";
- SetBin b98212061_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_CBOA_n1;
+ SetBin b98212061_fail_ARR_CCF_CXX_\ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_1200_\CONTENT\_n1;
  Return -1;
  }
  Result 0
  {
  Property PassFail = "Fail";
- SetBin b21372003_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_CBOA_0;
- IncrementCounters ARR_CCF_CXX::n21372003_fail_LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_CBOA_0;
+ SetBin b21372003_fail_ARR_CCF_CXX_\ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_1200_\CONTENT\_0;
+ IncrementCounters ARR_CCF_CXX::n21372003_fail_\ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_1200_\CONTENT\_0;
  Return 0;
  }
  Result 1
  {
  Property PassFail = "Pass";
- GoTo LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCRF;
+ChainBy ARR_TYPE>CONTENT;
+ GoTo \ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_3600_\CONTENT\_MTT;
  }
  Result 2
  {
  Property PassFail = "Fail";
- SetBin b21372004_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_CBOA_2;
- IncrementCounters ARR_CCF_CXX::n21372004_fail_LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_CBOA_2;
+ SetBin b21372004_fail_ARR_CCF_CXX_\ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_1200_\CONTENT\_2;
+ IncrementCounters ARR_CCF_CXX::n21372004_fail_\ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_1200_\CONTENT\_2;
  Return 0;
  }
  Result 3
  {
  Property PassFail = "Fail";
- SetBin b21372005_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_CBOA_3;
- IncrementCounters ARR_CCF_CXX::n21372005_fail_LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_CBOA_3;
+ SetBin b21372005_fail_ARR_CCF_CXX_\ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_1200_\CONTENT\_3;
+ IncrementCounters ARR_CCF_CXX::n21372005_fail_\ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_1200_\CONTENT\_3;
  Return 0;
  }
  Result 4
  {
  Property PassFail = "Fail";
- SetBin b97212027_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_CBOA_4;
- IncrementCounters ARR_CCF_CXX::n97212027_fail_LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_CBOA_4;
+ SetBin b97212027_fail_ARR_CCF_CXX_\ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_1200_\CONTENT\_4;
+ IncrementCounters ARR_CCF_CXX::n97212027_fail_\ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_1200_\CONTENT\_4;
  Return 0;
  }
  Result 5
  {
  Property PassFail = "Fail";
- SetBin b21192027_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_CBOA_5;
- IncrementCounters ARR_CCF_CXX::n21192027_fail_LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_CBOA_5;
+ SetBin b21192027_fail_ARR_CCF_CXX_\ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_1200_\CONTENT\_5;
+ IncrementCounters ARR_CCF_CXX::n21192027_fail_\ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_1200_\CONTENT\_5;
  Return 0;
  }
  }
  
- FlowItem LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCRF LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCRF
+ FlowItem \ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_3600_\CONTENT\_MTT \ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_3600_\CONTENT\_MTT
  {
  Result -2
  {
  Property PassFail = "Fail";
- SetBin b99212063_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCRF_n2;
+ SetBin b99212065_fail_ARR_CCF_CXX_\ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_3600_\CONTENT\_MTT_n2;
  Return -2;
  }
  Result -1
  {
  Property PassFail = "Fail";
- SetBin b98212063_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCRF_n1;
+ SetBin b98212065_fail_ARR_CCF_CXX_\ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_3600_\CONTENT\_MTT_n1;
  Return -1;
  }
  Result 0
  {
  Property PassFail = "Fail";
- SetBin b21382003_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCRF_0;
- IncrementCounters ARR_CCF_CXX::n21382003_fail_LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCRF_0;
- Return 0;
- }
- Result 1
- {
- Property PassFail = "Pass";
- GoTo SSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCSRAM;
- }
- Result 2
- {
- Property PassFail = "Fail";
- SetBin b21382004_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCRF_2;
- IncrementCounters ARR_CCF_CXX::n21382004_fail_LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCRF_2;
- Return 0;
- }
- Result 3
- {
- Property PassFail = "Fail";
- SetBin b21382005_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCRF_3;
- IncrementCounters ARR_CCF_CXX::n21382005_fail_LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCRF_3;
- Return 0;
- }
- Result 4
- {
- Property PassFail = "Fail";
- SetBin b97212029_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCRF_4;
- IncrementCounters ARR_CCF_CXX::n97212029_fail_LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCRF_4;
- Return 0;
- }
- Result 5
- {
- Property PassFail = "Fail";
- SetBin b21192029_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCRF_5;
- IncrementCounters ARR_CCF_CXX::n21192029_fail_LSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCRF_5;
- Return 0;
- }
- }
- 
- FlowItem SSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCSRAM SSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCSRAM
- {
- Result -2
- {
- Property PassFail = "Fail";
- SetBin b99622216_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCSRAM_n2;
- Return -2;
- }
- Result -1
- {
- Property PassFail = "Fail";
- SetBin b98622216_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCSRAM_n1;
- Return -1;
- }
- Result 0
- {
- Property PassFail = "Fail";
- SetBin b62442003_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCSRAM_0;
- IncrementCounters ARR_CCF_CXX::n62442003_fail_SSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCSRAM_0;
- Return 0;
- }
- Result 1
- {
- Property PassFail = "Pass";
- GoTo LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_CBOA_MTT;
- }
- Result 2
- {
- Property PassFail = "Fail";
- SetBin b62442004_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCSRAM_2;
- IncrementCounters ARR_CCF_CXX::n62442004_fail_SSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCSRAM_2;
- Return 0;
- }
- Result 3
- {
- Property PassFail = "Fail";
- SetBin b62442005_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCSRAM_3;
- IncrementCounters ARR_CCF_CXX::n62442005_fail_SSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCSRAM_3;
- Return 0;
- }
- Result 4
- {
- Property PassFail = "Fail";
- SetBin b97622009_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCSRAM_4;
- IncrementCounters ARR_CCF_CXX::n97622009_fail_SSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCSRAM_4;
- Return 0;
- }
- Result 5
- {
- Property PassFail = "Fail";
- SetBin b62192021_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCSRAM_5;
- IncrementCounters ARR_CCF_CXX::n62192021_fail_SSA_CCF_SB_K_VMAXXCCF_X_X_X_1200_LLCSRAM_5;
- Return 0;
- }
- }
- 
- FlowItem LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_CBOA_MTT LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_CBOA_MTT
- {
- Result -2
- {
- Property PassFail = "Fail";
- SetBin b99212065_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_CBOA_MTT_n2;
- Return -2;
- }
- Result -1
- {
- Property PassFail = "Fail";
- SetBin b98212065_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_CBOA_MTT_n1;
- Return -1;
- }
- Result 0
- {
- Property PassFail = "Fail";
- SetBin b21392003_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_CBOA_MTT_0;
- IncrementCounters ARR_CCF_CXX::n21392003_fail_LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_CBOA_MTT_0;
- Return 0;
- }
- Result 1
- {
- Property PassFail = "Pass";
- GoTo LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCRF_MTT;
- }
- Result 2
- {
- Property PassFail = "Fail";
- SetBin b21392004_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_CBOA_MTT_2;
- IncrementCounters ARR_CCF_CXX::n21392004_fail_LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_CBOA_MTT_2;
- Return 0;
- }
- Result 3
- {
- Property PassFail = "Fail";
- SetBin b21392005_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_CBOA_MTT_3;
- IncrementCounters ARR_CCF_CXX::n21392005_fail_LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_CBOA_MTT_3;
- Return 0;
- }
- Result 4
- {
- Property PassFail = "Fail";
- SetBin b97212031_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_CBOA_MTT_4;
- IncrementCounters ARR_CCF_CXX::n97212031_fail_LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_CBOA_MTT_4;
- Return 0;
- }
- Result 5
- {
- Property PassFail = "Fail";
- SetBin b21192031_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_CBOA_MTT_5;
- IncrementCounters ARR_CCF_CXX::n21192031_fail_LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_CBOA_MTT_5;
- Return 0;
- }
- }
- 
- FlowItem LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCRF_MTT LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCRF_MTT
- {
- Result -2
- {
- Property PassFail = "Fail";
- SetBin b99212067_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCRF_MTT_n2;
- Return -2;
- }
- Result -1
- {
- Property PassFail = "Fail";
- SetBin b98212067_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCRF_MTT_n1;
- Return -1;
- }
- Result 0
- {
- Property PassFail = "Fail";
- SetBin b21402003_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCRF_MTT_0;
- IncrementCounters ARR_CCF_CXX::n21402003_fail_LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCRF_MTT_0;
- Return 0;
- }
- Result 1
- {
- Property PassFail = "Pass";
- GoTo SSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCSRAM_MTT;
- }
- Result 2
- {
- Property PassFail = "Fail";
- SetBin b21402004_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCRF_MTT_2;
- IncrementCounters ARR_CCF_CXX::n21402004_fail_LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCRF_MTT_2;
- Return 0;
- }
- Result 3
- {
- Property PassFail = "Fail";
- SetBin b21402005_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCRF_MTT_3;
- IncrementCounters ARR_CCF_CXX::n21402005_fail_LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCRF_MTT_3;
- Return 0;
- }
- Result 4
- {
- Property PassFail = "Fail";
- SetBin b97212033_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCRF_MTT_4;
- IncrementCounters ARR_CCF_CXX::n97212033_fail_LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCRF_MTT_4;
- Return 0;
- }
- Result 5
- {
- Property PassFail = "Fail";
- SetBin b21192033_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCRF_MTT_5;
- IncrementCounters ARR_CCF_CXX::n21192033_fail_LSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCRF_MTT_5;
- Return 0;
- }
- }
- 
- FlowItem SSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCSRAM_MTT SSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCSRAM_MTT
- {
- Result -2
- {
- Property PassFail = "Fail";
- SetBin b99622218_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCSRAM_MTT_n2;
- Return -2;
- }
- Result -1
- {
- Property PassFail = "Fail";
- SetBin b98622218_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCSRAM_MTT_n1;
- Return -1;
- }
- Result 0
- {
- Property PassFail = "Fail";
- SetBin b62452003_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCSRAM_MTT_0;
- IncrementCounters ARR_CCF_CXX::n62452003_fail_SSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCSRAM_MTT_0;
+ SetBin b21392003_fail_ARR_CCF_CXX_\ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_3600_\CONTENT\_MTT_0;
+ IncrementCounters ARR_CCF_CXX::n21392003_fail_\ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_3600_\CONTENT\_MTT_0;
  Return 0;
  }
  Result 1
  {
  Property PassFail = "Pass";
  Return 1;
+ChainBy ARR_TYPE>CONTENT;
  }
  Result 2
  {
  Property PassFail = "Fail";
- SetBin b62452004_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCSRAM_MTT_2;
- IncrementCounters ARR_CCF_CXX::n62452004_fail_SSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCSRAM_MTT_2;
+ SetBin b21392004_fail_ARR_CCF_CXX_\ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_3600_\CONTENT\_MTT_2;
+ IncrementCounters ARR_CCF_CXX::n21392004_fail_\ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_3600_\CONTENT\_MTT_2;
  Return 0;
  }
  Result 3
  {
  Property PassFail = "Fail";
- SetBin b62452005_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCSRAM_MTT_3;
- IncrementCounters ARR_CCF_CXX::n62452005_fail_SSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCSRAM_MTT_3;
+ SetBin b21392005_fail_ARR_CCF_CXX_\ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_3600_\CONTENT\_MTT_3;
+ IncrementCounters ARR_CCF_CXX::n21392005_fail_\ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_3600_\CONTENT\_MTT_3;
  Return 0;
  }
  Result 4
  {
  Property PassFail = "Fail";
- SetBin b97622011_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCSRAM_MTT_4;
- IncrementCounters ARR_CCF_CXX::n97622011_fail_SSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCSRAM_MTT_4;
+ SetBin b97212031_fail_ARR_CCF_CXX_\ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_3600_\CONTENT\_MTT_4;
+ IncrementCounters ARR_CCF_CXX::n97212031_fail_\ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_3600_\CONTENT\_MTT_4;
  Return 0;
  }
  Result 5
  {
  Property PassFail = "Fail";
- SetBin b62192023_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCSRAM_MTT_5;
- IncrementCounters ARR_CCF_CXX::n62192023_fail_SSA_CCF_SB_K_VMAXXCCF_X_X_X_3600_LLCSRAM_MTT_5;
+ SetBin b21192031_fail_ARR_CCF_CXX_\ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_3600_\CONTENT\_MTT_5;
+ IncrementCounters ARR_CCF_CXX::n21192031_fail_\ARR_TYPE\_CCF_SB_K_VMAXXCCF_X_X_X_3600_\CONTENT\_MTT_5;
  Return 0;
  }
  }
 }
 
-Flow ARR_CCF_CXX_VMAXXCCFLO
-{
- FlowItem LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_CBOA LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_CBOA
- {
- Result -2
- {
- Property PassFail = "Fail";
- SetBin b99213061_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_CBOA_n2;
- Return -2;
- }
- Result -1
- {
- Property PassFail = "Fail";
- SetBin b98213061_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_CBOA_n1;
- Return -1;
- }
- Result 0
- {
- Property PassFail = "Fail";
- SetBin b21373003_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_CBOA_0;
- IncrementCounters ARR_CCF_CXX::n21373003_fail_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_CBOA_0;
- Return 0;
- }
- Result 1
- {
- Property PassFail = "Pass";
- GoTo LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCRF;
- }
- Result 2
- {
- Property PassFail = "Fail";
- SetBin b21373004_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_CBOA_2;
- IncrementCounters ARR_CCF_CXX::n21373004_fail_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_CBOA_2;
- Return 0;
- }
- Result 3
- {
- Property PassFail = "Fail";
- SetBin b21373005_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_CBOA_3;
- IncrementCounters ARR_CCF_CXX::n21373005_fail_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_CBOA_3;
- Return 0;
- }
- Result 4
- {
- Property PassFail = "Fail";
- SetBin b97213027_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_CBOA_4;
- IncrementCounters ARR_CCF_CXX::n97213027_fail_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_CBOA_4;
- Return 0;
- }
- Result 5
- {
- Property PassFail = "Fail";
- SetBin b21193027_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_CBOA_5;
- IncrementCounters ARR_CCF_CXX::n21193027_fail_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_CBOA_5;
- Return 0;
- }
- }
- 
- FlowItem LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCRF LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCRF
- {
- Result -2
- {
- Property PassFail = "Fail";
- SetBin b99213063_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCRF_n2;
- Return -2;
- }
- Result -1
- {
- Property PassFail = "Fail";
- SetBin b98213063_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCRF_n1;
- Return -1;
- }
- Result 0
- {
- Property PassFail = "Fail";
- SetBin b21383003_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCRF_0;
- IncrementCounters ARR_CCF_CXX::n21383003_fail_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCRF_0;
- Return 0;
- }
- Result 1
- {
- Property PassFail = "Pass";
- GoTo SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCSRAM;
- }
- Result 2
- {
- Property PassFail = "Fail";
- SetBin b21383004_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCRF_2;
- IncrementCounters ARR_CCF_CXX::n21383004_fail_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCRF_2;
- Return 0;
- }
- Result 3
- {
- Property PassFail = "Fail";
- SetBin b21383005_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCRF_3;
- IncrementCounters ARR_CCF_CXX::n21383005_fail_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCRF_3;
- Return 0;
- }
- Result 4
- {
- Property PassFail = "Fail";
- SetBin b97213029_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCRF_4;
- IncrementCounters ARR_CCF_CXX::n97213029_fail_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCRF_4;
- Return 0;
- }
- Result 5
- {
- Property PassFail = "Fail";
- SetBin b21193029_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCRF_5;
- IncrementCounters ARR_CCF_CXX::n21193029_fail_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCRF_5;
- Return 0;
- }
- }
- 
- FlowItem SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCSRAM SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCSRAM
- {
- Result -2
- {
- Property PassFail = "Fail";
- SetBin b99623216_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCSRAM_n2;
- Return -2;
- }
- Result -1
- {
- Property PassFail = "Fail";
- SetBin b98623216_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCSRAM_n1;
- Return -1;
- }
- Result 0
- {
- Property PassFail = "Fail";
- SetBin b62443003_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCSRAM_0;
- IncrementCounters ARR_CCF_CXX::n62443003_fail_SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCSRAM_0;
- Return 0;
- }
- Result 1
- {
- Property PassFail = "Pass";
- GoTo LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_CBOA_MTT;
- }
- Result 2
- {
- Property PassFail = "Fail";
- SetBin b62443004_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCSRAM_2;
- IncrementCounters ARR_CCF_CXX::n62443004_fail_SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCSRAM_2;
- Return 0;
- }
- Result 3
- {
- Property PassFail = "Fail";
- SetBin b62443005_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCSRAM_3;
- IncrementCounters ARR_CCF_CXX::n62443005_fail_SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCSRAM_3;
- Return 0;
- }
- Result 4
- {
- Property PassFail = "Fail";
- SetBin b97623009_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCSRAM_4;
- IncrementCounters ARR_CCF_CXX::n97623009_fail_SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCSRAM_4;
- Return 0;
- }
- Result 5
- {
- Property PassFail = "Fail";
- SetBin b62193021_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCSRAM_5;
- IncrementCounters ARR_CCF_CXX::n62193021_fail_SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_1200_LLCSRAM_5;
- Return 0;
- }
- }
- 
- FlowItem LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_CBOA_MTT LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_CBOA_MTT
- {
- Result -2
- {
- Property PassFail = "Fail";
- SetBin b99213065_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_CBOA_MTT_n2;
- Return -2;
- }
- Result -1
- {
- Property PassFail = "Fail";
- SetBin b98213065_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_CBOA_MTT_n1;
- Return -1;
- }
- Result 0
- {
- Property PassFail = "Fail";
- SetBin b21393003_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_CBOA_MTT_0;
- IncrementCounters ARR_CCF_CXX::n21393003_fail_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_CBOA_MTT_0;
- Return 0;
- }
- Result 1
- {
- Property PassFail = "Pass";
- GoTo LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCRF_MTT;
- }
- Result 2
- {
- Property PassFail = "Fail";
- SetBin b21393004_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_CBOA_MTT_2;
- IncrementCounters ARR_CCF_CXX::n21393004_fail_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_CBOA_MTT_2;
- Return 0;
- }
- Result 3
- {
- Property PassFail = "Fail";
- SetBin b21393005_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_CBOA_MTT_3;
- IncrementCounters ARR_CCF_CXX::n21393005_fail_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_CBOA_MTT_3;
- Return 0;
- }
- Result 4
- {
- Property PassFail = "Fail";
- SetBin b97213031_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_CBOA_MTT_4;
- IncrementCounters ARR_CCF_CXX::n97213031_fail_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_CBOA_MTT_4;
- Return 0;
- }
- Result 5
- {
- Property PassFail = "Fail";
- SetBin b21193031_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_CBOA_MTT_5;
- IncrementCounters ARR_CCF_CXX::n21193031_fail_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_CBOA_MTT_5;
- Return 0;
- }
- }
- 
- FlowItem LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCRF_MTT LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCRF_MTT
- {
- Result -2
- {
- Property PassFail = "Fail";
- SetBin b99213067_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCRF_MTT_n2;
- Return -2;
- }
- Result -1
- {
- Property PassFail = "Fail";
- SetBin b98213067_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCRF_MTT_n1;
- Return -1;
- }
- Result 0
- {
- Property PassFail = "Fail";
- SetBin b21403003_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCRF_MTT_0;
- IncrementCounters ARR_CCF_CXX::n21403003_fail_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCRF_MTT_0;
- Return 0;
- }
- Result 1
- {
- Property PassFail = "Pass";
- GoTo SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCSRAM_MTT;
- }
- Result 2
- {
- Property PassFail = "Fail";
- SetBin b21403004_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCRF_MTT_2;
- IncrementCounters ARR_CCF_CXX::n21403004_fail_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCRF_MTT_2;
- Return 0;
- }
- Result 3
- {
- Property PassFail = "Fail";
- SetBin b21403005_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCRF_MTT_3;
- IncrementCounters ARR_CCF_CXX::n21403005_fail_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCRF_MTT_3;
- Return 0;
- }
- Result 4
- {
- Property PassFail = "Fail";
- SetBin b97213033_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCRF_MTT_4;
- IncrementCounters ARR_CCF_CXX::n97213033_fail_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCRF_MTT_4;
- Return 0;
- }
- Result 5
- {
- Property PassFail = "Fail";
- SetBin b21193033_fail_ARR_CCF_CXX_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCRF_MTT_5;
- IncrementCounters ARR_CCF_CXX::n21193033_fail_LSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCRF_MTT_5;
- Return 0;
- }
- }
- 
- FlowItem SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCSRAM_MTT SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCSRAM_MTT
- {
- Result -2
- {
- Property PassFail = "Fail";
- SetBin b99623218_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCSRAM_MTT_n2;
- Return -2;
- }
- Result -1
- {
- Property PassFail = "Fail";
- SetBin b98623218_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCSRAM_MTT_n1;
- Return -1;
- }
- Result 0
- {
- Property PassFail = "Fail";
- SetBin b62453003_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCSRAM_MTT_0;
- IncrementCounters ARR_CCF_CXX::n62453003_fail_SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCSRAM_MTT_0;
- Return 0;
- }
- Result 1
- {
- Property PassFail = "Pass";
- Return 1;
- }
- Result 2
- {
- Property PassFail = "Fail";
- SetBin b62453004_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCSRAM_MTT_2;
- IncrementCounters ARR_CCF_CXX::n62453004_fail_SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCSRAM_MTT_2;
- Return 0;
- }
- Result 3
- {
- Property PassFail = "Fail";
- SetBin b62453005_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCSRAM_MTT_3;
- IncrementCounters ARR_CCF_CXX::n62453005_fail_SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCSRAM_MTT_3;
- Return 0;
- }
- Result 4
- {
- Property PassFail = "Fail";
- SetBin b97623011_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCSRAM_MTT_4;
- IncrementCounters ARR_CCF_CXX::n97623011_fail_SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCSRAM_MTT_4;
- Return 0;
- }
- Result 5
- {
- Property PassFail = "Fail";
- SetBin b62193023_fail_ARR_CCF_CXX_SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCSRAM_MTT_5;
- IncrementCounters ARR_CCF_CXX::n62193023_fail_SSA_CCF_SB_K_VMAXXCCFLO_X_X_X_3600_LLCSRAM_MTT_5;
- Return 0;
- }
- }
-}
 
 
 Flow NOM_REPAIR
