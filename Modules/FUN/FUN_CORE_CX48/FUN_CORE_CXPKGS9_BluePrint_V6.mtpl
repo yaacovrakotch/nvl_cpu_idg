@@ -1,0 +1,1200 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan FUN_CORE_\BOM\;
+
+Import "FUN_CORE_\BOM\.usrv";
+Import "FUN_CORE_\BOM\_TIMING.tcg";
+
+
+CSharpTest RunCallback SBFT_CORE_UF_K_INIT_X_X_X_X_VMIN_PINMAP_NONMISR
+{
+    BypassPort = -1;
+    Callback = "LoadPinmapFile";
+    Parameters = "--decoder FailDataDecoder --file ./Modules/FUN/FUN_CORE_\BOM\/InputFiles/DieRecoveryPinMaps_FREQ_FUN_CORE.json";
+}
+
+CSharpTest RunCallback SBFT_CORE_UF_K_INIT_X_X_X_X_VMIN_PINMAP_MISR
+{
+    BypassPort = -1;
+    Callback = "LoadPinmapFile";
+    Parameters = "--decoder RegisterCompareDecoder --file ./Modules/FUN/FUN_CORE_\BOM\/InputFiles/DieRecoveryPinMaps_FREQ_MISR_FUN_CORE.json";
+}
+
+CSharpTest RunCallback SBFT_CORE_UF_K_INIT_X_X_X_X_VMIN_PINMAP_NONMISR_APEX
+{
+    BypassPort = -1;
+    Callback = "LoadPinmapFile";
+    Parameters = "--decoder FailDataDecoder --file ./Modules/FUN/FUN_CORE_\BOM\/InputFiles/DieRecoveryPinMaps_FREQ_FUN_CORE_APEX.json";
+}
+
+CSharpTest PrimePatConfigTestMethod SBFT_CORE_PATMOD_K_INIT_X_X_X_X_FUSE_MLC
+{
+    BypassPort = -1;
+    ConfigurationFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/FUN/FUN_CORE_\BOM\/InputFiles/FUN_CORE_Generic.PatConfigSetpoints.json";
+    Plist = "IPC::fun_cdie_f1xcr_mlc_hptp800_list_master";
+    SetPoint = "FUSE_OVERRIDES_ALL";
+}
+
+CSharpTest PrimePatConfigTestMethod SBFT_CORE_PATMOD_K_INIT_X_X_X_X_FUSE_MLC_LS
+{
+    BypassPort = -1;
+    ConfigurationFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/FUN/FUN_CORE_\BOM\/InputFiles/FUN_CORE_Generic.PatConfigSetpoints.json";
+    Plist = "IPC::fun_cdie_f1xcr_mlc_ls_hptp800_list_master";
+    SetPoint = "FUSE_OVERRIDES_ALL";
+}
+
+CSharpTest PrimePatConfigTestMethod SBFT_CORE_PATMOD_K_INIT_X_X_X_X_FUSE_MLC_DRG
+{
+    BypassPort = -1;
+    ConfigurationFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/FUN/FUN_CORE_\BOM\/InputFiles/FUN_CORE_Generic.PatConfigSetpoints.json";
+    Plist = "IPC::fun_cdie_f1xcr_mlc_drg_hptp800_list_master";
+    SetPoint = "FUSE_OVERRIDES_ALL";
+}
+
+CSharpTest PrimePatConfigTestMethod SBFT_CORE_PATMOD_K_INIT_X_X_X_X_FUSE_SLC
+{
+    BypassPort = -1;
+    ConfigurationFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/FUN/FUN_CORE_\BOM\/InputFiles/FUN_CORE_Generic.PatConfigSetpoints.json";
+    Plist = "IPC::fun_cdie_f1xcr_slc_hptp800_list_master";
+    SetPoint = "FUSE_OVERRIDES_ALL";
+}
+
+CSharpTest PrimePatConfigTestMethod SBFT_CORE_PATMOD_K_INIT_X_X_X_X_FUSE_SLC_DRG
+{
+    BypassPort = -1;
+    ConfigurationFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/FUN/FUN_CORE_\BOM\/InputFiles/FUN_CORE_Generic.PatConfigSetpoints.json";
+    Plist = "IPC::fun_cdie_f1xcr_slc_drg_hptp800_list_master";
+    SetPoint = "FUSE_OVERRIDES_ALL";
+}
+
+CSharpTest PrimePatConfigTestMethod SBFT_CORE_PATMOD_K_INIT_X_X_X_X_DEBUG_COUNTER_MLC_DRG
+{
+    BypassPort = -1;
+    ConfigurationFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/FUN/FUN_CORE_\BOM\/InputFiles/Debug_Counter.PatConfigSetPoints.json";
+    Plist = "IPC::fun_cdie_f1xcr_mlc_drg_hptp800_list_master";
+    SetPoint = "DBGCNTR_MLC_DRG";
+}
+
+CSharpTest PrimePatConfigTestMethod SBFT_CORE_PATMOD_K_INIT_X_X_X_X_DEBUG_COUNTER_SLC
+{
+    BypassPort = -1;
+    ConfigurationFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/FUN/FUN_CORE_\BOM\/InputFiles/Debug_Counter.PatConfigSetPoints.json";
+    Plist = "IPC::fun_cdie_f1xcr_slc_hptp800_list_master";
+    SetPoint = "DBGCNTR_SLC_DRG";
+}
+
+CSharpTest PrimePatConfigTestMethod SBFT_CORE_PATMOD_K_INIT_X_X_X_X_DEBUG_COUNTER_SLC_DRG
+{
+    BypassPort = -1;
+    ConfigurationFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/FUN/FUN_CORE_\BOM\/InputFiles/Debug_Counter.PatConfigSetPoints.json";
+    Plist = "IPC::fun_cdie_f1xcr_slc_drg_hptp800_list_master";
+    SetPoint = "DBGCNTR_SLC_DRG";
+}
+
+CSharpTest PrimePatConfigTestMethod SBFT_CORE_PATMOD_K_INIT_X_X_X_X_WAIT_TIME_MLC
+{
+    BypassPort = -1;
+    ConfigurationFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/FUN/FUN_CORE_\BOM\/InputFiles/Wait_Time.PatConfigSetPoint.json";
+    Plist = "IPC::fun_cdie_f1xcr_mlc_hptp800_list_master";
+    SetPoint = "MLC_Wait_Times_MM";
+}
+
+CSharpTest PrimePatConfigTestMethod SBFT_CORE_PATMOD_K_INIT_X_X_X_X_WAIT_TIME_MLC_LS
+{
+    BypassPort = -1;
+    ConfigurationFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/FUN/FUN_CORE_\BOM\/InputFiles/Wait_Time.PatConfigSetPoint.json";
+    Plist = "IPC::fun_cdie_f1xcr_mlc_ls_hptp800_list_master";
+    SetPoint = "MLC_LS_Wait_Times_MM";
+}
+
+CSharpTest PrimePatConfigTestMethod SBFT_CORE_PATMOD_K_INIT_X_X_X_X_WAIT_TIME_MLC_DRG
+{
+    BypassPort = -1;
+    ConfigurationFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/FUN/FUN_CORE_\BOM\/InputFiles/Wait_Time.PatConfigSetPoint.json";
+    Plist = "IPC::fun_cdie_f1xcr_mlc_drg_hptp800_list_master";
+    SetPoint = "MLC_DRG_Wait_Times_MM";
+}
+
+CSharpTest PrimePatConfigTestMethod SBFT_CORE_PATMOD_K_INIT_X_X_X_X_WAIT_TIME_SLC
+{
+    BypassPort = -1;
+    ConfigurationFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/FUN/FUN_CORE_\BOM\/InputFiles/Wait_Time.PatConfigSetPoint.json";
+    Plist = "IPC::fun_cdie_f1xcr_slc_hptp800_list_master";
+    SetPoint = "SLC_Wait_Times_MM";
+}
+
+CSharpTest PrimePatConfigTestMethod SBFT_CORE_PATMOD_K_INIT_X_X_X_X_WAIT_TIME_SLC_DRG
+{
+    BypassPort = -1;
+    ConfigurationFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/FUN/FUN_CORE_\BOM\/InputFiles/Wait_Time.PatConfigSetPoint.json";
+    Plist = "IPC::fun_cdie_f1xcr_slc_drg_hptp800_list_master";
+    SetPoint = "SLC_DRG_Wait_Times_MM";
+}
+
+CSharpTest PrimePatConfigTestMethod SBFT_CORE_PATMOD_K_INIT_X_X_X_X_RAGN_MLC
+{
+    BypassPort = 1;
+    ConfigurationFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/FUN/FUN_CORE_\BOM\/InputFiles/RAGN.PatConfigSetpoints.json";
+    Plist = "IPC::fun_cdie_f1xcr_mlc_hptp800_list_master";
+    SetPoint = "RAGN_PATMOD";
+}
+
+CSharpTest PrimePatConfigTestMethod SBFT_CORE_PATMOD_K_INIT_X_X_X_X_RAGN_MLC_LS
+{
+    BypassPort = 1;
+    ConfigurationFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/FUN/FUN_CORE_\BOM\/InputFiles/RAGN.PatConfigSetpoints.json";
+    Plist = "IPC::fun_cdie_f1xcr_mlc_ls_hptp800_list_master";
+    SetPoint = "RAGN_PATMOD";
+}
+
+CSharpTest PrimePatConfigTestMethod SBFT_CORE_PATMOD_K_INIT_X_X_X_X_RAGN_MLC_DRG
+{
+    BypassPort = 1;
+    ConfigurationFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/FUN/FUN_CORE_\BOM\/InputFiles/RAGN.PatConfigSetpoints.json";
+    Plist = "IPC::fun_cdie_f1xcr_mlc_drg_hptp800_list_master";
+    SetPoint = "RAGN_PATMOD";
+}
+
+CSharpTest PrimePatConfigTestMethod SBFT_CORE_PATMOD_K_INIT_X_X_X_X_RAGN_SLC
+{
+    BypassPort = 1;
+    ConfigurationFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/FUN/FUN_CORE_\BOM\/InputFiles/RAGN.PatConfigSetpoints.json";
+    Plist = "IPC::fun_cdie_f1xcr_slc_hptp800_list_master";
+    SetPoint = "RAGN_PATMOD";
+}
+
+CSharpTest PrimePatConfigTestMethod SBFT_CORE_PATMOD_K_INIT_X_X_X_X_RAGN_SLC_DRG
+{
+    BypassPort = 1;
+    ConfigurationFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/FUN/FUN_CORE_\BOM\/InputFiles/RAGN.PatConfigSetpoints.json";
+    Plist = "IPC::fun_cdie_f1xcr_slc_drg_hptp800_list_master";
+    SetPoint = "RAGN_PATMOD";
+}
+
+CSharpTest PrimePatConfigTestMethod SBFT_CORE_PATMOD_K_INIT_X_X_X_X_DRG_VVAR_MLC_DRG
+{
+    BypassPort = -1;
+    ConfigurationFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/FUN/FUN_CORE_\BOM\/InputFiles/DRG_VVAR.PatConfigSetPoints.json";
+    Plist = "IPC::fun_cdie_f1xcr_mlc_drg_hptp800_list_master";
+    SetPoint = "VVAR_MLC_DRG";
+}
+
+CSharpTest PrimePatConfigTestMethod SBFT_CORE_PATMOD_K_INIT_X_X_X_X_X_SLC_CORE1MASK
+{
+    BypassPort = 1;
+    ConfigurationFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/FUN/FUN_CORE_\BOM\/InputFiles/FUN_CORE_SLC_mask.PatConfigSetPoints.json";
+    Plist = "IPC::fun_cdie_f1xcr_slc_hptp800_list_master";
+    SetPoint = "SLC_CORE1_MASK";
+}
+
+CSharpTest RunCallback SBFT_CORE_RUNCALLBACK_K_INIT_X_X_X_X_APEXTC
+{
+    BypassPort = -1;
+    Callback = "ReadFrequencyPatConfigFile";
+    Parameters = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/FUN/FUN_CORE_\BOM\/InputFiles/ApexTC_Input_Config.json";
+}
+
+CSharpTest DedcLoadConfigTC SBFT_CORE_DEDC_K_INIT_X_X_X_X_CONFIG
+{
+    BypassPort = -1;
+    ConfigFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/FUN/FUN_CORE_\BOM\/InputFiles/FUN_CORE_DEDC.json";
+    CoreAware = "ENABLE";
+    Modules = "FUN_CORE_\BOM\";
+    Scope = "LOCAL";
+    ValidationMode = "SYNTAX_AND_RULES";
+}
+
+MultiTrialTest SBFT_CORE_VMAX_K_VMAXXCR_X_CR_\VMAX_SINGLE\_X_\CONTENT\
+{
+    TrialVariable CPU_TRIALS::FlowDomain.CORE;
+    TrialVariableExitAction "Restore";
+    CSharpTrialTest VminTC "SBFT_CORE_VMAX_K_VMAXXCR_X_CR_\VMAX_SINGLE\_" + __shared__::CustomFlowMatrixSpecs.CR_\VMAX_SINGLE\_FREQ_MHz + "_\CONTENT\"
+    {
+        Patlist = "IPC::fun_cdie_VMAXXCR_\VMAX_SINGLE\_\CONTENT\_hptp800_list_master";
+        LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_max";
+        TimingsTc = FUN_CORE_\BOM\_Specs.Timing;
+        BaseNumbers = "11151";
+        BypassPort = -1;
+        DtsConfiguration = FUN_CORE_\BOM\_Specs.dtsconfig;
+        EndVoltageLimits = __shared__::FlowMatrixSingular.CR_VMAX_VALUE;
+        ExecutionMode = "SearchWithScoreboard";
+        FailCaptureCount = FUN_CORE_\BOM\_Specs.FailCaptureCount;
+        FeatureSwitchSettings = FUN_CORE_\BOM\_Specs.FeatureSwitchSettings;
+        FivrCondition = "NOM_CCF_CORE";
+        FivrConditionPlistParamName = "Patlist";
+        TrialParam FlowIndex = __shared__::FlowMatrix.FlowIndex;
+        ForwardingMode = "Input";
+        MaxFailsNum = toInteger(__shared__::Specs.VMX_MAX_FAILS);
+	    MultiPassMasks = "";
+        PatternNameCounterIndexes = FUN_CORE_\BOM\_Specs.PatNameIndex;
+        PinMap = FUN_CORE_\BOM\_Specs.PinMap_FREQ_NONMISR;
+        PreInstance = "EvaluateExpression(--result G.U.S.FUNCORE_DYN_FREQ_BINARY --storagetype gsds --datatype string --expression Reverse(Dec2Bin(ToInt32(Ceiling(ToDouble("+__shared__::FlowMatrixSingular.CR_F1_FREQ+")*60)),9)))";
+        RecoveryMode = "NoRecovery";
+        RecoveryOptions = "";
+        RecoveryTrackingIncoming = __shared__::RecoveryTracker.INCOMING_CR;
+        RecoveryTrackingOutgoing = "";
+        ScoreboardEdgeTicks = toInteger(__shared__::Specs.VMX_EDGE_TICK);
+        SetPointsPlistParamName = "Patlist";
+        SetPointsPostInstance = PSPOST.CR_F1+",CORE:nblctrl_core_l2:nblon,CORE:nblctrl1_core_l2:nblon";
+        SetPointsPreInstance = PSPRE.CR_F1+","+"MCdrv:"+FUN_CORE_\BOM\_Specs.corefreq+":"+ __shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:"+FUN_CORE_\BOM\_Specs.ringfreq+":"+ __shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz,CORE:nblctrl_core_l2:nbloff,CORE:nblctrl1_core_l2:nbloff";
+        StartVoltages = __shared__::FlowMatrixSingular.CR_VMAX_VALUE;
+        StepSize = toDouble(__shared__::FlowMatrixSingular.CR_SEARCH_RESOLUTION);
+        TestMode = "Scoreboard";
+        VoltageConverter = FUN_CORE_\BOM\_Specs.VoltageConverterVMAX + FUN_CORE_\BOM\_Specs.VoltageConverterVMAX\CONTENT\ +" --dlvrpins VCCIA --expressions " + DROPOUT.CR_F1;
+        VoltageTargets = FUN_CORE_\BOM\_Specs.VoltageTarget2C;
+        TrialResult -2
+        {
+            PassFail Fail;
+            TrialAction Exit;
+            Return -2;
+        }
+        TrialResult -1
+        {
+            PassFail Fail;
+            TrialAction Exit;
+            Return -1;
+        }
+        TrialResult 0
+        {
+            PassFail Fail;
+            TrialAction Exit;
+            Return 0;
+        }
+        TrialResult 1
+        {
+            PassFail Pass;
+            TrialAction Exit;
+            Return 1;
+        }
+        TrialResult 2
+        {
+            PassFail Fail;
+            TrialAction Exit;
+            Return 0;
+        }
+        TrialResult 3
+        {
+            PassFail Fail;
+            TrialAction Exit;
+            Return 0;
+        }
+        TrialResult 4
+        {
+            PassFail Fail;
+            TrialAction Exit;
+            Return 0;
+        }
+        TrialResult 5
+        {
+            PassFail Fail;
+            TrialAction Exit;
+            Return 0;
+        }
+    }
+}
+
+MultiTrialTest SBFT_CORE_VMAX_K_VMAXXCR_X_CR_C\CORNER\_X_\CONTENT\
+{
+    TrialVariable CPU_TRIALS::FlowDomain.CORE_TOP;
+    TrialVariableExitAction "Restore";
+	TrialTest VminTC "SBFT_CORE_VMAX_K_VMAXXCR_X_CR_" + __shared__::Corners.CR_C5+ "_" +__shared__::FreqInMHZ.CR_C5 + "_\CONTENT\"
+    {
+        Patlist = "IPC::fun_cdie_VMAXXCR_C5_\CONTENT\_hptp800_list_master";
+        LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_max";
+        TimingsTc = FUN_CORE_\BOM\_Specs.Timing;
+        BaseNumbers = "11146";
+        BypassPort = -1;
+        DtsConfiguration = FUN_CORE_\BOM\_Specs.dtsconfig;
+        EndVoltageLimits = __shared__::FlowMatrixSingular.CR_VMAX_VALUE;
+        ExecutionMode = "SearchWithScoreboard";
+        FailCaptureCount = FUN_CORE_\BOM\_Specs.FailCaptureCount;
+        FeatureSwitchSettings = FUN_CORE_\BOM\_Specs.FeatureSwitchSettings;
+        FivrCondition = "NOM_CCF_CORE";
+        FivrConditionPlistParamName = "Patlist";
+        FlowIndex = __shared__::FlowMatrixSingular.FlowIndex;
+        ForwardingMode = "Input";
+        MaxFailsNum = toInteger(__shared__::Specs.VMX_MAX_FAILS);
+        MultiPassMasks = FUN_CORE_\BOM\_Specs.MultiPass_2CDIE_4Pass;
+        PatternNameCounterIndexes = FUN_CORE_\BOM\_Specs.PatNameIndex;
+        PinMap = FUN_CORE_\BOM\_Specs.PinMap_FREQ_NONMISR;
+        TrialParam PreInstance = "EvaluateExpression(--result G.U.S.FUNCORE_DYN_FREQ_BINARY --storagetype gsds --datatype string --expression Reverse(Dec2Bin(ToInt32(Ceiling(ToDouble("+__shared__::FreqValues.CR_C5+")*60)),9)))";
+        RecoveryMode = "NoRecovery";
+        RecoveryOptions = "";
+        RecoveryTrackingIncoming = __shared__::RecoveryTracker.INCOMING_CR;
+        RecoveryTrackingOutgoing = "";
+        ScoreboardEdgeTicks = toInteger(__shared__::Specs.VMX_EDGE_TICK);
+        SetPointsPlistParamName = "Patlist";
+        SetPointsPostInstance = PSPOST.CR_F5+",CORE:nblctrl_core_l2:nblon,CORE:nblctrl1_core_l2:nblon";
+        TrialParam SetPointsPreInstance = PSPRE.CR_F5+","+"MCdrv:"+FUN_CORE_\BOM\_Specs.corefreq+":"+ __shared__::FreqValues.CR_C5+"GHz,MCdrv:"+FUN_CORE_\BOM\_Specs.ringfreq+":"+ __shared__::FreqValues.CCF_C5+"GHz,CORE:nblctrl_core_l2:nbloff,CORE:nblctrl1_core_l2:nbloff";
+        StartVoltages = __shared__::FlowMatrixSingular.CR_VMAX_VALUE;
+        StepSize = toDouble(__shared__::FlowMatrixSingular.CR_SEARCH_RESOLUTION);
+        TestMode = "Scoreboard";
+		VoltageConverter = FUN_CORE_\BOM\_Specs.VoltageConverterVMAX + FUN_CORE_\BOM\_Specs.VoltageConverterVMAX_\CONTENT\ +" --dlvrpins VCCIA --expressions " + DROPOUT.CR_F5;
+        VoltageTargets = FUN_CORE_\BOM\_Specs.VoltageTarget2C;
+        TrialResult -2
+        {
+            PassFail Fail;
+            TrialAction Exit;
+            Return -2;
+        }
+        TrialResult -1
+        {
+            PassFail Fail;
+            TrialAction Exit;
+            Return -1;
+        }
+        TrialResult 0
+        {
+            PassFail Fail;
+            TrialAction Exit;
+            Return 0;
+        }
+        TrialResult 1
+        {
+            PassFail Pass;
+            TrialAction Exit;
+            Return 1;
+        }
+        TrialResult 2
+        {
+            PassFail Fail;
+            TrialAction Exit;
+            Return 0;
+        }
+        TrialResult 3
+        {
+            PassFail Fail;
+            TrialAction Exit;
+            Return 0;
+        }
+        TrialResult 4
+        {
+            PassFail Fail;
+            TrialAction Exit;
+            Return 0;
+        }
+        TrialResult 5
+        {
+            PassFail Fail;
+            TrialAction Exit;
+            Return 0;
+        }
+    }
+}
+
+
+MultiTrialTest SBFT_CORE_\PURPOSE\_K_\MULTIFLOW\_X_CR_C\CORNER\_X_\CONTENT\
+{
+    TrialVariable CPU_TRIALS::FlowDomain.CORE_TOP;
+    TrialVariableExitAction "Continue";
+    CSharpTrialTest VminTC "SBFT_CORE_\PURPOSE\_K_\MULTIFLOW\_X_CR_" + __shared__::Corners.CR_C5+ "_" +__shared__::FreqInMHZ.CR_C5 + "_\CONTENT\"
+    {
+        Patlist = "IPC::fun_cdie_f\CORNER\xcr_\CONTENT\_hptp800_list_master";
+        LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_min";
+        TimingsTc = FUN_CORE_\BOM\_Specs.Timing;
+        BaseNumbers = "11101";
+        BypassPort = -1;
+        TrialParam CornerIdentifiers = __shared__::CornerIdentifiers.CR_C\CORNER\;
+        DtsConfiguration = FUN_CORE_\BOM\_Specs.dtsconfig;
+        EndVoltageLimits = __shared__::FlowMatrixSingular.CR_HIGH_SEARCH_VALUE;
+        ExecutionMode = "SearchWithScoreboard";
+        FailCaptureCount = FUN_CORE_\BOM\_Specs.FailCaptureCount;
+        FeatureSwitchSettings = FUN_CORE_\BOM\_Specs.FeatureSwitchSettings;
+        FivrCondition = "NOM_CCF_CORE";
+        FivrConditionPlistParamName = "Patlist";
+        FlowIndex = __shared__::FlowMatrixSingular.FlowIndex;
+        ForwardingMode = "InputOutput";
+        LimitGuardband = toString(__shared__::GBVars.LimitGuardband);
+        MaxFailsNum = toInteger(__shared__::Specs.CHK_MAX_FAILS);
+        MultiPassMasks = FUN_CORE_\BOM\_Specs.MultiPass_2CDIE;
+        PatternNameCounterIndexes = FUN_CORE_\BOM\_Specs.PatNameIndex;
+        PinMap = FUN_CORE_\BOM\_Specs.PinMap_FREQ_NONMISR;
+        TrialParam PreInstance = "EvaluateExpression(--result G.U.S.FUNCORE_DYN_FREQ_BINARY --storagetype gsds --datatype string --expression Reverse(Dec2Bin(ToInt32(Ceiling(ToDouble("+__shared__::FreqValues.CR_C5+")*60)),9)))";
+        RecoveryMode = FUN_CORE_\BOM\_Specs.CORE_RecoveryMode_MTT;
+        TrialParam RecoveryOptions = __shared__::Recovery.MTT_recovery_opt_CR;
+        RecoveryTrackingIncoming = __shared__::RecoveryTracker.INCOMING_CR;
+        RecoveryTrackingOutgoing = __shared__::RecoveryTracker.OUTGOING_CR;
+        ScoreboardEdgeTicks = toInteger(__shared__::Specs.CHK_EDGE_TICK);
+        SetPointsPlistParamName = "Patlist";
+        SetPointsPostInstance = PSPOST.CR_F\CORNER\;
+        TrialParam SetPointsPreInstance = PSPRE.CR_F\CORNER\+","+"MCdrv:"+FUN_CORE_\BOM\_Specs.corefreq+":"+ __shared__::FreqValues.CR_C\CORNER\+"GHz,MCdrv:"+FUN_CORE_\BOM\_Specs.ringfreq+":"+ __shared__::FreqValues.CCF_C\CORNER\+"GHz";
+        StartVoltages = __shared__::FlowMatrixSingular.CR_LOW_SEARCH_VALUE;
+        TrialParam StartVoltagesForRetry = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesForRetryF5 , ["","",""]);
+        TrialParam StartVoltagesOffset = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesOffsetF5 , ["","",""]);
+        StepSize = toDouble(__shared__::FlowMatrixSingular.CR_SEARCH_RESOLUTION);
+        TestMode = "MultiVmin";
+        VoltageConverter = FUN_CORE_\BOM\_Specs.VoltageConverter_NBLRail + DROPOUT.CR_F\CORNER\;
+        VoltageTargets = FUN_CORE_\BOM\_Specs.VoltageTarget2C;
+        TrialResult -2
+        {
+            PassFail Fail;
+            TrialAction Exit;
+            Return -2;
+        }
+        TrialResult -1
+        {
+            PassFail Fail;
+            TrialAction Exit;
+            Return -1;
+        }
+        TrialResult 0
+        {
+            PassFail Fail;
+            TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
+            Return 0;
+        }
+        TrialResult 1
+        {
+            PassFail Pass;
+            TrialAction Exit;
+            Return 1;
+        }
+        TrialResult 2
+        {
+            PassFail Fail;
+            TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
+            Return 0;
+        }
+        TrialResult 3
+        {
+            PassFail Fail;
+            TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
+            Return 0;
+        }
+        TrialResult 4
+        {
+            PassFail Fail;
+            TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
+            Return 0;
+        }
+        TrialResult 5
+        {
+            PassFail Fail;
+            TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
+            Return 0;
+        }
+    }
+}
+
+MultiTrialTest SBFT_CORE_\PURPOSE\_K_\SINGLEFLOW\_X_CR_F\CORNER\_X_\CONTENT\
+{
+    TrialVariable CPU_TRIALS::FlowDomain.CORE;
+    TrialVariableExitAction "Continue";
+    CSharpTrialTest VminTC "SBFT_CORE_\PURPOSE\_K_\SINGLEFLOW\_X_CR_F\CORNER\_" + __shared__::CustomFlowMatrixSpecs.CR_F\CORNER\_FREQ_MHz + "_\CONTENT\"
+    {
+        Patlist = "IPC::fun_cdie_\SINGLEFLOW\_\CONTENT\_hptp800_list_master";
+        LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_min";
+        TimingsTc = FUN_CORE_\BOM\_Specs.Timing;
+        BaseNumbers = "11111";
+        BypassPort = -1;
+        CornerIdentifiers = __shared__::CornerIdentifiers.CR_C\CORNER\;
+        DtsConfiguration = FUN_CORE_\BOM\_Specs.dtsconfig;
+        EndVoltageLimits = __shared__::FlowMatrixSingular.CR_LFM_VMIN_RAIN_KILL;
+        ExecutionMode = "SearchWithScoreboard";
+        FailCaptureCount = FUN_CORE_\BOM\_Specs.FailCaptureCount;
+        FeatureSwitchSettings = FUN_CORE_\BOM\_Specs.FeatureSwitchSettings;
+        FivrCondition = "NOM_CCF_CORE";
+        FivrConditionPlistParamName = "Patlist";
+        TrialParam FlowIndex = __shared__::FlowMatrix.FlowIndex;
+        ForwardingMode = "InputOutput";
+        LimitGuardband = toString(__shared__::GBVars.LimitGuardband);
+        MaxFailsNum = toInteger(__shared__::Specs.CHK_MAX_FAILS);
+        MultiPassMasks = "";
+        PatternNameCounterIndexes = FUN_CORE_\BOM\_Specs.PatNameIndex;
+        PinMap = FUN_CORE_\BOM\_Specs.PinMap_FREQ_NONMISR;
+        PreInstance = "EvaluateExpression(--result G.U.S.FUNCORE_DYN_FREQ_BINARY --storagetype gsds --datatype string --expression Reverse(Dec2Bin(ToInt32(Ceiling(ToDouble("+__shared__::FlowMatrixSingular.CR_F1_FREQ+")*60)),9)))";
+        RecoveryMode = FUN_CORE_\BOM\_Specs.CORE_RecoveryMode_MTT;
+        RecoveryOptions = __shared__::Recovery_Single.F1F4_recovery_opt_CR;
+        RecoveryTrackingIncoming = __shared__::RecoveryTracker.INCOMING_CR;
+        RecoveryTrackingOutgoing = __shared__::RecoveryTracker.OUTGOING_CR;
+        ScoreboardEdgeTicks = toInteger(__shared__::Specs.CHK_EDGE_TICK);
+        SetPointsPlistParamName = "Patlist";
+        SetPointsPostInstance = PSPOST.CR_F\CORNER\;
+        SetPointsPreInstance = PSPRE.CR_F\CORNER\+","+"MCdrv:"+FUN_CORE_\BOM\_Specs.corefreq+":"+ __shared__::FlowMatrixSingular.CR_F\CORNER\_FREQ+"GHz,MCdrv:"+FUN_CORE_\BOM\_Specs.ringfreq+":"+ __shared__::FlowMatrixSingular.CCF_F\CORNER\_FREQ+"GHz";
+        StartVoltages = __shared__::FlowMatrixSingular.CR_LOW_SEARCH_VALUE;
+        StartVoltagesForRetry = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesForRetryF1 , "");
+        StartVoltagesOffset = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesOffsetF1 , "");
+        StepSize = toDouble(__shared__::FlowMatrixSingular.CR_SEARCH_RESOLUTION);
+        TestMode = "MultiVmin";
+        VoltageConverter = FUN_CORE_\BOM\_Specs.VoltageConverter_NBLRail + DROPOUT.CR_F\CORNER\;
+        VoltageTargets = FUN_CORE_\BOM\_Specs.VoltageTarget2C;
+        TrialResult -2
+        {
+            PassFail Fail;
+            TrialAction Exit;
+            Return -2;
+        }
+        TrialResult -1
+        {
+            PassFail Fail;
+            TrialAction Exit;
+            Return -1;
+        }
+        TrialResult 0
+        {
+            PassFail Fail;
+            TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
+            Return 0;
+        }
+        TrialResult 1
+        {
+            PassFail Pass;
+            TrialAction Exit;
+            Return 1;
+        }
+        TrialResult 2
+        {
+            PassFail Fail;
+            TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
+            Return 0;
+        }
+        TrialResult 3
+        {
+            PassFail Fail;
+            TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
+            Return 0;
+        }
+        TrialResult 4
+        {
+            PassFail Fail;
+            TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
+            Return 0;
+        }
+        TrialResult 5
+        {
+            PassFail Fail;
+            TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
+            Return 0;
+        }
+    }
+}
+
+Flow FUN_CORE_\BOM\_INIT_PINMAP
+{
+    FlowItem SBFT_CORE_UF_K_INIT_X_X_X_X_VMIN_PINMAP_NONMISR SBFT_CORE_UF_K_INIT_X_X_X_X_VMIN_PINMAP_NONMISR
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CORE_UF_K_INIT_X_X_X_X_VMIN_PINMAP_MISR;
+        }
+    }
+    
+    FlowItem SBFT_CORE_UF_K_INIT_X_X_X_X_VMIN_PINMAP_MISR SBFT_CORE_UF_K_INIT_X_X_X_X_VMIN_PINMAP_MISR
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CORE_UF_K_INIT_X_X_X_X_VMIN_PINMAP_NONMISR_APEX;
+        }
+    }
+    
+    FlowItem SBFT_CORE_UF_K_INIT_X_X_X_X_VMIN_PINMAP_NONMISR_APEX SBFT_CORE_UF_K_INIT_X_X_X_X_VMIN_PINMAP_NONMISR_APEX
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow FUN_CORE_\BOM\_INIT_FUSE_PATMOD
+{
+    FlowItem SBFT_CORE_PATMOD_K_INIT_X_X_X_X_FUSE_MLC SBFT_CORE_PATMOD_K_INIT_X_X_X_X_FUSE_MLC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CORE_PATMOD_K_INIT_X_X_X_X_FUSE_MLC_LS;
+        }
+    }
+    
+    FlowItem SBFT_CORE_PATMOD_K_INIT_X_X_X_X_FUSE_MLC_LS SBFT_CORE_PATMOD_K_INIT_X_X_X_X_FUSE_MLC_LS
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CORE_PATMOD_K_INIT_X_X_X_X_FUSE_MLC_DRG;
+        }
+    }
+    
+    FlowItem SBFT_CORE_PATMOD_K_INIT_X_X_X_X_FUSE_MLC_DRG SBFT_CORE_PATMOD_K_INIT_X_X_X_X_FUSE_MLC_DRG
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CORE_PATMOD_K_INIT_X_X_X_X_FUSE_SLC;
+        }
+    }
+    
+    FlowItem SBFT_CORE_PATMOD_K_INIT_X_X_X_X_FUSE_SLC SBFT_CORE_PATMOD_K_INIT_X_X_X_X_FUSE_SLC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CORE_PATMOD_K_INIT_X_X_X_X_FUSE_SLC_DRG;
+        }
+    }
+    
+    FlowItem SBFT_CORE_PATMOD_K_INIT_X_X_X_X_FUSE_SLC_DRG SBFT_CORE_PATMOD_K_INIT_X_X_X_X_FUSE_SLC_DRG
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow FUN_CORE_\BOM\_INIT_DEBUG_COUNTER
+{
+    FlowItem SBFT_CORE_PATMOD_K_INIT_X_X_X_X_DEBUG_COUNTER_MLC_DRG SBFT_CORE_PATMOD_K_INIT_X_X_X_X_DEBUG_COUNTER_MLC_DRG
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CORE_PATMOD_K_INIT_X_X_X_X_DEBUG_COUNTER_SLC;
+        }
+    }
+    
+    FlowItem SBFT_CORE_PATMOD_K_INIT_X_X_X_X_DEBUG_COUNTER_SLC SBFT_CORE_PATMOD_K_INIT_X_X_X_X_DEBUG_COUNTER_SLC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CORE_PATMOD_K_INIT_X_X_X_X_DEBUG_COUNTER_SLC_DRG;
+        }
+    }
+    
+    FlowItem SBFT_CORE_PATMOD_K_INIT_X_X_X_X_DEBUG_COUNTER_SLC_DRG SBFT_CORE_PATMOD_K_INIT_X_X_X_X_DEBUG_COUNTER_SLC_DRG
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow FUN_CORE_\BOM\_INIT_WAIT_TIME
+{
+    FlowItem SBFT_CORE_PATMOD_K_INIT_X_X_X_X_WAIT_TIME_MLC SBFT_CORE_PATMOD_K_INIT_X_X_X_X_WAIT_TIME_MLC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CORE_PATMOD_K_INIT_X_X_X_X_WAIT_TIME_MLC_LS;
+        }
+    }
+    
+    FlowItem SBFT_CORE_PATMOD_K_INIT_X_X_X_X_WAIT_TIME_MLC_LS SBFT_CORE_PATMOD_K_INIT_X_X_X_X_WAIT_TIME_MLC_LS
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CORE_PATMOD_K_INIT_X_X_X_X_WAIT_TIME_MLC_DRG;
+        }
+    }
+    
+    FlowItem SBFT_CORE_PATMOD_K_INIT_X_X_X_X_WAIT_TIME_MLC_DRG SBFT_CORE_PATMOD_K_INIT_X_X_X_X_WAIT_TIME_MLC_DRG
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CORE_PATMOD_K_INIT_X_X_X_X_WAIT_TIME_SLC;
+        }
+    }
+    
+    FlowItem SBFT_CORE_PATMOD_K_INIT_X_X_X_X_WAIT_TIME_SLC SBFT_CORE_PATMOD_K_INIT_X_X_X_X_WAIT_TIME_SLC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CORE_PATMOD_K_INIT_X_X_X_X_WAIT_TIME_SLC_DRG;
+        }
+    }
+    
+    FlowItem SBFT_CORE_PATMOD_K_INIT_X_X_X_X_WAIT_TIME_SLC_DRG SBFT_CORE_PATMOD_K_INIT_X_X_X_X_WAIT_TIME_SLC_DRG
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow FUN_CORE_\BOM\_INIT_RAGN_PATMOD
+{
+    FlowItem SBFT_CORE_PATMOD_K_INIT_X_X_X_X_RAGN_MLC SBFT_CORE_PATMOD_K_INIT_X_X_X_X_RAGN_MLC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CORE_PATMOD_K_INIT_X_X_X_X_RAGN_MLC_LS;
+        }
+    }
+    
+    FlowItem SBFT_CORE_PATMOD_K_INIT_X_X_X_X_RAGN_MLC_LS SBFT_CORE_PATMOD_K_INIT_X_X_X_X_RAGN_MLC_LS
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CORE_PATMOD_K_INIT_X_X_X_X_RAGN_MLC_DRG;
+        }
+    }
+    
+    FlowItem SBFT_CORE_PATMOD_K_INIT_X_X_X_X_RAGN_MLC_DRG SBFT_CORE_PATMOD_K_INIT_X_X_X_X_RAGN_MLC_DRG
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CORE_PATMOD_K_INIT_X_X_X_X_RAGN_SLC;
+        }
+    }
+    
+    FlowItem SBFT_CORE_PATMOD_K_INIT_X_X_X_X_RAGN_SLC SBFT_CORE_PATMOD_K_INIT_X_X_X_X_RAGN_SLC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CORE_PATMOD_K_INIT_X_X_X_X_RAGN_SLC_DRG;
+        }
+    }
+    
+    FlowItem SBFT_CORE_PATMOD_K_INIT_X_X_X_X_RAGN_SLC_DRG SBFT_CORE_PATMOD_K_INIT_X_X_X_X_RAGN_SLC_DRG
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow FUN_CORE_\BOM\_INIT_DRG_VVAR
+{
+    FlowItem SBFT_CORE_PATMOD_K_INIT_X_X_X_X_DRG_VVAR_MLC_DRG SBFT_CORE_PATMOD_K_INIT_X_X_X_X_DRG_VVAR_MLC_DRG
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow FUN_CORE_\BOM\_INIT
+{
+    FlowItem FUN_CORE_\BOM\_INIT_PINMAP FUN_CORE_\BOM\_INIT_PINMAP
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUN_CORE_\BOM\_INIT_FUSE_PATMOD;
+        }
+    }
+    
+    FlowItem FUN_CORE_\BOM\_INIT_FUSE_PATMOD FUN_CORE_\BOM\_INIT_FUSE_PATMOD
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUN_CORE_\BOM\_INIT_DEBUG_COUNTER;
+        }
+    }
+    
+    FlowItem FUN_CORE_\BOM\_INIT_DEBUG_COUNTER FUN_CORE_\BOM\_INIT_DEBUG_COUNTER
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUN_CORE_\BOM\_INIT_WAIT_TIME;
+        }
+    }
+    
+    FlowItem FUN_CORE_\BOM\_INIT_WAIT_TIME FUN_CORE_\BOM\_INIT_WAIT_TIME
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUN_CORE_\BOM\_INIT_RAGN_PATMOD;
+        }
+    }
+    
+    FlowItem FUN_CORE_\BOM\_INIT_RAGN_PATMOD FUN_CORE_\BOM\_INIT_RAGN_PATMOD
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUN_CORE_\BOM\_INIT_DRG_VVAR;
+        }
+    }
+    
+    FlowItem FUN_CORE_\BOM\_INIT_DRG_VVAR FUN_CORE_\BOM\_INIT_DRG_VVAR
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CORE_PATMOD_K_INIT_X_X_X_X_X_SLC_CORE1MASK;
+        }
+    }
+    
+    FlowItem SBFT_CORE_PATMOD_K_INIT_X_X_X_X_X_SLC_CORE1MASK SBFT_CORE_PATMOD_K_INIT_X_X_X_X_X_SLC_CORE1MASK
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CORE_RUNCALLBACK_K_INIT_X_X_X_X_APEXTC;
+        }
+    }
+    
+    FlowItem SBFT_CORE_RUNCALLBACK_K_INIT_X_X_X_X_APEXTC SBFT_CORE_RUNCALLBACK_K_INIT_X_X_X_X_APEXTC
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CORE_DEDC_K_INIT_X_X_X_X_CONFIG;
+        }
+    }
+    
+    FlowItem SBFT_CORE_DEDC_K_INIT_X_X_X_X_CONFIG SBFT_CORE_DEDC_K_INIT_X_X_X_X_CONFIG
+    {
+        Result -2 { Property PassFail = "Fail"; Return -2; }
+        Result -1 { Property PassFail = "Fail"; Return -1; }
+        Result 0 { Property PassFail = "Fail"; Return 0; }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow FUN_CORE_\BOM\_\MULTIFLOW\
+{
+    
+    FlowItem SBFT_CORE_\PURPOSE\_K_\MULTIFLOW\_X_CR_C\CORNER\_X_\CONTENT\ SBFT_CORE_\PURPOSE\_K_\MULTIFLOW\_X_CR_C\CORNER\_X_\CONTENT\
+    {
+		Result -2 { Property PassFail = "Fail"; SetBin b99010001_fail_FAIL_DPS_ALARM; Return -2; }
+		Result -1 { Property PassFail = "Fail"; SetBin b98010001_fail_FAIL_SYSTEM_SOFTWARE; Return -1; }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b44012001_fail_FUN_CORE_\BOM\_SBFT_CORE_\PURPOSE\_K_\MULTIFLOW\_X_CR_C\CORNER\_X_\CONTENT\_0;
+           Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+            ChainBy CONTENT;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b44012002_fail_FUN_CORE_\BOM\_SBFT_CORE_\PURPOSE\_K_\MULTIFLOW\_X_CR_C\CORNER\_X_\CONTENT\_2;
+           Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b44012003_fail_FUN_CORE_\BOM\_SBFT_CORE_\PURPOSE\_K_\MULTIFLOW\_X_CR_C\CORNER\_X_\CONTENT\_3;
+           Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97442298_fail_FUN_CORE_\BOM\_SBFT_CORE_\PURPOSE\_K_\MULTIFLOW\_X_CR_C\CORNER\_X_\CONTENT\_4;
+           Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b44192298_fail_FUN_CORE_\BOM\_SBFT_CORE_\PURPOSE\_K_\MULTIFLOW\_X_CR_F\CORNER\_X_\CONTENT\_5;
+           Return 0;
+        }
+    }
+    
+}
+
+Flow FUN_CORE_\BOM\_\SINGLEFLOW\
+{
+    FlowItem SBFT_CORE_\PURPOSE\_K_\SINGLEFLOW\_X_CR_F\CORNER\_X_\CONTENT\ SBFT_CORE_\PURPOSE\_K_\SINGLEFLOW\_X_CR_F\CORNER\_X_\CONTENT\
+    {
+ 		Result -2 { Property PassFail = "Fail"; SetBin b99010001_fail_FAIL_DPS_ALARM; Return -2; }
+		Result -1 { Property PassFail = "Fail"; SetBin b98010001_fail_FAIL_SYSTEM_SOFTWARE; Return -1; }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b44112001_fail_FUN_CORE_\BOM\_SBFT_CORE_\PURPOSE\_K_\SINGLEFLOW\_X_CR_F\CORNER\_X_\CONTENT\_0;
+           Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+	    Return 1;
+            ChainBy CONTENT;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b44112002_fail_FUN_CORE_\BOM\_SBFT_CORE_\PURPOSE\_K_\SINGLEFLOW\_X_CR_F\CORNER\_X_\CONTENT\_2;
+           Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b44112003_fail_FUN_CORE_\BOM\_SBFT_CORE_\PURPOSE\_K_\SINGLEFLOW\_X_CR_F\CORNER\_X_\CONTENT\_3;
+           Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97442220_fail_FUN_CORE_\BOM\_SBFT_CORE_\PURPOSE\_K_\SINGLEFLOW\_X_CR_F\CORNER\_X_\CONTENT\_4;
+           Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b44192220_fail_FUN_CORE_\BOM\_SBFT_CORE_\PURPOSE\_K_\SINGLEFLOW\_X_CR_F\CORNER\__X_\CONTENT\_5;
+           Return 0;
+        }
+    }
+    
+}
+
+Flow FUN_CORE_\BOM\_VMAXXCR_\VMAX_MULTI\
+{
+	FlowItem SBFT_CORE_VMAX_K_VMAXXCR_X_CR_C\CORNER\_X_\CONTENT\ SBFT_CORE_VMAX_K_VMAXXCR_X_CR_C\CORNER\_X_\CONTENT\
+	{
+		Result -2 { Property PassFail = "Fail"; SetBin b99010001_fail_FAIL_DPS_ALARM; Return -2; }
+		Result -1 { Property PassFail = "Fail"; SetBin b98010001_fail_FAIL_SYSTEM_SOFTWARE; Return -1; }
+		Result 0
+		{
+			Property PassFail = "Fail";
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+			ChainBy CONTENT;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			Return 0;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			Return 0;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			Return 0;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			Return 0;
+		}
+	}
+
+}
+
+Flow FUN_CORE_\BOM\_VMAXXCR_\VMAX_SINGLE\
+{
+	FlowItem SBFT_CORE_VMAX_K_VMAXXCR_X_CR_\VMAX_SINGLE\_X_\CONTENT\ SBFT_CORE_VMAX_K_VMAXXCR_X_CR_\VMAX_SINGLE\_X_\CONTENT\
+	{
+		Result -2 { Property PassFail = "Fail"; SetBin b99010001_fail_FAIL_DPS_ALARM; Return -2; }
+		Result -1 { Property PassFail = "Fail"; SetBin b98010001_fail_FAIL_SYSTEM_SOFTWARE; Return -1; }
+		Result 0
+		{
+			Property PassFail = "Fail";
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+			ChainBy CONTENT;
+		}
+		Result 2
+		{
+			Property PassFail = "Fail";
+			Return 0;
+		}
+		Result 3
+		{
+			Property PassFail = "Fail";
+			Return 0;
+		}
+		Result 4
+		{
+			Property PassFail = "Fail";
+			Return 0;
+		}
+		Result 5
+		{
+			Property PassFail = "Fail";
+			Return 0;
+		}
+	}
+
+}
+
+Flow FUN_CORE_\BOM\_VMAXXCR
+{
+    FlowItem FUN_CORE_\BOM\_VMAXXCR_\VMAX_SINGLE\ FUN_CORE_\BOM\_VMAXXCR_\VMAX_SINGLE\
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo FUN_CORE_\BOM\_VMAXXCR_\VMAX_MULTI\;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUN_CORE_\BOM\_VMAXXCR_\VMAX_MULTI\;
+        }
+    }
+    
+    FlowItem FUN_CORE_\BOM\_VMAXXCR_\VMAX_MULTI\ FUN_CORE_\BOM\_VMAXXCR_\VMAX_MULTI\
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
