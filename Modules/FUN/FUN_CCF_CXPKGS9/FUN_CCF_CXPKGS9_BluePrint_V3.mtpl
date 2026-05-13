@@ -1,0 +1,1756 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan FUN_CCF_\BOM\;
+
+Import "FUN_CCF_\BOM\.usrv";
+Import "FUN_CCF_\BOM\_TIMING.tcg";
+
+# Test Counter Definition
+
+
+CSharpTest PrimePatConfigTestMethod SBFT_CCF_PATMOD_K_INIT_X_X_X_X_FUSE_FC_DRG
+{
+    BypassPort = -1;
+    ConfigurationFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/FUN/FUN_CCF_\BOM\/InputFiles/FUN_CCF_Generic.PatConfigSetpoints.json";
+    Plist = "fun_cdie_vccr_sbft_f1xccf_fc_drg_c1_hptp800_list_master";
+    SetPoint = "FUSE_OVERRIDES";
+}
+
+CSharpTest PrimePatConfigTestMethod SBFT_CCF_PATMOD_K_INIT_X_X_X_X_FUSE_CCFBIST
+{
+    BypassPort = -1;
+    ConfigurationFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/FUN/FUN_CCF_\BOM\/InputFiles/FUN_CCF_Generic.PatConfigSetpoints.json";
+    Plist = "fun_cdie_endcpu_ccfbist_list";
+    SetPoint = "FUSE_OVERRIDES";
+}
+
+CSharpTest PrimePatConfigTestMethod SBFT_CCF_PATMOD_K_INIT_X_X_X_X_FUSE_CORESTATE0_MASK
+{
+    BypassPort = 1;
+    ConfigurationFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/FUN/FUN_CCF_\BOM\/InputFiles/FUN_CCF_CORE_STATE_MASK.PatConfigSetPoints.json";
+    Plist = "fun_cdie_vccr_sbft_f1xccf_fc_drg_c1_hptp800_list_master";
+    SetPoint = "FUN_CCF_CORESTATE0_MASK";
+}
+
+CSharpTest PrimePatConfigTestMethod SBFT_CCF_PATMOD_K_INIT_X_X_X_X_FUSE_WAITTIME_DRG
+{
+    BypassPort = -1;
+    ConfigurationFile = GetEnvironmentVariable("~HDMT_TP_BASE_DIR") + "./Modules/FUN/FUN_CCF_\BOM\/InputFiles/Wait_Time.PatConfigSetPoint.json";
+    Plist = "fun_cdie_vccr_sbft_f1xccf_fc_drg_c1_hptp800_list_master";
+    SetPoint = "FC_DRG_WAITTIME_MM";
+}
+
+CSharpTest RunCallback SBFT_CCF_X_K_INIT_X_X_X_X_VMIN_PINMAP
+{
+    BypassPort = -1;
+    Callback = "LoadPinmapFile";
+    Parameters = "--decoder FailDataDecoder --file ./Modules/FUN/FUN_CCF_\BOM\/InputFiles/FUN_CCF_2CDIE_PINMAP.json";
+}
+
+CSharpTest ScreenTC SBFT_CCF_SCREEN_X_\MULTIFLOW\_X_X_X_X_CORE_SCREEN_F\CORNER\_SINGLEFLOW
+{
+    BypassPort = -1;
+    ScreenTestSet = "FUN_CCF_MM_SCREEN_\BOM\_SingleFlow";
+    ScreenTestsFile = "./InputFiles/SBFT_CCF_Downsku_screen.txt";
+}
+
+MultiTrialTest SBFT_CCF_\PURPOSE\_K_\MULTIFLOW\_X_CCF_F\CORNER\_X_\CONTENT\
+{
+    # SpeedFlow F5 F6 F7 VminTC with MTT
+    TrialVariable CPU_TRIALS::FlowDomain.RING_TOP;
+    TrialVariableExitAction "Continue";
+    CSharpTrialTest VminTC "SBFT_CCF_\PURPOSE\_K_\MULTIFLOW\_X_CCF_" + __shared__::Corners.CCF_C5 + "_" + __shared__::FreqInMHZ.CCF_C5 + "_\CONTENT\"
+    {
+        Patlist = "IPC::fun_cdie_vccr_sbft_\MULTIFLOW\_\CONTENT\_hptp800_burstoff_list_master";
+        LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_min";
+        TimingsTc = "FUN_CCF_\BOM\::cpu_fun_timing_mts800_tstprtclk400_tck100_fun_ccf";
+        BaseNumbers = "11411";
+        BypassPort = -1;
+        TrialParam CornerIdentifiers = __shared__::CornerIdentifiers.CCF_C5;
+        DtsConfiguration =FUN_CCF_\BOM\_SPECS.dtsconfig;
+        EndVoltageLimits = __shared__::FlowMatrixSingular.CCF_HIGH_SEARCH_VALUE;
+        ExecutionMode = "SearchWithScoreboard";
+        FailCaptureCount = FUN_CCF_\BOM\_SPECS.Fail_Capture_Count;
+        FeatureSwitchSettings = "fivr_mode_on, disable_masked_targets,print_per_target_increments,print_scoreboard_counters";
+        FivrCondition = "NOM_CCF_CORE";
+        FivrConditionPlistParamName = "Patlist";
+        FlowIndex = __shared__::FlowMatrixSingular.FlowIndex;
+        ForwardingMode = "InputOutput";
+        LimitGuardband = toString(__shared__::GBVars.LimitGuardband);
+        MaxFailsNum = toInteger(__shared__::Specs.CHK_MAX_FAILS);
+        PatternNameCounterIndexes = FUN_CCF_\BOM\_SPECS.PatNameIndex;
+        PinMap = FUN_CCF_\BOM\_SPECS.FC_Pin_Map;
+        PreInstance = FUN_CCF_\BOM\_SPECS.UncoreConfigPreinstance;
+        RecoveryMode = "NoRecovery";
+        RecoveryOptions = FUN_CCF_\BOM\_SPECS.FC_Recovery_Options;
+        RecoveryTrackingIncoming = FUN_CCF_\BOM\_SPECS.FC_Recovery_Tracking;
+        RecoveryTrackingOutgoing = FUN_CCF_\BOM\_SPECS.FC_Recovery_Tracking;
+        ScoreboardEdgeTicks = toInteger(__shared__::Specs.CHK_EDGE_TICK);
+        SetPointsPlistParamName = "Patlist";
+        SetPointsPostInstance = PSPOST.CLR_F5+","+"CORE:nblctrl_core_l2:nblon";
+        TrialParam SetPointsPreInstance = PSPRE.CLR_F5+","+"MCdrv:"+FUN_CCF_\BOM\_SPECS.corefreq+":"+ __shared__::FlowMatrixSingular.CR_F1_FREQ+"GHz,MCdrv:"+FUN_CCF_\BOM\_SPECS.ringfreq+":"+ __shared__::FreqValues.CCF_C5+"GHz,CORE:nblctrl_core_l2:nbloff,MCdrv:R1_SET";
+        StartVoltages = __shared__::FlowMatrixSingular.CR_LOW_SEARCH_VALUE;
+        StartVoltagesForRetry = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesForRetry , "");
+        StartVoltagesOffset = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesOffset , "");
+        StepSize = toDouble(__shared__::FlowMatrixSingular.CR_SEARCH_RESOLUTION);
+        TestMode = "MultiVmin";
+        VoltageConverter = "--overrides CORE31:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE3:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE2:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE21:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE11:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE1:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE01:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE0:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+"  --dlvrpins VCCIA --expressions CCF_CORE";
+        VoltageTargets = FUN_CCF_\BOM\_SPECS.VoltageTarget2Cdie;
+        TrialResult -2
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return -2;
+        }
+        TrialResult -1
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return -1;
+        }
+        TrialResult 0
+        {
+            PassFail Fail;
+            TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
+            Return 0;
+        }
+        TrialResult 1
+        {
+            PassFail Pass;
+            TrialAction "Exit";
+            Return 1;
+        }
+        TrialResult 2
+        {
+            PassFail Fail;
+            TrialAction "Next";
+            Return 0;
+        }
+        TrialResult 3
+        {
+            PassFail Fail;
+            TrialAction "Next";
+            Return 0;
+        }
+        TrialResult 4
+        {
+            PassFail Fail;
+            TrialAction "Next";
+            Return 0;
+        }
+        TrialResult 5
+        {
+            PassFail Fail;
+            TrialAction "Next";
+            Return 0;
+        }
+    }
+}
+
+CSharpTest ScreenTC SBFT_CCF_SCREEN_X_VMAXXCCF_X_X_X_X_CORE_SCREEN_\VMAX_SINGLE\_SINGLEFLOW
+{
+    BypassPort = -1;
+    ScreenTestSet = "FUN_CCF_MM_SCREEN_\BOM\_SingleFlow";
+    ScreenTestsFile = "./InputFiles/SBFT_CCF_Downsku_screen.txt";
+}
+
+CSharpTest VminTC SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_SINGLE\_X_\CONTENT\
+{
+    Patlist = "IPC::fun_cdie_vcore_sbft_vmaxxccf_\CONTENT\_hptp800_burstoff_list_master";
+    LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_max";
+    TimingsTc = "FUN_CCF_\BOM\::cpu_fun_timing_mts800_tstprtclk400_tck100_fun_ccf";
+    BaseNumbers = "11418";
+    BypassPort = -1;
+    DtsConfiguration =FUN_CCF_\BOM\_SPECS.dtsconfig;
+    EndVoltageLimits = __shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
+    ExecutionMode = "SearchWithScoreboard";
+    FeatureSwitchSettings = "fivr_mode_on, disable_masked_targets,print_per_target_increments,print_scoreboard_counters";
+    FivrCondition = "NOM_CCF_CORE";
+    FivrConditionPlistParamName = "Patlist";
+    ForwardingMode = "Input";
+    LimitGuardband = toString(__shared__::GBVars.LimitGuardband);
+    MaxFailsNum = toInteger(__shared__::Specs.VMX_EDGE_TICK);
+    PatternNameCounterIndexes = FUN_CCF_\BOM\_SPECS.PatNameIndex;
+    PinMap = "";
+    PreInstance = FUN_CCF_\BOM\_SPECS.UncoreConfigPreinstance;
+    RecoveryMode = "NoRecovery";
+    RecoveryOptions = "";
+    RecoveryTrackingIncoming = "";
+    RecoveryTrackingOutgoing = "";
+    ScoreboardEdgeTicks = toInteger(__shared__::Specs.VMX_EDGE_TICK);
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPostInstance = PSPOST.CLR_F1+","+"CORE:nblctrl_core_l2:nblon";
+    SetPointsPreInstance = PSPRE.CLR_F1+","+"MCdrv:"+FUN_CCF_\BOM\_SPECS.corefreq+":"+ __shared__::FlowMatrixSingular.CR_\VMAX_SINGLE\_FREQ+"GHz,MCdrv:"+FUN_CCF_\BOM\_SPECS.ringfreq+":"+ __shared__::FlowMatrixSingular.CCF_\VMAX_SINGLE\_FREQ+"GHz,CORE:nblctrl_core_l2:nbloff,MCdrv:R1_SET";
+    StartVoltages = __shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
+    StartVoltagesForRetry = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesForRetry , "");
+    StartVoltagesOffset = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesOffset , "");
+    StepSize = toDouble(__shared__::FlowMatrixSingular.CR_SEARCH_RESOLUTION);
+    TestMode = "Scoreboard";
+    VoltageConverter = "--overrides CCF1:"+__shared__::FlowMatrixSingular.CCF_VMAX_VALUE+",CCF:"+__shared__::FlowMatrixSingular.CCF_VMAX_VALUE+",CORE31:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE3:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE2:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE21:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE11:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE1:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE01:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE0:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+"  --dlvrpins VCCIA --expressions CCF_CORE";
+    VoltageTargets = FUN_CCF_\BOM\_SPECS.VoltageTarget2Cdie;
+}
+
+CSharpTest ScreenTC SBFT_CCF_SCREEN_X_\VMAX_MULTI\_X_X_X_X_CORE_SCREEN_\VMAX_MULTI\_SINGLEFLOW
+{
+    BypassPort = -1;
+    ScreenTestSet = "FUN_CCF_MM_SCREEN_\BOM\_SingleFlow";
+    ScreenTestsFile = "./InputFiles/SBFT_CCF_Downsku_screen.txt";
+}
+
+MultiTrialTest SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_MULTI\_X_\CONTENT\
+{
+    # SpeedFlow F5 VMAXTC with MTT
+    TrialVariable CPU_TRIALS::FlowDomain.RING_TOP;
+    TrialVariableExitAction "Restore";
+	TrialTest VminTC "SBFT_CCF_VMAX_K_\VMAX_MULTI\XCCF_X_CCF_" + __shared__::Corners.CCF_C5 + "_" + __shared__::FreqInMHZ.CCF_C5 + "_\CONTENT\"
+    {
+        Patlist = "IPC::fun_cdie_vcore_sbft_vmaxxccf_\CONTENT\_hptp800_burstoff_list_master";
+        LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_max";
+        TimingsTc = "FUN_CCF_\BOM\::cpu_fun_timing_mts800_tstprtclk400_tck100_fun_ccf";
+        BaseNumbers = "11419";
+        BypassPort = -1;
+        DtsConfiguration =FUN_CCF_\BOM\_SPECS.dtsconfig;
+        EndVoltageLimits = __shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
+        ExecutionMode = "SearchWithScoreboard";
+        FeatureSwitchSettings = "fivr_mode_on, disable_masked_targets,print_per_target_increments,print_scoreboard_counters";
+        FivrCondition = "NOM_CCF_CORE";
+        FivrConditionPlistParamName = "Patlist";
+        FlowIndex = __shared__::FlowMatrixSingular.FlowIndex;
+        ForwardingMode = "Input";
+        LimitGuardband = toString(__shared__::GBVars.LimitGuardband);
+        MaxFailsNum = toInteger(__shared__::Specs.VMX_EDGE_TICK);
+        PatternNameCounterIndexes = FUN_CCF_\BOM\_SPECS.PatNameIndex;
+        PinMap = "";
+        PreInstance = FUN_CCF_\BOM\_SPECS.UncoreConfigPreinstance;
+        RecoveryMode = "NoRecovery";
+        RecoveryOptions = "";
+        RecoveryTrackingIncoming = "";
+        RecoveryTrackingOutgoing = "";
+        ScoreboardEdgeTicks = toInteger(__shared__::Specs.VMX_EDGE_TICK);
+        SetPointsPlistParamName = "Patlist";
+        SetPointsPostInstance = PSPOST.CLR_F5+","+"CORE:nblctrl_core_l2:nblon";
+        TrialParam SetPointsPreInstance = PSPRE.CLR_F5+","+"MCdrv:"+FUN_CCF_\BOM\_SPECS.corefreq+":"+ __shared__::FlowMatrixSingular.CR_F3_FREQ+"GHz,MCdrv:"+FUN_CCF_\BOM\_SPECS.ringfreq+":"+ __shared__::FreqValues.CCF_C5+"GHz,CORE:nblctrl_core_l2:nbloff,MCdrv:R1_SET";
+        StartVoltages = __shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
+        StartVoltagesForRetry = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesForRetry , "");
+        StartVoltagesOffset = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesOffset , "");
+        StepSize = toDouble(__shared__::FlowMatrixSingular.CR_SEARCH_RESOLUTION);
+        TestMode = "Scoreboard";
+        VoltageConverter = "--overrides CCF1:"+__shared__::FlowMatrixSingular.CCF_VMAX_VALUE+",CCF:"+__shared__::FlowMatrixSingular.CCF_VMAX_VALUE+",CORE31:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE3:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE2:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE21:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE11:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE1:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE01:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE0:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+"  --dlvrpins VCCIA --expressions CCF_CORE";
+        VoltageTargets = FUN_CCF_\BOM\_SPECS.VoltageTarget2Cdie;
+        TrialResult -2
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return -2;
+        }
+        TrialResult -1
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return -1;
+        }
+        TrialResult 0
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return 0;
+        }
+        TrialResult 1
+        {
+            PassFail Pass;
+            TrialAction "Exit";
+            Return 1;
+        }
+        TrialResult 2
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return 0;
+        }
+        TrialResult 3
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return 0;
+        }
+        TrialResult 4
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return 0;
+        }
+        TrialResult 5
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return 0;
+        }
+    }
+}
+
+CSharpTest ScreenTC SBFT_CCF_SCREEN_X_\SINGLEFLOW\_X_X_X_X_CORE_SCREEN_F\CORNER\_SINGLEFLOW
+{
+    BypassPort = -1;
+    ScreenTestSet = "FUN_CCF_MM_SCREEN_\BOM\_SingleFlow";
+    ScreenTestsFile = "./InputFiles/SBFT_CCF_Downsku_screen.txt";
+}
+
+MultiTrialTest SBFT_CCF_\PURPOSE\_K_\SINGLEFLOW\_X_CCF_F\CORNER\_X_\CONTENT\
+{
+    # Sample VminTC test with MTT
+    TrialVariable CPU_TRIALS::FlowDomain.RING;
+    TrialVariableExitAction "Continue";
+    CSharpTrialTest VminTC "SBFT_CCF_\PURPOSE\_K_\SINGLEFLOW\_X_CCF_F\CORNER\_" + __shared__::CustomFlowMatrixSpecs.CCF_F\CORNER\_FREQ_MHz + "_\CONTENT\"
+    {
+        Patlist = "IPC::fun_cdie_vccr_sbft_\SINGLEFLOW\_\CONTENT\_hptp800_burstoff_list_master";
+        LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_min";
+        TimingsTc = "FUN_CCF_\BOM\::cpu_fun_timing_mts800_tstprtclk400_tck100_fun_ccf";
+        BaseNumbers = "11414";
+        BypassPort = -1;
+        CornerIdentifiers = "CCF1@F\CORNER\,CCF0@F\CORNER\";
+        DtsConfiguration =FUN_CCF_\BOM\_SPECS.dtsconfig;
+        EndVoltageLimits = __shared__::FlowMatrixSingular.CR_LFM_\PURPOSE\_RAIN_KILL;
+        ExecutionMode = "SearchWithScoreboard";
+        FailCaptureCount = FUN_CCF_\BOM\_SPECS.Fail_Capture_Count;
+        FeatureSwitchSettings = "fivr_mode_on, disable_masked_targets,print_per_target_increments,print_scoreboard_counters";
+        FivrCondition = "NOM_CCF_CORE";
+        FivrConditionPlistParamName = "Patlist";
+        TrialParam FlowIndex = __shared__::FlowMatrix.FlowIndex;
+        ForwardingMode = "InputOutput";
+        LimitGuardband = toString(__shared__::GBVars.LimitGuardband);
+        MaxFailsNum = toInteger(__shared__::Specs.CHK_MAX_FAILS);
+        PatternNameCounterIndexes = FUN_CCF_\BOM\_SPECS.PatNameIndex;
+        PinMap = FUN_CCF_\BOM\_SPECS.FC_Pin_Map;
+        PreInstance = FUN_CCF_\BOM\_SPECS.UncoreConfigPreinstance;
+        RecoveryMode = "NoRecovery";
+        RecoveryOptions = FUN_CCF_\BOM\_SPECS.FC_Recovery_Options;
+        RecoveryTrackingIncoming = FUN_CCF_\BOM\_SPECS.FC_Recovery_Tracking;
+        RecoveryTrackingOutgoing = FUN_CCF_\BOM\_SPECS.FC_Recovery_Tracking;
+        ScoreboardEdgeTicks = toInteger(__shared__::Specs.CHK_EDGE_TICK);
+        SetPointsPlistParamName = "Patlist";
+        SetPointsPostInstance = PSPOST.CLR_F\CORNER\+","+"CORE:nblctrl_core_l2:nblon";
+        SetPointsPreInstance = PSPRE.CLR_F\CORNER\+","+"MCdrv:"+FUN_CCF_\BOM\_SPECS.corefreq+":"+ __shared__::FlowMatrixSingular.CR_F\CORNER\_FREQ+"GHz,MCdrv:"+FUN_CCF_\BOM\_SPECS.ringfreq+":"+ __shared__::FlowMatrixSingular.CCF_F\CORNER\_FREQ+"GHz,CORE:nblctrl_core_l2:nbloff,MCdrv:R\CORNER\_SET";
+        StartVoltages = __shared__::FlowMatrixSingular.CR_LOW_SEARCH_VALUE;
+        StartVoltagesForRetry = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesForRetry , "");
+        StartVoltagesOffset = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesOffset , "");
+        StepSize = toDouble(__shared__::FlowMatrixSingular.CR_SEARCH_RESOLUTION);
+        TestMode = "MultiVmin";
+        VoltageConverter = "--overrides CORE31:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE3:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE2:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE21:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE11:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE1:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE01:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE0:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+"  --dlvrpins VCCIA --expressions CCF_CORE";
+        VoltageTargets = FUN_CCF_\BOM\_SPECS.VoltageTarget2Cdie;
+        TrialResult -2
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return -2;
+        }
+        TrialResult -1
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return -1;
+        }
+        TrialResult 0
+        {
+            PassFail Fail;
+            TrialAction __shared__::TpRule.MTT_Rule("Next","Exit");
+            Return 0;
+        }
+        TrialResult 1
+        {
+            PassFail Pass;
+            TrialAction "Exit";
+            Return 1;
+        }
+        TrialResult 2
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return 0;
+        }
+        TrialResult 3
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return 0;
+        }
+        TrialResult 4
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return 0;
+        }
+        TrialResult 5
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return 0;
+        }
+    }
+}
+
+CSharpTest ScreenTC SBFT_CCF_SCREEN_X_\FMIN_SINGLE\_X_X_X_X_CORE_SCREEN_F\CORNER\_SINGLEFLOW
+{
+    BypassPort = -1;
+    ScreenTestSet = "FUN_CCF_MM_SCREEN_CXPKGS9_SingleFlow";
+    ScreenTestsFile = "./InputFiles/SBFT_CCF_Downsku_screen.txt";
+}
+
+MultiTrialTest SBFT_CCF_VMIN_K_\FMIN_SINGLE\_X_CCF_F\CORNER\_X_FC_DRG
+{
+    # Sample VminTC test with MTT
+    TrialVariable CPU_TRIALS::FlowDomain.RING;
+    TrialVariableExitAction "Restore";
+	CSharpTrialTest VminTC "SBFT_CCF_VMIN_K_\FMIN_SINGLE\_X_CCF_F\CORNER\_" + __shared__::CustomFlowMatrixSpecs.CCF_F\CORNER\_MHz + "_FC_DRG"
+    {
+        Patlist = "IPC::fun_cdie_vccr_sbft_F\CORNER\_fc_drg_hptp800_burstoff_list_master";
+        LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_min";
+        TimingsTc = "FUN_CCF_CXPKGS9::cpu_fun_timing_mts400_tstprtclk200_tck50_i_drv_mul_F\CORNER\_fun_CCF";
+        BaseNumbers = "11412";
+        BypassPort = -1;
+        CornerIdentifiers = FUN_CCF_CXPKGS9_SPECS.CornersForFmin;
+        DtsConfiguration =FUN_CCF_CXPKGS9_SPECS.dtsconfig;
+        EndVoltageLimits = __shared__::FlowMatrixSingular.CR_LFM_VMIN_RAIN_KILL;
+        ExecutionMode = "SearchWithScoreboard";
+        FailCaptureCount = FUN_CCF_CXPKGS9_SPECS.Fail_Capture_Count;
+        FeatureSwitchSettings = "fivr_mode_on, disable_masked_targets,print_per_target_increments,print_scoreboard_counters";
+        FivrCondition = "NOM_CCF_CORE";
+        FivrConditionPlistParamName = "Patlist";
+        TrialParam FlowIndex = __shared__::FlowMatrix.FlowIndex;
+        ForwardingMode = "Input";
+        LimitGuardband = toString(__shared__::GBVars.FminLimitGuardband);
+        MaxFailsNum = toInteger(__shared__::Specs.CHK_MAX_FAILS);
+        PatternNameCounterIndexes = FUN_CCF_CXPKGS9_SPECS.PatNameIndex;
+        PinMap = FUN_CCF_CXPKGS9_SPECS.FC_Pin_Map;
+        PreInstance = FUN_CCF_CXPKGS9_SPECS.UncoreConfigPreinstance;
+        RecoveryMode = "NoRecovery";
+        RecoveryOptions = FUN_CCF_CXPKGS9_SPECS.FC_Recovery_Options;
+        RecoveryTrackingIncoming = FUN_CCF_CXPKGS9_SPECS.FC_Recovery_Tracking;
+        RecoveryTrackingOutgoing = FUN_CCF_CXPKGS9_SPECS.FC_Recovery_Tracking;
+        ScoreboardEdgeTicks = toInteger(__shared__::Specs.CHK_EDGE_TICK);
+        SetPointsPlistParamName = "Patlist";
+        SetPointsPostInstance = PSPOST.CLR_FMIN+","+"CORE:nblctrl_core_l2:nblon,"+FUN_CCF_CXPKGS9_SPECS.MCfunCCF_F\CORNER\_DRVMASK;
+        SetPointsPreInstance = PSPRE.CLR_FMIN+","+"MCdrv:"+FUN_CCF_CXPKGS9_SPECS.corefreq+":"+ __shared__::FlowMatrixSingular.CR_FMIN+"GHz,MCdrv:"+FUN_CCF_CXPKGS9_SPECS.ringfreq+":"+ __shared__::FlowMatrixSingular.CCF_FMIN+"GHz,CORE:nblctrl_core_l2:nbloff,MCdrv:R1_SET,"+FUN_CCF_CXPKGS9_SPECS.MCfunCCF_F\CORNER\_DRVMASK;
+        StartVoltages = __shared__::FlowMatrixSingular.CR_LOW_SEARCH_VALUE;
+        StartVoltagesForRetry = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesForRetry , "");
+        StartVoltagesOffset = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesOffset , "");
+        StepSize = toDouble(__shared__::FlowMatrixSingular.CR_SEARCH_RESOLUTION);
+        TestMode = "MultiVmin";
+        VoltageConverter = "--overrides CORE31:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE3:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE2:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE21:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE11:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE1:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE01:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+",CORE0:"+__shared__::FlowMatrixSingular.CR_VMAX_VALUE+"  --dlvrpins VCCIA --expressions CCF_CORE";
+        VoltageTargets = FUN_CCF_CXPKGS9_SPECS.VoltageTarget2Cdie;
+        TrialResult -2
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return -2;
+        }
+        TrialResult -1
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return -1;
+        }
+        TrialResult 0
+        {
+            PassFail Fail;
+            TrialAction "Next";
+            Return 0;
+        }
+        TrialResult 1
+        {
+            PassFail Pass;
+            TrialAction "Exit";
+            Return 1;
+        }
+        TrialResult 2
+        {
+            PassFail Fail;
+            TrialAction "Next";
+            Return 0;
+        }
+        TrialResult 3
+        {
+            PassFail Fail;
+            TrialAction "Next";
+            Return 0;
+        }
+        TrialResult 4
+        {
+            PassFail Fail;
+            TrialAction "Next";
+            Return 0;
+        }
+        TrialResult 5
+        {
+            PassFail Fail;
+            TrialAction "Next";
+            Return 0;
+        }
+    }
+}
+
+CSharpTest DrngTC DRNG_CCF_FUNC_K_ENDCPU_TAP_X_VNOM_X_CCF_DRNGTC_DRNG
+{
+    Patlist = "fun_cdie_endcpu_drng_list";
+    LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+    TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+    CollisionDataSize = 256;
+    CollisionStart = 260;
+    CtvCapturePins = "IPC::CPU_TDO";
+    DrngVersion = "DRNG_50";
+    ExpectedCtvSize = 1060;
+    FailuresToCaptureTotal = 1060;
+    MetricsStart = 0;
+    MetricsStart_NOXOR = 772;
+    Mode = "ALL";
+    ModeOrder = "COLLISION, FUNCTIONAL_METRICS, METRICS_NOXOR, FUNCTIONAL";
+}
+
+CSharpTest DrngTC DRNG_CCF_FUNC_K_ENDCPU_TAP_X_VNOM_X_CCF_DRNGTC_FUSE_DRNG
+{
+    Patlist = "fun_cdie_endcpu_fuse_drng_list";
+    LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+    TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+    CollisionDataSize = 256;
+    CollisionStart = 260;
+    CtvCapturePins = "IPC::CPU_TDO";
+    DrngVersion = "DRNG_50";
+    ExpectedCtvSize = 1060;
+    FailuresToCaptureTotal = 1060;
+    MetricsStart = 0;
+    MetricsStart_NOXOR = 772;
+    Mode = "ALL";
+    ModeOrder = "COLLISION, FUNCTIONAL_METRICS, METRICS_NOXOR, FUNCTIONAL";
+}
+
+CSharpTest VminTC SBFT_CCF_VMIN_E_ENDCPU_X_X_VNOM_X_CCF_CCFBIST
+{
+    Patlist = "fun_cdie_endcpu_ccfbist_test_burstoff_list";
+    LevelsTc = "CPU_IP_BASE::cpu_all_bf_x_x_ipc_lvl_nom";
+    TimingsTc = "CPU_IP_BASE::cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BaseNumbers = "11410";
+    BypassPort = -1;
+    EndVoltageLimits = __shared__::FlowMatrixSingular.CCF_HIGH_SEARCH_VALUE;
+    ExecutionMode = "SearchWithScoreboard";
+    FailCaptureCount = 336;
+    FeatureSwitchSettings = "fivr_mode_on, disable_masked_targets";
+    FivrCondition = "NOM_CCF_CORE";
+    ForwardingMode = "None";
+    LogLevel = "Disabled";
+    MaxFailsNum = 10;
+    MaxRepetitionCount = 1;
+    PatternNameCounterIndexes = "9,10,11,12,13,14,15";
+    PinMap = "";
+    RecoveryMode = "NoRecovery";
+    RecoveryOptions = "";
+    RecoveryTrackingIncoming = "";
+    RecoveryTrackingOutgoing = "";
+    ScoreboardEdgeTicks = 1;
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPreInstance = "MCdrv:" + FUN_CCF_\BOM\_SPECS.corefreq + ":0.8GHz,MCdrv:" + FUN_CCF_\BOM\_SPECS.ringfreq + ":0.8GHz,CORE:nblctrl_core_l2:nblon,CCF:nblctrl_ccf:ccfnblon";
+    StartVoltages = __shared__::FlowMatrixSingular.CR_LOW_SEARCH_VALUE;
+    StepSize = 0.02;
+    TestMode = "Scoreboard";
+    VminResult = "";
+    VoltageTargets = FUN_CCF_\BOM\_SPECS.VoltageTarget2Cdie;
+}
+
+Flow FUSE_PATMOD
+{
+    FlowItem SBFT_CCF_PATMOD_K_INIT_X_X_X_X_FUSE_FC_DRG SBFT_CCF_PATMOD_K_INIT_X_X_X_X_FUSE_FC_DRG
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99452010_fail_FUN_CCF_\BOM\_SBFT_CCF_PATMOD_K_INIT_X_X_X_X_FUSE_FC_DRG_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98452010_fail_FUN_CCF_\BOM\_SBFT_CCF_PATMOD_K_INIT_X_X_X_X_FUSE_FC_DRG_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b45482002_fail_FUN_CCF_\BOM\_SBFT_CCF_PATMOD_K_INIT_X_X_X_X_FUSE_FC_DRG_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_PATMOD_K_INIT_X_X_X_X_FUSE_CCFBIST;
+        }
+    }
+    
+    FlowItem SBFT_CCF_PATMOD_K_INIT_X_X_X_X_FUSE_CCFBIST SBFT_CCF_PATMOD_K_INIT_X_X_X_X_FUSE_CCFBIST
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99452008_fail_FUN_CCF_\BOM\_SBFT_CCF_PATMOD_K_INIT_X_X_X_X_FUSE_CCFBIST_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98452008_fail_FUN_CCF_\BOM\_SBFT_CCF_PATMOD_K_INIT_X_X_X_X_FUSE_CCFBIST_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b45482000_fail_FUN_CCF_\BOM\_SBFT_CCF_PATMOD_K_INIT_X_X_X_X_FUSE_CCFBIST_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_PATMOD_K_INIT_X_X_X_X_FUSE_CORESTATE0_MASK;
+        }
+    }
+    
+    FlowItem SBFT_CCF_PATMOD_K_INIT_X_X_X_X_FUSE_CORESTATE0_MASK SBFT_CCF_PATMOD_K_INIT_X_X_X_X_FUSE_CORESTATE0_MASK
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99452009_fail_FUN_CCF_\BOM\_SBFT_CCF_PATMOD_K_INIT_X_X_X_X_FUSE_CORESTATE0_MASK_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98452009_fail_FUN_CCF_\BOM\_SBFT_CCF_PATMOD_K_INIT_X_X_X_X_FUSE_CORESTATE0_MASK_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b45482001_fail_FUN_CCF_\BOM\_SBFT_CCF_PATMOD_K_INIT_X_X_X_X_FUSE_CORESTATE0_MASK_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow PATMOD_WAITTIME
+{
+    FlowItem SBFT_CCF_PATMOD_K_INIT_X_X_X_X_FUSE_WAITTIME_DRG SBFT_CCF_PATMOD_K_INIT_X_X_X_X_FUSE_WAITTIME_DRG
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99452011_fail_FUN_CCF_\BOM\_SBFT_CCF_PATMOD_K_INIT_X_X_X_X_FUSE_WAITTIME_DRG_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98452011_fail_FUN_CCF_\BOM\_SBFT_CCF_PATMOD_K_INIT_X_X_X_X_FUSE_WAITTIME_DRG_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b45482003_fail_FUN_CCF_\BOM\_SBFT_CCF_PATMOD_K_INIT_X_X_X_X_FUSE_WAITTIME_DRG_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow FUN_CCF_\BOM\_INIT @INIT_SubFlow
+{
+    FlowItem FUSE_PATMOD FUSE_PATMOD
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo PATMOD_WAITTIME;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo PATMOD_WAITTIME;
+        }
+    }
+    
+    FlowItem PATMOD_WAITTIME PATMOD_WAITTIME
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+			GoTo SBFT_CCF_X_K_INIT_X_X_X_X_VMIN_PINMAP;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			GoTo SBFT_CCF_X_K_INIT_X_X_X_X_VMIN_PINMAP;
+        }
+    }
+    
+    FlowItem SBFT_CCF_X_K_INIT_X_X_X_X_VMIN_PINMAP SBFT_CCF_X_K_INIT_X_X_X_X_VMIN_PINMAP
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99452074_fail_FUN_CCF_\BOM\_SBFT_CCF_X_K_INIT_X_X_X_X_VMIN_PINMAP_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98452074_fail_FUN_CCF_\BOM\_SBFT_CCF_X_K_INIT_X_X_X_X_VMIN_PINMAP_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b45412000_fail_FUN_CCF_\BOM\_SBFT_CCF_X_K_INIT_X_X_X_X_VMIN_PINMAP_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			Return 1;
+        }
+    }
+    
+}
+
+Flow FUN_CCF_\BOM\_\CONTENT\__\MULTIFLOW\
+{
+    FlowItem SBFT_CCF_SCREEN_X_\MULTIFLOW\_X_X_X_X_CORE_SCREEN_F\CORNER\_SINGLEFLOW SBFT_CCF_SCREEN_X_\MULTIFLOW\_X_X_X_X_CORE_SCREEN_F\CORNER\_SINGLEFLOW @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99452022_fail_FUN_CCF_\BOM\_SBFT_CCF_SCREEN_X_\MULTIFLOW\_X_X_X_X_CORE_SCREEN_F5_SINGLEFLOW_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98452022_fail_FUN_CCF_\BOM\_SBFT_CCF_SCREEN_X_\MULTIFLOW\_X_X_X_X_CORE_SCREEN_F5_SINGLEFLOW_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b45112001_fail_FUN_CCF_\BOM\_SBFT_CCF_SCREEN_X__\MULTIFLOW\_X_X_X_X_CORE_SCREEN_F5_SINGLEFLOW_0;
+                        GoTo SBFT_CCF_VMIN_K__\MULTIFLOW\_X_CCF_F5_X_FC_DRG;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\MULTIFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\MULTIFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\MULTIFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 4
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\MULTIFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 5
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\MULTIFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 6
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\MULTIFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 7
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\MULTIFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 9
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\MULTIFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 10
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\MULTIFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 11
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\MULTIFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 12
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\MULTIFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 13
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\MULTIFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 14
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\MULTIFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 15
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\MULTIFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+    }
+    
+    FlowItem SBFT_CCF_\PURPOSE\_K_\MULTIFLOW\_X_CCF_F\CORNER\_X_\CONTENT\ SBFT_CCF_\PURPOSE\_K_\MULTIFLOW\_X_CCF_F\CORNER\_X_\CONTENT\
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99452067_fail_FUN_CCF_\BOM\_SBFT_CCF_VMIN_K__\MULTIFLOW\_X_CCF_F5_X_\CONTENT\_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98452067_fail_FUN_CCF_\BOM\_SBFT_CCF_VMIN_K__\MULTIFLOW\_X_CCF_F5_X_\CONTENT\_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b45442000_fail_FUN_CCF_\BOM\_SBFT_CCF_VMIN_K__\MULTIFLOW\_X_CCF_F5_X_\CONTENT\_0;
+                        Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b45442001_fail_FUN_CCF_\BOM\_SBFT_CCF_VMIN_K__\MULTIFLOW\_X_CCF_F5_X_\CONTENT\_2;
+                        Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b45442002_fail_FUN_CCF_\BOM\_SBFT_CCF_VMIN_K__\MULTIFLOW\_X_CCF_F5_X_\CONTENT\_3;
+                        Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97452015_fail_FUN_CCF_\BOM\_SBFT_CCF_VMIN_K__\MULTIFLOW\_X_CCF_F5_X_\CONTENT\_4;
+                        Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b45192015_fail_FUN_CCF_\BOM\_SBFT_CCF_VMIN_K__\MULTIFLOW\_X_CCF_F5_X_\CONTENT\_5;
+                        Return 0;
+        }
+    }
+    
+}
+
+Flow FUN_CCF_\BOM\__\MULTIFLOW\ @_\MULTIFLOW\_SubFlow
+{
+    
+    FlowItem FUN_CCF_\BOM\_\CONTENT\__\MULTIFLOW\ FUN_CCF_\BOM\_\CONTENT\__\MULTIFLOW\
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow FUN_CCF_\BOM\_VMAXXCCF_\VMAX_SINGLE\
+{
+    FlowItem SBFT_CCF_SCREEN_X_VMAXXCCF_X_X_X_X_CORE_SCREEN_\VMAX_SINGLE\_SINGLEFLOW SBFT_CCF_SCREEN_X_VMAXXCCF_X_X_X_X_CORE_SCREEN_\VMAX_SINGLE\_SINGLEFLOW @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99452029_fail_FUN_CCF_\BOM\_SBFT_CCF_SCREEN_X_VMAXXCCF_X_X_X_X_CORE_SCREEN_\VMAX_SINGLE\_SINGLEFLOW_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98452029_fail_FUN_CCF_\BOM\_SBFT_CCF_SCREEN_X_VMAXXCCF_X_X_X_X_CORE_SCREEN_\VMAX_SINGLE\_SINGLEFLOW_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b45272000_fail_FUN_CCF_\BOM\_SBFT_CCF_SCREEN_X_VMAXXCCF_X_X_X_X_CORE_SCREEN_\VMAX_SINGLE\_SINGLEFLOW_0;
+                        GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_SINGLE\_X_\CONTENT\;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_SINGLE\_X_\CONTENT\;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_SINGLE\_X_\CONTENT\;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_SINGLE\_X_\CONTENT\;
+        }
+        Result 4
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_SINGLE\_X_\CONTENT\;
+        }
+        Result 5
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_SINGLE\_X_\CONTENT\;
+        }
+        Result 6
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_SINGLE\_X_\CONTENT\;
+        }
+        Result 7
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_SINGLE\_X_\CONTENT\;
+        }
+        Result 9
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_SINGLE\_X_\CONTENT\;
+        }
+        Result 10
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_SINGLE\_X_\CONTENT\;
+        }
+        Result 11
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_SINGLE\_X_\CONTENT\;
+        }
+        Result 12
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_SINGLE\_X_\CONTENT\;
+        }
+        Result 13
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_SINGLE\_X_\CONTENT\;
+        }
+        Result 14
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_SINGLE\_X_\CONTENT\;
+        }
+        Result 15
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_SINGLE\_X_\CONTENT\;
+        }
+    }
+    
+    FlowItem SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_SINGLE\_X_\CONTENT\ SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_SINGLE\_X_\CONTENT\
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99452053_fail_FUN_CCF_\BOM\_SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_SINGLE\_X_FC_DRG_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98452053_fail_FUN_CCF_\BOM\_SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_SINGLE\_X_FC_DRG_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b45472000_fail_FUN_CCF_\BOM\_SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_SINGLE\_X_FC_DRG_0;
+                        Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b45472001_fail_FUN_CCF_\BOM\_SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_SINGLE\_X_FC_DRG_2;
+                        Return 1;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b45472002_fail_FUN_CCF_\BOM\_SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_SINGLE\_X_FC_DRG_3;
+                        Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97452001_fail_FUN_CCF_\BOM\_SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_SINGLE\_X_FC_DRG_4;
+                        Return 1;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b45192001_fail_FUN_CCF_\BOM\_SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_SINGLE\_X_FC_DRG_5;
+            Return 1;
+        }
+    }
+    
+}
+
+Flow FUN_CCF_\BOM\_VMAXXCCF_\VMAX_MULTI\
+{
+    FlowItem ScreenTC SBFT_CCF_SCREEN_X_\VMAX_MULTI\_X_X_X_X_CORE_SCREEN_\VMAX_MULTI\_SINGLEFLOW ScreenTC SBFT_CCF_SCREEN_X_\VMAX_MULTI\_X_X_X_X_CORE_SCREEN_\VMAX_MULTI\_SINGLEFLOW @EDC
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99452031_fail_FUN_CCF_\BOM\_SBFT_CCF_SCREEN_X_VMAXXCCF_X_X_X_X_CORE_SCREEN_\VMAX_MULTI\_SINGLEFLOW_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98452031_fail_FUN_CCF_\BOM\_SBFT_CCF_SCREEN_X_VMAXXCCF_X_X_X_X_CORE_SCREEN_\VMAX_MULTI\_SINGLEFLOW_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            ##EDC## SetBin b45292001_fail_FUN_CCF_\BOM\_SBFT_CCF_SCREEN_X_VMAXXCCF_X_X_X_X_CORE_SCREEN_\VMAX_MULTI\_SINGLEFLOW_0;
+                        GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_MULTI\_X_\CONTENT\;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_MULTI\_X_\CONTENT\;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_MULTI\_X_\CONTENT\;
+        }
+        Result 4
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_MULTI\_X_\CONTENT\;
+        }
+        Result 5
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_MULTI\_X_\CONTENT\;
+        }
+        Result 6
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_MULTI\_X_\CONTENT\;
+        }
+        Result 7
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_MULTI\_X_\CONTENT\;
+        }
+        Result 9
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_MULTI\_X_\CONTENT\;
+        }
+        Result 10
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_MULTI\_X_\CONTENT\;
+        }
+        Result 11
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_MULTI\_X_\CONTENT\;
+        }
+        Result 12
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_MULTI\_X_\CONTENT\;
+        }
+        Result 13
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_MULTI\_X_\CONTENT\;
+        }
+        Result 14
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_MULTI\_X_\CONTENT\;
+        }
+        Result 15
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_MULTI\_X_\CONTENT\;
+        }
+    }
+    
+    FlowItem SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_MULTI\_X_\CONTENT\ SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_MULTI\_X_\CONTENT\
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99452055_fail_FUN_CCF_\BOM\_SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_MULTI\_X_FC_DRG_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98452055_fail_FUN_CCF_\BOM\_SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_MULTI\_X_FC_DRG_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b45492000_fail_FUN_CCF_\BOM\_SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_MULTI\_X_FC_DRG_0;
+                        Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b45492001_fail_FUN_CCF_\BOM\_SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_MULTI\_X_FC_DRG_2;
+                        Return 1;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b45492002_fail_FUN_CCF_\BOM\_SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_MULTI\_X_FC_DRG_3;
+                        Return 1;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97452003_fail_FUN_CCF_\BOM\_SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_MULTI\_X_FC_DRG_4;
+                        Return 1;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b45192003_fail_FUN_CCF_\BOM\_SBFT_CCF_VMAX_K_VMAXXCCF_X_CCF_\VMAX_MULTI\_X_FC_DRG_5;
+                        Return 1;
+        }
+    }
+    
+}
+
+Flow FUN_CCF_\BOM\_VMAXXCCF
+{
+    FlowItem FUN_CCF_\BOM\_VMAXXCCF_\VMAX_SINGLE\ FUN_CCF_\BOM\_VMAXXCCF_\VMAX_SINGLE\
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            GoTo FUN_CCF_\BOM\_VMAXXCCF_\VMAX_MULTI\;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUN_CCF_\BOM\_VMAXXCCF_\VMAX_MULTI\;
+        }
+    }
+    
+    FlowItem FUN_CCF_\BOM\_VMAXXCCF_\VMAX_MULTI\ FUN_CCF_\BOM\_VMAXXCCF_\VMAX_MULTI\
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 1;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow FUN_CCF_\BOM\_\SINGLEFLOW\_ @\SINGLEFLOW\__SubFlow
+{
+    FlowItem SBFT_CCF_SCREEN_X_\SINGLEFLOW\_X_X_X_X_CORE_SCREEN_F\CORNER\_SINGLEFLOW SBFT_CCF_SCREEN_X_\SINGLEFLOW\_X_X_X_X_CORE_SCREEN_F\CORNER\_SINGLEFLOW
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99452014_fail_FUN_CCF_\BOM\_SBFT_CCF_SCREEN_X_\SINGLEFLOW\__X_X_X_X_CORE_SCREEN_F1_SINGLEFLOW_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98452014_fail_FUN_CCF_\BOM\_SBFT_CCF_SCREEN_X_\SINGLEFLOW\__X_X_X_X_CORE_SCREEN_F1_SINGLEFLOW_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b45312000_fail_FUN_CCF_\BOM\_SBFT_CCF_SCREEN_X_\SINGLEFLOW\__X_X_X_X_CORE_SCREEN_F1_SINGLEFLOW_0;
+                        Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\SINGLEFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\SINGLEFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\SINGLEFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 4
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\SINGLEFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 5
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\SINGLEFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 6
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\SINGLEFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 7
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\SINGLEFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 9
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\SINGLEFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 10
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\SINGLEFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 11
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\SINGLEFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 12
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\SINGLEFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 13
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\SINGLEFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 14
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\SINGLEFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+        Result 15
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_\PURPOSE\_K_\SINGLEFLOW\_X_CCF_F\CORNER\_X_\CONTENT\;
+        }
+    }
+    
+    FlowItem SBFT_CCF_\PURPOSE\_K_\SINGLEFLOW\_X_CCF_F\CORNER\_X_\CONTENT\ SBFT_CCF_\PURPOSE\_K_\SINGLEFLOW\_X_CCF_F\CORNER\_X_\CONTENT\
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99452059_fail_FUN_CCF_\BOM\_SBFT_CCF_VMIN_K_\SINGLEFLOW\__X_CCF_F1_X_FC_DRG_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98452059_fail_FUN_CCF_\BOM\_SBFT_CCF_VMIN_K_\SINGLEFLOW\__X_CCF_F1_X_FC_DRG_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b45502000_fail_FUN_CCF_\BOM\_SBFT_CCF_VMIN_K_\SINGLEFLOW\__X_CCF_F1_X_FC_DRG_0;
+                        Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b45502001_fail_FUN_CCF_\BOM\_SBFT_CCF_VMIN_K_\SINGLEFLOW\__X_CCF_F1_X_FC_DRG_2;
+                        Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b45502002_fail_FUN_CCF_\BOM\_SBFT_CCF_VMIN_K_\SINGLEFLOW\__X_CCF_F1_X_FC_DRG_3;
+                        Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97452007_fail_FUN_CCF_\BOM\_SBFT_CCF_VMIN_K_\SINGLEFLOW\__X_CCF_F1_X_FC_DRG_4;
+                        Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b45192007_fail_FUN_CCF_\BOM\_SBFT_CCF_VMIN_K_\SINGLEFLOW\__X_CCF_F1_X_FC_DRG_5;
+                        Return 0;
+        }
+    }
+    
+}
+
+Flow FUN_CCF_CXPKGS9_\FMIN_SINGLE\ @\FMIN_SINGLE\_SubFlow
+{
+    FlowItem SBFT_CCF_SCREEN_X_\FMIN_SINGLE\_X_X_X_X_CORE_SCREEN_F\CORNER\_SINGLEFLOW SBFT_CCF_SCREEN_X_\FMIN_SINGLE\_X_X_X_X_CORE_SCREEN_F\CORNER\_SINGLEFLOW
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99452026_fail_FUN_CCF_CXPKGS9_SBFT_CCF_SCREEN_X_\FMIN_SINGLE\_X_X_X_X_CORE_SCREEN_F\CORNER\_SINGLEFLOW_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98452026_fail_FUN_CCF_CXPKGS9_SBFT_CCF_SCREEN_X_\FMIN_SINGLE\_X_X_X_X_CORE_SCREEN_F\CORNER\_SINGLEFLOW_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b45242000_fail_FUN_CCF_CXPKGS9_SBFT_CCF_SCREEN_X_\FMIN_SINGLE\_X_X_X_X_CORE_SCREEN_F\CORNER\_SINGLEFLOW_0;
+                        Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMIN_K_\FMIN_SINGLE\_X_CCF_F\CORNER\_X_FC_DRG;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMIN_K_\FMIN_SINGLE\_X_CCF_F\CORNER\_X_FC_DRG;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMIN_K_\FMIN_SINGLE\_X_CCF_F\CORNER\_X_FC_DRG;
+        }
+        Result 4
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMIN_K_\FMIN_SINGLE\_X_CCF_F\CORNER\_X_FC_DRG;
+        }
+        Result 5
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMIN_K_\FMIN_SINGLE\_X_CCF_F\CORNER\_X_FC_DRG;
+        }
+        Result 6
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMIN_K_\FMIN_SINGLE\_X_CCF_F\CORNER\_X_FC_DRG;
+        }
+        Result 7
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMIN_K_\FMIN_SINGLE\_X_CCF_F\CORNER\_X_FC_DRG;
+        }
+        Result 9
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMIN_K_\FMIN_SINGLE\_X_CCF_F\CORNER\_X_FC_DRG;
+        }
+        Result 10
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMIN_K_\FMIN_SINGLE\_X_CCF_F\CORNER\_X_FC_DRG;
+        }
+        Result 11
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMIN_K_\FMIN_SINGLE\_X_CCF_F\CORNER\_X_FC_DRG;
+        }
+        Result 12
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMIN_K_\FMIN_SINGLE\_X_CCF_F\CORNER\_X_FC_DRG;
+        }
+        Result 13
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMIN_K_\FMIN_SINGLE\_X_CCF_F\CORNER\_X_FC_DRG;
+        }
+        Result 14
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMIN_K_\FMIN_SINGLE\_X_CCF_F\CORNER\_X_FC_DRG;
+        }
+        Result 15
+        {
+            Property PassFail = "Pass";
+            GoTo SBFT_CCF_VMIN_K_\FMIN_SINGLE\_X_CCF_F\CORNER\_X_FC_DRG;
+        }
+    }
+    
+    FlowItem SBFT_CCF_VMIN_K_\FMIN_SINGLE\_X_CCF_F\CORNER\_X_FC_DRG SBFT_CCF_VMIN_K_\FMIN_SINGLE\_X_CCF_F\CORNER\_X_FC_DRG
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99452072_fail_FUN_CCF_CXPKGS9_SBFT_CCF_VMIN_K_\FMIN_SINGLE\_X_CCF_F\CORNER\_X_FC_DRG_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98452072_fail_FUN_CCF_CXPKGS9_SBFT_CCF_VMIN_K_\FMIN_SINGLE\_X_CCF_F\CORNER\_X_FC_DRG_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b45452001_fail_FUN_CCF_CXPKGS9_SBFT_CCF_VMIN_K_\FMIN_SINGLE\_X_CCF_F\CORNER\_X_FC_DRG_0;
+            Return 0;
+
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b45452002_fail_FUN_CCF_CXPKGS9_SBFT_CCF_VMIN_K_\FMIN_SINGLE\_X_CCF_F\CORNER\_X_FC_DRG_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b45452003_fail_FUN_CCF_CXPKGS9_SBFT_CCF_VMIN_K_\FMIN_SINGLE\_X_CCF_F\CORNER\_X_FC_DRG_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97452019_fail_FUN_CCF_CXPKGS9_SBFT_CCF_VMIN_K_\FMIN_SINGLE\_X_CCF_F\CORNER\_X_FC_DRG_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b45192019_fail_FUN_CCF_CXPKGS9_SBFT_CCF_VMIN_K_\FMIN_SINGLE\_X_CCF_F\CORNER\_X_FC_DRG_5;
+            Return 0;
+        }
+    }
+    
+}
+
+Flow FCSBFT_DRNG
+{
+    FlowItem DRNG_CCF_FUNC_K_ENDCPU_TAP_X_VNOM_X_CCF_DRNGTC_DRNG DRNG_CCF_FUNC_K_ENDCPU_TAP_X_VNOM_X_CCF_DRNGTC_DRNG
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99452001_fail_FUN_CCF_\BOM\_DRNG_CCF_FUNC_K_ENDCPU_TAP_X_VNOM_X_CCF_DRNGTC_DRNG_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98452001_fail_FUN_CCF_\BOM\_DRNG_CCF_FUNC_K_ENDCPU_TAP_X_VNOM_X_CCF_DRNGTC_DRNG_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b45392000_fail_FUN_CCF_\BOM\_DRNG_CCF_FUNC_K_ENDCPU_TAP_X_VNOM_X_CCF_DRNGTC_DRNG_0;
+                        Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo DRNG_CCF_FUNC_K_ENDCPU_TAP_X_VNOM_X_CCF_DRNGTC_FUSE_DRNG;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b45392001_fail_FUN_CCF_\BOM\_DRNG_CCF_FUNC_K_ENDCPU_TAP_X_VNOM_X_CCF_DRNGTC_DRNG_2;
+                        Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b45392002_fail_FUN_CCF_\BOM\_DRNG_CCF_FUNC_K_ENDCPU_TAP_X_VNOM_X_CCF_DRNGTC_DRNG_3;
+                        Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b45392003_fail_FUN_CCF_\BOM\_DRNG_CCF_FUNC_K_ENDCPU_TAP_X_VNOM_X_CCF_DRNGTC_DRNG_4;
+                        Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b45392004_fail_FUN_CCF_\BOM\_DRNG_CCF_FUNC_K_ENDCPU_TAP_X_VNOM_X_CCF_DRNGTC_DRNG_5;
+                        Return 0;
+        }
+    }
+    
+    FlowItem DRNG_CCF_FUNC_K_ENDCPU_TAP_X_VNOM_X_CCF_DRNGTC_FUSE_DRNG DRNG_CCF_FUNC_K_ENDCPU_TAP_X_VNOM_X_CCF_DRNGTC_FUSE_DRNG
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99452004_fail_FUN_CCF_\BOM\_DRNG_CCF_FUNC_K_ENDCPU_TAP_X_VNOM_X_CCF_DRNGTC_FUSE_DRNG_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98452004_fail_FUN_CCF_\BOM\_DRNG_CCF_FUNC_K_ENDCPU_TAP_X_VNOM_X_CCF_DRNGTC_FUSE_DRNG_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b45802005_fail_FUN_CCF_\BOM\_DRNG_CCF_FUNC_K_ENDCPU_TAP_X_VNOM_X_CCF_DRNGTC_FUSE_DRNG_0;
+                        Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+			Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b45802006_fail_FUN_CCF_\BOM\_DRNG_CCF_FUNC_K_ENDCPU_TAP_X_VNOM_X_CCF_DRNGTC_FUSE_DRNG_2;
+                        Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b45802007_fail_FUN_CCF_\BOM\_DRNG_CCF_FUNC_K_ENDCPU_TAP_X_VNOM_X_CCF_DRNGTC_FUSE_DRNG_3;
+                        Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b45802008_fail_FUN_CCF_\BOM\_DRNG_CCF_FUNC_K_ENDCPU_TAP_X_VNOM_X_CCF_DRNGTC_FUSE_DRNG_4;
+                        Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b45802009_fail_FUN_CCF_\BOM\_DRNG_CCF_FUNC_K_ENDCPU_TAP_X_VNOM_X_CCF_DRNGTC_FUSE_DRNG_5;
+                        Return 0;
+        }
+    }
+    
+}
+
+Flow FUN_CCF_\BOM\_ENDCPU @END_SubFlow
+{
+    FlowItem SBFT_CCF_VMIN_E_ENDCPU_X_X_VNOM_X_CCF_CCFBIST SBFT_CCF_VMIN_E_ENDCPU_X_X_VNOM_X_CCF_CCFBIST
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99452057_fail_FUN_CCF_\BOM\_SBFT_CCF_VMIN_E_ENDCPU_X_X_VNOM_X_CCF_CCFBIST_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98452057_fail_FUN_CCF_\BOM\_SBFT_CCF_VMIN_E_ENDCPU_X_X_VNOM_X_CCF_CCFBIST_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b45402000_fail_FUN_CCF_\BOM\_SBFT_CCF_VMIN_E_ENDCPU_X_X_VNOM_X_CCF_CCFBIST_0;
+                        Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FCSBFT_DRNG;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b45402001_fail_FUN_CCF_\BOM\_SBFT_CCF_VMIN_E_ENDCPU_X_X_VNOM_X_CCF_CCFBIST_2;
+                        Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b45402002_fail_FUN_CCF_\BOM\_SBFT_CCF_VMIN_E_ENDCPU_X_X_VNOM_X_CCF_CCFBIST_3;
+                        Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b97452005_fail_FUN_CCF_\BOM\_SBFT_CCF_VMIN_E_ENDCPU_X_X_VNOM_X_CCF_CCFBIST_4;
+                        Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b45192005_fail_FUN_CCF_\BOM\_SBFT_CCF_VMIN_E_ENDCPU_X_X_VNOM_X_CCF_CCFBIST_5;
+                        Return 0;
+        }
+    }
+    
+    FlowItem FCSBFT_DRNG FCSBFT_DRNG
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
