@@ -857,7 +857,7 @@ def main() -> int:
             print(f"  scope-filter: dropped {dropped_cross_module} cross-module "
                   f"instance(s) (no FlowItem in module's own mtpl)")
     if not SKILL_CSV.exists():
-        print(f"ERROR: skill CSV not found: {SKILL_CSV}", file=sys.stderr)
+        print(f'ERROR: skill CSV not found: {SKILL_CSV}', file=sys.stderr)
         return 2
 
     primary_text = MTPL_PRIMARY.read_text(encoding="utf-8", errors="replace")
