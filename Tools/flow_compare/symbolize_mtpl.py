@@ -43,6 +43,28 @@ OUT_SYMBOLS = _MODULE_DIR / f"{_MODULE_NAME}_bp.mtpl_symbols.csv"
 OUT_EXPANDED = _MODULE_DIR / f"{_MODULE_NAME}_bp.mtpl_expanded"
 
 
+def configure_module(*, keep_flow: str, remove_flows, out_suffix: str = "_bp"
+                     ) -> None:
+    """Repoint symbolize_mtpl's globals to a new (keep_flow, remove_flows)
+    tuple and output suffix. MUST be called AFTER `v3.configure_module()`
+    because module dir is derived from `v3.MTPL_PRIMARY.parent`.
+
+    The auto-BP driver invokes this once per Independent group with a
+    unique `out_suffix` (e.g. `_auto_bp_g0`) so artifacts of different
+    groups don't overwrite each other.
+    """
+    global KEEP_FLOW, REMOVE_FLOWS, ALL_FLOWS
+    global _MODULE_DIR, _MODULE_NAME, OUT_MTPL, OUT_SYMBOLS, OUT_EXPANDED
+    KEEP_FLOW = keep_flow
+    REMOVE_FLOWS = list(remove_flows)
+    ALL_FLOWS = [KEEP_FLOW, *REMOVE_FLOWS]
+    _MODULE_DIR = v3.MTPL_PRIMARY.parent
+    _MODULE_NAME = _MODULE_DIR.name
+    OUT_MTPL = _MODULE_DIR / f"{_MODULE_NAME}{out_suffix}.mtpl"
+    OUT_SYMBOLS = _MODULE_DIR / f"{_MODULE_NAME}{out_suffix}.mtpl_symbols.csv"
+    OUT_EXPANDED = _MODULE_DIR / f"{_MODULE_NAME}{out_suffix}.mtpl_expanded"
+
+
 def _find_flow_block(lines, flow_name):
     rgx = re.compile(rf"^\s*Flow\s+{re.escape(flow_name)}\s*(@\S+)?\s*$")
     for i, line in enumerate(lines):
@@ -959,19 +981,32 @@ def _prework_collect_targets() -> set[str]:
     """Return the set of test instance names that are reachable under the
     input flows according to the skill CSV. Strips each per-flow prefix from
     `compare_flows_v3.FLOW_DEFS` so the result matches the bare CSharpTest
-    instance names defined in the mtpl."""
+    instance names defined in the mtpl.
+
+    HYBRID: Also unions in every FlowItem instance reachable under any
+    input flow in the .mtpl itself, so flows missing from the runtime
+    trace still get prework normalization applied.
+    """
     out: set[str] = set()
-    if not v3.SKILL_CSV.exists():
-        return out
-    prefixes = tuple(v3.FLOW_DEFS.values())
-    with v3.SKILL_CSV.open(encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            n = row.get("Test Instance Name") or ""
-            for p in prefixes:
-                if n.startswith(p):
-                    out.add(n[len(p):])
-                    break
+    if v3.SKILL_CSV.exists():
+        prefixes = tuple(v3.FLOW_DEFS.values())
+        with v3.SKILL_CSV.open(encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                n = row.get("Test Instance Name") or ""
+                for p in prefixes:
+                    if n.startswith(p):
+                        out.add(n[len(p):])
+                        break
+    # Hybrid fallback: any FlowItem reachable under FLOWS in the .mtpl.
+    if v3.MTPL_PRIMARY.exists():
+        text = v3.MTPL_PRIMARY.read_text(encoding="utf-8", errors="replace")
+        nl = "\r\n" if "\r\n" in text[:4096] else "\n"
+        lines = text.split(nl)
+        for fn in v3.FLOWS:
+            for bf in [fn] + v3.collect_subflows(lines, fn):
+                for it in v3.parse_flow_body(lines, bf):
+                    out.add(it["instance"])
     return out
 
 
@@ -1191,50 +1226,63 @@ def phase_compare() -> tuple[list[str], str]:
     print("PHASE 1 / 3  —  COMPARE")
     print("=" * 60)
 
-    # CYCLE-AWARE detection: if `_bp.mtpl_symbols.csv` already exists, this
-    # is cycle N (N >= 2). Seed v3's symbol-numbering floor so new symbols
-    # get numbers > max(existing). Backup the previous compare CSV so we
-    # can merge it back in after this cycle's CSV is generated+merged.
-    max_n, prev_flows, prev_sym_rows, _prev_sym_fields = \
-        _detect_previous_cycle()
-    if max_n >= 0:
-        v3.PRESEED_MAX_SYMBOL = max_n
-        # Build a hole-tuple -> sN map projected onto the CURRENT FLOWS
-        # order. When current FLOWS overlap with prev_flows, identical
-        # tuples will REUSE the existing sN name. Tuples with empty cells
-        # (current FLOWS that weren't in prev) are skipped to avoid false
-        # matches.
-        preseed: dict[tuple, str] = {}
-        for row in prev_sym_rows:
-            m = re.match(r"\\s(\d+)\\", row.get("Symbol", ""))
-            if not m:
-                continue
-            sym = f"s{m.group(1)}"
-            try:
-                hole = tuple(row[fn] for fn in v3.FLOWS)
-            except KeyError:
-                continue  # current FLOWS not all present in prev symbols.csv
-            if all(v == "" for v in hole):
-                continue
-            preseed[hole] = sym
-        v3.PRESEED_SYMBOL_MAP = preseed
-        print(f"Cycle-aware: previous symbols.csv found "
-              f"(max=\\s{max_n}\\, prev_flows={prev_flows}, "
-              f"reuse-seeds={len(preseed)})")
+    # Orchestrator override: when `v3.PRESEED_OVERRIDE` is True, the
+    # caller (e.g. `auto_run_groups.py`) has explicitly supplied a
+    # cross-group preseed map. Honor it verbatim and skip the on-disk
+    # `_detect_previous_cycle()` auto-detect (which only handles
+    # same-flow re-runs of one group, NOT cross-group symbol reuse).
+    if getattr(v3, "PRESEED_OVERRIDE", False):
+        print(f"Orchestrator preseed in effect: "
+              f"max=\\s{v3.PRESEED_MAX_SYMBOL}\\, "
+              f"reuse-seeds={len(v3.PRESEED_SYMBOL_MAP)}")
+        prev_compare_backup: Path | None = None
+        if v3.OUT_CSV.exists() and v3.PRESEED_MAX_SYMBOL >= 0:
+            prev_compare_backup = v3.OUT_CSV.with_suffix(
+                v3.OUT_CSV.suffix + ".prev_cycle.bak")
+            if prev_compare_backup.exists():
+                prev_compare_backup.unlink()
+            v3.OUT_CSV.replace(prev_compare_backup)
+            print(f"Backed up previous compare CSV -> "
+                  f"{prev_compare_backup.name}")
     else:
-        v3.PRESEED_MAX_SYMBOL = -1
-        v3.PRESEED_SYMBOL_MAP = {}
-        print("Cycle 1: no previous artifacts found")
+        # CYCLE-AWARE detection: if `_bp.mtpl_symbols.csv` already exists,
+        # this is cycle N (N >= 2). Seed v3's symbol-numbering floor so new
+        # symbols get numbers > max(existing).
+        max_n, prev_flows, prev_sym_rows, _prev_sym_fields = \
+            _detect_previous_cycle()
+        if max_n >= 0:
+            v3.PRESEED_MAX_SYMBOL = max_n
+            preseed: dict[tuple, str] = {}
+            for row in prev_sym_rows:
+                m = re.match(r"\\s(\d+)\\", row.get("Symbol", ""))
+                if not m:
+                    continue
+                sym = f"s{m.group(1)}"
+                try:
+                    hole = tuple(row[fn] for fn in v3.FLOWS)
+                except KeyError:
+                    continue
+                if all(v == "" for v in hole):
+                    continue
+                preseed[hole] = sym
+            v3.PRESEED_SYMBOL_MAP = preseed
+            print(f"Cycle-aware: previous symbols.csv found "
+                  f"(max=\\s{max_n}\\, prev_flows={prev_flows}, "
+                  f"reuse-seeds={len(preseed)})")
+        else:
+            v3.PRESEED_MAX_SYMBOL = -1
+            v3.PRESEED_SYMBOL_MAP = {}
+            print("Cycle 1: no previous artifacts found")
 
-    prev_compare_backup: Path | None = None
-    if v3.OUT_CSV.exists() and max_n >= 0:
-        prev_compare_backup = v3.OUT_CSV.with_suffix(
-            v3.OUT_CSV.suffix + ".prev_cycle.bak")
-        if prev_compare_backup.exists():
-            prev_compare_backup.unlink()
-        v3.OUT_CSV.replace(prev_compare_backup)
-        print(f"Backed up previous compare CSV -> "
-              f"{prev_compare_backup.name}")
+        prev_compare_backup = None
+        if v3.OUT_CSV.exists() and max_n >= 0:
+            prev_compare_backup = v3.OUT_CSV.with_suffix(
+                v3.OUT_CSV.suffix + ".prev_cycle.bak")
+            if prev_compare_backup.exists():
+                prev_compare_backup.unlink()
+            v3.OUT_CSV.replace(prev_compare_backup)
+            print(f"Backed up previous compare CSV -> "
+                  f"{prev_compare_backup.name}")
 
     primary_text = v3.MTPL_PRIMARY.read_text(encoding="utf-8", errors="replace")
     nl = "\r\n" if "\r\n" in primary_text[:4096] else "\n"
@@ -1630,6 +1678,61 @@ def phase_generate(lines: list[str], nl: str) -> dict[tuple, str]:
                 rewritten[i] = new_line
                 inst_lines_changed += 1
     print(f"Instance-name lines rewritten: {inst_lines_changed}")
+
+    # 2f.5 — Cross-flow reference rewrite (sub-flow group support).
+    # Rewrite any `FlowItem <name> ...` / `GoTo <name>;` whose target is a
+    # member of this collapse group (KEEP_FLOW or any REMOVE_FLOWS) to the
+    # symbolized rep name (e.g. `L2_\s0\_MIN`). Without this, surviving
+    # parent flows still reference the removed sub-flow names by their
+    # original symbols, producing dangling FlowItem/GoTo targets after
+    # the Flow definitions are deleted (validator Check 11 fails).
+    # The kept flow's own body has already been handled by 2f; this pass
+    # touches all OTHER non-deleted lines.
+    name_subst: dict[str, str] = {}
+    if flow_template:
+        rep_sym_name = _symbolized_to_mtpl(flow_template)
+        for nm in ALL_FLOWS:
+            if nm and nm != rep_sym_name:
+                name_subst[nm] = rep_sym_name
+    xflow_rewrites = 0
+    if name_subst:
+        # Build precompiled per-name regexes (word-boundary on the target
+        # token) so we don't accidentally match inside longer identifiers.
+        # FlowItem can take 2 fields (template + instance) -- rewrite both.
+        # GoTo targets terminate at `;` or whitespace.
+        _flowitem_rewrite_re = re.compile(
+            r"^(\s*FlowItem\s+)(\S+)(\s+)(\S+)(.*)$")
+        _goto_rewrite_re = re.compile(
+            r"^(\s*GoTo\s+)([^\s;]+)(\s*;.*)$")
+        keep_s_body, keep_e_body = keep_block
+        for i in range(len(rewritten)):
+            if delete[i]:
+                continue
+            # Skip kept-flow body (already symbolized appropriately).
+            if keep_s_body <= i <= keep_e_body:
+                continue
+            line = rewritten[i]
+            new_line = line
+            m = _flowitem_rewrite_re.match(new_line)
+            if m:
+                tpl_name = m.group(2); inst_name = m.group(4)
+                new_tpl = name_subst.get(tpl_name, tpl_name)
+                new_inst = name_subst.get(inst_name, inst_name)
+                if new_tpl != tpl_name or new_inst != inst_name:
+                    new_line = (f"{m.group(1)}{new_tpl}{m.group(3)}"
+                                f"{new_inst}{m.group(5)}")
+            else:
+                gm = _goto_rewrite_re.match(new_line)
+                if gm:
+                    tgt = gm.group(2)
+                    new_tgt = name_subst.get(tgt, tgt)
+                    if new_tgt != tgt:
+                        new_line = f"{gm.group(1)}{new_tgt}{gm.group(3)}"
+            if new_line != line:
+                rewritten[i] = new_line
+                xflow_rewrites += 1
+    print(f"Cross-flow refs rewritten : {xflow_rewrites}  "
+          f"(subst={len(name_subst)})")
 
     # Emit (atomic via temp file -- safe even when OUT_MTPL == input).
     kept = [rewritten[i] for i in range(len(rewritten)) if not delete[i]]
@@ -2119,7 +2222,11 @@ def _run_torch_build_on(buildable_path: Path,
     """Build `buildable_path` AND `orig_path` (always both, so caller can
     enforce the contract: expanded build errors must be <= orig build
     errors). Returns (rc_build, rc_orig, n_err_build, n_err_orig).
-    A return code of 0 with -1 error counts means "build skipped"."""
+    A return code of 0 with -1 error counts means "build skipped".
+
+    The orig build is cached per process by absolute path+mtime, so when
+    the auto-BP driver invokes phase_validate() once per group within the
+    same module, the orig is built only the first time."""
     module_dir = buildable_path.parent
     module_name = module_dir.name
     # Find repo root: the directory containing NVL_CPU.sln.
@@ -2141,10 +2248,38 @@ def _run_torch_build_on(buildable_path: Path,
     if not orig_path.exists():
         print("  SKIP orig-build: no .mtpl_orig found - cannot compare")
         return rc_b, 0, n_b, -1
+
     log_orig = buildable_path.parent / f"{buildable_path.stem}.build_orig.log"
+    # Cache lookup
+    try:
+        st = orig_path.stat()
+        cache_key = (str(orig_path.resolve()), st.st_mtime_ns, st.st_size)
+    except OSError:
+        cache_key = None
+    if cache_key is not None and cache_key in _ORIG_BUILD_CACHE:
+        rc_o, n_o = _ORIG_BUILD_CACHE[cache_key]
+        print(f"  CACHED orig build: rc={rc_o}  errors={n_o}  "
+              f"(reused for {buildable_path.stem})")
+        # Still write the build_orig.log for this group (copy from previous).
+        try:
+            prev_log = _ORIG_BUILD_CACHE_LOG.get(cache_key)
+            if prev_log and prev_log.exists() and prev_log != log_orig:
+                log_orig.write_bytes(prev_log.read_bytes())
+        except Exception:
+            pass
+        return rc_b, rc_o, n_b, n_o
+
     rc_o, n_o = _build_with_swap(orig_path, repo_root, module_name,
                                  build_class, log_orig, label="orig")
+    if cache_key is not None:
+        _ORIG_BUILD_CACHE[cache_key] = (rc_o, n_o)
+        _ORIG_BUILD_CACHE_LOG[cache_key] = log_orig
     return rc_b, rc_o, n_b, n_o
+
+
+# Process-level cache: orig-build result keyed by (path, mtime, size).
+_ORIG_BUILD_CACHE: dict[tuple, tuple[int, int]] = {}
+_ORIG_BUILD_CACHE_LOG: dict[tuple, Path] = {}
 
 
 def _build_with_swap(source_file: Path, repo_root: Path,

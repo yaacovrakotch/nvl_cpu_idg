@@ -1,0 +1,2657 @@
+Version 1.0;
+
+ProgramStyle = Modular;
+
+TestPlan FUS_FUSEVLD_CKX;
+
+Import "FUS_FUSEVLD_CKX.usrv";
+
+# Test Counter Definition
+
+Counters
+{
+    n31402006_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_0,
+    n31402007_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_2,
+    n31402008_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_3,
+    n31402009_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_4,
+    n31402012_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_09_0,
+    n31402013_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_09_2,
+    n31402014_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_08_0,
+    n31402015_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_08_2,
+    n31402016_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_0,
+    n31402017_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_2,
+    n31402018_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_3,
+    n31402019_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_4,
+    n31402046_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_03_CPU1_0,
+    n31402047_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_03_CPU1_3,
+    n31402048_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_02_CPU1_0,
+    n31402049_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_02_CPU1_3,
+    n31402050_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_CPU1_0,
+    n31402051_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_CPU1_2,
+    n31402052_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_CPU1_3,
+    n31402053_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_CPU1_4,
+    n31402056_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_09_CPU1_0,
+    n31402057_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_09_CPU1_2,
+    n31402059_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_08_CPU1_2,
+    n31402060_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_CPU1_0,
+    n31402061_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_CPU1_2,
+    n31402062_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_CPU1_3,
+    n31402063_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_CPU1_4,
+    n31402065_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_02_0,
+    n31402066_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_02_3,
+    n31402068_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_08_CPU1_0,
+    n31402070_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_03_0,
+    n31402071_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_03_3,
+    n31472026_fail_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_03_UV_0,
+    n31472027_fail_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_02_UV_0,
+    n31472028_fail_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_01_UV_0,
+    n31472032_fail_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_07_OV_0,
+    n31472039_fail_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_03_UV_CPU1_0,
+    n31472040_fail_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_02_UV_CPU1_0,
+    n31472041_fail_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_01_UV_CPU1_0,
+    n31472043_fail_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_09_OV_CPU1_0,
+    n31472044_fail_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_08_OV_CPU1_0,
+    n31472045_fail_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_07_OV_CPU1_0,
+    n31472048_fail_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_09_OV_0,
+    n31472049_fail_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_08_OV_0,
+    n31482056_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE03_0,
+    n31482057_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE02_0,
+    n31482058_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE01_0,
+    n31482060_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE09_0,
+    n31482061_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE08_0,
+    n31482062_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE07_0,
+    n31482063_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_SETDFF_CPU1_0,
+    n31482069_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE03_CPU1_0,
+    n31482070_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE02_CPU1_0,
+    n31482071_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE01_CPU1_0,
+    n31482073_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE09_CPU1_0,
+    n31482074_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE08_CPU1_0,
+    n31482075_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE07_CPU1_0,
+    n31482076_fail_FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_ALL_IN_ONE_FORK_CPU_0,
+    n31482077_fail_FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_ALL_IN_ONE_FORK_CPU_2,
+    n31482078_fail_FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_ALL_IN_ONE_FORK_CPU_3,
+    n31482079_fail_FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_ALL_IN_ONE_FORK_CPU_4,
+    n31482080_fail_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_FUSE_STRING_VALID_CHECK_0,
+    n31482081_fail_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_FUSE_STRING_VALID_CHECK_2,
+    n31482082_fail_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_FUSE_STRING_VALID_CHECK_4,
+    n31482083_fail_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_FUSE_STRING_VALID_CHECK_5,
+    n31482084_fail_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_FUSE_STRING_VALID_CHECK_6,
+    n31482085_fail_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_FUSE_STRING_VALID_CHECK_7,
+    n31482086_fail_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_SOCKET_MODE_CHECK_0,
+    n31482087_fail_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_SOCKET_MODE_CHECK_2,
+    n31482088_fail_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_SOCKET_MODE_CHECK_4,
+    n31482090_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_UVLDSETDFF_0,
+    n31482091_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLDSETDFF_0,
+    n31482092_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_UVLDSETDFF_CPU1_0,
+    n31482093_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLDSETDFF_CPU1_0,
+    n31482095_fail_FUSE_X_AUX_K_BEGINCPUPKG_X_X_X_X_IF_18AP_0,
+    n31482096_fail_FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_SET_DEFAULT_DFF_0,
+    n31482097_fail_FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_SET_DEFAULT_DFF_3,
+    n31482098_fail_FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_SET_DEFAULT_DFF_4,
+    n31482099_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_SETDFF_0
+} # End of Test Counter Definition
+
+CSharpTest AuxiliaryTC FUSE_X_AUX_K_BEGINCPUPKG_X_X_X_X_IF_18AP
+{
+    BypassPort = -1;
+    DataType = "String";
+    Expression = "IsMatch([_UserVars.IF_18AP], 'YES')";
+    ResultPort = "[R]?1:2";
+    Storage = "UserVar";
+}
+
+CSharpTest FleCheckFuseStringStatusByDies FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_FUSE_STRING_VALID_CHECK
+{
+    BypassPort = -1;
+    FuseReadTokenNames = __shared__::TpRule.If_CLASS_NVL_S52C("FUS_FUSEREAD_CXX::FUS_FUSEREAD_CXX.FuseReadOutputStr_CPU0,FUS_FUSEREAD_CXX::FUS_FUSEREAD_CXX.FuseReadOutputStr_CPU1","FUS_FUSEREAD_CXX::FUS_FUSEREAD_CXX.FuseReadOutputStr_CPU0");
+    LockoutBitGroup = "LockoutBits_00";
+    OutputFuseStringLocation = "SharedStorage";
+    Registers = __shared__::TpRule.If_CLASS_NVL_S52C("CPU0,CPU1","CPU0");
+}
+
+CSharpTest FleGetDieStatus FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_SOCKET_MODE_CHECK
+{
+    BypassPort = -1;
+    FuseStateUservar = "Which_Socket.FuseState";
+    Register = "CPU0";
+}
+
+CSharpTest ScreenTC FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_ALL_IN_ONE_FORK_CPU
+{
+    ScreenTestSet = "CXX_VLD_PERDUTINIT";
+    ScreenTestsFile = "./InputFiles/VLD.screentest.json";
+}
+
+CSharpTest PrimeSetDffTestMethod FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLDSETDFF
+{
+    BypassPort = FUS_FUSEVLD_CKX_Rules.FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLDSETDFF_BypassPort(-1,1);
+    DieId = __shared__::DFFVars.DIEID_CPU;
+    TokenName = "FOVLDC0,FOVLDC1,FOBWVLD0,FOBWVLD1";
+    TokenValue = "Storage.CXX_OVERVOLTVALUE_NORESENSE,Storage.CXX_OVERVOLTVALUE_NORESENSE,Storage.CXX_OVERVOLTVALUE_BW,Storage.CXX_OVERVOLTVALUE_BW";
+}
+
+CSharpTest PrimeSetDffTestMethod FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_UVLDSETDFF
+{
+    BypassPort = FUS_FUSEVLD_CKX_Rules.FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_UVLDSETDFF_BypassPort(-1,1);
+    DieId = __shared__::DFFVars.DIEID_CPU;
+    TokenName = "FUVLDC0,FUVLDC1,FUBWVLD0,FUBWVLD1";
+    TokenValue = "Storage.CXX_UNDERVOLTVALUE_NORESENSE,Storage.CXX_UNDERVOLTVALUE_NORESENSE,Storage.CXX_UNDERVOLTVALUE_BW,Storage.CXX_UNDERVOLTVALUE_BW";
+}
+
+CSharpTest PrimeSetDffTestMethod FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLDSETDFF_CPU1
+{
+    BypassPort = FUS_FUSEVLD_CKX_Rules.FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLDSETDFF_CPU1_BypassPort(-1,1);
+    DieId = __shared__::DFFVars.DIEID_CPU1;
+    TokenName = "FOVLDC0,FOVLDC1,FOBWVLD0,FOBWVLD1";
+    TokenValue = "Storage.CXX_OVERVOLTVALUE_NORESENSE,Storage.CXX_OVERVOLTVALUE_NORESENSE,Storage.CXX_OVERVOLTVALUE_BW,Storage.CXX_OVERVOLTVALUE_BW";
+}
+
+CSharpTest PrimeSetDffTestMethod FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_UVLDSETDFF_CPU1
+{
+    BypassPort = FUS_FUSEVLD_CKX_Rules.FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_UVLDSETDFF_CPU1_BypassPort(-1,1);
+    DieId = __shared__::DFFVars.DIEID_CPU1;
+    TokenName = "FUVLDC0,FUVLDC1,FUBWVLD0,FUBWVLD1";
+    TokenValue = "Storage.CXX_UNDERVOLTVALUE_NORESENSE,Storage.CXX_UNDERVOLTVALUE_NORESENSE,Storage.CXX_UNDERVOLTVALUE_BW,Storage.CXX_UNDERVOLTVALUE_BW";
+}
+
+CSharpTest ScreenTC FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_SET_DEFAULT_DFF
+{
+    ScreenTestSet = "CXX_VLD_SET_DEFAULT";
+    ScreenTestsFile = "./InputFiles/VLD.screentest.json";
+}
+
+CSharpTest PrimeSetDffTestMethod FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_SETDFF
+{
+    BypassPort = FUS_FUSEVLD_CKX_Rules.FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_SETDFF_BypassPort(-1,1);
+    DieId = __shared__::DFFVars.DIEID_CPU;
+    TokenName = "FOBWVLD0,FOBWVLD1,FUBWVLD0,FUBWVLD1";
+    TokenValue = "Storage.CXX_OVERVOLTVALUE_BW,Storage.CXX_OVERVOLTVALUE_BW,Storage.CXX_UNDERVOLTVALUE_BW,Storage.CXX_UNDERVOLTVALUE_BW";
+}
+
+CSharpTest PrimeSetDffTestMethod FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_SETDFF_CPU1
+{
+    BypassPort = FUS_FUSEVLD_CKX_Rules.FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_SETDFF_CPU1_BypassPort(-1,1);
+    DieId = __shared__::DFFVars.DIEID_CPU1;
+    TokenName = "FOBWVLD0,FOBWVLD1,FUBWVLD0,FUBWVLD1";
+    TokenValue = "Storage.CXX_OVERVOLTVALUE_BW,Storage.CXX_OVERVOLTVALUE_BW,Storage.CXX_UNDERVOLTVALUE_BW,Storage.CXX_UNDERVOLTVALUE_BW";
+}
+
+
+
+Flow UVLD_REGISTER_METHOD
+{
+    FlowItem UV_03 UV_03
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo UV_02;
+        }
+    }
+    
+    FlowItem UV_02 UV_02
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo UV_01;
+        }
+    }
+    
+    FlowItem UV_01 UV_01
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+
+
+Flow OVLD_REGISTER_METHOD
+{
+    FlowItem OV_09 OV_09
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo OV_08;
+        }
+    }
+    
+    FlowItem OV_08 OV_08
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo OV_07;
+        }
+    }
+    
+    FlowItem OV_07 OV_07
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+
+
+Flow CPU1_UVLD_REGISTER_METHOD
+{
+    FlowItem UV_03_CPU1 UV_03_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo UV_02_CPU1;
+        }
+    }
+    
+    FlowItem UV_02_CPU1 UV_02_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo UV_01_CPU1;
+        }
+    }
+    
+    FlowItem UV_01_CPU1 UV_01_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+
+
+Flow CPU1_OVLD_REGISTER_METHOD
+{
+    FlowItem OV_09_CPU1 OV_09_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo OV_08_CPU1;
+        }
+    }
+    
+    FlowItem OV_08_CPU1 OV_08_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            GoTo OV_07_CPU1;
+        }
+    }
+    
+    FlowItem OV_07_CPU1 OV_07_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow FUS_FUSEVLD_CKX_BEGINCPUPKG
+{
+    FlowItem FUSE_X_AUX_K_BEGINCPUPKG_X_X_X_X_IF_18AP FUSE_X_AUX_K_BEGINCPUPKG_X_X_X_X_IF_18AP
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312000_fail_FUS_FUSEVLD_CKX_FUSE_X_AUX_K_BEGINCPUPKG_X_X_X_X_IF_18AP_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312000_fail_FUS_FUSEVLD_CKX_FUSE_X_AUX_K_BEGINCPUPKG_X_X_X_X_IF_18AP_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482095_fail_FUS_FUSEVLD_CKX_FUSE_X_AUX_K_BEGINCPUPKG_X_X_X_X_IF_18AP_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482095_fail_FUSE_X_AUX_K_BEGINCPUPKG_X_X_X_X_IF_18AP_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_FUSE_STRING_VALID_CHECK;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+    FlowItem FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_FUSE_STRING_VALID_CHECK FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_FUSE_STRING_VALID_CHECK
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312015_fail_FUS_FUSEVLD_CKX_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_FUSE_STRING_VALID_CHECK_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312015_fail_FUS_FUSEVLD_CKX_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_FUSE_STRING_VALID_CHECK_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482080_fail_FUS_FUSEVLD_CKX_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_FUSE_STRING_VALID_CHECK_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482080_fail_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_FUSE_STRING_VALID_CHECK_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_SOCKET_MODE_CHECK;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31482081_fail_FUS_FUSEVLD_CKX_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_FUSE_STRING_VALID_CHECK_2;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482081_fail_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_FUSE_STRING_VALID_CHECK_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_SOCKET_MODE_CHECK;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b31482082_fail_FUS_FUSEVLD_CKX_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_FUSE_STRING_VALID_CHECK_4;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482082_fail_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_FUSE_STRING_VALID_CHECK_4;
+            Return 0;
+        }
+        Result 5
+        {
+            Property PassFail = "Fail";
+            SetBin b31482083_fail_FUS_FUSEVLD_CKX_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_FUSE_STRING_VALID_CHECK_5;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482083_fail_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_FUSE_STRING_VALID_CHECK_5;
+            Return 0;
+        }
+        Result 6
+        {
+            Property PassFail = "Fail";
+            SetBin b31482084_fail_FUS_FUSEVLD_CKX_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_FUSE_STRING_VALID_CHECK_6;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482084_fail_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_FUSE_STRING_VALID_CHECK_6;
+            Return 0;
+        }
+        Result 7
+        {
+            Property PassFail = "Fail";
+            SetBin b31482085_fail_FUS_FUSEVLD_CKX_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_FUSE_STRING_VALID_CHECK_7;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482085_fail_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_FUSE_STRING_VALID_CHECK_7;
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_SOCKET_MODE_CHECK FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_SOCKET_MODE_CHECK
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312016_fail_FUS_FUSEVLD_CKX_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_SOCKET_MODE_CHECK_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312016_fail_FUS_FUSEVLD_CKX_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_SOCKET_MODE_CHECK_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482086_fail_FUS_FUSEVLD_CKX_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_SOCKET_MODE_CHECK_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482086_fail_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_SOCKET_MODE_CHECK_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_ALL_IN_ONE_FORK_CPU;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31482087_fail_FUS_FUSEVLD_CKX_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_SOCKET_MODE_CHECK_2;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482087_fail_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_SOCKET_MODE_CHECK_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_SET_DEFAULT_DFF;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b31482088_fail_FUS_FUSEVLD_CKX_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_SOCKET_MODE_CHECK_4;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482088_fail_FUSE_X_FLE_K_BEGINCPUPKG_X_X_X_X_SOCKET_MODE_CHECK_4;
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_ALL_IN_ONE_FORK_CPU FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_ALL_IN_ONE_FORK_CPU
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312189_fail_FUS_FUSEVLD_CKX_FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_ALL_IN_ONE_FORK_CPU_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312189_fail_FUS_FUSEVLD_CKX_FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_ALL_IN_ONE_FORK_CPU_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482076_fail_FUS_FUSEVLD_CKX_FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_ALL_IN_ONE_FORK_CPU_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482076_fail_FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_ALL_IN_ONE_FORK_CPU_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo OVLD_REGISTER_METHOD;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31482077_fail_FUS_FUSEVLD_CKX_FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_ALL_IN_ONE_FORK_CPU_2;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482077_fail_FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_ALL_IN_ONE_FORK_CPU_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b31482078_fail_FUS_FUSEVLD_CKX_FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_ALL_IN_ONE_FORK_CPU_3;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482078_fail_FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_ALL_IN_ONE_FORK_CPU_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b31482079_fail_FUS_FUSEVLD_CKX_FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_ALL_IN_ONE_FORK_CPU_4;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482079_fail_FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_ALL_IN_ONE_FORK_CPU_4;
+            Return 0;
+        }
+    }
+    
+    FlowItem OVLD_REGISTER_METHOD OVLD_REGISTER_METHOD
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLDSETDFF;
+        }
+    }
+    
+    FlowItem FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLDSETDFF FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLDSETDFF
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312237_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLDSETDFF_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312237_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLDSETDFF_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482091_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLDSETDFF_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482091_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLDSETDFF_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo UVLD_REGISTER_METHOD;
+        }
+    }
+    
+    FlowItem UVLD_REGISTER_METHOD UVLD_REGISTER_METHOD
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_UVLDSETDFF;
+        }
+    }
+    
+    FlowItem FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_UVLDSETDFF FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_UVLDSETDFF
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312247_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_UVLDSETDFF_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312247_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_UVLDSETDFF_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482090_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_UVLDSETDFF_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482090_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_UVLDSETDFF_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CPU1_OVLD_REGISTER_METHOD;
+        }
+    }
+    
+    FlowItem CPU1_OVLD_REGISTER_METHOD CPU1_OVLD_REGISTER_METHOD
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLDSETDFF_CPU1;
+        }
+    }
+    
+    FlowItem FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLDSETDFF_CPU1 FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLDSETDFF_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312238_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLDSETDFF_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312238_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLDSETDFF_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482093_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLDSETDFF_CPU1_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482093_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLDSETDFF_CPU1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo CPU1_UVLD_REGISTER_METHOD;
+        }
+    }
+    
+    FlowItem CPU1_UVLD_REGISTER_METHOD CPU1_UVLD_REGISTER_METHOD
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_UVLDSETDFF_CPU1;
+        }
+    }
+    
+    FlowItem FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_UVLDSETDFF_CPU1 FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_UVLDSETDFF_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312248_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_UVLDSETDFF_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312248_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_UVLDSETDFF_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482092_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_UVLDSETDFF_CPU1_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482092_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_UVLDSETDFF_CPU1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+    FlowItem FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_SET_DEFAULT_DFF FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_SET_DEFAULT_DFF
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312190_fail_FUS_FUSEVLD_CKX_FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_SET_DEFAULT_DFF_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312190_fail_FUS_FUSEVLD_CKX_FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_SET_DEFAULT_DFF_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482096_fail_FUS_FUSEVLD_CKX_FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_SET_DEFAULT_DFF_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482096_fail_FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_SET_DEFAULT_DFF_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_SETDFF;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b31482097_fail_FUS_FUSEVLD_CKX_FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_SET_DEFAULT_DFF_3;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482097_fail_FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_SET_DEFAULT_DFF_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b31482098_fail_FUS_FUSEVLD_CKX_FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_SET_DEFAULT_DFF_4;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482098_fail_FUSE_X_SCREENTC_K_BEGINCPUPKG_X_X_X_X_SET_DEFAULT_DFF_4;
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_SETDFF FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_SETDFF
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312245_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_SETDFF_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312245_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_SETDFF_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482099_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_SETDFF_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482099_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_SETDFF_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_SETDFF_CPU1;
+        }
+    }
+    
+    FlowItem FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_SETDFF_CPU1 FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_SETDFF_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312246_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_SETDFF_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312246_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_SETDFF_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482063_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_SETDFF_CPU1_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482063_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_SETDFF_CPU1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+# === auto-expander: original group Flow bodies ===
+Flow UV_01
+{
+    FlowItem FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_01_UV FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_01_UV
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312104_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_01_UV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312104_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_01_UV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31472028_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_01_UV_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31472028_fail_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_01_UV_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01 FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312144_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312144_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31402006_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402006_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE01;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31402007_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_2;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402007_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b31402008_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_3;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402008_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b31402009_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_4;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402009_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_4;
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE01 FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE01
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312249_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE01_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312249_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE01_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482058_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE01_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482058_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE01_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow UV_02
+{
+    FlowItem FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_02_UV FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_02_UV
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312106_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_02_UV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312106_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_02_UV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31472027_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_02_UV_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31472027_fail_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_02_UV_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_02;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_02 FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_02
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312146_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_02_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312146_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_02_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31402065_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_02_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402065_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_02_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE02;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            Return 2;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b31402066_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_02_3;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402066_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_02_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Pass";
+            Return 2;
+        }
+    }
+    
+    FlowItem FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE02 FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE02
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312251_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE02_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312251_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE02_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482057_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE02_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482057_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE02_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow UV_03
+{
+    FlowItem FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_03_UV FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_03_UV
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312108_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_03_UV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312108_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_03_UV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31472026_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_03_UV_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31472026_fail_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_03_UV_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_03;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_03 FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_03
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312148_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_03_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312148_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_03_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31402070_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_03_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402070_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_03_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE03;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            Return 2;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b31402071_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_03_3;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402071_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_03_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Pass";
+            Return 2;
+        }
+    }
+    
+    FlowItem FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE03 FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE03
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312253_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE03_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312253_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE03_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482056_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE03_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482056_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE03_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow OV_07
+{
+    FlowItem FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_07_OV FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_07_OV
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312110_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_07_OV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312110_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_07_OV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31472032_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_07_OV_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31472032_fail_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_07_OV_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07 FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312138_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312138_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31402016_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402016_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE07;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31402017_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_2;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402017_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b31402018_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_3;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402018_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b31402019_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_4;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402019_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_4;
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE07 FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE07
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312239_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE07_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312239_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE07_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482062_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE07_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482062_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE07_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow OV_08
+{
+    FlowItem FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_08_OV FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_08_OV
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312112_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_08_OV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312112_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_08_OV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31472049_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_08_OV_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31472049_fail_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_08_OV_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_08;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_08 FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_08
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312140_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_08_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312140_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_08_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31402014_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_08_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402014_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_08_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE08;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31402015_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_08_2;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402015_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_08_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 2;
+        }
+        Result 4
+        {
+            Property PassFail = "Pass";
+            Return 2;
+        }
+    }
+    
+    FlowItem FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE08 FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE08
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312241_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE08_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312241_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE08_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482061_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE08_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482061_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE08_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow OV_09
+{
+    FlowItem FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_09_OV FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_09_OV
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312114_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_09_OV_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312114_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_09_OV_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31472048_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_09_OV_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31472048_fail_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_09_OV_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_09;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_09 FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_09
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312142_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_09_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312142_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_09_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31402012_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_09_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402012_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_09_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE09;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31402013_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_09_2;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402013_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_09_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 2;
+        }
+        Result 4
+        {
+            Property PassFail = "Pass";
+            Return 2;
+        }
+    }
+    
+    FlowItem FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE09 FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE09
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312243_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE09_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312243_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE09_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482060_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE09_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482060_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE09_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow UV_01_CPU1
+{
+    FlowItem FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_01_UV_CPU1 FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_01_UV_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312105_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_01_UV_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312105_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_01_UV_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31472041_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_01_UV_CPU1_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31472041_fail_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_01_UV_CPU1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_CPU1;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_CPU1 FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312145_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312145_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31402050_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_CPU1_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402050_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_CPU1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE01_CPU1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31402051_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_CPU1_2;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402051_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_CPU1_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b31402052_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_CPU1_3;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402052_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_CPU1_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b31402053_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_CPU1_4;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402053_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_CPU1_4;
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE01_CPU1 FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE01_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312250_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE01_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312250_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE01_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482071_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE01_CPU1_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482071_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE01_CPU1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow UV_02_CPU1
+{
+    FlowItem FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_02_UV_CPU1 FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_02_UV_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312107_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_02_UV_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312107_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_02_UV_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31472040_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_02_UV_CPU1_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31472040_fail_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_02_UV_CPU1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_02_CPU1;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_02_CPU1 FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_02_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312147_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_02_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312147_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_02_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31402048_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_02_CPU1_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402048_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_02_CPU1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE02_CPU1;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            Return 2;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b31402049_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_02_CPU1_3;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402049_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_02_CPU1_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Pass";
+            Return 2;
+        }
+    }
+    
+    FlowItem FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE02_CPU1 FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE02_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312252_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE02_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312252_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE02_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482070_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE02_CPU1_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482070_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE02_CPU1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow UV_03_CPU1
+{
+    FlowItem FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_03_UV_CPU1 FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_03_UV_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312109_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_03_UV_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312109_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_03_UV_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31472039_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_03_UV_CPU1_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31472039_fail_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_03_UV_CPU1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_03_CPU1;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_03_CPU1 FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_03_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312149_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_03_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312149_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_03_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31402046_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_03_CPU1_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402046_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_03_CPU1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE03_CPU1;
+        }
+        Result 2
+        {
+            Property PassFail = "Pass";
+            Return 2;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b31402047_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_03_CPU1_3;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402047_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_03_CPU1_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Pass";
+            Return 2;
+        }
+    }
+    
+    FlowItem FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE03_CPU1 FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE03_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312254_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE03_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312254_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE03_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482069_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE03_CPU1_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482069_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE03_CPU1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow OV_07_CPU1
+{
+    FlowItem FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_07_OV_CPU1 FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_07_OV_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312111_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_07_OV_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312111_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_07_OV_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31472045_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_07_OV_CPU1_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31472045_fail_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_07_OV_CPU1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_CPU1;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_CPU1 FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312139_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312139_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31402060_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_CPU1_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402060_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_CPU1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE07_CPU1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31402061_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_CPU1_2;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402061_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_CPU1_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Fail";
+            SetBin b31402062_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_CPU1_3;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402062_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_CPU1_3;
+            Return 0;
+        }
+        Result 4
+        {
+            Property PassFail = "Fail";
+            SetBin b31402063_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_CPU1_4;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402063_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_CPU1_4;
+            Return 0;
+        }
+    }
+    
+    FlowItem FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE07_CPU1 FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE07_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312240_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE07_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312240_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE07_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482075_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE07_CPU1_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482075_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE07_CPU1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow OV_08_CPU1
+{
+    FlowItem FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_08_OV_CPU1 FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_08_OV_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312113_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_08_OV_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312113_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_08_OV_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31472044_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_08_OV_CPU1_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31472044_fail_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_08_OV_CPU1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_08_CPU1;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_08_CPU1 FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_08_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312141_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_08_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312141_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_08_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31402068_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_08_CPU1_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402068_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_08_CPU1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE08_CPU1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31402059_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_08_CPU1_2;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402059_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_08_CPU1_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 2;
+        }
+        Result 4
+        {
+            Property PassFail = "Pass";
+            Return 2;
+        }
+    }
+    
+    FlowItem FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE08_CPU1 FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE08_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312242_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE08_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312242_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE08_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482074_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE08_CPU1_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482074_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE08_CPU1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+Flow OV_09_CPU1
+{
+    FlowItem FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_09_OV_CPU1 FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_09_OV_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312115_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_09_OV_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312115_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_09_OV_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31472043_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_09_OV_CPU1_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31472043_fail_FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_09_OV_CPU1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_09_CPU1;
+        }
+    }
+    
+    FlowItem FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_09_CPU1 FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_09_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312143_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_09_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312143_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_09_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31402056_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_09_CPU1_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402056_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_09_CPU1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            GoTo FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE09_CPU1;
+        }
+        Result 2
+        {
+            Property PassFail = "Fail";
+            SetBin b31402057_fail_FUS_FUSEVLD_CKX_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_09_CPU1_2;
+            IncrementCounters FUS_FUSEVLD_CKX::n31402057_fail_FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_09_CPU1_2;
+            Return 0;
+        }
+        Result 3
+        {
+            Property PassFail = "Pass";
+            Return 2;
+        }
+        Result 4
+        {
+            Property PassFail = "Pass";
+            Return 2;
+        }
+    }
+    
+    FlowItem FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE09_CPU1 FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE09_CPU1
+    {
+        Result -2
+        {
+            Property PassFail = "Fail";
+            SetBin b99312244_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE09_CPU1_n2;
+            Return -2;
+        }
+        Result -1
+        {
+            Property PassFail = "Fail";
+            SetBin b98312244_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE09_CPU1_n1;
+            Return -1;
+        }
+        Result 0
+        {
+            Property PassFail = "Fail";
+            SetBin b31482073_fail_FUS_FUSEVLD_CKX_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE09_CPU1_0;
+            IncrementCounters FUS_FUSEVLD_CKX::n31482073_fail_FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE09_CPU1_0;
+            Return 0;
+        }
+        Result 1
+        {
+            Property PassFail = "Pass";
+            Return 1;
+        }
+    }
+    
+}
+
+
+# === auto-expander: dropped Test bodies ===
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_03_UV
+{
+    BypassPort = -1;
+    ConfigurationFile = __shared__::TpRule.If_CLASS_NVL_S52C("./InputFiles/VLD_C2X.setpoints.json","./InputFiles/VLD_C1X.setpoints.json");
+    SetPoint = "CXX_Undervolt03";
+}
+
+CSharpTest PrimeFuseReadMaskTestMethod FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_03
+{
+    Patlist = "cpu_fuse_hvm_vld_vbump";
+    LevelsTc = "BASE::cpu_all_bf_x_x_pkg_lvl_nom";
+    TimingsTc = "BASE::pkg_cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+    ConfigName = "VLDReadFlow";
+    ConfigurationFile = __shared__::TpRule.If_CLASS_NVL_S52C("./InputFiles/VLD_C2X.fuseread.json","./InputFiles/VLD_C1X.fuseread.json");
+    FailingMaskName = "Short_VLD,Open_VLD";
+    FuseGroupToDatalog = "";
+    PassingMaskName = "Undervolt_VLD";
+    RegisterName = __shared__::TpRule.If_CLASS_NVL_S52C("CPU0_VLD,CPU1_VLD","CPU0_VLD");
+    VoltageFile = "./InputFiles/VLD_UV.fuseReadVoltageFile.json";
+}
+
+CSharpTest PrimeSharedStorageInserterTestMethod FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE03
+{
+    BypassPort = -1;
+    Path = "./InputFiles/VLD_SharedStorage_03.json";
+}
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_02_UV
+{
+    BypassPort = -1;
+    ConfigurationFile = __shared__::TpRule.If_CLASS_NVL_S52C("./InputFiles/VLD_C2X.setpoints.json","./InputFiles/VLD_C1X.setpoints.json");
+    SetPoint = "CXX_Undervolt02";
+}
+
+CSharpTest PrimeFuseReadMaskTestMethod FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_02
+{
+    Patlist = "cpu_fuse_hvm_vld_vbump";
+    LevelsTc = "BASE::cpu_all_bf_x_x_pkg_lvl_nom";
+    TimingsTc = "BASE::pkg_cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+    ConfigName = "VLDReadFlow";
+    ConfigurationFile = __shared__::TpRule.If_CLASS_NVL_S52C("./InputFiles/VLD_C2X.fuseread.json","./InputFiles/VLD_C1X.fuseread.json");
+    FailingMaskName = "Short_VLD,Open_VLD";
+    FuseGroupToDatalog = "";
+    PassingMaskName = "Undervolt_VLD";
+    RegisterName = __shared__::TpRule.If_CLASS_NVL_S52C("CPU0_VLD,CPU1_VLD","CPU0_VLD");
+    VoltageFile = "./InputFiles/VLD_UV.fuseReadVoltageFile.json";
+}
+
+CSharpTest PrimeSharedStorageInserterTestMethod FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE02
+{
+    BypassPort = -1;
+    Path = "./InputFiles/VLD_SharedStorage_02.json";
+}
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_09_OV
+{
+    BypassPort = -1;
+    ConfigurationFile = __shared__::TpRule.If_CLASS_NVL_S52C("./InputFiles/VLD_C2X.setpoints.json","./InputFiles/VLD_C1X.setpoints.json");
+    SetPoint = "CXX_Overvolt09";
+}
+
+CSharpTest PrimeFuseReadMaskTestMethod FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_09
+{
+    Patlist = "cpu_fuse_hvm_vld_vbump";
+    LevelsTc = "BASE::cpu_all_bf_x_x_pkg_lvl_nom";
+    TimingsTc = "BASE::pkg_cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+    ConfigName = "VLDReadFlow";
+    ConfigurationFile = __shared__::TpRule.If_CLASS_NVL_S52C("./InputFiles/VLD_C2X.fuseread.json","./InputFiles/VLD_C1X.fuseread.json");
+    FailingMaskName = "Short_VLD,Open_VLD";
+    FuseGroupToDatalog = "";
+    PassingMaskName = "Overvolt_VLD";
+    RegisterName = __shared__::TpRule.If_CLASS_NVL_S52C("CPU0_VLD,CPU1_VLD","CPU0_VLD");
+    VoltageFile = "./InputFiles/VLD_OV.fuseReadVoltageFile.json";
+}
+
+CSharpTest PrimeSharedStorageInserterTestMethod FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE09
+{
+    BypassPort = -1;
+    Path = "./InputFiles/VLD_SharedStorage_09.json";
+}
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_08_OV
+{
+    BypassPort = -1;
+    ConfigurationFile = __shared__::TpRule.If_CLASS_NVL_S52C("./InputFiles/VLD_C2X.setpoints.json","./InputFiles/VLD_C1X.setpoints.json");
+    SetPoint = "CXX_Overvolt08";
+}
+
+CSharpTest PrimeFuseReadMaskTestMethod FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_08
+{
+    Patlist = "cpu_fuse_hvm_vld_vbump";
+    LevelsTc = "BASE::cpu_all_bf_x_x_pkg_lvl_nom";
+    TimingsTc = "BASE::pkg_cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+    ConfigName = "VLDReadFlow";
+    ConfigurationFile = __shared__::TpRule.If_CLASS_NVL_S52C("./InputFiles/VLD_C2X.fuseread.json","./InputFiles/VLD_C1X.fuseread.json");
+    FailingMaskName = "Short_VLD,Open_VLD";
+    FuseGroupToDatalog = "";
+    PassingMaskName = "Overvolt_VLD";
+    RegisterName = __shared__::TpRule.If_CLASS_NVL_S52C("CPU0_VLD,CPU1_VLD","CPU0_VLD");
+    VoltageFile = "./InputFiles/VLD_OV.fuseReadVoltageFile.json";
+}
+
+CSharpTest PrimeSharedStorageInserterTestMethod FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE08
+{
+    BypassPort = -1;
+    Path = "./InputFiles/VLD_SharedStorage_08.json";
+}
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_03_UV_CPU1
+{
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(1,1);
+    ConfigurationFile = __shared__::TpRule.If_CLASS_NVL_S52C("./InputFiles/VLD_C2X.setpoints.json","./InputFiles/VLD_C1X.setpoints.json");
+    SetPoint = "CXX_Undervolt03";
+}
+
+CSharpTest PrimeFuseReadMaskTestMethod FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_03_CPU1
+{
+    Patlist = "cpu_fuse_hvm_vld_vbump";
+    LevelsTc = "BASE::cpu_all_bf_x_x_pkg_lvl_nom";
+    TimingsTc = "BASE::pkg_cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(1,1);
+    ConfigName = "VLDReadFlow";
+    ConfigurationFile = __shared__::TpRule.If_CLASS_NVL_S52C("./InputFiles/VLD_C2X.fuseread.json","./InputFiles/VLD_C1X.fuseread.json");
+    FailingMaskName = "Short_VLD,Open_VLD";
+    FuseGroupToDatalog = "";
+    PassingMaskName = "Undervolt_VLD";
+    RegisterName = __shared__::TpRule.If_CLASS_NVL_S52C("CPU0_VLD,CPU1_VLD","CPU0_VLD");
+    VoltageFile = "./InputFiles/VLD_UV.fuseReadVoltageFile.json";
+}
+
+CSharpTest PrimeSharedStorageInserterTestMethod FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE03_CPU1
+{
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(1,1);
+    Path = "./InputFiles/VLD_SharedStorage_03.json";
+}
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_02_UV_CPU1
+{
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(1,1);
+    ConfigurationFile = __shared__::TpRule.If_CLASS_NVL_S52C("./InputFiles/VLD_C2X.setpoints.json","./InputFiles/VLD_C1X.setpoints.json");
+    SetPoint = "CXX_Undervolt02";
+}
+
+CSharpTest PrimeFuseReadMaskTestMethod FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_02_CPU1
+{
+    Patlist = "cpu_fuse_hvm_vld_vbump";
+    LevelsTc = "BASE::cpu_all_bf_x_x_pkg_lvl_nom";
+    TimingsTc = "BASE::pkg_cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(1,1);
+    ConfigName = "VLDReadFlow";
+    ConfigurationFile = __shared__::TpRule.If_CLASS_NVL_S52C("./InputFiles/VLD_C2X.fuseread.json","./InputFiles/VLD_C1X.fuseread.json");
+    FailingMaskName = "Short_VLD,Open_VLD";
+    FuseGroupToDatalog = "";
+    PassingMaskName = "Undervolt_VLD";
+    RegisterName = __shared__::TpRule.If_CLASS_NVL_S52C("CPU0_VLD,CPU1_VLD","CPU0_VLD");
+    VoltageFile = "./InputFiles/VLD_UV.fuseReadVoltageFile.json";
+}
+
+CSharpTest PrimeSharedStorageInserterTestMethod FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE02_CPU1
+{
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(1,1);
+    Path = "./InputFiles/VLD_SharedStorage_02.json";
+}
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_09_OV_CPU1
+{
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(1,1);
+    ConfigurationFile = __shared__::TpRule.If_CLASS_NVL_S52C("./InputFiles/VLD_C2X.setpoints.json","./InputFiles/VLD_C1X.setpoints.json");
+    SetPoint = "CXX_Overvolt09";
+}
+
+CSharpTest PrimeFuseReadMaskTestMethod FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_09_CPU1
+{
+    Patlist = "cpu_fuse_hvm_vld_vbump";
+    LevelsTc = "BASE::cpu_all_bf_x_x_pkg_lvl_nom";
+    TimingsTc = "BASE::pkg_cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(1,1);
+    ConfigName = "VLDReadFlow";
+    ConfigurationFile = __shared__::TpRule.If_CLASS_NVL_S52C("./InputFiles/VLD_C2X.fuseread.json","./InputFiles/VLD_C1X.fuseread.json");
+    FailingMaskName = "Short_VLD,Open_VLD";
+    FuseGroupToDatalog = "";
+    PassingMaskName = "Overvolt_VLD";
+    RegisterName = __shared__::TpRule.If_CLASS_NVL_S52C("CPU0_VLD,CPU1_VLD","CPU0_VLD");
+    VoltageFile = "./InputFiles/VLD_OV.fuseReadVoltageFile.json";
+}
+
+CSharpTest PrimeSharedStorageInserterTestMethod FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE09_CPU1
+{
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(1,1);
+    Path = "./InputFiles/VLD_SharedStorage_09.json";
+}
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_08_OV_CPU1
+{
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(1,1);
+    ConfigurationFile = __shared__::TpRule.If_CLASS_NVL_S52C("./InputFiles/VLD_C2X.setpoints.json","./InputFiles/VLD_C1X.setpoints.json");
+    SetPoint = "CXX_Overvolt08";
+}
+
+CSharpTest PrimeFuseReadMaskTestMethod FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_08_CPU1
+{
+    Patlist = "cpu_fuse_hvm_vld_vbump";
+    LevelsTc = "BASE::cpu_all_bf_x_x_pkg_lvl_nom";
+    TimingsTc = "BASE::pkg_cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(1,1);
+    ConfigName = "VLDReadFlow";
+    ConfigurationFile = __shared__::TpRule.If_CLASS_NVL_S52C("./InputFiles/VLD_C2X.fuseread.json","./InputFiles/VLD_C1X.fuseread.json");
+    FailingMaskName = "Short_VLD,Open_VLD";
+    FuseGroupToDatalog = "";
+    PassingMaskName = "Overvolt_VLD";
+    RegisterName = __shared__::TpRule.If_CLASS_NVL_S52C("CPU0_VLD,CPU1_VLD","CPU0_VLD");
+    VoltageFile = "./InputFiles/VLD_OV.fuseReadVoltageFile.json";
+}
+
+CSharpTest PrimeSharedStorageInserterTestMethod FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE08_CPU1
+{
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(1,1);
+    Path = "./InputFiles/VLD_SharedStorage_08.json";
+}
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_01_UV
+{
+    BypassPort = -1;
+    ConfigurationFile = __shared__::TpRule.If_CLASS_NVL_S52C("./InputFiles/VLD_C2X.setpoints.json","./InputFiles/VLD_C1X.setpoints.json");
+    SetPoint = "CXX_Undervolt01";
+}
+
+CSharpTest PrimeFuseReadMaskTestMethod FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01
+{
+    Patlist = "cpu_fuse_hvm_vld_vbump";
+    LevelsTc = "BASE::cpu_all_bf_x_x_pkg_lvl_nom";
+    TimingsTc = "BASE::pkg_cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+    ConfigName = "VLDReadFlow";
+    ConfigurationFile = __shared__::TpRule.If_CLASS_NVL_S52C("./InputFiles/VLD_C2X.fuseread.json","./InputFiles/VLD_C1X.fuseread.json");
+    FailingMaskName = "Short_VLD,Open_VLD";
+    FuseGroupToDatalog = "";
+    PassingMaskName = "Undervolt_VLD";
+    RegisterName = __shared__::TpRule.If_CLASS_NVL_S52C("CPU0_VLD,CPU1_VLD","CPU0_VLD");
+    VoltageFile = "./InputFiles/VLD_UV.fuseReadVoltageFile.json";
+}
+
+CSharpTest PrimeSharedStorageInserterTestMethod FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE01
+{
+    BypassPort = -1;
+    Path = "./InputFiles/VLD_SharedStorage_01.json";
+}
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_07_OV
+{
+    BypassPort = -1;
+    ConfigurationFile = __shared__::TpRule.If_CLASS_NVL_S52C("./InputFiles/VLD_C2X.setpoints.json","./InputFiles/VLD_C1X.setpoints.json");
+    SetPoint = "CXX_Overvolt07";
+}
+
+CSharpTest PrimeFuseReadMaskTestMethod FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07
+{
+    Patlist = "cpu_fuse_hvm_vld_vbump";
+    LevelsTc = "BASE::cpu_all_bf_x_x_pkg_lvl_nom";
+    TimingsTc = "BASE::pkg_cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = -1;
+    ConfigName = "VLDReadFlow";
+    ConfigurationFile = __shared__::TpRule.If_CLASS_NVL_S52C("./InputFiles/VLD_C2X.fuseread.json","./InputFiles/VLD_C1X.fuseread.json");
+    FailingMaskName = "Short_VLD,Open_VLD";
+    FuseGroupToDatalog = "";
+    PassingMaskName = "Overvolt_VLD";
+    RegisterName = __shared__::TpRule.If_CLASS_NVL_S52C("CPU0_VLD,CPU1_VLD","CPU0_VLD");
+    VoltageFile = "./InputFiles/VLD_OV.fuseReadVoltageFile.json";
+}
+
+CSharpTest PrimeSharedStorageInserterTestMethod FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE07
+{
+    BypassPort = -1;
+    Path = "./InputFiles/VLD_SharedStorage_07.json";
+}
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_01_UV_CPU1
+{
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(1,1);
+    ConfigurationFile = __shared__::TpRule.If_CLASS_NVL_S52C("./InputFiles/VLD_C2X.setpoints.json","./InputFiles/VLD_C1X.setpoints.json");
+    SetPoint = "CXX_Undervolt01";
+}
+
+CSharpTest PrimeFuseReadMaskTestMethod FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_UV_01_CPU1
+{
+    Patlist = "cpu_fuse_hvm_vld_vbump";
+    LevelsTc = "BASE::cpu_all_bf_x_x_pkg_lvl_nom";
+    TimingsTc = "BASE::pkg_cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(1,1);
+    ConfigName = "VLDReadFlow";
+    ConfigurationFile = __shared__::TpRule.If_CLASS_NVL_S52C("./InputFiles/VLD_C2X.fuseread.json","./InputFiles/VLD_C1X.fuseread.json");
+    FailingMaskName = "Short_VLD,Open_VLD";
+    FuseGroupToDatalog = "";
+    PassingMaskName = "Undervolt_VLD";
+    RegisterName = __shared__::TpRule.If_CLASS_NVL_S52C("CPU0_VLD,CPU1_VLD","CPU0_VLD");
+    VoltageFile = "./InputFiles/VLD_UV.fuseReadVoltageFile.json";
+}
+
+CSharpTest PrimeSharedStorageInserterTestMethod FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_VLD_SETSHAREDSTORAGE01_CPU1
+{
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(1,1);
+    Path = "./InputFiles/VLD_SharedStorage_01.json";
+}
+
+CSharpTest PrimePatConfigTestMethod FUSE_X_FUSECONFIG_K_BEGINCPUPKG_X_X_X_X_VLD_07_OV_CPU1
+{
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(1,1);
+    ConfigurationFile = __shared__::TpRule.If_CLASS_NVL_S52C("./InputFiles/VLD_C2X.setpoints.json","./InputFiles/VLD_C1X.setpoints.json");
+    SetPoint = "CXX_Overvolt07";
+}
+
+CSharpTest PrimeFuseReadMaskTestMethod FUSE_X_FUSEREAD_K_BEGINCPUPKG_X_X_X_X_VLD_OV_07_CPU1
+{
+    Patlist = "cpu_fuse_hvm_vld_vbump";
+    LevelsTc = "BASE::cpu_all_bf_x_x_pkg_lvl_nom";
+    TimingsTc = "BASE::pkg_cpu_fun_timing_mts100_tstprtclk50_tck100";
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(1,1);
+    ConfigName = "VLDReadFlow";
+    ConfigurationFile = __shared__::TpRule.If_CLASS_NVL_S52C("./InputFiles/VLD_C2X.fuseread.json","./InputFiles/VLD_C1X.fuseread.json");
+    FailingMaskName = "Short_VLD,Open_VLD";
+    FuseGroupToDatalog = "";
+    PassingMaskName = "Overvolt_VLD";
+    RegisterName = __shared__::TpRule.If_CLASS_NVL_S52C("CPU0_VLD,CPU1_VLD","CPU0_VLD");
+    VoltageFile = "./InputFiles/VLD_OV.fuseReadVoltageFile.json";
+}
+
+CSharpTest PrimeSharedStorageInserterTestMethod FUSE_X_X_K_BEGINCPUPKG_X_X_X_X_OVLD_SETSHAREDSTORAGE07_CPU1
+{
+    BypassPort = __shared__::TpRule.If_CLASS_NVL_S52C(1,1);
+    Path = "./InputFiles/VLD_SharedStorage_07.json";
+}
+
