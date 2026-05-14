@@ -883,31 +883,6 @@ MultiTrialTest ATSPEED_UNCORE_VMIN_K_F4XCCF_X_X_F4_X
     }
 }
 
-CSharpTest ApexTC ATSPEED_UNCORE_VMIN_K_F5XCCF_X_CCF_X_X_F5_APEX_MTT
-{
-    Patlist = "scn_cdie_f5xccf_trans_edt_classhvm_list_apex";
-    LevelsTc = __shared__::TpRule.If_DS0_DS1_M("SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCORE_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom");
-    TimingsTc = __shared__::TpRule.If_DS0_DS1_M("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX816::cpu_fun_timing_mts800_tstprtclk400_tck100_OVERRIDEHX","SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE");
-    BypassPort = __shared__::TpRule.If_DS0_DS1_M(-1, -1, BYPASS_PARAMETER.APEXTC_BYPASS, 1);
-    DtsConfiguration = __shared__::TpRule.If_DS0_DS1_M("ALL_CDIE_S28C_N2P","ALL_CDIE_S52C","ALL_CDIE_S28C_N2P","ALL_CDIE_S28C_N2P");
-    End = __shared__::FlowMatrixSingular.APEX_CCF_MIN;
-    ExportTokens = __shared__::APEX_Tokens.CCFToken;
-    FivrCondition = "NOM_CCF";
-    FivrConditionPlistParamName = "Patlist";
-    ForwardingMode = "None";
-    InitialMaskBits = "";
-    PatternNameCounterIndexes = "1,2,3,4,5,6,7";
-    PinMap = "";
-    RecoveryOptions = "";
-    RecoveryTracking = "";
-    SetPointsPostInstance = PSPOST.CLR_F5+","+"CCF:nblctrl_ccf:ccfnblon";
-    SetPointsPreInstance = PSPRE.CLR_F5+","+"MCdrv:ringfreq_0:"+__shared__::FlowMatrixSingular.CCF_F5_FREQ+"GHz," +"CCF:nblctrl_ccf:ccfnbloff";
-    Start = __shared__::FlowMatrixSingular.APEX_CCF_MAX;
-    StepSize = toInteger(3);
-    Targets = "SCCF";
-    VoltageConverter = "--dlvrpins VCCIA  --expressions " + DROPOUT.CLR_F5 + " --overrides CCF:" + __shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
-}
-
 MultiTrialTest ATSPEED_UNCORE_VMIN_K_F5XCCF_X_CCF_F5_X
 {
     # KILL ATSPEED F5XCCF
@@ -1002,64 +977,6 @@ MultiTrialTest ATSPEED_UNCORE_VMIN_K_F5XCCF_X_CCF_F5_X
             Return 0;
         }
     }
-}
-
-CSharpTest VminTC STUCKAT_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_X_ALL
-{
-    Patlist = "scn_cdie_vmaxxccf_full_atpg_all_edt_classhvm_list";
-    LevelsTc = __shared__::TpRule.If_DS0_DS1_M("SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCORE_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom");
-    TimingsTc = __shared__::TpRule.If_DS0_DS1_M("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500");
-    BaseNumbers = "13710";
-    BypassPort = -1;
-    EndVoltageLimits = __shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
-    ExecutionMode = "SearchWithScoreboard";
-    FeatureSwitchSettings = "fivr_mode_on,disable_masked_targets,print_per_target_increments,print_scoreboard_counters";
-    FivrCondition = "NOM_CCF";
-    ForwardingMode = "None";
-    LogLevel = "Disabled";
-    MaxFailsNum = toInteger(__shared__:: Specs.VMX_MAX_FAILS);
-    PatternNameCounterIndexes = "1,2,3,4,5,6,7";
-    PinMap = "";
-    PostInstance = "";
-    PreInstance = "";
-    ScoreboardEdgeTicks = toInteger(__shared__:: Specs.VMX_EDGE_TICK);
-    SetPointsPlistMode = "Local";
-    SetPointsPlistParamName = "Patlist";
-    SetPointsPostInstance = PSPOST.CLR_F1;
-    SetPointsPreInstance = PSPRE.CLR_F1+","+"MCdrv:ringfreq_0:"+__shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz";
-    StartVoltages = __shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
-    StepSize = 0.01;
-    TestMode = "Scoreboard";
-    VoltageTargets = "CCF";
-}
-
-CSharpTest VminTC STUCKAT_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_X_ALL
-{
-    Patlist = "scn_cdie_vmaxxccf_full_atpg_all_edt_classhvm_list";
-    LevelsTc = __shared__::TpRule.If_DS0_DS1_M("SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCORE_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom");
-    TimingsTc = __shared__::TpRule.If_DS0_DS1_M("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500");
-    BaseNumbers = "13712";
-    BypassPort = -1;
-    EndVoltageLimits = __shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
-    ExecutionMode = "SearchWithScoreboard";
-    FeatureSwitchSettings = "fivr_mode_on,disable_masked_targets,print_per_target_increments,print_scoreboard_counters";
-    FivrCondition = "NOM_CCF";
-    ForwardingMode = "None";
-    LogLevel = "Disabled";
-    MaxFailsNum = toInteger(__shared__:: Specs.VMX_MAX_FAILS);
-    PatternNameCounterIndexes = "1,2,3,4,5,6,7";
-    PinMap = "";
-    PostInstance = "";
-    PreInstance = "";
-    ScoreboardEdgeTicks = toInteger(__shared__:: Specs.VMX_EDGE_TICK);
-    SetPointsPlistMode = "Local";
-    SetPointsPlistParamName = "Patlist";
-    SetPointsPostInstance = PSPOST.CLR_F1;
-    SetPointsPreInstance = PSPRE.CLR_F1+","+"MCdrv:ringfreq_0:"+__shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz";
-    StartVoltages = __shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
-    StepSize = 0.01;
-    TestMode = "Scoreboard";
-    VoltageTargets = "CCF";
 }
 
 MultiTrialTest ATSPEED_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_3600_F5_F7
@@ -1218,6 +1135,130 @@ CSharpTest VminTC ATSPEED_UNCORE_SB_K_LTTCCPU_X_X_NOM_X_ALL
     StepSize = 0.01;
     TestMode = "Scoreboard";
     VoltageConverter = "--railconfigurations CDIE_CCF_NBLCTRL --dlvrpins VCCIA --expressions " + DROPOUT.CLR_F1;
+    VoltageTargets = "CCF";
+}
+
+MultiTrialTest ATSPEED_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_3600_F5_F7
+{
+    # KILL ATSPEED VMAXXCCF
+    TrialVariable CPU_TRIALS::FlowDomain.RING_TOP;
+    TrialVariableExitAction "Continue";
+    CSharpTrialTest VminTC "ATSPEED_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX" + __shared__::Corners.CCF_C5 + "_" +__shared__::FreqInMHZ.CCF_C5 + "_copy"
+    {
+        Patlist = "scn_cdie_vmaxxccf_trans_edt_classhvm_list";
+        LevelsTc = __shared__::TpRule.If_DS0_DS1_M("SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCORE_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom");
+        TimingsTc = __shared__::TpRule.If_DS0_DS1_M("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500");
+        BaseNumbers = "13726";
+        BypassPort = -1;
+        DtsConfiguration = __shared__::TpRule.If_DS0_DS1_M("ALL_CDIE_S28C_N2P","ALL_CDIE_S52C","ALL_CDIE_S28C_N2P","ALL_CDIE_S28C_N2P");
+        EndVoltageLimits = __shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
+        ExecutionMode = "SearchWithScoreboard";
+        FeatureSwitchSettings = "fivr_mode_on,disable_masked_targets,print_per_target_increments,print_scoreboard_counters";
+        FivrCondition = "NOM_CCF";
+        FlowIndex = __shared__::FlowMatrixSingular.FlowIndex;
+        FlowIndexCallbackName = "";
+        ForwardingMode = "InputOutput";
+        InitialMaskBits = "";
+        LimitGuardband = toString(__shared__::GBVars.LimitGuardband);
+        LogLevel = "Disabled";
+        MaskPins = "";
+        MaxFailsNum = toInteger(__shared__:: Specs.VMX_MAX_FAILS);
+        PatternNameCounterIndexes = "1,2,3,4,5,6,7";
+        PostInstance = "";
+        PreInstance = "";
+        RecoveryMode = "NoRecovery";
+        RecoveryOptions = "";
+        RecoveryTrackingIncoming = "";
+        RecoveryTrackingOutgoing = "";
+        ScoreboardEdgeTicks = toInteger(__shared__:: Specs.VMX_EDGE_TICK);
+        SetPointsPlistMode = "Local";
+        SetPointsPlistParamName = "Patlist";
+        SetPointsPostInstance = PSPOST.CLR_F5;
+        TrialParam SetPointsPreInstance = PSPRE.CLR_F5+","+"MCdrv:ringfreq_0:"+__shared__::FreqValues.CCF_C5+"GHz";
+        StartVoltages = __shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
+        TrialParam StartVoltagesForRetry = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesForRetryF5 , ["","",""]);
+        TrialParam StartVoltagesOffset = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesOffsetF5 , ["","",""]);
+        StepSize = toDouble(__shared__::FlowMatrixSingular.CR_SEARCH_RESOLUTION);
+        TestMode = "SingleVmin";
+        VoltageConverter = "--dlvrpins VCCIA --railconfigurations CDIE_CCF_NBLCTRL --expressions " + DROPOUT.CLR_F5;
+        VoltageTargets = "CCF";
+        TrialResult -2
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return -2;
+        }
+        TrialResult -1
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return -1;
+        }
+        TrialResult 0
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return 0;
+        }
+        TrialResult 1
+        {
+            PassFail Pass;
+            TrialAction "Exit";
+            Return 1;
+        }
+        TrialResult 2
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return 2;
+        }
+        TrialResult 3
+        {
+            PassFail Pass;
+            TrialAction "Exit";
+            Return 3;
+        }
+        TrialResult 4
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return 4;
+        }
+        TrialResult 5
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return 5;
+        }
+    }
+}
+
+CSharpTest VminTC STUCKAT_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_X_ALL
+{
+    Patlist = "scn_cdie_vmaxxccf_full_atpg_all_edt_classhvm_list";
+    LevelsTc = __shared__::TpRule.If_DS0_DS1_M("SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCORE_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom");
+    TimingsTc = __shared__::TpRule.If_DS0_DS1_M("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500");
+    BaseNumbers = "13710";
+    BypassPort = -1;
+    EndVoltageLimits = __shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
+    ExecutionMode = "SearchWithScoreboard";
+    FeatureSwitchSettings = "fivr_mode_on,disable_masked_targets,print_per_target_increments,print_scoreboard_counters";
+    FivrCondition = "NOM_CCF";
+    ForwardingMode = "None";
+    LogLevel = "Disabled";
+    MaxFailsNum = toInteger(__shared__:: Specs.VMX_MAX_FAILS);
+    PatternNameCounterIndexes = "1,2,3,4,5,6,7";
+    PinMap = "";
+    PostInstance = "";
+    PreInstance = "";
+    ScoreboardEdgeTicks = toInteger(__shared__:: Specs.VMX_EDGE_TICK);
+    SetPointsPlistMode = "Local";
+    SetPointsPlistParamName = "Patlist";
+    SetPointsPostInstance = PSPOST.CLR_F1;
+    SetPointsPreInstance = PSPRE.CLR_F1+","+"MCdrv:ringfreq_0:"+__shared__::FlowMatrixSingular.CCF_F1_FREQ+"GHz";
+    StartVoltages = __shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
+    StepSize = 0.01;
+    TestMode = "Scoreboard";
     VoltageTargets = "CCF";
 }
 
@@ -1635,7 +1676,7 @@ Flow SCN_UNCORE_CX816_FMINXCCF
     
 }
 
-Flow F1XCCF
+Flow SCN_UNCORE_CX816_F1XCCF
 {
     FlowItem ATSPEED_UNCORE_VMIN_K_F1XCCF_X_X_F1_X ATSPEED_UNCORE_VMIN_K_F1XCCF_X_X_F1_X
     {
@@ -1690,38 +1731,10 @@ Flow F1XCCF
             Return 0;
         }
     }
-    
+
 }
 
-Flow SCN_UNCORE_CX816_F1XCCF
-{
-    FlowItem F1XCCF F1XCCF
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-    }
-    
-}
-
-Flow F2XCCF
+Flow SCN_UNCORE_CX816_F2XCCF
 {
     FlowItem ATSPEED_UNCORE_VMIN_K_F2XCCF_X_X_F2_X ATSPEED_UNCORE_VMIN_K_F2XCCF_X_X_F2_X
     {
@@ -1776,38 +1789,10 @@ Flow F2XCCF
             Return 0;
         }
     }
-    
+
 }
 
-Flow SCN_UNCORE_CX816_F2XCCF
-{
-    FlowItem F2XCCF F2XCCF
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-    }
-    
-}
-
-Flow F3XCCF
+Flow SCN_UNCORE_CX816_F3XCCF
 {
     FlowItem ATSPEED_UNCORE_VMIN_K_F3XCCF_X_X_F3_X ATSPEED_UNCORE_VMIN_K_F3XCCF_X_X_F3_X
     {
@@ -1862,38 +1847,10 @@ Flow F3XCCF
             Return 0;
         }
     }
-    
+
 }
 
-Flow SCN_UNCORE_CX816_F3XCCF
-{
-    FlowItem F3XCCF F3XCCF
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-    }
-    
-}
-
-Flow F4XCCF
+Flow SCN_UNCORE_CX816_F4XCCF
 {
     FlowItem ATSPEED_UNCORE_VMIN_K_F4XCCF_X_X_F4_X ATSPEED_UNCORE_VMIN_K_F4XCCF_X_X_F4_X
     {
@@ -1948,87 +1905,14 @@ Flow F4XCCF
             Return 0;
         }
     }
-    
-}
 
-Flow SCN_UNCORE_CX816_F4XCCF
-{
-    FlowItem F4XCCF F4XCCF
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-    }
-    
 }
 
 
 
-Flow F5XCCF
+Flow SCN_UNCORE_CX816_F5XCCF
 {
-    FlowItem ATSPEED_UNCORE_VMIN_K_F5XCCF_X_CCF_X_X_F5_APEX_MTT ATSPEED_UNCORE_VMIN_K_F5XCCF_X_CCF_X_X_F5_APEX_MTT @EDC
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            SetBin b99412904_fail_SCN_UNCORE_CX816_ATSPEED_UNCORE_VMIN_K_F5XCCF_X_CCF_X_X_F5_APEX_MTT_n2;
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            SetBin b98412904_fail_SCN_UNCORE_CX816_ATSPEED_UNCORE_VMIN_K_F5XCCF_X_CCF_X_X_F5_APEX_MTT_n1;
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            GoTo ATSPEED_UNCORE_VMIN_K_F5XCCF_X_CCF_F5_X;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            GoTo ATSPEED_UNCORE_VMIN_K_F5XCCF_X_CCF_F5_X;
-        }
-        Result 2
-        {
-            Property PassFail = "Fail";
-            GoTo ATSPEED_UNCORE_VMIN_K_F5XCCF_X_CCF_F5_X;
-        }
-        Result 3
-        {
-            Property PassFail = "Pass";
-            GoTo ATSPEED_UNCORE_VMIN_K_F5XCCF_X_CCF_F5_X;
-        }
-        Result 4
-        {
-            Property PassFail = "Fail";
-            GoTo ATSPEED_UNCORE_VMIN_K_F5XCCF_X_CCF_F5_X;
-        }
-        Result 5
-        {
-            Property PassFail = "Fail";
-            GoTo ATSPEED_UNCORE_VMIN_K_F5XCCF_X_CCF_F5_X;
-        }
-    }
-    
+
     FlowItem ATSPEED_UNCORE_VMIN_K_F5XCCF_X_CCF_F5_X ATSPEED_UNCORE_VMIN_K_F5XCCF_X_CCF_F5_X
     {
         Result -2
@@ -2082,38 +1966,11 @@ Flow F5XCCF
             Return 0;
         }
     }
-    
+
 }
 
-Flow SCN_UNCORE_CX816_F5XCCF
-{
-    FlowItem F5XCCF F5XCCF
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-    }
-    
-}
 
-Flow VMAXXCCF_F1
+Flow SCN_UNCORE_CX816_VMAXXCCF
 {
     FlowItem STUCKAT_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_X_ALL STUCKAT_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_X_ALL
     {
@@ -2139,7 +1996,7 @@ Flow VMAXXCCF_F1
         Result 1
         {
             Property PassFail = "Pass";
-            Return 1;
+			GoTo ATSPEED_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_3600_F5_F7;
         }
         Result 2
         {
@@ -2151,7 +2008,7 @@ Flow VMAXXCCF_F1
         Result 3
         {
             Property PassFail = "Pass";
-            Return 1;
+			GoTo ATSPEED_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_3600_F5_F7;
         }
         Result 4
         {
@@ -2168,60 +2025,25 @@ Flow VMAXXCCF_F1
             Return 0;
         }
     }
-    
-}
-
-
-
-Flow SCN_UNCORE_CX816_VMAXXCCF
-{
-    FlowItem VMAXXCCF_F1 VMAXXCCF_F1
+    FlowItem ATSPEED_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_3600_F5_F7 ATSPEED_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_3600_F5_F7
     {
         Result -2
         {
             Property PassFail = "Fail";
+            SetBin b99472900_fail_SCN_UNCORE_CX816_ATSPEED_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_3600_F5_F7_n2;
             Return -2;
         }
         Result -1
         {
             Property PassFail = "Fail";
+            SetBin b98472900_fail_SCN_UNCORE_CX816_ATSPEED_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_3600_F5_F7_n1;
             Return -1;
         }
         Result 0
         {
             Property PassFail = "Fail";
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 1;
-        }
-    }  
-    
-}
-
-Flow VMAXXRLO_F1
-{
-    FlowItem STUCKAT_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_X_ALL STUCKAT_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_X_ALL
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            SetBin b99422891_fail_SCN_UNCORE_CX816_STUCKAT_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_X_ALL_n2;
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            SetBin b98422891_fail_SCN_UNCORE_CX816_STUCKAT_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_X_ALL_n1;
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            SetBin b42362889_fail_SCN_UNCORE_CX816_STUCKAT_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_X_ALL_0;
-            IncrementCounters SCN_UNCORE_CX816::n42362889_fail_STUCKAT_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_X_ALL_0;
+            SetBin b47342899_fail_SCN_UNCORE_CX816_ATSPEED_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_3600_F5_F7_0;
+            IncrementCounters SCN_UNCORE_CX816::n47342899_fail_ATSPEED_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_3600_F5_F7_0;
             Return 0;
         }
         Result 1
@@ -2232,8 +2054,8 @@ Flow VMAXXRLO_F1
         Result 2
         {
             Property PassFail = "Fail";
-            SetBin b42362890_fail_SCN_UNCORE_CX816_STUCKAT_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_X_ALL_2;
-            IncrementCounters SCN_UNCORE_CX816::n42362890_fail_STUCKAT_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_X_ALL_2;
+            SetBin b47342900_fail_SCN_UNCORE_CX816_ATSPEED_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_3600_F5_F7_2;
+            IncrementCounters SCN_UNCORE_CX816::n47342900_fail_ATSPEED_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_3600_F5_F7_2;
             Return 0;
         }
         Result 3
@@ -2244,69 +2066,16 @@ Flow VMAXXRLO_F1
         Result 4
         {
             Property PassFail = "Fail";
-            SetBin b97422892_fail_SCN_UNCORE_CX816_STUCKAT_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_X_ALL_4;
-            IncrementCounters SCN_UNCORE_CX816::n97422892_fail_STUCKAT_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_X_ALL_4;
+            SetBin b97472898_fail_SCN_UNCORE_CX816_ATSPEED_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_3600_F5_F7_4;
+            IncrementCounters SCN_UNCORE_CX816::n97472898_fail_ATSPEED_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_3600_F5_F7_4;
             Return 0;
         }
         Result 5
         {
             Property PassFail = "Fail";
-            SetBin b42192891_fail_SCN_UNCORE_CX816_STUCKAT_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_X_ALL_5;
-            IncrementCounters SCN_UNCORE_CX816::n42192891_fail_STUCKAT_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_X_ALL_5;
+            SetBin b47192899_fail_SCN_UNCORE_CX816_ATSPEED_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_3600_F5_F7_5;
+            IncrementCounters SCN_UNCORE_CX816::n47192899_fail_ATSPEED_UNCORE_SB_K_VMAXXCCF_X_CCF_MAX_3600_F5_F7_5;
             Return 0;
-        }
-    }
-    
-}
-
-
-Flow SCN_UNCORE_CX816_VMAXXCCF
-{
-    FlowItem VMAXXRLO_F1 VMAXXRLO_F1
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            GoTo VMAXXCCF_F5;
-        }
-    }
-    
-    FlowItem VMAXXCCF_F5 VMAXXCCF_F5
-    {
-        Result -2
-        {
-            Property PassFail = "Fail";
-            Return -2;
-        }
-        Result -1
-        {
-            Property PassFail = "Fail";
-            Return -1;
-        }
-        Result 0
-        {
-            Property PassFail = "Fail";
-            Return 0;
-        }
-        Result 1
-        {
-            Property PassFail = "Pass";
-            Return 1;
         }
     }
     
