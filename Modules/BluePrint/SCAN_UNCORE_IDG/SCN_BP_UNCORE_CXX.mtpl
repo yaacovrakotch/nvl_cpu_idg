@@ -226,120 +226,78 @@ MultiTrialTest \TESTTYPE\_\DOMAIN\_VMIN_K_\FXCORNERMTT\\SUBFLOW\_X_X_\FXCORNERMT
 }
 
 
-CSharpTest VminTC \TESTTYPE\_\DOMAIN\_VMAX_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X
+CSharpTest VminTC \TESTTYPE\_\DOMAIN\_SB_K_VMAX\SUBFLOW\_X_\POWERRAIL\_MAX_X_ALL
 {
-	Patlist = "scn_\ipblock\_\die_encoding\_\powerrail\_vmax\subflow\_\vmaxcorner\_hptp\hptpfreq\_\hptpbandwidth\_edt_\testtype\_region\domain\_\clocking_mode\_classvmin_plist";
-	LevelsTc = "\ipblock\_all_bf_x_x_\idut\_lvl_nom";
-	TimingsTc = TimingsTc = "\ipblock\_hvm_timing_mts\mtsfreq\_tstprtclk\tstprtfreq\_tck\tclkfreq\";;
-	BaseNumbers = "\scoreboard_base_num\";
+	Patlist = "scn_\ipblock\_\begin_plist\_edt_classhvm_list";
+	LevelsTc = __shared__::TpRule.If_DS0_DS1_M("SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCORE_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom");
+	TimingsTc = __shared__::TpRule.If_DS0_DS1_M("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500");
+	BaseNumbers = "\BASESBVAL\";
 	BypassPort = -1;
-	EndVoltageLimits = __shared__::FlowMatrixSingular.\SEARCH_RAIL\_HIGH_SEARCH_VALUE;
+	EndVoltageLimits = __shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
 	ExecutionMode = "\search_mode\";
-	FailCaptureCount = 999;
-	FeatureSwitchSettings = "ignore_masked_results, recovery_update_always, disable_masked_targets";
-	ForwardingMode = "InputOutput";
-	MaxRepetitionCount = 0;
+	FeatureSwitchSettings = "fivr_mode_on,disable_masked_targets,print_per_target_increments,print_scoreboard_counters";
+	FivrCondition = "NOM_CCF";
+	ForwardingMode = "None";
+	LogLevel = "Disabled";
+	MaxFailsNum = toInteger(__shared__:: Specs.VMX_MAX_FAILS);
 	PatternNameCounterIndexes = "1,2,3,4,5,6,7";
-	PinMap = "SCN_\IPBLOCK\_\DOMAIN\";
-	RecoveryMode = "\RECOVERY_MODE\";
-	RecoveryOptions = __shared__::FlowMatrix.BomGroupName+ "_\IPBLOCK\";
-	RecoveryTrackingIncoming = "\RECOVERYTRACKING\";
-	RecoveryTrackingOutgoing = "\RECOVERYTRACKING\";
-	SetPointsPlistMode = "Local";
-	SetPointsPlistParamName = "Patlist";
-	SetPointsPreInstance = \SETPOINT_CONFIG\;
-	StartVoltages = __shared__::FlowMatrixSingular.\SEARCH_RAIL\_LOW_SEARCH_VALUE;
-	StepSize = 0.01;
+    PinMap = "";
+    PostInstance = "";
+    PreInstance = "";
+	ScoreboardEdgeTicks = toInteger(__shared__:: Specs.VMX_EDGE_TICK);
+    SetPointsPlistMode = "Local";
+    SetPointsPlistParamName = "Patlist";
+	SetPointsPostInstance = \SETPOINT_POST_CONFIG\;
+    SetPointsPreInstance = \SETPOINT_CONFIG\;
+	StartVoltages = __shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
+    StepSize = 0.01;
 	TestMode = "Scoreboard";
 	VoltageTargets = "\POWERRAIL\";
 }
 
-CSharpTest VminTC CHAIN_\DOMAIN\_VMAX_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X_REBIN_\TESTTYPE\
+MultiTrialTest \TESTTYPE\_\DOMAIN\_SB_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_MAX_X_ALL
 {
-	Patlist = "scn_\ipblock\_\die_encoding\_\powerrail\_debug_chain_hptp\hptpfreq\_\hptpbandwidth\_edt_1hot_region\domain\_\clocking_mode\_classhvm_list";
-	LevelsTc = "\ipblock\_all_bf_x_x_\idut\_lvl_nom";
-	TimingsTc = TimingsTc = "\ipblock\_hvm_timing_mts\mtsfreq\_tstprtclk\tstprtfreq\_tck\tclkfreq\";;
-	BypassPort = \chainBypass\;
-	EndVoltageLimits = __shared__::FlowMatrixSingular.\SEARCH_RAIL\_HIGH_SEARCH_VALUE;
-	PatternNameCounterIndexes = "1,2,3,4,5,6,7";
-	SetPointsPlistMode = "Local";
-	SetPointsPlistParamName = "Patlist";
-	SetPointsPreInstance = \SETPOINT_CONFIG\;
-	StartVoltages = __shared__::FlowMatrixSingular.\SEARCH_RAIL\_LOW_SEARCH_VALUE;
-	StepSize = 0.01;
-	TestMode = "Functional";
-	VoltageTargets = "\POWERRAIL\";
-}
-
-CSharpTest VminTC \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X_FFSEARCH
-{
-	Patlist = "scn_\ipblock\_\die_encoding\_\powerrail\_vmax\subflow\_\vmaxcorner\_hptp\hptpfreq\_\hptpbandwidth\_edt_\testtype\_region\domain\_\clocking_mode\_classvmin_plist";
-	LevelsTc = "\ipblock\_all_bf_x_x_\idut\_lvl_nom";
-	TimingsTc = TimingsTc = "\ipblock\_hvm_timing_mts\mtsfreq\_tstprtclk\tstprtfreq\_tck\tclkfreq\";;
-	BypassPort = \edcBypass\;
-	EndVoltageLimits = __shared__::FlowMatrixSingular.\SEARCH_RAIL\_HIGH_SEARCH_VALUE;
-	SetPointsPlistMode = "Local";
-	SetPointsPlistParamName = "Patlist";
-	SetPointsPreInstance = \SETPOINT_CONFIG\;
-	StartVoltages = __shared__::FlowMatrixSingular.\SEARCH_RAIL\_LOW_SEARCH_VALUE;
-	StepSize = toDouble(__shared__::FlowMatrixSingular.\SEARCH_RAIL\_SEARCH_RESOLUTION);
-	TestMode = "SingleVmin";
-	VoltageTargets = "\POWERRAIL\";
-}
-
-CSharpTest DDGShmooTC \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X_FFSHMOO
-{
-	Patlist = "scn_\ipblock\_\die_encoding\_\powerrail\_vmax\subflow\_\vmaxcorner\_hptp\hptpfreq\_\hptpbandwidth\_edt_\testtype\_region\domain\_\clocking_mode\_classvmin_plist";
-	LevelsTc = "\ipblock\_all_bf_x_x_\idut\_lvl_nom";
-	TimingsTc = TimingsTc = "\ipblock\_hvm_timing_mts\mtsfreq\_tstprtclk\tstprtfreq\_tck\tclkfreq\";;
-	BypassPort = \edcBypass\;
-	SetPointsPlistMode = "Local";
-	SetPointsPlistParamName = "Patlist";
-	SetPointsPreInstance = \SETPOINT_CONFIG\;
-	XAxisParam = "p_all_mts";
-	XAxisParamType = "UserDefined";
-	XAxisRange = "400e6:100e6:1";
-	XAxisType = "SpecSetVariable";
-	YAxisParam = "p_\powerrail\_spec";
-	YAxisParamType = "UserDefined";
-	YAxisRange = "0.5:0.050:13";
-	YAxisType = "SpecSetVariable";
-}
-
-MultiTrialTest \TESTTYPE\_\DOMAIN\_VMAX_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X
-{
-    TrialVariable \IDUT\::\IPBLOCK\_TRIALS::FlowDomain.\trial_variable\;
+    TrialVariable \IPBLOCK\_TRIALS::FlowDomain.\trial_variable\;
     TrialVariableExitAction "Continue";
-    CSharpTrialTest VminTC "\TESTTYPE\_\DOMAIN\_VMAX_K_VMAX\SUBFLOW\_X_\POWERRAIL\_" + __shared__::Corners.\CORNERID\ + "_X_" + __shared__::FlowMatrixSingular.bin
+    CSharpTrialTest VminTC "\TESTTYPE\_\DOMAIN\_SB_K_VMAX\SUBFLOW\_X_\POWERRAIL\_MAX" + __shared__::Corners.\CORNERID\ + "_" + __shared__::FreqInMHZ.\CORNERID\;
     {
-	    Patlist = "scn_\ipblock\_\die_encoding\_\powerrail\_vmax\subflow\_\vmaxcornermtt\_hptp\hptpfreq\_\hptpbandwidth\_edt_\testtype\_region\domain\_\clocking_mode\_classvmin_plist";
-	    LevelsTc = "\ipblock\_all_bf_x_x_\idut\_lvl_nom";
-	    TimingsTc = TimingsTc = "\ipblock\_hvm_timing_mts\mtsfreq\_tstprtclk\tstprtfreq\_tck\tclkfreq\";;
-        BaseNumbers = "\scoreboard_base_num\";
+		Patlist = "scn_\ipblock\_\begin_plist\_edt_classhvm_list";
+        LevelsTc = __shared__::TpRule.If_DS0_DS1_M("SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCORE_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom");
+        TimingsTc = __shared__::TpRule.If_DS0_DS1_M("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500");
+        BaseNumbers = "\BASESBVAL\";
         BypassPort = -1;
-        EndVoltageLimits = __shared__::FlowMatrixSingular.\SEARCH_RAIL\_HIGH_SEARCH_VALUE;
-        ExecutionMode = "\search_mode\";
-        FailCaptureCount = 999;
-        FeatureSwitchSettings = "ignore_masked_results, disable_masked_targets";
-        FlowIndex = __shared__::FlowMatrixSingular.FlowIndex;
-        FlowIndexCallbackName = "";
-        ForwardingMode = "Input";
-        MaxFailsNum = toInteger(__shared__::Specs.CHK_MAX_FAILS);
-        MaxRepetitionCount = 0;
+		DtsConfiguration = __shared__::TpRule.If_DS0_DS1_M("ALL_CDIE_S28C_N2P","ALL_CDIE_S52C","ALL_CDIE_S28C_N2P","ALL_CDIE_S28C_N2P");
+		EndVoltageLimits = __shared__::FlowMatrixSingular.\SEARCH_RAIL\_VMAX_VALUE;
+		ExecutionMode = "\search_mode\";
+		FeatureSwitchSettings = "fivr_mode_on,disable_masked_targets,print_per_target_increments,print_scoreboard_counters";
+		FivrCondition = "NOM_CCF";
+		FlowIndex = __shared__::FlowMatrixSingular.FlowIndex;
+		FlowIndexCallbackName = "";
+        ForwardingMode = "InputOutput";
+        InitialMaskBits = "";
+		LimitGuardband = toString(__shared__::GBVars.LimitGuardband);
+        LogLevel = "Disabled";
+        MaskPins = "";
+		MaxFailsNum = toInteger(__shared__:: Specs.VMX_MAX_FAILS);
         PatternNameCounterIndexes = "1,2,3,4,5,6,7";
-        PinMap = "SCN_\IPBLOCK\_\DOMAIN\";
-        RecoveryMode = "\RECOVERY_MODE\";
-        RecoveryOptions = __shared__::FlowMatrix.BomGroupName+ "_\IPBLOCK\";
-        RecoveryTrackingIncoming = "\RECOVERYTRACKING\";
-        RecoveryTrackingOutgoing = "\RECOVERYTRACKING\";
+        PostInstance = "";
+        PreInstance = "";
+        RecoveryMode = "NoRecovery";
+        RecoveryOptions = "";
+        RecoveryTrackingIncoming = "";
+        RecoveryTrackingOutgoing = "";
+		ScoreboardEdgeTicks = toInteger(__shared__:: Specs.VMX_EDGE_TICK);
         SetPointsPlistMode = "Local";
         SetPointsPlistParamName = "Patlist";
-        TrialParam SetPointsPreInstance = \SETPOINT_CONFIG\;
-        StartVoltages = __shared__::FlowMatrixSingular.\SEARCH_RAIL\_LOW_SEARCH_VALUE;
-        StepSize = toDouble(__shared__::FlowMatrixSingular.\SEARCH_RAIL\_SEARCH_RESOLUTION);
-        TestMode = "Scoreboard";
-        VoltageConverter = "--ituff --overrides=\POWERRAIL\:"+ __shared__::GlobalRule.primaryoptype(__shared__::FlowMatrixSingular.SA_VMAX_VALUE,__shared__::FlowMatrixSingular.SA_VMAX_VALUE,VMAX_HI_Downstream.SA_VMAX_VALUE,VMAX_HI_Downstream.SA_VMAX_VALUE,VMAX_HI_Downstream.SA_VMAX_VALUE,VMAX_HI_Downstream.SA_VMAX_VALUE,VMAX_HI_Downstream.SA_VMAX_VALUE,VMAX_HI_Downstream.SA_VMAX_VALUE,VMAX_HI_Downstream.SA_VMAX_VALUE,VMAX_HI_Downstream.SA_VMAX_VALUE);
-        VoltageTargets = "\POWERRAIL\";
+		SetPointsPostInstance = \SETPOINT_POST_CONFIG\;
+        SetPointsPreInstance = \SETPOINT_CONFIG\;
+		StartVoltages = __shared__::FlowMatrixSingular.CCF_VMAX_VALUE;
+        TrialParam StartVoltagesForRetry = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesForRetry\CORNER\ , ["","",""]);
+        TrialParam StartVoltagesOffset = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesOffset\CORNER\ , ["","",""]);
+		StepSize = toDouble(__shared__::FlowMatrixSingular.CR_SEARCH_RESOLUTION);
+		TestMode = "SingleVmin";
+		VoltageConverter = "--dlvrpins VCCIA --railconfigurations CDIE_CCF_NBLCTRL --expressions " + DROPOUT.\CORNER\;
+		VoltageTargets = "\POWERRAIL\";
         TrialResult -2
         {
             PassFail Fail;
@@ -391,172 +349,6 @@ MultiTrialTest \TESTTYPE\_\DOMAIN\_VMAX_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNE
     }
 }
 
-CSharpTest VminTC CHAIN_\DOMAIN\_VMAX_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_REBIN_\TESTTYPE\
-{
-	Patlist = "scn_\ipblock\_\die_encoding\_\powerrail\_debug_chain_hptp\hptpfreq\_\hptpbandwidth\_edt_1hot_region\domain\_\clocking_mode\_classhvm_list";
-	LevelsTc = "\ipblock\_all_bf_x_x_\idut\_lvl_nom";
-	TimingsTc = TimingsTc = "\ipblock\_hvm_timing_mts\mtsfreq\_tstprtclk\tstprtfreq\_tck\tclkfreq\";;
-	BypassPort = \chainBypass\;
-	EndVoltageLimits = __shared__::FlowMatrixSingular.\SEARCH_RAIL\_HIGH_SEARCH_VALUE;
-	PatternNameCounterIndexes = "1,2,3,4,5,6,7";
-	SetPointsPlistMode = "Local";
-	SetPointsPlistParamName = "Patlist";
-	SetPointsPreInstance = \SETPOINT_CONFIG\;
-	StartVoltages = __shared__::FlowMatrixSingular.\SEARCH_RAIL\_LOW_SEARCH_VALUE;
-	StepSize = 0.01;
-	TestMode = "Functional";
-	VoltageTargets = "\POWERRAIL\";
-}
-
-MultiTrialTest \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSEARCH
-{
-    TrialVariable \IDUT\::\IPBLOCK\_TRIALS::FlowDomain.\trial_variable\;
-    TrialVariableExitAction "Restore";
-    CSharpTrialTest VminTC "\TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_" + __shared__::Corners.\CORNERID\ + "_X_FFSEARCH_" + __shared__::FlowMatrixSingular.bin
-    {
-	    Patlist = "scn_\ipblock\_\die_encoding\_\powerrail\_vmax\subflow\_\vmaxcornermtt\_hptp\hptpfreq\_\hptpbandwidth\_edt_\testtype\_region\domain\_\clocking_mode\_classvmin_plist";
-	    LevelsTc = "\ipblock\_all_bf_x_x_\idut\_lvl_nom";
-	    TimingsTc = TimingsTc = "\ipblock\_hvm_timing_mts\mtsfreq\_tstprtclk\tstprtfreq\_tck\tclkfreq\";;
-        BypassPort = \edcBypass\;
-        EndVoltageLimits = __shared__::FlowMatrixSingular.\SEARCH_RAIL\_HIGH_SEARCH_VALUE;
-        SetPointsPlistMode = "Local";
-        SetPointsPlistParamName = "Patlist";
-        TrialParam SetPointsPreInstance = \SETPOINT_CONFIG\;
-        StartVoltages = __shared__::FlowMatrixSingular.\SEARCH_RAIL\_LOW_SEARCH_VALUE;
-        StepSize = toDouble(__shared__::FlowMatrixSingular.\SEARCH_RAIL\_SEARCH_RESOLUTION);
-        TestMode = "SingleVmin";
-        VoltageTargets = "\POWERRAIL\";
-        TrialResult -2
-        {
-            PassFail Fail;
-            TrialAction "Exit";
-            Return -2;
-        }
-        TrialResult -1
-        {
-            PassFail Fail;
-            TrialAction "Exit";
-            Return -1;
-        }
-        TrialResult 0
-        {
-            PassFail Fail;
-            TrialAction  __shared__::TpRule.MTT_Rule("Exit","Exit");
-            Return 0;
-        }
-        TrialResult 1
-        {
-            PassFail Pass;
-            TrialAction "Exit";
-            Return 0;
-        }
-        TrialResult 2
-        {
-            PassFail Fail;
-            TrialAction "Exit";
-            Return 0;
-        }
-        TrialResult 3
-        {
-            PassFail Fail;
-            TrialAction "Exit";
-            Return 0;
-        }
-        TrialResult 4
-        {
-            PassFail Fail;
-            TrialAction "Exit";
-            Return 0;
-        }
-        TrialResult 5
-        {
-            PassFail Fail;
-            TrialAction "Exit";
-            Return 0;
-        }
-    }
-}
-
-MultiTrialTest \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSHMOO
-{
-    TrialVariable \IDUT\::\IPBLOCK\_TRIALS::FlowDomain.\trial_variable\;
-    TrialVariableExitAction "Restore";
-    CSharpTrialTest DDGShmooTC "\TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_" + __shared__::Corners.\CORNERID\ + "_X_FFSHMOO_" + __shared__::FlowMatrixSingular.bin
-    {
-	    Patlist = "scn_\ipblock\_\die_encoding\_\powerrail\_vmax\subflow\_\vmaxcornermtt\_hptp\hptpfreq\_\hptpbandwidth\_edt_\testtype\_region\domain\_\clocking_mode\_classvmin_plist";
-	    LevelsTc = "\ipblock\_all_bf_x_x_\idut\_lvl_nom";
-	    TimingsTc = TimingsTc = "\ipblock\_hvm_timing_mts\mtsfreq\_tstprtclk\tstprtfreq\_tck\tclkfreq\";;
-        BypassPort = \edcBypass\;
-        SetPointsPlistMode = "Local";
-        SetPointsPlistParamName = "Patlist";
-        TrialParam SetPointsPreInstance = \SETPOINT_CONFIG\;
-        XAxisParam = "p_all_mts";
-        XAxisParamType = "UserDefined";
-        XAxisRange = "800e6:100e6:1";
-        XAxisType = "SpecSetVariable";
-        YAxisParam = "p_\powerrail\_spec";
-        YAxisParamType = "UserDefined";
-        YAxisRange = "0.5:0.050:18";
-        YAxisType = "SpecSetVariable";
-        TrialResult -2
-        {
-            PassFail Fail;
-            TrialAction "Exit";
-            Return -2;
-        }
-        TrialResult -1
-        {
-            PassFail Fail;
-            TrialAction "Exit";
-            Return -1;
-        }
-        TrialResult 0
-        {
-            PassFail Fail;
-            TrialAction  __shared__::TpRule.MTT_Rule("Exit","Exit");
-            Return 0;
-        }
-        TrialResult 1
-        {
-            PassFail Pass;
-            TrialAction "Exit";
-            Return 0;
-        }
-        TrialResult 2
-        {
-            PassFail Fail;
-            TrialAction "Exit";
-            Return 0;
-        }
-        TrialResult 3
-        {
-            PassFail Fail;
-            TrialAction "Exit";
-            Return 0;
-        }
-        TrialResult 4
-        {
-            PassFail Fail;
-            TrialAction "Exit";
-            Return 0;
-        }
-        TrialResult 5
-        {
-            PassFail Fail;
-            TrialAction "Exit";
-            Return 0;
-        }
-    }
-}
-
-CSharpTest AuxiliaryTC CTRL_SCAN_AUX_E_VMAX\SUBFLOW\_X_X_X_X_BYPASS
-{
-	BypassPort = -1;
-	DataType = "String";
-	Expression = "1";
-	ResultPort = "[R]=1?0:0";
-}
-
 
 CSharpTest VminTC \TESTTYPE\_\DOMAIN\_SB_K_\FLOWID\_X_X_\LEVEL\_X_ALL
 {
@@ -589,72 +381,142 @@ CSharpTest VminTC \TESTTYPE\_\DOMAIN\_SB_K_\FLOWID\_X_X_\LEVEL\_X_ALL
 }
 
 
-CSharpTest VminTC \TESTTYPE\_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_copy
+MultiTrialTest \TESTTYPE\_\DOMAIN\_VMIN_E_\FMINCORNER\\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_MTT
 {
-	Patlist = "scn_\ipblock\_\die_encoding\_\powerrail\_fmin\subflow\_\fmincorner\_hptp\hptpfreq\_\hptpbandwidth\_edt_\testtype\_region\domain\_\clocking_mode\_classvmin_plist";
-	LevelsTc = "\ipblock\_all_bf_x_x_\idut\_lvl_nom";
-	TimingsTc = TimingsTc = "\ipblock\_hvm_timing_mts\mtsfreq\_tstprtclk\tstprtfreq\_tck\tclkfreq\";;
-	BaseNumbers = "\scoreboard_base_num\";
+    TrialVariable CPU_TRIALS::FlowDomain.\trial_variable\;
+    TrialVariableExitAction "Restore";
+    CSharpTrialTest VminTC "\TESTTYPE\_\DOMAIN\_VMIN_E_\FMINCORNER\\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_" + __shared__::CustomFlowMatrixSpecs.\CORNERID\ + "_MHz"
+    {
+        Patlist = "scn_\ipblock\_\begin_plist\_trans_edt_classvmin_list_master";
+        LevelsTc = __shared__::TpRule.If_DS0_DS1_M("SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCORE_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom");
+        TimingsTc = __shared__::TpRule.If_DS0_DS1_M("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500");
+        BaseNumbers = "\BASESBVAL\";
+        BypassPort = \bypassSetting\;
+        CornerIdentifiers = __shared__::CornerIdentifiers.\CORNERID\;
+		DtsConfiguration = __shared__::TpRule.If_DS0_DS1_M("ALL_CDIE_S28C_N2P","ALL_CDIE_S52C","ALL_CDIE_S28C_N2P","ALL_CDIE_S28C_N2P");
+        EndVoltageLimits = __shared__::FlowMatrixSingular.CR_LFM_VMIN_RAIN_KILL;
+        ExecutionMode = "\search_mode\";
+		FailCaptureCount = toInteger(999);
+        FeatureSwitchSettings = "fivr_mode_on,disable_masked_targets,print_per_target_increments,print_scoreboard_counters";
+        #FlowIndex = __shared__::FlowMatrixSingular.FlowIndex;
+		FivrCondition = "NOM_CCF";
+		TrialParam FlowIndex = __shared__::FlowMatrix.FlowIndex;
+		FlowIndexCallbackName = "";
+		ForwardingMode = "InputOutput";
+		InitialMaskBits = "";
+        LimitGuardband = toString(__shared__::GBVars.LimitGuardband);
+		LogLevel = "Disabled";
+		MaskPins = "";
+        MaxFailsNum = toInteger(__shared__::Specs.CHK_MAX_FAILS);
+        PatternNameCounterIndexes = "1,2,3,4,5,6,7";
+		PostInstance = "";
+        PreInstance = "";
+        RecoveryMode = "NoRecovery";
+        RecoveryOptions = "";
+        RecoveryTrackingIncoming = "";
+        RecoveryTrackingOutgoing = "";
+        ScoreboardEdgeTicks = toInteger(__shared__::Specs.CHK_EDGE_TICK);
+        SetPointsPlistMode = "Local";
+        SetPointsPlistParamName = "Patlist";
+		SetPointsPostInstance = \SETPOINT_POST_CONFIG\;
+        SetPointsPreInstance = \SETPOINT_CONFIG\;
+        StartVoltages = __shared__::FlowMatrixSingular.CR_LOW_SEARCH_VALUE;
+        StartVoltagesForRetry = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesForRetry , "");
+        StartVoltagesOffset = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesOffset  , "");
+        StepSize = toDouble(__shared__::FlowMatrixSingular.CR_SEARCH_RESOLUTION);
+        TestMode = "SingleVmin";
+		VoltageConverter = "--dlvrpins VCCIA --railconfigurations CDIE_CCF_NBLCTRL --expressions " + DROPOUT.CLR_\CORNER\;
+        VoltageTargets = "\POWERRAIL\";
+        VoltagesOffset = toString(__shared__::GBVars.VoltageOffset);
+        TrialResult -2
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return -2;
+        }
+        TrialResult -1
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return -1;
+        }
+        TrialResult 0
+        {
+            PassFail Fail;
+            TrialAction  __shared__::TpRule.MTT_Rule("Next","Exit");
+            Return 0;
+        }
+        TrialResult 1
+        {
+            PassFail Pass;
+            TrialAction "Exit";
+            Return 1;
+        }
+        TrialResult 2
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return 0;
+        }
+        TrialResult 3
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return 0;
+        }
+        TrialResult 4
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return 0;
+        }
+        TrialResult 5
+        {
+            PassFail Fail;
+            TrialAction "Exit";
+            Return 0;
+        }
+    }
+}
+
+CSharpTest VminTC \TESTTYPE\_\DOMAIN\_FMIN_K_\FMINCORNER\\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_MTT
+{
+	Patlist = "scn_\ipblock\_\begin_plist\_edt_classhvm_list";
+	LevelsTc = __shared__::TpRule.If_DS0_DS1_M("SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCORE_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom");
+	TimingsTc = __shared__::TpRule.If_DS0_DS1_M("SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_OVERRIDE","SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500","SCN_UNCORE_CX816::cpu_hvm_timing_mts1500_tstprtclk750_tck93p75_HXB0OVERRIDE1500");
+	BaseNumbers = "\BASESBVAL\";
 	BypassPort = -1;
-	CornerIdentifiers = __shared__::CornerIdentifiers.\CORNERID\;
-	EndVoltageLimits = __shared__::FlowMatrixSingular.\SEARCH_RAIL\_HIGH_SEARCH_VALUE;
-	ExecutionMode = "\search_mode\";
+	CornerIdentifiers = "CCF0@F1";
+	DtsConfiguration = __shared__::TpRule.If_DS0_DS1_M("ALL_CDIE_S28C_N2P","ALL_CDIE_S52C","ALL_CDIE_S28C_N2P","ALL_CDIE_S28C_N2P");
+	EndVoltageLimits = __shared__::FlowMatrixSingular.CR_LFM_VMIN_RAIN_KILL;
+	ExecutionMode = "SearchWithScoreboard";
 	FailCaptureCount = 999;
-	FeatureSwitchSettings = "ignore_masked_results, recovery_update_always, disable_masked_targets";
+	FeatureSwitchSettings = "fivr_mode_on,disable_masked_targets,print_per_target_increments,print_scoreboard_counters";
+	FivrCondition = "NOM_CCF";
 	FlowIndex = __shared__::FlowMatrixSingular.FlowIndex;
 	ForwardingMode = "Input";
-	LimitGuardband = toString(__shared__::GBVars.FminLimitGuardband);
-	MaxFailsNum = toInteger(__shared__::Specs.CHK_MAX_FAILS);
-	MaxRepetitionCount = 0;
+	LimitGuardband = "GBVars.FminLimitGuardband";
+	LogLevel = "Disabled";
+	MaxFailsNum = toInteger(__shared__:: Specs.CHK_MAX_FAILS);
 	PatternNameCounterIndexes = "1,2,3,4,5,6,7";
-	PinMap = "SCN_\IPBLOCK\_\DOMAIN\";
-	RecoveryMode = "\RECOVERY_MODE\";
-	RecoveryOptions = __shared__::FlowMatrix.BomGroupName+ "_\IPBLOCK\";
-	RecoveryTrackingIncoming = "\RECOVERYTRACKING\";
-	RecoveryTrackingOutgoing = "\RECOVERYTRACKING\";
-	ScoreboardEdgeTicks = toInteger(__shared__::Specs.CHK_EDGE_TICK);
+	PostInstance = "";
+    PreInstance = "";
+    RecoveryMode = "Default";
+    RecoveryOptions = "";
+    RecoveryTrackingIncoming = "";
+    RecoveryTrackingOutgoing = "";
+	ScoreboardEdgeTicks = toInteger(__shared__:: Specs.CHK_EDGE_TICK);
 	SetPointsPlistMode = "Local";
-	SetPointsPlistParamName = "Patlist";
-	SetPointsPreInstance = \SETPOINT_CONFIG\;
-	StartVoltages = __shared__::FlowMatrixSingular.\SEARCH_RAIL\_LOW_SEARCH_VALUE;
+    SetPointsPlistParamName = "Patlist";
+	SetPointsPostInstance = \SETPOINT_POST_CONFIG\;
+    SetPointsPreInstance = \SETPOINT_CONFIG\;
+
+	StartVoltages = __shared__::FlowMatrixSingular.CR_LOW_SEARCH_VALUE;
 	StartVoltagesForRetry = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesForRetry , "");
-	StartVoltagesOffset = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesOffset , "");
-	StepSize = toDouble(__shared__::FlowMatrixSingular.\SEARCH_RAIL\_SEARCH_RESOLUTION);
-	TestMode = "SingleVmin";
-	VoltageTargets = "\POWERRAIL\";
-	VoltagesOffset = toString(__shared__::GBVars.VoltageOffset);
-}
-
-CSharpTest VminTC CHAIN_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_REBIN_\TESTTYPE\_copy
-{
-	Patlist = "scn_\ipblock\_\die_encoding\_\powerrail\_debug_chain_hptp\hptpfreq\_\hptpbandwidth\_edt_1hot_region\domain\_\clocking_mode\_classhvm_list";
-	LevelsTc = "\ipblock\_all_bf_x_x_\idut\_lvl_nom";
-	TimingsTc = TimingsTc = "\ipblock\_hvm_timing_mts\mtsfreq\_tstprtclk\tstprtfreq\_tck\tclkfreq\";;
-	BypassPort = \chainBypass\;
-	EndVoltageLimits = __shared__::FlowMatrixSingular.\SEARCH_RAIL\_HIGH_SEARCH_VALUE;
-	PatternNameCounterIndexes = "1,2,3,4,5,6,7";
-	SetPointsPlistMode = "Local";
-	SetPointsPlistParamName = "Patlist";
-	SetPointsPreInstance = \SETPOINT_CONFIG\;
-	StartVoltages = __shared__::FlowMatrixSingular.\SEARCH_RAIL\_LOW_SEARCH_VALUE;
-	StepSize = 0.01;
-	TestMode = "Functional";
-	VoltageTargets = "\POWERRAIL\";
-}
-
-CSharpTest VminTC \TESTTYPE\_\DOMAIN\_\FMINCORNER\_E_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_FFSEARCH_copy
-{
-	Patlist = "scn_\ipblock\_\die_encoding\_\powerrail\_fmin\subflow\_\fmincorner\_hptp\hptpfreq\_\hptpbandwidth\_edt_\testtype\_region\domain\_\clocking_mode\_classvmin_plist";
-	LevelsTc = "\ipblock\_all_bf_x_x_\idut\_lvl_nom";
-	TimingsTc = TimingsTc = "\ipblock\_hvm_timing_mts\mtsfreq\_tstprtclk\tstprtfreq\_tck\tclkfreq\";;
-	BypassPort = \edcBypass\;
-	EndVoltageLimits = __shared__::FlowMatrixSingular.\SEARCH_RAIL\_HIGH_SEARCH_VALUE;
-	SetPointsPlistMode = "Local";
-	SetPointsPlistParamName = "Patlist";
-	SetPointsPreInstance = \SETPOINT_CONFIG\;
-	StartVoltages = __shared__::FlowMatrixSingular.\SEARCH_RAIL\_LOW_SEARCH_VALUE;
-	StepSize = toDouble(__shared__::FlowMatrixSingular.\SEARCH_RAIL\_SEARCH_RESOLUTION);
-	TestMode = "SingleVmin";
+    StartVoltagesOffset = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesOffset , "");
+    StepSize = toDouble(__shared__::FlowMatrixSingular.CR_SEARCH_RESOLUTION);
+    TestMode = "SingleVmin";
+    VoltageConverter = "--dlvrpins VCCIA --railconfigurations CDIE_CCF_NBLCTRL --expressions " + DROPOUT.CLR_FMIN;
 	VoltageTargets = "\POWERRAIL\";
 }
 
@@ -867,10 +729,8 @@ Flow SCN_\DOMAIN\_\DIE_ENCODING\_\FXCORNERMTT\\SUBFLOW\
 		}
 		Result 3
 		{
-			Property PassFail = "Fail";
-			SetBin b90475026_fail_SCN_\IPBLOCK\_\DIE_ENCODING\_\TESTTYPE\_\DOMAIN\_VMIN_K_\FXCORNERMTT\\SUBFLOW\_X_X_\FXCORNERMTT\_X;
-			IncrementCounters SCN_\IPBLOCK\_\DIE_ENCODING\::n47500099_fail_\TESTTYPE\_\DOMAIN\_VMIN_K_\FXCORNERMTT\\SUBFLOW\_X_X_\FXCORNERMTT\_X_3;
-			Return 0;
+			Property PassFail = "Pass";
+			Return 1;
 		}
 		Result 4
 		{
@@ -889,10 +749,9 @@ Flow SCN_\DOMAIN\_\DIE_ENCODING\_\FXCORNERMTT\\SUBFLOW\
 	}
 }
 
-Flow VMAX\SUBFLOW\_\VMAXCORNER\_\TESTTYPE\_COMPOSITE
-
+Flow SCN_\IPBLOCK\_\DIE_ENCODING\_VMAX\SUBFLOW\
 {
-	FlowItem \TESTTYPE\_\DOMAIN\_VMAX_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X \TESTTYPE\_\DOMAIN\_VMAX_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X \TESTTYPE\_\DOMAIN\_VMAX_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X
+	FlowItem \TESTTYPE\_\DOMAIN\_SB_K_VMAX\SUBFLOW\_X_\POWERRAIL\_MAX_X_ALL \TESTTYPE\_\DOMAIN\_SB_K_VMAX\SUBFLOW\_X_\POWERRAIL\_MAX_X_ALL \TESTTYPE\_\DOMAIN\_SB_K_VMAX\SUBFLOW\_X_\POWERRAIL\_MAX_X_ALL
 	{
 		Result -2
 		{
@@ -911,214 +770,41 @@ Flow VMAX\SUBFLOW\_\VMAXCORNER\_\TESTTYPE\_COMPOSITE
 			Property PassFail = "Fail";
 			SetBin b90426500_fail_SCN_HUB_HXX_\TESTTYPE\_\DOMAIN\_VMAX_K_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X;
 			IncrementCounters SCN_HUB_HXX::n42650000_fail_\TESTTYPE\_\DOMAIN\_VMAX_K_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_0;
-			GoTo CHAIN_\DOMAIN\_VMAX_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X_REBIN_\TESTTYPE\;
+			Return 0;
 		}
 		Result 1
 		{
 			Property PassFail = "Pass";
-			Return 1;
-			ChainBy DOMAIN;
+			GoTo \TESTTYPE\_\DOMAIN\_SB_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_MAX_X_ALL;
 		}
 		Result 2
 		{
 			Property PassFail = "Fail";
 			SetBin b90426500_fail_SCN_HUB_HXX_\TESTTYPE\_\DOMAIN\_VMAX_K_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X;
 			IncrementCounters SCN_HUB_HXX::n42650001_fail_\TESTTYPE\_\DOMAIN\_VMAX_K_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_2;
-			GoTo CHAIN_\DOMAIN\_VMAX_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X_REBIN_\TESTTYPE\;
+			Return 0;
 		}
 		Result 3
 		{
-			Property PassFail = "Fail";
-			SetBin b90426500_fail_SCN_HUB_HXX_\TESTTYPE\_\DOMAIN\_VMAX_K_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X;
-			IncrementCounters SCN_HUB_HXX::n42650002_fail_\TESTTYPE\_\DOMAIN\_VMAX_K_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_3;
-			GoTo CHAIN_\DOMAIN\_VMAX_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X_REBIN_\TESTTYPE\;
+			Property PassFail = "Pass";
+			GoTo \TESTTYPE\_\DOMAIN\_SB_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_MAX_X_ALL;
 		}
 		Result 4
 		{
 			Property PassFail = "Fail";
 			SetBin b90974255_fail_PTH_DTS_XXX_SCN_HUB_HXX_THERMAL_PORT4_SHARED_BIN;
 			IncrementCounters SCN_HUB_HXX::n97420165_fail_\TESTTYPE\_\DOMAIN\_VMAX_K_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_4;
-			GoTo CHAIN_\DOMAIN\_VMAX_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X_REBIN_\TESTTYPE\;
+			Return 0;
 		}
 		Result 5
 		{
 			Property PassFail = "Fail";
 			SetBin b90421955_fail_SCN_HUB_HXX_RESET_PORT5_SHARED_BIN;
-			IncrementCounters SCN_HUB_HXX::n42190165_fail_\TESTTYPE\_\DOMAIN\_VMAX_K_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_5;
-			GoTo CHAIN_\DOMAIN\_VMAX_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X_REBIN_\TESTTYPE\;
-		}
-	}
-	FlowItem CHAIN_\DOMAIN\_VMAX_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X_REBIN_\TESTTYPE\ CHAIN_\DOMAIN\_VMAX_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X_REBIN_\TESTTYPE\
-	{
-		Result -2
-		{
-			Property PassFail = "Fail";
-			SetBin b90990101_fail_FAIL_DPS_ALARM;
-			Return -2;
-		}
-		Result -1
-		{
-			Property PassFail = "Fail";
-			SetBin b90980101_fail_FAIL_SYSTEM_SOFTWARE;
-			Return -1;
-		}
-		Result 0
-		{
-			Property PassFail = "Fail";
-			SetBin b90415010_fail_SCN_HUB_HXX_CHAIN_\DOMAIN\_VMAX_K_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_REBIN;
-			IncrementCounters SCN_HUB_HXX::n41500028_fail_CHAIN_\DOMAIN\_VMAX_K_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_REBIN_0;
-			GoTo \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X_FFSEARCH;
-		}
-		Result 1
-		{
-			Property PassFail = "Pass";
-			GoTo \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X_FFSEARCH;
-		}
-		Result 2
-		{
-			Property PassFail = "Fail";
-			SetBin b90415010_fail_SCN_HUB_HXX_CHAIN_\DOMAIN\_VMAX_K_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_REBIN;
-			IncrementCounters SCN_HUB_HXX::n41500029_fail_CHAIN_\DOMAIN\_VMAX_K_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_REBIN_2;
-			GoTo \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X_FFSEARCH;
-		}
-		Result 3
-		{
-			Property PassFail = "Fail";
-			SetBin b90415010_fail_SCN_HUB_HXX_CHAIN_\DOMAIN\_VMAX_K_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_REBIN;
-			IncrementCounters SCN_HUB_HXX::n41500030_fail_CHAIN_\DOMAIN\_VMAX_K_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_REBIN_3;
-			GoTo \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X_FFSEARCH;
-		}
-		Result 4
-		{
-			Property PassFail = "Fail";
-			SetBin b90974155_fail_PTH_DTS_XXX_SCN_HUB_HXX_THERMAL_PORT4_SHARED_BIN;
-			IncrementCounters SCN_HUB_HXX::n97410180_fail_CHAIN_\DOMAIN\_VMAX_K_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_REBIN_4;
-			GoTo \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X_FFSEARCH;
-		}
-		Result 5
-		{
-			Property PassFail = "Fail";
-			SetBin b90411955_fail_SCN_HUB_HXX_RESET_PORT5_SHARED_BIN;
-			IncrementCounters SCN_HUB_HXX::n41190180_fail_CHAIN_\DOMAIN\_VMAX_K_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_REBIN_5;
-			GoTo \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X_FFSEARCH;
-		}
-	}
-	FlowItem \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X_FFSEARCH \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X_FFSEARCH @EDC
-	{
-		Result -2
-		{
-			Property PassFail = "Fail";
-			SetBin b90990101_fail_FAIL_DPS_ALARM;
-			Return -2;
-		}
-		Result -1
-		{
-			Property PassFail = "Fail";
-			SetBin b90980101_fail_FAIL_SYSTEM_SOFTWARE;
-			Return -1;
-		}
-		Result 0
-		{
-			Property PassFail = "Fail";
-			##EDC## SetBin b90425001_fail_SCN_HUB_HXX_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_FFSEARCH;
-			IncrementCounters SCN_HUB_HXX::n42500002_fail_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_FFSEARCH_0;
-			GoTo \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X_FFSHMOO;
-		}
-		Result 1
-		{
-			Property PassFail = "Pass";
-			GoTo \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X_FFSHMOO;
-		}
-		Result 2
-		{
-			Property PassFail = "Fail";
-			##EDC## SetBin b90425001_fail_SCN_HUB_HXX_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_FFSEARCH;
-			IncrementCounters SCN_HUB_HXX::n42500003_fail_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_FFSEARCH_2;
-			GoTo \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X_FFSHMOO;
-		}
-		Result 3
-		{
-			Property PassFail = "Fail";
-			##EDC## SetBin b90425001_fail_SCN_HUB_HXX_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_FFSEARCH;
-			IncrementCounters SCN_HUB_HXX::n42500004_fail_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_FFSEARCH_3;
-			GoTo \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X_FFSHMOO;
-		}
-		Result 4
-		{
-			Property PassFail = "Fail";
-			##EDC## SetBin b90974255_fail_PTH_DTS_XXX_SCN_HUB_HXX_THERMAL_PORT4_SHARED_BIN;
-			IncrementCounters SCN_HUB_HXX::n97420170_fail_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_FFSEARCH_4;
-			GoTo \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X_FFSHMOO;
-		}
-		Result 5
-		{
-			Property PassFail = "Fail";
-			##EDC## SetBin b90421955_fail_SCN_HUB_HXX_RESET_PORT5_SHARED_BIN;
-			IncrementCounters SCN_HUB_HXX::n42190170_fail_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_FFSEARCH_5;
-			GoTo \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X_FFSHMOO;
-		}
-	}
-	FlowItem \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X_FFSHMOO \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X_FFSHMOO @EDC
-	{
-		Result -2
-		{
-			Property PassFail = "Fail";
-			SetBin b90990101_fail_FAIL_DPS_ALARM;
-			Return -2;
-		}
-		Result -1
-		{
-			Property PassFail = "Fail";
-			SetBin b90980101_fail_FAIL_SYSTEM_SOFTWARE;
-			Return -1;
-		}
-		Result 0
-		{
-			Property PassFail = "Fail";
-			##EDC## SetBin b90425006_fail_SCN_HUB_HXX_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_FFSHMOO;
-			IncrementCounters SCN_HUB_HXX::n42500017_fail_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_FFSHMOO_0;
-			Return 0;
-		}
-		Result 1
-		{
-			Property PassFail = "Pass";
-			Return 0;
-		}
-		Result 2
-		{
-			Property PassFail = "Fail";
-			##EDC## SetBin b90425006_fail_SCN_HUB_HXX_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_FFSHMOO;
-			IncrementCounters SCN_HUB_HXX::n42500018_fail_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_FFSHMOO_2;
-			Return 0;
-		}
-		Result 3
-		{
-			Property PassFail = "Fail";
-			##EDC## SetBin b90425006_fail_SCN_HUB_HXX_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_FFSHMOO;
-			IncrementCounters SCN_HUB_HXX::n42500019_fail_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_FFSHMOO_3;
-			Return 0;
-		}
-		Result 4
-		{
-			Property PassFail = "Fail";
-			##EDC## SetBin b90425006_fail_SCN_HUB_HXX_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_FFSHMOO;
-			IncrementCounters SCN_HUB_HXX::n42500020_fail_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_FFSHMOO_4;
-			Return 0;
-		}
-		Result 5
-		{
-			Property PassFail = "Fail";
-			##EDC## SetBin b90425006_fail_SCN_HUB_HXX_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_FFSHMOO;
-			IncrementCounters SCN_HUB_HXX::n42500021_fail_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_FFSHMOO_5;
+			IncrementCounters SCN_HUB_HXX::n97420165_fail_\TESTTYPE\_\DOMAIN\_VMAX_K_\VMAXCORNER\_X_\POWERRAIL\_\FX\_X_5;
 			Return 0;
 		}
 	}
-}
-
-Flow VMAX\SUBFLOW\_\VMAXCORNERMTT\_\TESTTYPE\_COMPOSITE
-
-{
-	FlowItem \TESTTYPE\_\DOMAIN\_VMAX_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X \TESTTYPE\_\DOMAIN\_VMAX_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X \TESTTYPE\_\DOMAIN\_VMAX_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNER\_X
+	FlowItem \TESTTYPE\_\DOMAIN\_SB_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_MAX_X_ALL \TESTTYPE\_\DOMAIN\_SB_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_MAX_X_ALL \TESTTYPE\_\DOMAIN\_SB_K_VMAX\SUBFLOW\_X_\POWERRAIL\_MAX_X_ALL
 	{
 		Result -2
 		{
@@ -1137,340 +823,40 @@ Flow VMAX\SUBFLOW\_\VMAXCORNERMTT\_\TESTTYPE\_COMPOSITE
 			Property PassFail = "Fail";
 			SetBin b90426500_fail_SCN_\IPBLOCK\_\DIE_ENCODING\_\TESTTYPE\_\DOMAIN\_VMAX_K_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X;
 			IncrementCounters SCN_\IPBLOCK\_\DIE_ENCODING\::n42650000_fail_\TESTTYPE\_\DOMAIN\_VMAX_K_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_0;
-			GoTo CHAIN_\DOMAIN\_VMAX_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_REBIN_\TESTTYPE\;
+			Return 0;
 		}
 		Result 1
 		{
 			Property PassFail = "Pass";
 			Return 1;
-			ChainBy DOMAIN;
 		}
 		Result 2
 		{
 			Property PassFail = "Fail";
 			SetBin b90426500_fail_SCN_HUB_HXX_\TESTTYPE\_\DOMAIN\_VMAX_K_\VMAXCORNERMTT\_X_\POWERRAIL\_\FX\_X;
 			IncrementCounters SCN_HUB_HXX::n42650001_fail_\TESTTYPE\_\DOMAIN\_VMAX_K_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_2;
-			GoTo CHAIN_\DOMAIN\_VMAX_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_REBIN_\TESTTYPE\;
+			Return 0;
 		}
 		Result 3
 		{
-			Property PassFail = "Fail";
+			Property PassFail = "Pass";
 			SetBin b90426500_fail_SCN_HUB_HXX_\TESTTYPE\_\DOMAIN\_VMAX_K_\VMAXCORNERMTT\_X_\POWERRAIL\_\FX\_X;
 			IncrementCounters SCN_HUB_HXX::n42650002_fail_\TESTTYPE\_\DOMAIN\_VMAX_K_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_3;
-			GoTo CHAIN_\DOMAIN\_VMAX_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_REBIN_\TESTTYPE\;
+			Return 1;
 		}
 		Result 4
 		{
 			Property PassFail = "Fail";
 			SetBin b90974255_fail_PTH_DTS_XXX_SCN_HUB_HXX_THERMAL_PORT4_SHARED_BIN;
 			IncrementCounters SCN_HUB_HXX::n97420165_fail_\TESTTYPE\_\DOMAIN\_VMAX_K_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_4;
-			GoTo CHAIN_\DOMAIN\_VMAX_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_REBIN_\TESTTYPE\;
+			Return 0;
 		}
 		Result 5
 		{
 			Property PassFail = "Fail";
 			SetBin b90421955_fail_SCN_HUB_HXX_RESET_PORT5_SHARED_BIN;
 			IncrementCounters SCN_HUB_HXX::n42190165_fail_\TESTTYPE\_\DOMAIN\_VMAX_K_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_5;
-			GoTo CHAIN_\DOMAIN\_VMAX_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_REBIN_\TESTTYPE\;
-		}
-	}
-	FlowItem CHAIN_\DOMAIN\_VMAX_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_REBIN_\TESTTYPE\ CHAIN_\DOMAIN\_VMAX_K_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_REBIN_\TESTTYPE\
-	{
-		Result -2
-		{
-			Property PassFail = "Fail";
-			SetBin b90990101_fail_FAIL_DPS_ALARM;
-			Return -2;
-		}
-		Result -1
-		{
-			Property PassFail = "Fail";
-			SetBin b90980101_fail_FAIL_SYSTEM_SOFTWARE;
-			Return -1;
-		}
-		Result 0
-		{
-			Property PassFail = "Fail";
-			SetBin b90415010_fail_SCN_HUB_HXX_CHAIN_\DOMAIN\_VMAX_K_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_REBIN;
-			IncrementCounters SCN_HUB_HXX::n41500028_fail_CHAIN_\DOMAIN\_VMAX_K_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_REBIN_0;
-			GoTo \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSEARCH;
-		}
-		Result 1
-		{
-			Property PassFail = "Pass";
-			GoTo \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSEARCH;
-		}
-		Result 2
-		{
-			Property PassFail = "Fail";
-			SetBin b90415010_fail_SCN_HUB_HXX_CHAIN_\DOMAIN\_VMAX_K_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_REBIN;
-			IncrementCounters SCN_HUB_HXX::n41500029_fail_CHAIN_\DOMAIN\_VMAX_K_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_REBIN_2;
-			GoTo \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSEARCH;
-		}
-		Result 3
-		{
-			Property PassFail = "Fail";
-			SetBin b90415010_fail_SCN_HUB_HXX_CHAIN_\DOMAIN\_VMAX_K_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_REBIN;
-			IncrementCounters SCN_HUB_HXX::n41500030_fail_CHAIN_\DOMAIN\_VMAX_K_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_REBIN_3;
-			GoTo \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSEARCH;
-		}
-		Result 4
-		{
-			Property PassFail = "Fail";
-			SetBin b90974155_fail_PTH_DTS_XXX_SCN_HUB_HXX_THERMAL_PORT4_SHARED_BIN;
-			IncrementCounters SCN_HUB_HXX::n97410180_fail_CHAIN_\DOMAIN\_VMAX_K_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_REBIN_4;
-			GoTo \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSEARCH;
-		}
-		Result 5
-		{
-			Property PassFail = "Fail";
-			SetBin b90411955_fail_SCN_HUB_HXX_RESET_PORT5_SHARED_BIN;
-			IncrementCounters SCN_HUB_HXX::n41190180_fail_CHAIN_\DOMAIN\_VMAX_K_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_REBIN_5;
-			GoTo \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSEARCH;
-		}
-	}
-	FlowItem \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSEARCH \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSEARCH @EDC
-	{
-		Result -2
-		{
-			Property PassFail = "Fail";
-			SetBin b90990101_fail_FAIL_DPS_ALARM;
-			Return -2;
-		}
-		Result -1
-		{
-			Property PassFail = "Fail";
-			SetBin b90980101_fail_FAIL_SYSTEM_SOFTWARE;
-			Return -1;
-		}
-		Result 0
-		{
-			Property PassFail = "Fail";
-			##EDC## SetBin b90425001_fail_SCN_HUB_HXX_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSEARCH;
-			IncrementCounters SCN_HUB_HXX::n42500002_fail_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSEARCH_0;
-			GoTo \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSHMOO;
-		}
-		Result 1
-		{
-			Property PassFail = "Pass";
-			GoTo \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSHMOO;
-		}
-		Result 2
-		{
-			Property PassFail = "Fail";
-			##EDC## SetBin b90425001_fail_SCN_HUB_HXX_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSEARCH;
-			IncrementCounters SCN_HUB_HXX::n42500003_fail_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNERMTT\_X_\POWERRAIL\_\FX\_X_FFSEARCH_2;
-			GoTo \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSHMOO;
-		}
-		Result 3
-		{
-			Property PassFail = "Fail";
-			##EDC## SetBin b90425001_fail_SCN_HUB_HXX_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSEARCH;
-			IncrementCounters SCN_HUB_HXX::n42500004_fail_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSEARCH_3;
-			GoTo \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSHMOO;
-		}
-		Result 4
-		{
-			Property PassFail = "Fail";
-			##EDC## SetBin b90974255_fail_PTH_DTS_XXX_SCN_HUB_HXX_THERMAL_PORT4_SHARED_BIN;
-			IncrementCounters SCN_HUB_HXX::n97420170_fail_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSEARCH_4;
-			GoTo \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSHMOO;
-		}
-		Result 5
-		{
-			Property PassFail = "Fail";
-			##EDC## SetBin b90421955_fail_SCN_HUB_HXX_RESET_PORT5_SHARED_BIN;
-			IncrementCounters SCN_HUB_HXX::n42190170_fail_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSEARCH_5;
-			GoTo \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSHMOO;
-		}
-	}
-	FlowItem \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSHMOO \TESTTYPE\_\DOMAIN\_VMAX_E_VMAX\SUBFLOW\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSHMOO @EDC
-	{
-		Result -2
-		{
-			Property PassFail = "Fail";
-			SetBin b90990101_fail_FAIL_DPS_ALARM;
-			Return -2;
-		}
-		Result -1
-		{
-			Property PassFail = "Fail";
-			SetBin b90980101_fail_FAIL_SYSTEM_SOFTWARE;
-			Return -1;
-		}
-		Result 0
-		{
-			Property PassFail = "Fail";
-			##EDC## SetBin b90425006_fail_SCN_HUB_HXX_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSHMOO;
-			IncrementCounters SCN_HUB_HXX::n42500017_fail_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSHMOO_0;
 			Return 0;
-		}
-		Result 1
-		{
-			Property PassFail = "Pass";
-			Return 0;
-		}
-		Result 2
-		{
-			Property PassFail = "Fail";
-			##EDC## SetBin b90425006_fail_SCN_HUB_HXX_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSHMOO;
-			IncrementCounters SCN_HUB_HXX::n42500018_fail_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSHMOO_2;
-			Return 0;
-		}
-		Result 3
-		{
-			Property PassFail = "Fail";
-			##EDC## SetBin b90425006_fail_SCN_HUB_HXX_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSHMOO;
-			IncrementCounters SCN_HUB_HXX::n42500019_fail_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSHMOO_3;
-			Return 0;
-		}
-		Result 4
-		{
-			Property PassFail = "Fail";
-			##EDC## SetBin b90425006_fail_SCN_HUB_HXX_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSHMOO;
-			IncrementCounters SCN_HUB_HXX::n42500020_fail_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSHMOO_4;
-			Return 0;
-		}
-		Result 5
-		{
-			Property PassFail = "Fail";
-			##EDC## SetBin b90425006_fail_SCN_HUB_HXX_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSHMOO;
-			IncrementCounters SCN_HUB_HXX::n42500021_fail_\TESTTYPE\_\DOMAIN\_VMAX_E_\VMAXCORNERMTT\_X_\POWERRAIL\_\VMAXCORNERMTT\_X_FFSHMOO_5;
-			Return 0;
-		}
-	}
-}
-Flow VMAX\SUBFLOW\_\VMAXCORNER\_COMPOSITE
-{
-	FlowItem VMAX\SUBFLOW\_\VMAXCORNER\_\TESTTYPE\_COMPOSITE VMAX\SUBFLOW\_\VMAXCORNER\_\TESTTYPE\_COMPOSITE
-	{
-		Result -2
-		{
-			Property PassFail = "Fail";
-			SetBin b90990101_fail_FAIL_DPS_ALARM;
-			Return -2;
-		}
-		Result -1
-		{
-			Property PassFail = "Fail";
-			SetBin b90980101_fail_FAIL_SYSTEM_SOFTWARE;
-			Return -1;
-		}
-		Result 0
-		{
-			Property PassFail = "Pass";
-			Return 0;
-		}
-		Result 1
-		{
-			Property PassFail = "Pass";
-			Return 1;
-			ChainBy TESTTYPE;
-	}
-}
-Flow VMAX\SUBFLOW\_\VMAXCORNERMTT\_COMPOSITE
-{
-	FlowItem VMAX\SUBFLOW\_\VMAXCORNERMTT\_\TESTTYPE\_COMPOSITE VMAX\SUBFLOW\_\VMAXCORNERMTT\_\TESTTYPE\_COMPOSITE
-	{
-		Result -2
-		{
-			Property PassFail = "Fail";
-			SetBin b90990101_fail_FAIL_DPS_ALARM;
-			Return -2;
-		}
-		Result -1
-		{
-			Property PassFail = "Fail";
-			SetBin b90980101_fail_FAIL_SYSTEM_SOFTWARE;
-			Return -1;
-		}
-		Result 0
-		{
-			Property PassFail = "Pass";
-			Return 0;
-		}
-		Result 1
-		{
-			Property PassFail = "Pass";
-			Return 1;
-			ChainBy TESTTYPE;
-	}
-}
-Flow SCN_\IPBLOCK\_\DIE_ENCODING\_VMAX\SUBFLOW\
-{
-	FlowItem CTRL_SCAN_AUX_E_VMAX\SUBFLOW\_X_X_X_X_BYPASS CTRL_SCAN_AUX_E_VMAX\SUBFLOW\_X_X_X_X_BYPASS
-	{
-		Result -2
-		{
-			Property PassFail = "Fail";
-			SetBin b90990101_fail_FAIL_DPS_ALARM;
-			Return -2;
-		}
-		Result -1
-		{
-			Property PassFail = "Fail";
-			SetBin b90980101_fail_FAIL_SYSTEM_SOFTWARE;
-			Return -1;
-		}
-		Result 0
-		{
-			Property PassFail = "Pass";
-			GoTo VMAX\SUBFLOW\_\VMAXCORNER\_COMPOSITE;
-		}
-		Result 1
-		{
-			Property PassFail = "Pass";
-			Return 1;
-		}
-	}
-	FlowItem VMAX\SUBFLOW\_\VMAXCORNER\_COMPOSITE VMAX\SUBFLOW\_\VMAXCORNER\_COMPOSITE
-	{
-		Result -2
-		{
-			Property PassFail = "Fail";
-			Return -2;
-		}
-		Result -1
-		{
-			Property PassFail = "Fail";
-			Return -1;
-		}
-		Result 0
-		{
-			Property PassFail = "Fail";
-			Return 0;
-		}
-		Result 1
-		{
-			Property PassFail = "Pass";
-			GoTo VMAX\SUBFLOW\_\VMAXCORNERMTT\_COMPOSITE;
-
-			ChainBy VMAXCORNER; 
-		}
-	}
-	FlowItem VMAX\SUBFLOW\_\VMAXCORNERMTT\_COMPOSITE VMAX\SUBFLOW\_\VMAXCORNERMTT\_COMPOSITE
-	{
-		Result -2
-		{
-			Property PassFail = "Fail";
-			Return -2;
-		}
-		Result -1
-		{
-			Property PassFail = "Fail";
-			Return -1;
-		}
-		Result 0
-		{
-			Property PassFail = "Fail";
-			Return 0;
-		}
-		Result 1
-		{
-			Property PassFail = "Pass";
-			Return 1;
-
-			ChainBy VMAXCORNERMTT; 
 		}
 	}
 }
@@ -1566,9 +952,9 @@ Flow SCN_\IPBLOCK\_\DIE_ENCODING\_\FLOWID\\IPBLOCK\\LEVEL\
 	
 
 
-Flow FMIN\SUBFLOW\_\FMINCORNER\_\TESTTYPE\_COMPOSITE_copy
+Flow FMIN\SUBFLOW\_\FMINCORNER\_\TESTTYPE\_COMPOSITE
 {
-	FlowItem \TESTTYPE\_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_copy \TESTTYPE\_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_copy
+	FlowItem \TESTTYPE\_\DOMAIN\_VMIN_E_\FMINCORNER\\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_MTT \TESTTYPE\_\DOMAIN\_VMIN_E_\FMINCORNER\\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_MTT
 	{
 		Result -2
 		{
@@ -1587,7 +973,7 @@ Flow FMIN\SUBFLOW\_\FMINCORNER\_\TESTTYPE\_COMPOSITE_copy
 			Property PassFail = "Fail";
 			SetBin b90475080_fail_SCN_\IPBLOCK\_\DIE_ENCODING\_\TESTTYPE\_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X;
 			IncrementCounters SCN_\IPBLOCK\_\DIE_ENCODING\::n47500295_fail_\TESTTYPE\_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_0;
-			GoTo CHAIN_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_REBIN_\TESTTYPE\_copy;
+			GoTo \TESTTYPE\_\DOMAIN\_FMIN_K_\FMINCORNER\\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_MTT;
 		}
 		Result 1
 		{
@@ -1600,31 +986,29 @@ Flow FMIN\SUBFLOW\_\FMINCORNER\_\TESTTYPE\_COMPOSITE_copy
 			Property PassFail = "Fail";
 			SetBin b90475080_fail_SCN_\IPBLOCK\_\DIE_ENCODING\_\TESTTYPE\_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X;
 			IncrementCounters SCN_\IPBLOCK\_\DIE_ENCODING\::n47500296_fail_\TESTTYPE\_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_2;
-			GoTo CHAIN_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_REBIN_\TESTTYPE\_copy;
+			GoTo \TESTTYPE\_\DOMAIN\_FMIN_K_\FMINCORNER\\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_MTT;
 		}
 		Result 3
 		{
-			Property PassFail = "Fail";
-			SetBin b90475080_fail_SCN_\IPBLOCK\_\DIE_ENCODING\_\TESTTYPE\_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_FMIN_X;
-			IncrementCounters SCN_\IPBLOCK\_\DIE_ENCODING\::n47500297_fail_\TESTTYPE\_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_3;
-			GoTo CHAIN_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_REBIN_\TESTTYPE\_copy;
+			Property PassFail = "Pass";
+			Return 1;
 		}
 		Result 4
 		{
 			Property PassFail = "Fail";
 			SetBin b90974755_fail_PTH_DTS_XXX_SCN_\IPBLOCK\_\SUBFLOW\_THERMAL_PORT4_SHARED_BIN;
 			IncrementCounters SCN_\IPBLOCK\_\DIE_ENCODING\::n97470221_fail_\TESTTYPE\_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_4;
-			GoTo CHAIN_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_REBIN_\TESTTYPE\_copy;
+			GoTo \TESTTYPE\_\DOMAIN\_FMIN_K_\FMINCORNER\\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_MTT;
 		}
 		Result 5
 		{
 			Property PassFail = "Fail";
 			SetBin b90471955_fail_SCN_\IPBLOCK\_\DIE_ENCODING\_RESET_PORT5_SHARED_BIN;
 			IncrementCounters SCN_\IPBLOCK\_\DIE_ENCODING\::n47190221_fail_\TESTTYPE\_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_5;
-			GoTo CHAIN_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_REBIN_\TESTTYPE\_copy;
+			GoTo \TESTTYPE\_\DOMAIN\_FMIN_K_\FMINCORNER\\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_MTT;
 		}
 	}
-	FlowItem CHAIN_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_REBIN_\TESTTYPE\_copy CHAIN_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_REBIN_\TESTTYPE\_copy
+	FlowItem \TESTTYPE\_\DOMAIN\_FMIN_K_\FMINCORNER\\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_MTT \TESTTYPE\_\DOMAIN\_FMIN_K_\FMINCORNER\\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_MTT
 	{
 		Result -2
 		{
@@ -1643,61 +1027,6 @@ Flow FMIN\SUBFLOW\_\FMINCORNER\_\TESTTYPE\_COMPOSITE_copy
 			Property PassFail = "Fail";
 			SetBin b90415036_fail_SCN_\IPBLOCK\_\DIE_ENCODING\_CHAIN_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_REBIN;
 			IncrementCounters SCN_\IPBLOCK\_\DIE_ENCODING\::n41500106_fail_CHAIN_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_REBIN_0;
-			GoTo \TESTTYPE\_\DOMAIN\_\FMINCORNER\_E_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_FFSEARCH_copy;
-		}
-		Result 1
-		{
-			Property PassFail = "Pass";
-			GoTo \TESTTYPE\_\DOMAIN\_\FMINCORNER\_E_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_FFSEARCH_copy;
-		}
-		Result 2
-		{
-			Property PassFail = "Fail";
-			SetBin b90415036_fail_SCN_\IPBLOCK\_\DIE_ENCODING\_CHAIN_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_REBIN;
-			IncrementCounters SCN_\IPBLOCK\_\DIE_ENCODING\::n41500107_fail_CHAIN_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_REBIN_2;
-			GoTo \TESTTYPE\_\DOMAIN\_\FMINCORNER\_E_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_FFSEARCH_copy;
-		}
-		Result 3
-		{
-			Property PassFail = "Fail";
-			SetBin b90415036_fail_SCN_\IPBLOCK\_\DIE_ENCODING\_CHAIN_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_REBIN;
-			IncrementCounters SCN_\IPBLOCK\_\DIE_ENCODING\::n41500108_fail_CHAIN_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_REBIN_3;
-			GoTo \TESTTYPE\_\DOMAIN\_\FMINCORNER\_E_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_FFSEARCH_copy;
-		}
-		Result 4
-		{
-			Property PassFail = "Fail";
-			SetBin b90974155_fail_PTH_DTS_XXX_SCN_\IPBLOCK\_\DIE_ENCODING\_THERMAL_PORT4_SHARED_BIN;
-			IncrementCounters SCN_\IPBLOCK\_\DIE_ENCODING\::n97410206_fail_CHAIN_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_REBIN_4;
-			GoTo \TESTTYPE\_\DOMAIN\_\FMINCORNER\_E_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_FFSEARCH_copy;
-		}
-		Result 5
-		{
-			Property PassFail = "Fail";
-			SetBin b90411955_fail_SCN_\IPBLOCK\_\DIE_ENCODING\_RESET_PORT5_SHARED_BIN;
-			IncrementCounters SCN_\IPBLOCK\_\DIE_ENCODING\::n41190206_fail_CHAIN_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_REBIN_5;
-			GoTo \TESTTYPE\_\DOMAIN\_\FMINCORNER\_E_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_FFSEARCH_copy;
-		}
-	}
-	FlowItem \TESTTYPE\_\DOMAIN\_\FMINCORNER\_E_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_FFSEARCH_copy \TESTTYPE\_\DOMAIN\_\FMINCORNER\_E_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_FFSEARCH_copy @EDC
-	{
-		Result -2
-		{
-			Property PassFail = "Fail";
-			SetBin b90990101_fail_FAIL_DPS_ALARM;
-			Return -2;
-		}
-		Result -1
-		{
-			Property PassFail = "Fail";
-			SetBin b90980101_fail_FAIL_SYSTEM_SOFTWARE;
-			Return -1;
-		}
-		Result 0
-		{
-			Property PassFail = "Fail";
-			##EDC## SetBin b90475085_fail_SCN_HUB_HXX_\TESTTYPE\_\DOMAIN\_FMIN_E_\FMINXSN\_X_\POWERRAIL\_FMIN_X_FFSEARCH;
-			IncrementCounters SCN_\IPBLOCK\_\DIE_ENCODING\::n47500310_fail_\TESTTYPE\_\DOMAIN\_\FMINCORNER\_E_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_FFSEARCH_0;
 			Return 0;
 		}
 		Result 1
@@ -1708,29 +1037,28 @@ Flow FMIN\SUBFLOW\_\FMINCORNER\_\TESTTYPE\_COMPOSITE_copy
 		Result 2
 		{
 			Property PassFail = "Fail";
-			##EDC## SetBin b90475085_fail_SCN_HUB_HXX_\TESTTYPE\_\DOMAIN\_FMIN_E_\FMINXSN\_X_\POWERRAIL\_FMIN_X_FFSEARCH;
-			IncrementCounters SCN_\IPBLOCK\_\DIE_ENCODING\::n47500311_fail_\TESTTYPE\_\DOMAIN\_\FMINCORNER\_E_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_FFSEARCH_2;
-			GoTo \TESTTYPE\_\DOMAIN\_\FMINCORNER\_E_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_FFSHMOO;
+			SetBin b90415036_fail_SCN_\IPBLOCK\_\DIE_ENCODING\_CHAIN_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_REBIN;
+			IncrementCounters SCN_\IPBLOCK\_\DIE_ENCODING\::n41500107_fail_CHAIN_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_REBIN_2;
+			Return 0;
 		}
 		Result 3
 		{
-			Property PassFail = "Fail";
-			##EDC## SetBin b90475085_fail_SCN_HUB_HXX_\TESTTYPE\_\DOMAIN\_FMIN_E_\FMINXSN\_X_\POWERRAIL\_FMIN_X_FFSEARCH;
-			IncrementCounters SCN_\IPBLOCK\_\DIE_ENCODING\::n47500312_fail_\TESTTYPE\_\DOMAIN\_\FMINCORNER\_E_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_FFSEARCH_3;
-			GoTo \TESTTYPE\_\DOMAIN\_\FMINCORNER\_E_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_FFSHMOO;
+			Property PassFail = "Pass";
+			Return 1;
 		}
 		Result 4
 		{
 			Property PassFail = "Fail";
-			##EDC## SetBin b90974755_fail_PTH_DTS_XXX_SCN_HUB_HXX_THERMAL_PORT4_SHARED_BIN;
-			IncrementCounters SCN_\IPBLOCK\_\DIE_ENCODING\::n97470226_fail_\TESTTYPE\_\DOMAIN\_\FMINCORNER\_E_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_FFSEARCH_4;
-			GoTo \TESTTYPE\_\DOMAIN\_\FMINCORNER\_E_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_FFSHMOO;
+			SetBin b90974155_fail_PTH_DTS_XXX_SCN_\IPBLOCK\_\DIE_ENCODING\_THERMAL_PORT4_SHARED_BIN;
+			IncrementCounters SCN_\IPBLOCK\_\DIE_ENCODING\::n97410206_fail_CHAIN_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_REBIN_4;
+			Return 0;
 		}
 		Result 5
 		{
 			Property PassFail = "Fail";
-			##EDC## SetBin b90471955_fail_SCN_HUB_HXX_RESET_PORT5_SHARED_BIN;
-			IncrementCounters SCN_\IPBLOCK\_\DIE_ENCODING\::n47190226_fail_\TESTTYPE\_\DOMAIN\_\FMINCORNER\_E_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_FFSEARCH_5;
+			SetBin b90411955_fail_SCN_\IPBLOCK\_\DIE_ENCODING\_RESET_PORT5_SHARED_BIN;
+			IncrementCounters SCN_\IPBLOCK\_\DIE_ENCODING\::n41190206_fail_CHAIN_\DOMAIN\_\FMINCORNER\_K_FMIN\SUBFLOW\_X_\POWERRAIL\_\FMINCORNER\_X_REBIN_5;
+			Return 0;
 		}
 	}
 }
@@ -1738,7 +1066,7 @@ Flow FMIN\SUBFLOW\_\FMINCORNER\_\TESTTYPE\_COMPOSITE_copy
 Flow SCN_\IPBLOCK\_\DIE_ENCODING\_FMIN\SUBFLOW\
 {
 			
-	FlowItem FMIN\SUBFLOW\_\FMINCORNER\_\TESTTYPE\_COMPOSITE_copy FMIN\SUBFLOW\_\FMINCORNER\_\TESTTYPE\_COMPOSITE_copy
+	FlowItem FMIN\SUBFLOW\_\FMINCORNER\_\TESTTYPE\_COMPOSITE FMIN\SUBFLOW\_\FMINCORNER\_\TESTTYPE\_COMPOSITE
 	{
 		Result -2
 		{
