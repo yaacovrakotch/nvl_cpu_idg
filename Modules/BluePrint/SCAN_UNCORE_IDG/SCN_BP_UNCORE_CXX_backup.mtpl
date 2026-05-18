@@ -31,11 +31,107 @@ CSharpTest PrimeScanHRYSSNTestMethod SCAN_HRYSSNTESTMETHOD_K_INIT\IPBLOCK\_X_X_X
 	BypassPort = 1;
 }
 
+CSharpTest AuxiliaryTC CTRL_SCAN_AUX_E_\FXCORNER\\SUBFLOW\_X_X_X_X_BYPASS
+{
+	BypassPort = -1;
+	DataType = "String";
+	Expression = "1";
+	ResultPort = "[R]=1?0:0";
+}
+
+CSharpTest VminTC \TESTTYPE\_\DOMAIN\_VMIN_K_\FXCORNER\\SUBFLOW\_X_\POWERRAIL\_\FXCORNER\_X 
+{
+	Patlist = "scn_\ipblock\_\die_encoding\_\powerrail\_\fxcorner\_vmin_hptp\hptpfreq\_\hptpbandwidth\_edt_\testtype\_region\domain\_\clocking_mode\_classvmin_master";
+	LevelsTc = "\ipblock\_all_bf_x_x_\idut\_lvl_nom";
+	TimingsTc = "\ipblock\_hvm_timing_mts\mtsfreq\_tstprtclk\tstprtfreq\_tck\tclkfreq\";
+	BaseNumbers = "\scoreboard_base_num\";
+	BypassPort = -1;
+	CornerIdentifiers = __shared__::CornerIdentifiers.\CORNERID\;
+	EndVoltageLimits = __shared__::FlowMatrixSingular.\SEARCH_RAIL\_HIGH_SEARCH_VALUE;
+	ExecutionMode = "\search_mode\";
+	FeatureSwitchSettings = "ignore_masked_results, recovery_update_always, disable_masked_targets";
+	FlowIndex = __shared__::FlowMatrixSingular.FlowIndex;
+	FlowIndexCallbackName = "";
+	ForwardingMode = "InputOutput";
+	LimitGuardband = toString(__shared__::GBVars.LimitGuardband);
+	MaxFailsNum = toInteger(__shared__::Specs.CHK_MAX_FAILS);
+	PatternNameCounterIndexes = "1,2,3,4,5,6,7";
+	PinMap = "SCN_\IPBLOCK\_\DOMAIN\";
+	RecoveryMode = "\RECOVERY_MODE\";
+	RecoveryOptions = __shared__::FlowMatrix.BomGroupName+ "_\IPBLOCK\";
+	RecoveryTrackingIncoming = "\RECOVERYTRACKING\";
+	RecoveryTrackingOutgoing = "\RECOVERYTRACKING\";
+	ScoreboardEdgeTicks = toInteger(__shared__::Specs.CHK_EDGE_TICK);
+	SetPointsPlistMode = "Local";
+	SetPointsPlistParamName = "Patlist";
+	SetPointsPreInstance = \SETPOINT_CONFIG\;
+	StartVoltages = __shared__::FlowMatrixSingular.\SEARCH_RAIL\_LOW_SEARCH_VALUE;
+	StartVoltagesForRetry = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesForRetry , "");
+	StartVoltagesOffset = __shared__::QNRTpRuleShared.If_PseudoVminForwarding(__shared__::QNRUsrvShared.StartVoltagesOffset , "");
+	StepSize = toDouble(__shared__::FlowMatrixSingular.\SEARCH_RAIL\_SEARCH_RESOLUTION);
+	TestMode = "SingleVmin";
+	VminResult = "G.U.S.\TESTTYPE\_\DOMAIN\_\FXCORNER\_VMIN_FMIN";
+	VoltageTargets = "\POWERRAIL\";
+	VoltagesOffset = toString(__shared__::GBVars.VoltageOffset);
+}
+
+CSharpTest VminTC CHAIN_\DOMAIN\_SRH_K_\FXCORNER\\SUBFLOW\_X_\POWERRAIL\_\FXCORNER\_X_REBIN
+{
+	Patlist = "scn_\ipblock\_\die_encoding\_\powerrail\_debug_chain_hptp\hptpfreq\_\hptpbandwidth\_edt_1hot_region\domain\_\clocking_mode\_classhvm_list";
+	LevelsTc = "\ipblock\_all_bf_x_x_\idut\_lvl_nom";
+	TimingsTc = TimingsTc = "\ipblock\_hvm_timing_mts\mtsfreq\_tstprtclk\tstprtfreq\_tck\tclkfreq\";;
+	BypassPort = \chainBypass\;
+	EndVoltageLimits = __shared__::FlowMatrixSingular.\SEARCH_RAIL\_HIGH_SEARCH_VALUE;
+	PatternNameCounterIndexes = "1,2,3,4,5,6,7";
+	SetPointsPlistMode = "Local";
+	SetPointsPlistParamName = "Patlist";
+	SetPointsPreInstance = \SETPOINT_CONFIG\;
+	StartVoltages = __shared__::FlowMatrixSingular.\SEARCH_RAIL\_LOW_SEARCH_VALUE;
+	StepSize = 0.01;
+	TestMode = "Functional";
+	VoltageTargets = "\POWERRAIL\";
+}
+
+CSharpTest VminTC \TESTTYPE\_\DOMAIN\_SRH_E_\FXCORNER\\SUBFLOW\_X_\POWERRAIL\_\FXCORNER\_X_FFSEARCH
+{
+	Patlist = "scn_\ipblock\_\die_encoding\_\powerrail\_\fxcorner\_vmin_hptp\hptpfreq\_\hptpbandwidth\_edt_\testtype\_region\domain\_\clocking_mode\_classvmin_master";
+	LevelsTc = "\ipblock\_all_bf_x_x_\idut\_lvl_nom";
+	TimingsTc = TimingsTc = "\ipblock\_hvm_timing_mts\mtsfreq\_tstprtclk\tstprtfreq\_tck\tclkfreq\";;
+	BypassPort = \edcBypass\;
+	EndVoltageLimits = __shared__::FlowMatrixSingular.\SEARCH_RAIL\_HIGH_SEARCH_VALUE;
+	SetPointsPlistMode = "Local";
+	SetPointsPlistParamName = "Patlist";
+	SetPointsPreInstance = \SETPOINT_CONFIG\;
+	StartVoltages = __shared__::FlowMatrixSingular.\SEARCH_RAIL\_LOW_SEARCH_VALUE;
+	StepSize = toDouble(__shared__::FlowMatrixSingular.\SEARCH_RAIL\_SEARCH_RESOLUTION);
+	TestMode = "SingleVmin";
+	VoltageTargets = "\POWERRAIL\";
+}
+
+CSharpTest DDGShmooTC \TESTTYPE\_\DOMAIN\_SRH_E_\FXCORNER\\SUBFLOW\_X_\POWERRAIL\_\FXCORNER\_X_FFSHMOO
+{
+	Patlist = "scn_\ipblock\_\die_encoding\_\powerrail\_\fxcorner\_vmin_hptp\hptpfreq\_\hptpbandwidth\_edt_atspeed_region\domain\_\clocking_mode\_classvmin_master";
+	LevelsTc = "\ipblock\_all_bf_x_x_\idut\_lvl_nom";
+	TimingsTc = TimingsTc = "\ipblock\_hvm_timing_mts\mtsfreq\_tstprtclk\tstprtfreq\_tck\tclkfreq\";;
+	BypassPort = \edcBypass\;
+	SetPointsPlistMode = "Local";
+	SetPointsPlistParamName = "Patlist";
+	SetPointsPreInstance = \SETPOINT_CONFIG\;
+	XAxisParam = "p_all_mts";
+	XAxisParamType = "UserDefined";
+	XAxisRange = "400e6:100e6:1";
+	XAxisType = "SpecSetVariable";
+	YAxisParam = "p_\powerrail\_spec";
+	YAxisParamType = "UserDefined";
+	YAxisRange = "0.5:0.050:13";
+	YAxisType = "SpecSetVariable";
+}
+
 MultiTrialTest \TESTTYPE\_\DOMAIN\_VMIN_K_\FXCORNERMTT\\SUBFLOW\_X_X_\FXCORNERMTT\_X
 {
     TrialVariable CPU_TRIALS::FlowDomain.\trial_variable\;
     TrialVariableExitAction "Continue";
-    CSharpTrialTest VminTC "\TESTTYPE\_\DOMAIN\_VMIN_K_\FXCORNERMTT\\SUBFLOW\_X_\POWERRAIL\_\CORNER\_" + __shared__::CustomFlowMatrixSpecs.\CORNERID\ + "_FREQ_MHz"
+    CSharpTrialTest VminTC "\TESTTYPE\_\DOMAIN\_VMIN_K_\FXCORNERMTT\\SUBFLOW\_X_\POWERDOMAIN\_\FXCORNERMTT\" + __shared__::CustomFlowMatrixSpecs.\CORNERID\ + "_FREQ_MHz"
     {
         Patlist = "scn_\ipblock\_\FXCORNERMTT\\SUBFLOW\_edt_classvmin_list_master";
         LevelsTc = __shared__::TpRule.If_DS0_DS1_M("SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCORE_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom","SCN_UNCORE_CX816::cpu_all_bf_x_x_ipc_lvl_CPU_BFUNC_SCNUNCOREB0_OVERRIDE_nom");
@@ -766,7 +862,8 @@ Flow SCN_\IPBLOCK\_\DIE_ENCODING\_VMAX\SUBFLOW\
 }
 
 
-Flow BEGINCPU_\DOMAIN\
+Flow \FLOWID\_\DOMAIN\
+
 {
 	FlowItem \TESTTYPE\_\DOMAIN\_SB_K_\FLOWID\_X_X_\LEVEL\_X_ALL \TESTTYPE\_\DOMAIN\_SB_K_\FLOWID\_X_X_\LEVEL\_X_ALL
 	{
@@ -821,6 +918,34 @@ Flow BEGINCPU_\DOMAIN\
 			SetBin b90421955_fail_SCN_HUB_HXX_RESET_PORT5_SHARED_BIN;
 			IncrementCounters SCN_HUB_HXX::n42190183_fail_\TESTTYPE\_\DOMAIN\_\LEVEL\_K_\FLOWID\HUB\LEVEL\_X_\POWERRAIL\_F1_X_5;
 			Return 0;
+		}
+	}
+}
+
+Flow SCN_\IPBLOCK\_\DIE_ENCODING\_\FLOWID\\IPBLOCK\\LEVEL\
+{
+	FlowItem \FLOWID\_\DOMAIN\ \FLOWID\_\DOMAIN\
+	{
+		Result -2
+		{
+			Property PassFail = "Fail";
+			Return -2;
+		}
+		Result -1
+		{
+			Property PassFail = "Fail";
+			Return -1;
+		}
+		Result 0
+		{
+			Property PassFail = "Fail";
+			Return 0;
+		}
+		Result 1
+		{
+			Property PassFail = "Pass";
+			Return 1;
+			ChainBy TESTTYPE;
 		}
 	}
 }
