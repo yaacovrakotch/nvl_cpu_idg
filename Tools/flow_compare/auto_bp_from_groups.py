@@ -718,11 +718,423 @@ def emit_auto_bp(src_lines: list[str], flows: list[tuple[str, int, int]],
     return out
 
 
-def write_symbols_csv(out_path: Path, table: list[dict]) -> None:
+def _parse_flow_results(body_text: str) -> dict[str, dict[str, list[str]]]:
+    """Parse a Flow body's text. Returns:
+       { flowitem_name: { result_code: [body_line, ...] } }
+
+    body_line list excludes the `Result N {` and matching `}` lines — only
+    the inner content."""
+    lines = body_text.splitlines(keepends=True)
+    out: dict[str, dict[str, list[str]]] = {}
+    n = len(lines)
+    i = 0
+    cur_fi: str | None = None
+    fi_brace_depth = 0
+    fi_started = False
+    while i < n:
+        ln = lines[i]
+        m_fi = RE_FLOWITEM.match(ln)
+        if m_fi and (cur_fi is None or not fi_started):
+            cur_fi = m_fi.group(3)
+            out.setdefault(cur_fi, {})
+            fi_brace_depth = 0
+            fi_started = False
+            # Walk this FlowItem block
+            j = i
+            while j < n:
+                content = re.sub(r'"[^"]*"', '', lines[j])
+                for ch in content:
+                    if ch == '{':
+                        fi_brace_depth += 1
+                        fi_started = True
+                    elif ch == '}':
+                        fi_brace_depth -= 1
+                if fi_started and fi_brace_depth == 0:
+                    break
+                j += 1
+            # Within lines[i+1:j], find Result blocks
+            k = i + 1
+            while k < j:
+                m_r = re.match(r'^\s*Result\s+(\S+)\s*$', lines[k])
+                if not m_r:
+                    k += 1
+                    continue
+                code = m_r.group(1)
+                # Find matching brace
+                kk = k
+                depth = 0
+                opened = False
+                while kk < j:
+                    content = re.sub(r'"[^"]*"', '', lines[kk])
+                    for ch in content:
+                        if ch == '{':
+                            depth += 1
+                            opened = True
+                        elif ch == '}':
+                            depth -= 1
+                    if opened and depth == 0:
+                        break
+                    kk += 1
+                # Body = lines between k+1 (Result line) and kk-1 (close brace).
+                # The Result line is at k, the open brace `{` may be on k+1.
+                body_start = k + 1
+                if body_start < n and lines[body_start].strip() == '{':
+                    body_start += 1
+                body_end = kk - 1
+                if body_end >= 0 and lines[body_end].strip() == '}':
+                    body_end -= 1
+                body = lines[body_start:body_end + 1]
+                out[cur_fi][code] = body
+                k = kk + 1
+            i = j + 1
+            cur_fi = None
+            fi_started = False
+            continue
+        i += 1
+    return out
+
+
+def _normalize_body(body_lines: list[str], from_token: str,
+                    to_token: str) -> str:
+    """Return body text after substituting `from_token` -> `to_token`."""
+    text = ''.join(body_lines)
+    if from_token and from_token != to_token:
+        text = text.replace(from_token, to_token)
+    return text
+
+
+# Whole-statement patterns used by `_shape_normalize` for body-shape
+# dedup. We abstract `SetBin <label>;` and `IncrementCounters <label>;`
+# to placeholders because the labels embed bin numbers, module name,
+# FlowItem name, member token, and result-code suffix — none of which
+# carry structural information about the port behavior.
+_SETBIN_RE = re.compile(r'SetBin\s+\S+?;')
+_INCR_RE = re.compile(r'IncrementCounters\s+\S+?;')
+
+
+def _shape_normalize(text: str) -> str:
+    """Shape-normalized form of a Result body for body-symbol dedup.
+
+    Abstracts `SetBin ...;` -> `SetBin <BIN>;` and
+    `IncrementCounters ...;` -> `IncrementCounters <CTR>;` so two Result
+    bodies sharing the same port-behavior structure (kill / pass /
+    continue / goto) collapse to one body-symbol regardless of which
+    bin or counter identifier is set.
+    """
+    s = _SETBIN_RE.sub('SetBin <BIN>;', text)
+    s = _INCR_RE.sub('IncrementCounters <CTR>;', s)
+    return s
+
+
+def symbolize_divergent_results(bp_lines: list[str],
+                                table: list[dict],
+                                member_bodies: list[dict]
+                                ) -> tuple[list[str], dict]:
+    """Post-pass on `_auto_bp.mtpl` lines: walk every rep Flow block (those
+    whose name contains `\\sN\\`) and, for each FlowItem inside, compare its
+    Result blocks against the corresponding sibling members' Result blocks.
+    Where bodies diverge across members (after canonicalizing the variant
+    token to the rep's), replace the rep's Result body with a single
+    `\\sM\\` placeholder line. Allocate fresh symbols starting at one past
+    the highest existing name-symbol number. Returns:
+        (new_bp_lines, body_symbols)
+        body_symbols: { 'sM': { member_name: body_text, ... } }
+
+    The expander already restores all member Flow bodies verbatim from
+    `_auto_group_flows.csv`, so this purely-cosmetic symbolization does
+    NOT affect build correctness; it only makes the BP file informative
+    (port-divergence inline-visible)."""
+    body_symbols: dict[str, dict[str, str]] = {}
+    # Highest existing name-symbol number.
+    max_idx = -1
+    for e in table:
+        sym = e.get('symbol', '')
+        m = re.match(r's(\d+)$', sym)
+        if m:
+            n = int(m.group(1))
+            if n > max_idx:
+                max_idx = n
+    next_idx = max_idx + 1
+    # Memoize symbol assignment by per-member-SHAPE-tuple so
+    # structurally-equivalent divergence patterns share a single symbol
+    # across FlowItems / Results / groups. The shape strips numeric
+    # identifiers (bin numbers `b\d+`, counter numbers `n\d+`) and member
+    # token (already canonicalized to rep_token) so e.g. all "kill on
+    # R-2 with bin" bodies dedup to one symbol regardless of which bin
+    # number is set.
+    body_to_sym: dict[tuple, str] = {}
+
+    # Group member bodies by group symbol.
+    members_by_group_sym: dict[str, list[dict]] = {}
+    for mb in member_bodies:
+        members_by_group_sym.setdefault(mb['symbol'], []).append(mb)
+
+    # Pre-parse each member's Flow body once.
+    parsed_by_member: dict[str, dict] = {}  # member_name -> parsed dict
+    for mb in member_bodies:
+        parsed_by_member[mb['name']] = _parse_flow_results(mb['body'])
+
+    # Find rep Flow blocks in current bp_lines (post-rename, post-trim).
+    blocks = _find_flow_def_blocks(bp_lines)
+    # Process bottom-up to keep indices valid as we splice.
+    for fname, fs, fe in sorted(blocks, key=lambda b: -b[1]):
+        m = re.search(r'\\(s\d+)\\', fname)
+        if not m:
+            continue
+        sym = m.group(1)
+        members = members_by_group_sym.get(sym)
+        if not members or len(members) < 2:
+            continue
+        # Symbol-dedup in `build_symbol_table` can put multiple physically-
+        # distinct groups under the same `\sN\` (e.g. UV_* and UV_*_CPU1
+        # both share `s0` because they have the same sorted token tuple
+        # and the same rep token). Filter members to ONLY those whose
+        # literal name, when their variant token is replaced by the
+        # symbolic placeholder, matches THIS rep block's name. Otherwise
+        # FlowItem lookups against those out-of-block members would fail
+        # and the divergence detection would silently skip every Result.
+        block_relevant = []
+        sym_placeholder = f"\\{sym}\\"
+        for mb in members:
+            if not mb['token']:
+                continue
+            if mb['name'].replace(mb['token'], sym_placeholder) == fname:
+                block_relevant.append(mb)
+        if len(block_relevant) < 2:
+            continue
+        rep_mb = next((mb for mb in block_relevant if mb['is_rep'] == '1'),
+                      None)
+        if rep_mb is None:
+            # Fallback: when build_symbol_table assigned IsRep across the
+            # whole symbol-group (not per physical group), this block's
+            # subset may have no IsRep=1. Pick the alphabetically-first
+            # member as a deterministic substitute (matches build_symbol_
+            # table's sort).
+            rep_mb = sorted(block_relevant, key=lambda x: x['name'])[0]
+        rep_token = rep_mb['token']
+        # Rewrite this block.
+        block_lines = list(bp_lines[fs:fe + 1])
+        new_block_lines = _rewrite_rep_block(
+            block_lines, sym, block_relevant, parsed_by_member, rep_token,
+            body_symbols, body_to_sym, next_idx)
+        # Update next_idx based on what was allocated.
+        for s in body_symbols.keys():
+            mm = re.match(r's(\d+)$', s)
+            if mm:
+                v = int(mm.group(1))
+                if v >= next_idx:
+                    next_idx = v + 1
+        bp_lines = bp_lines[:fs] + new_block_lines + bp_lines[fe + 1:]
+
+    return bp_lines, body_symbols
+
+
+def _rewrite_rep_block(block_lines: list[str], group_sym: str,
+                       members: list[dict],
+                       parsed_by_member: dict,
+                       rep_token: str,
+                       body_symbols: dict,
+                       body_to_sym: dict,
+                       next_idx_start: int) -> list[str]:
+    """Walk FlowItem/Result structure inside a single rep Flow block; replace
+    each diverging Result body with `\\sM\\`. Returns new block lines."""
+    out: list[str] = []
+    n = len(block_lines)
+    i = 0
+    next_idx = [next_idx_start]
+    while i < n:
+        ln = block_lines[i]
+        m_fi = RE_FLOWITEM.match(ln)
+        if not m_fi:
+            out.append(ln)
+            i += 1
+            continue
+        # FlowItem name in the BP may carry a `\sN\` token. Map it back to
+        # the rep's literal name to look up in parsed_by_member.
+        bp_fi_name = m_fi.group(3)
+        rep_fi_name = bp_fi_name.replace(f"\\{group_sym}\\", rep_token)
+        # Find the FlowItem's brace range.
+        depth = 0
+        opened = False
+        j = i
+        while j < n:
+            content = re.sub(r'"[^"]*"', '', block_lines[j])
+            for ch in content:
+                if ch == '{':
+                    depth += 1
+                    opened = True
+                elif ch == '}':
+                    depth -= 1
+            if opened and depth == 0:
+                break
+            j += 1
+        if not opened:
+            out.append(ln)
+            i += 1
+            continue
+        # Inside lines[i+1:j], find Result blocks and possibly rewrite.
+        fi_lines = list(block_lines[i:j + 1])
+        new_fi_lines = _rewrite_flowitem(
+            fi_lines, group_sym, members, parsed_by_member,
+            rep_fi_name, rep_token, body_symbols, body_to_sym, next_idx)
+        out.extend(new_fi_lines)
+        i = j + 1
+    return out
+
+
+def _rewrite_flowitem(fi_lines: list[str], group_sym: str,
+                      members: list[dict], parsed_by_member: dict,
+                      rep_fi_name: str, rep_token: str,
+                      body_symbols: dict, body_to_sym: dict,
+                      next_idx: list) -> list[str]:
+    """Within a FlowItem block, walk Result subblocks, compare per-member
+    Result bodies, and replace divergent rep bodies with `\\sM\\`."""
+    out: list[str] = []
+    n = len(fi_lines)
+    k = 0
+    while k < n:
+        ln = fi_lines[k]
+        m_r = re.match(r'^(\s*)Result\s+(\S+)\s*$', ln)
+        if not m_r:
+            out.append(ln)
+            k += 1
+            continue
+        indent = m_r.group(1)
+        code = m_r.group(2)
+        # Find matching `{` ... `}`.
+        depth = 0
+        opened = False
+        j = k
+        while j < n:
+            content = re.sub(r'"[^"]*"', '', fi_lines[j])
+            for ch in content:
+                if ch == '{':
+                    depth += 1
+                    opened = True
+                elif ch == '}':
+                    depth -= 1
+            if opened and depth == 0:
+                break
+            j += 1
+        if not opened:
+            out.append(ln)
+            k += 1
+            continue
+        # body lines: between the `{` line and the `}` line (exclusive).
+        body_start = k + 1
+        if body_start < n and fi_lines[body_start].strip() == '{':
+            body_start += 1
+        body_end = j - 1
+        if body_end >= 0 and fi_lines[body_end].strip() == '}':
+            body_end -= 1
+        rep_body_lines = fi_lines[body_start:body_end + 1]
+        # Gather per-member body content.
+        per_member_body: dict[str, str] = {}
+        all_present = True
+        for mb in members:
+            parsed = parsed_by_member.get(mb['name'], {})
+            # Member's literal flowitem name = rep_fi_name with rep_token
+            # replaced by member's token.
+            if rep_token:
+                mem_fi_name = rep_fi_name.replace(rep_token, mb['token'])
+            else:
+                mem_fi_name = rep_fi_name
+            fi_results = parsed.get(mem_fi_name)
+            if fi_results is None or code not in fi_results:
+                all_present = False
+                break
+            mem_body_lines = fi_results[code]
+            per_member_body[mb['name']] = ''.join(mem_body_lines)
+        if not all_present:
+            # Shape mismatch — leave verbatim.
+            out.extend(fi_lines[k:j + 1])
+            k = j + 1
+            continue
+        # Extract the TERMINATOR line (last non-blank line) of each
+        # member's body — typically `Return N;` or `GoTo <flow>;`.
+        # Only the terminator is candidate for symbolization; all
+        # preceding lines (Property, SetBin, IncrementCounters …) are
+        # emitted verbatim from the rep body so the BP stays readable.
+        def _terminator(text: str) -> tuple[str, str]:
+            """Return (stripped_terminator, leading_indent)."""
+            lines = text.splitlines()
+            for ln_ in reversed(lines):
+                if ln_.strip():
+                    stripped = ln_.lstrip()
+                    indent_ = ln_[:len(ln_) - len(stripped)]
+                    return stripped, indent_
+            return '', ''
+
+        canon_terms: dict[str, str] = {}
+        for mb in members:
+            tok = mb['token']
+            text = per_member_body[mb['name']]
+            term, _ind = _terminator(text)
+            if tok and tok != rep_token:
+                term = term.replace(tok, rep_token)
+            canon_terms[mb['name']] = term
+        if len(set(canon_terms.values())) <= 1:
+            # Terminator agrees across members — leave verbatim.
+            out.extend(fi_lines[k:j + 1])
+            k = j + 1
+            continue
+        # Divergent terminator: allocate a symbol keyed by the
+        # position-ordered tuple of canonical terminators so identical
+        # divergence patterns share a single symbol across FlowItems /
+        # Results / families.
+        ordered_names = sorted(canon_terms.keys())
+        body_key = tuple(canon_terms[mn] for mn in ordered_names)
+        sym = body_to_sym.get(body_key)
+        if sym is None:
+            sym = f"s{next_idx[0]}"
+            next_idx[0] += 1
+            body_to_sym[body_key] = sym
+            body_symbols[sym] = dict(canon_terms)
+        else:
+            for mn, mv in canon_terms.items():
+                body_symbols[sym].setdefault(mn, mv)
+        # Emit Result line, opening `{` lines, all body lines EXCEPT the
+        # last non-blank one, then the `\sN\` placeholder at that line's
+        # indentation, then the closing `}`.
+        out.append(fi_lines[k])
+        for mid in range(k + 1, body_start):
+            out.append(fi_lines[mid])
+        # Locate the terminator line within rep_body_lines.
+        term_local_idx = -1
+        for li in range(len(rep_body_lines) - 1, -1, -1):
+            if rep_body_lines[li].strip():
+                term_local_idx = li
+                break
+        if term_local_idx < 0:
+            # No content — fall back to verbatim.
+            out.extend(rep_body_lines)
+        else:
+            for li, line_text in enumerate(rep_body_lines):
+                if li == term_local_idx:
+                    line_stripped = line_text.lstrip()
+                    line_indent = line_text[:len(line_text) -
+                                            len(line_stripped)]
+                    out.append(f"{line_indent}\\{sym}\\\n")
+                else:
+                    out.append(line_text)
+        for tail in range(body_end + 1, j + 1):
+            out.append(fi_lines[tail])
+        k = j + 1
+    return out
+
+
+def write_symbols_csv(out_path: Path, table: list[dict],
+                      body_symbols: dict | None = None) -> None:
     """Canonical schema: Symbol,<flow1>,<flow2>,...
     One row per UNIQUE symbol (dedup-aware: when build_symbol_table assigns
     the same `\\sN\\` to multiple groups, their per-member token cells are
-    merged into a single row spanning the union of members)."""
+    merged into a single row spanning the union of members).
+
+    `body_symbols` (optional) holds the divergent-Result-body symbols
+    allocated by `symbolize_divergent_results()`. Each entry is
+    `{symbol_name: {member_name: body_text, ...}}`. These rows are appended
+    after the name-symbol rows. Cells are multi-line; csv.writer quotes
+    them automatically."""
     all_members = sorted({m for e in table for m in e['members']})
     # Merge entries by symbol -> {member: token}
     merged: dict[str, dict[str, str]] = {}
@@ -734,6 +1146,12 @@ def write_symbols_csv(out_path: Path, table: list[dict]) -> None:
             sym_order.append(sym)
         for m, t in e['token_for'].items():
             merged[sym][m] = t
+    # Union body-symbol members into all_members so columns line up.
+    if body_symbols:
+        extra_members = set()
+        for per_member in body_symbols.values():
+            extra_members.update(per_member.keys())
+        all_members = sorted(set(all_members) | extra_members)
     with out_path.open('w', newline='', encoding='utf-8') as f:
         w = csv.writer(f)
         w.writerow(['Symbol'] + all_members)
@@ -743,6 +1161,17 @@ def write_symbols_csv(out_path: Path, table: list[dict]) -> None:
             for m in all_members:
                 row.append(tok_for.get(m, ''))
             w.writerow(row)
+        if body_symbols:
+            # Sort by numeric symbol index so output is deterministic.
+            def _idx(s: str) -> int:
+                m = re.match(r's(\d+)', s)
+                return int(m.group(1)) if m else 0
+            for sym in sorted(body_symbols.keys(), key=_idx):
+                per_member = body_symbols[sym]
+                row = [f"\\{sym}\\"]
+                for m in all_members:
+                    row.append(per_member.get(m, ''))
+                w.writerow(row)
 
 
 def write_flows_compare_csv(out_path: Path, table: list[dict],
@@ -919,6 +1348,22 @@ def main(module_dir: str) -> int:
     if dropped_flows:
         print(f"[trim] dropped {len(dropped_flows)} orphan Flow definitions")
         write_tests_bank_csv(md / f"{module}_auto_flows.csv", dropped_flows)
+
+    # Post-pass: symbolize divergent Result bodies inside each rep Flow
+    # block so the BP file makes per-port divergence (e.g. UV/OV `Return 0`
+    # vs `Return 2` on R2/R4) inline-visible. Allocates fresh `\sM\`
+    # numbers above all name-symbol numbers; the per-member body text is
+    # written to `_auto_symbols.csv` as multi-line CSV cells. The expander
+    # is unaffected (it restores all member bodies verbatim from the
+    # group-flows bank).
+    body_symbols: dict[str, dict[str, str]] = {}
+    if member_bodies:
+        new_lines, body_symbols = symbolize_divergent_results(
+            new_lines, table, member_bodies)
+        if body_symbols:
+            print(f"[bp-post] symbolized {len(body_symbols)} divergent "
+                  f"Result body(ies) inline")
+
     out_bp = md / f"{module}_auto_bp.mtpl"
     out_bp.write_text(''.join(new_lines), encoding='utf-8')
     print(f"[out] {out_bp}  ({len(new_lines)} lines, "
@@ -926,8 +1371,9 @@ def main(module_dir: str) -> int:
           f"{(1 - len(new_lines)/len(lines))*100:.1f}%)")
 
     out_sym = md / f"{module}_auto_symbols.csv"
-    write_symbols_csv(out_sym, table)
-    print(f"[out] {out_sym}  ({len(table)} symbols)")
+    write_symbols_csv(out_sym, table, body_symbols)
+    print(f"[out] {out_sym}  ({len(table)} name-symbol(s) + "
+          f"{len(body_symbols)} body-symbol(s))")
 
     out_cmp = md / f"{module}_auto_flows_compare.csv"
     write_flows_compare_csv(out_cmp, table, flow_items)

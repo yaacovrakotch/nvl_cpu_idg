@@ -126,6 +126,28 @@ def _run_full_compare(md: Path, module: str) -> int:
     print(f"[{module}] running full per-entity compare across "
           f"{len(groups)} group(s) -> {out_path.name}")
 
+    # Build the canonical symbol table ONCE so per-group `\sN\` numbering
+    # matches the BP and the symbol assigned to each group is shared with
+    # `_auto_symbols.csv`. We also pass `key_substitutions` to v3 so each
+    # group's per-flow variant-token (e.g. `01`/`02`/`03`) collapses to the
+    # group's symbol in the alignment key — merging the N flows' instances
+    # into one symbolized row per Entity (instead of N disjoint literal-key
+    # rows). `preseed_map` lets v3.symbolize() reuse the same `\sN\` for the
+    # variant-token hole tuple, and `preseed_max` ensures any newly-
+    # allocated diff symbol number is strictly greater than every BP group
+    # symbol — so naming never collides with the BP.
+    table = legacy.build_symbol_table(groups)
+    sym_for_members: dict[tuple[str, ...], dict] = {
+        tuple(sorted(e['members'])): e for e in table
+    }
+    max_sym_idx = -1
+    for e in table:
+        sym = e.get('symbol', '')
+        if sym.startswith('s') and sym[1:].isdigit():
+            n = int(sym[1:])
+            if n > max_sym_idx:
+                max_sym_idx = n
+
     agg_fields: list[str] = []
     agg_rows: list[dict] = []
     for i, g in enumerate(groups):
@@ -138,8 +160,32 @@ def _run_full_compare(md: Path, module: str) -> int:
         except Exception as e:
             print(f"  [{group_label}] derive_flow_defs FAILED: {e}")
             continue
-        v3.configure_module(md, flow_defs, mtpl_input=md / f"{module}_orig.mtpl",
-                            out_suffix=f"_auto_full_g{i}")
+        # Look up this group's BP symbol + per-member token to build the
+        # per-flow key substitution and the preseed map.
+        key_subs: dict[str, list[tuple[str, str]]] = {}
+        preseed_map: dict[tuple, str] = {}
+        entry = sym_for_members.get(tuple(sorted(members)))
+        if entry is not None:
+            sym = entry['symbol']
+            token_for = entry.get('token_for', {})
+            placeholder = f"<{sym}>"  # canonical compare-CSV form
+            # Per-flow substitution: variant-token -> placeholder
+            for m in members:
+                tok = token_for.get(m, '')
+                if tok:
+                    key_subs[m] = [(tok, placeholder)]
+            # Preseed: the variant-token hole tuple in FLOWS-order maps to
+            # the same BP symbol so symbolize() reuses it (instead of
+            # allocating a fresh symbol).
+            hole = tuple(token_for.get(m, '') for m in members)
+            if all(hole) and len(set(hole)) > 1:
+                preseed_map[hole] = sym
+        v3.configure_module(md, flow_defs,
+                            mtpl_input=md / f"{module}_orig.mtpl",
+                            out_suffix=f"_auto_full_g{i}",
+                            preseed_max=max_sym_idx,
+                            preseed_map=preseed_map,
+                            key_substitutions=key_subs)
         # Run v3.main() (writes per-group CSV at v3.OUT_CSV).
         saved = sys.argv
         try:

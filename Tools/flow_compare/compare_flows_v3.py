@@ -37,7 +37,7 @@ from collections import OrderedDict
 from difflib import SequenceMatcher
 from pathlib import Path
 
-ROOT = Path(r"C:\Users\yrakotch\source\repos\nvl_cpu_idg")
+ROOT = Path(__file__).resolve().parents[2]
 SKILL_CSV = ROOT / "Tools" / "flow_compare" / "P16C_all.csv"
 # Module being collapsed. The pipeline is iterative: first run uses
 # `<module>_orig.mtpl` as input and writes `<module>_bp.mtpl`. Subsequent
@@ -55,7 +55,12 @@ def ensure_orig_snapshot() -> None:
     """Auto-create `<module>_orig.mtpl` on first run by copying the current
     `<module>.mtpl`. Also accepts a legacy `<module>.mtpl_orig` snapshot and
     migrates it to the new name. Idempotent: a no-op if `_orig.mtpl` already
-    exists."""
+    exists. No-op (silent) if neither file exists — this lets the module be
+    imported on machines where the hard-coded default `_MODULE_DIR` (set
+    above the `ensure_orig_snapshot()` call at import time) doesn't exist;
+    callers that genuinely need a snapshot will reach this function again
+    via `configure_module()` after repointing `_MODULE_DIR`, and the
+    FileNotFoundError will surface there."""
     if _ORIG_PATH.exists():
         return
     legacy = _MODULE_DIR / f"{_MODULE_NAME}.mtpl_orig"
@@ -64,8 +69,9 @@ def ensure_orig_snapshot() -> None:
         print(f"[orig] migrated legacy snapshot -> {_ORIG_PATH.name}")
         return
     if not _SRC_MTPL.exists():
-        raise FileNotFoundError(
-            f"Cannot create orig snapshot: source mtpl missing: {_SRC_MTPL}")
+        # Silent no-op: callers that genuinely need a snapshot will hit
+        # this via configure_module() once _MODULE_DIR is repointed.
+        return
     import shutil
     shutil.copy2(_SRC_MTPL, _ORIG_PATH)
     print(f"[orig] created snapshot {_ORIG_PATH.name} from {_SRC_MTPL.name}")
@@ -80,7 +86,8 @@ def configure_module(module_dir,
                      mtpl_input=None,
                      out_suffix: str = "_bp",
                      preseed_max: int = -1,
-                     preseed_map: dict | None = None) -> None:
+                     preseed_map: dict | None = None,
+                     key_substitutions: dict | None = None) -> None:
     """Repoint all module-level globals to a different module/flow-set.
 
     The auto-BP driver calls this once per Independent group to delegate
@@ -100,6 +107,7 @@ def configure_module(module_dir,
     global _MODULE_DIR, _MODULE_NAME, _BP_PATH, _ORIG_PATH, _SRC_MTPL
     global MTPL_PRIMARY, MTPL_TEST_SOURCES, OUT_CSV
     global PRESEED_MAX_SYMBOL, PRESEED_SYMBOL_MAP, PRESEED_OVERRIDE
+    global KEY_SUBSTITUTIONS
     global FLOW_DEFS, FLOWS
 
     _MODULE_DIR = Path(module_dir)
@@ -118,6 +126,7 @@ def configure_module(module_dir,
     # honor caller-set preseed (cross-group orchestration) vs auto-detect
     # from the on-disk symbols CSV (same-flow re-run).
     PRESEED_OVERRIDE = (preseed_max >= 0) or bool(preseed_map)
+    KEY_SUBSTITUTIONS = dict(key_substitutions or {})
     FLOW_DEFS = OrderedDict(flow_defs)
     FLOWS = list(FLOW_DEFS.keys())
 
@@ -346,6 +355,25 @@ PRESEED_SYMBOL_MAP: dict[tuple, str] = {}
 # skip the on-disk `_detect_previous_cycle()` auto-detect (which is
 # only valid for same-flow re-runs of the SAME group).
 PRESEED_OVERRIDE: bool = False
+
+# Per-flow KEY SUBSTITUTIONS for cross-flow alignment. When the auto-BP
+# orchestrator collapses a group of N sibling flows that differ in a
+# single token (e.g. UV_01_CPU1 / UV_02_CPU1 / UV_03_CPU1 differ only in
+# `01`/`02`/`03`), it sets this map to:
+#   { 'UV_01_CPU1': [('01', '\\s2\\')],
+#     'UV_02_CPU1': [('02', '\\s2\\')],
+#     'UV_03_CPU1': [('03', '\\s2\\')] }
+# In the alignment loop, the per-flow instance/value strings are passed
+# through their flow's substitutions BEFORE keying. Effect: instances
+# whose names differ ONLY in the variant token now share a single key
+# (e.g. `..._UV_\\s2\\_CPU1`), so all N flows populate the same row.
+# Per-flow value cells are also substituted (so `GoTo ..._01_CPU1` /
+# `..._02_CPU1` / `..._03_CPU1` collapse to one symbolized GoTo and DIFF=OK).
+# Values that don't contain the variant token (e.g. `Return 0` vs `Return 2`)
+# stay literal — DIFF surfaces, and `symbolize()` auto-allocates a fresh
+# `\\sM\\` symbol (M > all preseeded BP group symbols).
+# Default: empty (no substitution; legacy behavior).
+KEY_SUBSTITUTIONS: dict[str, list[tuple[str, str]]] = {}
 
 FLOW_DEFS = OrderedDict([
     ("FUN_CCF_CX48_F1XCCF", "F1XCCF_SubFlow_SPEEDPRL0CPU::"),
@@ -828,34 +856,6 @@ def fmt_symbols_for_value(idx: int, sym_assignments) -> str:
 # -------- main --------
 
 def main() -> int:
-        # merge per-flow items with mtpl info.
-        in_module_norm: set[str] = set()
-        for fn in FLOWS:
-            for it in mtpl_per_flow[fn]:
-                in_module_norm.add(normalize(it["instance"]))
-        dropped_cross_module = 0
-        per_flow_items: dict[str, list[dict]] = {}
-        for fn in FLOWS:
-            mtpl_idx = {it["instance"]: it for it in mtpl_per_flow[fn]}
-            merged = []
-            for s in skill_per_flow[fn]:
-                if normalize(s["instance"]) not in in_module_norm:
-                    dropped_cross_module += 1
-                    continue
-                m = mtpl_idx.get(s["instance"])
-                merged.append({
-                    "instance": s["instance"],
-                    "edc": (m["edc"] if m else ""),
-                    "connectivity": (m["connectivity"] if m else {}),
-                    "flowItem_line": (m["flowItem_line"] if m else None),
-                    "connectivity_lines": (m["connectivity_lines"] if m else {}),
-                    "params": s["params"],
-                    "is_mtt": s.get("is_mtt", False),
-                })
-            per_flow_items[fn] = merged
-        if dropped_cross_module:
-            print(f"  scope-filter: dropped {dropped_cross_module} cross-module "
-                  f"instance(s) (no FlowItem in module's own mtpl)")
     if not SKILL_CSV.exists():
         print(f"ERROR: skill CSV not found: {SKILL_CSV}", file=sys.stderr)
         return 2
@@ -909,12 +909,58 @@ def main() -> int:
     for fn in FLOWS:
         print(f"  skill {fn}: {len(skill_per_flow[fn])} instances")
 
+    # Scope-filter & merge per-flow items: combine mtpl-side connectivity/edc
+    # with skill-side params. Drop cross-module instances (no FlowItem in
+    # ANY of the module's compared flows).
+    in_module_norm: set[str] = set()
+    for fn in FLOWS:
+        for it in mtpl_per_flow[fn]:
+            in_module_norm.add(normalize(it["instance"]))
+    dropped_cross_module = 0
+    per_flow_items: dict[str, list[dict]] = {}
+    for fn in FLOWS:
+        mtpl_idx = {it["instance"]: it for it in mtpl_per_flow[fn]}
+        merged = []
+        for s in skill_per_flow[fn]:
+            if normalize(s["instance"]) not in in_module_norm:
+                dropped_cross_module += 1
+                continue
+            m = mtpl_idx.get(s["instance"])
+            merged.append({
+                "instance": s["instance"],
+                "edc": (m["edc"] if m else ""),
+                "connectivity": (m["connectivity"] if m else {}),
+                "flowItem_line": (m["flowItem_line"] if m else None),
+                "connectivity_lines": (m["connectivity_lines"] if m else {}),
+                "params": s["params"],
+                "is_mtt": s.get("is_mtt", False),
+            })
+        per_flow_items[fn] = merged
+    if dropped_cross_module:
+        print(f"  scope-filter: dropped {dropped_cross_module} cross-module "
+              f"instance(s) (no FlowItem in module's own mtpl)")
+
     # merge per-flow items with mtpl info.
     # SCOPE FILTER: drop instances that have no FlowItem in the module's
     # own .mtpl for ANY of the compared flows. These are runtime instances
     # align by normalized instance name, with ordinal fallback for param rows
+    #
+    # CROSS-FLOW MERGE via KEY_SUBSTITUTIONS: if the orchestrator collapsed
+    # this group of N flows under a single `\sK\` symbol, KEY_SUBSTITUTIONS
+    # maps each flow_name to [(variant_token, '<sK>')]. Applied here BEFORE
+    # `normalize()` so the per-flow alignment key for instances that differ
+    # only in the variant token collapses to one symbolized key — and all N
+    # flows populate the same row (instead of producing N disjoint rows
+    # keyed by literal name).
+    def _apply_key_subs(fn: str, s: str) -> str:
+        for find, repl in KEY_SUBSTITUTIONS.get(fn, ()):
+            if find:
+                s = s.replace(find, repl)
+        return s
+
     per_flow_keys = {
-        fn: [(normalize(it["instance"]), it) for it in per_flow_items[fn]]
+        fn: [(normalize(_apply_key_subs(fn, it["instance"])), it)
+             for it in per_flow_items[fn]]
         for fn in FLOWS
     }
     seen = set()
@@ -1028,54 +1074,6 @@ def main() -> int:
                     seen_p.add(p)
                     param_names.append(p)
         for p in param_names:
-            if p in ("BaseNumbers", "BypassPort"):
-                continue
-            vals = [it["params"].get(p, "") if it else "" for it in items]
-            line_vals = []
-            for it in items:
-                if not it:
-                    line_vals.append(None)
-                    continue
-                pl = param_lines.get(it["instance"], {}).get(p)
-                line_vals.append(pl)
-            # If any value is missing, try ordinal fallback
-            if any(v == "" for v in vals):
-                # For each flow, get the idx-th instance and its p value
-                ord_vals = []
-                ord_lines = []
-                for i, fn in enumerate(FLOWS):
-                    insts = per_flow_instances[fn]
-                    if idx < len(insts):
-                        ord_val = insts[idx]["params"].get(p, "")
-                        ord_line = param_lines.get(insts[idx]["instance"], {}).get(p)
-                    else:
-                        ord_val = ""
-                        ord_line = None
-                    ord_vals.append(ord_val)
-                    ord_lines.append(ord_line)
-                # Use ordinal values if they fill more slots
-                if ord_vals.count("") < vals.count(""):
-                    vals = ord_vals
-                    line_vals = ord_lines
-
-        codes.sort(key=code_key)
-        for c in codes:
-            emit(
-                f"{key}.connectivity.R{c}",
-                [it["connectivity"].get(c, "") if it else "" for it in items],
-                [it["connectivity_lines"].get(c) if it else None for it in items],
-            )
-        # params
-        param_names = []
-        seen_p = set()
-        for it in items:
-            if not it:
-                continue
-            for p in it["params"].keys():
-                if p not in seen_p:
-                    seen_p.add(p)
-                    param_names.append(p)
-        for p in param_names:
             # Skip params that are pre-normalized to a single value across
             # all flows by symbolize_mtpl._apply_prework -- they would only
             # add noise (always OK) to the comparison.
@@ -1089,6 +1087,23 @@ def main() -> int:
                     continue
                 pl = param_lines.get(it["instance"], {}).get(p)
                 line_vals.append(pl)
+            # If any value is missing, try ordinal fallback
+            if any(v == "" for v in vals):
+                ord_vals = []
+                ord_lines = []
+                for i, fn in enumerate(FLOWS):
+                    insts = per_flow_instances[fn]
+                    if idx < len(insts):
+                        ord_val = insts[idx]["params"].get(p, "")
+                        ord_line = param_lines.get(insts[idx]["instance"], {}).get(p)
+                    else:
+                        ord_val = ""
+                        ord_line = None
+                    ord_vals.append(ord_val)
+                    ord_lines.append(ord_line)
+                if ord_vals.count("") < vals.count(""):
+                    vals = ord_vals
+                    line_vals = ord_lines
             emit(f"{key}.param.{p}", vals, line_vals)
 
     OUT_CSV.parent.mkdir(parents=True, exist_ok=True)
